@@ -1450,9 +1450,7 @@
             "d015bbe8f3761f7f"
         ],
         "x": 54,
-        "y": -1,
-        "w": 838,
-        "h": 208
+        "y": -1
     },
     {
         "id": "5a28e866a67c90ec",
@@ -1477,9 +1475,7 @@
             "8764792a5250d529"
         ],
         "x": 14,
-        "y": 279,
-        "w": 1152,
-        "h": 262
+        "y": 279
     },
     {
         "id": "c0b83f35fdc02130",
@@ -1497,9 +1493,7 @@
             "d394b61bcc4755e6"
         ],
         "x": 14,
-        "y": 939,
-        "w": 1532,
-        "h": 82
+        "y": 939
     },
     {
         "id": "ef50b77b253a7883",
@@ -1519,9 +1513,7 @@
             "d587f5de3f4014c8"
         ],
         "x": 14,
-        "y": 239,
-        "w": 1792,
-        "h": 182
+        "y": 239
     },
     {
         "id": "62708d0bbe922798",
@@ -1545,9 +1537,7 @@
             "58df41cd8e54a653"
         ],
         "x": 14,
-        "y": 519,
-        "w": 1432,
-        "h": 322
+        "y": 519
     },
     {
         "id": "19463268a6c67561",
@@ -1565,8 +1555,6 @@
         ],
         "x": 14,
         "y": 99,
-        "w": 1432,
-        "h": 82,
         "info": "# Rules from Parameter Files"
     },
     {
@@ -1582,7 +1570,7 @@
             "a47c991027033263"
         ],
         "x": 714,
-        "y": 19,
+        "y": 79,
         "w": 432,
         "h": 82
     },
@@ -1609,7 +1597,7 @@
         "x": 14,
         "y": 19,
         "w": 652,
-        "h": 262
+        "h": 222
     },
     {
         "id": "d1e0f39ddacfeb20",
@@ -1629,9 +1617,7 @@
             "e5ca7c9975e3a6b5"
         ],
         "x": 474,
-        "y": 99,
-        "w": 392,
-        "h": 82
+        "y": 99
     },
     {
         "id": "748ca46ea16faad4",
@@ -6449,7 +6435,7 @@
             "617d768f3414b52e"
         ],
         "x": 2455,
-        "y": 120,
+        "y": 140,
         "wires": []
     },
     {
@@ -6647,7 +6633,7 @@
         "className": "",
         "topicType": "msg",
         "x": 800,
-        "y": 60,
+        "y": 120,
         "wires": [
             [
                 "a47c991027033263"
@@ -6666,8 +6652,8 @@
         "sendError": false,
         "encoding": "none",
         "allProps": false,
-        "x": 1120,
-        "y": 140,
+        "x": 1240,
+        "y": 240,
         "wires": [
             [
                 "d9f955651664d4a8"
@@ -6689,8 +6675,8 @@
         "strings": false,
         "include_empty_strings": false,
         "include_null_values": false,
-        "x": 1290,
-        "y": 140,
+        "x": 1370,
+        "y": 240,
         "wires": [
             [
                 "792badd055e46ded",
@@ -6710,8 +6696,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1490,
-        "y": 180,
+        "x": 1570,
+        "y": 240,
         "wires": [
             [
                 "8ff713c60410aa36",
@@ -6727,8 +6713,8 @@
         "links": [
             "60931347e15bc805"
         ],
-        "x": 1335,
-        "y": 220,
+        "x": 1385,
+        "y": 400,
         "wires": [
             [
                 "792badd055e46ded"
@@ -6746,8 +6732,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 870,
-        "y": 140,
+        "x": 1010,
+        "y": 240,
         "wires": [
             [
                 "499c2706ea3d919f"
@@ -6767,7 +6753,7 @@
         "finalize": "",
         "libs": [],
         "x": 1040,
-        "y": 60,
+        "y": 120,
         "wires": [
             []
         ]
@@ -6785,8 +6771,8 @@
         "format": "{{msg.payload}}",
         "layout": "row-spread",
         "className": "",
-        "x": 1970,
-        "y": 220,
+        "x": 2090,
+        "y": 240,
         "wires": []
     },
     {
@@ -6800,8 +6786,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1690,
-        "y": 220,
+        "x": 1790,
+        "y": 240,
         "wires": [
             [
                 "aee5640ceffb474d",
@@ -6830,7 +6816,7 @@
         "step": 1,
         "className": "",
         "x": 2000,
-        "y": 360,
+        "y": 400,
         "wires": [
             [
                 "251d88e5cb4a68cb"
@@ -6849,8 +6835,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2290,
-        "y": 200,
+        "x": 2270,
+        "y": 400,
         "wires": [
             [
                 "8fc8da4acdeb51a4"
@@ -6877,8 +6863,8 @@
         "payloadType": "str",
         "topic": "topic",
         "topicType": "msg",
-        "x": 580,
-        "y": 140,
+        "x": 760,
+        "y": 240,
         "wires": [
             [
                 "5f62bf825c6c1132"
@@ -6915,8 +6901,8 @@
         "syntax": "mustache",
         "template": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Upload CSV File</title>\n    <!-- Include Materialize CSS and JS -->\n    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css\">\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js\"></script>\n</head>\n<body>\n\n<div class=\"container\">\n    <h1 class=\"center-align\">Upload CSV File</h1>\n    \n    <div class=\"row\">\n        <form action=\"/upload\" method=\"POST\" enctype=\"multipart/form-data\" class=\"col s12\">\n            <div class=\"file-field input-field\">\n                <div class=\"btn\">\n                    <span>File</span>\n                    <input type=\"file\" name=\"myFile\">\n                </div>\n                <div class=\"file-path-wrapper\">\n                    <input class=\"file-path validate\" type=\"text\" placeholder=\"Upload a CSV file\">\n                </div>\n            </div>\n            <div class=\"input-field center-align\">\n                <button class=\"btn waves-effect waves-light\" type=\"submit\">Submit\n                    <i class=\"material-icons right\">send</i>\n                </button>\n            </div>\n        </form>\n    </div>\n</div>\n\n<!-- Initialize Materialize Components -->\n<script>\n    M.AutoInit();\n</script>\n\n</body>\n</html>\n",
         "output": "str",
-        "x": 450,
-        "y": 100,
+        "x": 310,
+        "y": 60,
         "wires": [
             [
                 "737e44d2.373a64"
@@ -6931,8 +6917,8 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 590,
-        "y": 100,
+        "x": 490,
+        "y": 60,
         "wires": []
     },
     {
@@ -6984,7 +6970,7 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "<p></p>File {{name}} uploaded !</p>\n\n<h2>Contents:</h2>\n\n<pre>\n{{{payload}}}\n</pre>",
+        "template": "<p></p>\nFile {{name}} uploaded !\n</p>\n<div class=\"input-field center-align\">\n    <a href=\"/ui\" class=\"btn waves-effect waves-light\">Test the Uploaded File.\n       \n    </a>\n</div>\n<h2>Contents:</h2>\n<pre>\n{{{payload}}}\n</pre>\n",
         "output": "str",
         "x": 450,
         "y": 160,
@@ -7029,7 +7015,7 @@
         "overwriteFile": "true",
         "encoding": "none",
         "x": 510,
-        "y": 240,
+        "y": 200,
         "wires": [
             []
         ]
@@ -7183,8 +7169,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1720,
-        "y": 120,
+        "x": 1820,
+        "y": 140,
         "wires": [
             [
                 "8fc8da4acdeb51a4"
@@ -7204,8 +7190,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 430,
-        "y": 60,
+        "x": 470,
+        "y": 120,
         "wires": [
             [
                 "12c94ce38056fc20"
