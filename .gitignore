@@ -1,0 +1,14 @@
+README.md
+.npm
+node_modules
+uibuilder
+lib
+projects
+*.backup
+*nodes*
+*projects.json
+*.runtime.*
+*.users.*
+*.config.*
+mc2_cred.json
+settings.js

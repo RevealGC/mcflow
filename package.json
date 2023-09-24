@@ -1,0 +1,28 @@
+{
+  "name": "nr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node-red -s settings.js -u . -p 1880 -f flows.json"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@digitaloak/node-red-contrib-digitaloak-postgresql": "~0.3.2",
+    "node-red": "^3.1.0",
+    "node-red-contrib-custom-chatgpt": "~1.2.11",
+    "node-red-contrib-email": "~0.2.1",
+    "node-red-contrib-fs": "~1.4.1",
+    "node-red-contrib-kafka-client": "~0.1.0",
+    "node-red-contrib-kafka-manager": "~0.5.1",
+    "node-red-contrib-msg-speed": "~2.1.0",
+    "node-red-contrib-re-postgres": "~0.3.4",
+    "node-red-contrib-ui-etable": "~4.6.3",
+    "node-red-contrib-uibuilder": "~6.0.0",
+    "node-red-dashboard": "~3.3.1",
+    "node-red-node-email": "~2.0.1",
+    "node-red-node-ui-table": "~0.4.3"
+  }
+}
