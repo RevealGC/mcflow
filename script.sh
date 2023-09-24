@@ -11,3 +11,4 @@ else
     git clone "$REPO_URL"
     cd "$DIR_NAME"
 fi
+npm start
