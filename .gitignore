@@ -10,3 +10,4 @@ projects
 *.users.*
 *.config.*
 mc2_cred.json
+flows_cred.json
