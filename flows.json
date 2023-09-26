@@ -1658,12 +1658,13 @@
             "25859a94.7d9976",
             "e1643981.20d7c8",
             "d7e5df8b.97a4e8",
-            "0464e4eb98976890"
+            "0464e4eb98976890",
+            "81e3239593f9f1d1"
         ],
         "x": 14,
         "y": 619,
         "w": 652,
-        "h": 262
+        "h": 282
     },
     {
         "id": "d1e0f39ddacfeb20",
@@ -10267,13 +10268,13 @@
         "order": 1,
         "width": 4,
         "height": 1,
-        "wrap": false,
+        "wrap": true,
         "passthru": true,
         "topic": "topic",
         "topicType": "msg",
         "format": "{{value}}",
         "min": "1",
-        "max": 10,
+        "max": "",
         "step": 1,
         "className": "",
         "x": 860,
@@ -10430,7 +10431,7 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "<p></p>File {{name}} uploaded !</p>\n\n<h2>Contents:</h2>\n\n<pre>\n{{{payload}}}\n</pre>",
+        "template": "<p></p>File {{name}} uploaded !</p>\n<a href='/ui'>Test{{msg.filename}}</a>\n<h2>Contents:</h2>\n\n<pre>\n{{{payload}}}\n</pre>",
         "output": "str",
         "x": 450,
         "y": 760,
@@ -10457,7 +10458,8 @@
         "wires": [
             [
                 "e1643981.20d7c8",
-                "0464e4eb98976890"
+                "0464e4eb98976890",
+                "81e3239593f9f1d1"
             ]
         ]
     },
@@ -10474,7 +10476,7 @@
         "overwriteFile": "true",
         "encoding": "none",
         "x": 510,
-        "y": 840,
+        "y": 820,
         "wires": [
             []
         ]
@@ -10613,6 +10615,27 @@
             [
                 "3c92b89522e322f8",
                 "aee5640ceffb474d"
+            ]
+        ]
+    },
+    {
+        "id": "81e3239593f9f1d1",
+        "type": "function",
+        "z": "dad88d9a3132fed6",
+        "g": "4099bf03141f3710",
+        "name": "getFileName in payload",
+        "func": "msg.payload=msg.filename\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 860,
+        "wires": [
+            [
+                "12c94ce38056fc20"
             ]
         ]
     },
