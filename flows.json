@@ -11121,8 +11121,9 @@
         "type": "function",
         "z": "112a2e5b60c3f3a8",
         "name": "classification function",
-        "func": "if ((msg.payload.csv[0].RECORD_TYP == 20 || msg.payload.csv[0].RECORD_TYP == 90) && msg.payload.csv[0].BR_STAT == \"Y\") {\n    if ((msg.payload.csv[0].NAICS_CODE_OLD).toString().substring(1, 4) == \"4821\" || (msg.payload.csv[0].NAICS_CODE_OLD).toString().substring(1, 7) == \"6221101\" || (msg.payload.csv[0].NAICS_CODE_OLD).toString().substring(1, 6) == \"113110\") {\n        if (!msg.payload.csv[0].NAICS_WRITIN_TEXT) {\n            msg.payload.csv[0].analysisRef = \"NAICS_WRITIN\"\n        }\n    } else {\n        msg.payload.csv[0].TABSTAT = \"N\"\n        msg.payload.csv[0].NONTABFL = \"R\"\n    }\n    msg.payload.csv[0].action = \"Go to Geography\"\n\n} else if (msg.payload.csv[0].RECORD_TYP == 30 && msg.payload.csv[0].BR_STAT == \"Y\") {\n    if (msg.payload.csv[0].KAU_NAICS == \"4821\" + \" \" || msg.payload.csv[0].KAU_NAICS == \"6221101\" || msg.payload.csv[0].KAU_NAICS + \" \" == \"113110\") {\n        msg.payload.csv[0].action = \"Go to Geography\"\n    } else {\n        msg.payload.csv[0].TABSTAT = \"N\"\n        msg.payload.csv[0].NONTABFL = \"R\"\n    }\n} else {\n    msg.payload.csv[0].error = \"Record should not have entered this module\"\n}\n\n\nreturn msg;",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\nlet status = \"\";\n\nfunction checkStr(str) {\n    return (typeof str === 'undefined' || str === null || str.toUpperCase() === \"NULL\") ?\n        \"\" : str.toUpperCase();\n}\n\nfunction recTypeMatch(recArr){\n    return (record.record_typ_txt ? \n        recArr.includes(record.record_typ_txt) : \n        false) &&\n        checkStr(record.aies_scope) == \"Y\" &&\n        checkStr(record.br_stat) == \"Y\";\n}\n\nfunction checkNaicsValidation(naicsNumLen, naicsValdnColumn = 0){\n    let cache = global.get(\"lookupCache\");\n    cache = Array.isArray(cache?.data) ? cache : { \"data\": [] };\n    let naicsValData = cache.data.length && \n        cache.data.find(item =>(\n            item.module == \"classification\" &&\n            item.program == \"aies\" &&\n            item.unit_type == \"estab\"\n        ))?.json_values;\n    return (naicsValData && naicsValData[\"col_\" + naicsValdnColumn] || []).includes((record.naics_num || \"\").substring(0, naicsNumLen));\n}\n// if ((msg.payload.csv[0].RECORD_TYP == 20 || msg.payload.csv[0].RECORD_TYP == 90) && msg.payload.csv[0].BR_STAT == \"Y\") {\n//     if ((msg.payload.csv[0].NAICS_CODE_OLD).toString().substring(1, 4) == \"4821\" || (msg.payload.csv[0].NAICS_CODE_OLD).toString().substring(1, 7) == \"6221101\" || (msg.payload.csv[0].NAICS_CODE_OLD).toString().substring(1, 6) == \"113110\") {\n//         if (!msg.payload.csv[0].NAICS_WRITIN_TEXT) {\n//             msg.payload.csv[0].analysisRef = \"NAICS_WRITIN\"\n//         }\n//     } else {\n//         msg.payload.csv[0].TABSTAT = \"N\"\n//         msg.payload.csv[0].NONTABFL = \"R\"\n//     }\n//     msg.payload.csv[0].action = \"Go to Geography\"\n\n// } else if (msg.payload.csv[0].RECORD_TYP == 30 && msg.payload.csv[0].BR_STAT == \"Y\") {\n//     if (msg.payload.csv[0].KAU_NAICS == \"4821\" + \" \" || msg.payload.csv[0].KAU_NAICS == \"6221101\" || msg.payload.csv[0].KAU_NAICS + \" \" == \"113110\") {\n//         msg.payload.csv[0].action = \"Go to Geography\"\n//     } else {\n//         msg.payload.csv[0].TABSTAT = \"N\"\n//         msg.payload.csv[0].NONTABFL = \"R\"\n//     }\n// } else {\n//     msg.payload.csv[0].error = \"Record should not have entered this module\"\n// }\n\n\n// return msg;",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -11166,6 +11167,17 @@
         "x": 560,
         "y": 100,
         "wires": []
+    },
+    {
+        "id": "d724d7b540efbda7",
+        "type": "subflow:0be109393cb5f28a",
+        "z": "112a2e5b60c3f3a8",
+        "name": "",
+        "x": 130,
+        "y": 80,
+        "wires": [
+            []
+        ]
     },
     {
         "id": "3f936d74a59fd02d",
