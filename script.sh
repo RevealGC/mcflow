@@ -1,3 +1,5 @@
+#!/bin/bash
+
 REPO_URL="https://github.com/RevealGC/mcflow.git"
 DIR_NAME="mcflow"
 
@@ -12,4 +14,21 @@ else
     cd "$DIR_NAME"
 fi
 npm install
-npm start
+
+# Check if the system is Linux
+if [ "$(uname)" == "Linux" ]; then
+    echo "This machine is running Linux 🐧"
+    npm run start:linux
+fi
+
+# Check if the system is macOS
+if [ "$(uname)" == "Darwin" ]; then
+    echo "This machine is running macOS "
+    npm run start:linux
+fi
+
+# Check if the system is Windows using the presence of the SYSTEMROOT environment variable
+if [ -n "$SYSTEMROOT" ] && [ -f "$SYSTEMROOT\\system32\\cmd.exe" ]; then
+    echo "This machine is running Windows 💻"
+    npm start
+fi
