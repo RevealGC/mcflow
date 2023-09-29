@@ -6124,8 +6124,9 @@
         "type": "function",
         "z": "0be109393cb5f28a",
         "name": "prepare API Request",
-        "func": "// Fetch the required parameters from msg.payload.lookup\nconst { moduleName, program, unit_type, missingParams } = msg.payload.lookup;\n\n// Construct the params query parameter from missingParams.\nconst params = (missingParams.length && missingParams.join(\",\")) || \"\";\n\n// Construct the full API URL\nconst apiurl = `http://census_api:3000/params?module=${moduleName}&params=${params}&program=${program}&unit_type=${unit_type}`;\n\n// Append the constructed API URL to msg.payload.lookup.apiurl\nmsg.url = apiurl;\nmsg.payloadBackup = msg.payload;\nreturn msg;\n",
+        "func": "// Fetch the required parameters from msg.payload.lookup\nconst { moduleName, program, unit_type, missingParams } = msg.payload.lookup;\n\n// Construct the params query parameter from missingParams.\nconst params = (missingParams.length && missingParams.join(\",\")) || \"\";\n\n// Construct the full API URL\n// localhost needs to be replace with the actual domain where the API is hosted. The port needs to be 80 or 443\nconst apiurl = `http://localhost:3000/params?module=${moduleName}&params=${params}&program=${program}&unit_type=${unit_type}`;\n\n// Append the constructed API URL to msg.payload.lookup.apiurl\nmsg.url = apiurl;\nmsg.payloadBackup = msg.payload;\nreturn msg;\n",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -6167,7 +6168,7 @@
         "type": "function",
         "z": "0be109393cb5f28a",
         "name": "cache result",
-        "func": "let cache = global.get(\"lookupCache\");\ncache = Array.isArray(cache?.data) ? cache : {\"data\":[]}\n\n// Get the payload\nlet payload = msg.payload;\n\n// Check if the API call was successful\nif (payload.status === \"success\") {\n\n    // Get the data array\n    let dataArr = payload.data;\n\n    // Extract the necessary fields from the API response and update the cache\n    for (let item of dataArr) {\n        const { id, module, param, values, json_values, program, unit_type } = item;\n        cache.data.push({ id, module, param, values, json_values, program, unit_type });\n    }\n}\n// Save the updated cache\nglobal.set(\"lookupCache\", cache)\nmsg.payload = msg.payloadBackup;\ndelete msg.payloadBackup;\nreturn msg;",
+        "func": "let cache = global.get(\"lookupCache\");\ncache = Array.isArray(cache?.data) ? cache : {\"data\":[]}\n\n// Get the payload\nlet payload = msg.payload;\n\n// Check if the API call was successful\nif (payload.status === \"success\") {\n\n    // Get the data array\n    let dataArr = payload.data;\n\n    // Extract the necessary fields from the API response and update the cache\n    for (let item of dataArr) {\n        const { id, module, param, values, json_values, program, unit_type } = item;\n        cache.data.push({ id, module, param, values, json_values, program, unit_type });\n    }\n    msg.payload = { ...msg.payloadBackup, dataArr };\n\n}\n// Save the updated cache\nglobal.set(\"lookupCache\", cache)\n// msg.payload = { ...msg.payloadBackup, dataArr };\n// msg.payload.cache = cache;\ndelete msg.payloadBackup;\nreturn msg;",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -9543,7 +9544,7 @@
         "type": "function",
         "z": "0a014270e6816fdf",
         "name": "critical error",
-        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\nlet status = \"\";\nmsg.payload.status = status;\n/* Uncomment this block for debugging \n    msg.payload.COV_CHG_CODE = record.COV_CHG_CODE\n    msg.payload.PAY_ANN_VAL = record.PAY_ANN_VAL\n    msg.payload.EMP_MAR12_NUM = record.EMP_MAR12_NUM\n    msg.payload.PAY_QTR1_VAL = record.PAY_QTR1_VAL\n    msg.payload.ECPAYANN = record.ECPAYANN\n    msg.payload.ECPAYQ1 = record.ECPAYQ1\n    msg.payload.ECEMPQ1 = record.ECEMPQ1\n    msg.payload.ECPAYANL = record.ECPAYANL\n    msg.payload.PROCESS_DIV_CODE_TXT = record.PROCESS_DIV_CODE_TXT\n    msg.payload.NAICS_SECTOR_OLD_NUM = record.NAICS_SECTOR_OLD_NUM\n*/\n\nfunction setResult() {\n    /* Uncomment to debug*/\n    msg.payload.status += \"+settingResult\";\n    msg.payload.csv[record_idx].TABSTAT = \"N\";\n    msg.payload.csv[record_idx].NONTABFL = \"D\";\n    msg.payload.csv[record_idx].action = \"Exit Edit\";\n}\n\nfunction parseToNum(val){\n    return isNaN(val) ? 0 : parseInt(val, 10);\n}\nfunction naicsSectorCheck() {\n    let result =\n        parseToNum(record.PAY_ANN_VAL) +\n        parseToNum(record.EMP_MAR12_NUM) +\n        parseToNum(record.PAY_QTR1_VAL) +\n        parseToNum(record.ECPAYANN) +\n        parseToNum(record.ECPAYQ1) +\n        parseToNum(record.ECEMPQ1) +\n        parseToNum(record.ECPAYANL);\n    msg.payload.status += \"result=\" + result + \" >>>\"\n    if (parseToNum(record.NAICS_SECTOR_OLD_NUM === 31)) {\n        /* Uncomment to debug*/\n        msg.payload.status += \"31-True>>>Data === 0?\" + (result + parseToNum(record.exps_tempstaf_val_f) === 0) + \">>>\";\n        return result + parseToNum(record.exps_tempstaf_val_f) === 0;\n    }\n    /* Uncomment to debug*/\n    msg.payload.status += \"31-False>>>Data === 0?\" + (result === 0) + \">>>\";\n    return result === 0\n}\n\nif (\n    [\"111\", \"131\", \"791\"].includes(record.COV_CHG_CODE.toString()) &&\n    new Date(record.COV_CHG_DATE) <=\n    new Date(\"01-01-\" + record.REF_PER.substring(0, 4)) &&\n    naicsSectorCheck()\n) {\n    /* Uncomment to debug*/\n    msg.payload.status += \"111-131-791-PASSED>>>\";\n    msg.payload.status += \"COV_CHG_CODE-DATE-CHECK-PASSED\";\n    msg.payload.status += \"NAICS-True>>>\";\n    setResult();\n    msg.payload.action = \"Exit Edit\";\n    return msg;\n\n} else {\n    /* Uncomment to debug*/\n    msg.payload.status += \"NAICS-False>>>\"; \n    if (\n        [\"181\", \"201\", \"791\", \"801\", \"091\", \"121\", \"171\"].includes(record.COV_CHG_CODE.toString())\n    ) {\n        /* Uncomment to debug*/\n        msg.payload.status += \"181-201-791-801-True>>>\";\n        setResult();\n        msg.payload.action = \"Exit Edit\";\n        return msg;\n    } else {\n        msg.payload.csv[record_idx].action = \"Go To Main Routing\";\n        return msg;\n    }\n}",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\nlet status = \"\";\nmsg.payload.status = status;\n/* Uncomment this block for debugging \n    msg.payload.COV_CHG_CODE = record.COV_CHG_CODE\n    msg.payload.PAY_ANN_VAL = record.PAY_ANN_VAL\n    msg.payload.EMP_MAR12_NUM = record.EMP_MAR12_NUM\n    msg.payload.PAY_QTR1_VAL = record.PAY_QTR1_VAL\n    msg.payload.ECPAYANN = record.ECPAYANN\n    msg.payload.ECPAYQ1 = record.ECPAYQ1\n    msg.payload.ECEMPQ1 = record.ECEMPQ1\n    msg.payload.ECPAYANL = record.ECPAYANL\n    msg.payload.PROCESS_DIV_CODE_TXT = record.PROCESS_DIV_CODE_TXT\n    msg.payload.NAICS_SECTOR_OLD_NUM = record.NAICS_SECTOR_OLD_NUM\n*/\n\nfunction setResult() {\n    /* Uncomment to debug\n    msg.payload.status += \"+settingResult\";*/\n    msg.payload.csv[record_idx].TABSTAT = \"N\";\n    msg.payload.csv[record_idx].NONTABFL = \"D\";\n    msg.payload.csv[record_idx].action = \"Exit Edit\";\n}\n\nfunction parseToNum(val){\n    return isNaN(val) ? 0 : parseInt(val, 10);\n}\nfunction naicsSectorCheck() {\n    let result =\n        parseToNum(record.PAY_ANN_VAL) +\n        parseToNum(record.EMP_MAR12_NUM) +\n        parseToNum(record.PAY_QTR1_VAL) +\n        parseToNum(record.ECPAYANN) +\n        parseToNum(record.ECPAYQ1) +\n        parseToNum(record.ECEMPQ1) +\n        parseToNum(record.ECPAYANL);\n    msg.payload.status += \"result=\" + result + \" >>>\"\n    if (parseToNum(record.NAICS_SECTOR_OLD_NUM === 31)) {\n        /* Uncomment to debug\n        msg.payload.status += \"31-True>>>Data === 0?\" + (result + parseToNum(record.exps_tempstaf_val_f) === 0) + \">>>\";*/\n        return result + parseToNum(record.exps_tempstaf_val_f) === 0;\n    }\n    /* Uncomment to debug\n    msg.payload.status += \"31-False>>>Data === 0?\" + (result === 0) + \">>>\";*/\n    return result === 0\n}\n\nif (\n    [\"111\", \"131\", \"791\"].includes(record.COV_CHG_CODE.toString()) &&\n    new Date(record.COV_CHG_DATE) <=\n    new Date(\"01-01-\" + record.REF_PER.substring(0, 4)) &&\n    naicsSectorCheck()\n) {\n    /* Uncomment to debug\n    msg.payload.status += \"111-131-791-PASSED>>>\";\n    msg.payload.status += \"COV_CHG_CODE-DATE-CHECK-PASSED\";\n    msg.payload.status += \"NAICS-True>>>\";*/\n    setResult();\n    msg.payload.action = \"Exit Edit\";\n    return msg;\n\n} else {\n    /* Uncomment to debug\n    msg.payload.status += \"NAICS-False>>>\";*/\n    if (\n        [\"181\", \"201\", \"791\", \"801\", \"091\", \"121\", \"171\"].includes(record.COV_CHG_CODE.toString())\n    ) {\n        /* Uncomment to debug\n        msg.payload.status += \"181-201-791-801-True>>>\";*/\n        setResult();\n        // msg.payload.action = \"Exit Edit\";\n        return msg;\n    } else {\n        msg.payload.csv[record_idx].action = \"Go To Main Routing\";\n        return msg;\n    }\n}",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -11131,11 +11132,11 @@
             "f14b49f36a5b83fc",
             "ae36b936ef8f7cc6"
         ],
-        "x": 185,
+        "x": 45,
         "y": 180,
         "wires": [
             [
-                "1d09b4bb89816289"
+                "e68533f8e220dc5c"
             ]
         ]
     },
@@ -11144,13 +11145,14 @@
         "type": "function",
         "z": "112a2e5b60c3f3a8",
         "name": "classification function",
-        "func": "if ((msg.payload.csv[0].RECORD_TYP == 20 || msg.payload.csv[0].RECORD_TYP == 90) && msg.payload.csv[0].BR_STAT == \"Y\") {\n    if ((msg.payload.csv[0].NAICS_CODE_OLD).toString().substring(1, 4) == \"4821\" || (msg.payload.csv[0].NAICS_CODE_OLD).toString().substring(1, 7) == \"6221101\" || (msg.payload.csv[0].NAICS_CODE_OLD).toString().substring(1, 6) == \"113110\") {\n        if (!msg.payload.csv[0].NAICS_WRITIN_TEXT) {\n            msg.payload.csv[0].analysisRef = \"NAICS_WRITIN\"\n        }\n    } else {\n        msg.payload.csv[0].TABSTAT = \"N\"\n        msg.payload.csv[0].NONTABFL = \"R\"\n    }\n    msg.payload.csv[0].action = \"Go to Geography\"\n\n} else if (msg.payload.csv[0].RECORD_TYP == 30 && msg.payload.csv[0].BR_STAT == \"Y\") {\n    if (msg.payload.csv[0].KAU_NAICS == \"4821\" + \" \" || msg.payload.csv[0].KAU_NAICS == \"6221101\" || msg.payload.csv[0].KAU_NAICS + \" \" == \"113110\") {\n        msg.payload.csv[0].action = \"Go to Geography\"\n    } else {\n        msg.payload.csv[0].TABSTAT = \"N\"\n        msg.payload.csv[0].NONTABFL = \"R\"\n    }\n} else {\n    msg.payload.csv[0].error = \"Record should not have entered this module\"\n}\n\n\nreturn msg;",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\nlet cache = global.get(\"lookupCache\");\n\n/* For debugging\nmsg.payload.record_typ_txt = record.record_typ_txt;\nmsg.payload.aies_scope = record.aies_scope;\nmsg.payload.br_stat = record.br_stat;\nmsg.payload.naics_num = record.naics_num;\n*/\n\nlet status = \"\";\n\nfunction checkStr(str) {\n    return typeof str === undefined ||\n        str === null ||\n        str.toUpperCase() === \"NULL\"\n        ? \"\"\n        : str.toUpperCase();\n}\n\nfunction recTypeMatch(recArr) {\n    return ( \n        (record.record_typ_txt ? recArr.includes(record.record_typ_txt) : false) &&\n        checkStr(record.aies_scope) == \"Y\" &&\n        checkStr(record.br_stat) == \"Y\"\n    );\n}\n\nfunction partialNaicsNum(length) {\n    msg.payload.naics_num = record.naics_num.substring(0, length);\n    return record.naics_num.substring(0, length) || \"\";\n}\n\nfunction stopExit() {\n    // Todo: Add Referral Flag: Invalid _NAICS_ESTAB in the CSV if not present and add appropriate values (discuss with Hector)\n    msg.payload.status += \"+settingResult\";\n    msg.payload.csv[record_idx].TABSTAT = \"N\";\n    msg.payload.csv[record_idx].NONTABFL = \"R\";\n    msg.payload.csv[record_idx].STOP = \"T\";\n    msg.payload.csv[record_idx].action = \"Exit Edit\";\n}\n\nfunction checkNaicsValidation(field, cache, record, naicsValdnColumn = 0) {\n    if (!cache || !Array.isArray(cache.data)) {\n        cache = { data: [] };\n    }\n\n    const naicsValData = cache.data.find(\n        item =>\n            item.module === \"classification\" &&\n            item.program === \"aies\" &&\n            item.unit_type === \"estab\"\n    )?.json_values;\n\n    return (\n        record[field] &&\n        (\n            (naicsValData &&\n                typeof naicsValData === \"object\" &&\n                naicsValData[\"col_\" + naicsValdnColumn]) ||\n            []\n        ).some(item => checkStr(item) === checkStr(record[field]))\n    );\n}\n\nif (recTypeMatch([\"20\", \"90\"])) {\n    //msg.payload.status += \"<<< IN recTypeMatch>>>\"\n    if (\n        checkNaicsValidation(partialNaicsNum(4), cache, record, 0) ||\n        checkNaicsValidation(partialNaicsNum(7), cache, record, 1) ||\n        checkNaicsValidation(partialNaicsNum(6), cache, record, 2) ||\n        checkNaicsValidation(partialNaicsNum(3), cache, record, 3)\n    ) {\n        \n        /* Uncomment to debug\n        msg.payload.status += \"checkNaicsValidation(partialNaicsNum(4), cache, record, 0) >>>\" + checkNaicsValidation(partialNaicsNum(4), cache, record, 0)\n        */\n        // Todo: Link to Derive Naics code Module\n    } else {\n        stopExit();\n    }\n} \nelse if (recTypeMatch([\"30\"])) {\n    if (\n        checkNaicsValidation(record.kau_naics || \"\", cache, record, 0) ||\n        checkNaicsValidation(record.kau_naics || \"\", cache, record, 1) ||\n        checkNaicsValidation(record.kau_naics || \"\", cache, record, 2)\n    ) {\n        // Todo: Link to Geography\n    } else {\n        stopExit();\n    }\n} else {\n    msg.payload.action = \"Error - Record should not have entered this module\";\n}\n\n\n//////// Old Code - Can be removed ////////\n// if ((msg.payload.csv[0].RECORD_TYP == 20 || msg.payload.csv[0].RECORD_TYP == 90) && msg.payload.csv[0].BR_STAT == \"Y\") {\n//     if ((msg.payload.csv[0].NAICS_CODE_OLD).toString().substring(1, 4) == \"4821\" || (msg.payload.csv[0].NAICS_CODE_OLD).toString().substring(1, 7) == \"6221101\" || (msg.payload.csv[0].NAICS_CODE_OLD).toString().substring(1, 6) == \"113110\") {\n//         if (!msg.payload.csv[0].NAICS_WRITIN_TEXT) {\n//             msg.payload.csv[0].analysisRef = \"NAICS_WRITIN\"\n//         }\n//     } else {\n//         msg.payload.csv[0].TABSTAT = \"N\"\n//         msg.payload.csv[0].NONTABFL = \"R\"\n//     }\n//     msg.payload.csv[0].action = \"Go to Geography\"\n\n// } else if (msg.payload.csv[0].RECORD_TYP == 30 && msg.payload.csv[0].BR_STAT == \"Y\") {\n//     if (msg.payload.csv[0].KAU_NAICS == \"4821\" + \" \" || msg.payload.csv[0].KAU_NAICS == \"6221101\" || msg.payload.csv[0].KAU_NAICS + \" \" == \"113110\") {\n//         msg.payload.csv[0].action = \"Go to Geography\"\n//     } else {\n//         msg.payload.csv[0].TABSTAT = \"N\"\n//         msg.payload.csv[0].NONTABFL = \"R\"\n//     }\n// } else {\n//     msg.payload.csv[0].error = \"Record should not have entered this module\"\n// }\n\n\nreturn msg;",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 360,
+        "x": 760,
         "y": 180,
         "wires": [
             [
@@ -11169,7 +11171,7 @@
             "7d91540d69ac16c1",
             "688a39b3e0070fe9"
         ],
-        "x": 525,
+        "x": 925,
         "y": 180,
         "wires": []
     },
@@ -11186,8 +11188,190 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 560,
+        "x": 960,
         "y": 100,
+        "wires": []
+    },
+    {
+        "id": "d724d7b540efbda7",
+        "type": "subflow:0be109393cb5f28a",
+        "z": "112a2e5b60c3f3a8",
+        "name": "",
+        "x": 510,
+        "y": 180,
+        "wires": [
+            [
+                "1d09b4bb89816289",
+                "597040e7f9c95810"
+            ]
+        ]
+    },
+    {
+        "id": "597040e7f9c95810",
+        "type": "debug",
+        "z": "112a2e5b60c3f3a8",
+        "name": "debug 95",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 520,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "3e48307d8de2024d",
+        "type": "inject",
+        "z": "112a2e5b60c3f3a8",
+        "name": "Reset Cache",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"lookup\":{\"moduleName\":\"classification\",\"program\":\"aies\",\"unit_type\":\"estab\",\"params\":\"naics_alt,naics_validation\"}}",
+        "payloadType": "json",
+        "x": 270,
+        "y": 600,
+        "wires": [
+            [
+                "dfd56f079cadbf6d"
+            ]
+        ]
+    },
+    {
+        "id": "e68533f8e220dc5c",
+        "type": "change",
+        "z": "112a2e5b60c3f3a8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.lookup",
+                "pt": "msg",
+                "to": "{\"moduleName\":\"classification\",\"program\":\"aies\",\"unit_type\":\"estab\",\"params\":\"naics_alt,naics_validation\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 250,
+        "y": 180,
+        "wires": [
+            [
+                "d724d7b540efbda7"
+            ]
+        ]
+    },
+    {
+        "id": "dfd56f079cadbf6d",
+        "type": "function",
+        "z": "112a2e5b60c3f3a8",
+        "name": "reset cache function",
+        "func": "let cache = global.set(\"lookupCache\", { \"data\": [] });\nmsg.cache = global.get(\"lookupCache\");\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 600,
+        "wires": [
+            [
+                "8e6b9ce262c7a33c"
+            ]
+        ]
+    },
+    {
+        "id": "bb8cfd0edc7b6039",
+        "type": "inject",
+        "z": "112a2e5b60c3f3a8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"lookup\":{\"moduleName\":\"classification\",\"program\":\"aies\",\"unit_type\":\"estab\",\"params\":\"naics_alt,naics_validation\"}}",
+        "payloadType": "json",
+        "x": 250,
+        "y": 500,
+        "wires": [
+            [
+                "ccdc5863fd12c3f6"
+            ]
+        ]
+    },
+    {
+        "id": "ccdc5863fd12c3f6",
+        "type": "function",
+        "z": "112a2e5b60c3f3a8",
+        "name": "Check cache",
+        "func": "msg.cache = global.get(\"lookupCache\");\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 500,
+        "wires": [
+            [
+                "f24d832341a7b238"
+            ]
+        ]
+    },
+    {
+        "id": "f24d832341a7b238",
+        "type": "debug",
+        "z": "112a2e5b60c3f3a8",
+        "name": "debug 96",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "cache",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "8e6b9ce262c7a33c",
+        "type": "debug",
+        "z": "112a2e5b60c3f3a8",
+        "name": "debug 97",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "cache",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 600,
         "wires": []
     },
     {
