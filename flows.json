@@ -1659,12 +1659,14 @@
             "e1643981.20d7c8",
             "d7e5df8b.97a4e8",
             "0464e4eb98976890",
-            "81e3239593f9f1d1"
+            "81e3239593f9f1d1",
+            "2319e5574f035f21",
+            "133f3ab8f0f73e6d"
         ],
         "x": 14,
         "y": 619,
-        "w": 712,
-        "h": 282
+        "w": 872,
+        "h": 702
     },
     {
         "id": "d1e0f39ddacfeb20",
@@ -17692,7 +17694,7 @@
         "type": "function",
         "z": "5e1a962405c84d2b",
         "name": "function 18",
-        "func": "// if (String(msg.payload.csv[0].RECORD_TYP) === \"20\" || String(msg.payload.csv[0].RECORD_TYP) === \"90\") {\n//     if(msg.payload.csv[0].PROCESS_DIV_CODE = \"1\") {\n//         msg.payload.csv[0].action = \"Go to: Derive MFG NAICS from NAPCS\"\n//     } else {\n//         msg.payload.csv[0].action = \"Go to: Classification\"\n//     }\n// } else {\n//     msg.payload.csv[0].action = \"Go to: Classification\"\n// }\n// return msg;\n// console.log(String(msg.payload.csv[0].RECORD_TYP_TXT), String(msg.payload.csv[0].RECORD_TYP_TXT), String(msg.payload.csv[0].REPORTING_TYP_ID) === \"SU\", String(msg.payload.csv[0].REPORTING_TYP_ID) === \"MU\")\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nif (\n    (String(record.RECORD_TYP_TXT) === \"20\" || String(record.RECORD_TYP_TXT) === \"90\")\n    && \n    (String(record.REPORTING_TYP_ID) === \"SU\" || String(record.REPORTING_TYP_ID) === \"MU\")\n    ) \n{\n    console.log(1)\n    if (String(record.NAICS_SECTOR_CODE_NUM) === \"31\") {\n        console.log(2)\n        record.action = \"Go to: Derive MFG NAICS from NAPCS\"\n    } else {\n        console.log(3)\n        record.action = \"Go to: Classification\"\n        \n    }\n    return msg;\n} \nelse if (\n    String(record.RECORD_TYP_TXT) === \"30\"\n    &&\n    String(record.REPORTING_TYP_ID) === \"KAU\"\n) {\n    console.log(4)\n    record.action = \"Do Responses to special Items Lead you question NAICS (GROUP_KEY) of Entire KAU\"\n    return msg;\n}\nelse {\n    console.log(5)\n    record.action = \"Go to: Classification\"\n    return msg;\n}",
+        "func": "// if (String(msg.payload.csv[0].RECORD_TYP) === \"20\" || String(msg.payload.csv[0].RECORD_TYP) === \"90\") {\n//     if(msg.payload.csv[0].PROCESS_DIV_CODE = \"1\") {\n//         msg.payload.csv[0].action = \"Go to: Derive MFG NAICS from NAPCS\"\n//     } else {\n//         msg.payload.csv[0].action = \"Go to: Classification\"\n//     }\n// } else {\n//     msg.payload.csv[0].action = \"Go to: Classification\"\n// }\n// return msg;\n// console.log(String(msg.payload.csv[0].RECORD_TYP_TXT), String(msg.payload.csv[0].RECORD_TYP_TXT), String(msg.payload.csv[0].REPORTING_TYP_ID) === \"SU\", String(msg.payload.csv[0].REPORTING_TYP_ID) === \"MU\")\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nif (\n    (String(record.RECORD_TYP_TXT) === \"20\" || String(record.RECORD_TYP_TXT) === \"90\")\n    && \n    (String(record.REPORTING_TYP_ID) === \"SU\" || String(record.REPORTING_TYP_ID) === \"MU\")\n    ) \n{\n    console.log(1)\n    if (String(record.NAICS_SECTOR_OLD_NUM) === \"31\") {\n        console.log(2)\n        record.action = \"Go to: Derive MFG NAICS from NAPCS\"\n    } else {\n        console.log(3)\n        record.action = \"Go to: Classification\"\n        \n    }\n    return msg;\n} \nelse if (\n    String(record.RECORD_TYP_TXT) === \"30\"\n    &&\n    String(record.REPORTING_TYP_ID) === \"KAU\"\n) {\n    console.log(4)\n    record.action = \"Do Responses to special Items Lead you question NAICS (GROUP_KEY) of Entire KAU\"\n    return msg;\n}\nelse {\n    console.log(5)\n    record.action = \"Go to: Classification\"\n    return msg;\n}",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -18591,6 +18593,7 @@
         "name": "nullify moduleFacts and originalData",
         "func": "flow.set(\"moduleFacts\", [])\nflow.set(\"originalData\", [])\n//NK initialize global context\nglobal.set(\"originalData\", [])\nglobal.set(\"moduleFacts\", [])\nglobal.set(\"ptrModuleFacts\",0)\n\n\n// // Reset flow context variables\n// flow.keys().forEach(function (key) {\n//     flow.context().set(key, undefined);\n// });\n\n// // Reset global context variables\n// global.keys().forEach(function (key) {\n//     global.context().set(key, undefined);\n// });\n\n\n\n\nif(global.get(\"filename\")){\n    // msg.filename = global.get(\"filename\")\n    msg.payload = global.get(\"filename\")\n    return msg\n}\nelse return null;\n\n",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -18599,7 +18602,8 @@
         "y": 260,
         "wires": [
             [
-                "499c2706ea3d919f"
+                "499c2706ea3d919f",
+                "40d9b466bfb45d06"
             ]
         ]
     },
@@ -18691,8 +18695,9 @@
         "type": "function",
         "z": "dad88d9a3132fed6",
         "name": "Select ptr in csv file",
-        "func": "// Get the pointer from the ui which record in the csv is selected\n// set the value of the ptr to the count from the ui\nlet ptr = msg.payload - 1\nglobal.set(\"ptrModuleFacts\", ptr)\n\n\nmsg.payload = global.get(\"moduleFacts\")\nglobal.set('originalData', msg.payload[ptr])\n\nreturn msg;",
+        "func": "// Get the pointer from the ui which record in the csv is selected\n// set the value of the ptr to the count from the ui\nlet ptr = msg.payload - 1\nglobal.set(\"ptrModuleFacts\", ptr)\n\n\nmsg.payload = global.get(\"moduleFacts\")\nconsole.log(msg.payload[ptr])\nglobal.set('originalData', msg.payload[ptr])\n\nreturn msg;",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -18800,8 +18805,8 @@
         "z": "dad88d9a3132fed6",
         "g": "4099bf03141f3710",
         "name": "",
-        "x": 650,
-        "y": 760,
+        "x": 790,
+        "y": 1260,
         "wires": []
     },
     {
@@ -18832,10 +18837,10 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Upload CSV File</title>\n    <!-- Include Materialize CSS and JS -->\n    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css\">\n    <link href=\"https://fonts.googleapis.com/icon?family=Material+Icons\" rel=\"stylesheet\">\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js\"></script>\n</head>\n<body>\n  <nav>\n    <div class=\"blue nav-wrapper\">\n      <a href=\"#\" data-target=\"mobile-demo\" class=\"sidenav-trigger\"><i class=\"material-icons\">menu</i></a>\n      <ul class=\"left hide-on-med-and-down\">\n        <li><a class=\"bold\" href=\"/update_params\">Params</a></li>\n        <li><a class=\"bold\" href=\"/upload_page\">Upload csv</a></li>\n        <li><a class=\"bold\" href=\"/ui_wrapper\">UI</a></li>\n      </ul>\n    </div>\n  </nav>\n\n  <ul class=\"blue sidenav\" id=\"mobile-demo\">\n      <li><a class=\"bold\" href=\"/update_params\">Params</a></li>\n        <li><a class=\"bold\" href=\"/upload_page\">Upload csv</a></li>\n        <li><a class=\"bold\" href=\"/ui_wrapper\">UI</a></li>\n  </ul>\n<div class=\"container\">\n    <h1 class=\"center-align\">Uploaded</h1>\n</div>\n\n<p></p>File {{name}} uploaded !</p>\n{{!-- <a href='/ui'>Test{{msg.filename}}</a> --}}\n\n <div class=\"input-field center-align\">\n  <a href='/ui' class=\"btn waves-effect waves-light\" type=\"submit\">Go {{msg.filename}}\n      <i class=\"material-icons right\">send</i>\n  </a>\n</div>\n<h2>Contents:</h2>\n\n<pre>\n{{{payload}}}\n</pre>\n</body>",
+        "template": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Upload CSV File</title>\n    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css\">\n    <link href=\"https://fonts.googleapis.com/icon?family=Material+Icons\" rel=\"stylesheet\">\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js\"></script>\n    <style>\n        /* Add custom styles for responsiveness */\n         .table-container {\n            width: 95%;\n            overflow-x: auto;\n            margin: 2%;\n        }\n        table {\n            width: 100%;\n            border-collapse: collapse;\n        }\n\n        th, td {\n            border: 1px solid #dddddd;\n            text-align: left;\n            padding: 8px;\n        }\n\n        tr:nth-child(even) {\n            background-color: #f2f2f2;\n        }\n    </style>\n</head>\n<body>\n<nav>\n    <div class=\"blue nav-wrapper\">\n      <a href=\"#\" data-target=\"mobile-demo\" class=\"sidenav-trigger\"><i class=\"material-icons\">menu</i></a>\n      <ul class=\"left hide-on-med-and-down\">\n        <li><a class=\"bold\" href=\"/update_params\">Params</a></li>\n        <li><a class=\"bold\" href=\"/upload_page\">Upload csv</a></li>\n        <li><a class=\"bold\" href=\"/ui_wrapper\">UI</a></li>\n      </ul>\n    </div>\n  </nav>\n\n  <ul class=\"blue sidenav\" id=\"mobile-demo\">\n      <li><a class=\"bold\" href=\"/update_params\">Params</a></li>\n        <li><a class=\"bold\" href=\"/upload_page\">Upload csv</a></li>\n        <li><a class=\"bold\" href=\"/ui_wrapper\">UI</a></li>\n  </ul>\n\n  <div class=\"container\">\n    <h1 class=\"center-align\">Uploaded</h1>\n  </div>\n  <div id=\"hide_this_to_load\">{{payload}}</div>\n    <div class=\"table-container\">\n  <div id=\"load_table\"></div>\n  </div>\n  <p>File {{name}} uploaded !</p>\n  <div class=\"input-field center-align\">\n    <a href='/ui' class=\"btn waves-effect waves-light\" type=\"submit\">Go {{msg.filename}}\n      <i class=\"material-icons right\">send</i>\n    </a>\n  </div>\n  <h2>Contents:</h2>\n<script>\n  let data = document.getElementById('hide_this_to_load').innerHTML\n  document.getElementById('hide_this_to_load').style.display = 'none';\n  data = JSON.parse(data);\n  let headers; // Define headers variable here\n\n  document.addEventListener('DOMContentLoaded', function() {\n    const loadTableDiv = document.getElementById('load_table');\n    const table = document.createElement('table');\n    table.classList.add('striped');\n    const tableHeader = document.createElement('thead');\n    const headerRow = document.createElement('tr');\n    headers = Object.keys(data[0]); // Set headers here\n    headers.forEach(headerText => {\n      const th = document.createElement('th');\n      th.textContent = headerText;\n      headerRow.appendChild(th);\n    });\n    tableHeader.appendChild(headerRow);\n    table.appendChild(tableHeader);\n    const tableBody = document.createElement('tbody');\n    data.forEach((item, index) => {\n      const row = document.createElement('tr');\n      headers.forEach(header => {\n        const cell = document.createElement('td');\n        if (index !== 0) { // Make fields editable for all rows except the header row\n          const input = document.createElement('input');\n          input.value = item[header];\n          input.addEventListener('input', function() {\n            item[header] = this.value;\n            const updatedData = getUpdatedData();\n            console.log(updatedData);\n          });\n          cell.appendChild(input);\n        } else {\n          cell.textContent = item[header];\n        }\n        row.appendChild(cell);\n      });\n      tableBody.appendChild(row);\n    });\n    table.appendChild(tableBody);\n    loadTableDiv.appendChild(table);\n  });\n\n  function getUpdatedData() {\n    const updatedData = [];\n    const rows = document.querySelectorAll('#load_table tbody tr');\n    rows.forEach(row => {\n      const rowData = {};\n      const cells = row.querySelectorAll('td');\n      cells.forEach((cell, index) => {\n        const header = headers[index];\n        if (header) {\n          rowData[header] = cell.firstChild.value || cell.textContent;\n        }\n      });\n      updatedData.push(rowData);\n    });\n    return updatedData;\n  }\n</script>\n\n\n</body>\n</html>\n",
         "output": "str",
-        "x": 530,
-        "y": 780,
+        "x": 670,
+        "y": 1280,
         "wires": [
             [
                 "7d8e179a.283e4"
@@ -18854,7 +18859,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 300,
+        "x": 600,
         "y": 760,
         "wires": [
             [
@@ -19294,6 +19299,61 @@
         "headers": {},
         "x": 1310,
         "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "2319e5574f035f21",
+        "type": "function",
+        "z": "dad88d9a3132fed6",
+        "g": "4099bf03141f3710",
+        "name": "function 31",
+        "func": "msg.payload.payload = JSON.stringify({params: msg.payload});\n\nconst csvToJSON = (csv) => {\n    const lines = csv.split('\\n');\n    const headers = lines[0].split(',');\n    const result = [];\n    for (let i = 1; i < lines.length; i++) {\n        const obj = {};\n        const currentLine = lines[i].split(',');\n        for (let j = 0; j < headers.length; j++) {\n            obj[headers[j]] = currentLine[j];\n        }\n        result.push(obj);\n    }\n    return result;\n};\n\nconst csvString = msg.payload;\n\nconst jsonData = csvToJSON(csvString);\nmsg.payload = JSON.stringify(jsonData, null, 2);\n\n// msg.payload.payload = JSON.stringify(msg.payload.data[0].json_values);\n// msg.payload.id = JSON.stringify(msg.payload.data[0].id);\n// msg.payload.values = JSON.stringify({\n//     values: msg.payload.data[0].values,\n//     json_values: msg.payload.data[0].json_values\n// });\n\n// msg.payload = msg.payload.data[0].json_values;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 1180,
+        "wires": [
+            [
+                "e1643981.20d7c8",
+                "133f3ab8f0f73e6d"
+            ]
+        ]
+    },
+    {
+        "id": "133f3ab8f0f73e6d",
+        "type": "debug",
+        "z": "dad88d9a3132fed6",
+        "g": "4099bf03141f3710",
+        "name": "debug 100",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 770,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "40d9b466bfb45d06",
+        "type": "debug",
+        "z": "dad88d9a3132fed6",
+        "name": "debug 101",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 200,
         "wires": []
     }
 ]
