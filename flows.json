@@ -269,6 +269,14 @@
         "env": []
     },
     {
+        "id": "dad88d9a3132fed6",
+        "type": "tab",
+        "label": "Run Modules",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "112a2e5b60c3f3a8",
         "type": "tab",
         "label": "Classification",
@@ -277,9 +285,9 @@
         "env": []
     },
     {
-        "id": "dad88d9a3132fed6",
+        "id": "d416a739a235277c",
         "type": "tab",
-        "label": "Run Modules",
+        "label": "ElectricEnergyModule",
         "disabled": false,
         "info": "",
         "env": []
@@ -1661,11 +1669,12 @@
             "0464e4eb98976890",
             "81e3239593f9f1d1",
             "2319e5574f035f21",
-            "133f3ab8f0f73e6d"
+            "2e210837e211c8be",
+            "20ef4922bea8d7fd"
         ],
         "x": 14,
         "y": 619,
-        "w": 872,
+        "w": 972,
         "h": 702
     },
     {
@@ -12356,7 +12365,13 @@
             "05e1e9f94e92a19d",
             "62e629bde644c4ac",
             "312be7f6e10bbadc",
-            "b6899b0c09b0259e"
+            "b6899b0c09b0259e",
+            "1550efeda1667825",
+            "7dae0df881453eeb",
+            "45908235e45f6dfd",
+            "eda519aa8a1db303",
+            "8b699616f9c5a9b5",
+            "d9030a8fd1f031b8"
         ],
         "x": 205,
         "y": 260,
@@ -17742,257 +17757,6 @@
         "wires": []
     },
     {
-        "id": "d9650115f85479a9",
-        "type": "link in",
-        "z": "112a2e5b60c3f3a8",
-        "name": "link in 18",
-        "links": [
-            "f14b49f36a5b83fc",
-            "ae36b936ef8f7cc6"
-        ],
-        "x": 45,
-        "y": 180,
-        "wires": [
-            [
-                "e68533f8e220dc5c"
-            ]
-        ]
-    },
-    {
-        "id": "1d09b4bb89816289",
-        "type": "function",
-        "z": "112a2e5b60c3f3a8",
-        "name": "classification function",
-        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\nlet cache = global.get(\"lookupCache\");\n\nmsg.payload.record_typ_txt = record.RECORD_TYP_TXT;\nmsg.payload.aies_scope = record.AIES_SCOPE;\nmsg.payload.naics_num = record.NAICS_NUM;\n\n\nlet status = \"\";\nfunction checkStr(str) {\n    return typeof str === 'undefined' ||\n        str === null ||\n        str === \"NULL\"\n        ? \"\"\n        : str\n}\n\nfunction recTypeMatch(recArr) {\n    console.log((\n        (record.RECORD_TYP_TXT ? recArr.includes(record.RECORD_TYP_TXT) : false)\n    ))\n    return (\n        (record.RECORD_TYP_TXT ? recArr.includes(record.RECORD_TYP_TXT) : false)\n    );\n}\nfunction checkMinimumLength(inputString) {\n    return typeof inputString === 'string' && inputString.length >= 8;\n}\nfunction partialNaicsNum(length) {\n    msg.payload.NAICS_NUM = record.NAICS_NUM.substring(0, length);\n    console.log(msg.payload.NAICS_NUM)\n    return record.NAICS_NUM.substring(0, length) || \"\";\n}\nfunction partialKAUNaicsNum(length) {\n    msg.payload.KAU_NAICS = record.KAU_NAICS.substring(0, length);\n    console.log(msg.payload.KAU_NAICS)\n    return record.KAU_NAICS.substring(0, length) || \"\";\n}\nfunction setFlag() {\n    msg.payload.csv[record_idx].TABSTAT = \"N\";\n    msg.payload.csv[record_idx].NONTABFL = \"R\";\n    msg.payload.csv[record_idx].STOP = \"T\";\n    msg.payload.csv[record_idx].ACTION = \"Exit Edit\";\n}\nfunction setAction(action) {\n    console.log(action)\n    msg.payload.csv[record_idx].ACTION = action;\n}\nfunction stopExit(val) {\n    setFlag()\n    if (val === 1) {\n        msg.payload.csv[record_idx].REFERRAL_FLAG = \"INVALID_NAICS_KAU\";\n    } else {\n        msg.payload.csv[record_idx].REFERRAL_FLAG = \"INVALID_NAICS_ESTAB\";\n    }\n\n}\n\nfunction checkNaicsValidation(field, cache, record, naicsValdnColumn = 0) {\n    if (!cache || !Array.isArray(cache.data)) {\n        cache = { data: [] };\n    }\n\n    const naicsValData = cache.data.find(\n        item =>\n            item.module === \"classification\" &&\n            item.program === \"aies\" &&\n            item.unit_type === \"estab\"\n    )?.json_values;\n    console.log({\n        test1: record['NAICS_NUM'] &&\n            (\n                (naicsValData &&\n                    typeof naicsValData === \"object\" &&\n                    naicsValData[\"col_\" + naicsValdnColumn]) ||\n                []\n            ).some(item => checkStr((item).toString()) === checkStr((field).toString()))\n    })\n\n    return (\n        record['NAICS_NUM'] &&\n        (\n            (naicsValData &&\n                typeof naicsValData === \"object\" &&\n                naicsValData[\"col_\" + naicsValdnColumn]) ||\n            []\n        ).some(item => checkStr((item).toString()) === checkStr((field).toString()))\n    );\n}\nfunction callMeInElse() {\n    if (recTypeMatch([\"20\", \"90\"])) {\n        stopExit(20 || 90)\n    } else {\n        stopExit(1)\n    }\n}\nif (recTypeMatch([\"10\", \"20\", \"90\"])) {\n    if (checkMinimumLength(record.NAICS_NUM)) {\n        if (\n            checkNaicsValidation(partialNaicsNum(4), cache, record, 0) ||\n            checkNaicsValidation(partialNaicsNum(7), cache, record, 1) ||\n            checkNaicsValidation(partialNaicsNum(6), cache, record, 2)\n        ) {\n            setAction(\"Link to Derive Naics code Module\");\n        } else {\n            callMeInElse()\n        }\n        return msg;\n    } else if (recTypeMatch([\"20\", \"90\"])) {\n        callMeInElse()\n        return msg;\n    }else{\n        stopExit(1)\n    }\n    return msg;\n\n} else {\n    setAction(\"Error - Record should not have entered this module\");\n    return msg;\n}",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 760,
-        "y": 180,
-        "wires": [
-            [
-                "434436c270b7f283",
-                "2252d07a88b97680"
-            ]
-        ]
-    },
-    {
-        "id": "434436c270b7f283",
-        "type": "link out",
-        "z": "112a2e5b60c3f3a8",
-        "name": "link out classification",
-        "mode": "link",
-        "links": [
-            "7d91540d69ac16c1",
-            "688a39b3e0070fe9"
-        ],
-        "x": 925,
-        "y": 180,
-        "wires": []
-    },
-    {
-        "id": "2252d07a88b97680",
-        "type": "debug",
-        "z": "112a2e5b60c3f3a8",
-        "name": "debug classification",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 960,
-        "y": 100,
-        "wires": []
-    },
-    {
-        "id": "d724d7b540efbda7",
-        "type": "subflow:0be109393cb5f28a",
-        "z": "112a2e5b60c3f3a8",
-        "name": "",
-        "x": 510,
-        "y": 180,
-        "wires": [
-            [
-                "1d09b4bb89816289",
-                "597040e7f9c95810"
-            ]
-        ]
-    },
-    {
-        "id": "597040e7f9c95810",
-        "type": "debug",
-        "z": "112a2e5b60c3f3a8",
-        "name": "debug 95",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 520,
-        "y": 300,
-        "wires": []
-    },
-    {
-        "id": "3e48307d8de2024d",
-        "type": "inject",
-        "z": "112a2e5b60c3f3a8",
-        "name": "Reset Cache",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "{\"lookup\":{\"moduleName\":\"classification\",\"program\":\"aies\",\"unit_type\":\"estab\",\"params\":\"naics_alt,naics_validation\"}}",
-        "payloadType": "json",
-        "x": 270,
-        "y": 600,
-        "wires": [
-            [
-                "dfd56f079cadbf6d"
-            ]
-        ]
-    },
-    {
-        "id": "e68533f8e220dc5c",
-        "type": "change",
-        "z": "112a2e5b60c3f3a8",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload.lookup",
-                "pt": "msg",
-                "to": "{\"moduleName\":\"classification\",\"program\":\"aies\",\"unit_type\":\"estab\",\"params\":\"naics_alt,naics_validation\"}",
-                "tot": "json"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 250,
-        "y": 180,
-        "wires": [
-            [
-                "d724d7b540efbda7"
-            ]
-        ]
-    },
-    {
-        "id": "dfd56f079cadbf6d",
-        "type": "function",
-        "z": "112a2e5b60c3f3a8",
-        "name": "reset cache function",
-        "func": "let cache = global.set(\"lookupCache\", { \"data\": [] });\nmsg.cache = global.get(\"lookupCache\");\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 500,
-        "y": 600,
-        "wires": [
-            [
-                "8e6b9ce262c7a33c"
-            ]
-        ]
-    },
-    {
-        "id": "bb8cfd0edc7b6039",
-        "type": "inject",
-        "z": "112a2e5b60c3f3a8",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "{\"lookup\":{\"moduleName\":\"classification\",\"program\":\"aies\",\"unit_type\":\"estab\",\"params\":\"naics_alt,naics_validation\"}}",
-        "payloadType": "json",
-        "x": 250,
-        "y": 500,
-        "wires": [
-            [
-                "ccdc5863fd12c3f6"
-            ]
-        ]
-    },
-    {
-        "id": "ccdc5863fd12c3f6",
-        "type": "function",
-        "z": "112a2e5b60c3f3a8",
-        "name": "Check cache",
-        "func": "msg.cache = global.get(\"lookupCache\");\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 450,
-        "y": 500,
-        "wires": [
-            [
-                "f24d832341a7b238"
-            ]
-        ]
-    },
-    {
-        "id": "f24d832341a7b238",
-        "type": "debug",
-        "z": "112a2e5b60c3f3a8",
-        "name": "debug 96",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "cache",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 740,
-        "y": 500,
-        "wires": []
-    },
-    {
-        "id": "8e6b9ce262c7a33c",
-        "type": "debug",
-        "z": "112a2e5b60c3f3a8",
-        "name": "debug 97",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "cache",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 740,
-        "y": 600,
-        "wires": []
-    },
-    {
         "id": "523b46f795f0a997",
         "type": "ui_dropdown",
         "z": "dad88d9a3132fed6",
@@ -18331,7 +18095,8 @@
         "name": "link out classification",
         "mode": "link",
         "links": [
-            "d9650115f85479a9"
+            "d9650115f85479a9",
+            "af33a10fa21c5083"
         ],
         "x": 845,
         "y": 440,
@@ -18371,7 +18136,12 @@
         "mode": "link",
         "links": [
             "8feba05e91ff48f3",
-            "9c07038005bdd444"
+            "9c07038005bdd444",
+            "9ff3beac87b1677b",
+            "46cb49f11fea1177",
+            "9823416feef8960a",
+            "95d077dd39781efe",
+            "765efb0653db36d7"
         ],
         "x": 845,
         "y": 560,
@@ -18695,14 +18465,14 @@
         "type": "function",
         "z": "dad88d9a3132fed6",
         "name": "Select ptr in csv file",
-        "func": "// Get the pointer from the ui which record in the csv is selected\n// set the value of the ptr to the count from the ui\nlet ptr = msg.payload - 1\nglobal.set(\"ptrModuleFacts\", ptr)\n\n\nmsg.payload = global.get(\"moduleFacts\")\nconsole.log(msg.payload[ptr])\nglobal.set('originalData', msg.payload[ptr])\n\nreturn msg;",
+        "func": "// Get the pointer from the ui which record in the csv is selected\n// set the value of the ptr to the count from the ui\nlet ptr = msg.payload - 1\nglobal.set(\"ptrModuleFacts\", ptr)\nmsg.payload = global.get(\"moduleFacts\")\nglobal.set('originalData', msg.payload[ptr])\n\nreturn msg;",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1090,
+        "x": 1250,
         "y": 80,
         "wires": [
             [
@@ -18805,8 +18575,8 @@
         "z": "dad88d9a3132fed6",
         "g": "4099bf03141f3710",
         "name": "",
-        "x": 790,
-        "y": 1260,
+        "x": 910,
+        "y": 1280,
         "wires": []
     },
     {
@@ -18837,7 +18607,7 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Upload CSV File</title>\n    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css\">\n    <link href=\"https://fonts.googleapis.com/icon?family=Material+Icons\" rel=\"stylesheet\">\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js\"></script>\n    <style>\n        /* Add custom styles for responsiveness */\n         .table-container {\n            width: 95%;\n            overflow-x: auto;\n            margin: 2%;\n        }\n        table {\n            width: 100%;\n            border-collapse: collapse;\n        }\n\n        th, td {\n            border: 1px solid #dddddd;\n            text-align: left;\n            padding: 8px;\n        }\n\n        tr:nth-child(even) {\n            background-color: #f2f2f2;\n        }\n    </style>\n</head>\n<body>\n<nav>\n    <div class=\"blue nav-wrapper\">\n      <a href=\"#\" data-target=\"mobile-demo\" class=\"sidenav-trigger\"><i class=\"material-icons\">menu</i></a>\n      <ul class=\"left hide-on-med-and-down\">\n        <li><a class=\"bold\" href=\"/update_params\">Params</a></li>\n        <li><a class=\"bold\" href=\"/upload_page\">Upload csv</a></li>\n        <li><a class=\"bold\" href=\"/ui_wrapper\">UI</a></li>\n      </ul>\n    </div>\n  </nav>\n\n  <ul class=\"blue sidenav\" id=\"mobile-demo\">\n      <li><a class=\"bold\" href=\"/update_params\">Params</a></li>\n        <li><a class=\"bold\" href=\"/upload_page\">Upload csv</a></li>\n        <li><a class=\"bold\" href=\"/ui_wrapper\">UI</a></li>\n  </ul>\n\n  <div class=\"container\">\n    <h1 class=\"center-align\">Uploaded</h1>\n  </div>\n  <div id=\"hide_this_to_load\">{{payload}}</div>\n    <div class=\"table-container\">\n  <div id=\"load_table\"></div>\n  </div>\n  <p>File {{name}} uploaded !</p>\n  <div class=\"input-field center-align\">\n    <a href='/ui' class=\"btn waves-effect waves-light\" type=\"submit\">Go {{msg.filename}}\n      <i class=\"material-icons right\">send</i>\n    </a>\n  </div>\n  <h2>Contents:</h2>\n<script>\n  let data = document.getElementById('hide_this_to_load').innerHTML\n  document.getElementById('hide_this_to_load').style.display = 'none';\n  data = JSON.parse(data);\n  let headers; // Define headers variable here\n\n  document.addEventListener('DOMContentLoaded', function() {\n    const loadTableDiv = document.getElementById('load_table');\n    const table = document.createElement('table');\n    table.classList.add('striped');\n    const tableHeader = document.createElement('thead');\n    const headerRow = document.createElement('tr');\n    headers = Object.keys(data[0]); // Set headers here\n    headers.forEach(headerText => {\n      const th = document.createElement('th');\n      th.textContent = headerText;\n      headerRow.appendChild(th);\n    });\n    tableHeader.appendChild(headerRow);\n    table.appendChild(tableHeader);\n    const tableBody = document.createElement('tbody');\n    data.forEach((item, index) => {\n      const row = document.createElement('tr');\n      headers.forEach(header => {\n        const cell = document.createElement('td');\n        if (index !== 0) { // Make fields editable for all rows except the header row\n          const input = document.createElement('input');\n          input.value = item[header];\n          input.addEventListener('input', function() {\n            item[header] = this.value;\n            const updatedData = getUpdatedData();\n            console.log(updatedData);\n          });\n          cell.appendChild(input);\n        } else {\n          cell.textContent = item[header];\n        }\n        row.appendChild(cell);\n      });\n      tableBody.appendChild(row);\n    });\n    table.appendChild(tableBody);\n    loadTableDiv.appendChild(table);\n  });\n\n  function getUpdatedData() {\n    const updatedData = [];\n    const rows = document.querySelectorAll('#load_table tbody tr');\n    rows.forEach(row => {\n      const rowData = {};\n      const cells = row.querySelectorAll('td');\n      cells.forEach((cell, index) => {\n        const header = headers[index];\n        if (header) {\n          rowData[header] = cell.firstChild.value || cell.textContent;\n        }\n      });\n      updatedData.push(rowData);\n    });\n    return updatedData;\n  }\n</script>\n\n\n</body>\n</html>\n",
+        "template": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Upload CSV File</title>\n    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css\">\n    <link href=\"https://fonts.googleapis.com/icon?family=Material+Icons\" rel=\"stylesheet\">\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js\"></script>\n    <style>\n        /* Add custom styles for responsiveness */\n         .table-container {\n            width: 95%;\n            overflow-x: auto;\n            margin: 2%;\n        }\n        table {\n            width: 100%;\n            border-collapse: collapse;\n        }\n\n        th, td {\n            border: 1px solid #dddddd;\n            text-align: left;\n            padding: 8px;\n        }\n\n        tr:nth-child(even) {\n            background-color: #f2f2f2;\n        }\n    </style>\n</head>\n<body>\n<nav>\n    <div class=\"blue nav-wrapper\">\n      <a href=\"#\" data-target=\"mobile-demo\" class=\"sidenav-trigger\"><i class=\"material-icons\">menu</i></a>\n      <ul class=\"left hide-on-med-and-down\">\n        <li><a class=\"bold\" href=\"/update_params\">Params</a></li>\n        <li><a class=\"bold\" href=\"/upload_page\">Upload csv</a></li>\n        <li><a class=\"bold\" href=\"/ui_wrapper\">UI</a></li>\n      </ul>\n    </div>\n  </nav>\n\n  <ul class=\"blue sidenav\" id=\"mobile-demo\">\n      <li><a class=\"bold\" href=\"/update_params\">Params</a></li>\n        <li><a class=\"bold\" href=\"/upload_page\">Upload csv</a></li>\n        <li><a class=\"bold\" href=\"/ui_wrapper\">UI</a></li>\n  </ul>\n\n  <div class=\"container\">\n    {{!-- <h1 class=\"center-align\">Uploaded</h1> --}}\n  </div>\n  <div id=\"hide_this_to_load\">{{payload}}</div>\n    <div class=\"table-container\">\n  <div id=\"load_table\"></div>\n  </div>\n  <p id=\"file_name\">{{name}}</p>\n    <div class=\"input-field center-align\">\n    <button onclick='saveCsv()' class=\"btn waves-effect waves-light\" type=\"submit\">Save\n    </button>\n     <a href='/ui_wrapper' class=\"btn waves-effect waves-light\" type=\"submit\">Go {{msg.filename}}\n    </a>\n  </div>\n<script>\n  let data = document.getElementById('hide_this_to_load').innerHTML\n  let file_name = document.getElementById('file_name').innerHTML\n  document.getElementById('hide_this_to_load').style.display = 'none';\n  document.getElementById('file_name').style.display = 'none';\n  data = JSON.parse(data);\n  let headers; \n  document.addEventListener('DOMContentLoaded', function() {\n    const loadTableDiv = document.getElementById('load_table');\n    const table = document.createElement('table');\n    table.classList.add('striped');\n    const tableHeader = document.createElement('thead');\n    const headerRow = document.createElement('tr');\n    headers = Object.keys(data[0]); // Set headers here\n    headers.forEach(headerText => {\n      const th = document.createElement('th');\n      th.textContent = headerText;\n      headerRow.appendChild(th);\n    });\n    tableHeader.appendChild(headerRow);\n    table.appendChild(tableHeader);\n    const tableBody = document.createElement('tbody');\n    data.forEach((item, index) => {\n      const row = document.createElement('tr');\n      headers.forEach(header => {\n        const cell = document.createElement('td');\n        if (index !== 0) { // Make fields editable for all rows except the header row\n          const input = document.createElement('input');\n          input.value = item[header];\n          input.addEventListener('input', function() {\n            item[header] = this.value;\n            const updatedJData = getUpdatedData();\n            // console.log(updatedJData);\n          });\n          cell.appendChild(input);\n        } else {\n          cell.textContent = item[header];\n        }\n        row.appendChild(cell);\n      });\n      tableBody.appendChild(row);\n    });\n    table.appendChild(tableBody);\n    loadTableDiv.appendChild(table);\n  });\n\n  function getUpdatedData() {\n    const updatedData = [];\n    const rows = document.querySelectorAll('#load_table tbody tr');\n    rows.forEach(row => {\n      const rowData = {};\n      const cells = row.querySelectorAll('td');\n      cells.forEach((cell, index) => {\n        const header = headers[index];\n        if (header) {\n          rowData[header] = cell.firstChild.value || cell.textContent;\n        }\n      });\n      updatedData.push(rowData);\n    });\n    return updatedData;\n  }\n  const jsonToCSV = (jsonArray) => {\n    const headers = Object.keys(jsonArray[0]);\n\n    let csv = headers.join(',') + '\\n';\n\n    jsonArray.forEach(obj => {\n        const values = headers.map(header => {\n            const escapedValue = obj[header].replace(/\"/g, '\\\\\"');\n            return `\"${escapedValue}\"`;\n        });\n        csv += values.join(',') + '\\n';\n    });\n\n    return csv;\n};\n\n  function saveCsv(){\n     fetch('/saveCsv', {\n      method: 'POST',\n      headers: {\n        'Content-Type': 'application/json'\n      },\n      body: JSON.stringify({filename: file_name, csvData:jsonToCSV(getUpdatedData())})\n    })\n    .then(response => {\n      if (response.ok) {\n        console.log('Update successful!');\n      } else {\n        console.error('Error updating params:', response.status);\n      }\n    })\n    .catch(error => {\n      console.error('Error:', error);\n    });\n  }\n</script>\n\n\n</body>\n</html>\n",
         "output": "str",
         "x": 670,
         "y": 1280,
@@ -18853,8 +18623,9 @@
         "z": "dad88d9a3132fed6",
         "g": "4099bf03141f3710",
         "name": "toBase64",
-        "func": "msg.name = '/tmp/'+ msg.req.files[0].originalname;\nmsg.filename = msg.name;\n\nif (msg.req.files[0].mimetype.includes('image')) {\n    msg.payload = `<img src=\"data:image/gif;base64,${msg.req.files[0].buffer.toString('base64')}\">`;\n} else {\n    msg.payload = msg.req.files[0].buffer.toString();\n}\n\n\nreturn msg;",
+        "func": "msg.name = '/tmp/'+ msg.req.files[0].originalname;\nmsg.filename = msg.name;\n\nif (msg.req.files[0].mimetype.includes('image')) {\n    msg.payload = `<img src=\"data:image/gif;base64,${msg.req.files[0].buffer.toString('base64')}\">`;\n} else {\n    msg.payload = msg.req.files[0].buffer.toString();\n}\nreturn msg;",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -19318,27 +19089,9 @@
         "y": 1180,
         "wires": [
             [
-                "e1643981.20d7c8",
-                "133f3ab8f0f73e6d"
+                "e1643981.20d7c8"
             ]
         ]
-    },
-    {
-        "id": "133f3ab8f0f73e6d",
-        "type": "debug",
-        "z": "dad88d9a3132fed6",
-        "g": "4099bf03141f3710",
-        "name": "debug 100",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 770,
-        "y": 1140,
-        "wires": []
     },
     {
         "id": "40d9b466bfb45d06",
@@ -19354,6 +19107,641 @@
         "statusType": "auto",
         "x": 550,
         "y": 200,
+        "wires": []
+    },
+    {
+        "id": "2e210837e211c8be",
+        "type": "http in",
+        "z": "dad88d9a3132fed6",
+        "g": "4099bf03141f3710",
+        "name": "",
+        "url": "/saveCsv",
+        "method": "post",
+        "upload": true,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 1180,
+        "wires": [
+            [
+                "20ef4922bea8d7fd"
+            ]
+        ]
+    },
+    {
+        "id": "20ef4922bea8d7fd",
+        "type": "function",
+        "z": "dad88d9a3132fed6",
+        "g": "4099bf03141f3710",
+        "name": "toBase64",
+        "func": "// msg.name = '/tmp/'+ msg.payload.filename\nmsg.name = msg.payload.filename\nmsg.filename = msg.name;\nmsg.payload = msg.payload.csvData;\n// console.log(\"=====\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 1260,
+        "wires": [
+            [
+                "0464e4eb98976890"
+            ]
+        ]
+    },
+    {
+        "id": "d9650115f85479a9",
+        "type": "link in",
+        "z": "112a2e5b60c3f3a8",
+        "name": "link in 18",
+        "links": [
+            "f14b49f36a5b83fc",
+            "ae36b936ef8f7cc6"
+        ],
+        "x": 45,
+        "y": 180,
+        "wires": [
+            [
+                "e68533f8e220dc5c"
+            ]
+        ]
+    },
+    {
+        "id": "1d09b4bb89816289",
+        "type": "function",
+        "z": "112a2e5b60c3f3a8",
+        "name": "classification function",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\nlet cache = global.get(\"lookupCache\");\n\nmsg.payload.record_typ_txt = record.RECORD_TYP_TXT;\nmsg.payload.aies_scope = record.AIES_SCOPE;\nmsg.payload.naics_num = record.NAICS_NUM;\n\n\nlet status = \"\";\nfunction checkStr(str) {\n    return typeof str === 'undefined' ||\n        str === null ||\n        str === \"NULL\"\n        ? \"\"\n        : str\n}\n\nfunction recTypeMatch(recArr) {\n    console.log((\n        (record.RECORD_TYP_TXT ? recArr.includes(record.RECORD_TYP_TXT) : false)\n    ))\n    return (\n        (record.RECORD_TYP_TXT ? recArr.includes(record.RECORD_TYP_TXT) : false)\n    );\n}\nfunction checkMinimumLength(inputString) {\n    return typeof inputString === 'string' && inputString.length >= 8;\n}\nfunction partialNaicsNum(length) {\n    msg.payload.NAICS_NUM = record.NAICS_NUM.substring(0, length);\n    console.log(msg.payload.NAICS_NUM)\n    return record.NAICS_NUM.substring(0, length) || \"\";\n}\nfunction partialKAUNaicsNum(length) {\n    msg.payload.KAU_NAICS = record.KAU_NAICS.substring(0, length);\n    console.log(msg.payload.KAU_NAICS)\n    return record.KAU_NAICS.substring(0, length) || \"\";\n}\nfunction setFlag() {\n    msg.payload.csv[record_idx].TABSTAT = \"N\";\n    msg.payload.csv[record_idx].NONTABFL = \"R\";\n    msg.payload.csv[record_idx].STOP = \"T\";\n    msg.payload.csv[record_idx].ACTION = \"Exit Edit\";\n}\nfunction setAction(action) {\n    console.log(action)\n    msg.payload.csv[record_idx].ACTION = action;\n}\nfunction stopExit(val) {\n    setFlag()\n    if (val === 1) {\n        msg.payload.csv[record_idx].REFERRAL_FLAG = \"INVALID_NAICS_KAU\";\n    } else {\n        msg.payload.csv[record_idx].REFERRAL_FLAG = \"INVALID_NAICS_ESTAB\";\n    }\n\n}\n\nfunction checkNaicsValidation(field, cache, record, naicsValdnColumn = 0) {\n    if (!cache || !Array.isArray(cache.data)) {\n        cache = { data: [] };\n    }\n\n    const naicsValData = cache.data.find(\n        item =>\n            item.module === \"classification\" &&\n            item.program === \"aies\" &&\n            item.unit_type === \"estab\"\n    )?.json_values;\n    console.log({\n        test1: record['NAICS_NUM'] &&\n            (\n                (naicsValData &&\n                    typeof naicsValData === \"object\" &&\n                    naicsValData[\"col_\" + naicsValdnColumn]) ||\n                []\n            ).some(item => checkStr((item).toString()) === checkStr((field).toString()))\n    })\n\n    return (\n        record['NAICS_NUM'] &&\n        (\n            (naicsValData &&\n                typeof naicsValData === \"object\" &&\n                naicsValData[\"col_\" + naicsValdnColumn]) ||\n            []\n        ).some(item => checkStr((item).toString()) === checkStr((field).toString()))\n    );\n}\nfunction callMeInElse() {\n    if (recTypeMatch([\"20\", \"90\"])) {\n        stopExit(20 || 90)\n    } else {\n        stopExit(1)\n    }\n}\nif (recTypeMatch([\"30\", \"20\", \"90\"])) {\n    if (checkMinimumLength(record.NAICS_NUM)) {\n        if (\n            checkNaicsValidation(partialNaicsNum(4), cache, record, 0) ||\n            checkNaicsValidation(partialNaicsNum(7), cache, record, 1) ||\n            checkNaicsValidation(partialNaicsNum(6), cache, record, 2)\n        ) {\n            setAction(\"Link to Derive Naics code Module\");\n        } else {\n            callMeInElse()\n        }\n        return msg;\n    } else if (recTypeMatch([\"20\", \"90\"])) {\n        callMeInElse()\n        return msg;\n    }else{\n        stopExit(1)\n    }\n    return msg;\n\n} else {\n    setAction(\"Error - Record should not have entered this module\");\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 760,
+        "y": 180,
+        "wires": [
+            [
+                "434436c270b7f283",
+                "2252d07a88b97680"
+            ]
+        ]
+    },
+    {
+        "id": "434436c270b7f283",
+        "type": "link out",
+        "z": "112a2e5b60c3f3a8",
+        "name": "link out classification",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9"
+        ],
+        "x": 925,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "2252d07a88b97680",
+        "type": "debug",
+        "z": "112a2e5b60c3f3a8",
+        "name": "debug classification",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 960,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "d724d7b540efbda7",
+        "type": "subflow:0be109393cb5f28a",
+        "z": "112a2e5b60c3f3a8",
+        "name": "",
+        "x": 510,
+        "y": 180,
+        "wires": [
+            [
+                "1d09b4bb89816289",
+                "597040e7f9c95810"
+            ]
+        ]
+    },
+    {
+        "id": "597040e7f9c95810",
+        "type": "debug",
+        "z": "112a2e5b60c3f3a8",
+        "name": "debug 95",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 520,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "3e48307d8de2024d",
+        "type": "inject",
+        "z": "112a2e5b60c3f3a8",
+        "name": "Reset Cache",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"lookup\":{\"moduleName\":\"classification\",\"program\":\"aies\",\"unit_type\":\"estab\",\"params\":\"naics_alt,naics_validation\"}}",
+        "payloadType": "json",
+        "x": 270,
+        "y": 600,
+        "wires": [
+            [
+                "dfd56f079cadbf6d"
+            ]
+        ]
+    },
+    {
+        "id": "e68533f8e220dc5c",
+        "type": "change",
+        "z": "112a2e5b60c3f3a8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.lookup",
+                "pt": "msg",
+                "to": "{\"moduleName\":\"classification\",\"program\":\"aies\",\"unit_type\":\"estab\",\"params\":\"naics_alt,naics_validation\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 250,
+        "y": 180,
+        "wires": [
+            [
+                "d724d7b540efbda7"
+            ]
+        ]
+    },
+    {
+        "id": "dfd56f079cadbf6d",
+        "type": "function",
+        "z": "112a2e5b60c3f3a8",
+        "name": "reset cache function",
+        "func": "let cache = global.set(\"lookupCache\", { \"data\": [] });\nmsg.cache = global.get(\"lookupCache\");\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 600,
+        "wires": [
+            [
+                "8e6b9ce262c7a33c"
+            ]
+        ]
+    },
+    {
+        "id": "bb8cfd0edc7b6039",
+        "type": "inject",
+        "z": "112a2e5b60c3f3a8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"lookup\":{\"moduleName\":\"classification\",\"program\":\"aies\",\"unit_type\":\"estab\",\"params\":\"naics_alt,naics_validation\"}}",
+        "payloadType": "json",
+        "x": 250,
+        "y": 500,
+        "wires": [
+            [
+                "ccdc5863fd12c3f6"
+            ]
+        ]
+    },
+    {
+        "id": "ccdc5863fd12c3f6",
+        "type": "function",
+        "z": "112a2e5b60c3f3a8",
+        "name": "Check cache",
+        "func": "msg.cache = global.get(\"lookupCache\");\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 500,
+        "wires": [
+            [
+                "f24d832341a7b238"
+            ]
+        ]
+    },
+    {
+        "id": "f24d832341a7b238",
+        "type": "debug",
+        "z": "112a2e5b60c3f3a8",
+        "name": "debug 96",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "cache",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "8e6b9ce262c7a33c",
+        "type": "debug",
+        "z": "112a2e5b60c3f3a8",
+        "name": "debug 97",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "cache",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "9ff3beac87b1677b",
+        "type": "link in",
+        "z": "d416a739a235277c",
+        "name": "link in 38",
+        "links": [
+            "b1540f3459d95049",
+            "51e14578de8e4e73"
+        ],
+        "x": 235,
+        "y": 480,
+        "wires": [
+            [
+                "abef3a766d7b04ab"
+            ]
+        ]
+    },
+    {
+        "id": "abef3a766d7b04ab",
+        "type": "function",
+        "z": "d416a739a235277c",
+        "name": "ElectricEnergyModule",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\nlet status = \"\";\nmsg.payload.status = status;\n/* Uncomment this block for debugging \n    msg.payload.COV_CHG_CODE = record.COV_CHG_CODE\n    msg.payload.PAY_ANN_VAL = record.PAY_ANN_VAL\n    msg.payload.EMP_MAR12_NUM = record.EMP_MAR12_NUM\n    msg.payload.PAY_QTR1_VAL = record.PAY_QTR1_VAL\n    msg.payload.ECPAYANN = record.ECPAYANN\n    msg.payload.ECPAYQ1 = record.ECPAYQ1\n    msg.payload.ECEMPQ1 = record.ECEMPQ1\n    msg.payload.ECPAYANL = record.ECPAYANL\n    msg.payload.PROCESS_DIV_CODE_TXT = record.PROCESS_DIV_CODE_TXT\n    msg.payload.NAICS_SECTOR_OLD_NUM = record.NAICS_SECTOR_OLD_NUM\n*/\n\nfunction setResult() {\n    /* Uncomment to debug\n    msg.payload.status += \"+settingResult\";*/\n    msg.payload.csv[record_idx].TABSTAT = \"N\";\n    msg.payload.csv[record_idx].NONTABFL = \"D\";\n    msg.payload.csv[record_idx].action = \"Exit Edit\";\n}\n\n\n\nfunction parseToNum(val) {\n    return isNaN(val) ? 0 : parseInt(val, 10);\n}\nfunction naicsSectorCheck() {\n    let result =\n        parseToNum(record.PAY_ANN_VAL) +\n        parseToNum(record.EMP_MAR12_NUM) +\n        parseToNum(record.PAY_QTR1_VAL) +\n        parseToNum(record.ECPAYANN) +\n        parseToNum(record.ECPAYQ1) +\n        parseToNum(record.ECEMPQ1) +\n        parseToNum(record.ECPAYANL);\n\n    if (parseToNum(record.NAICS_SECTOR_OLD_NUM) === 31) {\n        return result + parseToNum(record.EXPS_TEMPSTAF_VAL);\n    }\n    return result\n}\nlet data = naicsSectorCheck();\nmsg.payload.csv[record_idx].DATA = data\nconsole.log()\nif (\n    [\"111\", \"131\", \"791\"].includes(record.COV_CHG_CODE.toString()) &&\n    new Date(record.COV_CHG_DATE) <=\n    new Date(\"01-01-\" + record.REF_PER.substring(0, 4)) &&\n    data\n) {\n    msg.payload.csv[record_idx].TABSTAT = \"Y\";\n    return msg;\n\n} else if ([\"181\", \"201\", \"801\", \"091\", \"121\", \"171\"].includes(record.COV_CHG_CODE.toString()) || data === 0) {\n    setResult();\n    return msg;\n} else {\n    msg.payload.csv[record_idx].action = \"Go To Main Routing\";\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 480,
+        "wires": [
+            [
+                "8fb70c16daf9473e",
+                "7dae0df881453eeb"
+            ]
+        ]
+    },
+    {
+        "id": "8fb70c16daf9473e",
+        "type": "debug",
+        "z": "d416a739a235277c",
+        "name": "debug ElectricEnergyModule",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "7dae0df881453eeb",
+        "type": "link out",
+        "z": "d416a739a235277c",
+        "name": "link out 56",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9"
+        ],
+        "x": 565,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "46cb49f11fea1177",
+        "type": "link in",
+        "z": "d416a739a235277c",
+        "name": "link in 39",
+        "links": [
+            "b1540f3459d95049",
+            "51e14578de8e4e73"
+        ],
+        "x": 225,
+        "y": 720,
+        "wires": [
+            [
+                "1d5798f410ba94fa"
+            ]
+        ]
+    },
+    {
+        "id": "1d5798f410ba94fa",
+        "type": "function",
+        "z": "d416a739a235277c",
+        "name": "electricEnergyModuleCont",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\n// Assumed JavaScript function based on new extracted OCR text (Continued Electric Energy Module)\nfunction electricEnergyModuleCont(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL) {\n    // Placeholder for parameter table\n    let X_ELECTRIC_STATE_PARAMETER_TABLE = {\n        AVG1: 0,\n        AVG2: 0,\n        ELEC: 0,\n        LL: 0,\n        UL: 0\n    };\n\n    let { AVG1, AVG2, ELEC, LL, UL } = X_ELECTRIC_STATE_PARAMETER_TABLE;\n\n    if (EXPS_ELEC_VAL > 0 && ELEC_PRCH_KWH_NUM === 0) {\n        // Logic here\n    } else if (EXPS_ELEC_VAL / ELEC_PRCH_KWH_NUM <= UL) {\n        // Logic here\n    } else {\n        // Call Electric Impute Module\n    }\n\n    // Additional logic...\n\n    return EXPS_ELEC_VAL;\n}\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 720,
+        "wires": [
+            [
+                "8e1b2cb6d829fd58",
+                "45908235e45f6dfd"
+            ]
+        ]
+    },
+    {
+        "id": "8e1b2cb6d829fd58",
+        "type": "debug",
+        "z": "d416a739a235277c",
+        "name": "debug electricEnergyModuleCont",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "45908235e45f6dfd",
+        "type": "link out",
+        "z": "d416a739a235277c",
+        "name": "link out 57",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9"
+        ],
+        "x": 575,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "9823416feef8960a",
+        "type": "link in",
+        "z": "d416a739a235277c",
+        "name": "link in 40",
+        "links": [
+            "b1540f3459d95049",
+            "51e14578de8e4e73"
+        ],
+        "x": 235,
+        "y": 960,
+        "wires": [
+            [
+                "c903163629df82af"
+            ]
+        ]
+    },
+    {
+        "id": "c903163629df82af",
+        "type": "function",
+        "z": "d416a739a235277c",
+        "name": "electricImputeModule",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\n// Assumed JavaScript function based on the newest extracted OCR text (Electric Impute Module)\nfunction electricImputeModule(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL) {\n    // Placeholder for NM_State parameter table\n    let NM_STATE_PARAMETER_TABLE = {\n        AVG1: 0,\n        AVG2: 0\n    };\n\n    let { AVG1, AVG2 } = NM_STATE_PARAMETER_TABLE;\n\n    if (EXPS_ELEC_VAL <= 10000) {\n        // Logic for Year 1 historic values (H_) referencing 2022 EC data. Year 2 and on will refer to prior year AIES data\n    }\n\n    if (ELEC_PRCH_KWH_NUM_F[3][1] !== 'B') {\n        ELEC_PRCH_KWH_NUM = Math.round(EXPS_ELEC_VAL * AVG2);\n        ELEC_PRCH_KWH_NUM_F[3][1] = 'B';\n    } else {\n        ELEC_PRCH_KWH_NUM = Math.round(EXPS_ELEC_VAL * AVG1);\n    }\n\n    // Additional logic...\n\n    return EXPS_ELEC_VAL;\n}\n\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 9,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 960,
+        "wires": [
+            [
+                "ba693bb539d071b9",
+                "eda519aa8a1db303"
+            ]
+        ]
+    },
+    {
+        "id": "ba693bb539d071b9",
+        "type": "debug",
+        "z": "d416a739a235277c",
+        "name": "debug electricImputeModule",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "eda519aa8a1db303",
+        "type": "link out",
+        "z": "d416a739a235277c",
+        "name": "link out 58",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9"
+        ],
+        "x": 585,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "95d077dd39781efe",
+        "type": "link in",
+        "z": "d416a739a235277c",
+        "name": "link in 41",
+        "links": [
+            "b1540f3459d95049",
+            "51e14578de8e4e73"
+        ],
+        "x": 235,
+        "y": 1180,
+        "wires": [
+            [
+                "5f5ca49f66f32b41"
+            ]
+        ]
+    },
+    {
+        "id": "5f5ca49f66f32b41",
+        "type": "function",
+        "z": "d416a739a235277c",
+        "name": "electricImputeModule",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\n// Assumed JavaScript function based on the newest extracted OCR text (Electric Impute Module)\nfunction electricImputeModule(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL) {\n    // Placeholder for NM_State parameter table\n    let NM_STATE_PARAMETER_TABLE = {\n        AVG1: 0,\n        AVG2: 0\n    };\n\n    let { AVG1, AVG2 } = NM_STATE_PARAMETER_TABLE;\n\n    if (EXPS_ELEC_VAL <= 10000) {\n        // Logic for Year 1 historic values (H_) referencing 2022 EC data. Year 2 and on will refer to prior year AIES data\n    }\n\n    if (ELEC_PRCH_KWH_NUM_F[3][1] !== 'B') {\n        ELEC_PRCH_KWH_NUM = Math.round(EXPS_ELEC_VAL * AVG2);\n        ELEC_PRCH_KWH_NUM_F[3][1] = 'B';\n    } else {\n        ELEC_PRCH_KWH_NUM = Math.round(EXPS_ELEC_VAL * AVG1);\n    }\n\n    // Additional logic...\n\n    return EXPS_ELEC_VAL;\n}\n\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 9,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 1180,
+        "wires": [
+            [
+                "d024af4d5725903e",
+                "8b699616f9c5a9b5"
+            ]
+        ]
+    },
+    {
+        "id": "d024af4d5725903e",
+        "type": "debug",
+        "z": "d416a739a235277c",
+        "name": "debug electricImputeModule",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "8b699616f9c5a9b5",
+        "type": "link out",
+        "z": "d416a739a235277c",
+        "name": "link out 59",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9"
+        ],
+        "x": 585,
+        "y": 1220,
+        "wires": []
+    },
+    {
+        "id": "765efb0653db36d7",
+        "type": "link in",
+        "z": "d416a739a235277c",
+        "name": "link in 42",
+        "links": [
+            "b1540f3459d95049",
+            "51e14578de8e4e73"
+        ],
+        "x": 245,
+        "y": 1400,
+        "wires": [
+            [
+                "1455ef9792b755e9"
+            ]
+        ]
+    },
+    {
+        "id": "1455ef9792b755e9",
+        "type": "function",
+        "z": "d416a739a235277c",
+        "name": "Main",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\n// JavaScript function incorporating the parameter table data as an array of objects\nconst parameterTableData = [\n    { 'GEO_ST': '01', 'AVG1': 6.99263, 'AVG2': 12.1924, 'ELEC_INTERSECT': 1000, 'LL': 0.02, 'UL': 0.29 },\n    { 'GEO_ST': '02', 'AVG1': 2.97017, 'AVG2': 6.2589, 'ELEC_INTERSECT': 1000, 'LL': 0.03, 'UL': 0.21 },\n];\n\nfunction getParameterByGeoSt(geoSt) {\n    if (!geoSt || geoSt === 'NULL') return null;\n    return parameterTableData.find(item => item.GEO_ST === geoSt);\n}\n\nfunction electricEnergyModule(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, x_CURR) {\n    console.log(\"Executing electricEnergyModule...\");\n\n    if (!T_STFIPS || !REFPER || !ELEC_PRCH_KWH_NUM || !x_CURR ||\n        [T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, x_CURR].includes('NULL')) {\n        console.log('Invalid parameters');\n        return 'Invalid parameters';\n    }\n\n    const parameter = getParameterByGeoSt(T_STFIPS);\n    if (!parameter) {\n        console.log('Invalid STFIPS');\n        return 'Invalid STFIPS';\n    }\n\n    // ... rest of the logic\n\n    return electricEnergyModuleCont(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, 0, x_CURR);\n}\n\nfunction electricEnergyModuleCont(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL, x_CURR) {\n    console.log(\"Executing electricEnergyModuleCont...\");\n    if (!T_STFIPS || !REFPER || ELEC_PRCH_KWH_NUM === null || EXPS_ELEC_VAL === null || !x_CURR ||\n        [T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL, x_CURR].includes('NULL')) {\n        console.log('Invalid parameters');\n        return 'Invalid parameters';\n    }\n\n    const parameter = getParameterByGeoSt(T_STFIPS);\n    let FIXED = 0;\n    let BETA = 0;\n\n    if (EXPS_ELEC_VAL / ELEC_PRCH_KWH_NUM > BETA) {\n        return electricImputeModule(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL, x_CURR);\n    }\n\n    console.log('Returning from electricEnergyModuleCont:', EXPS_ELEC_VAL);\n    return EXPS_ELEC_VAL;\n}\n\nfunction electricImputeModule(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL, x_CURR) {\n    console.log(\"Executing electricImputeModule...\");\n    if (!T_STFIPS || !REFPER || ELEC_PRCH_KWH_NUM === null || EXPS_ELEC_VAL === null || !x_CURR ||\n        [T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL, x_CURR].includes('NULL')) {\n        console.log('Invalid parameters');\n        return 'Invalid parameters';\n    }\n\n    const parameter = getParameterByGeoSt(T_STFIPS);\n    let NM_STATE_PARAMETER_TABLE = {\n        AVG1: parameter ? parameter.AVG1 : 0,\n        AVG2: parameter ? parameter.AVG2 : 0\n    };\n\n    // ... rest of the logic\n\n    console.log('Returning from electricImputeModule:', EXPS_ELEC_VAL);\n    return EXPS_ELEC_VAL;\n}\n\n// Test cases\nconsole.log(electricEnergyModule('01', '2022', 1000, 'M'));  // Should execute all three functions for GEO_ST '01'\nconsole.log(electricEnergyModule(undefined, '2022', 500, 'M'));  // Should return 'Invalid parameters'\nconsole.log(electricEnergyModule('02', 'NULL', 500, 'M'));  // Should return 'Invalid parameters'\nconsole.log(electricEnergyModule('03', '2022', 500, 'M'));  // Should return 'Invalid STFIPS' because '03' is not in parameterTableData\n\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 1400,
+        "wires": [
+            [
+                "fb0490d46f6dac6d",
+                "d9030a8fd1f031b8"
+            ]
+        ]
+    },
+    {
+        "id": "fb0490d46f6dac6d",
+        "type": "debug",
+        "z": "d416a739a235277c",
+        "name": "debug Main",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 1320,
+        "wires": []
+    },
+    {
+        "id": "d9030a8fd1f031b8",
+        "type": "link out",
+        "z": "d416a739a235277c",
+        "name": "link out 60",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9"
+        ],
+        "x": 595,
+        "y": 1440,
         "wires": []
     }
 ]
