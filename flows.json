@@ -1670,7 +1670,8 @@
             "81e3239593f9f1d1",
             "2319e5574f035f21",
             "2e210837e211c8be",
-            "20ef4922bea8d7fd"
+            "20ef4922bea8d7fd",
+            "89e7e315b3a8c30b"
         ],
         "x": 14,
         "y": 619,
@@ -17911,11 +17912,16 @@
                 "t": "eq",
                 "v": "post_edit",
                 "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ElectricEnergyModule",
+                "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 12,
+        "outputs": 13,
         "x": 630,
         "y": 480,
         "wires": [
@@ -17954,6 +17960,9 @@
             ],
             [
                 "1597f28db268d317"
+            ],
+            [
+                "89e7e315b3a8c30b"
             ]
         ]
     },
@@ -18037,6 +18046,13 @@
                 "pt": "msg",
                 "to": "selectModule",
                 "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "version",
+                "pt": "msg",
+                "to": "",
+                "tot": "date"
             }
         ],
         "action": "",
@@ -18076,7 +18092,7 @@
         "order": 1,
         "width": 18,
         "height": 13,
-        "format": "<div ng-switch=\"msg.payload\">\n\n        <div ng-switch-when=\"balance_module\">\n\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/balance_module.png\" style=\"max-width: 100%; height: auto;\">\n\n    </div>\n\n        <div ng-switch-when=\"br_stat_evaluation\">\n\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/br_stat.png\" style=\"max-width: 100%; height: auto;\">\n\n    </div>\n\n    <div ng-switch-when=\"critical_error\">\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/critical_error.png\" style=\"max-width: 100%; height: auto;\">\n    </div>\n\n        <div ng-switch-when=\"derive_NAICS_code\">\n\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/derive_naics_code.png\" style=\"max-width: 100%; height: auto;\">\n\n    </div>\n\n    <div ng-switch-when=\"classification\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/classification.png\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"geography\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/geography.png\" style=\"max-width: 100%; height: auto;\">\n     </div>\n\n        <div ng-switch-default>\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/Set_NONNORM.png\" style=\"max-width: 100%; height: auto;\">\n    </div>\n\n</div>",
+        "format": "<div ng-switch=\"msg.payload\">\n\n        <div ng-switch-when=\"balance_module\">\n\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/balance_module.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n\n    </div>\n\n        <div ng-switch-when=\"br_stat_evaluation\">\n\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/br_stat.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n\n    </div>\n\n    <div ng-switch-when=\"critical_error\">\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/critical_error.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n\n        <div ng-switch-when=\"derive_NAICS_code\">\n\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/derive_naics_code.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n\n    </div>\n\n    <div ng-switch-when=\"classification\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/classification.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"geography\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/geography.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n     </div>\n\n        <div ng-switch-default>\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/Set_NONNORM.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n\n</div>",
         "storeOutMessages": true,
         "fwdInMessages": true,
         "resendOnRefresh": true,
@@ -18135,13 +18151,7 @@
         "name": "link out critical error",
         "mode": "link",
         "links": [
-            "8feba05e91ff48f3",
-            "9c07038005bdd444",
-            "9ff3beac87b1677b",
-            "46cb49f11fea1177",
-            "9823416feef8960a",
-            "95d077dd39781efe",
-            "765efb0653db36d7"
+            "8feba05e91ff48f3"
         ],
         "x": 845,
         "y": 560,
@@ -19149,6 +19159,20 @@
         ]
     },
     {
+        "id": "89e7e315b3a8c30b",
+        "type": "link out",
+        "z": "dad88d9a3132fed6",
+        "g": "4099bf03141f3710",
+        "name": "link out post edit",
+        "mode": "link",
+        "links": [
+            "f2f56f84d002ec0f"
+        ],
+        "x": 845,
+        "y": 800,
+        "wires": []
+    },
+    {
         "id": "d9650115f85479a9",
         "type": "link in",
         "z": "112a2e5b60c3f3a8",
@@ -19157,8 +19181,8 @@
             "f14b49f36a5b83fc",
             "ae36b936ef8f7cc6"
         ],
-        "x": 45,
-        "y": 180,
+        "x": 185,
+        "y": 100,
         "wires": [
             [
                 "e68533f8e220dc5c"
@@ -19405,7 +19429,6 @@
         "z": "d416a739a235277c",
         "name": "link in 38",
         "links": [
-            "b1540f3459d95049",
             "51e14578de8e4e73"
         ],
         "x": 235,
@@ -19474,7 +19497,6 @@
         "z": "d416a739a235277c",
         "name": "link in 39",
         "links": [
-            "b1540f3459d95049",
             "51e14578de8e4e73"
         ],
         "x": 225,
@@ -19543,7 +19565,6 @@
         "z": "d416a739a235277c",
         "name": "link in 40",
         "links": [
-            "b1540f3459d95049",
             "51e14578de8e4e73"
         ],
         "x": 235,
@@ -19612,7 +19633,6 @@
         "z": "d416a739a235277c",
         "name": "link in 41",
         "links": [
-            "b1540f3459d95049",
             "51e14578de8e4e73"
         ],
         "x": 235,
@@ -19681,7 +19701,6 @@
         "z": "d416a739a235277c",
         "name": "link in 42",
         "links": [
-            "b1540f3459d95049",
             "51e14578de8e4e73"
         ],
         "x": 245,
@@ -19738,10 +19757,77 @@
         "mode": "link",
         "links": [
             "7d91540d69ac16c1",
-            "688a39b3e0070fe9"
+            "688a39b3e0070fe9",
+            "95d077dd39781efe"
         ],
         "x": 595,
         "y": 1440,
         "wires": []
+    },
+    {
+        "id": "475236651a5b2d4f",
+        "type": "subflow:0be109393cb5f28a",
+        "z": "d416a739a235277c",
+        "name": "",
+        "x": 350,
+        "y": 1560,
+        "wires": [
+            [
+                "9373014f1bd2d06a"
+            ]
+        ]
+    },
+    {
+        "id": "b0708af5257122f7",
+        "type": "debug",
+        "z": "d416a739a235277c",
+        "name": "debug 102",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "cache",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 930,
+        "y": 1580,
+        "wires": []
+    },
+    {
+        "id": "9373014f1bd2d06a",
+        "type": "function",
+        "z": "d416a739a235277c",
+        "name": "function 32",
+        "func": "msg.cache = global.get(\"lookupCache\")\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 1680,
+        "wires": [
+            [
+                "b0708af5257122f7"
+            ]
+        ]
+    },
+    {
+        "id": "f2f56f84d002ec0f",
+        "type": "link in",
+        "z": "d416a739a235277c",
+        "name": "link in 43",
+        "links": [
+            "89e7e315b3a8c30b"
+        ],
+        "x": 175,
+        "y": 1560,
+        "wires": [
+            [
+                "475236651a5b2d4f"
+            ]
+        ]
     }
 ]
