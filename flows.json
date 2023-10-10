@@ -293,6 +293,30 @@
         "env": []
     },
     {
+        "id": "c54f3247808fdf7f",
+        "type": "tab",
+        "label": "Electric Energy Module Cont",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "1c6c32346fee9416",
+        "type": "tab",
+        "label": "Electric Impute Module",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "6399b853963e761e",
+        "type": "tab",
+        "label": "Flow 5",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "c5ce2d38887016b2",
         "type": "subflow",
         "name": "Apply rules by level type",
@@ -1568,7 +1592,9 @@
             "d394b61bcc4755e6"
         ],
         "x": 14,
-        "y": 939
+        "y": 939,
+        "w": 1532,
+        "h": 82
     },
     {
         "id": "ef50b77b253a7883",
@@ -1588,7 +1614,9 @@
             "d587f5de3f4014c8"
         ],
         "x": 14,
-        "y": 239
+        "y": 239,
+        "w": 1792,
+        "h": 182
     },
     {
         "id": "62708d0bbe922798",
@@ -1612,7 +1640,9 @@
             "58df41cd8e54a653"
         ],
         "x": 14,
-        "y": 519
+        "y": 519,
+        "w": 1432,
+        "h": 322
     },
     {
         "id": "19463268a6c67561",
@@ -1630,6 +1660,8 @@
         ],
         "x": 14,
         "y": 99,
+        "w": 1432,
+        "h": 82,
         "info": "# Rules from Parameter Files"
     },
     {
@@ -1671,7 +1703,9 @@
             "2319e5574f035f21",
             "2e210837e211c8be",
             "20ef4922bea8d7fd",
-            "89e7e315b3a8c30b"
+            "89e7e315b3a8c30b",
+            "ba5d5bdad0bc957e",
+            "8434c6c16c1fbaaf"
         ],
         "x": 14,
         "y": 619,
@@ -12372,7 +12406,12 @@
             "45908235e45f6dfd",
             "eda519aa8a1db303",
             "8b699616f9c5a9b5",
-            "d9030a8fd1f031b8"
+            "d9030a8fd1f031b8",
+            "63e57e09491e405e",
+            "fcf92106d34fe5ff",
+            "aafa3aaec7fae7e6",
+            "d167c6cf7b89444d",
+            "ca558b1ab669675d"
         ],
         "x": 205,
         "y": 260,
@@ -17831,6 +17870,21 @@
                 "label": "Post Edit",
                 "value": "post_edit",
                 "type": "str"
+            },
+            {
+                "label": "Electric Energy Module",
+                "value": "electric_energy_module",
+                "type": "str"
+            },
+            {
+                "label": "Electric Energy Module Cont",
+                "value": "electric_energy_module_cont",
+                "type": "str"
+            },
+            {
+                "label": "Electric Impute Module",
+                "value": "electric_impute_module",
+                "type": "str"
             }
         ],
         "payload": "",
@@ -17915,13 +17969,23 @@
             },
             {
                 "t": "eq",
-                "v": "ElectricEnergyModule",
+                "v": "electric_energy_module",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "electric_energy_module_cont",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "electric_impute_module",
                 "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 13,
+        "outputs": 15,
         "x": 630,
         "y": 480,
         "wires": [
@@ -17963,6 +18027,12 @@
             ],
             [
                 "89e7e315b3a8c30b"
+            ],
+            [
+                "ba5d5bdad0bc957e"
+            ],
+            [
+                "8434c6c16c1fbaaf"
             ]
         ]
     },
@@ -18092,7 +18162,7 @@
         "order": 1,
         "width": 18,
         "height": 13,
-        "format": "<div ng-switch=\"msg.payload\">\n\n        <div ng-switch-when=\"balance_module\">\n\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/balance_module.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n\n    </div>\n\n        <div ng-switch-when=\"br_stat_evaluation\">\n\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/br_stat.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n\n    </div>\n\n    <div ng-switch-when=\"critical_error\">\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/critical_error.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n\n        <div ng-switch-when=\"derive_NAICS_code\">\n\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/derive_naics_code.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n\n    </div>\n\n    <div ng-switch-when=\"classification\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/classification.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"geography\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/geography.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n     </div>\n\n        <div ng-switch-default>\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/Set_NONNORM.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n\n</div>",
+        "format": "<div ng-switch=\"msg.payload\">\n\n        <div ng-switch-when=\"balance_module\">\n\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/balance_module.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n\n    </div>\n\n        <div ng-switch-when=\"br_stat_evaluation\">\n\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/br_stat.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n\n    </div>\n\n    <div ng-switch-when=\"critical_error\">\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/critical_error.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n\n        <div ng-switch-when=\"derive_NAICS_code\">\n\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/derive_naics_code.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n\n    </div>\n\n    <div ng-switch-when=\"classification\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/classification.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"geography\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/geography.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n     </div>\n    <div ng-switch-when=\"electric_energy_module\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/electric_energy_module.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"electric_energy_module_cont\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/electric_energy_module_cont.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"electric_impute_module\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/electric_impute_module.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-default>\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/Set_NONNORM.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n\n</div>",
         "storeOutMessages": true,
         "fwdInMessages": true,
         "resendOnRefresh": true,
@@ -18546,7 +18616,7 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Upload CSV File</title>\n    <!-- Include Materialize CSS and JS -->\n    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css\">\n    <link href=\"https://fonts.googleapis.com/icon?family=Material+Icons\" rel=\"stylesheet\">\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js\"></script>\n</head>\n<body>\n  <nav>\n    <div class=\"blue nav-wrapper\">\n      <a href=\"#\" data-target=\"mobile-demo\" class=\"sidenav-trigger\"><i class=\"material-icons\">menu</i></a>\n      <ul class=\"left hide-on-med-and-down\">\n        <li><a class=\"bold\" href=\"/update_params\">Params</a></li>\n        <li><a class=\"bold\" href=\"/upload_page\">Upload csv</a></li>\n        <li><a class=\"bold\" href=\"/ui_wrapper\">UI</a></li>\n      </ul>\n    </div>\n  </nav>\n\n  <ul class=\"blue sidenav\" id=\"mobile-demo\">\n      <li><a class=\"bold\" href=\"/update_params\">Params</a></li>\n        <li><a class=\"bold\" href=\"/upload_page\">Upload csv</a></li>\n        <li><a class=\"bold\" href=\"/ui_wrapper\">UI</a></li>\n  </ul>\n<div class=\"container\">\n    <h1 class=\"center-align\">Upload CSV File</h1>\n    \n    <div class=\"row\">\n        <form action=\"/upload\" method=\"POST\" enctype=\"multipart/form-data\" class=\"col s12\">\n            <div class=\"file-field input-field\">\n                <div class=\"btn\">\n                    <span>File</span>\n                    <input type=\"file\" name=\"myFile\">\n                </div>\n                <div class=\"file-path-wrapper\">\n                    <input class=\"file-path validate\" type=\"text\" placeholder=\"Upload a CSV file\">\n                </div>\n            </div>\n            <div class=\"input-field center-align\">\n                <button class=\"btn waves-effect waves-light\" type=\"submit\">Submit\n                    <i class=\"material-icons right\">send</i>\n                </button>\n            </div>\n        </form>\n    </div>\n</div>\n\n<!-- Initialize Materialize Components -->\n<script>\n    M.AutoInit();\n</script>\n\n</body>\n</html>\n",
+        "template": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Upload CSV File</title>\n    <!-- Include Materialize CSS and JS -->\n    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css\">\n    <link href=\"https://fonts.googleapis.com/icon?family=Material+Icons\" rel=\"stylesheet\">\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js\"></script>\n</head>\n<body>\n  <nav>\n    <div class=\"blue nav-wrapper\">\n      <a href=\"#\" data-target=\"mobile-demo\" class=\"sidenav-trigger\"><i class=\"material-icons\">menu</i></a>\n      <ul class=\"left hide-on-med-and-down\">\n        <li><a class=\"bold\" href=\"/update_params\">Params</a></li>\n        <li><a class=\"bold\" href=\"/upload_page\">Upload csv</a></li>\n        <li><a class=\"bold\" href=\"/ui_wrapper\">UI</a></li>\n      </ul>\n    </div>\n  </nav>\n\n  <ul class=\"blue sidenav\" id=\"mobile-demo\">\n      <li><a class=\"bold\" href=\"/update_params\">Params</a></li>\n        <li><a class=\"bold\" href=\"/upload_page\">Upload csv</a></li>\n        <li><a class=\"bold\" href=\"/ui_wrapper\">UI</a></li>\n  </ul>\n<div class=\"container\">\n    <h1 class=\"center-align\">Upload CSV File</h1>\n    \n    <div class=\"row\">\n        <form action=\"/upload\" method=\"POST\" enctype=\"multipart/form-data\" class=\"col s12\">\n            <div class=\"file-field input-field\">\n                <div class=\"btn\">\n                    <span>File</span>\n                    <input type=\"file\" name=\"myFile\">\n                </div>\n                <div class=\"file-path-wrapper\">\n                    <input class=\"file-path validate\" type=\"text\" placeholder=\"Upload a CSV file\">\n                </div>\n            </div>\n            <div class=\"input-field center-align\">\n                <button onclick=\"showToast()\" class=\"btn waves-effect waves-light\" type=\"submit\">Submit\n                    <i class=\"material-icons right\">send</i>\n                </button>\n            </div>\n        </form>\n    </div>\n</div>\n\n<!-- Initialize Materialize Components -->\n<script>\n    M.AutoInit();\n    function showToast() {\n        M.toast({html: 'Uploading...'});\n    }\n</script>\n\n</body>\n</html>\n",
         "output": "str",
         "x": 450,
         "y": 700,
@@ -19173,6 +19243,34 @@
         "wires": []
     },
     {
+        "id": "ba5d5bdad0bc957e",
+        "type": "link out",
+        "z": "dad88d9a3132fed6",
+        "g": "4099bf03141f3710",
+        "name": "link out post edit",
+        "mode": "link",
+        "links": [
+            "d946e5bca62e02d1"
+        ],
+        "x": 845,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "8434c6c16c1fbaaf",
+        "type": "link out",
+        "z": "dad88d9a3132fed6",
+        "g": "4099bf03141f3710",
+        "name": "link out post edit",
+        "mode": "link",
+        "links": [
+            "3cd3e107ac0789b7"
+        ],
+        "x": 845,
+        "y": 880,
+        "wires": []
+    },
+    {
         "id": "d9650115f85479a9",
         "type": "link in",
         "z": "112a2e5b60c3f3a8",
@@ -19424,22 +19522,6 @@
         "wires": []
     },
     {
-        "id": "9ff3beac87b1677b",
-        "type": "link in",
-        "z": "d416a739a235277c",
-        "name": "link in 38",
-        "links": [
-            "51e14578de8e4e73"
-        ],
-        "x": 235,
-        "y": 480,
-        "wires": [
-            [
-                "abef3a766d7b04ab"
-            ]
-        ]
-    },
-    {
         "id": "abef3a766d7b04ab",
         "type": "function",
         "z": "d416a739a235277c",
@@ -19490,22 +19572,6 @@
         "x": 565,
         "y": 480,
         "wires": []
-    },
-    {
-        "id": "46cb49f11fea1177",
-        "type": "link in",
-        "z": "d416a739a235277c",
-        "name": "link in 39",
-        "links": [
-            "51e14578de8e4e73"
-        ],
-        "x": 225,
-        "y": 720,
-        "wires": [
-            [
-                "1d5798f410ba94fa"
-            ]
-        ]
     },
     {
         "id": "1d5798f410ba94fa",
@@ -19560,217 +19626,12 @@
         "wires": []
     },
     {
-        "id": "9823416feef8960a",
-        "type": "link in",
-        "z": "d416a739a235277c",
-        "name": "link in 40",
-        "links": [
-            "51e14578de8e4e73"
-        ],
-        "x": 235,
-        "y": 960,
-        "wires": [
-            [
-                "c903163629df82af"
-            ]
-        ]
-    },
-    {
-        "id": "c903163629df82af",
-        "type": "function",
-        "z": "d416a739a235277c",
-        "name": "electricImputeModule",
-        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\n// Assumed JavaScript function based on the newest extracted OCR text (Electric Impute Module)\nfunction electricImputeModule(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL) {\n    // Placeholder for NM_State parameter table\n    let NM_STATE_PARAMETER_TABLE = {\n        AVG1: 0,\n        AVG2: 0\n    };\n\n    let { AVG1, AVG2 } = NM_STATE_PARAMETER_TABLE;\n\n    if (EXPS_ELEC_VAL <= 10000) {\n        // Logic for Year 1 historic values (H_) referencing 2022 EC data. Year 2 and on will refer to prior year AIES data\n    }\n\n    if (ELEC_PRCH_KWH_NUM_F[3][1] !== 'B') {\n        ELEC_PRCH_KWH_NUM = Math.round(EXPS_ELEC_VAL * AVG2);\n        ELEC_PRCH_KWH_NUM_F[3][1] = 'B';\n    } else {\n        ELEC_PRCH_KWH_NUM = Math.round(EXPS_ELEC_VAL * AVG1);\n    }\n\n    // Additional logic...\n\n    return EXPS_ELEC_VAL;\n}\n\n",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 9,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 400,
-        "y": 960,
-        "wires": [
-            [
-                "ba693bb539d071b9",
-                "eda519aa8a1db303"
-            ]
-        ]
-    },
-    {
-        "id": "ba693bb539d071b9",
-        "type": "debug",
-        "z": "d416a739a235277c",
-        "name": "debug electricImputeModule",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 690,
-        "y": 880,
-        "wires": []
-    },
-    {
-        "id": "eda519aa8a1db303",
-        "type": "link out",
-        "z": "d416a739a235277c",
-        "name": "link out 58",
-        "mode": "link",
-        "links": [
-            "7d91540d69ac16c1",
-            "688a39b3e0070fe9"
-        ],
-        "x": 585,
-        "y": 1000,
-        "wires": []
-    },
-    {
-        "id": "95d077dd39781efe",
-        "type": "link in",
-        "z": "d416a739a235277c",
-        "name": "link in 41",
-        "links": [
-            "51e14578de8e4e73"
-        ],
-        "x": 235,
-        "y": 1180,
-        "wires": [
-            [
-                "5f5ca49f66f32b41"
-            ]
-        ]
-    },
-    {
-        "id": "5f5ca49f66f32b41",
-        "type": "function",
-        "z": "d416a739a235277c",
-        "name": "electricImputeModule",
-        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\n// Assumed JavaScript function based on the newest extracted OCR text (Electric Impute Module)\nfunction electricImputeModule(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL) {\n    // Placeholder for NM_State parameter table\n    let NM_STATE_PARAMETER_TABLE = {\n        AVG1: 0,\n        AVG2: 0\n    };\n\n    let { AVG1, AVG2 } = NM_STATE_PARAMETER_TABLE;\n\n    if (EXPS_ELEC_VAL <= 10000) {\n        // Logic for Year 1 historic values (H_) referencing 2022 EC data. Year 2 and on will refer to prior year AIES data\n    }\n\n    if (ELEC_PRCH_KWH_NUM_F[3][1] !== 'B') {\n        ELEC_PRCH_KWH_NUM = Math.round(EXPS_ELEC_VAL * AVG2);\n        ELEC_PRCH_KWH_NUM_F[3][1] = 'B';\n    } else {\n        ELEC_PRCH_KWH_NUM = Math.round(EXPS_ELEC_VAL * AVG1);\n    }\n\n    // Additional logic...\n\n    return EXPS_ELEC_VAL;\n}\n\n",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 9,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 400,
-        "y": 1180,
-        "wires": [
-            [
-                "d024af4d5725903e",
-                "8b699616f9c5a9b5"
-            ]
-        ]
-    },
-    {
-        "id": "d024af4d5725903e",
-        "type": "debug",
-        "z": "d416a739a235277c",
-        "name": "debug electricImputeModule",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 690,
-        "y": 1100,
-        "wires": []
-    },
-    {
-        "id": "8b699616f9c5a9b5",
-        "type": "link out",
-        "z": "d416a739a235277c",
-        "name": "link out 59",
-        "mode": "link",
-        "links": [
-            "7d91540d69ac16c1",
-            "688a39b3e0070fe9"
-        ],
-        "x": 585,
-        "y": 1220,
-        "wires": []
-    },
-    {
-        "id": "765efb0653db36d7",
-        "type": "link in",
-        "z": "d416a739a235277c",
-        "name": "link in 42",
-        "links": [
-            "51e14578de8e4e73"
-        ],
-        "x": 245,
-        "y": 1400,
-        "wires": [
-            [
-                "1455ef9792b755e9"
-            ]
-        ]
-    },
-    {
-        "id": "1455ef9792b755e9",
-        "type": "function",
-        "z": "d416a739a235277c",
-        "name": "Main",
-        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\n// JavaScript function incorporating the parameter table data as an array of objects\nconst parameterTableData = [\n    { 'GEO_ST': '01', 'AVG1': 6.99263, 'AVG2': 12.1924, 'ELEC_INTERSECT': 1000, 'LL': 0.02, 'UL': 0.29 },\n    { 'GEO_ST': '02', 'AVG1': 2.97017, 'AVG2': 6.2589, 'ELEC_INTERSECT': 1000, 'LL': 0.03, 'UL': 0.21 },\n];\n\nfunction getParameterByGeoSt(geoSt) {\n    if (!geoSt || geoSt === 'NULL') return null;\n    return parameterTableData.find(item => item.GEO_ST === geoSt);\n}\n\nfunction electricEnergyModule(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, x_CURR) {\n    console.log(\"Executing electricEnergyModule...\");\n\n    if (!T_STFIPS || !REFPER || !ELEC_PRCH_KWH_NUM || !x_CURR ||\n        [T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, x_CURR].includes('NULL')) {\n        console.log('Invalid parameters');\n        return 'Invalid parameters';\n    }\n\n    const parameter = getParameterByGeoSt(T_STFIPS);\n    if (!parameter) {\n        console.log('Invalid STFIPS');\n        return 'Invalid STFIPS';\n    }\n\n    // ... rest of the logic\n\n    return electricEnergyModuleCont(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, 0, x_CURR);\n}\n\nfunction electricEnergyModuleCont(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL, x_CURR) {\n    console.log(\"Executing electricEnergyModuleCont...\");\n    if (!T_STFIPS || !REFPER || ELEC_PRCH_KWH_NUM === null || EXPS_ELEC_VAL === null || !x_CURR ||\n        [T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL, x_CURR].includes('NULL')) {\n        console.log('Invalid parameters');\n        return 'Invalid parameters';\n    }\n\n    const parameter = getParameterByGeoSt(T_STFIPS);\n    let FIXED = 0;\n    let BETA = 0;\n\n    if (EXPS_ELEC_VAL / ELEC_PRCH_KWH_NUM > BETA) {\n        return electricImputeModule(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL, x_CURR);\n    }\n\n    console.log('Returning from electricEnergyModuleCont:', EXPS_ELEC_VAL);\n    return EXPS_ELEC_VAL;\n}\n\nfunction electricImputeModule(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL, x_CURR) {\n    console.log(\"Executing electricImputeModule...\");\n    if (!T_STFIPS || !REFPER || ELEC_PRCH_KWH_NUM === null || EXPS_ELEC_VAL === null || !x_CURR ||\n        [T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL, x_CURR].includes('NULL')) {\n        console.log('Invalid parameters');\n        return 'Invalid parameters';\n    }\n\n    const parameter = getParameterByGeoSt(T_STFIPS);\n    let NM_STATE_PARAMETER_TABLE = {\n        AVG1: parameter ? parameter.AVG1 : 0,\n        AVG2: parameter ? parameter.AVG2 : 0\n    };\n\n    // ... rest of the logic\n\n    console.log('Returning from electricImputeModule:', EXPS_ELEC_VAL);\n    return EXPS_ELEC_VAL;\n}\n\n// Test cases\nconsole.log(electricEnergyModule('01', '2022', 1000, 'M'));  // Should execute all three functions for GEO_ST '01'\nconsole.log(electricEnergyModule(undefined, '2022', 500, 'M'));  // Should return 'Invalid parameters'\nconsole.log(electricEnergyModule('02', 'NULL', 500, 'M'));  // Should return 'Invalid parameters'\nconsole.log(electricEnergyModule('03', '2022', 500, 'M'));  // Should return 'Invalid STFIPS' because '03' is not in parameterTableData\n\n",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 360,
-        "y": 1400,
-        "wires": [
-            [
-                "fb0490d46f6dac6d",
-                "d9030a8fd1f031b8"
-            ]
-        ]
-    },
-    {
-        "id": "fb0490d46f6dac6d",
-        "type": "debug",
-        "z": "d416a739a235277c",
-        "name": "debug Main",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 650,
-        "y": 1320,
-        "wires": []
-    },
-    {
-        "id": "d9030a8fd1f031b8",
-        "type": "link out",
-        "z": "d416a739a235277c",
-        "name": "link out 60",
-        "mode": "link",
-        "links": [
-            "7d91540d69ac16c1",
-            "688a39b3e0070fe9",
-            "95d077dd39781efe"
-        ],
-        "x": 595,
-        "y": 1440,
-        "wires": []
-    },
-    {
         "id": "475236651a5b2d4f",
         "type": "subflow:0be109393cb5f28a",
         "z": "d416a739a235277c",
         "name": "",
-        "x": 350,
-        "y": 1560,
+        "x": 850,
+        "y": 1580,
         "wires": [
             [
                 "9373014f1bd2d06a"
@@ -19786,11 +19647,11 @@
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "cache",
+        "complete": "payload",
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 930,
+        "x": 1310,
         "y": 1580,
         "wires": []
     },
@@ -19799,18 +19660,19 @@
         "type": "function",
         "z": "d416a739a235277c",
         "name": "function 32",
-        "func": "msg.cache = global.get(\"lookupCache\")\nreturn msg;",
+        "func": "let paramsT = global.get(\"lookupCache\")\nmsg.cache = paramsT\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n// console.log({ paramsT: paramsT?.data[0]?.json_values, record, record_idx})\nconst params = paramsT?.data[0]?.json_values\nconst input = record\nconst T_STFIPS = input?.STFIPS;\nconst cutoffs = params.MN_ELEC_CUTOFF;\n\nfunction getParameterByGeoSt(geoSt) {\n    if (!geoSt || geoSt === 'NULL') return null;\n    const year = record.REF_PER.substring(0, 4)\n    let state;\n    switch (String(year)) {\n        case '2022':\n            state = params['MN_ELECTRIC_STATE'];\n            break;\n        case '2023':\n            state = params['ASM23_MN_ELECTRIC_STATE'];\n            break;\n        case '2024':\n            state = params['ASM24_MN_ELECTRIC_STATE'];\n            break;\n        case '2025':\n            state = params['ASM25_MN_ELECTRIC_STATE'];\n            break;\n        case '2026':\n            state = params['ASM26_MN_ELECTRIC_STATE'];\n            break;\n        default:\n            // Handle default case\n            break;\n    }\n    console.log(state.map(item => parseInt(item.GEO_ST) === parseInt(geoSt) ? item : null).find(item => item !== null) || null)\n    return state.map(item => parseInt(item.GEO_ST) === parseInt(geoSt) ? item : null).find(item => item !== null) || null;\n}\nconst parameter = getParameterByGeoSt(T_STFIPS);\n\n// console.log(parameter, T_STFIPS, input.EXPS_ELEC_VAL, input.ELEC_PRCH_KWH_NUM)\n\nfunction electricEnergyModule(input) {\n    const { EXPS_ELEC_VAL, ELEC_PRCH_KWH_NUM } = input;\n    if (parseInt(EXPS_ELEC_VAL) === 0 && parseInt(ELEC_PRCH_KWH_NUM) === 0) {\n        console.log(1)\n        msg.payload.csv[record_idx].ACTION = \"Go To A\";\n    } else if (parseInt(EXPS_ELEC_VAL) === 0 && parseInt(ELEC_PRCH_KWH_NUM) > 0) {\n        console.log(2)\n        msg.payload.csv[record_idx].ELEC_PRCH_KWH_NUM = 0\n        msg.payload.csv[record_idx].ELEC_PRCH_KWH_NUM_F ='J'\n        msg.payload.csv[record_idx].ACTION = \"Go To A\";\n    } \n    else if (parseInt(parameter.GEO_ST) === parseInt(T_STFIPS)) {\n        msg.payload.csv[record_idx].ACTION = \"Go To 2 - (electricEnergyModuleCont ?)\";\n    } \n    else {\n        console.log(3, input, parameter.GEOST, T_STFIPS)\n        msg.payload.csv[record_idx].MISSING_ST_FIPS_ELECTRIC = 1;\n        msg.payload.csv[record_idx].ACTION = \"Go To A - END\";\n    }\n//   console.log(msg);\n  return msg;\n}\n\nreturn electricEnergyModule(input)\n// function electricEnergyModule(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, x_CURR) {\n//     console.log(\"Executing electricEnergyModule...\");\n\n//     if (!T_STFIPS || !REFPER || !ELEC_PRCH_KWH_NUM || !x_CURR ||\n//         [T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, x_CURR].includes('NULL')) {\n//         console.log('Invalid parameters');\n//         return 'Invalid parameters';\n//     }\n\n//     const parameter = getParameterByGeoSt(T_STFIPS);\n//     if (!parameter) {\n//         console.log('Invalid STFIPS');\n//         return 'Invalid STFIPS';\n//     }\n\n//     // ... rest of the logic\n\n//     return electricEnergyModuleCont(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, 0, x_CURR);\n// }\n\n// function electricEnergyModuleCont(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL, x_CURR) {\n//     console.log(\"Executing electricEnergyModuleCont...\");\n//     if (!T_STFIPS || !REFPER || ELEC_PRCH_KWH_NUM === null || EXPS_ELEC_VAL === null || !x_CURR ||\n//         [T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL, x_CURR].includes('NULL')) {\n//         console.log('Invalid parameters');\n//         return 'Invalid parameters';\n//     }\n\n//     const parameter = getParameterByGeoSt(T_STFIPS);\n//     let FIXED = 0;\n//     let BETA = 0;\n\n//     if (EXPS_ELEC_VAL / ELEC_PRCH_KWH_NUM > BETA) {\n//         return electricImputeModule(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL, x_CURR);\n//     }\n\n//     console.log('Returning from electricEnergyModuleCont:', EXPS_ELEC_VAL);\n//     return EXPS_ELEC_VAL;\n// }\n\n// function electricImputeModule(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL, x_CURR) {\n//     console.log(\"Executing electricImputeModule...\");\n//     if (!T_STFIPS || !REFPER || ELEC_PRCH_KWH_NUM === null || EXPS_ELEC_VAL === null || !x_CURR ||\n//         [T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL, x_CURR].includes('NULL')) {\n//         console.log('Invalid parameters');\n//         return 'Invalid parameters';\n//     }\n\n//     const parameter = getParameterByGeoSt(T_STFIPS);\n//     let NM_STATE_PARAMETER_TABLE = {\n//         AVG1: parameter ? parameter.AVG1 : 0,\n//         AVG2: parameter ? parameter.AVG2 : 0\n//     };\n\n//     // ... rest of the logic\n\n//     console.log('Returning from electricImputeModule:', EXPS_ELEC_VAL);\n//     return EXPS_ELEC_VAL;\n// }\n\n// console.log(electricEnergyModule(T_STFIPS, '2022', 1000, 'M'));\n\n// Test cases\n// console.log(electricEnergyModule('01', '2022', 1000, 'M'));  // Should execute all three functions for GEO_ST '01'\n// console.log(electricEnergyModule(undefined, '2022', 500, 'M'));  // Should return 'Invalid parameters'\n// console.log(electricEnergyModule('02', 'NULL', 500, 'M'));  // Should return 'Invalid parameters'\n// console.log(electricEnergyModule('03', '2022', 500, 'M'));  // Should return 'Invalid STFIPS' because '03' is not in parameterTableData\n\n// function getElecState(REFPER, params) {\n//     let stateParam;\n//     // Choose parameter table based on REFPER\n//     if (REFPER.slice(0, 4) === '2022') {\n//         stateParam = params.MN_ELECTRIC_STATE;\n//     } else if (REFPER === '2023A1') {\n//         stateParam = params.ASM23_ELECTRIC_STATE;\n//     } else if (REFPER === '2024A1') {\n//         stateParam = params.ASM24_ELECTRIC_STATE;\n//     } // ... add other conditions for other years\n\n//     return stateParam;\n// }\n// console.log(getElecState('2022', params));\n\n// return msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 550,
-        "y": 1680,
+        "x": 1110,
+        "y": 1580,
         "wires": [
             [
-                "b0708af5257122f7"
+                "b0708af5257122f7",
+                "63e57e09491e405e"
             ]
         ]
     },
@@ -19822,12 +19684,426 @@
         "links": [
             "89e7e315b3a8c30b"
         ],
-        "x": 175,
-        "y": 1560,
+        "x": 365,
+        "y": 1580,
+        "wires": [
+            [
+                "ba808bf2520da70a"
+            ]
+        ]
+    },
+    {
+        "id": "ba808bf2520da70a",
+        "type": "change",
+        "z": "d416a739a235277c",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.lookup",
+                "pt": "msg",
+                "to": "{\"moduleName\":\"electric_energy\",\"program\":\"aies\",\"unit_type\":\"estab\",\"params\":\"electric_energy_module\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 570,
+        "y": 1580,
         "wires": [
             [
                 "475236651a5b2d4f"
             ]
         ]
+    },
+    {
+        "id": "63e57e09491e405e",
+        "type": "link out",
+        "z": "d416a739a235277c",
+        "name": "link out classification",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9"
+        ],
+        "x": 1245,
+        "y": 1640,
+        "wires": []
+    },
+    {
+        "id": "0d8c91218e476015",
+        "type": "subflow:0be109393cb5f28a",
+        "z": "c54f3247808fdf7f",
+        "name": "",
+        "x": 530,
+        "y": 420,
+        "wires": [
+            [
+                "cc3b332a2e1dd3b1"
+            ]
+        ]
+    },
+    {
+        "id": "609f0f76ef58737d",
+        "type": "debug",
+        "z": "c54f3247808fdf7f",
+        "name": "debug 105",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 990,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "cc3b332a2e1dd3b1",
+        "type": "function",
+        "z": "c54f3247808fdf7f",
+        "name": "function 35",
+        "func": "let paramsT = global.get(\"lookupCache\")\nmsg.cache = paramsT\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\nconst params = paramsT?.data[0]?.json_values\nconst input = record\nconst T_STFIPS = input?.STFIPS;\nconst cutoffs = params.MN_ELEC_CUTOFF;\n\nfunction getParameterByGeoSt(geoSt) {\n    if (!geoSt || geoSt === 'NULL') return null;\n    const year = record.REF_PER.substring(0, 4)\n    let state;\n    switch (String(year)) {\n        case '2022':\n            state = params['MN_ELECTRIC_STATE'];\n            break;\n        case '2023':\n            state = params['ASM23_MN_ELECTRIC_STATE'];\n            break;\n        case '2024':\n            state = params['ASM24_MN_ELECTRIC_STATE'];\n            break;\n        case '2025':\n            state = params['ASM25_MN_ELECTRIC_STATE'];\n            break;\n        case '2026':\n            state = params['ASM26_MN_ELECTRIC_STATE'];\n            break;\n        default:\n            // Handle default case\n            break;\n    }\n    console.log(state.map(item => parseInt(item.GEO_ST) === parseInt(geoSt) ? item : null).find(item => item !== null) || null)\n    return state.map(item => parseInt(item.GEO_ST) === parseInt(geoSt) ? item : null).find(item => item !== null) || null;\n}\nconst parameter = getParameterByGeoSt(T_STFIPS);\n// console.log(parameter, T_STFIPS, input.EXPS_ELEC_VAL, input.ELEC_PRCH_KWH_NUM)\nfunction electricEnergyModuleCont(input) {\n    const { EXPS_ELEC_VAL, ELEC_PRCH_KWH_NUM } = input;\n    console.log({ parameter }, (parseFloat(EXPS_ELEC_VAL) / parseFloat(ELEC_PRCH_KWH_NUM)))\n    if (parseFloat(EXPS_ELEC_VAL) > 0 && parseFloat(ELEC_PRCH_KWH_NUM) === 0) {\n        console.log(1)\n        msg.payload.csv[record_idx].ACTION = \"Go To B\";\n    } else if (\n        parseFloat(parameter.LL) <= (parseFloat(EXPS_ELEC_VAL) / parseFloat(ELEC_PRCH_KWH_NUM)) \n    && (parseFloat(EXPS_ELEC_VAL) / parseFloat(ELEC_PRCH_KWH_NUM)) <= parseFloat(parameter.UL))\n    {\n        console.log(2)\n        msg.payload.csv[record_idx].ACTION = \"Go To 1 - A\";\n    } else if (\n        parseFloat(parameter.LL) <= ((parseFloat(EXPS_ELEC_VAL) * 1000) / parseFloat(ELEC_PRCH_KWH_NUM))\n        && ((parseFloat(EXPS_ELEC_VAL) * 1000) / parseFloat(ELEC_PRCH_KWH_NUM)) <= parseFloat(parameter.UL)) {\n        console.log(3)\n        msg.payload.csv[record_idx].ELEC_PRCH_KWH_NUM = parseFloat(ELEC_PRCH_KWH_NUM) / 1000;\n        msg.payload.csv[record_idx].ELEC_PRCH_KWH_NUM = 'N' // (3,1)\n        msg.payload.csv[record_idx].ACTION = \"Go To 1 - A\";\n    } else{\n        console.log(4)\n        msg.payload.csv[record_idx].ACTION = \"Go To B and then Go to 1 (A)\";\n    }\n//   console.log(msg);\n  return msg;\n}\n\nreturn electricEnergyModuleCont(input)",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 790,
+        "y": 420,
+        "wires": [
+            [
+                "609f0f76ef58737d",
+                "d167c6cf7b89444d"
+            ]
+        ]
+    },
+    {
+        "id": "d946e5bca62e02d1",
+        "type": "link in",
+        "z": "c54f3247808fdf7f",
+        "name": "link in 44",
+        "links": [
+            "ba5d5bdad0bc957e"
+        ],
+        "x": 45,
+        "y": 420,
+        "wires": [
+            [
+                "1a26d214cba4c42b"
+            ]
+        ]
+    },
+    {
+        "id": "1a26d214cba4c42b",
+        "type": "change",
+        "z": "c54f3247808fdf7f",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.lookup",
+                "pt": "msg",
+                "to": "{\"moduleName\":\"electric_energy\",\"program\":\"aies\",\"unit_type\":\"estab\",\"params\":\"electric_energy_module\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 250,
+        "y": 420,
+        "wires": [
+            [
+                "0d8c91218e476015"
+            ]
+        ]
+    },
+    {
+        "id": "d167c6cf7b89444d",
+        "type": "link out",
+        "z": "c54f3247808fdf7f",
+        "name": "link out classification",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9"
+        ],
+        "x": 925,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "51888bfbb37a0690",
+        "type": "subflow:0be109393cb5f28a",
+        "z": "1c6c32346fee9416",
+        "name": "",
+        "x": 600,
+        "y": 440.3703308105469,
+        "wires": [
+            [
+                "8a4a29f10142c232"
+            ]
+        ]
+    },
+    {
+        "id": "578fd20a66562b72",
+        "type": "debug",
+        "z": "1c6c32346fee9416",
+        "name": "debug 106",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1020,
+        "y": 440.3703308105469,
+        "wires": []
+    },
+    {
+        "id": "8a4a29f10142c232",
+        "type": "function",
+        "z": "1c6c32346fee9416",
+        "name": "function 36",
+        "func": "let paramsT = global.get(\"lookupCache\")\nmsg.cache = paramsT\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\nconst params = paramsT?.data[0]?.json_values\nconst input = record\nconst T_STFIPS = input?.STFIPS;\nconst cutoffs = params.MN_ELEC_CUTOFF;\n\nfunction getParameterByGeoSt(geoSt) {\n    if (!geoSt || geoSt === 'NULL') return null;\n    const year = record.REF_PER.substring(0, 4)\n    let state;\n    switch (String(year)) {\n        case '2022':\n            state = params['MN_ELECTRIC_STATE'];\n            break;\n        case '2023':\n            state = params['ASM23_MN_ELECTRIC_STATE'];\n            break;\n        case '2024':\n            state = params['ASM24_MN_ELECTRIC_STATE'];\n            break;\n        case '2025':\n            state = params['ASM25_MN_ELECTRIC_STATE'];\n            break;\n        case '2026':\n            state = params['ASM26_MN_ELECTRIC_STATE'];\n            break;\n        default:\n            // Handle default case\n            break;\n    }\n    console.log(state, year)\n    console.log(state.map(item => parseInt(item.GEO_ST) === parseInt(geoSt) ? item : null).find(item => item !== null) || null)\n    return state.map(item => parseInt(item.GEO_ST) === parseInt(geoSt) ? item : null).find(item => item !== null) || null;\n}\nconst parameter = getParameterByGeoSt(T_STFIPS);\nfunction electricEnergyModuleCont(input) {\n    const { EXPS_ELEC_VAL, ELEC_PRCH_KWH_NUM, ELEC, H_EXPS_ELEC_VAL, H_ELEC_PRCH_KWH_NUM } = input; // What is ELEC and H_EXPS_ELEC_VAL, H_ELEC_PRCH_KWH_NUM here ?\n    if (parseFloat(EXPS_ELEC_VAL) <= 10000) {\n        console.log(1)\n        if (parseFloat(EXPS_ELEC_VAL) >= parseFloat(ELEC)){\n            console.log(2)\n            msg.payload.csv[record_idx].ELEC_PRCH_KWH_NUM = Math.round(parseFloat(EXPS_ELEC_VAL) * parseFloat(parameter.AVG1));\n            msg.payload.csv[record_idx].ELEC_PRCH_KWH_NUM_F = 'B'; // What is (3,1) here ?\n        }else{\n            console.log(3)\n            msg.payload.csv[record_idx].ELEC_PRCH_KWH_NUM = Math.round(parseFloat(EXPS_ELEC_VAL) * parseFloat(parameter.AVG2));\n            msg.payload.csv[record_idx].ELEC_PRCH_KWH_NUM_F = 'B'; // What is (3,1) here ?\n        }\n        msg.payload.csv[record_idx].ACTION = \"Go To A\";\n    } else if ((parseFloat(H_EXPS_ELEC_VAL) > 0)) {\n        console.log(4)\n        msg.payload.csv[record_idx].ELEC_PRCH_KWH_NUM = Math.round((parseFloat(EXPS_ELEC_VAL) / parseFloat(H_EXPS_ELEC_VAL)) * parseFloat(H_ELEC_PRCH_KWH_NUM));\n        msg.payload.csv[record_idx].ELEC_PRCH_KWH_NUM_F = 'H'; // What is (3,1) here ?\n        msg.payload.csv[record_idx].ACTION = \"Go To A\";\n    } else{\n        console.log(5)\n        msg.payload.csv[record_idx].ELEC_PRCH_KWH_NUM = Math.round(parseFloat(EXPS_ELEC_VAL) * parseFloat(parameter.AVG1));\n        msg.payload.csv[record_idx].ELEC_PRCH_KWH_NUM_F = 'B'; // What is (3,1) here ?\n        msg.payload.csv[record_idx].ACTION = \"Go To A - END\";\n    }\n    return msg;\n}\n\nreturn electricEnergyModuleCont(input)",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 440.3703308105469,
+        "wires": [
+            [
+                "578fd20a66562b72",
+                "ca558b1ab669675d"
+            ]
+        ]
+    },
+    {
+        "id": "3cd3e107ac0789b7",
+        "type": "link in",
+        "z": "1c6c32346fee9416",
+        "name": "link in 45",
+        "links": [
+            "8434c6c16c1fbaaf"
+        ],
+        "x": 20,
+        "y": 440.3703308105469,
+        "wires": [
+            [
+                "651b041f7e61e179"
+            ]
+        ]
+    },
+    {
+        "id": "651b041f7e61e179",
+        "type": "change",
+        "z": "1c6c32346fee9416",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.lookup",
+                "pt": "msg",
+                "to": "{\"moduleName\":\"electric_energy\",\"program\":\"aies\",\"unit_type\":\"estab\",\"params\":\"electric_energy_module\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 320,
+        "y": 440.3703308105469,
+        "wires": [
+            [
+                "51888bfbb37a0690"
+            ]
+        ]
+    },
+    {
+        "id": "ca558b1ab669675d",
+        "type": "link out",
+        "z": "1c6c32346fee9416",
+        "name": "link out classification",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9"
+        ],
+        "x": 900,
+        "y": 500.3703308105469,
+        "wires": []
+    },
+    {
+        "id": "c903163629df82af",
+        "type": "function",
+        "z": "6399b853963e761e",
+        "name": "electricImputeModule",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\n// Assumed JavaScript function based on the newest extracted OCR text (Electric Impute Module)\nfunction electricImputeModule(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL) {\n    // Placeholder for NM_State parameter table\n    let NM_STATE_PARAMETER_TABLE = {\n        AVG1: 0,\n        AVG2: 0\n    };\n\n    let { AVG1, AVG2 } = NM_STATE_PARAMETER_TABLE;\n\n    if (EXPS_ELEC_VAL <= 10000) {\n        // Logic for Year 1 historic values (H_) referencing 2022 EC data. Year 2 and on will refer to prior year AIES data\n    }\n\n    if (ELEC_PRCH_KWH_NUM_F[3][1] !== 'B') {\n        ELEC_PRCH_KWH_NUM = Math.round(EXPS_ELEC_VAL * AVG2);\n        ELEC_PRCH_KWH_NUM_F[3][1] = 'B';\n    } else {\n        ELEC_PRCH_KWH_NUM = Math.round(EXPS_ELEC_VAL * AVG1);\n    }\n\n    // Additional logic...\n\n    return EXPS_ELEC_VAL;\n}\n\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 9,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 240,
+        "wires": [
+            [
+                "ba693bb539d071b9",
+                "eda519aa8a1db303"
+            ]
+        ]
+    },
+    {
+        "id": "ba693bb539d071b9",
+        "type": "debug",
+        "z": "6399b853963e761e",
+        "name": "debug electricImputeModule",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "eda519aa8a1db303",
+        "type": "link out",
+        "z": "6399b853963e761e",
+        "name": "link out 58",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9"
+        ],
+        "x": 585,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "5f5ca49f66f32b41",
+        "type": "function",
+        "z": "6399b853963e761e",
+        "name": "electricImputeModule",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\n// Assumed JavaScript function based on the newest extracted OCR text (Electric Impute Module)\nfunction electricImputeModule(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL) {\n    // Placeholder for NM_State parameter table\n    let NM_STATE_PARAMETER_TABLE = {\n        AVG1: 0,\n        AVG2: 0\n    };\n\n    let { AVG1, AVG2 } = NM_STATE_PARAMETER_TABLE;\n\n    if (EXPS_ELEC_VAL <= 10000) {\n        // Logic for Year 1 historic values (H_) referencing 2022 EC data. Year 2 and on will refer to prior year AIES data\n    }\n\n    if (ELEC_PRCH_KWH_NUM_F[3][1] !== 'B') {\n        ELEC_PRCH_KWH_NUM = Math.round(EXPS_ELEC_VAL * AVG2);\n        ELEC_PRCH_KWH_NUM_F[3][1] = 'B';\n    } else {\n        ELEC_PRCH_KWH_NUM = Math.round(EXPS_ELEC_VAL * AVG1);\n    }\n\n    // Additional logic...\n\n    return EXPS_ELEC_VAL;\n}\n\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 9,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 460,
+        "wires": [
+            [
+                "d024af4d5725903e",
+                "8b699616f9c5a9b5"
+            ]
+        ]
+    },
+    {
+        "id": "d024af4d5725903e",
+        "type": "debug",
+        "z": "6399b853963e761e",
+        "name": "debug electricImputeModule",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "8b699616f9c5a9b5",
+        "type": "link out",
+        "z": "6399b853963e761e",
+        "name": "link out 59",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9"
+        ],
+        "x": 585,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "1455ef9792b755e9",
+        "type": "function",
+        "z": "6399b853963e761e",
+        "name": "Main",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nconst params = {\n    MN_ELECTRIC_STATE: [\n        { 'GEO_ST': '01', 'AVG1': 6.99263, 'AVG2': 12.1924, 'ELEC_INTERSECT': 1000, 'LL': 0.02, 'UL': 0.29 },\n        { 'GEO_ST': '02', 'AVG1': 2.97017, 'AVG2': 6.2589, 'ELEC_INTERSECT': 1000, 'LL': 0.03, 'UL': 0.21 },\n    ],\n    MN_ELEC_CUTOFF: {\n        REFPER: '2008A1',\n        CUTOFF1: '50000',\n        CUTOFF2: '10000',\n        FIXED: '684953',\n        BETA: '6.017'\n    }\n}\nconst input = {\n    STFIPS: '',\n    ELECGEN:'',\n    CSTELEC: '',\n    ELECSLD:'',\n    H_ELECGEN: '',\n    H_ELECSLD: '',\n    HISTSTAT: '',\n    EXPS_ELEC_VAL: 0,\n    ELEC_PRCH_KWH_NUM: 0\n}\nconst T_STFIPS = input?.STFIPS;\nlet MISSING_ST_FLIPS_ELECTRIC = 0;\nconst cutoffs = params.MN_ELEC_CUTOFF;\n\nfunction getParameterByGeoSt(geoSt) {\n    if (!geoSt || geoSt === 'NULL') return null;\n    return params.MN_ELECTRIC_STATE.find(item => item.GEO_ST === geoSt);\n}\nfunction electricEnergyModule(input){\n    const { EXPS_ELEC_VAL, ELEC_PRCH_KWH_NUM } = input;\n    if(EXPS_ELEC_VAL === 0 && ELEC_PRCH_KWH_NUM === 0){\n        // Go to A\n    }else if (EXPS_ELEC_VAL === 0 && ELEC_PRCH_KWH_NUM > 0){\n            // ELEC_PRCH_KWH_NUM = 0\n            // ELEC_PRCH_KWH_NUM_F (3,1) = 'J'\n            // go to A \n    }else if(T_STFIPS) {\n        // Go to electricEnergyModuleCont\n    }else{\n        MISSING_ST_FLIPS_ELECTRIC = 1;\n    }\n}\n// function electricEnergyModule(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, x_CURR) {\n//     console.log(\"Executing electricEnergyModule...\");\n\n//     if (!T_STFIPS || !REFPER || !ELEC_PRCH_KWH_NUM || !x_CURR ||\n//         [T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, x_CURR].includes('NULL')) {\n//         console.log('Invalid parameters');\n//         return 'Invalid parameters';\n//     }\n\n//     const parameter = getParameterByGeoSt(T_STFIPS);\n//     if (!parameter) {\n//         console.log('Invalid STFIPS');\n//         return 'Invalid STFIPS';\n//     }\n\n//     // ... rest of the logic\n\n//     return electricEnergyModuleCont(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, 0, x_CURR);\n// }\n\n// function electricEnergyModuleCont(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL, x_CURR) {\n//     console.log(\"Executing electricEnergyModuleCont...\");\n//     if (!T_STFIPS || !REFPER || ELEC_PRCH_KWH_NUM === null || EXPS_ELEC_VAL === null || !x_CURR ||\n//         [T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL, x_CURR].includes('NULL')) {\n//         console.log('Invalid parameters');\n//         return 'Invalid parameters';\n//     }\n\n//     const parameter = getParameterByGeoSt(T_STFIPS);\n//     let FIXED = 0;\n//     let BETA = 0;\n\n//     if (EXPS_ELEC_VAL / ELEC_PRCH_KWH_NUM > BETA) {\n//         return electricImputeModule(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL, x_CURR);\n//     }\n\n//     console.log('Returning from electricEnergyModuleCont:', EXPS_ELEC_VAL);\n//     return EXPS_ELEC_VAL;\n// }\n\n// function electricImputeModule(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL, x_CURR) {\n//     console.log(\"Executing electricImputeModule...\");\n//     if (!T_STFIPS || !REFPER || ELEC_PRCH_KWH_NUM === null || EXPS_ELEC_VAL === null || !x_CURR ||\n//         [T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL, x_CURR].includes('NULL')) {\n//         console.log('Invalid parameters');\n//         return 'Invalid parameters';\n//     }\n\n//     const parameter = getParameterByGeoSt(T_STFIPS);\n//     let NM_STATE_PARAMETER_TABLE = {\n//         AVG1: parameter ? parameter.AVG1 : 0,\n//         AVG2: parameter ? parameter.AVG2 : 0\n//     };\n\n//     // ... rest of the logic\n\n//     console.log('Returning from electricImputeModule:', EXPS_ELEC_VAL);\n//     return EXPS_ELEC_VAL;\n// }\n\n// console.log(electricEnergyModule(T_STFIPS, '2022', 1000, 'M'));\n\n// Test cases\n// console.log(electricEnergyModule('01', '2022', 1000, 'M'));  // Should execute all three functions for GEO_ST '01'\n// console.log(electricEnergyModule(undefined, '2022', 500, 'M'));  // Should return 'Invalid parameters'\n// console.log(electricEnergyModule('02', 'NULL', 500, 'M'));  // Should return 'Invalid parameters'\n// console.log(electricEnergyModule('03', '2022', 500, 'M'));  // Should return 'Invalid STFIPS' because '03' is not in parameterTableData\n\n// function getElecState(REFPER, params) {\n//     let stateParam;\n//     // Choose parameter table based on REFPER\n//     if (REFPER.slice(0, 4) === '2022') {\n//         stateParam = params.MN_ELECTRIC_STATE;\n//     } else if (REFPER === '2023A1') {\n//         stateParam = params.ASM23_ELECTRIC_STATE;\n//     } else if (REFPER === '2024A1') {\n//         stateParam = params.ASM24_ELECTRIC_STATE;\n//     } // ... add other conditions for other years\n\n//     return stateParam;\n// }\n// console.log(getElecState('2022', params));\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 680,
+        "wires": [
+            [
+                "fb0490d46f6dac6d",
+                "d9030a8fd1f031b8"
+            ]
+        ]
+    },
+    {
+        "id": "fb0490d46f6dac6d",
+        "type": "debug",
+        "z": "6399b853963e761e",
+        "name": "debug Main",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "d9030a8fd1f031b8",
+        "type": "link out",
+        "z": "6399b853963e761e",
+        "name": "link out 60",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9",
+            "95d077dd39781efe"
+        ],
+        "x": 595,
+        "y": 720,
+        "wires": []
     }
 ]
