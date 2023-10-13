@@ -317,6 +317,14 @@
         "env": []
     },
     {
+        "id": "3248e82e44cba772",
+        "type": "tab",
+        "label": "Completeness",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "c5ce2d38887016b2",
         "type": "subflow",
         "name": "Apply rules by level type",
@@ -1592,7 +1600,9 @@
             "d394b61bcc4755e6"
         ],
         "x": 14,
-        "y": 939
+        "y": 939,
+        "w": 1532,
+        "h": 82
     },
     {
         "id": "ef50b77b253a7883",
@@ -1612,7 +1622,9 @@
             "d587f5de3f4014c8"
         ],
         "x": 14,
-        "y": 239
+        "y": 239,
+        "w": 1792,
+        "h": 182
     },
     {
         "id": "62708d0bbe922798",
@@ -1636,7 +1648,9 @@
             "58df41cd8e54a653"
         ],
         "x": 14,
-        "y": 519
+        "y": 519,
+        "w": 1432,
+        "h": 322
     },
     {
         "id": "19463268a6c67561",
@@ -1654,6 +1668,8 @@
         ],
         "x": 14,
         "y": 99,
+        "w": 1432,
+        "h": 82,
         "info": "# Rules from Parameter Files"
     },
     {
@@ -1697,11 +1713,14 @@
             "20ef4922bea8d7fd",
             "89e7e315b3a8c30b",
             "ba5d5bdad0bc957e",
-            "8434c6c16c1fbaaf"
+            "8434c6c16c1fbaaf",
+            "399608507ce305d7",
+            "24ae978c7feb5fc3",
+            "b9b9acc35bdd0b75"
         ],
         "x": 14,
         "y": 619,
-        "w": 972,
+        "w": 1032,
         "h": 702
     },
     {
@@ -12404,7 +12423,8 @@
             "aafa3aaec7fae7e6",
             "d167c6cf7b89444d",
             "ca558b1ab669675d",
-            "782e6a52f1a66003"
+            "782e6a52f1a66003",
+            "daa2e09cc7fbb842"
         ],
         "x": 205,
         "y": 260,
@@ -13012,6 +13032,7 @@
         "name": "geography function",
         "func": "const validationChart = [{ \"STFIPS\": \"01\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"02\", \"GEOREG\": \"04\" }, { \"STFIPS\": \"04\", \"GEOREG\": \"04\" }, { \"STFIPS\": \"05\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"06\", \"GEOREG\": \"04\" }, { \"STFIPS\": \"08\", \"GEOREG\": \"04\" }, { \"STFIPS\": \"09\", \"GEOREG\": \"01\" }, { \"STFIPS\": \"10\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"11\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"12\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"13\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"15\", \"GEOREG\": \"04\" }, { \"STFIPS\": \"16\", \"GEOREG\": \"04\" }, { \"STFIPS\": \"17\", \"GEOREG\": \"02\" }, { \"STFIPS\": \"18\", \"GEOREG\": \"02\" }, { \"STFIPS\": \"19\", \"GEOREG\": \"02\" }, { \"STFIPS\": \"20\", \"GEOREG\": \"02\" }, { \"STFIPS\": \"21\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"22\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"23\", \"GEOREG\": \"01\" }, { \"STFIPS\": \"24\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"25\", \"GEOREG\": \"01\" }, { \"STFIPS\": \"26\", \"GEOREG\": \"02\" }, { \"STFIPS\": \"27\", \"GEOREG\": \"02\" }, { \"STFIPS\": \"28\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"29\", \"GEOREG\": \"02\" }, { \"STFIPS\": \"30\", \"GEOREG\": \"04\" }, { \"STFIPS\": \"31\", \"GEOREG\": \"02\" }, { \"STFIPS\": \"32\", \"GEOREG\": \"04\" }, { \"STFIPS\": \"33\", \"GEOREG\": \"01\" }, { \"STFIPS\": \"34\", \"GEOREG\": \"01\" }, { \"STFIPS\": \"35\", \"GEOREG\": \"04\" }, { \"STFIPS\": \"36\", \"GEOREG\": \"01\" }, { \"STFIPS\": \"37\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"38\", \"GEOREG\": \"02\" }, { \"STFIPS\": \"39\", \"GEOREG\": \"02\" }, { \"STFIPS\": \"40\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"41\", \"GEOREG\": \"04\" }, { \"STFIPS\": \"42\", \"GEOREG\": \"01\" }, { \"STFIPS\": \"44\", \"GEOREG\": \"01\" }, { \"STFIPS\": \"45\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"46\", \"GEOREG\": \"02\" }, { \"STFIPS\": \"47\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"48\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"49\", \"GEOREG\": \"04\" }, { \"STFIPS\": \"50\", \"GEOREG\": \"01\" }, { \"STFIPS\": \"51\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"53\", \"GEOREG\": \"04\" }, { \"STFIPS\": \"54\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"55\", \"GEOREG\": \"02\" }, { \"STFIPS\": \"56\", \"GEOREG\": \"04\" }]\nlet validation = false\n\nfor (let i = 0; i < validationChart.length; i++) {\n    const element = validationChart[i];\n    let parsedSTFIPS = parseInt(element[\"STFIPS\"]);\n    let parsedGEOREG = parseInt(element[\"GEOREG\"]);\n\n    if (parsedSTFIPS === parseInt(msg.payload.csv[0].STFIPS) && parsedGEOREG === parseInt(msg.payload.csv[0].GEOREG)) {\n        validation = true\n        break;\n    }\n}\n\nif (validation) {\n    msg.payload.csv[0].action = \"Go to Calculate Best Admin Receipts\"\n} else {\n    if (msg.payload.csv[0].STFIPS == \"97\" ) {\n        if (msg.payload.csv[0].NAICS_SECTOR_OLD == \"21\" && (msg.payload.csv[0].STATE_PHY == \"PC\" || msg.payload.csv[0].STATE_PHY == \"NG\" || msg.payload.csv[0].STATE_PHY == \"AT\")) {\n            msg.payload.csv[0].action = \"Go to Calculate Best Admin Receipts\"\n        } else {\n            msg.payload.csv[0].TABSTAT = \"N\"\n            msg.payload.csv[0].NONTABFL = \"Y\"\n        }\n    } else {\n        msg.payload.csv[0].flag = \"GEO_Invalid\"\n        msg.payload.csv[0].action = \"Go to Calculate Best Admin Receipts\"\n    }\n}\n\nreturn msg",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -17878,6 +17899,11 @@
                 "label": "Electric Impute Module",
                 "value": "electric_impute_module",
                 "type": "str"
+            },
+            {
+                "label": "Completeness",
+                "value": "completeness",
+                "type": "str"
             }
         ],
         "payload": "",
@@ -17974,11 +18000,21 @@
                 "t": "eq",
                 "v": "electric_impute_module",
                 "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "logical_edits",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "completeness",
+                "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 15,
+        "outputs": 17,
         "x": 630,
         "y": 480,
         "wires": [
@@ -18026,6 +18062,12 @@
             ],
             [
                 "8434c6c16c1fbaaf"
+            ],
+            [
+                "24ae978c7feb5fc3"
+            ],
+            [
+                "b9b9acc35bdd0b75"
             ]
         ]
     },
@@ -18155,7 +18197,7 @@
         "order": 1,
         "width": 18,
         "height": 13,
-        "format": "<div ng-switch=\"msg.payload\">\n\n        <div ng-switch-when=\"balance_module\">\n\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/balance_module.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n\n    </div>\n\n        <div ng-switch-when=\"br_stat_evaluation\">\n\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/br_stat.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n\n    </div>\n\n    <div ng-switch-when=\"critical_error\">\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/critical_error.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n\n        <div ng-switch-when=\"derive_NAICS_code\">\n\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/derive_naics_code.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n\n    </div>\n\n    <div ng-switch-when=\"classification\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/classification.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"geography\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/geography.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n     </div>\n    <div ng-switch-when=\"electric_energy_module\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/electric_energy_module.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"electric_energy_module_cont\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/electric_energy_module_cont.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"electric_impute_module\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/electric_impute_module.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-default>\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/Set_NONNORM.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n\n</div>",
+        "format": "<div ng-switch=\"msg.payload\">\n\n        <div ng-switch-when=\"balance_module\">\n\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/balance_module.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n\n    </div>\n\n        <div ng-switch-when=\"br_stat_evaluation\">\n\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/br_stat.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n\n    </div>\n\n    <div ng-switch-when=\"critical_error\">\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/critical_error.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n\n        <div ng-switch-when=\"derive_NAICS_code\">\n\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/derive_naics_code.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n\n    </div>\n\n    <div ng-switch-when=\"classification\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/classification.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"geography\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/geography.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n     </div>\n    <div ng-switch-when=\"electric_energy_module\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/electric_energy_module.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"electric_energy_module_cont\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/electric_energy_module_cont.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"electric_impute_module\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/electric_impute_module.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-default>\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/Set_NONNORM.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-default>\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/completeness.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n\n</div>",
         "storeOutMessages": true,
         "fwdInMessages": true,
         "resendOnRefresh": true,
@@ -18908,7 +18950,7 @@
         "method": "get",
         "upload": false,
         "swaggerDoc": "",
-        "x": 1000,
+        "x": 1220,
         "y": 860,
         "wires": [
             [
@@ -19011,6 +19053,7 @@
         "id": "399608507ce305d7",
         "type": "http request",
         "z": "dad88d9a3132fed6",
+        "g": "4099bf03141f3710",
         "name": "",
         "method": "GET",
         "ret": "obj",
@@ -19023,8 +19066,8 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 990,
-        "y": 940,
+        "x": 950,
+        "y": 1080,
         "wires": [
             [
                 "6f78481c2e90771f",
@@ -19257,11 +19300,38 @@
         "name": "link out post edit",
         "mode": "link",
         "links": [
-            "3cd3e107ac0789b7",
-            "affe73445eec8a4f"
+            "3cd3e107ac0789b7"
         ],
         "x": 845,
         "y": 880,
+        "wires": []
+    },
+    {
+        "id": "24ae978c7feb5fc3",
+        "type": "link out",
+        "z": "dad88d9a3132fed6",
+        "g": "4099bf03141f3710",
+        "name": "link out post edit",
+        "mode": "link",
+        "links": [
+            "affe73445eec8a4f"
+        ],
+        "x": 845,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "b9b9acc35bdd0b75",
+        "type": "link out",
+        "z": "dad88d9a3132fed6",
+        "g": "4099bf03141f3710",
+        "name": "link out post edit",
+        "mode": "link",
+        "links": [
+            "1c611eb0c30a9863"
+        ],
+        "x": 845,
+        "y": 960,
         "wires": []
     },
     {
@@ -19892,7 +19962,9 @@
         "z": "1c6c32346fee9416",
         "name": "link in 45",
         "links": [
-            "8434c6c16c1fbaaf"
+            "8434c6c16c1fbaaf",
+            "cede3264bdcd0a70",
+            "36c4687d5f1bee6b"
         ],
         "x": 20,
         "y": 440.3703308105469,
@@ -20157,7 +20229,9 @@
         "z": "6399b853963e761e",
         "name": "link in 46",
         "links": [
-            "8434c6c16c1fbaaf"
+            "cede3264bdcd0a70",
+            "36c4687d5f1bee6b",
+            "24ae978c7feb5fc3"
         ],
         "x": 155,
         "y": 980,
@@ -20206,6 +20280,116 @@
         ],
         "x": 930,
         "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "e9d981f6b2f55e86",
+        "type": "subflow:0be109393cb5f28a",
+        "z": "3248e82e44cba772",
+        "name": "",
+        "x": 710,
+        "y": 320,
+        "wires": [
+            [
+                "44cfe99b5f9e273f"
+            ]
+        ]
+    },
+    {
+        "id": "26b6d9f356114422",
+        "type": "debug",
+        "z": "3248e82e44cba772",
+        "name": "debug 108",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1130,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "44cfe99b5f9e273f",
+        "type": "function",
+        "z": "3248e82e44cba772",
+        "name": "function 38",
+        "func": "msg.cache = global.get(\"lookupCache\")\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nconst isValueMissing = value => value === null || value === undefined || value === 'NULL';\n\nconst isCoreVariableMissing = variables => {\n    const coreVariables = ['PAY_ANN_VAL', 'EMP_MAR12_NUM', 'PAY_QTR_VAL', 'RCPT_TOT_VAL'];\n    return coreVariables.some(variable => isValueMissing(variables[variable]));\n};\n\nconst handleYesFlow = variables => {\n    goToPVPrep(variables)\n};\n\nconst handleNoFlow = variables => completenessCheckForAIES(variables);\n\nconst completenessCheckForAIES = variables => {\n    const moduleOrder = ['PAY_ANN_VAL', 'EMP_MAR12_NUM', 'PAY_QTR_VAL', 'RCPT_TOT_VAL'];\n    for (let item of moduleOrder) {\n        if (isValueMissing(variables[item])) {\n            msg.payload.csv[record_idx].ACTION = variables.join(', ') + 'Will be executed'\n        }\n    }\n};\n\nconst goToPVPrep = variables => {\n    msg.payload.csv[record_idx].ACTION = 'Go To PV Prep'\n};\n\nconst isValueZero = value => parseInt(value) === 0;\n\nconst checkVariables = (variables) => {\n    const coreVariables = ['PAY_ANN_VAL', 'EMP_MAR12_NUM', 'PAY_QTR_VAL', 'RCPT_TOT_VAL'];\n\n    const shouldProceed = [];\n    const shouldNotProceed = [];\n\n    const isPoF_G = variables.PO_F[1] === 'G';\n\n    const notInArray = !['A', 'P', 'V', 'H', 'M', 'E', 'B', 'W', 'U', 'X'].includes(variables.PO_F[1]);\n    coreVariables.forEach(variable => {\n        if (variable === 'RCPT_TOT_VAL' && notInArray && !isValueZero(variables[variable])) {\n            shouldProceed.push(variable);\n        } else if (variable !== 'RCPT_TOT_VAL' && notInArray && (isPoF_G || !isValueZero(variables[variable]))) {\n            shouldProceed.push(variable);\n        } else {\n            shouldNotProceed.push(variable);\n        }\n    });\n\n    return { shouldProceed, shouldNotProceed };\n};\n\n\nconst completenessCheck = variables => {\n    const checkVariablesToProceed = checkVariables(record)\n    if (variables['REPORTING_ID_TYP_TXT'] && ['MU', 'SU', 'KAU'].includes(variables['REPORTING_ID_TYP_TXT'])) {\n        if (!isCoreVariableMissing(variables)) {\n            console.log({ isCoreVariableMissing  })\n            if (checkVariablesToProceed.shouldProceed.length === 4) {\n                console.log('All PASS')\n                handleYesFlow(checkVariablesToProceed.shouldProceed);\n            }\n        }\n    }\n     handleNoFlow(checkVariablesToProceed?.shouldNotProceed);\n     return msg;\n};\n\nconst result = completenessCheck(record);\nreturn result\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 930,
+        "y": 320,
+        "wires": [
+            [
+                "26b6d9f356114422",
+                "daa2e09cc7fbb842"
+            ]
+        ]
+    },
+    {
+        "id": "1c611eb0c30a9863",
+        "type": "link in",
+        "z": "3248e82e44cba772",
+        "name": "link in 47",
+        "links": [
+            "cede3264bdcd0a70",
+            "36c4687d5f1bee6b",
+            "b9b9acc35bdd0b75"
+        ],
+        "x": 235,
+        "y": 320,
+        "wires": [
+            [
+                "1a56cedc7b9501e1"
+            ]
+        ]
+    },
+    {
+        "id": "1a56cedc7b9501e1",
+        "type": "change",
+        "z": "3248e82e44cba772",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.lookup",
+                "pt": "msg",
+                "to": "{\"moduleName\":\"electric_energy\",\"program\":\"aies\",\"unit_type\":\"estab\",\"params\":\"electric_energy_module\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 320,
+        "wires": [
+            [
+                "e9d981f6b2f55e86"
+            ]
+        ]
+    },
+    {
+        "id": "daa2e09cc7fbb842",
+        "type": "link out",
+        "z": "3248e82e44cba772",
+        "name": "link out classification",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9"
+        ],
+        "x": 1065,
+        "y": 380,
         "wires": []
     }
 ]
