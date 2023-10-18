@@ -19,6 +19,7 @@
     "node-red-contrib-kafka-client": "~0.1.0",
     "node-red-contrib-kafka-manager": "~0.5.1",
     "node-red-contrib-msg-speed": "~2.1.0",
+    "node-red-contrib-postgresql": "~0.14.0",
     "node-red-contrib-re-postgres": "~0.3.4",
     "node-red-contrib-ui-etable": "~4.6.3",
     "node-red-contrib-uibuilder": "~6.0.0",
