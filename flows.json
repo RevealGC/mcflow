@@ -17906,7 +17906,7 @@
         "type": "function",
         "z": "5e1a962405c84d2b",
         "name": "function 18",
-        "func": "\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nif (\n    (String(record.RECORD_TYP_TXT) === \"20\" || String(record.RECORD_TYP_TXT) === \"90\")\n    && \n    (String(record.REPORTING_TYP_ID) === \"SU\" || String(record.REPORTING_TYP_ID) === \"MU\")\n    ) \n{\n    if (String(record.NAICS_SECTOR_OLD_NUM) === \"31\") {\n        console.log(2)\n        record.action = \"Go to: Derive MFG NAICS from NAPCS\"\n    } else {\n        console.log(3)\n        record.action = \"Go to: Classification\"\n\n    }\n    return msg;\n} \n// else if (\n//     String(record.RECORD_TYP_TXT) === \"30\"\n//     &&\n//     String(record.REPORTING_TYP_ID) === \"KAU\"\n// ) {\n//     console.log(4)\n//     record.action = \"Do Responses to special Items Lead you question NAICS (GROUP_KEY) of Entire KAU\"\n//     return msg;\n// }\nelse {\n    console.log(5)\n    record.action = \"Go to: Classification\"\n    return msg;\n}\n// let record_idx = global.get(\"ptrModuleFacts\");\n// let record = msg.payload.csv[record_idx];\n\n// if (String(record.NAICS_SECTOR_OLD_NUM) === \"31\") {\n//     console.log(1)\n//     record.action = \"Go to: Derive MFG NAICS from NAPCS\"\n// }\n// else {\n//     console.log(2)\n//     record.action = \"Go to: Classification\"\n//     return msg;\n// }",
+        "func": "\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nif ((String(record.RECORD_TYP_TXT) === \"20\" || String(record.RECORD_TYP_TXT) === \"90\")) \n{\n    if (String(record.NAICS_SECTOR_OLD_NUM) === \"31\") {\n        console.log(2)\n        record.action = \"Go to: Derive MFG NAICS from NAPCS\"\n    } else {\n        console.log(3)\n        record.action = \"Go to: Classification\"\n\n    }\n    return msg;\n} \n// else if (\n//     String(record.RECORD_TYP_TXT) === \"30\"\n//     &&\n//     String(record.REPORTING_TYP_ID) === \"KAU\"\n// ) {\n//     console.log(4)\n//     record.action = \"Do Responses to special Items Lead you question NAICS (GROUP_KEY) of Entire KAU\"\n//     return msg;\n// }\nelse {\n    console.log(5)\n    record.action = \"Go to: Classification\"\n    return msg;\n}\n// let record_idx = global.get(\"ptrModuleFacts\");\n// let record = msg.payload.csv[record_idx];\n\n// if (String(record.NAICS_SECTOR_OLD_NUM) === \"31\") {\n//     console.log(1)\n//     record.action = \"Go to: Derive MFG NAICS from NAPCS\"\n// }\n// else {\n//     console.log(2)\n//     record.action = \"Go to: Classification\"\n//     return msg;\n// }",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -21835,6 +21835,35 @@
         ]
     },
     {
+        "id": "f58a665e158ea438",
+        "type": "inject",
+        "z": "dad88d9a3132fed6",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 280,
+        "y": 1860,
+        "wires": [
+            [
+                "4b28156dce4522c1"
+            ]
+        ]
+    },
+    {
         "id": "8eacd61d364bbafe",
         "type": "link in",
         "z": "b2e59c2394f7c26c",
@@ -22020,8 +22049,19 @@
         "type": "subflow:e4fb9739caef0397",
         "z": "b2e59c2394f7c26c",
         "name": "",
-        "x": 850,
-        "y": 1140,
+        "x": 530,
+        "y": 820,
         "wires": []
+    },
+    {
+        "id": "55fbb4297e588b4b",
+        "type": "subflow:ae0faa518ff234d5",
+        "z": "b2e59c2394f7c26c",
+        "name": "Derived Items",
+        "x": 500,
+        "y": 900,
+        "wires": [
+            []
+        ]
     }
 ]
