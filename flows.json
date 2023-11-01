@@ -1646,7 +1646,9 @@
             "d015bbe8f3761f7f"
         ],
         "x": 54,
-        "y": -1
+        "y": -1,
+        "w": 838,
+        "h": 208
     },
     {
         "id": "5a28e866a67c90ec",
@@ -1671,7 +1673,9 @@
             "8764792a5250d529"
         ],
         "x": 14,
-        "y": 279
+        "y": 279,
+        "w": 1152,
+        "h": 262
     },
     {
         "id": "c0b83f35fdc02130",
@@ -1689,9 +1693,7 @@
             "d394b61bcc4755e6"
         ],
         "x": 14,
-        "y": 939,
-        "w": 1532,
-        "h": 82
+        "y": 939
     },
     {
         "id": "ef50b77b253a7883",
@@ -1711,9 +1713,7 @@
             "d587f5de3f4014c8"
         ],
         "x": 14,
-        "y": 239,
-        "w": 1792,
-        "h": 182
+        "y": 239
     },
     {
         "id": "62708d0bbe922798",
@@ -1737,9 +1737,7 @@
             "58df41cd8e54a653"
         ],
         "x": 14,
-        "y": 519,
-        "w": 1432,
-        "h": 322
+        "y": 519
     },
     {
         "id": "19463268a6c67561",
@@ -1757,8 +1755,6 @@
         ],
         "x": 14,
         "y": 99,
-        "w": 1432,
-        "h": 82,
         "info": "# Rules from Parameter Files"
     },
     {
@@ -1838,7 +1834,9 @@
             "e5ca7c9975e3a6b5"
         ],
         "x": 474,
-        "y": 99
+        "y": 99,
+        "w": 392,
+        "h": 82
     },
     {
         "id": "748ca46ea16faad4",
@@ -20803,7 +20801,7 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Upload CSV File</title>\n    <!-- Include Materialize CSS and JS -->\n    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css\">\n    <link href=\"https://fonts.googleapis.com/icon?family=Material+Icons\" rel=\"stylesheet\">\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js\"></script>\n</head>\n<body>\n  <nav>\n    <div class=\"blue nav-wrapper\">\n      <a href=\"#\" data-target=\"mobile-demo\" class=\"sidenav-trigger\"><i class=\"material-icons\">menu</i></a>\n      <ul class=\"left hide-on-med-and-down\">\n        <li><a class=\"bold\" href=\"/update_params\">Params</a></li>\n        <li><a class=\"bold\" href=\"/upload_page\">Upload csv</a></li>\n        <li><a class=\"bold\" href=\"/ui_wrapper\">UI</a></li>\n        <li><a class=\"bold\" href=\"/test_ui\">Load DB</a></li>\n      </ul>\n    </div>\n  </nav>\n\n  <ul class=\"blue sidenav\" id=\"mobile-demo\">\n      <li><a class=\"bold\" href=\"/update_params\">Params</a></li>\n        <li><a class=\"bold\" href=\"/upload_page\">Upload csv</a></li>\n        <li><a class=\"bold\" href=\"/ui_wrapper\">UI</a></li>\n        <li><a class=\"bold\" href=\"/test_ui\">Load DB</a></li>\n  </ul>\n<div class=\"container\">\n    <h1 class=\"center-align\">Upload CSV File</h1>\n    \n    <div class=\"row\">\n        <form action=\"/upload\" method=\"POST\" enctype=\"multipart/form-data\" class=\"col s12\">\n            <div class=\"file-field input-field\">\n                <div class=\"btn\">\n                    <span>File</span>\n                    <input type=\"file\" name=\"myFile\">\n                </div>\n                <div class=\"file-path-wrapper\">\n                    <input class=\"file-path validate\" type=\"text\" placeholder=\"Upload a CSV file\">\n                </div>\n            </div>\n            <div class=\"input-field center-align\">\n                <button onclick=\"showToast()\" class=\"btn waves-effect waves-light\" type=\"submit\">Submit\n                    <i class=\"material-icons right\">send</i>\n                </button>\n            </div>\n        </form>\n    </div>\n</div>\n<div class=\"container\">\n  <h4> CSV Links </h4>\n  <table class=\"responsive-table\">\n        <thead>\n          <tr>\n              <th>Name</th>\n              <th>Link</th>\n          </tr>\n        </thead>\n\n        <tbody>\n          <tr>\n            <td>rcpt_tot_val</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/rcpt_tot_val.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n          <tr>\n            <td>pay_qtr1_val</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/pay_qtr1_val.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n          <tr>\n            <td>pay_ann_val</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/pay_ann_val.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n          <tr>\n            <td>emp_mar12_num</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/emp_mar12_num.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n        </tbody>\n      </table>\n</div>\n<!-- Initialize Materialize Components -->\n<script>\n    M.AutoInit();\n    function showToast() {\n        M.toast({html: 'Uploading...'});\n    }\n</script>\n\n</body>\n</html>\n",
+        "template": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Upload CSV File</title>\n    <!-- Include Materialize CSS and JS -->\n    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css\">\n    <link href=\"https://fonts.googleapis.com/icon?family=Material+Icons\" rel=\"stylesheet\">\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js\"></script>\n</head>\n<body>\n  <nav>\n    <div class=\"blue nav-wrapper\">\n      <a href=\"#\" data-target=\"mobile-demo\" class=\"sidenav-trigger\"><i class=\"material-icons\">menu</i></a>\n      <ul class=\"left hide-on-med-and-down\">\n        <li><a class=\"bold\" href=\"/update_params\">Params</a></li>\n        <li><a class=\"bold\" href=\"/upload_page\">Upload csv</a></li>\n        <li><a class=\"bold\" href=\"/ui_wrapper\">UI</a></li>\n        <li><a class=\"bold\" href=\"/test_ui\">Load DB</a></li>\n      </ul>\n    </div>\n  </nav>\n\n  <ul class=\"blue sidenav\" id=\"mobile-demo\">\n      <li><a class=\"bold\" href=\"/update_params\">Params</a></li>\n        <li><a class=\"bold\" href=\"/upload_page\">Upload csv</a></li>\n        <li><a class=\"bold\" href=\"/ui_wrapper\">UI</a></li>\n        <li><a class=\"bold\" href=\"/test_ui\">Load DB</a></li>\n  </ul>\n<div class=\"container\">\n    <h1 class=\"center-align\">Upload CSV File</h1>\n    \n    <div class=\"row\">\n        <form action=\"/upload\" method=\"POST\" enctype=\"multipart/form-data\" class=\"col s12\">\n            <div class=\"file-field input-field\">\n                <div class=\"btn\">\n                    <span>File</span>\n                    <input type=\"file\" name=\"myFile\">\n                </div>\n                <div class=\"file-path-wrapper\">\n                    <input class=\"file-path validate\" type=\"text\" placeholder=\"Upload a CSV file\">\n                </div>\n            </div>\n            <div class=\"input-field center-align\">\n                <button onclick=\"showToast()\" class=\"btn waves-effect waves-light\" type=\"submit\">Submit\n                    <i class=\"material-icons right\">send</i>\n                </button>\n            </div>\n        </form>\n    </div>\n</div>\n<div class=\"container\">\n  <h4> CSV Links </h4>\n  <table class=\"responsive-table\">\n        <thead>\n          <tr>\n              <th>Name</th>\n              <th>Link</th>\n          </tr>\n        </thead>\n\n        <tbody>\n          <tr>\n            <td>rcpt_tot_val</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/rcpt_tot_val.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n          <tr>\n            <td>pay_qtr1_val</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/pay_qtr1_val.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n          <tr>\n            <td>pay_ann_val</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/pay_ann_val.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n          <tr>\n            <td>emp_mar12_num</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/emp_mar12_num.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n           <tr>\n            <td>post_edit_status_ields</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/post_edit_status_ields.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n        </tbody>\n      </table>\n</div>\n<!-- Initialize Materialize Components -->\n<script>\n    M.AutoInit();\n    function showToast() {\n        M.toast({html: 'Uploading...'});\n    }\n</script>\n\n</body>\n</html>\n",
         "output": "str",
         "x": 450,
         "y": 700,
@@ -21718,7 +21716,7 @@
         "split": false,
         "rowsPerMsg": "1",
         "outputs": 1,
-        "x": 540,
+        "x": 580,
         "y": 1700,
         "wires": [
             [
@@ -21753,7 +21751,7 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 1470,
+        "x": 1210,
         "y": 1700,
         "wires": []
     },
@@ -21774,35 +21772,6 @@
         "wires": [
             [
                 "3a09eefeb46e3070"
-            ]
-        ]
-    },
-    {
-        "id": "f58a665e158ea438",
-        "type": "inject",
-        "z": "dad88d9a3132fed6",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 280,
-        "y": 1860,
-        "wires": [
-            [
-                "4b28156dce4522c1"
             ]
         ]
     },
@@ -21832,6 +21801,109 @@
         ],
         "x": 845,
         "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "5bf7f51448d5e055",
+        "type": "Kafka Admin",
+        "z": "dad88d9a3132fed6",
+        "name": "",
+        "x": 630,
+        "y": 1940,
+        "wires": [
+            [
+                "7b578c41f67e5310"
+            ],
+            [
+                "7b578c41f67e5310"
+            ]
+        ]
+    },
+    {
+        "id": "395ec4e45f0e2746",
+        "type": "http in",
+        "z": "dad88d9a3132fed6",
+        "name": "",
+        "url": "/kafka_ui_test_post",
+        "method": "get",
+        "upload": true,
+        "swaggerDoc": "",
+        "x": 190,
+        "y": 1940,
+        "wires": [
+            [
+                "e04eedac58c69ed1"
+            ]
+        ]
+    },
+    {
+        "id": "e04eedac58c69ed1",
+        "type": "function",
+        "z": "dad88d9a3132fed6",
+        "name": "Get Body",
+        "func": "msg.newVars = Object.values(msg.payload)\nmsg.name = 'DB_DATA.csv'\nflow.set(\"moduleFacts\", [])\nflow.set(\"originalData\", [])\n//NK initialize global context\nglobal.set(\"originalData\", [])\nglobal.set(\"moduleFacts\", [])\nglobal.set(\"ptrModuleFacts\", 0)\nglobal.set(\"filename\", '/tmp/DB_DATA.csv')\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 1940,
+        "wires": [
+            [
+                "5bf7f51448d5e055"
+            ]
+        ]
+    },
+    {
+        "id": "7b578c41f67e5310",
+        "type": "function",
+        "z": "dad88d9a3132fed6",
+        "name": "Get Kafka Records",
+        "func": "// flow.set(\"moduleFacts\", [])\n// flow.set(\"originalData\", [])\n// //NK initialize global context\n// global.set(\"originalData\", [])\n// global.set(\"moduleFacts\", [])\n// global.set(\"ptrModuleFacts\",0)\n// global.set(\"filename\", '/tmp/DB_DATA.csv')\n\n\n// const result = msg.payload.map(obj => Object.fromEntries(Object.entries(obj).map(([key, val]) => [key.toUpperCase(), val])));\n// msg.payload.csv = result;\n// msg.payload.length = msg.pgsql.rowCount\n// // console.log(msg.payload.csv)\n\n// let p = msg.payload.csv;\n// msg.payload = p;\n\n// let ptr = global.get(\"ptrModuleFacts\"); //HF\n\n// flow.set('moduleFacts', p)\n// global.set('moduleFacts', p)\n// global.set('originalData', p[ptr]) //HF\n// // global.set('originalData', p[0]) //NK\n// msg.topic = 'csv'\n// msg.ui_control = {\n//     max: p.length // Assuming msg.payload contains the row count\n// };\n// msg.payload = JSON.stringify(msg.payload, null, 2);\n\n// msg.newVars = JSON.stringify({newVars: msg.newVars}, null, 2);\n\n// // console.log({getD: msg.newVars, postD: JSON.stringify({j: msg.newVars}), postDD: msg.newVars})\nconsole.log({\n    msg: msg.payload\n})\nreturn msg",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 850,
+        "y": 1940,
+        "wires": [
+            [
+                "614849ea184b04aa"
+            ]
+        ]
+    },
+    {
+        "id": "614849ea184b04aa",
+        "type": "template",
+        "z": "dad88d9a3132fed6",
+        "name": "html",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Upload CSV File</title>\n    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css\">\n    <link href=\"https://fonts.googleapis.com/icon?family=Material+Icons\" rel=\"stylesheet\">\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js\"></script>\n    <style>\n        /* Add custom styles for responsiveness */\n         .table-container {\n            width: 95%;\n            overflow-x: auto;\n            margin: 2%;\n        }\n        table {\n            width: 100%;\n            border-collapse: collapse;\n        }\n\n        th, td {\n            border: 1px solid #dddddd;\n            text-align: left;\n            padding: 8px;\n        }\n\n        tr:nth-child(even) {\n            background-color: #f2f2f2;\n        }\n    </style>\n</head>\n<body>\n<nav>\n    <div class=\"blue nav-wrapper\">\n      <a href=\"#\" data-target=\"mobile-demo\" class=\"sidenav-trigger\"><i class=\"material-icons\">menu</i></a>\n      <ul class=\"left hide-on-med-and-down\">\n        <li><a class=\"bold\" href=\"/update_params\">Params</a></li>\n        <li><a class=\"bold\" href=\"/upload_page\">Upload csv</a></li>\n        <li><a class=\"bold\" href=\"/ui_wrapper\">UI</a></li>\n        <li><a class=\"bold\" href=\"/test_ui\">Load DB</a></li>\n      </ul>\n    </div>\n  </nav>\n\n  <ul class=\"blue sidenav\" id=\"mobile-demo\">\n      <li><a class=\"bold\" href=\"/update_params\">Params</a></li>\n        <li><a class=\"bold\" href=\"/upload_page\">Upload csv</a></li>\n        <li><a class=\"bold\" href=\"/ui_wrapper\">UI</a></li>\n        <li><a class=\"bold\" href=\"/test_ui\">Load DB</a></li>\n  </ul>\n\n  <div class=\"container\">\n    {{!-- <h1 class=\"center-align\">Uploaded</h1> --}}\n  </div>\n  <div id=\"hide_this_to_load\">{{payload}}</div>\n    <div class=\"table-container\">\n  <div id=\"load_table\"></div>\n  </div>\n  <p id=\"file_name\">{{name}}</p>\n   <p id=\"new_vars\">{{newVars}}</p>\n    <div class=\"input-field center-align\">\n    <button onclick='saveCsv()' class=\"btn waves-effect waves-light\" type=\"submit\">Save\n    </button>\n     <a href='/ui_wrapper' class=\"btn waves-effect waves-light\" type=\"submit\">Go {{name}}\n    </a>\n  </div>\n<script>\n  let data = document.getElementById('hide_this_to_load').innerHTML\n  let file_name = document.getElementById('file_name').innerHTML\n  let new_vars = document.getElementById('new_vars').innerHTML\n  \n  document.getElementById('new_vars').style.display = 'none';\n  document.getElementById('hide_this_to_load').style.display = 'none';\n  document.getElementById('file_name').style.display = 'none';\n  data = JSON.parse(data);\n  new_vars = JSON.parse(new_vars);\n  let headers; \n  document.addEventListener('DOMContentLoaded', function() {\n    const loadTableDiv = document.getElementById('load_table');\n    const table = document.createElement('table');\n    table.classList.add('striped');\n    const tableHeader = document.createElement('thead');\n    const headerRow = document.createElement('tr');\n    headers = [...new_vars.newVars.map(i=>i.toUpperCase()), ...(Object.keys(data[0]))]; // Set headers here\n    headers.forEach(headerText => {\n      const th = document.createElement('th');\n      th.textContent = headerText;\n      headerRow.appendChild(th);\n    });\n    tableHeader.appendChild(headerRow);\n    table.appendChild(tableHeader);\n    const tableBody = document.createElement('tbody');\n    data.forEach((item, index) => {\n      const row = document.createElement('tr');\n      headers.forEach(header => {\n        const cell = document.createElement('td');\n        cell.style.minWidth = '200px';\n        if (index !== -1) { // Make fields editable for all rows except the header row\n          const input = document.createElement('input');\n          input.value = item[header] == undefined ? 'NULL': item[header];\n          input.addEventListener('input', function() {\n            item[header] = this.value;\n            const updatedJData = getUpdatedData();\n            // console.log(updatedJData);\n          });\n          cell.appendChild(input);\n        } else {\n          cell.textContent = item[header];\n        }\n        row.appendChild(cell);\n      });\n      tableBody.appendChild(row);\n    });\n    table.appendChild(tableBody);\n    loadTableDiv.appendChild(table);\n  });\n\n  function getUpdatedData() {\n    const updatedData = [];\n    const rows = document.querySelectorAll('#load_table tbody tr');\n    rows.forEach(row => {\n      const rowData = {};\n      const cells = row.querySelectorAll('td');\n      cells.forEach((cell, index) => {\n        const header = headers[index];\n        if (header) {\n          rowData[header] = cell.firstChild.value || cell.textContent;\n        }\n      });\n      updatedData.push(rowData);\n    });\n    return updatedData;\n  }\n  const jsonToCSV = (jsonArray) => {\n    const headers = Object.keys(jsonArray[0]);\n\n    let csv = headers.join(',') + '\\n';\n\n    jsonArray.forEach(obj => {\n        const values = headers.map(header => {\n            const escapedValue = obj[header].replace(/\"/g, '\\\\\"');\n            return `\"${escapedValue}\"`;\n        });\n        csv += values.join(',') + '\\n';\n    });\n\n    return csv;\n};\n\n  function saveCsv(){\n    console.log(JSON.stringify({filename: file_name, csvData:jsonToCSV(getUpdatedData())}))\n     fetch('/saveCsv', {\n      method: 'POST',\n      headers: {\n        'Content-Type': 'application/json'\n      },\n      body: JSON.stringify({filename: '/tmp/' + file_name, csvData:jsonToCSV(getUpdatedData())})\n    })\n    .then(response => {\n      if (response.ok) {\n        console.log('Update successful!');\n      } else {\n        console.error('Error updating params:', response.status);\n      }\n    })\n    .catch(error => {\n      console.error('Error:', error);\n    });\n  }\n</script>\n\n\n</body>\n</html>\n",
+        "output": "str",
+        "x": 1050,
+        "y": 1940,
+        "wires": [
+            [
+                "bf57c5e0dbaa9486"
+            ]
+        ]
+    },
+    {
+        "id": "bf57c5e0dbaa9486",
+        "type": "http response",
+        "z": "dad88d9a3132fed6",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1210,
+        "y": 1940,
         "wires": []
     },
     {
