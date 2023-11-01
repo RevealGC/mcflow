@@ -691,12 +691,13 @@
     {
         "id": "67a3cd3b754e4fbd",
         "type": "subflow",
-        "name": "Subflow 7",
+        "name": "Post Edit Status Field",
         "info": "",
+        "category": "",
         "in": [
             {
-                "x": 50,
-                "y": 30,
+                "x": 460,
+                "y": 140,
                 "wires": [
                     {
                         "id": "0f9ffc3cef064808"
@@ -706,8 +707,8 @@
         ],
         "out": [
             {
-                "x": 160,
-                "y": 30,
+                "x": 840,
+                "y": 140,
                 "wires": [
                     {
                         "id": "0f9ffc3cef064808",
@@ -715,7 +716,10 @@
                     }
                 ]
             }
-        ]
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
     },
     {
         "id": "045ba1012eb08b50",
@@ -1588,6 +1592,39 @@
         "color": "#DDAA99"
     },
     {
+        "id": "9e4e212b0811233d",
+        "type": "subflow",
+        "name": "Pre Db Write Back For Leased",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 340,
+                "y": 220,
+                "wires": [
+                    {
+                        "id": "e4588ba92d2276e3"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 780,
+                "y": 220,
+                "wires": [
+                    {
+                        "id": "e4588ba92d2276e3",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
         "id": "7dc18555ca029842",
         "type": "group",
         "z": "d103860e993c1512",
@@ -1652,7 +1689,9 @@
             "d394b61bcc4755e6"
         ],
         "x": 14,
-        "y": 939
+        "y": 939,
+        "w": 1532,
+        "h": 82
     },
     {
         "id": "ef50b77b253a7883",
@@ -1672,7 +1711,9 @@
             "d587f5de3f4014c8"
         ],
         "x": 14,
-        "y": 239
+        "y": 239,
+        "w": 1792,
+        "h": 182
     },
     {
         "id": "62708d0bbe922798",
@@ -1696,7 +1737,9 @@
             "58df41cd8e54a653"
         ],
         "x": 14,
-        "y": 519
+        "y": 519,
+        "w": 1432,
+        "h": 322
     },
     {
         "id": "19463268a6c67561",
@@ -1714,6 +1757,8 @@
         ],
         "x": 14,
         "y": 99,
+        "w": 1432,
+        "h": 82,
         "info": "# Rules from Parameter Files"
     },
     {
@@ -1765,11 +1810,14 @@
             "d5aac8a297ee6dd2",
             "5d05b108e4e3f722",
             "28494dbc74f30091",
-            "8272974b9a32a0ac"
+            "8272974b9a32a0ac",
+            "270941def4b7c8b6",
+            "65738b3d68734570",
+            "fbcbf9510de0509c"
         ],
         "x": 14,
         "y": 619,
-        "w": 1052,
+        "w": 1092,
         "h": 702
     },
     {
@@ -3425,14 +3473,15 @@
         "type": "function",
         "z": "67a3cd3b754e4fbd",
         "name": "11.0 Post Edit Status Fields",
-        "func": "msg.actions.postEditStatusFieldsCompleted = true\nreturn msg;",
+        "func": "// msg.actions.postEditStatusFieldsCompleted = true\nlet record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\nlet criticalFlags = record['criticalFlags'];\nlet TABSTAT;\nlet FAIL;\nif (criticalFlags) {\n    TABSTAT = \"FAIL\";\n    FAIL = 1;\n} \n\nmsg.payload.csv[global.get(\"ptrModuleFacts\")].ACTION = 'Post Edit Status Field'\nconsole.log({\n    msg: msg.payload.csv[global.get(\"ptrModuleFacts\")]\n})\nreturn msg;",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 200,
-        "y": 80,
+        "x": 640,
+        "y": 140,
         "wires": [
             []
         ]
@@ -6631,6 +6680,24 @@
             [
                 "9755131b10a45865"
             ]
+        ]
+    },
+    {
+        "id": "e4588ba92d2276e3",
+        "type": "function",
+        "z": "9e4e212b0811233d",
+        "name": "Pre Db Write Back For Leased",
+        "func": "// msg.actions.postEditStatusFieldsCompleted = true\nlet record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\nlet REFERRAL_FLAG = record['REFERRAL_FLAG'];\n\nif (REFERRAL_FLAG === 'LEASED_ONLY') {\n    record['PAY_ANN_VAL'] = 0;\n\n    if (record['PAY_ANN_VAL_FLG'] && record['PAY_ANN_VAL_FLG'].length >= 2) {\n        record['PAY_ANN_VAL_FLG'] = record['PAY_ANN_VAL_FLG'].substring(0, 1) + 'G' + record['PAY_ANN_VAL_FLG'].substring(2);\n    } else if (!record['PAY_ANN_VAL_FLG'] || record['PAY_ANN_VAL_FLG'].length == 0) {\n        record['PAY_ANN_VAL_FLG'] = '_G_';\n    } else if (record['PAY_ANN_VAL_FLG'].length == 1) {\n        record['PAY_ANN_VAL_FLG'] = record['PAY_ANN_VAL_FLG'][0] + 'G_';\n    }\n}\n\nmsg.payload.csv[global.get(\"ptrModuleFacts\")].ACTION = 'EXIT'\n\nconsole.log({\n    msg: msg.payload.csv[global.get(\"ptrModuleFacts\")]\n})\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 220,
+        "wires": [
+            []
         ]
     },
     {
@@ -12806,7 +12873,9 @@
             "86f363969a0f8d77",
             "a6250f4cc9b410d4",
             "94f8c7ddd4beeac8",
-            "ed77e55538e24a1f"
+            "ed77e55538e24a1f",
+            "b6bebbeac0549686",
+            "ece1e11393b49799"
         ],
         "x": 205,
         "y": 260,
@@ -18075,49 +18144,13 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 830,
+        "x": 270,
         "y": 320,
         "wires": [
             [
                 "6de317f273718e08",
                 "8a9c9b9f567f8a2a"
             ]
-        ]
-    },
-    {
-        "id": "8eb72a98706bd4e5",
-        "type": "subflow:0be109393cb5f28a",
-        "z": "4afed9425459216e",
-        "name": "",
-        "x": 590,
-        "y": 220,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "16d77c94e3014836",
-        "type": "change",
-        "z": "4afed9425459216e",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload.lookup",
-                "pt": "msg",
-                "to": "{\"moduleName\":\"electric_energy\",\"program\":\"aies\",\"unit_type\":\"estab\",\"params\":\"electric_energy_module\"}",
-                "tot": "json"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 310,
-        "y": 200,
-        "wires": [
-            []
         ]
     },
     {
@@ -18130,7 +18163,7 @@
             "7d91540d69ac16c1",
             "688a39b3e0070fe9"
         ],
-        "x": 955,
+        "x": 395,
         "y": 400,
         "wires": []
     },
@@ -18147,7 +18180,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1030,
+        "x": 470,
         "y": 320,
         "wires": []
     },
@@ -18159,7 +18192,6 @@
         "links": [
             "cede3264bdcd0a70",
             "36c4687d5f1bee6b",
-            "b9b9acc35bdd0b75",
             "43545e3b96e7f60c"
         ],
         "x": 125,
@@ -18192,42 +18224,6 @@
         ]
     },
     {
-        "id": "0ed2c684947d775e",
-        "type": "subflow:0be109393cb5f28a",
-        "z": "0a690414bffb7c2e",
-        "name": "",
-        "x": 590,
-        "y": 320,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "7ed007c3e5ebf226",
-        "type": "change",
-        "z": "0a690414bffb7c2e",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload.lookup",
-                "pt": "msg",
-                "to": "{\"moduleName\":\"electric_energy\",\"program\":\"aies\",\"unit_type\":\"estab\",\"params\":\"electric_energy_module\"}",
-                "tot": "json"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 310,
-        "y": 320,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "b9aedad7e15bc0ed",
         "type": "link in",
         "z": "0a690414bffb7c2e",
@@ -18235,7 +18231,6 @@
         "links": [
             "cede3264bdcd0a70",
             "36c4687d5f1bee6b",
-            "b9b9acc35bdd0b75",
             "5d05b108e4e3f722"
         ],
         "x": 125,
@@ -18299,42 +18294,6 @@
         ]
     },
     {
-        "id": "59b55b3202e4780b",
-        "type": "subflow:0be109393cb5f28a",
-        "z": "f06fc99b8cb78464",
-        "name": "",
-        "x": 670,
-        "y": 160,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "a1d7e6dcf79d2197",
-        "type": "change",
-        "z": "f06fc99b8cb78464",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload.lookup",
-                "pt": "msg",
-                "to": "{\"moduleName\":\"electric_energy\",\"program\":\"aies\",\"unit_type\":\"estab\",\"params\":\"electric_energy_module\"}",
-                "tot": "json"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 390,
-        "y": 160,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "b16c9d56493fb914",
         "type": "link in",
         "z": "f06fc99b8cb78464",
@@ -18342,7 +18301,6 @@
         "links": [
             "cede3264bdcd0a70",
             "36c4687d5f1bee6b",
-            "b9b9acc35bdd0b75",
             "d5aac8a297ee6dd2"
         ],
         "x": 695,
@@ -19860,42 +19818,6 @@
         ]
     },
     {
-        "id": "dc168bd91db6f298",
-        "type": "subflow:0be109393cb5f28a",
-        "z": "0e31453ffacd3b3c",
-        "name": "",
-        "x": 610,
-        "y": 120,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "57bbdf12371cd3b0",
-        "type": "change",
-        "z": "0e31453ffacd3b3c",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload.lookup",
-                "pt": "msg",
-                "to": "{\"moduleName\":\"electric_energy\",\"program\":\"aies\",\"unit_type\":\"estab\",\"params\":\"electric_energy_module\"}",
-                "tot": "json"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 350,
-        "y": 120,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "76691f5ac3362ba9",
         "type": "link in",
         "z": "0e31453ffacd3b3c",
@@ -19903,7 +19825,6 @@
         "links": [
             "cede3264bdcd0a70",
             "36c4687d5f1bee6b",
-            "b9b9acc35bdd0b75",
             "28494dbc74f30091"
         ],
         "x": 715,
@@ -20069,6 +19990,16 @@
                 "label": "Q Flow",
                 "value": "qflow",
                 "type": "str"
+            },
+            {
+                "label": "Post Edit Status Field",
+                "value": "post_edit_status_field",
+                "type": "str"
+            },
+            {
+                "label": "Pre Db Write Back For Leased",
+                "value": "pre_db_write_back_for_leased",
+                "type": "str"
             }
         ],
         "payload": "",
@@ -20200,11 +20131,21 @@
                 "t": "eq",
                 "v": "qflow",
                 "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "post_edit_status_field",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "pre_db_write_back_for_leased",
+                "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 22,
+        "outputs": 24,
         "x": 630,
         "y": 480,
         "wires": [
@@ -20273,6 +20214,12 @@
             ],
             [
                 "8272974b9a32a0ac"
+            ],
+            [
+                "270941def4b7c8b6"
+            ],
+            [
+                "fbcbf9510de0509c"
             ]
         ]
     },
@@ -20402,7 +20349,7 @@
         "order": 1,
         "width": 18,
         "height": 13,
-        "format": "<div ng-switch=\"msg.payload\">\n\n        <div ng-switch-when=\"balance_module\">\n\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/balance_module.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n\n    </div>\n\n        <div ng-switch-when=\"br_stat_evaluation\">\n\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/br_stat.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n\n    </div>\n\n    <div ng-switch-when=\"critical_error\">\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/critical_error.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n\n        <div ng-switch-when=\"derive_NAICS_code\">\n\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/derive_naics_code.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n\n    </div>\n\n    <div ng-switch-when=\"classification\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/classification.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"geography\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/geography.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n     </div>\n    <div ng-switch-when=\"electric_energy_module\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/electric_energy_module.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"electric_energy_module_cont\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/electric_energy_module_cont.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"electric_impute_module\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/electric_impute_module.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"best_admin_receipts\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/best_admin_receipt.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"emp_mar12_num\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/emp_mar12_num.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"pay_ann_val\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/pay_ann_val.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"pay_qtr1_val\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/pay_qtr1_val.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"rcpt_tot_val\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/rcpt_tot_val.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"qflow\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/qflow.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-default>\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/Set_NONNORM.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-default>\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/completeness.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n\n\n\n\n</div>",
+        "format": "<div ng-switch=\"msg.payload\">\n\n        <div ng-switch-when=\"balance_module\">\n\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/balance_module.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n\n    </div>\n\n        <div ng-switch-when=\"br_stat_evaluation\">\n\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/br_stat.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n\n    </div>\n\n    <div ng-switch-when=\"critical_error\">\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/critical_error.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n\n        <div ng-switch-when=\"derive_NAICS_code\">\n\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/derive_naics_code.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n\n    </div>\n\n    <div ng-switch-when=\"classification\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/classification.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"geography\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/geography.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n     </div>\n    <div ng-switch-when=\"electric_energy_module\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/electric_energy_module.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"electric_energy_module_cont\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/electric_energy_module_cont.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"electric_impute_module\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/electric_impute_module.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"best_admin_receipts\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/best_admin_receipt.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"emp_mar12_num\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/emp_mar12_num.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"pay_ann_val\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/pay_ann_val.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"pay_qtr1_val\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/pay_qtr1_val.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"rcpt_tot_val\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/rcpt_tot_val.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"qflow\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/qflow.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"post_edit_status_field\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/post_edit_status_field.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"pre_db_write_back_for_leased\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/pre_db_write_back_for_leased.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-default>\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/completeness.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n\n\n\n\n</div>",
         "storeOutMessages": true,
         "fwdInMessages": true,
         "resendOnRefresh": true,
@@ -21272,7 +21219,7 @@
         "senderr": false,
         "headers": [],
         "x": 970,
-        "y": 1140,
+        "y": 1160,
         "wires": [
             [
                 "6f78481c2e90771f",
@@ -21300,13 +21247,14 @@
         "id": "65738b3d68734570",
         "type": "http in",
         "z": "dad88d9a3132fed6",
+        "g": "4099bf03141f3710",
         "name": "",
         "url": "/ui_wrapper",
         "method": "get",
         "upload": false,
         "swaggerDoc": "",
-        "x": 980,
-        "y": 1200,
+        "x": 1000,
+        "y": 1240,
         "wires": [
             [
                 "ea0778e9f5cd9498"
@@ -21533,12 +21481,7 @@
         "name": "link out post edit",
         "mode": "link",
         "links": [
-            "1c611eb0c30a9863",
-            "a9fa566fb3fb1f74",
-            "b16c9d56493fb914",
-            "b9aedad7e15bc0ed",
-            "76691f5ac3362ba9",
-            "8eacd61d364bbafe"
+            "1c611eb0c30a9863"
         ],
         "x": 845,
         "y": 960,
@@ -21864,6 +21807,34 @@
         ]
     },
     {
+        "id": "270941def4b7c8b6",
+        "type": "link out",
+        "z": "dad88d9a3132fed6",
+        "g": "4099bf03141f3710",
+        "name": "link out post edit",
+        "mode": "link",
+        "links": [
+            "3a3f1620dbce8bb0"
+        ],
+        "x": 845,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "fbcbf9510de0509c",
+        "type": "link out",
+        "z": "dad88d9a3132fed6",
+        "g": "4099bf03141f3710",
+        "name": "link out post edit",
+        "mode": "link",
+        "links": [
+            "384ea40a25aa8e76"
+        ],
+        "x": 845,
+        "y": 1240,
+        "wires": []
+    },
+    {
         "id": "8eacd61d364bbafe",
         "type": "link in",
         "z": "b2e59c2394f7c26c",
@@ -21871,7 +21842,6 @@
         "links": [
             "cede3264bdcd0a70",
             "36c4687d5f1bee6b",
-            "b9b9acc35bdd0b75",
             "8272974b9a32a0ac"
         ],
         "x": 315,
@@ -22063,5 +22033,127 @@
         "wires": [
             []
         ]
+    },
+    {
+        "id": "25b4ac02d36e687d",
+        "type": "subflow:67a3cd3b754e4fbd",
+        "z": "b2e59c2394f7c26c",
+        "name": "",
+        "x": 520,
+        "y": 980,
+        "wires": [
+            [
+                "61ad052d0b1e9853",
+                "b6bebbeac0549686"
+            ]
+        ]
+    },
+    {
+        "id": "3a3f1620dbce8bb0",
+        "type": "link in",
+        "z": "b2e59c2394f7c26c",
+        "name": "Post Edit Status Status Field Link",
+        "links": [
+            "270941def4b7c8b6"
+        ],
+        "x": 285,
+        "y": 980,
+        "wires": [
+            [
+                "25b4ac02d36e687d"
+            ]
+        ]
+    },
+    {
+        "id": "61ad052d0b1e9853",
+        "type": "debug",
+        "z": "b2e59c2394f7c26c",
+        "name": "Post Edit Status Field",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "b6bebbeac0549686",
+        "type": "link out",
+        "z": "b2e59c2394f7c26c",
+        "name": "link out classification",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9"
+        ],
+        "x": 665,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "6ee2ec45fe951e56",
+        "type": "subflow:9e4e212b0811233d",
+        "z": "b2e59c2394f7c26c",
+        "name": "",
+        "x": 540,
+        "y": 1140,
+        "wires": [
+            [
+                "792d27c74905c675",
+                "ece1e11393b49799"
+            ]
+        ]
+    },
+    {
+        "id": "384ea40a25aa8e76",
+        "type": "link in",
+        "z": "b2e59c2394f7c26c",
+        "name": "Pre Db Write Back For Leased",
+        "links": [
+            "fbcbf9510de0509c"
+        ],
+        "x": 285,
+        "y": 1140,
+        "wires": [
+            [
+                "6ee2ec45fe951e56"
+            ]
+        ]
+    },
+    {
+        "id": "792d27c74905c675",
+        "type": "debug",
+        "z": "b2e59c2394f7c26c",
+        "name": "Post Edit Status Field",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "ece1e11393b49799",
+        "type": "link out",
+        "z": "b2e59c2394f7c26c",
+        "name": "link out classification",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9"
+        ],
+        "x": 715,
+        "y": 1220,
+        "wires": []
     }
 ]
