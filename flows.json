@@ -125,14 +125,6 @@
         "env": []
     },
     {
-        "id": "475c4bbdee672833",
-        "type": "tab",
-        "label": "Geography",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
         "id": "2245e192a734f1bb",
         "type": "tab",
         "label": "Best Admin Receipts",
@@ -269,14 +261,6 @@
         "env": []
     },
     {
-        "id": "6399b853963e761e",
-        "type": "tab",
-        "label": "Logical Edits",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
         "id": "32a46ccfb2faded5",
         "type": "tab",
         "label": "DB Connection",
@@ -392,6 +376,22 @@
         "id": "067b1d1ff9443ad3",
         "type": "tab",
         "label": "Valid Negative Value",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "475c4bbdee672833",
+        "type": "tab",
+        "label": "Geography",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "6399b853963e761e",
+        "type": "tab",
+        "label": "Logical Edits",
         "disabled": false,
         "info": "",
         "env": []
@@ -5687,8 +5687,9 @@
         "type": "function",
         "z": "4ed21c9150f5597a",
         "name": "geography function",
-        "func": "node.status({ fill: \"green\", shape: \"dot\", text: \"processing\" });\n\nconst validationChart = [{ \"STFIPS\": \"01\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"02\", \"GEOREG\": \"04\" }, { \"STFIPS\": \"04\", \"GEOREG\": \"04\" }, { \"STFIPS\": \"05\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"06\", \"GEOREG\": \"04\" }, { \"STFIPS\": \"08\", \"GEOREG\": \"04\" }, { \"STFIPS\": \"09\", \"GEOREG\": \"01\" }, { \"STFIPS\": \"10\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"11\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"12\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"13\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"15\", \"GEOREG\": \"04\" }, { \"STFIPS\": \"16\", \"GEOREG\": \"04\" }, { \"STFIPS\": \"17\", \"GEOREG\": \"02\" }, { \"STFIPS\": \"18\", \"GEOREG\": \"02\" }, { \"STFIPS\": \"19\", \"GEOREG\": \"02\" }, { \"STFIPS\": \"20\", \"GEOREG\": \"02\" }, { \"STFIPS\": \"21\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"22\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"23\", \"GEOREG\": \"01\" }, { \"STFIPS\": \"24\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"25\", \"GEOREG\": \"01\" }, { \"STFIPS\": \"26\", \"GEOREG\": \"02\" }, { \"STFIPS\": \"27\", \"GEOREG\": \"02\" }, { \"STFIPS\": \"28\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"29\", \"GEOREG\": \"02\" }, { \"STFIPS\": \"30\", \"GEOREG\": \"04\" }, { \"STFIPS\": \"31\", \"GEOREG\": \"02\" }, { \"STFIPS\": \"32\", \"GEOREG\": \"04\" }, { \"STFIPS\": \"33\", \"GEOREG\": \"01\" }, { \"STFIPS\": \"34\", \"GEOREG\": \"01\" }, { \"STFIPS\": \"35\", \"GEOREG\": \"04\" }, { \"STFIPS\": \"36\", \"GEOREG\": \"01\" }, { \"STFIPS\": \"37\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"38\", \"GEOREG\": \"02\" }, { \"STFIPS\": \"39\", \"GEOREG\": \"02\" }, { \"STFIPS\": \"40\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"41\", \"GEOREG\": \"04\" }, { \"STFIPS\": \"42\", \"GEOREG\": \"01\" }, { \"STFIPS\": \"44\", \"GEOREG\": \"01\" }, { \"STFIPS\": \"45\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"46\", \"GEOREG\": \"02\" }, { \"STFIPS\": \"47\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"48\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"49\", \"GEOREG\": \"04\" }, { \"STFIPS\": \"50\", \"GEOREG\": \"01\" }, { \"STFIPS\": \"51\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"53\", \"GEOREG\": \"04\" }, { \"STFIPS\": \"54\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"55\", \"GEOREG\": \"02\" }, { \"STFIPS\": \"56\", \"GEOREG\": \"04\" }]\nlet validation = false\n\nfor (let i = 0; i < validationChart.length; i++) {\n    const element = validationChart[i];\n    let parsedSTFIPS = parseInt(element[\"STFIPS\"]);\n    let parsedGEOREG = parseInt(element[\"GEOREG\"]);\n\n    if (parsedSTFIPS === parseInt(msg.payload.csv[0].STFIPS) && parsedGEOREG === parseInt(msg.payload.csv[0].GEOREG)) {\n        validation = true\n        break;\n    }\n}\n\nif (validation) {\n    msg.payload.csv[0].action = \"Go to Calculate Best Admin Receipts\"\n} else {\n    if (msg.payload.csv[0].STFIPS == \"97\" ) {\n        if (msg.payload.csv[0].NAICS_SECTOR_OLD == \"21\" && (msg.payload.csv[0].STATE_PHY == \"PC\" || msg.payload.csv[0].STATE_PHY == \"NG\" || msg.payload.csv[0].STATE_PHY == \"AT\")) {\n            msg.payload.csv[0].action = \"Go to Calculate Best Admin Receipts\"\n        } else {\n            msg.payload.csv[0].TABSTAT = \"N\"\n            msg.payload.csv[0].NONTABFL = \"Y\"\n        }\n    } else {\n        msg.payload.csv[0].flag = \"GEO_Invalid\"\n        msg.payload.csv[0].action = \"Go to Calculate Best Admin Receipts\"\n    }\n}\nmsg.payload.csv[0].module = \"Geography\"\n\n// setTimeout(function () {\nnode.status({ fill: \"gray\", shape: \"ring\", text: \"complete\" });\n//     node.send(msg);\n// }, 1000);\n\nreturn msg",
+        "func": "// let record_idx = global.get(\"recordIndex\"); \n\n\n// const validationChart = [\n//     { \"stfips\": \"01\", \"georeg\": \"03\" },\n//     { \"stfips\": \"02\", \"georeg\": \"04\" },\n//     { \"stfips\": \"04\", \"georeg\": \"04\" },\n//     { \"stfips\": \"05\", \"georeg\": \"03\" },\n//     { \"stfips\": \"06\", \"georeg\": \"04\" },\n//     { \"stfips\": \"08\", \"georeg\": \"04\" },\n//     { \"stfips\": \"09\", \"georeg\": \"01\" },\n//     { \"stfips\": \"10\", \"georeg\": \"03\" },\n//     { \"stfips\": \"11\", \"georeg\": \"03\" },\n//     { \"stfips\": \"12\", \"georeg\": \"03\" },\n//     { \"stfips\": \"13\", \"georeg\": \"03\" },\n//     { \"stfips\": \"15\", \"georeg\": \"04\" }\n// ]\n// let validation = false\n\n// for (let i = 0; i < validationChart.length; i++) {\n//     const element = validationChart[i];\n//     let parsedSTFIPS = parseInt(element[\"stfips\"]);\n//     let parsedGEOREG = parseInt(element[\"georeg\"]);\n\n//     if (parsedSTFIPS === parseInt(msg.payload.csv[record_idx]['STFIPS']) && parsedGEOREG === parseInt(msg.payload.csv[record_idx]['GEOREG'])) {\n//         validation = true\n//         break;\n//     }\n// }\n\n// if (validation) {\n//     msg.payload.csv[record_idx].action = \"Go to Calculate Best Admin Receipts\"\n// } else {\n//     if (msg.payload.csv[record_idx]['STFIPS'] == \"97\") {\n//         if (msg.payload.csv[record_idx]['NAICS_SECTOR_OLD'] == \"21\" && (msg.payload.csv[record_idx]['STATE_PHY'] == \"PC\" || msg.payload.csv[record_idx]['STATE_PHY'] == \"NG\" || msg.payload.csv[record_idx]['STATE_PHY'] == \"AT\")) {\n//             msg.payload.csv[record_idx].action = \"Go to Calculate Best Admin Receipts\"\n//         } else {\n//             msg.payload.csv[record_idx]['TABSTAT'] = \"N\"\n//             msg.payload.csv[record_idx]['NONTABFL'] = \"Y\"\n//         }\n//     } else {\n//         msg.payload.csv[record_idx]['FLAG'] = \"GEO_Invalid\"\n//         msg.payload.csv[record_idx]['ACTION'] = \"Go to Calculate Best Admin Receipts\"\n//     }\n// }\n// msg.payload.csv[record_idx].module = \"Geography\"\n\n\n// return msg\n\nlet record_idx = global.get(\"recordIndex\");\nconst record = msg.payload.csv[record_idx];\nconst validationChart = global.get(\"lookupCache\");\n\nlet validation = validationChart.some(element =>\n    parseInt(element.stfips) === parseInt(record?.STFIPS) &&\n    parseInt(element.georeg) === parseInt(record?.GEOREG)\n);\n\nif (validation) {\n    record.action = \"Go to Calculate Best Admin Receipts\";\n} else if (record?.STFIPS === \"97\") {\n    if (record?.NAICS_SECTOR_OLD === \"21\" && [\"PC\", \"NG\", \"AT\"].includes(record?.STATE_PHY)) {\n        record.action = \"Go to Calculate Best Admin Receipts\";\n    } else {\n        record.TABSTAT = \"N\";\n        record.NONTABFL = \"Y\";\n    }\n} else {\n    record.FLAG = \"GEO_Invalid\";\n    record.ACTION = \"Go to Calculate Best Admin Receipts\";\n}\n\nrecord.module = \"Geography\";\nmsg.payload.csv[record_idx] = record;\nreturn msg;\n",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -5912,7 +5913,7 @@
         "type": "function",
         "z": "473d6735cc46fccd",
         "name": "logical edits function",
-        "func": "// node.status({ fill: \"green\", shape: \"dot\", text: \"processing\" });\n\n// const items = [\n//     {\n//         \"VARIABLE\": \"TYPOP_CODE_STAT  RCPT_COMSN_GSV_VAL RCPT_OWN_VAL \\nRCPT_TOT_VAL\",\n//         \"UNIT\": \"estab\",\n//         \"NAICS\": \"NAICS3='425'\",\n//         \"CONDITION \": \"TYPOP_CODE_STAT eq '4X' and RCPT_COMSN_GSV_VAL + RCPT_OWN_VAL ne RCPT_TOT_VAL\",\n//         \"ACTION\": \"set review flag\"\n//     },\n//     {\n//         \"VARIABLE\": \"TYPOP_CODE_STAT  RCPT_COMSN_GSV_VAL RCPT_COMSN_EARN_VAL RCPT_COMSN_AVG_RATE \",\n//         \"UNIT\": \"estab\",\n//         \"NAICS\": \"NAICS3='425'\",\n//         \"CONDITION \": \"TYPOP_CODE_STAT eq '4X' and RCPT_COMSN_GSV_VAL not in (0,.) and RCPT_COMSN_EARN_VAL in (0,.) and RCPT_COMSN_AVG_RATE not in (0,.)\",\n//         \"ACTION\": \"RCPT_COMSN_EARN_VAL = RCPT_COMSN_GSV_VAL * RCPT_COMSN_AVG_RATE\",\n//         \" DESCRIPTION\": \"if they reported a gross selling value from goods gold on commission, and an average commission rate, but didn't provide the amount of commissions (or set to 0), use GSV * average commission rate to derive commission\"\n//     },\n//     {\n//         \"VARIABLE\": \"TYPOP_CODE_STAT  RCPT_COMSN_GSV_VAL RCPT_COMSN_EARN_VAL RCPT_COMSN_AVG_RATE \",\n//         \"UNIT\": \"estab\",\n//         \"NAICS\": \"NAICS3='425'\",\n//         \"CONDITION \": \"TYPOP_CODE_STAT eq '4X' and RCPT_COMSN_GSV_VAL in (0,.) and RCPT_COMSN_EARN_VAL not in (0,.) and RCPT_COMSN_AVG_RATE not in (0,.)\",\n//         \"ACTION\": \"RCPT_COMSN_GSV_VAL = RCPT_COMSN_EARN_VAL \\/ RCPT_COMSN_AVG_RATE\",\n//         \" DESCRIPTION\": \"if they reported commissions and an average commission rate but no GSV, use the commission and commission rate to calculate GSV\"\n//     },\n//     {\n//         \"VARIABLE\": \"TYPOP_CODE_STAT\\nRCPT_OWN_VAL \\nRCPT_TOT_VAL RCPT_COMSN_GSV_VAL \\n RCPT_COMSN_EARN_VAL\",\n//         \"UNIT\": \"estab\",\n//         \"NAICS\": \"NAICS3='425'\",\n//         \"CONDITION \": \"TYPOP_CODE_STAT = '4X' and RCPT_OWN_VAL eq 0 and RCPT_COMSN_GSV_VAL ne RCPT_TOT_VAL and RCPT_COMSN_GSV_VAL < RCPT_TOT_VAL and RCPT_TOT_VAL eq sum(RCPT_COMSN_GSV_VAL, RCPT_COMSN_EARN_VAL)\",\n//         \"ACTION\": \"RCPT_TOT_VAL = RCPT_COMSN_GSV_VAL\",\n//         \" DESCRIPTION\": \"if no sales on own account (i.e., all commission-based) and GSV does not equal total sales (which, by definition can't happen, because GSV + OWN = total sales and if OWN = 0, then GSV = SALES) and SALES = the sum of GSV + COMMISSION, set sales to GSV because commissions should not be included in total sales\"\n//     },\n//     {\n//         \"VARIABLE\": \"TYPOP_CODE_STAT\\nRCPT_OWN_VAL \\nRCPT_TOT_VAL RCPT_COMSN_GSV_VAL \\n RCPT_COMSN_EARN_VAL\",\n//         \"UNIT\": \"estab\",\n//         \"NAICS\": \"NAICS3='425'\",\n//         \"CONDITION \": \"TYPOP_CODE_STAT = '4X' and RCPT_OWN_VAL eq 0 and RCPT_COMSN_GSV_VAL ne RCPT_TOT_VAL and RCPT_COMSN_GSV_VAL > RCPT_TOT_VAL and RCPT_TOT_VAL eq RCPT_COMSN_EARN_VAL\",\n//         \"ACTION\": \"RCPT_TOT_VAL = RCPT_COMSN_GSV_VAL\",\n//         \" DESCRIPTION\": \"if they reported sales as commissions, set sales = GSV\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_ECOMM_VAL\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"42', '44', '45'\",\n//         \"CONDITION \": \"RCPT_ECOMM_STAT eq 2 \",\n//         \"ACTION\": \"RCPT_ECOMM_VAL = 0\",\n//         \" DESCRIPTION\": \"if ecommerce status = 2 (no) then the value for e-commerce should be 0\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_ECOMM_VAL\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"42', '44', '45'\",\n//         \"CONDITION \": \"RCPT_ECOMM_VAL gt 0\",\n//         \"ACTION\": \"RCPT_ECOMM_STAT = 1\",\n//         \" DESCRIPTION\": \"if there's a reliable value for ecommerce, then the e-commerce status variable should be 1\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_MOTR_HAZRD_STAT\\nRCPT_MOTR_HAZRD_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3= '484 '\",\n//         \"CONDITION \": \"If  RCPT_MOTR_HAZRD_STAT =2 and RCPT_MOTR_HAZRD_PCT  = missing\",\n//         \"ACTION\": \" then RCPT_MOTR_HAZRD_PCT =0.\",\n//         \" DESCRIPTION\": \"IF the flag for hazardas materials is reported   and the NAICS is in 484 and the checkbox is a no and % - Hazardous Materials is equal to missing then set the % - Hazardous Materials to 0.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_MOTR_HAZRD_STAT\\nRCPT_MOTR_HAZRD_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3= '484 '\",\n//         \"CONDITION \": \"If RCPT_MOTR_HAZRD_STAT = . and RCPT_MOTR_HAZRD_PCT  is >0 \",\n//         \"ACTION\": \"then RCPT_MOTR_HAZRD_STAT  =1\",\n//         \" DESCRIPTION\": \"IF the flag for hazardas materials is reported   and the NAICS is in 484 and the checkbox is a missing and % - Hazardous Materials is greater than zero then set the hazardous materials checkbox to yes.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_MOTR_HAZRD_STAT\\nRCPT_MOTR_HAZRD_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3= '484 '\",\n//         \"CONDITION \": \"If  RCPT_MOTR_HAZRD_STAT = . or 1 and RCPT_MOTR_HAZRD_PCT  is =0 \",\n//         \"ACTION\": \"then RCPT_MOTR_HAZRD_STAT=2\",\n//         \" DESCRIPTION\": \"IF the flag for hazardas materials is reported  and the NAICS is in 484 and the checkbox is a missing or equal to yes  and % - Hazardous Materials is equal to zero then set the hazardous materials checkbox to no\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_MOTR_HAZRD_STAT\\nRCPT_MOTR_HAZRD_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3= '484 '\",\n//         \"CONDITION \": \"If RCPT_MOTR_HAZRD_STAT is 2 and RCPT_MOTR_HAZRD_PCT  is >0 \",\n//         \"ACTION\": \"then RCPT_MOTR_HAZRD_STAT= 1\",\n//         \" DESCRIPTION\": \"IF the flag for hazardas materials is reported   and the NAICS is in 484 and the checkbox is a  equal to no and % - Hazardous Materials is greater than zero then set the hazardous materials checkbox to yes\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_BILL_PAY_PCT\\nRCPT_BILL_OTHOP_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS6=‘561330’ \",\n//         \"CONDITION \": \"If  the sum of RCPT_BILL_PAY_PCT and RCPT_BILL_OTHOP_PCT =0 \",\n//         \"ACTION\": \"then RCPT_BILL_PAY_PCT and\\nRCPT_BILL_OTHOP_PCT =.\",\n//         \" DESCRIPTION\": \"If status is active and NAICS is 561330 and the sum of % of total gross billings x Payroll srvc and % - All other operating revenue equals zero then set them to missing\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_BUS_PCT\\nRCPT_LEISURE_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS6=‘561510’,’561599’,'561520'\",\n//         \"CONDITION \": \"If the sum of RCPT_BUS_PCT and RCPT_LEISURE_PCT =0 \",\n//         \"ACTION\": \"then RCPT_BUS_PCT and RCPT_LEISURE_PCT =.\",\n//         \" DESCRIPTION\": \"If status is active and NAICS is in 561510 or 561599 and the sum of % - Percent of Revenue from Business and % - Percent of Revenue from Leisure equals zero then set them to missing\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_NEWS_PRNT_PCT\\nRCPT_NEWS_ONLINE_PCT\\nRCPT_NEWS_OTH_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS5='51111' \",\n//         \"CONDITION \": \"If sum(RCPT_NEWS_PRNT_PCT,  RCPT_NEWS_ONLINE_PCT, and RCPT_NEWS_OTH_PCT) =0 \",\n//         \"ACTION\": \"then RCPT_NEWS_PRNT_PCT,  RCPT_NEWS_ONLINE_PCT, and RCPT_NEWS_OTH_PCT = .\",\n//         \" DESCRIPTION\": \"If the status is active and the NAICS is in '51111' and the sum of % Print subscriptions and sales,  % Internet subscriptions and sales and % Newspapers - Other media advertising equals zero, then set them to missing.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_ADV_CLASS_PCT\\nRCPT_ADV_OTH_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS5='51111' \",\n//         \"CONDITION \": \"If the sum of RCPT_ADV_CLASS_PCT and RCPT_ADV_OTH_PCT =0 \",\n//         \"ACTION\": \"then RCPT_ADV_CLASS_PCT and RCPT_ADV_OTH_PCT =.\",\n//         \" DESCRIPTION\": \"If the status is active and the NAICS is in '51111' and the sum of % Print subscriptions and % Advertising Rev - Other Advertising equals zero, then set them to missing.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_PER_PRNT_PCT\\nRCPT_PER_ONLINE_PCT\\nRCPT_PER_OTH_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS5='51112' \",\n//         \"CONDITION \": \"If sum(RCPT_PER_PRNT_PCT,  RCPT_PER_ONLINE_PCT, and RCPT_PER_OTH_PCT) =0 \",\n//         \"ACTION\": \"then RCPT_NEWS_PRNT_PCT,  RCPT_NEWS_ONLINE_PCT, and RCPT_NEWS_OTH_PCT =.\",\n//         \" DESCRIPTION\": \"If the status is active and the NAICS is in '51112' and the sum of % Print subscriptions and sales, % Internet subscriptions and sales, and % Other media advertising is equal to zero then set them to missing.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_BOOK_PRNT_PCT\\nRCPT_BOOK_ONLINE_PCT\\nRCPT_BOOK_OTH_PCT\\n\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS5='51113' \",\n//         \"CONDITION \": \"If sum (RCPT_BOOK_PRNT_PCT,  RCPT_BOOK_ONLINE_PCT, and RCPT_BOOK_OTH_PCT) =0\",\n//         \"ACTION\": \"then RCPT_BOOK_PRNT_PCT,  RCPT_BOOK_ONLINE_PCT, and RCPT_BOOK_OTH_PCT =.\",\n//         \" DESCRIPTION\": \"If the status is active and the NAICS is in '51113' and the sum of % Books - Print,  % Books - Internet, and % Books - other media is equal to zero then set them to missing.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_DIR_PRNT_PCT\\nRCPT_DIR_ONLINE_PCT\\nRCPT_DIR_OTH_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS5='51114' \",\n//         \"CONDITION \": \"If sum(RCPT_DIR_PRNT_PCT,  RCPT_DIR_ONLINE_PCT, and RCPT_DIR_OTH_PCT) =0 \",\n//         \"ACTION\": \"then RCPT_DIR_PRNT_PCT,  RCPT_DIR_ONLINE_PCT, and RCPT_DIR_OTH_PCT =.\",\n//         \" DESCRIPTION\": \"If the status is active and the NAICS is in '51114' and the sum of % Print subscriptions and sales, % Internet subscriptions and sales, and % Other media advertising is equal to zero then set them to missing.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_SYSOFT_PERS_PCT\\nRCPT_SYSOFT_ENTR_PCT\\nRCPT_SYSOFT_MAIN_PCT\\nRCPT_SYSOFT_OTH_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS5='51121' \",\n//         \"CONDITION \": \"If sum(RCPT_SYSOFT_PERS_PCT, RCPT_SYSOFT_ENTR_PCT, RCPT_SYSOFT_MAIN_PCT, and RCPT_SYSOFT_OTH_PCT)=0 \",\n//         \"ACTION\": \"then RCPT_SYSOFT_PERS_PCT, RCPT_SYSOFT_ENTR_PCT, RCPT_SYSOFT_MAIN_PCT, and RCPT_SYSOFT_OTH_PCT =.\",\n//         \" DESCRIPTION\": \"If the status is active and the NAICS is in '51121' and the sum of % rev - Personal computer systems rev, % Enterprise-systems software revenue, % Mainframe computer-Systems software, and % of other systems software revenue is equal to zero then set them to missing.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_APSOFT_PERS_PCT\\nRCPT_APSOFT_ENTR_PCT\\nRCPT_APSOFT_MAIN_PCT\\nRCPT_APSOFT_OTH_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS5='51121' \",\n//         \"CONDITION \": \"If the sum of RCPT_APSOFT_PERS_PCT, RCPT_APSOFT_ENTR_PCT, RCPT_APSOFT_MAIN_PCT, and RCPT_APSOFT_OTH_PCT =0 \",\n//         \"ACTION\": \"then  RCPT_APSOFT_PERS_PCT, RCPT_APSOFT_ENTR_PCT, RCPT_APSOFT_MAIN_PCT, and RCPT_APSOFT_OTH_PCT =.\",\n//         \" DESCRIPTION\": \"If the status is active and the NAICS is in '51121' and the sum of % rev - Personal computer systems rev, % Enterprise-systems software revenue, % Mainframe computer-Systems software, and % of other systems software revenue is equal to zero then set them to missing.\"\n//     },\n//     {\n//         \"VARIABLE\": \"INV_STAT\\nINV_CY_GOODS_TOT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3='511','512'\",\n//         \"CONDITION \": \"If and INV_STAT =2 and INV_CY_GOODS_TOT_DVAL = .\",\n//         \"ACTION\": \"then INV_CY_GOODS_TOT_DVAL =0\",\n//         \" DESCRIPTION\": \"If NAICS in 511 or 512 and the flag for Total inventories is reported    and the inventory checkbox is equal to no and the total inventories is missing then set the inventories equal to zero. \"\n//     },\n//     {\n//         \"VARIABLE\": \"INV_STAT\\nINV_CY_GOODS_TOT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3='511','512'\",\n//         \"CONDITION \": \"If Substr(RECORD_NAICS_NUM,1,3) in ('511','512')  and INV_STAT =. and INV_CY_GOODS_TOT is >0 \",\n//         \"ACTION\": \"then INV_STAT =1\",\n//         \" DESCRIPTION\": \"If NAICS in 511 or 512 and the flag for Total inventories is reported   and the inventory checkbox is missing and the total inventories is greater than zero, then set the inventories checkbox to yes. \"\n//     },\n//     {\n//         \"VARIABLE\": \"INV_STAT\\nINV_CY_GOODS_TOT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3='511','512'\",\n//         \"CONDITION \": \"If Substr(RECORD_NAICS_NUM,1,3) in ('511','512') and INV_STAT = . or = 1  and INV_CY_GOODS_TOT is =0 \",\n//         \"ACTION\": \"then INV_STAT = 2\",\n//         \" DESCRIPTION\": \"If NAICS in 511 or 512 and the flag for Total inventories is reported   the inventory checkbox is missing or equal to yes and the total inventories is equal to zero, then set the inventories checkbox to no.\"\n//     },\n//     {\n//         \"VARIABLE\": \"INV_STAT\\nINV_CY_GOODS_TOT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3='511','512'\",\n//         \"CONDITION \": \"If Substr(RECORD_NAICS_NUM,1,3) in ('511','512')  and INV_STAT = 2  and INV_CY_GOODS_TOT is > 0 \",\n//         \"ACTION\": \"then INV_STAT =1\",\n//         \" DESCRIPTION\": \"If NAICS in 511 or 512 and the flag for Total inventories is is reported   , and the inventory checkbox is equal to no and the total inventories is freater than zero, then set the inventories checkbox to yes.\"\n//     },\n//     {\n//         \"VARIABLE\": \"EXPS_EHR_STAT\\nEXPS_EHR_VAL\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS2='62' and NAICS3 \\n<> ('624') \",\n//         \"CONDITION \": \"If EXPS_EHR_VAL ne . and EXPS_EHR_STAT =( . or 2) and EXPS_EHR_VAL is >0 \",\n//         \"ACTION\": \"then EXPS_EHR_STAT= 1\",\n//         \" DESCRIPTION\": \"If the NAICS is in 62, but no in 624, and the flag for Electronic health record expenses is equal is reported   and the electronic health records checkbox is equal to no and the Electronic health records expenses is greater than zero, then set the electronic health records checkbox to yes.\"\n//     },\n//     {\n//         \"VARIABLE\": \"EXPS_EHR_STAT \\nEXPS_EHR_VAL\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS2='62' and NAICS3 \\n<> ('624') \",\n//         \"CONDITION \": \"If EXPS_EHR_VAL ne . and EXPS_EHR_STAT = (. or 1) and EXPS_EHR_VAL is =0\",\n//         \"ACTION\": \"then   EXPS_EHR_STAT = 2\",\n//         \" DESCRIPTION\": \"If the NAICS is in 62, but no in 624, and the flag for Electronic health record expenses is reported   and the electronic health records checkbox is equal to yes  and the Electronic health records expenses is equal to zero, then set the electronic health records checkbox to no.\"\n//     },\n//     {\n//         \"VARIABLE\": \"EXPS_EHR_STAT \\nEXPS_EHR_VAL\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS2='62' and NAICS3 \\n<> '624'\",\n//         \"CONDITION \": \"If EXPS_EHR_STAT  ne . and EXPS_EHR_STAT =  2  and EXPS_EHR_VAL is =.\",\n//         \"ACTION\": \"then EXPS_EHR_VAL is = 0\",\n//         \" DESCRIPTION\": \"If the NAICS is in 62, but no in 624, and the flag for Electronic health record expenses is reported   and the electronic health records checkbox is equal to no  and the Electronic health records expenses is missing, then set the electronic health records to zero.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_ECOMM_ES_VAL\\n RCPT_ECOMM_WEB_STAT  RCPT_ECOMM_THRD_STAT  RCPT_ECOMM_OTH_STAT  \",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS2='22','48','49,'51','52','53','54','55','56,'61','62','71','72,'81'\",\n//         \"CONDITION \": \"If RCPT_ECOMM_ES_VAL ne . and RCPT_ECOMM_WEB_STAT  = (. or 1) and RCPT_ECOMM_THRD_STAT =( . or 1) and RCPT_ECOMM_OTH_STAT = (. or 1 )and  RCPT_ECOMM_ES_VAL =0 \",\n//         \"ACTION\": \"then RCPT_ECOMM_WEB_STAT  = 2 RCPT_ECOMM_THRD_STAT = 2 RCPT_ECOMM_OTH_STAT  = 2\",\n//         \" DESCRIPTION\": \"If the e-commerce flag is reported   or the e-commerce percent flag is reported   and Electronic revenue- company website is missing or yes,  Electronic revenue- third party website is missing or yes, Electronic revenue- electronic system, and e-commerce is zero and the e-commerce percent equals zero then set - company website is missing or yes,  Electronic revenue- third party website is missing or yes, Electronic revenue- electronic system to no.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_ECOMM_ES_VAL\\n RCPT_ECOMM_WEB_STAT  RCPT_ECOMM_THRD_STAT  RCPT_ECOMM_OTH_STAT  \",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS2='22','48','49,'51','52','53','54','55','56,'61','62','71','72,'81'\",\n//         \"CONDITION \": \"If RCPT_ECOMM_WEB_STAT = 2, RCPT_ECOMM_THRD_STAT  = 2, and RCPT_ECOMM_OTH_STAT  = 2 and RCPT_ECOMM_ES_VAL = . \",\n//         \"ACTION\": \"then RCPT_ECOMM_ES_VAL =0.\",\n//         \" DESCRIPTION\": \"If the Electronic revenue- company website flag is reported   and the Electronic revenue- third party website is reported   , Electronic revenue- electronic system, and is reported   and Electronic revenue- company website,  Electronic revenue- third party website, Electronic revenue- electronic system all are set to no and e-commerce is missing and ecommerce percent is missing or zero then set e-commerce to zero.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_ECOMM_ES_VAL\\n RCPT_ECOMM_WEB_STAT  RCPT_ECOMM_THRD_STAT  RCPT_ECOMM_OTH_STAT  \",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS2='22','48','49,'51','52','53','54','55','56,'61','62','71','72,'81'\",\n//         \"CONDITION \": \"If RCPT_ECOMM_ES_VAL = . and RCPT_ECOMM_WEB_STAT  = . and RCPT_ECOMM_THRD_STAT = . and RCPT_ECOMM_OTH_STAT = . and  RCPT_ECOMM_ES_VAL  is >0 \",\n//         \"ACTION\": \"then RCPT_ECOMM_WEB_STAT  =1\",\n//         \" DESCRIPTION\": \"If e-commerce flag is reported   or e-commerce percent is reported   and Electronic revenue- company website,  Electronic revenue- third party website, Electronic revenue- electronic system all are missing and e-commerce is greater than zero or percent e-commerce is greater than zero then set Electronic revenue- company website to yes. \"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_ECOMM_ES_VAL\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS2='22','48','49,'51','52','53','54','55','56,'61','62','71','72,'81'\",\n//         \"CONDITION \": \"If RCPT_ECOMM_ES_VAL ne . and RCPT_ECOMM_WEB_STAT  is 2 and RCPT_ECOMM_THRD_STAT is 2, and RCPT_ECOMM_OTH_STAT is 2 and  RCPT_ECOMM_ES_VAL  is >0 \",\n//         \"ACTION\": \"then RCPT_ECOMM_WEB_STAT  =1\",\n//         \" DESCRIPTION\": \"If e-commerce flag  is reported   or e-commerce percent is reported   and Electronic revenue- company website,  Electronic revenue- third party website,  and Electronic revenue- electronic system all are no  and e-commerce is greater than zero or percent e-commerce is greater than zero then set Electronic revenue- company website to yes. \"\n//     },\n//     {\n//         \"VARIABLE\": \"EXPS_TOT_VAL\",\n//         \"UNIT\": \"KAU\",\n//         \"CONDITION \": \"If _qss00 in ('Y') and E190000 = . AND EQEXPD00 = 0 AND EQEXP00 > 0\",\n//         \"ACTION\": \" then E190000 = eqexp00\",\n//         \" DESCRIPTION\": \"If Total operating expenses is missing and QSS number of quarters imputed is equal to zero, and qss espense is greater than zero, then set total operating expense to qss expense\"\n//     },\n//     {\n//         \"VARIABLE\": \"TAX_EXEMPT_STAT\",\n//         \"UNIT\": \"KAU\",\n//         \"CONDITION \": \"If substr(RECORD_NAICS_NUM,1,5) = '51912' and TAX_EXEMPT_STAT = 1\",\n//         \"ACTION\": \"then NONPROFT_STAT=1\",\n//         \" DESCRIPTION\": \"If NAICS in 51912 and tax recode is equal to exempt, then set not for profit basses to 1.\"\n//     },\n//     {\n//         \"VARIABLE\": \"CPT_CUST_RES_PCT \\nCPT_CUST_NORES_PCT \",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS2='22'\",\n//         \"CONDITION \": \"If sum(CPT_CUST_RES_PCT,CPT_CUST_NORES_PCT) = 0\",\n//         \"ACTION\": \"then CPT_CUST_RES_PCT = . CPT_CUST_NORES_PCT = .\",\n//         \" DESCRIPTION\": \"If NAICS in sector 22 and is active, and the sum of residential customers and non-residential customers is zero then set residential customers and non-residential customers to missing\"\n//     },\n//     {\n//         \"VARIABLE\": \"CAPEX_OTH_NEW_VAL                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       CAPEX_OTH_USED_VAL                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 CAPEX_OTH_TOT\",\n//         \"UNIT\": \"industry\",\n//         \"CONDITION \": \"Value reported in other\",\n//         \"ACTION\": \"set referral flag for analyst review\",\n//         \" DESCRIPTION\": \"analyst reclassify value in other to structures or equipment\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_MOTR_AGR_PCT  RCPT_MOTR_GRAIN_PCT  RCPT_MOTR_STONE_PCT RCPT_MOTR_FUEL_PCT  RCPT_MOTR_PHARM_PCT  RCPT_MOTR_WOOD_PCT  RCPT_MOTR_METAL_PCT  RCPT_MOTR_ELECT_PCT  RCPT_MOTR_USEDGD_PCT  RCPT_MOTR_NEWFRN_PCT  RCPT_MOTR_OTH_PCT \",\n//         \"UNIT\": \"industry\",\n//         \"NAICS\": \"NAICS3='484'\",\n//         \"CONDITION \": \"If Sum(RCPT_MOTR_AGR_PCT,RCPT_MOTR_GRAIN_PCT,RCPT_MOTR_STONE_PCT,RCPT_MOTR_FUEL_PCT,RCPT_MOTR_PHARM_PCT,RCPT_MOTR_WOOD_PCT,RCPT_MOTR_METAL_PCT,RCPT_MOTR_ELECT_PCT, RCPT_MOTR_USEDGD_PCT,RCPT_MOTR_NEWFRN_PCT,RCPT_MOTR_OTH_PCT)=0\",\n//         \"ACTION\": \"then RCPT_MOTR_AGR_PCT = .; RCPT_MOTR_GRAIN_PCT = .; RCPT_MOTR_STONE_PCT = .; RCPT_MOTR_FUEL_PCT = .; RCPT_MOTR_PHARM_PCT = .; RCPT_MOTR_WOOD_PCT = .; RCPT_MOTR_METAL_PCT = .; RCPT_MOTR_ELECT_PCT = .; RCPT_MOTR_USEDGD_PCT = .; RCPT_MOTR_NEWFRN_PCT = .; RCPT_MOTR_OTH_PCT = .;\",\n//         \" DESCRIPTION\": \"If the NAICS is in 484 and active, and the sum of % - Agricultural Products, % - Grains, Alcohol, Tobacco Products, % - Stone, Nonmetallic minerals, % - Coal and Petroleum Products, % - Coal and Petroleum Products, % - Pharmaceutical and chemical products, % - Wood Products, Textiles, Leather, % - Electronic & Precision Instruments,% - Base Metal and Machinery % - Used household and office goods, % - New Furniture & Misc. Prods is zero, then set all to missing\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_CUST_BUS_PCT RCPT_CUST_IND_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS6=('517311','517312','517911', 519130')\",\n//         \"CONDITION \": \"If sum(RCPT_CUST_BUS_PCT,RCPT_CUST_IND_PCT)=0\",\n//         \"ACTION\": \"then RCPT_CUST_BUS_PCT=.; RCPT_CUST_IND_PCT=.;\",\n//         \" DESCRIPTION\": \"If the status is active and the NAICS is in  517110, 517210, 517911, or 519130 and the sum of % Household revenue and % of revenue by Government & Businesses equal zero then set them to missing.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_CUST_LOCTEL_BUS_PCT RCPT_CUST_LOCTEL_IND_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS6='517311' \",\n//         \"CONDITION \": \"If sum(RCPT_CUST_LOCTEL_BUS_PCT,RCPT_CUST_LOCTEL_IND_PCT)=0\",\n//         \"ACTION\": \"then RCPT_CUST_LOCTEL_BUS_PCT=.; RCPT_CUST_LOCTEL_IND_PCT=.;\",\n//         \" DESCRIPTION\": \"If the status is active and the NIACS is in 51711 and the sum of % Household - local telephony and Fixed local Telephone - Gov & Business is equal to zero set them to mising.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_CUST_LNGTEL_BUS_PCT RCPT_CUST_LNGTEL_IND_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS6='517311' \",\n//         \"CONDITION \": \"If sum(RCPT_CUST_LNGTEL_BUS_PCT, RCPT_CUST_LNGTEL_IND_PCT)=0\",\n//         \"ACTION\": \"then RCPT_CUST_LNGTEL_BUS_PCT=.; RCPT_CUST_LNGTEL_IND_PCT=.;\",\n//         \" DESCRIPTION\": \"If the status is active and the NIACS is in 51711 and the sum of  % Fixed Long dist - Gov & Business and % Household-long distance telephony is equal to zero set them to mising.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_CUST_SUBLIN_BUS_PCT RCPT_CUST_SUBLIN_IND_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS6='517311' \",\n//         \"CONDITION \": \"If sum(RCPT_CUST_SUBLIN_BUS_PCT, RCPT_CUST_SUBLIN_IND_PCT)=0\",\n//         \"ACTION\": \"then RCPT_CUST_SUBLIN_BUS_PCT=.; RCPT_CUST_SUBLIN_IND_PCT=.;\",\n//         \" DESCRIPTION\": \"If the status is active and the NIACS is in 51711 and the sum of  % Subscriber line charges - Household and % Subscriber Line - Gov & Business is equal to zero set them to mising.\"\n//     },\n//     {\n//         \"VARIABLE\": \"INV_STAT\\nTRUCKTRAC_NUM_TOT_DVAL TRAILER_NUM_TOT_DVAL\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3='484'\",\n//         \"CONDITION \": \"If INV_STAT = . and (TRUCK_NUM_TOT_DVAL > 0 or TRUCKTRAC_NUM_TOT_DVAL > 0 or TRAILER_NUM_TOT_DVAL > 0)\",\n//         \"ACTION\": \"then INV_STAT = 1;\",\n//         \" DESCRIPTION\": \"If the flag for total truck inventory, total truck-tractor inventory, or total tralers inventory is reported  (R,A,E,or O) and the NAICS is in 484, and the inventory checkbox is missing and the total truck inventory, total truck-tractor inventory, or total tralers inventory is greater than zero, then set the inventory checkbox to yes. \"\n//     },\n//     {\n//         \"VARIABLE\": \"INV_STAT\\nTRUCKTRAC_NUM_TOT_DVAL TRAILER_NUM_TOT_DVAL\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3='484'\",\n//         \"CONDITION \": \"If INV_STAT in (.,1) and TRUCK_NUM_TOT_DVAL = 0 and TRUCKTRAC_NUM_TOT_DVAL = 0 and TRAILER_NUM_TOT_DVAL = 0\",\n//         \"ACTION\": \"then INV_STAT = 2;\",\n//         \" DESCRIPTION\": \"If the flag for total truck inventory, total truck-tractor inventory, or total tralers inventory is reported  (R,A,E,or O)and the NAICS is in 484, and the inventory checkbox is equal to yes and the total truck inventory, total truck-tractor inventory, or total tralers inventory is equal to zero, then set the inventory checkbox to no.\"\n//     },\n//     {\n//         \"VARIABLE\": \"INV_STAT\\nTRUCKTRAC_NUM_TOT_DVAL TRAILER_NUM_TOT_DVAL\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3='484'\",\n//         \"CONDITION \": \"If INV_STAT = 2 and (TRUCK_NUM_TOT_DVAL > 0 or TRUCKTRAC_NUM_TOT_DVAL > 0 or TRAILER_NUM_TOT_DVAL > 0)\",\n//         \"ACTION\": \"then INV_STAT = 1;\",\n//         \" DESCRIPTION\": \"If the flag for total truck inventory, total truck-tractor inventory, or total tralers inventory isreported (R,A,E,or O)and the NAICS is in 484, and the inventory checkbox is equal to no and the total truck inventory, total truck-tractor inventory, or total tralers inventory is greater than zero, then set the inventory checkbox to yes. \"\n//     },\n//     {\n//         \"VARIABLE\": \"HOTEL_OWN3RD_STAT RCPT_TOT_HOTEL_OWN3RD_VAL  RCPT_ECOMM_HOTEL_OWN3RD_VAL\\nEXPS_TOT_HOTEL_OWN3RD_VAL \",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS5='72111','72112'\",\n//         \"CONDITION \": \"If EXPS_TOT_HOTEL_OWN3RD_VAL <>2 and RCPT_TOT_HOTEL_OWN3RD_VAL=0 or RCPT_ECOMM_HOTEL_OWN3RD_VA=0  or EXPS_TOT_HOTEL_OWN3RD_VAL is >0\",\n//         \"ACTION\": \"then EXPS_TOT_HOTEL_OWN3RD_VAL =2\"\n//     },\n//     {\n//         \"VARIABLE\": \"HOTEL_OWN3RD_STAT RCPT_TOT_HOTEL_OWN3RD_VAL  RCPT_ECOMM_HOTEL_OWN3RD_VAL\\nEXPS_TOT_HOTEL_OWN3RD_VAL \",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS5='72111','72112'\",\n//         \"CONDITION \": \"If EXPS_TOT_HOTEL_OWN3RD_VAL <>1 and RCPT_TOT_HOTEL_OWN3RD_VAL > 0  or RCPT_ECOMM_HOTEL_OWN3RD_VAL is > 0  or EXPS_TOT_HOTEL_OWN3RD_VAL is >0 \",\n//         \"ACTION\": \"EXPS_TOT_HOTEL_OWN3RD_VAL=2\"\n//     },\n//     {\n//         \"VARIABLE\": \"HOTEL_OWN3RD_STAT RCPT_TOT_HOTEL_OWN3RD_VAL  RCPT_ECOMM_HOTEL_OWN3RD_VAL\\nEXPS_TOT_HOTEL_OWN3RD_VAL \",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS5='72111','72112'\",\n//         \"CONDITION \": \"If (HOTEL_OWN3RD_STAT = 2) AND (RCPT_TOT_HOTEL_OWN3RD_VAL = . AND  RCPT_ECOMM_HOTEL_OWN3RD_VAL = . AND EXPS_TOT_HOTEL_OWN3RD_VAL = .)\",\n//         \"ACTION\": \"then RCPT_TOT_HOTEL_OWN3RD_VAL = 0; RCPT_ECOMM_HOTEL_OWN3RD_VAL = 0; EXPS_TOT_HOTEL_OWN3RD_VAL = 0;\",\n//         \" DESCRIPTION\": \"If the NAICS is in 72111 or 72112 and the hotel management checkbox is set to no and hotel revenue of hotels managed, hotel e-commerce from hotels managed, and operating expense from hotels managed are all missing then set them all to zero. \"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_TELEMED_STAT RCPT_TELEMED_VAL  \",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3='621','622','623' AND NAICS4 <> ‘6215’,’6219’\",\n//         \"CONDITION \": \"If RCPT_TELEMED_STAT = . AND (RCPT_TELEMED_VAL > 0 \",\n//         \"ACTION\": \"then RCPT_TELEMED_STAT = 1;\",\n//         \" DESCRIPTION\": \"If the flag for Hospitals: Of 2020 total revenues reported, what was the dollar amount from telemedicine is reported (R,A,E,O)  or the flag for Hospitals: Of the total revenues reported, what was the percentage that was from telemedicine is reported (R,A,E,O)  and Hospitals: Did this receive revenues from telemedicine services in 2020 is missing and  total revenues reported, what was the dollar amount from telemedicine is greater than zero or Hospitals: Of the total revenues reported, what was the percentage that was from telemedicine is greater than zero then set Hospitals: Did this receive revenues from telemedicine services in 2020  to yes. \"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_TELEMED_STAT RCPT_TELEMED_VAL  \",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3='621','622','623' AND NAICS4 <> ‘6215’,’6219’\",\n//         \"CONDITION \": \"RCPT_TELEMED_STAT = (.,1) AND (RCPT_TELEMED_VAL = 0)\",\n//         \"ACTION\": \"then RCPT_TELEMED_STAT = 2;\",\n//         \" DESCRIPTION\": \"If the flag for Hospitals: Of 2020 total revenues reported, what was the dollar amount from telemedicine is reported (R,A,E,O)  or the flag for Hospitals: Of the total revenues reported, what was the percentage that was from telemedicine is reported (R,A,E,O)  and Hospitals: Did this receive revenues from telemedicine services in 2020 is missing or set to yes and  total revenues reported, what was the dollar amount from telemedicine is zero or Hospitals: Of the total revenues reported, what was the percentage that was from telemedicine is zero then set Hospitals: Did this receive revenues from telemedicine services in 2020  to no \"\n//     },\n//     {\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS6='721110','721120'\",\n//         \"ACTION\": \"then RCPT_ECOMM_ES_TOT_VAL=SUM(RCPT_TOT_VAL,RCPT_TOT_HOTEL_OWN3RD_VAL)\"\n//     },\n//     {\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS6='561330' \",\n//         \"ACTION\": \"then RCPTOT=RCPT_GROSSBILL_VAL\"\n//     },\n//     {\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS6='721110','721120'\",\n//         \"ACTION\": \"then RCPTOT=RCP_TOT_VAL_SUM+RCPT_TOT_HOTEL_OWN3RD_VAL\"\n//     },\n//     {\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3='621','622','623'\",\n//         \"CONDITION \": \"and _TXRCD00 <> 'E'\",\n//         \"ACTION\": \"then RCPT_NONOP_GIFTS_VAL=0\"\n//     },\n//     {\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3='621','622','623'\",\n//         \"CONDITION \": \"and _TXRCD00 <> 'E'\",\n//         \"ACTION\": \"then RCPT_NONOP_INVST_VAL=0\"\n//     }\n// ]\n\n// let csv = msg.payload.csv[0]\n\n// for (let i = 0; i < items.length; i++) {\n//     const item = items[i];\n\n//     if (item[\"NAICS\"]) {\n//         if (item[\"UNIT\"] == csv.UNIT) {\n//             if (item.CONDITION) {\n//                 csv.ACTION = item.ACTION\n//             }\n//         }\n//     }\n// }\n\n// msg.payload.csv[0].module = \"Logical Edits\"\n\n// setTimeout(function () {\n//     node.status({ fill: \"gray\", shape: \"ring\", text: \"complete\" });\n//     node.send(msg);\n// }, 1000);\n\n// // msg.payload.csv[0].RCPT_NONOP_GIFTS_VAL = 0\n\n// // return msg;\nconst cache = global.get(\"lookupCache\");\nconsole.log({cache})\nif(cache){\nconst parameterData = cache.data[0]?.json_values || {}; \nconsole.log(437, {d:parameterData})\n\n// Get current record\nlet record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\nconsole.log(441, {d: record})\n\n// Call Logical Edits\nconst getNAICSCode = () => {\n    switch (record['UNIT']) {\n        case 'ESTAB':\n            return record['NAICS_NUM'];\n        case 'KAU':\n            return record['KAU_NAICS'];\n        default:\n            return null; // No NAICS needed for company level\n    }\n};\n\nconst naicsCode = getNAICSCode();\nconsole.log(456, {d: naicsCode})\n\n// Use parameter file per NAICS to determine simple computations/definitions\nif (naicsCode && parameterData.NAICS === naicsCode) {\n    // Do necessary computations/edits based on the naicsCode and parameters from parameterData\n    // e.g.:\n    // record['SomeField'] = someFunctionBasedOnNAICS(naicsCode, parameterData);\n    record.ACTION = 'Go to Unit Balance';\n}\nelse{\n    // rerun  todo\n    record.ACTION = '- Logical Checks';\n}\n\n// // Check if all simple imputation is calculated\n// if (/* Some condition to determine if all simple imputation is calculated */) {\n//     msg.payload.action = 'Go to Unit Balance';\n// } else {\n//     // If not all simple imputation is calculated, do necessary steps here\n//     // e.g.:\n//     // msg.payload.action = 'Repeat Logical Edits';\n// }\n}\nreturn msg;\n",
+        "func": "// node.status({ fill: \"green\", shape: \"dot\", text: \"processing\" });\n\n// const items = [\n//     {\n//         \"VARIABLE\": \"TYPOP_CODE_STAT  RCPT_COMSN_GSV_VAL RCPT_OWN_VAL \\nRCPT_TOT_VAL\",\n//         \"UNIT\": \"estab\",\n//         \"NAICS\": \"NAICS3='425'\",\n//         \"CONDITION \": \"TYPOP_CODE_STAT eq '4X' and RCPT_COMSN_GSV_VAL + RCPT_OWN_VAL ne RCPT_TOT_VAL\",\n//         \"ACTION\": \"set review flag\"\n//     },\n//     {\n//         \"VARIABLE\": \"TYPOP_CODE_STAT  RCPT_COMSN_GSV_VAL RCPT_COMSN_EARN_VAL RCPT_COMSN_AVG_RATE \",\n//         \"UNIT\": \"estab\",\n//         \"NAICS\": \"NAICS3='425'\",\n//         \"CONDITION \": \"TYPOP_CODE_STAT eq '4X' and RCPT_COMSN_GSV_VAL not in (0,.) and RCPT_COMSN_EARN_VAL in (0,.) and RCPT_COMSN_AVG_RATE not in (0,.)\",\n//         \"ACTION\": \"RCPT_COMSN_EARN_VAL = RCPT_COMSN_GSV_VAL * RCPT_COMSN_AVG_RATE\",\n//         \" DESCRIPTION\": \"if they reported a gross selling value from goods gold on commission, and an average commission rate, but didn't provide the amount of commissions (or set to 0), use GSV * average commission rate to derive commission\"\n//     },\n//     {\n//         \"VARIABLE\": \"TYPOP_CODE_STAT  RCPT_COMSN_GSV_VAL RCPT_COMSN_EARN_VAL RCPT_COMSN_AVG_RATE \",\n//         \"UNIT\": \"estab\",\n//         \"NAICS\": \"NAICS3='425'\",\n//         \"CONDITION \": \"TYPOP_CODE_STAT eq '4X' and RCPT_COMSN_GSV_VAL in (0,.) and RCPT_COMSN_EARN_VAL not in (0,.) and RCPT_COMSN_AVG_RATE not in (0,.)\",\n//         \"ACTION\": \"RCPT_COMSN_GSV_VAL = RCPT_COMSN_EARN_VAL \\/ RCPT_COMSN_AVG_RATE\",\n//         \" DESCRIPTION\": \"if they reported commissions and an average commission rate but no GSV, use the commission and commission rate to calculate GSV\"\n//     },\n//     {\n//         \"VARIABLE\": \"TYPOP_CODE_STAT\\nRCPT_OWN_VAL \\nRCPT_TOT_VAL RCPT_COMSN_GSV_VAL \\n RCPT_COMSN_EARN_VAL\",\n//         \"UNIT\": \"estab\",\n//         \"NAICS\": \"NAICS3='425'\",\n//         \"CONDITION \": \"TYPOP_CODE_STAT = '4X' and RCPT_OWN_VAL eq 0 and RCPT_COMSN_GSV_VAL ne RCPT_TOT_VAL and RCPT_COMSN_GSV_VAL < RCPT_TOT_VAL and RCPT_TOT_VAL eq sum(RCPT_COMSN_GSV_VAL, RCPT_COMSN_EARN_VAL)\",\n//         \"ACTION\": \"RCPT_TOT_VAL = RCPT_COMSN_GSV_VAL\",\n//         \" DESCRIPTION\": \"if no sales on own account (i.e., all commission-based) and GSV does not equal total sales (which, by definition can't happen, because GSV + OWN = total sales and if OWN = 0, then GSV = SALES) and SALES = the sum of GSV + COMMISSION, set sales to GSV because commissions should not be included in total sales\"\n//     },\n//     {\n//         \"VARIABLE\": \"TYPOP_CODE_STAT\\nRCPT_OWN_VAL \\nRCPT_TOT_VAL RCPT_COMSN_GSV_VAL \\n RCPT_COMSN_EARN_VAL\",\n//         \"UNIT\": \"estab\",\n//         \"NAICS\": \"NAICS3='425'\",\n//         \"CONDITION \": \"TYPOP_CODE_STAT = '4X' and RCPT_OWN_VAL eq 0 and RCPT_COMSN_GSV_VAL ne RCPT_TOT_VAL and RCPT_COMSN_GSV_VAL > RCPT_TOT_VAL and RCPT_TOT_VAL eq RCPT_COMSN_EARN_VAL\",\n//         \"ACTION\": \"RCPT_TOT_VAL = RCPT_COMSN_GSV_VAL\",\n//         \" DESCRIPTION\": \"if they reported sales as commissions, set sales = GSV\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_ECOMM_VAL\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"42', '44', '45'\",\n//         \"CONDITION \": \"RCPT_ECOMM_STAT eq 2 \",\n//         \"ACTION\": \"RCPT_ECOMM_VAL = 0\",\n//         \" DESCRIPTION\": \"if ecommerce status = 2 (no) then the value for e-commerce should be 0\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_ECOMM_VAL\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"42', '44', '45'\",\n//         \"CONDITION \": \"RCPT_ECOMM_VAL gt 0\",\n//         \"ACTION\": \"RCPT_ECOMM_STAT = 1\",\n//         \" DESCRIPTION\": \"if there's a reliable value for ecommerce, then the e-commerce status variable should be 1\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_MOTR_HAZRD_STAT\\nRCPT_MOTR_HAZRD_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3= '484 '\",\n//         \"CONDITION \": \"If  RCPT_MOTR_HAZRD_STAT =2 and RCPT_MOTR_HAZRD_PCT  = missing\",\n//         \"ACTION\": \" then RCPT_MOTR_HAZRD_PCT =0.\",\n//         \" DESCRIPTION\": \"IF the flag for hazardas materials is reported   and the NAICS is in 484 and the checkbox is a no and % - Hazardous Materials is equal to missing then set the % - Hazardous Materials to 0.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_MOTR_HAZRD_STAT\\nRCPT_MOTR_HAZRD_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3= '484 '\",\n//         \"CONDITION \": \"If RCPT_MOTR_HAZRD_STAT = . and RCPT_MOTR_HAZRD_PCT  is >0 \",\n//         \"ACTION\": \"then RCPT_MOTR_HAZRD_STAT  =1\",\n//         \" DESCRIPTION\": \"IF the flag for hazardas materials is reported   and the NAICS is in 484 and the checkbox is a missing and % - Hazardous Materials is greater than zero then set the hazardous materials checkbox to yes.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_MOTR_HAZRD_STAT\\nRCPT_MOTR_HAZRD_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3= '484 '\",\n//         \"CONDITION \": \"If  RCPT_MOTR_HAZRD_STAT = . or 1 and RCPT_MOTR_HAZRD_PCT  is =0 \",\n//         \"ACTION\": \"then RCPT_MOTR_HAZRD_STAT=2\",\n//         \" DESCRIPTION\": \"IF the flag for hazardas materials is reported  and the NAICS is in 484 and the checkbox is a missing or equal to yes  and % - Hazardous Materials is equal to zero then set the hazardous materials checkbox to no\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_MOTR_HAZRD_STAT\\nRCPT_MOTR_HAZRD_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3= '484 '\",\n//         \"CONDITION \": \"If RCPT_MOTR_HAZRD_STAT is 2 and RCPT_MOTR_HAZRD_PCT  is >0 \",\n//         \"ACTION\": \"then RCPT_MOTR_HAZRD_STAT= 1\",\n//         \" DESCRIPTION\": \"IF the flag for hazardas materials is reported   and the NAICS is in 484 and the checkbox is a  equal to no and % - Hazardous Materials is greater than zero then set the hazardous materials checkbox to yes\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_BILL_PAY_PCT\\nRCPT_BILL_OTHOP_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS6=‘561330’ \",\n//         \"CONDITION \": \"If  the sum of RCPT_BILL_PAY_PCT and RCPT_BILL_OTHOP_PCT =0 \",\n//         \"ACTION\": \"then RCPT_BILL_PAY_PCT and\\nRCPT_BILL_OTHOP_PCT =.\",\n//         \" DESCRIPTION\": \"If status is active and NAICS is 561330 and the sum of % of total gross billings x Payroll srvc and % - All other operating revenue equals zero then set them to missing\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_BUS_PCT\\nRCPT_LEISURE_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS6=‘561510’,’561599’,'561520'\",\n//         \"CONDITION \": \"If the sum of RCPT_BUS_PCT and RCPT_LEISURE_PCT =0 \",\n//         \"ACTION\": \"then RCPT_BUS_PCT and RCPT_LEISURE_PCT =.\",\n//         \" DESCRIPTION\": \"If status is active and NAICS is in 561510 or 561599 and the sum of % - Percent of Revenue from Business and % - Percent of Revenue from Leisure equals zero then set them to missing\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_NEWS_PRNT_PCT\\nRCPT_NEWS_ONLINE_PCT\\nRCPT_NEWS_OTH_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS5='51111' \",\n//         \"CONDITION \": \"If sum(RCPT_NEWS_PRNT_PCT,  RCPT_NEWS_ONLINE_PCT, and RCPT_NEWS_OTH_PCT) =0 \",\n//         \"ACTION\": \"then RCPT_NEWS_PRNT_PCT,  RCPT_NEWS_ONLINE_PCT, and RCPT_NEWS_OTH_PCT = .\",\n//         \" DESCRIPTION\": \"If the status is active and the NAICS is in '51111' and the sum of % Print subscriptions and sales,  % Internet subscriptions and sales and % Newspapers - Other media advertising equals zero, then set them to missing.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_ADV_CLASS_PCT\\nRCPT_ADV_OTH_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS5='51111' \",\n//         \"CONDITION \": \"If the sum of RCPT_ADV_CLASS_PCT and RCPT_ADV_OTH_PCT =0 \",\n//         \"ACTION\": \"then RCPT_ADV_CLASS_PCT and RCPT_ADV_OTH_PCT =.\",\n//         \" DESCRIPTION\": \"If the status is active and the NAICS is in '51111' and the sum of % Print subscriptions and % Advertising Rev - Other Advertising equals zero, then set them to missing.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_PER_PRNT_PCT\\nRCPT_PER_ONLINE_PCT\\nRCPT_PER_OTH_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS5='51112' \",\n//         \"CONDITION \": \"If sum(RCPT_PER_PRNT_PCT,  RCPT_PER_ONLINE_PCT, and RCPT_PER_OTH_PCT) =0 \",\n//         \"ACTION\": \"then RCPT_NEWS_PRNT_PCT,  RCPT_NEWS_ONLINE_PCT, and RCPT_NEWS_OTH_PCT =.\",\n//         \" DESCRIPTION\": \"If the status is active and the NAICS is in '51112' and the sum of % Print subscriptions and sales, % Internet subscriptions and sales, and % Other media advertising is equal to zero then set them to missing.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_BOOK_PRNT_PCT\\nRCPT_BOOK_ONLINE_PCT\\nRCPT_BOOK_OTH_PCT\\n\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS5='51113' \",\n//         \"CONDITION \": \"If sum (RCPT_BOOK_PRNT_PCT,  RCPT_BOOK_ONLINE_PCT, and RCPT_BOOK_OTH_PCT) =0\",\n//         \"ACTION\": \"then RCPT_BOOK_PRNT_PCT,  RCPT_BOOK_ONLINE_PCT, and RCPT_BOOK_OTH_PCT =.\",\n//         \" DESCRIPTION\": \"If the status is active and the NAICS is in '51113' and the sum of % Books - Print,  % Books - Internet, and % Books - other media is equal to zero then set them to missing.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_DIR_PRNT_PCT\\nRCPT_DIR_ONLINE_PCT\\nRCPT_DIR_OTH_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS5='51114' \",\n//         \"CONDITION \": \"If sum(RCPT_DIR_PRNT_PCT,  RCPT_DIR_ONLINE_PCT, and RCPT_DIR_OTH_PCT) =0 \",\n//         \"ACTION\": \"then RCPT_DIR_PRNT_PCT,  RCPT_DIR_ONLINE_PCT, and RCPT_DIR_OTH_PCT =.\",\n//         \" DESCRIPTION\": \"If the status is active and the NAICS is in '51114' and the sum of % Print subscriptions and sales, % Internet subscriptions and sales, and % Other media advertising is equal to zero then set them to missing.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_SYSOFT_PERS_PCT\\nRCPT_SYSOFT_ENTR_PCT\\nRCPT_SYSOFT_MAIN_PCT\\nRCPT_SYSOFT_OTH_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS5='51121' \",\n//         \"CONDITION \": \"If sum(RCPT_SYSOFT_PERS_PCT, RCPT_SYSOFT_ENTR_PCT, RCPT_SYSOFT_MAIN_PCT, and RCPT_SYSOFT_OTH_PCT)=0 \",\n//         \"ACTION\": \"then RCPT_SYSOFT_PERS_PCT, RCPT_SYSOFT_ENTR_PCT, RCPT_SYSOFT_MAIN_PCT, and RCPT_SYSOFT_OTH_PCT =.\",\n//         \" DESCRIPTION\": \"If the status is active and the NAICS is in '51121' and the sum of % rev - Personal computer systems rev, % Enterprise-systems software revenue, % Mainframe computer-Systems software, and % of other systems software revenue is equal to zero then set them to missing.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_APSOFT_PERS_PCT\\nRCPT_APSOFT_ENTR_PCT\\nRCPT_APSOFT_MAIN_PCT\\nRCPT_APSOFT_OTH_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS5='51121' \",\n//         \"CONDITION \": \"If the sum of RCPT_APSOFT_PERS_PCT, RCPT_APSOFT_ENTR_PCT, RCPT_APSOFT_MAIN_PCT, and RCPT_APSOFT_OTH_PCT =0 \",\n//         \"ACTION\": \"then  RCPT_APSOFT_PERS_PCT, RCPT_APSOFT_ENTR_PCT, RCPT_APSOFT_MAIN_PCT, and RCPT_APSOFT_OTH_PCT =.\",\n//         \" DESCRIPTION\": \"If the status is active and the NAICS is in '51121' and the sum of % rev - Personal computer systems rev, % Enterprise-systems software revenue, % Mainframe computer-Systems software, and % of other systems software revenue is equal to zero then set them to missing.\"\n//     },\n//     {\n//         \"VARIABLE\": \"INV_STAT\\nINV_CY_GOODS_TOT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3='511','512'\",\n//         \"CONDITION \": \"If and INV_STAT =2 and INV_CY_GOODS_TOT_DVAL = .\",\n//         \"ACTION\": \"then INV_CY_GOODS_TOT_DVAL =0\",\n//         \" DESCRIPTION\": \"If NAICS in 511 or 512 and the flag for Total inventories is reported    and the inventory checkbox is equal to no and the total inventories is missing then set the inventories equal to zero. \"\n//     },\n//     {\n//         \"VARIABLE\": \"INV_STAT\\nINV_CY_GOODS_TOT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3='511','512'\",\n//         \"CONDITION \": \"If Substr(RECORD_NAICS_NUM,1,3) in ('511','512')  and INV_STAT =. and INV_CY_GOODS_TOT is >0 \",\n//         \"ACTION\": \"then INV_STAT =1\",\n//         \" DESCRIPTION\": \"If NAICS in 511 or 512 and the flag for Total inventories is reported   and the inventory checkbox is missing and the total inventories is greater than zero, then set the inventories checkbox to yes. \"\n//     },\n//     {\n//         \"VARIABLE\": \"INV_STAT\\nINV_CY_GOODS_TOT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3='511','512'\",\n//         \"CONDITION \": \"If Substr(RECORD_NAICS_NUM,1,3) in ('511','512') and INV_STAT = . or = 1  and INV_CY_GOODS_TOT is =0 \",\n//         \"ACTION\": \"then INV_STAT = 2\",\n//         \" DESCRIPTION\": \"If NAICS in 511 or 512 and the flag for Total inventories is reported   the inventory checkbox is missing or equal to yes and the total inventories is equal to zero, then set the inventories checkbox to no.\"\n//     },\n//     {\n//         \"VARIABLE\": \"INV_STAT\\nINV_CY_GOODS_TOT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3='511','512'\",\n//         \"CONDITION \": \"If Substr(RECORD_NAICS_NUM,1,3) in ('511','512')  and INV_STAT = 2  and INV_CY_GOODS_TOT is > 0 \",\n//         \"ACTION\": \"then INV_STAT =1\",\n//         \" DESCRIPTION\": \"If NAICS in 511 or 512 and the flag for Total inventories is is reported   , and the inventory checkbox is equal to no and the total inventories is freater than zero, then set the inventories checkbox to yes.\"\n//     },\n//     {\n//         \"VARIABLE\": \"EXPS_EHR_STAT\\nEXPS_EHR_VAL\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS2='62' and NAICS3 \\n<> ('624') \",\n//         \"CONDITION \": \"If EXPS_EHR_VAL ne . and EXPS_EHR_STAT =( . or 2) and EXPS_EHR_VAL is >0 \",\n//         \"ACTION\": \"then EXPS_EHR_STAT= 1\",\n//         \" DESCRIPTION\": \"If the NAICS is in 62, but no in 624, and the flag for Electronic health record expenses is equal is reported   and the electronic health records checkbox is equal to no and the Electronic health records expenses is greater than zero, then set the electronic health records checkbox to yes.\"\n//     },\n//     {\n//         \"VARIABLE\": \"EXPS_EHR_STAT \\nEXPS_EHR_VAL\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS2='62' and NAICS3 \\n<> ('624') \",\n//         \"CONDITION \": \"If EXPS_EHR_VAL ne . and EXPS_EHR_STAT = (. or 1) and EXPS_EHR_VAL is =0\",\n//         \"ACTION\": \"then   EXPS_EHR_STAT = 2\",\n//         \" DESCRIPTION\": \"If the NAICS is in 62, but no in 624, and the flag for Electronic health record expenses is reported   and the electronic health records checkbox is equal to yes  and the Electronic health records expenses is equal to zero, then set the electronic health records checkbox to no.\"\n//     },\n//     {\n//         \"VARIABLE\": \"EXPS_EHR_STAT \\nEXPS_EHR_VAL\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS2='62' and NAICS3 \\n<> '624'\",\n//         \"CONDITION \": \"If EXPS_EHR_STAT  ne . and EXPS_EHR_STAT =  2  and EXPS_EHR_VAL is =.\",\n//         \"ACTION\": \"then EXPS_EHR_VAL is = 0\",\n//         \" DESCRIPTION\": \"If the NAICS is in 62, but no in 624, and the flag for Electronic health record expenses is reported   and the electronic health records checkbox is equal to no  and the Electronic health records expenses is missing, then set the electronic health records to zero.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_ECOMM_ES_VAL\\n RCPT_ECOMM_WEB_STAT  RCPT_ECOMM_THRD_STAT  RCPT_ECOMM_OTH_STAT  \",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS2='22','48','49,'51','52','53','54','55','56,'61','62','71','72,'81'\",\n//         \"CONDITION \": \"If RCPT_ECOMM_ES_VAL ne . and RCPT_ECOMM_WEB_STAT  = (. or 1) and RCPT_ECOMM_THRD_STAT =( . or 1) and RCPT_ECOMM_OTH_STAT = (. or 1 )and  RCPT_ECOMM_ES_VAL =0 \",\n//         \"ACTION\": \"then RCPT_ECOMM_WEB_STAT  = 2 RCPT_ECOMM_THRD_STAT = 2 RCPT_ECOMM_OTH_STAT  = 2\",\n//         \" DESCRIPTION\": \"If the e-commerce flag is reported   or the e-commerce percent flag is reported   and Electronic revenue- company website is missing or yes,  Electronic revenue- third party website is missing or yes, Electronic revenue- electronic system, and e-commerce is zero and the e-commerce percent equals zero then set - company website is missing or yes,  Electronic revenue- third party website is missing or yes, Electronic revenue- electronic system to no.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_ECOMM_ES_VAL\\n RCPT_ECOMM_WEB_STAT  RCPT_ECOMM_THRD_STAT  RCPT_ECOMM_OTH_STAT  \",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS2='22','48','49,'51','52','53','54','55','56,'61','62','71','72,'81'\",\n//         \"CONDITION \": \"If RCPT_ECOMM_WEB_STAT = 2, RCPT_ECOMM_THRD_STAT  = 2, and RCPT_ECOMM_OTH_STAT  = 2 and RCPT_ECOMM_ES_VAL = . \",\n//         \"ACTION\": \"then RCPT_ECOMM_ES_VAL =0.\",\n//         \" DESCRIPTION\": \"If the Electronic revenue- company website flag is reported   and the Electronic revenue- third party website is reported   , Electronic revenue- electronic system, and is reported   and Electronic revenue- company website,  Electronic revenue- third party website, Electronic revenue- electronic system all are set to no and e-commerce is missing and ecommerce percent is missing or zero then set e-commerce to zero.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_ECOMM_ES_VAL\\n RCPT_ECOMM_WEB_STAT  RCPT_ECOMM_THRD_STAT  RCPT_ECOMM_OTH_STAT  \",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS2='22','48','49,'51','52','53','54','55','56,'61','62','71','72,'81'\",\n//         \"CONDITION \": \"If RCPT_ECOMM_ES_VAL = . and RCPT_ECOMM_WEB_STAT  = . and RCPT_ECOMM_THRD_STAT = . and RCPT_ECOMM_OTH_STAT = . and  RCPT_ECOMM_ES_VAL  is >0 \",\n//         \"ACTION\": \"then RCPT_ECOMM_WEB_STAT  =1\",\n//         \" DESCRIPTION\": \"If e-commerce flag is reported   or e-commerce percent is reported   and Electronic revenue- company website,  Electronic revenue- third party website, Electronic revenue- electronic system all are missing and e-commerce is greater than zero or percent e-commerce is greater than zero then set Electronic revenue- company website to yes. \"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_ECOMM_ES_VAL\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS2='22','48','49,'51','52','53','54','55','56,'61','62','71','72,'81'\",\n//         \"CONDITION \": \"If RCPT_ECOMM_ES_VAL ne . and RCPT_ECOMM_WEB_STAT  is 2 and RCPT_ECOMM_THRD_STAT is 2, and RCPT_ECOMM_OTH_STAT is 2 and  RCPT_ECOMM_ES_VAL  is >0 \",\n//         \"ACTION\": \"then RCPT_ECOMM_WEB_STAT  =1\",\n//         \" DESCRIPTION\": \"If e-commerce flag  is reported   or e-commerce percent is reported   and Electronic revenue- company website,  Electronic revenue- third party website,  and Electronic revenue- electronic system all are no  and e-commerce is greater than zero or percent e-commerce is greater than zero then set Electronic revenue- company website to yes. \"\n//     },\n//     {\n//         \"VARIABLE\": \"EXPS_TOT_VAL\",\n//         \"UNIT\": \"KAU\",\n//         \"CONDITION \": \"If _qss00 in ('Y') and E190000 = . AND EQEXPD00 = 0 AND EQEXP00 > 0\",\n//         \"ACTION\": \" then E190000 = eqexp00\",\n//         \" DESCRIPTION\": \"If Total operating expenses is missing and QSS number of quarters imputed is equal to zero, and qss espense is greater than zero, then set total operating expense to qss expense\"\n//     },\n//     {\n//         \"VARIABLE\": \"TAX_EXEMPT_STAT\",\n//         \"UNIT\": \"KAU\",\n//         \"CONDITION \": \"If substr(RECORD_NAICS_NUM,1,5) = '51912' and TAX_EXEMPT_STAT = 1\",\n//         \"ACTION\": \"then NONPROFT_STAT=1\",\n//         \" DESCRIPTION\": \"If NAICS in 51912 and tax recode is equal to exempt, then set not for profit basses to 1.\"\n//     },\n//     {\n//         \"VARIABLE\": \"CPT_CUST_RES_PCT \\nCPT_CUST_NORES_PCT \",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS2='22'\",\n//         \"CONDITION \": \"If sum(CPT_CUST_RES_PCT,CPT_CUST_NORES_PCT) = 0\",\n//         \"ACTION\": \"then CPT_CUST_RES_PCT = . CPT_CUST_NORES_PCT = .\",\n//         \" DESCRIPTION\": \"If NAICS in sector 22 and is active, and the sum of residential customers and non-residential customers is zero then set residential customers and non-residential customers to missing\"\n//     },\n//     {\n//         \"VARIABLE\": \"CAPEX_OTH_NEW_VAL                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       CAPEX_OTH_USED_VAL                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 CAPEX_OTH_TOT\",\n//         \"UNIT\": \"industry\",\n//         \"CONDITION \": \"Value reported in other\",\n//         \"ACTION\": \"set referral flag for analyst review\",\n//         \" DESCRIPTION\": \"analyst reclassify value in other to structures or equipment\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_MOTR_AGR_PCT  RCPT_MOTR_GRAIN_PCT  RCPT_MOTR_STONE_PCT RCPT_MOTR_FUEL_PCT  RCPT_MOTR_PHARM_PCT  RCPT_MOTR_WOOD_PCT  RCPT_MOTR_METAL_PCT  RCPT_MOTR_ELECT_PCT  RCPT_MOTR_USEDGD_PCT  RCPT_MOTR_NEWFRN_PCT  RCPT_MOTR_OTH_PCT \",\n//         \"UNIT\": \"industry\",\n//         \"NAICS\": \"NAICS3='484'\",\n//         \"CONDITION \": \"If Sum(RCPT_MOTR_AGR_PCT,RCPT_MOTR_GRAIN_PCT,RCPT_MOTR_STONE_PCT,RCPT_MOTR_FUEL_PCT,RCPT_MOTR_PHARM_PCT,RCPT_MOTR_WOOD_PCT,RCPT_MOTR_METAL_PCT,RCPT_MOTR_ELECT_PCT, RCPT_MOTR_USEDGD_PCT,RCPT_MOTR_NEWFRN_PCT,RCPT_MOTR_OTH_PCT)=0\",\n//         \"ACTION\": \"then RCPT_MOTR_AGR_PCT = .; RCPT_MOTR_GRAIN_PCT = .; RCPT_MOTR_STONE_PCT = .; RCPT_MOTR_FUEL_PCT = .; RCPT_MOTR_PHARM_PCT = .; RCPT_MOTR_WOOD_PCT = .; RCPT_MOTR_METAL_PCT = .; RCPT_MOTR_ELECT_PCT = .; RCPT_MOTR_USEDGD_PCT = .; RCPT_MOTR_NEWFRN_PCT = .; RCPT_MOTR_OTH_PCT = .;\",\n//         \" DESCRIPTION\": \"If the NAICS is in 484 and active, and the sum of % - Agricultural Products, % - Grains, Alcohol, Tobacco Products, % - Stone, Nonmetallic minerals, % - Coal and Petroleum Products, % - Coal and Petroleum Products, % - Pharmaceutical and chemical products, % - Wood Products, Textiles, Leather, % - Electronic & Precision Instruments,% - Base Metal and Machinery % - Used household and office goods, % - New Furniture & Misc. Prods is zero, then set all to missing\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_CUST_BUS_PCT RCPT_CUST_IND_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS6=('517311','517312','517911', 519130')\",\n//         \"CONDITION \": \"If sum(RCPT_CUST_BUS_PCT,RCPT_CUST_IND_PCT)=0\",\n//         \"ACTION\": \"then RCPT_CUST_BUS_PCT=.; RCPT_CUST_IND_PCT=.;\",\n//         \" DESCRIPTION\": \"If the status is active and the NAICS is in  517110, 517210, 517911, or 519130 and the sum of % Household revenue and % of revenue by Government & Businesses equal zero then set them to missing.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_CUST_LOCTEL_BUS_PCT RCPT_CUST_LOCTEL_IND_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS6='517311' \",\n//         \"CONDITION \": \"If sum(RCPT_CUST_LOCTEL_BUS_PCT,RCPT_CUST_LOCTEL_IND_PCT)=0\",\n//         \"ACTION\": \"then RCPT_CUST_LOCTEL_BUS_PCT=.; RCPT_CUST_LOCTEL_IND_PCT=.;\",\n//         \" DESCRIPTION\": \"If the status is active and the NIACS is in 51711 and the sum of % Household - local telephony and Fixed local Telephone - Gov & Business is equal to zero set them to mising.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_CUST_LNGTEL_BUS_PCT RCPT_CUST_LNGTEL_IND_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS6='517311' \",\n//         \"CONDITION \": \"If sum(RCPT_CUST_LNGTEL_BUS_PCT, RCPT_CUST_LNGTEL_IND_PCT)=0\",\n//         \"ACTION\": \"then RCPT_CUST_LNGTEL_BUS_PCT=.; RCPT_CUST_LNGTEL_IND_PCT=.;\",\n//         \" DESCRIPTION\": \"If the status is active and the NIACS is in 51711 and the sum of  % Fixed Long dist - Gov & Business and % Household-long distance telephony is equal to zero set them to mising.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_CUST_SUBLIN_BUS_PCT RCPT_CUST_SUBLIN_IND_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS6='517311' \",\n//         \"CONDITION \": \"If sum(RCPT_CUST_SUBLIN_BUS_PCT, RCPT_CUST_SUBLIN_IND_PCT)=0\",\n//         \"ACTION\": \"then RCPT_CUST_SUBLIN_BUS_PCT=.; RCPT_CUST_SUBLIN_IND_PCT=.;\",\n//         \" DESCRIPTION\": \"If the status is active and the NIACS is in 51711 and the sum of  % Subscriber line charges - Household and % Subscriber Line - Gov & Business is equal to zero set them to mising.\"\n//     },\n//     {\n//         \"VARIABLE\": \"INV_STAT\\nTRUCKTRAC_NUM_TOT_DVAL TRAILER_NUM_TOT_DVAL\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3='484'\",\n//         \"CONDITION \": \"If INV_STAT = . and (TRUCK_NUM_TOT_DVAL > 0 or TRUCKTRAC_NUM_TOT_DVAL > 0 or TRAILER_NUM_TOT_DVAL > 0)\",\n//         \"ACTION\": \"then INV_STAT = 1;\",\n//         \" DESCRIPTION\": \"If the flag for total truck inventory, total truck-tractor inventory, or total tralers inventory is reported  (R,A,E,or O) and the NAICS is in 484, and the inventory checkbox is missing and the total truck inventory, total truck-tractor inventory, or total tralers inventory is greater than zero, then set the inventory checkbox to yes. \"\n//     },\n//     {\n//         \"VARIABLE\": \"INV_STAT\\nTRUCKTRAC_NUM_TOT_DVAL TRAILER_NUM_TOT_DVAL\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3='484'\",\n//         \"CONDITION \": \"If INV_STAT in (.,1) and TRUCK_NUM_TOT_DVAL = 0 and TRUCKTRAC_NUM_TOT_DVAL = 0 and TRAILER_NUM_TOT_DVAL = 0\",\n//         \"ACTION\": \"then INV_STAT = 2;\",\n//         \" DESCRIPTION\": \"If the flag for total truck inventory, total truck-tractor inventory, or total tralers inventory is reported  (R,A,E,or O)and the NAICS is in 484, and the inventory checkbox is equal to yes and the total truck inventory, total truck-tractor inventory, or total tralers inventory is equal to zero, then set the inventory checkbox to no.\"\n//     },\n//     {\n//         \"VARIABLE\": \"INV_STAT\\nTRUCKTRAC_NUM_TOT_DVAL TRAILER_NUM_TOT_DVAL\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3='484'\",\n//         \"CONDITION \": \"If INV_STAT = 2 and (TRUCK_NUM_TOT_DVAL > 0 or TRUCKTRAC_NUM_TOT_DVAL > 0 or TRAILER_NUM_TOT_DVAL > 0)\",\n//         \"ACTION\": \"then INV_STAT = 1;\",\n//         \" DESCRIPTION\": \"If the flag for total truck inventory, total truck-tractor inventory, or total tralers inventory isreported (R,A,E,or O)and the NAICS is in 484, and the inventory checkbox is equal to no and the total truck inventory, total truck-tractor inventory, or total tralers inventory is greater than zero, then set the inventory checkbox to yes. \"\n//     },\n//     {\n//         \"VARIABLE\": \"HOTEL_OWN3RD_STAT RCPT_TOT_HOTEL_OWN3RD_VAL  RCPT_ECOMM_HOTEL_OWN3RD_VAL\\nEXPS_TOT_HOTEL_OWN3RD_VAL \",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS5='72111','72112'\",\n//         \"CONDITION \": \"If EXPS_TOT_HOTEL_OWN3RD_VAL <>2 and RCPT_TOT_HOTEL_OWN3RD_VAL=0 or RCPT_ECOMM_HOTEL_OWN3RD_VA=0  or EXPS_TOT_HOTEL_OWN3RD_VAL is >0\",\n//         \"ACTION\": \"then EXPS_TOT_HOTEL_OWN3RD_VAL =2\"\n//     },\n//     {\n//         \"VARIABLE\": \"HOTEL_OWN3RD_STAT RCPT_TOT_HOTEL_OWN3RD_VAL  RCPT_ECOMM_HOTEL_OWN3RD_VAL\\nEXPS_TOT_HOTEL_OWN3RD_VAL \",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS5='72111','72112'\",\n//         \"CONDITION \": \"If EXPS_TOT_HOTEL_OWN3RD_VAL <>1 and RCPT_TOT_HOTEL_OWN3RD_VAL > 0  or RCPT_ECOMM_HOTEL_OWN3RD_VAL is > 0  or EXPS_TOT_HOTEL_OWN3RD_VAL is >0 \",\n//         \"ACTION\": \"EXPS_TOT_HOTEL_OWN3RD_VAL=2\"\n//     },\n//     {\n//         \"VARIABLE\": \"HOTEL_OWN3RD_STAT RCPT_TOT_HOTEL_OWN3RD_VAL  RCPT_ECOMM_HOTEL_OWN3RD_VAL\\nEXPS_TOT_HOTEL_OWN3RD_VAL \",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS5='72111','72112'\",\n//         \"CONDITION \": \"If (HOTEL_OWN3RD_STAT = 2) AND (RCPT_TOT_HOTEL_OWN3RD_VAL = . AND  RCPT_ECOMM_HOTEL_OWN3RD_VAL = . AND EXPS_TOT_HOTEL_OWN3RD_VAL = .)\",\n//         \"ACTION\": \"then RCPT_TOT_HOTEL_OWN3RD_VAL = 0; RCPT_ECOMM_HOTEL_OWN3RD_VAL = 0; EXPS_TOT_HOTEL_OWN3RD_VAL = 0;\",\n//         \" DESCRIPTION\": \"If the NAICS is in 72111 or 72112 and the hotel management checkbox is set to no and hotel revenue of hotels managed, hotel e-commerce from hotels managed, and operating expense from hotels managed are all missing then set them all to zero. \"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_TELEMED_STAT RCPT_TELEMED_VAL  \",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3='621','622','623' AND NAICS4 <> ‘6215’,’6219’\",\n//         \"CONDITION \": \"If RCPT_TELEMED_STAT = . AND (RCPT_TELEMED_VAL > 0 \",\n//         \"ACTION\": \"then RCPT_TELEMED_STAT = 1;\",\n//         \" DESCRIPTION\": \"If the flag for Hospitals: Of 2020 total revenues reported, what was the dollar amount from telemedicine is reported (R,A,E,O)  or the flag for Hospitals: Of the total revenues reported, what was the percentage that was from telemedicine is reported (R,A,E,O)  and Hospitals: Did this receive revenues from telemedicine services in 2020 is missing and  total revenues reported, what was the dollar amount from telemedicine is greater than zero or Hospitals: Of the total revenues reported, what was the percentage that was from telemedicine is greater than zero then set Hospitals: Did this receive revenues from telemedicine services in 2020  to yes. \"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_TELEMED_STAT RCPT_TELEMED_VAL  \",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3='621','622','623' AND NAICS4 <> ‘6215’,’6219’\",\n//         \"CONDITION \": \"RCPT_TELEMED_STAT = (.,1) AND (RCPT_TELEMED_VAL = 0)\",\n//         \"ACTION\": \"then RCPT_TELEMED_STAT = 2;\",\n//         \" DESCRIPTION\": \"If the flag for Hospitals: Of 2020 total revenues reported, what was the dollar amount from telemedicine is reported (R,A,E,O)  or the flag for Hospitals: Of the total revenues reported, what was the percentage that was from telemedicine is reported (R,A,E,O)  and Hospitals: Did this receive revenues from telemedicine services in 2020 is missing or set to yes and  total revenues reported, what was the dollar amount from telemedicine is zero or Hospitals: Of the total revenues reported, what was the percentage that was from telemedicine is zero then set Hospitals: Did this receive revenues from telemedicine services in 2020  to no \"\n//     },\n//     {\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS6='721110','721120'\",\n//         \"ACTION\": \"then RCPT_ECOMM_ES_TOT_VAL=SUM(RCPT_TOT_VAL,RCPT_TOT_HOTEL_OWN3RD_VAL)\"\n//     },\n//     {\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS6='561330' \",\n//         \"ACTION\": \"then RCPTOT=RCPT_GROSSBILL_VAL\"\n//     },\n//     {\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS6='721110','721120'\",\n//         \"ACTION\": \"then RCPTOT=RCP_TOT_VAL_SUM+RCPT_TOT_HOTEL_OWN3RD_VAL\"\n//     },\n//     {\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3='621','622','623'\",\n//         \"CONDITION \": \"and _TXRCD00 <> 'E'\",\n//         \"ACTION\": \"then RCPT_NONOP_GIFTS_VAL=0\"\n//     },\n//     {\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3='621','622','623'\",\n//         \"CONDITION \": \"and _TXRCD00 <> 'E'\",\n//         \"ACTION\": \"then RCPT_NONOP_INVST_VAL=0\"\n//     }\n// ]\n\n// let csv = msg.payload.csv[0]\n\n// for (let i = 0; i < items.length; i++) {\n//     const item = items[i];\n\n//     if (item[\"NAICS\"]) {\n//         if (item[\"UNIT\"] == csv.UNIT) {\n//             if (item.CONDITION) {\n//                 csv.ACTION = item.ACTION\n//             }\n//         }\n//     }\n// }\n\n// msg.payload.csv[0].module = \"Logical Edits\"\n\n// setTimeout(function () {\n//     node.status({ fill: \"gray\", shape: \"ring\", text: \"complete\" });\n//     node.send(msg);\n// }, 1000);\n\n// // msg.payload.csv[0].RCPT_NONOP_GIFTS_VAL = 0\n\n// // return msg;\nconst cache = global.get(\"lookupCache\");\n// console.log({cache})\nif(cache){\nconst parameterData = cache.data[0]?.json_values || {}; \nconsole.log(437, {d:parameterData})\n\n// Get current record\nlet record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\nconsole.log(441, {d: record})\n\n// Call Logical Edits\nconst getNAICSCode = () => {\n    switch (record['UNIT']) {\n        case 'ESTAB':\n            return record['NAICS_NUM'];\n        case 'KAU':\n            return record['KAU_NAICS'];\n        default:\n            return null; // No NAICS needed for company level\n    }\n};\n\nconst naicsCode = getNAICSCode();\nconsole.log(456, {d: naicsCode})\n\n// Use parameter file per NAICS to determine simple computations/definitions\nif (naicsCode && parameterData.NAICS === naicsCode) {\n    // Do necessary computations/edits based on the naicsCode and parameters from parameterData\n    // e.g.:\n    // record['SomeField'] = someFunctionBasedOnNAICS(naicsCode, parameterData);\n    record.ACTION = 'Go to Unit Balance';\n}\nelse{\n    // rerun  todo\n    record.ACTION = '- Logical Checks';\n}\n\n// // Check if all simple imputation is calculated\n// if (/* Some condition to determine if all simple imputation is calculated */) {\n//     msg.payload.action = 'Go to Unit Balance';\n// } else {\n//     // If not all simple imputation is calculated, do necessary steps here\n//     // e.g.:\n//     // msg.payload.action = 'Repeat Logical Edits';\n// }\n}\nreturn msg;\n",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -13767,75 +13768,6 @@
         "wires": []
     },
     {
-        "id": "57c75bd58af75621",
-        "type": "link in",
-        "z": "475c4bbdee672833",
-        "name": "link in 20",
-        "links": [
-            "4a50e74e63590ec7",
-            "6cd6c27ee7f2bd7d"
-        ],
-        "x": 165,
-        "y": 260,
-        "wires": [
-            [
-                "310c654aa32dd481"
-            ]
-        ]
-    },
-    {
-        "id": "310c654aa32dd481",
-        "type": "function",
-        "z": "475c4bbdee672833",
-        "name": "geography function",
-        "func": "const validationChart = [{ \"STFIPS\": \"01\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"02\", \"GEOREG\": \"04\" }, { \"STFIPS\": \"04\", \"GEOREG\": \"04\" }, { \"STFIPS\": \"05\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"06\", \"GEOREG\": \"04\" }, { \"STFIPS\": \"08\", \"GEOREG\": \"04\" }, { \"STFIPS\": \"09\", \"GEOREG\": \"01\" }, { \"STFIPS\": \"10\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"11\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"12\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"13\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"15\", \"GEOREG\": \"04\" }, { \"STFIPS\": \"16\", \"GEOREG\": \"04\" }, { \"STFIPS\": \"17\", \"GEOREG\": \"02\" }, { \"STFIPS\": \"18\", \"GEOREG\": \"02\" }, { \"STFIPS\": \"19\", \"GEOREG\": \"02\" }, { \"STFIPS\": \"20\", \"GEOREG\": \"02\" }, { \"STFIPS\": \"21\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"22\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"23\", \"GEOREG\": \"01\" }, { \"STFIPS\": \"24\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"25\", \"GEOREG\": \"01\" }, { \"STFIPS\": \"26\", \"GEOREG\": \"02\" }, { \"STFIPS\": \"27\", \"GEOREG\": \"02\" }, { \"STFIPS\": \"28\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"29\", \"GEOREG\": \"02\" }, { \"STFIPS\": \"30\", \"GEOREG\": \"04\" }, { \"STFIPS\": \"31\", \"GEOREG\": \"02\" }, { \"STFIPS\": \"32\", \"GEOREG\": \"04\" }, { \"STFIPS\": \"33\", \"GEOREG\": \"01\" }, { \"STFIPS\": \"34\", \"GEOREG\": \"01\" }, { \"STFIPS\": \"35\", \"GEOREG\": \"04\" }, { \"STFIPS\": \"36\", \"GEOREG\": \"01\" }, { \"STFIPS\": \"37\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"38\", \"GEOREG\": \"02\" }, { \"STFIPS\": \"39\", \"GEOREG\": \"02\" }, { \"STFIPS\": \"40\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"41\", \"GEOREG\": \"04\" }, { \"STFIPS\": \"42\", \"GEOREG\": \"01\" }, { \"STFIPS\": \"44\", \"GEOREG\": \"01\" }, { \"STFIPS\": \"45\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"46\", \"GEOREG\": \"02\" }, { \"STFIPS\": \"47\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"48\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"49\", \"GEOREG\": \"04\" }, { \"STFIPS\": \"50\", \"GEOREG\": \"01\" }, { \"STFIPS\": \"51\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"53\", \"GEOREG\": \"04\" }, { \"STFIPS\": \"54\", \"GEOREG\": \"03\" }, { \"STFIPS\": \"55\", \"GEOREG\": \"02\" }, { \"STFIPS\": \"56\", \"GEOREG\": \"04\" }]\nlet validation = false\n\nfor (let i = 0; i < validationChart.length; i++) {\n    const element = validationChart[i];\n    let parsedSTFIPS = parseInt(element[\"STFIPS\"]);\n    let parsedGEOREG = parseInt(element[\"GEOREG\"]);\n\n    if (parsedSTFIPS === parseInt(msg.payload.csv[0].STFIPS) && parsedGEOREG === parseInt(msg.payload.csv[0].GEOREG)) {\n        validation = true\n        break;\n    }\n}\n\nif (validation) {\n    msg.payload.csv[0].action = \"Go to Calculate Best Admin Receipts\"\n} else {\n    if (msg.payload.csv[0].STFIPS == \"97\" ) {\n        if (msg.payload.csv[0].NAICS_SECTOR_OLD == \"21\" && (msg.payload.csv[0].STATE_PHY == \"PC\" || msg.payload.csv[0].STATE_PHY == \"NG\" || msg.payload.csv[0].STATE_PHY == \"AT\")) {\n            msg.payload.csv[0].action = \"Go to Calculate Best Admin Receipts\"\n        } else {\n            msg.payload.csv[0].TABSTAT = \"N\"\n            msg.payload.csv[0].NONTABFL = \"Y\"\n        }\n    } else {\n        msg.payload.csv[0].flag = \"GEO_Invalid\"\n        msg.payload.csv[0].action = \"Go to Calculate Best Admin Receipts\"\n    }\n}\n\nreturn msg",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 330,
-        "y": 260,
-        "wires": [
-            [
-                "1c8d9d938796f4db",
-                "bad79e5ee645cc24"
-            ]
-        ]
-    },
-    {
-        "id": "1c8d9d938796f4db",
-        "type": "debug",
-        "z": "475c4bbdee672833",
-        "name": "debug geography",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 530,
-        "y": 160,
-        "wires": []
-    },
-    {
-        "id": "bad79e5ee645cc24",
-        "type": "link out",
-        "z": "475c4bbdee672833",
-        "name": "link out 17",
-        "mode": "link",
-        "links": [
-            "7d91540d69ac16c1",
-            "688a39b3e0070fe9"
-        ],
-        "x": 505,
-        "y": 260,
-        "wires": []
-    },
-    {
         "id": "2eee0041d9d93424",
         "type": "link in",
         "z": "2245e192a734f1bb",
@@ -17528,273 +17460,6 @@
         "wires": []
     },
     {
-        "id": "c903163629df82af",
-        "type": "function",
-        "z": "6399b853963e761e",
-        "name": "electricImputeModule",
-        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\n// Assumed JavaScript function based on the newest extracted OCR text (Electric Impute Module)\nfunction electricImputeModule(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL) {\n    // Placeholder for NM_State parameter table\n    let NM_STATE_PARAMETER_TABLE = {\n        AVG1: 0,\n        AVG2: 0\n    };\n\n    let { AVG1, AVG2 } = NM_STATE_PARAMETER_TABLE;\n\n    if (EXPS_ELEC_VAL <= 10000) {\n        // Logic for Year 1 historic values (H_) referencing 2022 EC data. Year 2 and on will refer to prior year AIES data\n    }\n\n    if (ELEC_PRCH_KWH_NUM_F[3][1] !== 'B') {\n        ELEC_PRCH_KWH_NUM = Math.round(EXPS_ELEC_VAL * AVG2);\n        ELEC_PRCH_KWH_NUM_F[3][1] = 'B';\n    } else {\n        ELEC_PRCH_KWH_NUM = Math.round(EXPS_ELEC_VAL * AVG1);\n    }\n\n    // Additional logic...\n\n    return EXPS_ELEC_VAL;\n}\n\n",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 9,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 400,
-        "y": 240,
-        "wires": [
-            [
-                "ba693bb539d071b9",
-                "eda519aa8a1db303"
-            ]
-        ]
-    },
-    {
-        "id": "ba693bb539d071b9",
-        "type": "debug",
-        "z": "6399b853963e761e",
-        "name": "debug electricImputeModule",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 690,
-        "y": 160,
-        "wires": []
-    },
-    {
-        "id": "eda519aa8a1db303",
-        "type": "link out",
-        "z": "6399b853963e761e",
-        "name": "link out 58",
-        "mode": "link",
-        "links": [
-            "7d91540d69ac16c1",
-            "688a39b3e0070fe9"
-        ],
-        "x": 585,
-        "y": 280,
-        "wires": []
-    },
-    {
-        "id": "5f5ca49f66f32b41",
-        "type": "function",
-        "z": "6399b853963e761e",
-        "name": "electricImputeModule",
-        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\n// Assumed JavaScript function based on the newest extracted OCR text (Electric Impute Module)\nfunction electricImputeModule(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL) {\n    // Placeholder for NM_State parameter table\n    let NM_STATE_PARAMETER_TABLE = {\n        AVG1: 0,\n        AVG2: 0\n    };\n\n    let { AVG1, AVG2 } = NM_STATE_PARAMETER_TABLE;\n\n    if (EXPS_ELEC_VAL <= 10000) {\n        // Logic for Year 1 historic values (H_) referencing 2022 EC data. Year 2 and on will refer to prior year AIES data\n    }\n\n    if (ELEC_PRCH_KWH_NUM_F[3][1] !== 'B') {\n        ELEC_PRCH_KWH_NUM = Math.round(EXPS_ELEC_VAL * AVG2);\n        ELEC_PRCH_KWH_NUM_F[3][1] = 'B';\n    } else {\n        ELEC_PRCH_KWH_NUM = Math.round(EXPS_ELEC_VAL * AVG1);\n    }\n\n    // Additional logic...\n\n    return EXPS_ELEC_VAL;\n}\n\n",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 9,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 400,
-        "y": 460,
-        "wires": [
-            [
-                "d024af4d5725903e",
-                "8b699616f9c5a9b5"
-            ]
-        ]
-    },
-    {
-        "id": "d024af4d5725903e",
-        "type": "debug",
-        "z": "6399b853963e761e",
-        "name": "debug electricImputeModule",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 690,
-        "y": 380,
-        "wires": []
-    },
-    {
-        "id": "8b699616f9c5a9b5",
-        "type": "link out",
-        "z": "6399b853963e761e",
-        "name": "link out 59",
-        "mode": "link",
-        "links": [
-            "7d91540d69ac16c1",
-            "688a39b3e0070fe9"
-        ],
-        "x": 585,
-        "y": 500,
-        "wires": []
-    },
-    {
-        "id": "1455ef9792b755e9",
-        "type": "function",
-        "z": "6399b853963e761e",
-        "name": "Main",
-        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nconst params = {\n    MN_ELECTRIC_STATE: [\n        { 'GEO_ST': '01', 'AVG1': 6.99263, 'AVG2': 12.1924, 'ELEC_INTERSECT': 1000, 'LL': 0.02, 'UL': 0.29 },\n        { 'GEO_ST': '02', 'AVG1': 2.97017, 'AVG2': 6.2589, 'ELEC_INTERSECT': 1000, 'LL': 0.03, 'UL': 0.21 },\n    ],\n    MN_ELEC_CUTOFF: {\n        REFPER: '2008A1',\n        CUTOFF1: '50000',\n        CUTOFF2: '10000',\n        FIXED: '684953',\n        BETA: '6.017'\n    }\n}\nconst input = {\n    STFIPS: '',\n    ELECGEN:'',\n    CSTELEC: '',\n    ELECSLD:'',\n    H_ELECGEN: '',\n    H_ELECSLD: '',\n    HISTSTAT: '',\n    EXPS_ELEC_VAL: 0,\n    ELEC_PRCH_KWH_NUM: 0\n}\nconst T_STFIPS = input?.STFIPS;\nlet MISSING_ST_FLIPS_ELECTRIC = 0;\nconst cutoffs = params.MN_ELEC_CUTOFF;\n\nfunction getParameterByGeoSt(geoSt) {\n    if (!geoSt || geoSt === 'NULL') return null;\n    return params.MN_ELECTRIC_STATE.find(item => item.GEO_ST === geoSt);\n}\nfunction electricEnergyModule(input){\n    const { EXPS_ELEC_VAL, ELEC_PRCH_KWH_NUM } = input;\n    if(EXPS_ELEC_VAL === 0 && ELEC_PRCH_KWH_NUM === 0){\n        // Go to A\n    }else if (EXPS_ELEC_VAL === 0 && ELEC_PRCH_KWH_NUM > 0){\n            // ELEC_PRCH_KWH_NUM = 0\n            // ELEC_PRCH_KWH_NUM_F (3,1) = 'J'\n            // go to A \n    }else if(T_STFIPS) {\n        // Go to electricEnergyModuleCont\n    }else{\n        MISSING_ST_FLIPS_ELECTRIC = 1;\n    }\n}\n// function electricEnergyModule(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, x_CURR) {\n//     console.log(\"Executing electricEnergyModule...\");\n\n//     if (!T_STFIPS || !REFPER || !ELEC_PRCH_KWH_NUM || !x_CURR ||\n//         [T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, x_CURR].includes('NULL')) {\n//         console.log('Invalid parameters');\n//         return 'Invalid parameters';\n//     }\n\n//     const parameter = getParameterByGeoSt(T_STFIPS);\n//     if (!parameter) {\n//         console.log('Invalid STFIPS');\n//         return 'Invalid STFIPS';\n//     }\n\n//     // ... rest of the logic\n\n//     return electricEnergyModuleCont(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, 0, x_CURR);\n// }\n\n// function electricEnergyModuleCont(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL, x_CURR) {\n//     console.log(\"Executing electricEnergyModuleCont...\");\n//     if (!T_STFIPS || !REFPER || ELEC_PRCH_KWH_NUM === null || EXPS_ELEC_VAL === null || !x_CURR ||\n//         [T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL, x_CURR].includes('NULL')) {\n//         console.log('Invalid parameters');\n//         return 'Invalid parameters';\n//     }\n\n//     const parameter = getParameterByGeoSt(T_STFIPS);\n//     let FIXED = 0;\n//     let BETA = 0;\n\n//     if (EXPS_ELEC_VAL / ELEC_PRCH_KWH_NUM > BETA) {\n//         return electricImputeModule(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL, x_CURR);\n//     }\n\n//     console.log('Returning from electricEnergyModuleCont:', EXPS_ELEC_VAL);\n//     return EXPS_ELEC_VAL;\n// }\n\n// function electricImputeModule(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL, x_CURR) {\n//     console.log(\"Executing electricImputeModule...\");\n//     if (!T_STFIPS || !REFPER || ELEC_PRCH_KWH_NUM === null || EXPS_ELEC_VAL === null || !x_CURR ||\n//         [T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL, x_CURR].includes('NULL')) {\n//         console.log('Invalid parameters');\n//         return 'Invalid parameters';\n//     }\n\n//     const parameter = getParameterByGeoSt(T_STFIPS);\n//     let NM_STATE_PARAMETER_TABLE = {\n//         AVG1: parameter ? parameter.AVG1 : 0,\n//         AVG2: parameter ? parameter.AVG2 : 0\n//     };\n\n//     // ... rest of the logic\n\n//     console.log('Returning from electricImputeModule:', EXPS_ELEC_VAL);\n//     return EXPS_ELEC_VAL;\n// }\n\n// console.log(electricEnergyModule(T_STFIPS, '2022', 1000, 'M'));\n\n// Test cases\n// console.log(electricEnergyModule('01', '2022', 1000, 'M'));  // Should execute all three functions for GEO_ST '01'\n// console.log(electricEnergyModule(undefined, '2022', 500, 'M'));  // Should return 'Invalid parameters'\n// console.log(electricEnergyModule('02', 'NULL', 500, 'M'));  // Should return 'Invalid parameters'\n// console.log(electricEnergyModule('03', '2022', 500, 'M'));  // Should return 'Invalid STFIPS' because '03' is not in parameterTableData\n\n// function getElecState(REFPER, params) {\n//     let stateParam;\n//     // Choose parameter table based on REFPER\n//     if (REFPER.slice(0, 4) === '2022') {\n//         stateParam = params.MN_ELECTRIC_STATE;\n//     } else if (REFPER === '2023A1') {\n//         stateParam = params.ASM23_ELECTRIC_STATE;\n//     } else if (REFPER === '2024A1') {\n//         stateParam = params.ASM24_ELECTRIC_STATE;\n//     } // ... add other conditions for other years\n\n//     return stateParam;\n// }\n// console.log(getElecState('2022', params));\n",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 360,
-        "y": 680,
-        "wires": [
-            [
-                "fb0490d46f6dac6d",
-                "d9030a8fd1f031b8"
-            ]
-        ]
-    },
-    {
-        "id": "fb0490d46f6dac6d",
-        "type": "debug",
-        "z": "6399b853963e761e",
-        "name": "debug Main",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 650,
-        "y": 600,
-        "wires": []
-    },
-    {
-        "id": "d9030a8fd1f031b8",
-        "type": "link out",
-        "z": "6399b853963e761e",
-        "name": "link out 60",
-        "mode": "link",
-        "links": [
-            "7d91540d69ac16c1",
-            "688a39b3e0070fe9",
-            "95d077dd39781efe"
-        ],
-        "x": 595,
-        "y": 720,
-        "wires": []
-    },
-    {
-        "id": "82512cd1437a65ef",
-        "type": "subflow:0be109393cb5f28a",
-        "z": "6399b853963e761e",
-        "name": "",
-        "x": 630,
-        "y": 980,
-        "wires": [
-            [
-                "446e40b2499253e6"
-            ]
-        ]
-    },
-    {
-        "id": "5ffef6c04222007d",
-        "type": "debug",
-        "z": "6399b853963e761e",
-        "name": "debug 107",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1050,
-        "y": 980,
-        "wires": []
-    },
-    {
-        "id": "446e40b2499253e6",
-        "type": "function",
-        "z": "6399b853963e761e",
-        "name": "function 37",
-        "func": "let paramsT = global.get(\"lookupCache\")\nmsg.cache = paramsT\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\nconst params = paramsT?.data[0]?.json_values\nconst input = record\nconst NAICS_NUM = input?.NAICS_NUM;\n\nfunction LogicalEdits(input) {\n    const { NAICS_NUM } = input;\n    if (parseFloat(EXPS_ELEC_VAL) <= 10000) {\n        console.log(1)\n        msg.payload.csv[record_idx].ACTION = \"Go To A\";\n    } else{\n        console.log(2)\n        msg.payload.csv[record_idx].ELEC_PRCH_KWH_NUM = Math.round(parseFloat(EXPS_ELEC_VAL) * parseFloat(parameter.AVG1));\n        msg.payload.csv[record_idx].ELEC_PRCH_KWH_NUM_F = 'B'; // What is (3,1) here ?\n        msg.payload.csv[record_idx].ACTION = \"Go To A - END\";\n    }\n    return msg;\n}\n\nreturn LogicalEdits(input)",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 5,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 850,
-        "y": 980,
-        "wires": [
-            [
-                "5ffef6c04222007d",
-                "782e6a52f1a66003"
-            ]
-        ]
-    },
-    {
-        "id": "affe73445eec8a4f",
-        "type": "link in",
-        "z": "6399b853963e761e",
-        "name": "link in 46",
-        "links": [
-            "cede3264bdcd0a70",
-            "36c4687d5f1bee6b",
-            "24ae978c7feb5fc3"
-        ],
-        "x": 155,
-        "y": 980,
-        "wires": [
-            [
-                "d6716f22d2ac0593"
-            ]
-        ]
-    },
-    {
-        "id": "d6716f22d2ac0593",
-        "type": "change",
-        "z": "6399b853963e761e",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload.lookup",
-                "pt": "msg",
-                "to": "{\"moduleName\":\"electric_energy\",\"program\":\"aies\",\"unit_type\":\"estab\",\"params\":\"electric_energy_module\"}",
-                "tot": "json"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 350,
-        "y": 980,
-        "wires": [
-            [
-                "82512cd1437a65ef"
-            ]
-        ]
-    },
-    {
-        "id": "782e6a52f1a66003",
-        "type": "link out",
-        "z": "6399b853963e761e",
-        "name": "link out classification",
-        "mode": "link",
-        "links": [
-            "7d91540d69ac16c1",
-            "688a39b3e0070fe9"
-        ],
-        "x": 930,
-        "y": 1040,
-        "wires": []
-    },
-    {
         "id": "36d7a2e7.38e4de",
         "type": "inject",
         "z": "32a46ccfb2faded5",
@@ -19909,14 +19574,15 @@
         "type": "function",
         "z": "0952db06f674f8bc",
         "name": "logical edits function",
-        "func": "const items = [\n    {\n        \"VARIABLE\": \"TYPOP_CODE_STAT  RCPT_COMSN_GSV_VAL RCPT_OWN_VAL \\nRCPT_TOT_VAL\",\n        \"UNIT\": \"estab\",\n        \"NAICS\": \"NAICS3='425'\",\n        \"CONDITION \": \"TYPOP_CODE_STAT eq '4X' and RCPT_COMSN_GSV_VAL + RCPT_OWN_VAL ne RCPT_TOT_VAL\",\n        \"ACTION\": \"set review flag\"\n    },\n    {\n        \"VARIABLE\": \"TYPOP_CODE_STAT  RCPT_COMSN_GSV_VAL RCPT_COMSN_EARN_VAL RCPT_COMSN_AVG_RATE \",\n        \"UNIT\": \"estab\",\n        \"NAICS\": \"NAICS3='425'\",\n        \"CONDITION \": \"TYPOP_CODE_STAT eq '4X' and RCPT_COMSN_GSV_VAL not in (0,.) and RCPT_COMSN_EARN_VAL in (0,.) and RCPT_COMSN_AVG_RATE not in (0,.)\",\n        \"ACTION\": \"RCPT_COMSN_EARN_VAL = RCPT_COMSN_GSV_VAL * RCPT_COMSN_AVG_RATE\",\n        \" DESCRIPTION\": \"if they reported a gross selling value from goods gold on commission, and an average commission rate, but didn't provide the amount of commissions (or set to 0), use GSV * average commission rate to derive commission\"\n    },\n    {\n        \"VARIABLE\": \"TYPOP_CODE_STAT  RCPT_COMSN_GSV_VAL RCPT_COMSN_EARN_VAL RCPT_COMSN_AVG_RATE \",\n        \"UNIT\": \"estab\",\n        \"NAICS\": \"NAICS3='425'\",\n        \"CONDITION \": \"TYPOP_CODE_STAT eq '4X' and RCPT_COMSN_GSV_VAL in (0,.) and RCPT_COMSN_EARN_VAL not in (0,.) and RCPT_COMSN_AVG_RATE not in (0,.)\",\n        \"ACTION\": \"RCPT_COMSN_GSV_VAL = RCPT_COMSN_EARN_VAL \\/ RCPT_COMSN_AVG_RATE\",\n        \" DESCRIPTION\": \"if they reported commissions and an average commission rate but no GSV, use the commission and commission rate to calculate GSV\"\n    },\n    {\n        \"VARIABLE\": \"TYPOP_CODE_STAT\\nRCPT_OWN_VAL \\nRCPT_TOT_VAL RCPT_COMSN_GSV_VAL \\n RCPT_COMSN_EARN_VAL\",\n        \"UNIT\": \"estab\",\n        \"NAICS\": \"NAICS3='425'\",\n        \"CONDITION \": \"TYPOP_CODE_STAT = '4X' and RCPT_OWN_VAL eq 0 and RCPT_COMSN_GSV_VAL ne RCPT_TOT_VAL and RCPT_COMSN_GSV_VAL < RCPT_TOT_VAL and RCPT_TOT_VAL eq sum(RCPT_COMSN_GSV_VAL, RCPT_COMSN_EARN_VAL)\",\n        \"ACTION\": \"RCPT_TOT_VAL = RCPT_COMSN_GSV_VAL\",\n        \" DESCRIPTION\": \"if no sales on own account (i.e., all commission-based) and GSV does not equal total sales (which, by definition can't happen, because GSV + OWN = total sales and if OWN = 0, then GSV = SALES) and SALES = the sum of GSV + COMMISSION, set sales to GSV because commissions should not be included in total sales\"\n    },\n    {\n        \"VARIABLE\": \"TYPOP_CODE_STAT\\nRCPT_OWN_VAL \\nRCPT_TOT_VAL RCPT_COMSN_GSV_VAL \\n RCPT_COMSN_EARN_VAL\",\n        \"UNIT\": \"estab\",\n        \"NAICS\": \"NAICS3='425'\",\n        \"CONDITION \": \"TYPOP_CODE_STAT = '4X' and RCPT_OWN_VAL eq 0 and RCPT_COMSN_GSV_VAL ne RCPT_TOT_VAL and RCPT_COMSN_GSV_VAL > RCPT_TOT_VAL and RCPT_TOT_VAL eq RCPT_COMSN_EARN_VAL\",\n        \"ACTION\": \"RCPT_TOT_VAL = RCPT_COMSN_GSV_VAL\",\n        \" DESCRIPTION\": \"if they reported sales as commissions, set sales = GSV\"\n    },\n    {\n        \"VARIABLE\": \"RCPT_ECOMM_VAL\",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"42', '44', '45'\",\n        \"CONDITION \": \"RCPT_ECOMM_STAT eq 2 \",\n        \"ACTION\": \"RCPT_ECOMM_VAL = 0\",\n        \" DESCRIPTION\": \"if ecommerce status = 2 (no) then the value for e-commerce should be 0\"\n    },\n    {\n        \"VARIABLE\": \"RCPT_ECOMM_VAL\",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"42', '44', '45'\",\n        \"CONDITION \": \"RCPT_ECOMM_VAL gt 0\",\n        \"ACTION\": \"RCPT_ECOMM_STAT = 1\",\n        \" DESCRIPTION\": \"if there's a reliable value for ecommerce, then the e-commerce status variable should be 1\"\n    },\n    {\n        \"VARIABLE\": \"RCPT_MOTR_HAZRD_STAT\\nRCPT_MOTR_HAZRD_PCT\",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS3= '484 '\",\n        \"CONDITION \": \"If  RCPT_MOTR_HAZRD_STAT =2 and RCPT_MOTR_HAZRD_PCT  = missing\",\n        \"ACTION\": \" then RCPT_MOTR_HAZRD_PCT =0.\",\n        \" DESCRIPTION\": \"IF the flag for hazardas materials is reported   and the NAICS is in 484 and the checkbox is a no and % - Hazardous Materials is equal to missing then set the % - Hazardous Materials to 0.\"\n    },\n    {\n        \"VARIABLE\": \"RCPT_MOTR_HAZRD_STAT\\nRCPT_MOTR_HAZRD_PCT\",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS3= '484 '\",\n        \"CONDITION \": \"If RCPT_MOTR_HAZRD_STAT = . and RCPT_MOTR_HAZRD_PCT  is >0 \",\n        \"ACTION\": \"then RCPT_MOTR_HAZRD_STAT  =1\",\n        \" DESCRIPTION\": \"IF the flag for hazardas materials is reported   and the NAICS is in 484 and the checkbox is a missing and % - Hazardous Materials is greater than zero then set the hazardous materials checkbox to yes.\"\n    },\n    {\n        \"VARIABLE\": \"RCPT_MOTR_HAZRD_STAT\\nRCPT_MOTR_HAZRD_PCT\",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS3= '484 '\",\n        \"CONDITION \": \"If  RCPT_MOTR_HAZRD_STAT = . or 1 and RCPT_MOTR_HAZRD_PCT  is =0 \",\n        \"ACTION\": \"then RCPT_MOTR_HAZRD_STAT=2\",\n        \" DESCRIPTION\": \"IF the flag for hazardas materials is reported  and the NAICS is in 484 and the checkbox is a missing or equal to yes  and % - Hazardous Materials is equal to zero then set the hazardous materials checkbox to no\"\n    },\n    {\n        \"VARIABLE\": \"RCPT_MOTR_HAZRD_STAT\\nRCPT_MOTR_HAZRD_PCT\",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS3= '484 '\",\n        \"CONDITION \": \"If RCPT_MOTR_HAZRD_STAT is 2 and RCPT_MOTR_HAZRD_PCT  is >0 \",\n        \"ACTION\": \"then RCPT_MOTR_HAZRD_STAT= 1\",\n        \" DESCRIPTION\": \"IF the flag for hazardas materials is reported   and the NAICS is in 484 and the checkbox is a  equal to no and % - Hazardous Materials is greater than zero then set the hazardous materials checkbox to yes\"\n    },\n    {\n        \"VARIABLE\": \"RCPT_BILL_PAY_PCT\\nRCPT_BILL_OTHOP_PCT\",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS6=‘561330’ \",\n        \"CONDITION \": \"If  the sum of RCPT_BILL_PAY_PCT and RCPT_BILL_OTHOP_PCT =0 \",\n        \"ACTION\": \"then RCPT_BILL_PAY_PCT and\\nRCPT_BILL_OTHOP_PCT =.\",\n        \" DESCRIPTION\": \"If status is active and NAICS is 561330 and the sum of % of total gross billings x Payroll srvc and % - All other operating revenue equals zero then set them to missing\"\n    },\n    {\n        \"VARIABLE\": \"RCPT_BUS_PCT\\nRCPT_LEISURE_PCT\",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS6=‘561510’,’561599’,'561520'\",\n        \"CONDITION \": \"If the sum of RCPT_BUS_PCT and RCPT_LEISURE_PCT =0 \",\n        \"ACTION\": \"then RCPT_BUS_PCT and RCPT_LEISURE_PCT =.\",\n        \" DESCRIPTION\": \"If status is active and NAICS is in 561510 or 561599 and the sum of % - Percent of Revenue from Business and % - Percent of Revenue from Leisure equals zero then set them to missing\"\n    },\n    {\n        \"VARIABLE\": \"RCPT_NEWS_PRNT_PCT\\nRCPT_NEWS_ONLINE_PCT\\nRCPT_NEWS_OTH_PCT\",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS5='51111' \",\n        \"CONDITION \": \"If sum(RCPT_NEWS_PRNT_PCT,  RCPT_NEWS_ONLINE_PCT, and RCPT_NEWS_OTH_PCT) =0 \",\n        \"ACTION\": \"then RCPT_NEWS_PRNT_PCT,  RCPT_NEWS_ONLINE_PCT, and RCPT_NEWS_OTH_PCT = .\",\n        \" DESCRIPTION\": \"If the status is active and the NAICS is in '51111' and the sum of % Print subscriptions and sales,  % Internet subscriptions and sales and % Newspapers - Other media advertising equals zero, then set them to missing.\"\n    },\n    {\n        \"VARIABLE\": \"RCPT_ADV_CLASS_PCT\\nRCPT_ADV_OTH_PCT\",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS5='51111' \",\n        \"CONDITION \": \"If the sum of RCPT_ADV_CLASS_PCT and RCPT_ADV_OTH_PCT =0 \",\n        \"ACTION\": \"then RCPT_ADV_CLASS_PCT and RCPT_ADV_OTH_PCT =.\",\n        \" DESCRIPTION\": \"If the status is active and the NAICS is in '51111' and the sum of % Print subscriptions and % Advertising Rev - Other Advertising equals zero, then set them to missing.\"\n    },\n    {\n        \"VARIABLE\": \"RCPT_PER_PRNT_PCT\\nRCPT_PER_ONLINE_PCT\\nRCPT_PER_OTH_PCT\",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS5='51112' \",\n        \"CONDITION \": \"If sum(RCPT_PER_PRNT_PCT,  RCPT_PER_ONLINE_PCT, and RCPT_PER_OTH_PCT) =0 \",\n        \"ACTION\": \"then RCPT_NEWS_PRNT_PCT,  RCPT_NEWS_ONLINE_PCT, and RCPT_NEWS_OTH_PCT =.\",\n        \" DESCRIPTION\": \"If the status is active and the NAICS is in '51112' and the sum of % Print subscriptions and sales, % Internet subscriptions and sales, and % Other media advertising is equal to zero then set them to missing.\"\n    },\n    {\n        \"VARIABLE\": \"RCPT_BOOK_PRNT_PCT\\nRCPT_BOOK_ONLINE_PCT\\nRCPT_BOOK_OTH_PCT\\n\",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS5='51113' \",\n        \"CONDITION \": \"If sum (RCPT_BOOK_PRNT_PCT,  RCPT_BOOK_ONLINE_PCT, and RCPT_BOOK_OTH_PCT) =0\",\n        \"ACTION\": \"then RCPT_BOOK_PRNT_PCT,  RCPT_BOOK_ONLINE_PCT, and RCPT_BOOK_OTH_PCT =.\",\n        \" DESCRIPTION\": \"If the status is active and the NAICS is in '51113' and the sum of % Books - Print,  % Books - Internet, and % Books - other media is equal to zero then set them to missing.\"\n    },\n    {\n        \"VARIABLE\": \"RCPT_DIR_PRNT_PCT\\nRCPT_DIR_ONLINE_PCT\\nRCPT_DIR_OTH_PCT\",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS5='51114' \",\n        \"CONDITION \": \"If sum(RCPT_DIR_PRNT_PCT,  RCPT_DIR_ONLINE_PCT, and RCPT_DIR_OTH_PCT) =0 \",\n        \"ACTION\": \"then RCPT_DIR_PRNT_PCT,  RCPT_DIR_ONLINE_PCT, and RCPT_DIR_OTH_PCT =.\",\n        \" DESCRIPTION\": \"If the status is active and the NAICS is in '51114' and the sum of % Print subscriptions and sales, % Internet subscriptions and sales, and % Other media advertising is equal to zero then set them to missing.\"\n    },\n    {\n        \"VARIABLE\": \"RCPT_SYSOFT_PERS_PCT\\nRCPT_SYSOFT_ENTR_PCT\\nRCPT_SYSOFT_MAIN_PCT\\nRCPT_SYSOFT_OTH_PCT\",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS5='51121' \",\n        \"CONDITION \": \"If sum(RCPT_SYSOFT_PERS_PCT, RCPT_SYSOFT_ENTR_PCT, RCPT_SYSOFT_MAIN_PCT, and RCPT_SYSOFT_OTH_PCT)=0 \",\n        \"ACTION\": \"then RCPT_SYSOFT_PERS_PCT, RCPT_SYSOFT_ENTR_PCT, RCPT_SYSOFT_MAIN_PCT, and RCPT_SYSOFT_OTH_PCT =.\",\n        \" DESCRIPTION\": \"If the status is active and the NAICS is in '51121' and the sum of % rev - Personal computer systems rev, % Enterprise-systems software revenue, % Mainframe computer-Systems software, and % of other systems software revenue is equal to zero then set them to missing.\"\n    },\n    {\n        \"VARIABLE\": \"RCPT_APSOFT_PERS_PCT\\nRCPT_APSOFT_ENTR_PCT\\nRCPT_APSOFT_MAIN_PCT\\nRCPT_APSOFT_OTH_PCT\",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS5='51121' \",\n        \"CONDITION \": \"If the sum of RCPT_APSOFT_PERS_PCT, RCPT_APSOFT_ENTR_PCT, RCPT_APSOFT_MAIN_PCT, and RCPT_APSOFT_OTH_PCT =0 \",\n        \"ACTION\": \"then  RCPT_APSOFT_PERS_PCT, RCPT_APSOFT_ENTR_PCT, RCPT_APSOFT_MAIN_PCT, and RCPT_APSOFT_OTH_PCT =.\",\n        \" DESCRIPTION\": \"If the status is active and the NAICS is in '51121' and the sum of % rev - Personal computer systems rev, % Enterprise-systems software revenue, % Mainframe computer-Systems software, and % of other systems software revenue is equal to zero then set them to missing.\"\n    },\n    {\n        \"VARIABLE\": \"INV_STAT\\nINV_CY_GOODS_TOT\",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS3='511','512'\",\n        \"CONDITION \": \"If and INV_STAT =2 and INV_CY_GOODS_TOT_DVAL = .\",\n        \"ACTION\": \"then INV_CY_GOODS_TOT_DVAL =0\",\n        \" DESCRIPTION\": \"If NAICS in 511 or 512 and the flag for Total inventories is reported    and the inventory checkbox is equal to no and the total inventories is missing then set the inventories equal to zero. \"\n    },\n    {\n        \"VARIABLE\": \"INV_STAT\\nINV_CY_GOODS_TOT\",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS3='511','512'\",\n        \"CONDITION \": \"If Substr(RECORD_NAICS_NUM,1,3) in ('511','512')  and INV_STAT =. and INV_CY_GOODS_TOT is >0 \",\n        \"ACTION\": \"then INV_STAT =1\",\n        \" DESCRIPTION\": \"If NAICS in 511 or 512 and the flag for Total inventories is reported   and the inventory checkbox is missing and the total inventories is greater than zero, then set the inventories checkbox to yes. \"\n    },\n    {\n        \"VARIABLE\": \"INV_STAT\\nINV_CY_GOODS_TOT\",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS3='511','512'\",\n        \"CONDITION \": \"If Substr(RECORD_NAICS_NUM,1,3) in ('511','512') and INV_STAT = . or = 1  and INV_CY_GOODS_TOT is =0 \",\n        \"ACTION\": \"then INV_STAT = 2\",\n        \" DESCRIPTION\": \"If NAICS in 511 or 512 and the flag for Total inventories is reported   the inventory checkbox is missing or equal to yes and the total inventories is equal to zero, then set the inventories checkbox to no.\"\n    },\n    {\n        \"VARIABLE\": \"INV_STAT\\nINV_CY_GOODS_TOT\",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS3='511','512'\",\n        \"CONDITION \": \"If Substr(RECORD_NAICS_NUM,1,3) in ('511','512')  and INV_STAT = 2  and INV_CY_GOODS_TOT is > 0 \",\n        \"ACTION\": \"then INV_STAT =1\",\n        \" DESCRIPTION\": \"If NAICS in 511 or 512 and the flag for Total inventories is is reported   , and the inventory checkbox is equal to no and the total inventories is freater than zero, then set the inventories checkbox to yes.\"\n    },\n    {\n        \"VARIABLE\": \"EXPS_EHR_STAT\\nEXPS_EHR_VAL\",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS2='62' and NAICS3 \\n<> ('624') \",\n        \"CONDITION \": \"If EXPS_EHR_VAL ne . and EXPS_EHR_STAT =( . or 2) and EXPS_EHR_VAL is >0 \",\n        \"ACTION\": \"then EXPS_EHR_STAT= 1\",\n        \" DESCRIPTION\": \"If the NAICS is in 62, but no in 624, and the flag for Electronic health record expenses is equal is reported   and the electronic health records checkbox is equal to no and the Electronic health records expenses is greater than zero, then set the electronic health records checkbox to yes.\"\n    },\n    {\n        \"VARIABLE\": \"EXPS_EHR_STAT \\nEXPS_EHR_VAL\",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS2='62' and NAICS3 \\n<> ('624') \",\n        \"CONDITION \": \"If EXPS_EHR_VAL ne . and EXPS_EHR_STAT = (. or 1) and EXPS_EHR_VAL is =0\",\n        \"ACTION\": \"then   EXPS_EHR_STAT = 2\",\n        \" DESCRIPTION\": \"If the NAICS is in 62, but no in 624, and the flag for Electronic health record expenses is reported   and the electronic health records checkbox is equal to yes  and the Electronic health records expenses is equal to zero, then set the electronic health records checkbox to no.\"\n    },\n    {\n        \"VARIABLE\": \"EXPS_EHR_STAT \\nEXPS_EHR_VAL\",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS2='62' and NAICS3 \\n<> '624'\",\n        \"CONDITION \": \"If EXPS_EHR_STAT  ne . and EXPS_EHR_STAT =  2  and EXPS_EHR_VAL is =.\",\n        \"ACTION\": \"then EXPS_EHR_VAL is = 0\",\n        \" DESCRIPTION\": \"If the NAICS is in 62, but no in 624, and the flag for Electronic health record expenses is reported   and the electronic health records checkbox is equal to no  and the Electronic health records expenses is missing, then set the electronic health records to zero.\"\n    },\n    {\n        \"VARIABLE\": \"RCPT_ECOMM_ES_VAL\\n RCPT_ECOMM_WEB_STAT  RCPT_ECOMM_THRD_STAT  RCPT_ECOMM_OTH_STAT  \",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS2='22','48','49,'51','52','53','54','55','56,'61','62','71','72,'81'\",\n        \"CONDITION \": \"If RCPT_ECOMM_ES_VAL ne . and RCPT_ECOMM_WEB_STAT  = (. or 1) and RCPT_ECOMM_THRD_STAT =( . or 1) and RCPT_ECOMM_OTH_STAT = (. or 1 )and  RCPT_ECOMM_ES_VAL =0 \",\n        \"ACTION\": \"then RCPT_ECOMM_WEB_STAT  = 2 RCPT_ECOMM_THRD_STAT = 2 RCPT_ECOMM_OTH_STAT  = 2\",\n        \" DESCRIPTION\": \"If the e-commerce flag is reported   or the e-commerce percent flag is reported   and Electronic revenue- company website is missing or yes,  Electronic revenue- third party website is missing or yes, Electronic revenue- electronic system, and e-commerce is zero and the e-commerce percent equals zero then set - company website is missing or yes,  Electronic revenue- third party website is missing or yes, Electronic revenue- electronic system to no.\"\n    },\n    {\n        \"VARIABLE\": \"RCPT_ECOMM_ES_VAL\\n RCPT_ECOMM_WEB_STAT  RCPT_ECOMM_THRD_STAT  RCPT_ECOMM_OTH_STAT  \",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS2='22','48','49,'51','52','53','54','55','56,'61','62','71','72,'81'\",\n        \"CONDITION \": \"If RCPT_ECOMM_WEB_STAT = 2, RCPT_ECOMM_THRD_STAT  = 2, and RCPT_ECOMM_OTH_STAT  = 2 and RCPT_ECOMM_ES_VAL = . \",\n        \"ACTION\": \"then RCPT_ECOMM_ES_VAL =0.\",\n        \" DESCRIPTION\": \"If the Electronic revenue- company website flag is reported   and the Electronic revenue- third party website is reported   , Electronic revenue- electronic system, and is reported   and Electronic revenue- company website,  Electronic revenue- third party website, Electronic revenue- electronic system all are set to no and e-commerce is missing and ecommerce percent is missing or zero then set e-commerce to zero.\"\n    },\n    {\n        \"VARIABLE\": \"RCPT_ECOMM_ES_VAL\\n RCPT_ECOMM_WEB_STAT  RCPT_ECOMM_THRD_STAT  RCPT_ECOMM_OTH_STAT  \",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS2='22','48','49,'51','52','53','54','55','56,'61','62','71','72,'81'\",\n        \"CONDITION \": \"If RCPT_ECOMM_ES_VAL = . and RCPT_ECOMM_WEB_STAT  = . and RCPT_ECOMM_THRD_STAT = . and RCPT_ECOMM_OTH_STAT = . and  RCPT_ECOMM_ES_VAL  is >0 \",\n        \"ACTION\": \"then RCPT_ECOMM_WEB_STAT  =1\",\n        \" DESCRIPTION\": \"If e-commerce flag is reported   or e-commerce percent is reported   and Electronic revenue- company website,  Electronic revenue- third party website, Electronic revenue- electronic system all are missing and e-commerce is greater than zero or percent e-commerce is greater than zero then set Electronic revenue- company website to yes. \"\n    },\n    {\n        \"VARIABLE\": \"RCPT_ECOMM_ES_VAL\",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS2='22','48','49,'51','52','53','54','55','56,'61','62','71','72,'81'\",\n        \"CONDITION \": \"If RCPT_ECOMM_ES_VAL ne . and RCPT_ECOMM_WEB_STAT  is 2 and RCPT_ECOMM_THRD_STAT is 2, and RCPT_ECOMM_OTH_STAT is 2 and  RCPT_ECOMM_ES_VAL  is >0 \",\n        \"ACTION\": \"then RCPT_ECOMM_WEB_STAT  =1\",\n        \" DESCRIPTION\": \"If e-commerce flag  is reported   or e-commerce percent is reported   and Electronic revenue- company website,  Electronic revenue- third party website,  and Electronic revenue- electronic system all are no  and e-commerce is greater than zero or percent e-commerce is greater than zero then set Electronic revenue- company website to yes. \"\n    },\n    {\n        \"VARIABLE\": \"EXPS_TOT_VAL\",\n        \"UNIT\": \"KAU\",\n        \"CONDITION \": \"If _qss00 in ('Y') and E190000 = . AND EQEXPD00 = 0 AND EQEXP00 > 0\",\n        \"ACTION\": \" then E190000 = eqexp00\",\n        \" DESCRIPTION\": \"If Total operating expenses is missing and QSS number of quarters imputed is equal to zero, and qss espense is greater than zero, then set total operating expense to qss expense\"\n    },\n    {\n        \"VARIABLE\": \"TAX_EXEMPT_STAT\",\n        \"UNIT\": \"KAU\",\n        \"CONDITION \": \"If substr(RECORD_NAICS_NUM,1,5) = '51912' and TAX_EXEMPT_STAT = 1\",\n        \"ACTION\": \"then NONPROFT_STAT=1\",\n        \" DESCRIPTION\": \"If NAICS in 51912 and tax recode is equal to exempt, then set not for profit basses to 1.\"\n    },\n    {\n        \"VARIABLE\": \"CPT_CUST_RES_PCT \\nCPT_CUST_NORES_PCT \",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS2='22'\",\n        \"CONDITION \": \"If sum(CPT_CUST_RES_PCT,CPT_CUST_NORES_PCT) = 0\",\n        \"ACTION\": \"then CPT_CUST_RES_PCT = . CPT_CUST_NORES_PCT = .\",\n        \" DESCRIPTION\": \"If NAICS in sector 22 and is active, and the sum of residential customers and non-residential customers is zero then set residential customers and non-residential customers to missing\"\n    },\n    {\n        \"VARIABLE\": \"CAPEX_OTH_NEW_VAL                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       CAPEX_OTH_USED_VAL                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 CAPEX_OTH_TOT\",\n        \"UNIT\": \"industry\",\n        \"CONDITION \": \"Value reported in other\",\n        \"ACTION\": \"set referral flag for analyst review\",\n        \" DESCRIPTION\": \"analyst reclassify value in other to structures or equipment\"\n    },\n    {\n        \"VARIABLE\": \"RCPT_MOTR_AGR_PCT  RCPT_MOTR_GRAIN_PCT  RCPT_MOTR_STONE_PCT RCPT_MOTR_FUEL_PCT  RCPT_MOTR_PHARM_PCT  RCPT_MOTR_WOOD_PCT  RCPT_MOTR_METAL_PCT  RCPT_MOTR_ELECT_PCT  RCPT_MOTR_USEDGD_PCT  RCPT_MOTR_NEWFRN_PCT  RCPT_MOTR_OTH_PCT \",\n        \"UNIT\": \"industry\",\n        \"NAICS\": \"NAICS3='484'\",\n        \"CONDITION \": \"If Sum(RCPT_MOTR_AGR_PCT,RCPT_MOTR_GRAIN_PCT,RCPT_MOTR_STONE_PCT,RCPT_MOTR_FUEL_PCT,RCPT_MOTR_PHARM_PCT,RCPT_MOTR_WOOD_PCT,RCPT_MOTR_METAL_PCT,RCPT_MOTR_ELECT_PCT, RCPT_MOTR_USEDGD_PCT,RCPT_MOTR_NEWFRN_PCT,RCPT_MOTR_OTH_PCT)=0\",\n        \"ACTION\": \"then RCPT_MOTR_AGR_PCT = .; RCPT_MOTR_GRAIN_PCT = .; RCPT_MOTR_STONE_PCT = .; RCPT_MOTR_FUEL_PCT = .; RCPT_MOTR_PHARM_PCT = .; RCPT_MOTR_WOOD_PCT = .; RCPT_MOTR_METAL_PCT = .; RCPT_MOTR_ELECT_PCT = .; RCPT_MOTR_USEDGD_PCT = .; RCPT_MOTR_NEWFRN_PCT = .; RCPT_MOTR_OTH_PCT = .;\",\n        \" DESCRIPTION\": \"If the NAICS is in 484 and active, and the sum of % - Agricultural Products, % - Grains, Alcohol, Tobacco Products, % - Stone, Nonmetallic minerals, % - Coal and Petroleum Products, % - Coal and Petroleum Products, % - Pharmaceutical and chemical products, % - Wood Products, Textiles, Leather, % - Electronic & Precision Instruments,% - Base Metal and Machinery % - Used household and office goods, % - New Furniture & Misc. Prods is zero, then set all to missing\"\n    },\n    {\n        \"VARIABLE\": \"RCPT_CUST_BUS_PCT RCPT_CUST_IND_PCT\",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS6=('517311','517312','517911', 519130')\",\n        \"CONDITION \": \"If sum(RCPT_CUST_BUS_PCT,RCPT_CUST_IND_PCT)=0\",\n        \"ACTION\": \"then RCPT_CUST_BUS_PCT=.; RCPT_CUST_IND_PCT=.;\",\n        \" DESCRIPTION\": \"If the status is active and the NAICS is in  517110, 517210, 517911, or 519130 and the sum of % Household revenue and % of revenue by Government & Businesses equal zero then set them to missing.\"\n    },\n    {\n        \"VARIABLE\": \"RCPT_CUST_LOCTEL_BUS_PCT RCPT_CUST_LOCTEL_IND_PCT\",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS6='517311' \",\n        \"CONDITION \": \"If sum(RCPT_CUST_LOCTEL_BUS_PCT,RCPT_CUST_LOCTEL_IND_PCT)=0\",\n        \"ACTION\": \"then RCPT_CUST_LOCTEL_BUS_PCT=.; RCPT_CUST_LOCTEL_IND_PCT=.;\",\n        \" DESCRIPTION\": \"If the status is active and the NIACS is in 51711 and the sum of % Household - local telephony and Fixed local Telephone - Gov & Business is equal to zero set them to mising.\"\n    },\n    {\n        \"VARIABLE\": \"RCPT_CUST_LNGTEL_BUS_PCT RCPT_CUST_LNGTEL_IND_PCT\",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS6='517311' \",\n        \"CONDITION \": \"If sum(RCPT_CUST_LNGTEL_BUS_PCT, RCPT_CUST_LNGTEL_IND_PCT)=0\",\n        \"ACTION\": \"then RCPT_CUST_LNGTEL_BUS_PCT=.; RCPT_CUST_LNGTEL_IND_PCT=.;\",\n        \" DESCRIPTION\": \"If the status is active and the NIACS is in 51711 and the sum of  % Fixed Long dist - Gov & Business and % Household-long distance telephony is equal to zero set them to mising.\"\n    },\n    {\n        \"VARIABLE\": \"RCPT_CUST_SUBLIN_BUS_PCT RCPT_CUST_SUBLIN_IND_PCT\",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS6='517311' \",\n        \"CONDITION \": \"If sum(RCPT_CUST_SUBLIN_BUS_PCT, RCPT_CUST_SUBLIN_IND_PCT)=0\",\n        \"ACTION\": \"then RCPT_CUST_SUBLIN_BUS_PCT=.; RCPT_CUST_SUBLIN_IND_PCT=.;\",\n        \" DESCRIPTION\": \"If the status is active and the NIACS is in 51711 and the sum of  % Subscriber line charges - Household and % Subscriber Line - Gov & Business is equal to zero set them to mising.\"\n    },\n    {\n        \"VARIABLE\": \"INV_STAT\\nTRUCKTRAC_NUM_TOT_DVAL TRAILER_NUM_TOT_DVAL\",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS3='484'\",\n        \"CONDITION \": \"If INV_STAT = . and (TRUCK_NUM_TOT_DVAL > 0 or TRUCKTRAC_NUM_TOT_DVAL > 0 or TRAILER_NUM_TOT_DVAL > 0)\",\n        \"ACTION\": \"then INV_STAT = 1;\",\n        \" DESCRIPTION\": \"If the flag for total truck inventory, total truck-tractor inventory, or total tralers inventory is reported  (R,A,E,or O) and the NAICS is in 484, and the inventory checkbox is missing and the total truck inventory, total truck-tractor inventory, or total tralers inventory is greater than zero, then set the inventory checkbox to yes. \"\n    },\n    {\n        \"VARIABLE\": \"INV_STAT\\nTRUCKTRAC_NUM_TOT_DVAL TRAILER_NUM_TOT_DVAL\",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS3='484'\",\n        \"CONDITION \": \"If INV_STAT in (.,1) and TRUCK_NUM_TOT_DVAL = 0 and TRUCKTRAC_NUM_TOT_DVAL = 0 and TRAILER_NUM_TOT_DVAL = 0\",\n        \"ACTION\": \"then INV_STAT = 2;\",\n        \" DESCRIPTION\": \"If the flag for total truck inventory, total truck-tractor inventory, or total tralers inventory is reported  (R,A,E,or O)and the NAICS is in 484, and the inventory checkbox is equal to yes and the total truck inventory, total truck-tractor inventory, or total tralers inventory is equal to zero, then set the inventory checkbox to no.\"\n    },\n    {\n        \"VARIABLE\": \"INV_STAT\\nTRUCKTRAC_NUM_TOT_DVAL TRAILER_NUM_TOT_DVAL\",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS3='484'\",\n        \"CONDITION \": \"If INV_STAT = 2 and (TRUCK_NUM_TOT_DVAL > 0 or TRUCKTRAC_NUM_TOT_DVAL > 0 or TRAILER_NUM_TOT_DVAL > 0)\",\n        \"ACTION\": \"then INV_STAT = 1;\",\n        \" DESCRIPTION\": \"If the flag for total truck inventory, total truck-tractor inventory, or total tralers inventory isreported (R,A,E,or O)and the NAICS is in 484, and the inventory checkbox is equal to no and the total truck inventory, total truck-tractor inventory, or total tralers inventory is greater than zero, then set the inventory checkbox to yes. \"\n    },\n    {\n        \"VARIABLE\": \"HOTEL_OWN3RD_STAT RCPT_TOT_HOTEL_OWN3RD_VAL  RCPT_ECOMM_HOTEL_OWN3RD_VAL\\nEXPS_TOT_HOTEL_OWN3RD_VAL \",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS5='72111','72112'\",\n        \"CONDITION \": \"If EXPS_TOT_HOTEL_OWN3RD_VAL <>2 and RCPT_TOT_HOTEL_OWN3RD_VAL=0 or RCPT_ECOMM_HOTEL_OWN3RD_VA=0  or EXPS_TOT_HOTEL_OWN3RD_VAL is >0\",\n        \"ACTION\": \"then EXPS_TOT_HOTEL_OWN3RD_VAL =2\"\n    },\n    {\n        \"VARIABLE\": \"HOTEL_OWN3RD_STAT RCPT_TOT_HOTEL_OWN3RD_VAL  RCPT_ECOMM_HOTEL_OWN3RD_VAL\\nEXPS_TOT_HOTEL_OWN3RD_VAL \",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS5='72111','72112'\",\n        \"CONDITION \": \"If EXPS_TOT_HOTEL_OWN3RD_VAL <>1 and RCPT_TOT_HOTEL_OWN3RD_VAL > 0  or RCPT_ECOMM_HOTEL_OWN3RD_VAL is > 0  or EXPS_TOT_HOTEL_OWN3RD_VAL is >0 \",\n        \"ACTION\": \"EXPS_TOT_HOTEL_OWN3RD_VAL=2\"\n    },\n    {\n        \"VARIABLE\": \"HOTEL_OWN3RD_STAT RCPT_TOT_HOTEL_OWN3RD_VAL  RCPT_ECOMM_HOTEL_OWN3RD_VAL\\nEXPS_TOT_HOTEL_OWN3RD_VAL \",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS5='72111','72112'\",\n        \"CONDITION \": \"If (HOTEL_OWN3RD_STAT = 2) AND (RCPT_TOT_HOTEL_OWN3RD_VAL = . AND  RCPT_ECOMM_HOTEL_OWN3RD_VAL = . AND EXPS_TOT_HOTEL_OWN3RD_VAL = .)\",\n        \"ACTION\": \"then RCPT_TOT_HOTEL_OWN3RD_VAL = 0; RCPT_ECOMM_HOTEL_OWN3RD_VAL = 0; EXPS_TOT_HOTEL_OWN3RD_VAL = 0;\",\n        \" DESCRIPTION\": \"If the NAICS is in 72111 or 72112 and the hotel management checkbox is set to no and hotel revenue of hotels managed, hotel e-commerce from hotels managed, and operating expense from hotels managed are all missing then set them all to zero. \"\n    },\n    {\n        \"VARIABLE\": \"RCPT_TELEMED_STAT RCPT_TELEMED_VAL  \",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS3='621','622','623' AND NAICS4 <> ‘6215’,’6219’\",\n        \"CONDITION \": \"If RCPT_TELEMED_STAT = . AND (RCPT_TELEMED_VAL > 0 \",\n        \"ACTION\": \"then RCPT_TELEMED_STAT = 1;\",\n        \" DESCRIPTION\": \"If the flag for Hospitals: Of 2020 total revenues reported, what was the dollar amount from telemedicine is reported (R,A,E,O)  or the flag for Hospitals: Of the total revenues reported, what was the percentage that was from telemedicine is reported (R,A,E,O)  and Hospitals: Did this receive revenues from telemedicine services in 2020 is missing and  total revenues reported, what was the dollar amount from telemedicine is greater than zero or Hospitals: Of the total revenues reported, what was the percentage that was from telemedicine is greater than zero then set Hospitals: Did this receive revenues from telemedicine services in 2020  to yes. \"\n    },\n    {\n        \"VARIABLE\": \"RCPT_TELEMED_STAT RCPT_TELEMED_VAL  \",\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS3='621','622','623' AND NAICS4 <> ‘6215’,’6219’\",\n        \"CONDITION \": \"RCPT_TELEMED_STAT = (.,1) AND (RCPT_TELEMED_VAL = 0)\",\n        \"ACTION\": \"then RCPT_TELEMED_STAT = 2;\",\n        \" DESCRIPTION\": \"If the flag for Hospitals: Of 2020 total revenues reported, what was the dollar amount from telemedicine is reported (R,A,E,O)  or the flag for Hospitals: Of the total revenues reported, what was the percentage that was from telemedicine is reported (R,A,E,O)  and Hospitals: Did this receive revenues from telemedicine services in 2020 is missing or set to yes and  total revenues reported, what was the dollar amount from telemedicine is zero or Hospitals: Of the total revenues reported, what was the percentage that was from telemedicine is zero then set Hospitals: Did this receive revenues from telemedicine services in 2020  to no \"\n    },\n    {\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS6='721110','721120'\",\n        \"ACTION\": \"then RCPT_ECOMM_ES_TOT_VAL=SUM(RCPT_TOT_VAL,RCPT_TOT_HOTEL_OWN3RD_VAL)\"\n    },\n    {\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS6='561330' \",\n        \"ACTION\": \"then RCPTOT=RCPT_GROSSBILL_VAL\"\n    },\n    {\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS6='721110','721120'\",\n        \"ACTION\": \"then RCPTOT=RCP_TOT_VAL_SUM+RCPT_TOT_HOTEL_OWN3RD_VAL\"\n    },\n    {\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS3='621','622','623'\",\n        \"CONDITION \": \"and _TXRCD00 <> 'E'\",\n        \"ACTION\": \"then RCPT_NONOP_GIFTS_VAL=0\"\n    },\n    {\n        \"UNIT\": \"KAU\",\n        \"NAICS\": \"NAICS3='621','622','623'\",\n        \"CONDITION \": \"and _TXRCD00 <> 'E'\",\n        \"ACTION\": \"then RCPT_NONOP_INVST_VAL=0\"\n    }\n]\n\nlet csv = msg.payload.csv[0]\n\nfor (let i = 0; i < items.length; i++) {\n    const item = items[i];\n\n    if (item[\"NAICS\"]) {\n        if (item[\"UNIT\"] == csv.UNIT) {\n            if (item.CONDITION) {\n                csv.ACTION = item.ACTION\n            }\n        }\n    }\n}\n\nmsg.payload.csv[0].RCPT_NONOP_GIFTS_VAL = 0\n\nreturn msg;",
+        "func": "// const items = [\n//     {\n//         \"VARIABLE\": \"TYPOP_CODE_STAT  RCPT_COMSN_GSV_VAL RCPT_OWN_VAL \\nRCPT_TOT_VAL\",\n//         \"UNIT\": \"estab\",\n//         \"NAICS\": \"NAICS3='425'\",\n//         \"CONDITION \": \"TYPOP_CODE_STAT eq '4X' and RCPT_COMSN_GSV_VAL + RCPT_OWN_VAL ne RCPT_TOT_VAL\",\n//         \"ACTION\": \"set review flag\"\n//     },\n//     {\n//         \"VARIABLE\": \"TYPOP_CODE_STAT  RCPT_COMSN_GSV_VAL RCPT_COMSN_EARN_VAL RCPT_COMSN_AVG_RATE \",\n//         \"UNIT\": \"estab\",\n//         \"NAICS\": \"NAICS3='425'\",\n//         \"CONDITION \": \"TYPOP_CODE_STAT eq '4X' and RCPT_COMSN_GSV_VAL not in (0,.) and RCPT_COMSN_EARN_VAL in (0,.) and RCPT_COMSN_AVG_RATE not in (0,.)\",\n//         \"ACTION\": \"RCPT_COMSN_EARN_VAL = RCPT_COMSN_GSV_VAL * RCPT_COMSN_AVG_RATE\",\n//         \" DESCRIPTION\": \"if they reported a gross selling value from goods gold on commission, and an average commission rate, but didn't provide the amount of commissions (or set to 0), use GSV * average commission rate to derive commission\"\n//     },\n//     {\n//         \"VARIABLE\": \"TYPOP_CODE_STAT  RCPT_COMSN_GSV_VAL RCPT_COMSN_EARN_VAL RCPT_COMSN_AVG_RATE \",\n//         \"UNIT\": \"estab\",\n//         \"NAICS\": \"NAICS3='425'\",\n//         \"CONDITION \": \"TYPOP_CODE_STAT eq '4X' and RCPT_COMSN_GSV_VAL in (0,.) and RCPT_COMSN_EARN_VAL not in (0,.) and RCPT_COMSN_AVG_RATE not in (0,.)\",\n//         \"ACTION\": \"RCPT_COMSN_GSV_VAL = RCPT_COMSN_EARN_VAL \\/ RCPT_COMSN_AVG_RATE\",\n//         \" DESCRIPTION\": \"if they reported commissions and an average commission rate but no GSV, use the commission and commission rate to calculate GSV\"\n//     },\n//     {\n//         \"VARIABLE\": \"TYPOP_CODE_STAT\\nRCPT_OWN_VAL \\nRCPT_TOT_VAL RCPT_COMSN_GSV_VAL \\n RCPT_COMSN_EARN_VAL\",\n//         \"UNIT\": \"estab\",\n//         \"NAICS\": \"NAICS3='425'\",\n//         \"CONDITION \": \"TYPOP_CODE_STAT = '4X' and RCPT_OWN_VAL eq 0 and RCPT_COMSN_GSV_VAL ne RCPT_TOT_VAL and RCPT_COMSN_GSV_VAL < RCPT_TOT_VAL and RCPT_TOT_VAL eq sum(RCPT_COMSN_GSV_VAL, RCPT_COMSN_EARN_VAL)\",\n//         \"ACTION\": \"RCPT_TOT_VAL = RCPT_COMSN_GSV_VAL\",\n//         \" DESCRIPTION\": \"if no sales on own account (i.e., all commission-based) and GSV does not equal total sales (which, by definition can't happen, because GSV + OWN = total sales and if OWN = 0, then GSV = SALES) and SALES = the sum of GSV + COMMISSION, set sales to GSV because commissions should not be included in total sales\"\n//     },\n//     {\n//         \"VARIABLE\": \"TYPOP_CODE_STAT\\nRCPT_OWN_VAL \\nRCPT_TOT_VAL RCPT_COMSN_GSV_VAL \\n RCPT_COMSN_EARN_VAL\",\n//         \"UNIT\": \"estab\",\n//         \"NAICS\": \"NAICS3='425'\",\n//         \"CONDITION \": \"TYPOP_CODE_STAT = '4X' and RCPT_OWN_VAL eq 0 and RCPT_COMSN_GSV_VAL ne RCPT_TOT_VAL and RCPT_COMSN_GSV_VAL > RCPT_TOT_VAL and RCPT_TOT_VAL eq RCPT_COMSN_EARN_VAL\",\n//         \"ACTION\": \"RCPT_TOT_VAL = RCPT_COMSN_GSV_VAL\",\n//         \" DESCRIPTION\": \"if they reported sales as commissions, set sales = GSV\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_ECOMM_VAL\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"42', '44', '45'\",\n//         \"CONDITION \": \"RCPT_ECOMM_STAT eq 2 \",\n//         \"ACTION\": \"RCPT_ECOMM_VAL = 0\",\n//         \" DESCRIPTION\": \"if ecommerce status = 2 (no) then the value for e-commerce should be 0\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_ECOMM_VAL\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"42', '44', '45'\",\n//         \"CONDITION \": \"RCPT_ECOMM_VAL gt 0\",\n//         \"ACTION\": \"RCPT_ECOMM_STAT = 1\",\n//         \" DESCRIPTION\": \"if there's a reliable value for ecommerce, then the e-commerce status variable should be 1\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_MOTR_HAZRD_STAT\\nRCPT_MOTR_HAZRD_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3= '484 '\",\n//         \"CONDITION \": \"If  RCPT_MOTR_HAZRD_STAT =2 and RCPT_MOTR_HAZRD_PCT  = missing\",\n//         \"ACTION\": \" then RCPT_MOTR_HAZRD_PCT =0.\",\n//         \" DESCRIPTION\": \"IF the flag for hazardas materials is reported   and the NAICS is in 484 and the checkbox is a no and % - Hazardous Materials is equal to missing then set the % - Hazardous Materials to 0.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_MOTR_HAZRD_STAT\\nRCPT_MOTR_HAZRD_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3= '484 '\",\n//         \"CONDITION \": \"If RCPT_MOTR_HAZRD_STAT = . and RCPT_MOTR_HAZRD_PCT  is >0 \",\n//         \"ACTION\": \"then RCPT_MOTR_HAZRD_STAT  =1\",\n//         \" DESCRIPTION\": \"IF the flag for hazardas materials is reported   and the NAICS is in 484 and the checkbox is a missing and % - Hazardous Materials is greater than zero then set the hazardous materials checkbox to yes.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_MOTR_HAZRD_STAT\\nRCPT_MOTR_HAZRD_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3= '484 '\",\n//         \"CONDITION \": \"If  RCPT_MOTR_HAZRD_STAT = . or 1 and RCPT_MOTR_HAZRD_PCT  is =0 \",\n//         \"ACTION\": \"then RCPT_MOTR_HAZRD_STAT=2\",\n//         \" DESCRIPTION\": \"IF the flag for hazardas materials is reported  and the NAICS is in 484 and the checkbox is a missing or equal to yes  and % - Hazardous Materials is equal to zero then set the hazardous materials checkbox to no\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_MOTR_HAZRD_STAT\\nRCPT_MOTR_HAZRD_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3= '484 '\",\n//         \"CONDITION \": \"If RCPT_MOTR_HAZRD_STAT is 2 and RCPT_MOTR_HAZRD_PCT  is >0 \",\n//         \"ACTION\": \"then RCPT_MOTR_HAZRD_STAT= 1\",\n//         \" DESCRIPTION\": \"IF the flag for hazardas materials is reported   and the NAICS is in 484 and the checkbox is a  equal to no and % - Hazardous Materials is greater than zero then set the hazardous materials checkbox to yes\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_BILL_PAY_PCT\\nRCPT_BILL_OTHOP_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS6=‘561330’ \",\n//         \"CONDITION \": \"If  the sum of RCPT_BILL_PAY_PCT and RCPT_BILL_OTHOP_PCT =0 \",\n//         \"ACTION\": \"then RCPT_BILL_PAY_PCT and\\nRCPT_BILL_OTHOP_PCT =.\",\n//         \" DESCRIPTION\": \"If status is active and NAICS is 561330 and the sum of % of total gross billings x Payroll srvc and % - All other operating revenue equals zero then set them to missing\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_BUS_PCT\\nRCPT_LEISURE_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS6=‘561510’,’561599’,'561520'\",\n//         \"CONDITION \": \"If the sum of RCPT_BUS_PCT and RCPT_LEISURE_PCT =0 \",\n//         \"ACTION\": \"then RCPT_BUS_PCT and RCPT_LEISURE_PCT =.\",\n//         \" DESCRIPTION\": \"If status is active and NAICS is in 561510 or 561599 and the sum of % - Percent of Revenue from Business and % - Percent of Revenue from Leisure equals zero then set them to missing\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_NEWS_PRNT_PCT\\nRCPT_NEWS_ONLINE_PCT\\nRCPT_NEWS_OTH_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS5='51111' \",\n//         \"CONDITION \": \"If sum(RCPT_NEWS_PRNT_PCT,  RCPT_NEWS_ONLINE_PCT, and RCPT_NEWS_OTH_PCT) =0 \",\n//         \"ACTION\": \"then RCPT_NEWS_PRNT_PCT,  RCPT_NEWS_ONLINE_PCT, and RCPT_NEWS_OTH_PCT = .\",\n//         \" DESCRIPTION\": \"If the status is active and the NAICS is in '51111' and the sum of % Print subscriptions and sales,  % Internet subscriptions and sales and % Newspapers - Other media advertising equals zero, then set them to missing.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_ADV_CLASS_PCT\\nRCPT_ADV_OTH_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS5='51111' \",\n//         \"CONDITION \": \"If the sum of RCPT_ADV_CLASS_PCT and RCPT_ADV_OTH_PCT =0 \",\n//         \"ACTION\": \"then RCPT_ADV_CLASS_PCT and RCPT_ADV_OTH_PCT =.\",\n//         \" DESCRIPTION\": \"If the status is active and the NAICS is in '51111' and the sum of % Print subscriptions and % Advertising Rev - Other Advertising equals zero, then set them to missing.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_PER_PRNT_PCT\\nRCPT_PER_ONLINE_PCT\\nRCPT_PER_OTH_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS5='51112' \",\n//         \"CONDITION \": \"If sum(RCPT_PER_PRNT_PCT,  RCPT_PER_ONLINE_PCT, and RCPT_PER_OTH_PCT) =0 \",\n//         \"ACTION\": \"then RCPT_NEWS_PRNT_PCT,  RCPT_NEWS_ONLINE_PCT, and RCPT_NEWS_OTH_PCT =.\",\n//         \" DESCRIPTION\": \"If the status is active and the NAICS is in '51112' and the sum of % Print subscriptions and sales, % Internet subscriptions and sales, and % Other media advertising is equal to zero then set them to missing.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_BOOK_PRNT_PCT\\nRCPT_BOOK_ONLINE_PCT\\nRCPT_BOOK_OTH_PCT\\n\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS5='51113' \",\n//         \"CONDITION \": \"If sum (RCPT_BOOK_PRNT_PCT,  RCPT_BOOK_ONLINE_PCT, and RCPT_BOOK_OTH_PCT) =0\",\n//         \"ACTION\": \"then RCPT_BOOK_PRNT_PCT,  RCPT_BOOK_ONLINE_PCT, and RCPT_BOOK_OTH_PCT =.\",\n//         \" DESCRIPTION\": \"If the status is active and the NAICS is in '51113' and the sum of % Books - Print,  % Books - Internet, and % Books - other media is equal to zero then set them to missing.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_DIR_PRNT_PCT\\nRCPT_DIR_ONLINE_PCT\\nRCPT_DIR_OTH_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS5='51114' \",\n//         \"CONDITION \": \"If sum(RCPT_DIR_PRNT_PCT,  RCPT_DIR_ONLINE_PCT, and RCPT_DIR_OTH_PCT) =0 \",\n//         \"ACTION\": \"then RCPT_DIR_PRNT_PCT,  RCPT_DIR_ONLINE_PCT, and RCPT_DIR_OTH_PCT =.\",\n//         \" DESCRIPTION\": \"If the status is active and the NAICS is in '51114' and the sum of % Print subscriptions and sales, % Internet subscriptions and sales, and % Other media advertising is equal to zero then set them to missing.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_SYSOFT_PERS_PCT\\nRCPT_SYSOFT_ENTR_PCT\\nRCPT_SYSOFT_MAIN_PCT\\nRCPT_SYSOFT_OTH_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS5='51121' \",\n//         \"CONDITION \": \"If sum(RCPT_SYSOFT_PERS_PCT, RCPT_SYSOFT_ENTR_PCT, RCPT_SYSOFT_MAIN_PCT, and RCPT_SYSOFT_OTH_PCT)=0 \",\n//         \"ACTION\": \"then RCPT_SYSOFT_PERS_PCT, RCPT_SYSOFT_ENTR_PCT, RCPT_SYSOFT_MAIN_PCT, and RCPT_SYSOFT_OTH_PCT =.\",\n//         \" DESCRIPTION\": \"If the status is active and the NAICS is in '51121' and the sum of % rev - Personal computer systems rev, % Enterprise-systems software revenue, % Mainframe computer-Systems software, and % of other systems software revenue is equal to zero then set them to missing.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_APSOFT_PERS_PCT\\nRCPT_APSOFT_ENTR_PCT\\nRCPT_APSOFT_MAIN_PCT\\nRCPT_APSOFT_OTH_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS5='51121' \",\n//         \"CONDITION \": \"If the sum of RCPT_APSOFT_PERS_PCT, RCPT_APSOFT_ENTR_PCT, RCPT_APSOFT_MAIN_PCT, and RCPT_APSOFT_OTH_PCT =0 \",\n//         \"ACTION\": \"then  RCPT_APSOFT_PERS_PCT, RCPT_APSOFT_ENTR_PCT, RCPT_APSOFT_MAIN_PCT, and RCPT_APSOFT_OTH_PCT =.\",\n//         \" DESCRIPTION\": \"If the status is active and the NAICS is in '51121' and the sum of % rev - Personal computer systems rev, % Enterprise-systems software revenue, % Mainframe computer-Systems software, and % of other systems software revenue is equal to zero then set them to missing.\"\n//     },\n//     {\n//         \"VARIABLE\": \"INV_STAT\\nINV_CY_GOODS_TOT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3='511','512'\",\n//         \"CONDITION \": \"If and INV_STAT =2 and INV_CY_GOODS_TOT_DVAL = .\",\n//         \"ACTION\": \"then INV_CY_GOODS_TOT_DVAL =0\",\n//         \" DESCRIPTION\": \"If NAICS in 511 or 512 and the flag for Total inventories is reported    and the inventory checkbox is equal to no and the total inventories is missing then set the inventories equal to zero. \"\n//     },\n//     {\n//         \"VARIABLE\": \"INV_STAT\\nINV_CY_GOODS_TOT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3='511','512'\",\n//         \"CONDITION \": \"If Substr(RECORD_NAICS_NUM,1,3) in ('511','512')  and INV_STAT =. and INV_CY_GOODS_TOT is >0 \",\n//         \"ACTION\": \"then INV_STAT =1\",\n//         \" DESCRIPTION\": \"If NAICS in 511 or 512 and the flag for Total inventories is reported   and the inventory checkbox is missing and the total inventories is greater than zero, then set the inventories checkbox to yes. \"\n//     },\n//     {\n//         \"VARIABLE\": \"INV_STAT\\nINV_CY_GOODS_TOT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3='511','512'\",\n//         \"CONDITION \": \"If Substr(RECORD_NAICS_NUM,1,3) in ('511','512') and INV_STAT = . or = 1  and INV_CY_GOODS_TOT is =0 \",\n//         \"ACTION\": \"then INV_STAT = 2\",\n//         \" DESCRIPTION\": \"If NAICS in 511 or 512 and the flag for Total inventories is reported   the inventory checkbox is missing or equal to yes and the total inventories is equal to zero, then set the inventories checkbox to no.\"\n//     },\n//     {\n//         \"VARIABLE\": \"INV_STAT\\nINV_CY_GOODS_TOT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3='511','512'\",\n//         \"CONDITION \": \"If Substr(RECORD_NAICS_NUM,1,3) in ('511','512')  and INV_STAT = 2  and INV_CY_GOODS_TOT is > 0 \",\n//         \"ACTION\": \"then INV_STAT =1\",\n//         \" DESCRIPTION\": \"If NAICS in 511 or 512 and the flag for Total inventories is is reported   , and the inventory checkbox is equal to no and the total inventories is freater than zero, then set the inventories checkbox to yes.\"\n//     },\n//     {\n//         \"VARIABLE\": \"EXPS_EHR_STAT\\nEXPS_EHR_VAL\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS2='62' and NAICS3 \\n<> ('624') \",\n//         \"CONDITION \": \"If EXPS_EHR_VAL ne . and EXPS_EHR_STAT =( . or 2) and EXPS_EHR_VAL is >0 \",\n//         \"ACTION\": \"then EXPS_EHR_STAT= 1\",\n//         \" DESCRIPTION\": \"If the NAICS is in 62, but no in 624, and the flag for Electronic health record expenses is equal is reported   and the electronic health records checkbox is equal to no and the Electronic health records expenses is greater than zero, then set the electronic health records checkbox to yes.\"\n//     },\n//     {\n//         \"VARIABLE\": \"EXPS_EHR_STAT \\nEXPS_EHR_VAL\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS2='62' and NAICS3 \\n<> ('624') \",\n//         \"CONDITION \": \"If EXPS_EHR_VAL ne . and EXPS_EHR_STAT = (. or 1) and EXPS_EHR_VAL is =0\",\n//         \"ACTION\": \"then   EXPS_EHR_STAT = 2\",\n//         \" DESCRIPTION\": \"If the NAICS is in 62, but no in 624, and the flag for Electronic health record expenses is reported   and the electronic health records checkbox is equal to yes  and the Electronic health records expenses is equal to zero, then set the electronic health records checkbox to no.\"\n//     },\n//     {\n//         \"VARIABLE\": \"EXPS_EHR_STAT \\nEXPS_EHR_VAL\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS2='62' and NAICS3 \\n<> '624'\",\n//         \"CONDITION \": \"If EXPS_EHR_STAT  ne . and EXPS_EHR_STAT =  2  and EXPS_EHR_VAL is =.\",\n//         \"ACTION\": \"then EXPS_EHR_VAL is = 0\",\n//         \" DESCRIPTION\": \"If the NAICS is in 62, but no in 624, and the flag for Electronic health record expenses is reported   and the electronic health records checkbox is equal to no  and the Electronic health records expenses is missing, then set the electronic health records to zero.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_ECOMM_ES_VAL\\n RCPT_ECOMM_WEB_STAT  RCPT_ECOMM_THRD_STAT  RCPT_ECOMM_OTH_STAT  \",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS2='22','48','49,'51','52','53','54','55','56,'61','62','71','72,'81'\",\n//         \"CONDITION \": \"If RCPT_ECOMM_ES_VAL ne . and RCPT_ECOMM_WEB_STAT  = (. or 1) and RCPT_ECOMM_THRD_STAT =( . or 1) and RCPT_ECOMM_OTH_STAT = (. or 1 )and  RCPT_ECOMM_ES_VAL =0 \",\n//         \"ACTION\": \"then RCPT_ECOMM_WEB_STAT  = 2 RCPT_ECOMM_THRD_STAT = 2 RCPT_ECOMM_OTH_STAT  = 2\",\n//         \" DESCRIPTION\": \"If the e-commerce flag is reported   or the e-commerce percent flag is reported   and Electronic revenue- company website is missing or yes,  Electronic revenue- third party website is missing or yes, Electronic revenue- electronic system, and e-commerce is zero and the e-commerce percent equals zero then set - company website is missing or yes,  Electronic revenue- third party website is missing or yes, Electronic revenue- electronic system to no.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_ECOMM_ES_VAL\\n RCPT_ECOMM_WEB_STAT  RCPT_ECOMM_THRD_STAT  RCPT_ECOMM_OTH_STAT  \",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS2='22','48','49,'51','52','53','54','55','56,'61','62','71','72,'81'\",\n//         \"CONDITION \": \"If RCPT_ECOMM_WEB_STAT = 2, RCPT_ECOMM_THRD_STAT  = 2, and RCPT_ECOMM_OTH_STAT  = 2 and RCPT_ECOMM_ES_VAL = . \",\n//         \"ACTION\": \"then RCPT_ECOMM_ES_VAL =0.\",\n//         \" DESCRIPTION\": \"If the Electronic revenue- company website flag is reported   and the Electronic revenue- third party website is reported   , Electronic revenue- electronic system, and is reported   and Electronic revenue- company website,  Electronic revenue- third party website, Electronic revenue- electronic system all are set to no and e-commerce is missing and ecommerce percent is missing or zero then set e-commerce to zero.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_ECOMM_ES_VAL\\n RCPT_ECOMM_WEB_STAT  RCPT_ECOMM_THRD_STAT  RCPT_ECOMM_OTH_STAT  \",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS2='22','48','49,'51','52','53','54','55','56,'61','62','71','72,'81'\",\n//         \"CONDITION \": \"If RCPT_ECOMM_ES_VAL = . and RCPT_ECOMM_WEB_STAT  = . and RCPT_ECOMM_THRD_STAT = . and RCPT_ECOMM_OTH_STAT = . and  RCPT_ECOMM_ES_VAL  is >0 \",\n//         \"ACTION\": \"then RCPT_ECOMM_WEB_STAT  =1\",\n//         \" DESCRIPTION\": \"If e-commerce flag is reported   or e-commerce percent is reported   and Electronic revenue- company website,  Electronic revenue- third party website, Electronic revenue- electronic system all are missing and e-commerce is greater than zero or percent e-commerce is greater than zero then set Electronic revenue- company website to yes. \"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_ECOMM_ES_VAL\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS2='22','48','49,'51','52','53','54','55','56,'61','62','71','72,'81'\",\n//         \"CONDITION \": \"If RCPT_ECOMM_ES_VAL ne . and RCPT_ECOMM_WEB_STAT  is 2 and RCPT_ECOMM_THRD_STAT is 2, and RCPT_ECOMM_OTH_STAT is 2 and  RCPT_ECOMM_ES_VAL  is >0 \",\n//         \"ACTION\": \"then RCPT_ECOMM_WEB_STAT  =1\",\n//         \" DESCRIPTION\": \"If e-commerce flag  is reported   or e-commerce percent is reported   and Electronic revenue- company website,  Electronic revenue- third party website,  and Electronic revenue- electronic system all are no  and e-commerce is greater than zero or percent e-commerce is greater than zero then set Electronic revenue- company website to yes. \"\n//     },\n//     {\n//         \"VARIABLE\": \"EXPS_TOT_VAL\",\n//         \"UNIT\": \"KAU\",\n//         \"CONDITION \": \"If _qss00 in ('Y') and E190000 = . AND EQEXPD00 = 0 AND EQEXP00 > 0\",\n//         \"ACTION\": \" then E190000 = eqexp00\",\n//         \" DESCRIPTION\": \"If Total operating expenses is missing and QSS number of quarters imputed is equal to zero, and qss espense is greater than zero, then set total operating expense to qss expense\"\n//     },\n//     {\n//         \"VARIABLE\": \"TAX_EXEMPT_STAT\",\n//         \"UNIT\": \"KAU\",\n//         \"CONDITION \": \"If substr(RECORD_NAICS_NUM,1,5) = '51912' and TAX_EXEMPT_STAT = 1\",\n//         \"ACTION\": \"then NONPROFT_STAT=1\",\n//         \" DESCRIPTION\": \"If NAICS in 51912 and tax recode is equal to exempt, then set not for profit basses to 1.\"\n//     },\n//     {\n//         \"VARIABLE\": \"CPT_CUST_RES_PCT \\nCPT_CUST_NORES_PCT \",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS2='22'\",\n//         \"CONDITION \": \"If sum(CPT_CUST_RES_PCT,CPT_CUST_NORES_PCT) = 0\",\n//         \"ACTION\": \"then CPT_CUST_RES_PCT = . CPT_CUST_NORES_PCT = .\",\n//         \" DESCRIPTION\": \"If NAICS in sector 22 and is active, and the sum of residential customers and non-residential customers is zero then set residential customers and non-residential customers to missing\"\n//     },\n//     {\n//         \"VARIABLE\": \"CAPEX_OTH_NEW_VAL                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       CAPEX_OTH_USED_VAL                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 CAPEX_OTH_TOT\",\n//         \"UNIT\": \"industry\",\n//         \"CONDITION \": \"Value reported in other\",\n//         \"ACTION\": \"set referral flag for analyst review\",\n//         \" DESCRIPTION\": \"analyst reclassify value in other to structures or equipment\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_MOTR_AGR_PCT  RCPT_MOTR_GRAIN_PCT  RCPT_MOTR_STONE_PCT RCPT_MOTR_FUEL_PCT  RCPT_MOTR_PHARM_PCT  RCPT_MOTR_WOOD_PCT  RCPT_MOTR_METAL_PCT  RCPT_MOTR_ELECT_PCT  RCPT_MOTR_USEDGD_PCT  RCPT_MOTR_NEWFRN_PCT  RCPT_MOTR_OTH_PCT \",\n//         \"UNIT\": \"industry\",\n//         \"NAICS\": \"NAICS3='484'\",\n//         \"CONDITION \": \"If Sum(RCPT_MOTR_AGR_PCT,RCPT_MOTR_GRAIN_PCT,RCPT_MOTR_STONE_PCT,RCPT_MOTR_FUEL_PCT,RCPT_MOTR_PHARM_PCT,RCPT_MOTR_WOOD_PCT,RCPT_MOTR_METAL_PCT,RCPT_MOTR_ELECT_PCT, RCPT_MOTR_USEDGD_PCT,RCPT_MOTR_NEWFRN_PCT,RCPT_MOTR_OTH_PCT)=0\",\n//         \"ACTION\": \"then RCPT_MOTR_AGR_PCT = .; RCPT_MOTR_GRAIN_PCT = .; RCPT_MOTR_STONE_PCT = .; RCPT_MOTR_FUEL_PCT = .; RCPT_MOTR_PHARM_PCT = .; RCPT_MOTR_WOOD_PCT = .; RCPT_MOTR_METAL_PCT = .; RCPT_MOTR_ELECT_PCT = .; RCPT_MOTR_USEDGD_PCT = .; RCPT_MOTR_NEWFRN_PCT = .; RCPT_MOTR_OTH_PCT = .;\",\n//         \" DESCRIPTION\": \"If the NAICS is in 484 and active, and the sum of % - Agricultural Products, % - Grains, Alcohol, Tobacco Products, % - Stone, Nonmetallic minerals, % - Coal and Petroleum Products, % - Coal and Petroleum Products, % - Pharmaceutical and chemical products, % - Wood Products, Textiles, Leather, % - Electronic & Precision Instruments,% - Base Metal and Machinery % - Used household and office goods, % - New Furniture & Misc. Prods is zero, then set all to missing\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_CUST_BUS_PCT RCPT_CUST_IND_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS6=('517311','517312','517911', 519130')\",\n//         \"CONDITION \": \"If sum(RCPT_CUST_BUS_PCT,RCPT_CUST_IND_PCT)=0\",\n//         \"ACTION\": \"then RCPT_CUST_BUS_PCT=.; RCPT_CUST_IND_PCT=.;\",\n//         \" DESCRIPTION\": \"If the status is active and the NAICS is in  517110, 517210, 517911, or 519130 and the sum of % Household revenue and % of revenue by Government & Businesses equal zero then set them to missing.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_CUST_LOCTEL_BUS_PCT RCPT_CUST_LOCTEL_IND_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS6='517311' \",\n//         \"CONDITION \": \"If sum(RCPT_CUST_LOCTEL_BUS_PCT,RCPT_CUST_LOCTEL_IND_PCT)=0\",\n//         \"ACTION\": \"then RCPT_CUST_LOCTEL_BUS_PCT=.; RCPT_CUST_LOCTEL_IND_PCT=.;\",\n//         \" DESCRIPTION\": \"If the status is active and the NIACS is in 51711 and the sum of % Household - local telephony and Fixed local Telephone - Gov & Business is equal to zero set them to mising.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_CUST_LNGTEL_BUS_PCT RCPT_CUST_LNGTEL_IND_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS6='517311' \",\n//         \"CONDITION \": \"If sum(RCPT_CUST_LNGTEL_BUS_PCT, RCPT_CUST_LNGTEL_IND_PCT)=0\",\n//         \"ACTION\": \"then RCPT_CUST_LNGTEL_BUS_PCT=.; RCPT_CUST_LNGTEL_IND_PCT=.;\",\n//         \" DESCRIPTION\": \"If the status is active and the NIACS is in 51711 and the sum of  % Fixed Long dist - Gov & Business and % Household-long distance telephony is equal to zero set them to mising.\"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_CUST_SUBLIN_BUS_PCT RCPT_CUST_SUBLIN_IND_PCT\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS6='517311' \",\n//         \"CONDITION \": \"If sum(RCPT_CUST_SUBLIN_BUS_PCT, RCPT_CUST_SUBLIN_IND_PCT)=0\",\n//         \"ACTION\": \"then RCPT_CUST_SUBLIN_BUS_PCT=.; RCPT_CUST_SUBLIN_IND_PCT=.;\",\n//         \" DESCRIPTION\": \"If the status is active and the NIACS is in 51711 and the sum of  % Subscriber line charges - Household and % Subscriber Line - Gov & Business is equal to zero set them to mising.\"\n//     },\n//     {\n//         \"VARIABLE\": \"INV_STAT\\nTRUCKTRAC_NUM_TOT_DVAL TRAILER_NUM_TOT_DVAL\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3='484'\",\n//         \"CONDITION \": \"If INV_STAT = . and (TRUCK_NUM_TOT_DVAL > 0 or TRUCKTRAC_NUM_TOT_DVAL > 0 or TRAILER_NUM_TOT_DVAL > 0)\",\n//         \"ACTION\": \"then INV_STAT = 1;\",\n//         \" DESCRIPTION\": \"If the flag for total truck inventory, total truck-tractor inventory, or total tralers inventory is reported  (R,A,E,or O) and the NAICS is in 484, and the inventory checkbox is missing and the total truck inventory, total truck-tractor inventory, or total tralers inventory is greater than zero, then set the inventory checkbox to yes. \"\n//     },\n//     {\n//         \"VARIABLE\": \"INV_STAT\\nTRUCKTRAC_NUM_TOT_DVAL TRAILER_NUM_TOT_DVAL\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3='484'\",\n//         \"CONDITION \": \"If INV_STAT in (.,1) and TRUCK_NUM_TOT_DVAL = 0 and TRUCKTRAC_NUM_TOT_DVAL = 0 and TRAILER_NUM_TOT_DVAL = 0\",\n//         \"ACTION\": \"then INV_STAT = 2;\",\n//         \" DESCRIPTION\": \"If the flag for total truck inventory, total truck-tractor inventory, or total tralers inventory is reported  (R,A,E,or O)and the NAICS is in 484, and the inventory checkbox is equal to yes and the total truck inventory, total truck-tractor inventory, or total tralers inventory is equal to zero, then set the inventory checkbox to no.\"\n//     },\n//     {\n//         \"VARIABLE\": \"INV_STAT\\nTRUCKTRAC_NUM_TOT_DVAL TRAILER_NUM_TOT_DVAL\",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3='484'\",\n//         \"CONDITION \": \"If INV_STAT = 2 and (TRUCK_NUM_TOT_DVAL > 0 or TRUCKTRAC_NUM_TOT_DVAL > 0 or TRAILER_NUM_TOT_DVAL > 0)\",\n//         \"ACTION\": \"then INV_STAT = 1;\",\n//         \" DESCRIPTION\": \"If the flag for total truck inventory, total truck-tractor inventory, or total tralers inventory isreported (R,A,E,or O)and the NAICS is in 484, and the inventory checkbox is equal to no and the total truck inventory, total truck-tractor inventory, or total tralers inventory is greater than zero, then set the inventory checkbox to yes. \"\n//     },\n//     {\n//         \"VARIABLE\": \"HOTEL_OWN3RD_STAT RCPT_TOT_HOTEL_OWN3RD_VAL  RCPT_ECOMM_HOTEL_OWN3RD_VAL\\nEXPS_TOT_HOTEL_OWN3RD_VAL \",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS5='72111','72112'\",\n//         \"CONDITION \": \"If EXPS_TOT_HOTEL_OWN3RD_VAL <>2 and RCPT_TOT_HOTEL_OWN3RD_VAL=0 or RCPT_ECOMM_HOTEL_OWN3RD_VA=0  or EXPS_TOT_HOTEL_OWN3RD_VAL is >0\",\n//         \"ACTION\": \"then EXPS_TOT_HOTEL_OWN3RD_VAL =2\"\n//     },\n//     {\n//         \"VARIABLE\": \"HOTEL_OWN3RD_STAT RCPT_TOT_HOTEL_OWN3RD_VAL  RCPT_ECOMM_HOTEL_OWN3RD_VAL\\nEXPS_TOT_HOTEL_OWN3RD_VAL \",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS5='72111','72112'\",\n//         \"CONDITION \": \"If EXPS_TOT_HOTEL_OWN3RD_VAL <>1 and RCPT_TOT_HOTEL_OWN3RD_VAL > 0  or RCPT_ECOMM_HOTEL_OWN3RD_VAL is > 0  or EXPS_TOT_HOTEL_OWN3RD_VAL is >0 \",\n//         \"ACTION\": \"EXPS_TOT_HOTEL_OWN3RD_VAL=2\"\n//     },\n//     {\n//         \"VARIABLE\": \"HOTEL_OWN3RD_STAT RCPT_TOT_HOTEL_OWN3RD_VAL  RCPT_ECOMM_HOTEL_OWN3RD_VAL\\nEXPS_TOT_HOTEL_OWN3RD_VAL \",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS5='72111','72112'\",\n//         \"CONDITION \": \"If (HOTEL_OWN3RD_STAT = 2) AND (RCPT_TOT_HOTEL_OWN3RD_VAL = . AND  RCPT_ECOMM_HOTEL_OWN3RD_VAL = . AND EXPS_TOT_HOTEL_OWN3RD_VAL = .)\",\n//         \"ACTION\": \"then RCPT_TOT_HOTEL_OWN3RD_VAL = 0; RCPT_ECOMM_HOTEL_OWN3RD_VAL = 0; EXPS_TOT_HOTEL_OWN3RD_VAL = 0;\",\n//         \" DESCRIPTION\": \"If the NAICS is in 72111 or 72112 and the hotel management checkbox is set to no and hotel revenue of hotels managed, hotel e-commerce from hotels managed, and operating expense from hotels managed are all missing then set them all to zero. \"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_TELEMED_STAT RCPT_TELEMED_VAL  \",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3='621','622','623' AND NAICS4 <> ‘6215’,’6219’\",\n//         \"CONDITION \": \"If RCPT_TELEMED_STAT = . AND (RCPT_TELEMED_VAL > 0 \",\n//         \"ACTION\": \"then RCPT_TELEMED_STAT = 1;\",\n//         \" DESCRIPTION\": \"If the flag for Hospitals: Of 2020 total revenues reported, what was the dollar amount from telemedicine is reported (R,A,E,O)  or the flag for Hospitals: Of the total revenues reported, what was the percentage that was from telemedicine is reported (R,A,E,O)  and Hospitals: Did this receive revenues from telemedicine services in 2020 is missing and  total revenues reported, what was the dollar amount from telemedicine is greater than zero or Hospitals: Of the total revenues reported, what was the percentage that was from telemedicine is greater than zero then set Hospitals: Did this receive revenues from telemedicine services in 2020  to yes. \"\n//     },\n//     {\n//         \"VARIABLE\": \"RCPT_TELEMED_STAT RCPT_TELEMED_VAL  \",\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3='621','622','623' AND NAICS4 <> ‘6215’,’6219’\",\n//         \"CONDITION \": \"RCPT_TELEMED_STAT = (.,1) AND (RCPT_TELEMED_VAL = 0)\",\n//         \"ACTION\": \"then RCPT_TELEMED_STAT = 2;\",\n//         \" DESCRIPTION\": \"If the flag for Hospitals: Of 2020 total revenues reported, what was the dollar amount from telemedicine is reported (R,A,E,O)  or the flag for Hospitals: Of the total revenues reported, what was the percentage that was from telemedicine is reported (R,A,E,O)  and Hospitals: Did this receive revenues from telemedicine services in 2020 is missing or set to yes and  total revenues reported, what was the dollar amount from telemedicine is zero or Hospitals: Of the total revenues reported, what was the percentage that was from telemedicine is zero then set Hospitals: Did this receive revenues from telemedicine services in 2020  to no \"\n//     },\n//     {\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS6='721110','721120'\",\n//         \"ACTION\": \"then RCPT_ECOMM_ES_TOT_VAL=SUM(RCPT_TOT_VAL,RCPT_TOT_HOTEL_OWN3RD_VAL)\"\n//     },\n//     {\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS6='561330' \",\n//         \"ACTION\": \"then RCPTOT=RCPT_GROSSBILL_VAL\"\n//     },\n//     {\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS6='721110','721120'\",\n//         \"ACTION\": \"then RCPTOT=RCP_TOT_VAL_SUM+RCPT_TOT_HOTEL_OWN3RD_VAL\"\n//     },\n//     {\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3='621','622','623'\",\n//         \"CONDITION \": \"and _TXRCD00 <> 'E'\",\n//         \"ACTION\": \"then RCPT_NONOP_GIFTS_VAL=0\"\n//     },\n//     {\n//         \"UNIT\": \"KAU\",\n//         \"NAICS\": \"NAICS3='621','622','623'\",\n//         \"CONDITION \": \"and _TXRCD00 <> 'E'\",\n//         \"ACTION\": \"then RCPT_NONOP_INVST_VAL=0\"\n//     }\n// ]\n\n// let csv = msg.payload.csv[0]\n\n// for (let i = 0; i < items.length; i++) {\n//     const item = items[i];\n\n//     if (item[\"NAICS\"]) {\n//         if (item[\"UNIT\"] == csv.UNIT) {\n//             if (item.CONDITION) {\n//                 csv.ACTION = item.ACTION\n//             }\n//         }\n//     }\n// }\n\n// msg.payload.csv[0].RCPT_NONOP_GIFTS_VAL = 0\n\n// return msg;\nconst cache = global.get(\"lookupCache\");\nconst parameterData = cache.data[0]?.json_values || {};\n\nlet record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\nconst getNAICSCode = () => {\n    switch (record['UNIT']) {\n        case 'ESTAB':\n            return record['NAICS_NUM'];\n        case 'KAU':\n            return record['KAU_NAICS'];\n        default:\n            return null;\n    }\n};\n\nconst naicsCode = getNAICSCode();\nconsole.log(456, { d: naicsCode })\n\nif (naicsCode && parameterData.NAICS === naicsCode) {\n    record.ACTION = 'Go to Unit Balance';\n}\nelse {\n    // rerun  todo\n    record.ACTION = '- Logical Checks';\n}\nreturn msg;",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 480,
-        "y": 280,
+        "x": 1880,
+        "y": 260,
         "wires": [
             [
                 "05e1e9f94e92a19d",
@@ -19937,7 +19603,7 @@
         "y": 280,
         "wires": [
             [
-                "0c4def347547a284"
+                "c33fc2971a1649d2"
             ]
         ]
     },
@@ -19951,8 +19617,8 @@
             "7d91540d69ac16c1",
             "688a39b3e0070fe9"
         ],
-        "x": 615,
-        "y": 280,
+        "x": 2015,
+        "y": 260,
         "wires": []
     },
     {
@@ -19968,8 +19634,66 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 650,
-        "y": 180,
+        "x": 2050,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "c33fc2971a1649d2",
+        "type": "change",
+        "z": "0952db06f674f8bc",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.lookup",
+                "pt": "msg",
+                "to": "{\"moduleName\":\"logical_edits\",\"program\":\"aies\",\"unit_type\":\"estab\",\"params\":\"NAICS\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 350,
+        "y": 440,
+        "wires": [
+            [
+                "0e7e45c109b5dd47"
+            ]
+        ]
+    },
+    {
+        "id": "0e7e45c109b5dd47",
+        "type": "subflow:0be109393cb5f28a",
+        "z": "0952db06f674f8bc",
+        "name": "",
+        "x": 610,
+        "y": 440,
+        "wires": [
+            [
+                "71d67fa527052259",
+                "0c4def347547a284"
+            ]
+        ]
+    },
+    {
+        "id": "71d67fa527052259",
+        "type": "debug",
+        "z": "0952db06f674f8bc",
+        "name": "debug 115",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 870,
+        "y": 540,
         "wires": []
     },
     {
@@ -22885,5 +22609,417 @@
                 "ceac326c4b9a08f5"
             ]
         ]
+    },
+    {
+        "id": "57c75bd58af75621",
+        "type": "link in",
+        "z": "475c4bbdee672833",
+        "name": "link in 20",
+        "links": [
+            "4a50e74e63590ec7",
+            "6cd6c27ee7f2bd7d"
+        ],
+        "x": 1005,
+        "y": 260,
+        "wires": [
+            [
+                "b552d858621572e5",
+                "4e6b174248abce2d"
+            ]
+        ]
+    },
+    {
+        "id": "310c654aa32dd481",
+        "type": "function",
+        "z": "475c4bbdee672833",
+        "name": "geography function",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nconsole.log({record_idx})\nconsole.log({\n    msg: msg.payload.csv\n})\nconst record = msg.payload.csv[record_idx];\nconst cache = global.get(\"lookupCache\");\nconsole.log({record})\nconst validationChartData = cache.data.find(\n    item =>\n        item.module === \"geography\" &&\n        item.param === \"geography\" &&\n        item.program === \"aies\" &&\n        item.unit_type === \"estab\"\n)?.json_values;\nconsole.log({ validationChartData })\nlet validation = validationChartData?.GEO.some(element =>\n    parseInt(element.stfips) === parseInt(record?.STFIPS) &&\n    parseInt(element.georeg) === parseInt(record?.GEOREG)\n);\n\nif (validation) {\n    record.action = \"Go to Calculate Best Admin Receipts\";\n} else if (record?.STFIPS === \"97\") {\n    if (record?.NAICS_SECTOR_OLD === \"21\" && [\"PC\", \"NG\", \"AT\"].includes(record?.STATE_PHY)) {\n        msg.payload.csv[record_idx]['ACTION'] = \"Go to Calculate Best Admin Receipts\";\n    } else {\n        msg.payload.csv[record_idx]['TABSTAT'] = \"N\";\n        msg.payload.csv[record_idx]['NONTABFL'] = \"Y\";\n    }\n} else {\n    msg.payload.csv[record_idx]['FLAG'] = \"GEO_Invalid\";\n    msg.payload.csv[record_idx]['ACTION'] = \"Go to Calculate Best Admin Receipts\";\n}\n\nrecord.module = \"Geography\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1810,
+        "y": 400,
+        "wires": [
+            [
+                "1c8d9d938796f4db",
+                "bad79e5ee645cc24"
+            ]
+        ]
+    },
+    {
+        "id": "1c8d9d938796f4db",
+        "type": "debug",
+        "z": "475c4bbdee672833",
+        "name": "debug geography",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2170,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "bad79e5ee645cc24",
+        "type": "link out",
+        "z": "475c4bbdee672833",
+        "name": "link out 17",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9"
+        ],
+        "x": 2325,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "b552d858621572e5",
+        "type": "change",
+        "z": "475c4bbdee672833",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.lookup",
+                "pt": "msg",
+                "to": "{\"moduleName\":\"geography\",\"program\":\"aies\",\"unit_type\":\"estab\",\"params\":\"geography\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1250,
+        "y": 260,
+        "wires": [
+            [
+                "57cb2ba29b5e996e"
+            ]
+        ]
+    },
+    {
+        "id": "57cb2ba29b5e996e",
+        "type": "subflow:0be109393cb5f28a",
+        "z": "475c4bbdee672833",
+        "name": "",
+        "x": 1470,
+        "y": 400,
+        "wires": [
+            [
+                "dc5d7fb7aec6153c",
+                "310c654aa32dd481"
+            ]
+        ]
+    },
+    {
+        "id": "dc5d7fb7aec6153c",
+        "type": "debug",
+        "z": "475c4bbdee672833",
+        "name": "Get Geography Data",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1780,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "4e6b174248abce2d",
+        "type": "debug",
+        "z": "475c4bbdee672833",
+        "name": "Debuf record",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1090,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "c903163629df82af",
+        "type": "function",
+        "z": "6399b853963e761e",
+        "name": "electricImputeModule",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\n// Assumed JavaScript function based on the newest extracted OCR text (Electric Impute Module)\nfunction electricImputeModule(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL) {\n    // Placeholder for NM_State parameter table\n    let NM_STATE_PARAMETER_TABLE = {\n        AVG1: 0,\n        AVG2: 0\n    };\n\n    let { AVG1, AVG2 } = NM_STATE_PARAMETER_TABLE;\n\n    if (EXPS_ELEC_VAL <= 10000) {\n        // Logic for Year 1 historic values (H_) referencing 2022 EC data. Year 2 and on will refer to prior year AIES data\n    }\n\n    if (ELEC_PRCH_KWH_NUM_F[3][1] !== 'B') {\n        ELEC_PRCH_KWH_NUM = Math.round(EXPS_ELEC_VAL * AVG2);\n        ELEC_PRCH_KWH_NUM_F[3][1] = 'B';\n    } else {\n        ELEC_PRCH_KWH_NUM = Math.round(EXPS_ELEC_VAL * AVG1);\n    }\n\n    // Additional logic...\n\n    return EXPS_ELEC_VAL;\n}\n\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 9,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 240,
+        "wires": [
+            [
+                "ba693bb539d071b9",
+                "eda519aa8a1db303"
+            ]
+        ]
+    },
+    {
+        "id": "ba693bb539d071b9",
+        "type": "debug",
+        "z": "6399b853963e761e",
+        "name": "debug electricImputeModule",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "eda519aa8a1db303",
+        "type": "link out",
+        "z": "6399b853963e761e",
+        "name": "link out 58",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9"
+        ],
+        "x": 585,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "5f5ca49f66f32b41",
+        "type": "function",
+        "z": "6399b853963e761e",
+        "name": "electricImputeModule",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\n// Assumed JavaScript function based on the newest extracted OCR text (Electric Impute Module)\nfunction electricImputeModule(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL) {\n    // Placeholder for NM_State parameter table\n    let NM_STATE_PARAMETER_TABLE = {\n        AVG1: 0,\n        AVG2: 0\n    };\n\n    let { AVG1, AVG2 } = NM_STATE_PARAMETER_TABLE;\n\n    if (EXPS_ELEC_VAL <= 10000) {\n        // Logic for Year 1 historic values (H_) referencing 2022 EC data. Year 2 and on will refer to prior year AIES data\n    }\n\n    if (ELEC_PRCH_KWH_NUM_F[3][1] !== 'B') {\n        ELEC_PRCH_KWH_NUM = Math.round(EXPS_ELEC_VAL * AVG2);\n        ELEC_PRCH_KWH_NUM_F[3][1] = 'B';\n    } else {\n        ELEC_PRCH_KWH_NUM = Math.round(EXPS_ELEC_VAL * AVG1);\n    }\n\n    // Additional logic...\n\n    return EXPS_ELEC_VAL;\n}\n\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 9,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 460,
+        "wires": [
+            [
+                "d024af4d5725903e",
+                "8b699616f9c5a9b5"
+            ]
+        ]
+    },
+    {
+        "id": "d024af4d5725903e",
+        "type": "debug",
+        "z": "6399b853963e761e",
+        "name": "debug electricImputeModule",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "8b699616f9c5a9b5",
+        "type": "link out",
+        "z": "6399b853963e761e",
+        "name": "link out 59",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9"
+        ],
+        "x": 585,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "1455ef9792b755e9",
+        "type": "function",
+        "z": "6399b853963e761e",
+        "name": "Main",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nconst params = {\n    MN_ELECTRIC_STATE: [\n        { 'GEO_ST': '01', 'AVG1': 6.99263, 'AVG2': 12.1924, 'ELEC_INTERSECT': 1000, 'LL': 0.02, 'UL': 0.29 },\n        { 'GEO_ST': '02', 'AVG1': 2.97017, 'AVG2': 6.2589, 'ELEC_INTERSECT': 1000, 'LL': 0.03, 'UL': 0.21 },\n    ],\n    MN_ELEC_CUTOFF: {\n        REFPER: '2008A1',\n        CUTOFF1: '50000',\n        CUTOFF2: '10000',\n        FIXED: '684953',\n        BETA: '6.017'\n    }\n}\nconst input = {\n    STFIPS: '',\n    ELECGEN:'',\n    CSTELEC: '',\n    ELECSLD:'',\n    H_ELECGEN: '',\n    H_ELECSLD: '',\n    HISTSTAT: '',\n    EXPS_ELEC_VAL: 0,\n    ELEC_PRCH_KWH_NUM: 0\n}\nconst T_STFIPS = input?.STFIPS;\nlet MISSING_ST_FLIPS_ELECTRIC = 0;\nconst cutoffs = params.MN_ELEC_CUTOFF;\n\nfunction getParameterByGeoSt(geoSt) {\n    if (!geoSt || geoSt === 'NULL') return null;\n    return params.MN_ELECTRIC_STATE.find(item => item.GEO_ST === geoSt);\n}\nfunction electricEnergyModule(input){\n    const { EXPS_ELEC_VAL, ELEC_PRCH_KWH_NUM } = input;\n    if(EXPS_ELEC_VAL === 0 && ELEC_PRCH_KWH_NUM === 0){\n        // Go to A\n    }else if (EXPS_ELEC_VAL === 0 && ELEC_PRCH_KWH_NUM > 0){\n            // ELEC_PRCH_KWH_NUM = 0\n            // ELEC_PRCH_KWH_NUM_F (3,1) = 'J'\n            // go to A \n    }else if(T_STFIPS) {\n        // Go to electricEnergyModuleCont\n    }else{\n        MISSING_ST_FLIPS_ELECTRIC = 1;\n    }\n}\n// function electricEnergyModule(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, x_CURR) {\n//     console.log(\"Executing electricEnergyModule...\");\n\n//     if (!T_STFIPS || !REFPER || !ELEC_PRCH_KWH_NUM || !x_CURR ||\n//         [T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, x_CURR].includes('NULL')) {\n//         console.log('Invalid parameters');\n//         return 'Invalid parameters';\n//     }\n\n//     const parameter = getParameterByGeoSt(T_STFIPS);\n//     if (!parameter) {\n//         console.log('Invalid STFIPS');\n//         return 'Invalid STFIPS';\n//     }\n\n//     // ... rest of the logic\n\n//     return electricEnergyModuleCont(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, 0, x_CURR);\n// }\n\n// function electricEnergyModuleCont(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL, x_CURR) {\n//     console.log(\"Executing electricEnergyModuleCont...\");\n//     if (!T_STFIPS || !REFPER || ELEC_PRCH_KWH_NUM === null || EXPS_ELEC_VAL === null || !x_CURR ||\n//         [T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL, x_CURR].includes('NULL')) {\n//         console.log('Invalid parameters');\n//         return 'Invalid parameters';\n//     }\n\n//     const parameter = getParameterByGeoSt(T_STFIPS);\n//     let FIXED = 0;\n//     let BETA = 0;\n\n//     if (EXPS_ELEC_VAL / ELEC_PRCH_KWH_NUM > BETA) {\n//         return electricImputeModule(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL, x_CURR);\n//     }\n\n//     console.log('Returning from electricEnergyModuleCont:', EXPS_ELEC_VAL);\n//     return EXPS_ELEC_VAL;\n// }\n\n// function electricImputeModule(T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL, x_CURR) {\n//     console.log(\"Executing electricImputeModule...\");\n//     if (!T_STFIPS || !REFPER || ELEC_PRCH_KWH_NUM === null || EXPS_ELEC_VAL === null || !x_CURR ||\n//         [T_STFIPS, REFPER, ELEC_PRCH_KWH_NUM, EXPS_ELEC_VAL, x_CURR].includes('NULL')) {\n//         console.log('Invalid parameters');\n//         return 'Invalid parameters';\n//     }\n\n//     const parameter = getParameterByGeoSt(T_STFIPS);\n//     let NM_STATE_PARAMETER_TABLE = {\n//         AVG1: parameter ? parameter.AVG1 : 0,\n//         AVG2: parameter ? parameter.AVG2 : 0\n//     };\n\n//     // ... rest of the logic\n\n//     console.log('Returning from electricImputeModule:', EXPS_ELEC_VAL);\n//     return EXPS_ELEC_VAL;\n// }\n\n// console.log(electricEnergyModule(T_STFIPS, '2022', 1000, 'M'));\n\n// Test cases\n// console.log(electricEnergyModule('01', '2022', 1000, 'M'));  // Should execute all three functions for GEO_ST '01'\n// console.log(electricEnergyModule(undefined, '2022', 500, 'M'));  // Should return 'Invalid parameters'\n// console.log(electricEnergyModule('02', 'NULL', 500, 'M'));  // Should return 'Invalid parameters'\n// console.log(electricEnergyModule('03', '2022', 500, 'M'));  // Should return 'Invalid STFIPS' because '03' is not in parameterTableData\n\n// function getElecState(REFPER, params) {\n//     let stateParam;\n//     // Choose parameter table based on REFPER\n//     if (REFPER.slice(0, 4) === '2022') {\n//         stateParam = params.MN_ELECTRIC_STATE;\n//     } else if (REFPER === '2023A1') {\n//         stateParam = params.ASM23_ELECTRIC_STATE;\n//     } else if (REFPER === '2024A1') {\n//         stateParam = params.ASM24_ELECTRIC_STATE;\n//     } // ... add other conditions for other years\n\n//     return stateParam;\n// }\n// console.log(getElecState('2022', params));\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 680,
+        "wires": [
+            [
+                "fb0490d46f6dac6d",
+                "d9030a8fd1f031b8"
+            ]
+        ]
+    },
+    {
+        "id": "fb0490d46f6dac6d",
+        "type": "debug",
+        "z": "6399b853963e761e",
+        "name": "debug Main",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "d9030a8fd1f031b8",
+        "type": "link out",
+        "z": "6399b853963e761e",
+        "name": "link out 60",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9",
+            "95d077dd39781efe"
+        ],
+        "x": 595,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "82512cd1437a65ef",
+        "type": "subflow:0be109393cb5f28a",
+        "z": "6399b853963e761e",
+        "name": "",
+        "x": 630,
+        "y": 980,
+        "wires": [
+            [
+                "446e40b2499253e6"
+            ]
+        ]
+    },
+    {
+        "id": "5ffef6c04222007d",
+        "type": "debug",
+        "z": "6399b853963e761e",
+        "name": "debug 107",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1050,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "446e40b2499253e6",
+        "type": "function",
+        "z": "6399b853963e761e",
+        "name": "function 37",
+        "func": "let paramsT = global.get(\"lookupCache\")\nmsg.cache = paramsT\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\nconst params = paramsT?.data[0]?.json_values\nconst input = record\nconst NAICS_NUM = input?.NAICS_NUM;\n\nfunction LogicalEdits(input) {\n    const { NAICS_NUM } = input;\n    if (parseFloat(EXPS_ELEC_VAL) <= 10000) {\n        console.log(1)\n        msg.payload.csv[record_idx].ACTION = \"Go To A\";\n    } else{\n        console.log(2)\n        msg.payload.csv[record_idx].ELEC_PRCH_KWH_NUM = Math.round(parseFloat(EXPS_ELEC_VAL) * parseFloat(parameter.AVG1));\n        msg.payload.csv[record_idx].ELEC_PRCH_KWH_NUM_F = 'B'; // What is (3,1) here ?\n        msg.payload.csv[record_idx].ACTION = \"Go To A - END\";\n    }\n    return msg;\n}\n\nreturn LogicalEdits(input)",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 5,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 850,
+        "y": 980,
+        "wires": [
+            [
+                "5ffef6c04222007d",
+                "782e6a52f1a66003"
+            ]
+        ]
+    },
+    {
+        "id": "affe73445eec8a4f",
+        "type": "link in",
+        "z": "6399b853963e761e",
+        "name": "link in 46",
+        "links": [
+            "cede3264bdcd0a70",
+            "36c4687d5f1bee6b",
+            "24ae978c7feb5fc3"
+        ],
+        "x": 155,
+        "y": 980,
+        "wires": [
+            [
+                "d6716f22d2ac0593"
+            ]
+        ]
+    },
+    {
+        "id": "d6716f22d2ac0593",
+        "type": "change",
+        "z": "6399b853963e761e",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.lookup",
+                "pt": "msg",
+                "to": "{\"moduleName\":\"electric_energy\",\"program\":\"aies\",\"unit_type\":\"estab\",\"params\":\"electric_energy_module\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 350,
+        "y": 980,
+        "wires": [
+            [
+                "82512cd1437a65ef"
+            ]
+        ]
+    },
+    {
+        "id": "782e6a52f1a66003",
+        "type": "link out",
+        "z": "6399b853963e761e",
+        "name": "link out classification",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9"
+        ],
+        "x": 930,
+        "y": 1040,
+        "wires": []
     }
 ]
