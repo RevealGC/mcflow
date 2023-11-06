@@ -229,14 +229,6 @@
         "env": []
     },
     {
-        "id": "0a014270e6816fdf",
-        "type": "tab",
-        "label": "Critical Error",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
         "id": "d416a739a235277c",
         "type": "tab",
         "label": "ElectricEnergyModule",
@@ -392,6 +384,22 @@
         "id": "6399b853963e761e",
         "type": "tab",
         "label": "Logical Edits",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c606c03db54a5be8",
+        "type": "tab",
+        "label": "demo_recipe_1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "0a014270e6816fdf",
+        "type": "tab",
+        "label": "Critical Error",
         "disabled": false,
         "info": "",
         "env": []
@@ -1732,9 +1740,7 @@
             "d394b61bcc4755e6"
         ],
         "x": 14,
-        "y": 939,
-        "w": 1532,
-        "h": 82
+        "y": 939
     },
     {
         "id": "ef50b77b253a7883",
@@ -1754,9 +1760,7 @@
             "d587f5de3f4014c8"
         ],
         "x": 14,
-        "y": 239,
-        "w": 1792,
-        "h": 182
+        "y": 239
     },
     {
         "id": "62708d0bbe922798",
@@ -1780,9 +1784,7 @@
             "58df41cd8e54a653"
         ],
         "x": 14,
-        "y": 519,
-        "w": 1432,
-        "h": 322
+        "y": 519
     },
     {
         "id": "19463268a6c67561",
@@ -1800,8 +1802,6 @@
         ],
         "x": 14,
         "y": 99,
-        "w": 1432,
-        "h": 82,
         "info": "# Rules from Parameter Files"
     },
     {
@@ -1860,12 +1860,13 @@
             "05b67576d444bda4",
             "039e4172b173ea18",
             "45b768d58693d73d",
-            "854cd7a417cbbc6e"
+            "854cd7a417cbbc6e",
+            "6c8827ce7a4c83d8"
         ],
         "x": 14,
         "y": 619,
         "w": 1092,
-        "h": 822
+        "h": 862
     },
     {
         "id": "d1e0f39ddacfeb20",
@@ -13183,7 +13184,8 @@
             "83cf5c1c02a121e8",
             "2e4029be13b46163",
             "108f9747956b439a",
-            "25627bf820122fe8"
+            "25627bf820122fe8",
+            "739edc4c44d5eb0b"
         ],
         "x": 205,
         "y": 260,
@@ -17065,75 +17067,6 @@
         "wires": []
     },
     {
-        "id": "8feba05e91ff48f3",
-        "type": "link in",
-        "z": "0a014270e6816fdf",
-        "name": "link in 22",
-        "links": [
-            "b1540f3459d95049",
-            "51e14578de8e4e73"
-        ],
-        "x": 185,
-        "y": 240,
-        "wires": [
-            [
-                "f2eeed6f42b8a31c"
-            ]
-        ]
-    },
-    {
-        "id": "f2eeed6f42b8a31c",
-        "type": "function",
-        "z": "0a014270e6816fdf",
-        "name": "critical error",
-        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\nlet status = \"\";\nmsg.payload.status = status;\n/* Uncomment this block for debugging \n    msg.payload.COV_CHG_CODE = record.COV_CHG_CODE\n    msg.payload.PAY_ANN_VAL = record.PAY_ANN_VAL\n    msg.payload.EMP_MAR12_NUM = record.EMP_MAR12_NUM\n    msg.payload.PAY_QTR1_VAL = record.PAY_QTR1_VAL\n    msg.payload.ECPAYANN = record.ECPAYANN\n    msg.payload.ECPAYQ1 = record.ECPAYQ1\n    msg.payload.ECEMPQ1 = record.ECEMPQ1\n    msg.payload.ECPAYANL = record.ECPAYANL\n    msg.payload.PROCESS_DIV_CODE_TXT = record.PROCESS_DIV_CODE_TXT\n    msg.payload.NAICS_SECTOR_OLD_NUM = record.NAICS_SECTOR_OLD_NUM\n*/\n\nfunction setResult() {\n    /* Uncomment to debug\n    msg.payload.status += \"+settingResult\";*/\n    msg.payload.csv[record_idx].TABSTAT = \"N\";\n    msg.payload.csv[record_idx].NONTABFL = \"D\";\n    msg.payload.csv[record_idx].action = \"Exit Edit\";\n}\n\n\n\nfunction parseToNum(val) {\n    return isNaN(val) ? 0 : parseInt(val, 10);\n}\nfunction naicsSectorCheck() {\n    let result =\n        parseToNum(record.PAY_ANN_VAL) +\n        parseToNum(record.EMP_MAR12_NUM) +\n        parseToNum(record.PAY_QTR1_VAL) +\n        parseToNum(record.ECPAYANN) +\n        parseToNum(record.ECPAYQ1) +\n        parseToNum(record.ECEMPQ1) +\n        parseToNum(record.ECPAYANL);\n\n    if (parseToNum(record.NAICS_SECTOR_OLD_NUM) === 31) {\n        return result + parseToNum(record.EXPS_TEMPSTAF_VAL);\n    }\n    return result\n}\nlet data = naicsSectorCheck();\nmsg.payload.csv[record_idx].DATA = data\nconsole.log()\nif (\n    [\"111\", \"131\", \"791\"].includes(record.COV_CHG_CODE.toString()) &&\n    new Date(record.COV_CHG_DATE) <=\n    new Date(\"01-01-\" + record.REF_PER.substring(0, 4)) &&\n    data\n) {\n    msg.payload.csv[record_idx].TABSTAT = \"Y\";\n    return msg;\n\n} else if ([\"181\", \"201\", \"801\", \"091\", \"121\", \"171\"].includes(record.COV_CHG_CODE.toString()) || data === 0) {\n    setResult();\n    return msg;\n} else {\n    msg.payload.csv[record_idx].action = \"Go To Main Routing\";\n    return msg;\n}",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 330,
-        "y": 240,
-        "wires": [
-            [
-                "ff2345470be2965f",
-                "f7e7a2a2e4eb195a"
-            ]
-        ]
-    },
-    {
-        "id": "ff2345470be2965f",
-        "type": "debug",
-        "z": "0a014270e6816fdf",
-        "name": "debug critical error",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 590,
-        "y": 160,
-        "wires": []
-    },
-    {
-        "id": "f7e7a2a2e4eb195a",
-        "type": "link out",
-        "z": "0a014270e6816fdf",
-        "name": "link out 19",
-        "mode": "link",
-        "links": [
-            "7d91540d69ac16c1",
-            "688a39b3e0070fe9"
-        ],
-        "x": 485,
-        "y": 240,
-        "wires": []
-    },
-    {
         "id": "475236651a5b2d4f",
         "type": "subflow:0be109393cb5f28a",
         "z": "d416a739a235277c",
@@ -17168,7 +17101,7 @@
         "type": "function",
         "z": "d416a739a235277c",
         "name": "ElectricEnergyModule",
-        "func": "// let paramsT = global.get(\"lookupCache\")\n// // msg.cache = paramsT\n\n// let record_idx = global.get(\"ptrModuleFacts\");\n// let record = msg.payload.csv[record_idx];\n\n\n// msg.cache = paramsT.data.find(\n//     item =>\n//         item.module === \"electric_energy\" &&\n//         item.param === 'electric_energy_module' &&\n//         item.program === \"aies\" &&\n//         item.unit_type === \"estab\"\n// )?.json_values;\n\n// const params = msg.cache\n// const input = record\n// const T_STFIPS = input?.GEO_STATE_FIPS;\n// msg.payload.csv[record_idx].T_STFIPS = T_STFIPS;\n// const cutoffs = params.MN_ELEC_CUTOFF;\n\n// function getParameterByGeoSt(geoSt) {\n//     if (!geoSt || geoSt === 'NULL') return null;\n//     const year = record.REF_PER.substring(0, 4)\n//     let state;\n//     switch (String(year)) {\n//         case '2022':\n//             state = params['MN_ELECTRIC_STATE'];\n//             break;\n//         case '2023':\n//             state = params['ASM23_MN_ELECTRIC_STATE'];\n//             break;\n//         case '2024':\n//             state = params['ASM24_MN_ELECTRIC_STATE'];\n//             break;\n//         case '2025':\n//             state = params['ASM25_MN_ELECTRIC_STATE'];\n//             break;\n//         case '2026':\n//             state = params['ASM26_MN_ELECTRIC_STATE'];\n//             break;\n//         default:\n//             // Handle default case\n//             break;\n//     }\n//     console.log(state, state.map(item => parseInt(item.GEO_ST) === parseInt(geoSt) ? item : null).find(item => item !== null) || null)\n//     return state.map(item => parseInt(item.GEO_ST) === parseInt(geoSt) ? item : null).find(item => item !== null) || null;\n// }\n// const parameter = getParameterByGeoSt(T_STFIPS);\n\n// // console.log(parameter, T_STFIPS, input.EXPS_ELEC_VAL, input.ELEC_PRCH_KWH_NUM)\n// console.log(\"Electricity\", parameter)\n// function electricEnergyModule(input) {\n//     const { EXPS_ELEC_VAL, ELEC_PRCH_KWH_NUM } = input;\n//     console.log({ EXPS_ELEC_VAL, ELEC_PRCH_KWH_NUM, t1:parseInt(EXPS_ELEC_VAL) === 0 && parseInt(ELEC_PRCH_KWH_NUM) === 0,\n//     t2: parseInt(EXPS_ELEC_VAL) === 0 && parseInt(ELEC_PRCH_KWH_NUM) > 0, t3: parameter != null && parseInt(parameter.GEO_ST) === parseInt(T_STFIPS)})\n//     if (parseInt(EXPS_ELEC_VAL) === 0 && parseInt(ELEC_PRCH_KWH_NUM) === 0) {\n//         msg.payload.csv[record_idx].ACTION = \"Go To A\";\n//     } else if (parseInt(EXPS_ELEC_VAL) === 0 && parseInt(ELEC_PRCH_KWH_NUM) > 0) {\n//         msg.payload.csv[record_idx].ELEC_PRCH_KWH_NUM = 0\n//         msg.payload.csv[record_idx].ELEC_PRCH_KWH_NUM_F ='J'\n//         msg.payload.csv[record_idx].ACTION = \"Go To A\";\n//     } \n//     else if (parameter != null && parseInt(parameter.GEO_ST) === parseInt(T_STFIPS)) {\n//         console.log(4)\n//         msg.payload.csv[record_idx].ACTION = \"Go To 2 - (electricEnergyModuleCont ?)\";\n//     } \n//     else {\n//         msg.payload.csv[record_idx].MISSING_ST_FIPS_ELECTRIC = 1;\n//         msg.payload.csv[record_idx].ACTION = \"EXIT\";\n//     }\n//   return msg;\n// }\n\n// return electricEnergyModule(input)\n\nlet record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\nmsg.cache = global.get(\"lookupCache\")\n    .data.find(\n    item =>\n        item.module === \"electric_energy\" &&\n        item.param === 'electric_energy_module' &&\n        item.program === \"aies\" &&\n        item.unit_type === \"estab\"\n)?.json_values;\n\nif (record['NAICS_SECTOR'] === '31' && record['SUBSAMP_IND_TXT'] != 'MC') {\n\n    record['T_STFIPS'] = record['GEO_STATE_FIPS'];\n\n    if (record['EXPS_ELEC_VAL'] == 0 && record['ELEC_PRCH_KWH_NUM'] == 0) {\n            record['ACTION'] = 'Go To A'\n        return;\n    } else if (record['EXPS_ELEC_VAL'] == 0 && record['ELEC_PRCH_KWH_NUM'] > 0) {\n        record['ELEC_PRCH_KWH_NUM'] = 0;\n        if (record['ELEC_PRCH_KWH_NUM_F'] && record['ELEC_PRCH_KWH_NUM_F'].length >= 3) {\n            record['ELEC_PRCH_KWH_NUM_F'] = record['ELEC_PRCH_KWH_NUM_F'].substring(0, 2) + 'J';\n        } else {\n            record['ELEC_PRCH_KWH_NUM_F'] = '_J';\n        }\n        record['ACTION'] = 'Go To A'\n        return;\n    } else {\n        let found = false;\n        for (let key in msg.cache) {\n            if (Array.isArray(msg.cache[key]) && msg.cache[key].some(entry => entry[\"GEO_ST\"] === record['T_STFIPS'])) {\n                found = true;\n                break;\n            }\n        }\n        if (found) {\n            record['ACTION'] = 'Go To 2'\n        } else {\n            record['Referral_Flag'] = 'MISSING_ST_FIPS_ELECTRIC';\n            record['ACTION'] = 'Go To A'\n            return;\n        }\n    }\n} else {\n    record['ACTION'] = 'Go To A'\n    return;\n}\n\nreturn msg;\n",
+        "func": "// let paramsT = global.get(\"lookupCache\")\n// // msg.cache = paramsT\n\n// let record_idx = global.get(\"ptrModuleFacts\");\n// let record = msg.payload.csv[record_idx];\n\n\n// msg.cache = paramsT.data.find(\n//     item =>\n//         item.module === \"electric_energy\" &&\n//         item.param === 'electric_energy_module' &&\n//         item.program === \"aies\" &&\n//         item.unit_type === \"estab\"\n// )?.json_values;\n\n// const params = msg.cache\n// const input = record\n// const T_STFIPS = input?.GEO_STATE_FIPS;\n// msg.payload.csv[record_idx].T_STFIPS = T_STFIPS;\n// const cutoffs = params.MN_ELEC_CUTOFF;\n\n// function getParameterByGeoSt(geoSt) {\n//     if (!geoSt || geoSt === 'NULL') return null;\n//     const year = record.REF_PER.substring(0, 4)\n//     let state;\n//     switch (String(year)) {\n//         case '2022':\n//             state = params['MN_ELECTRIC_STATE'];\n//             break;\n//         case '2023':\n//             state = params['ASM23_MN_ELECTRIC_STATE'];\n//             break;\n//         case '2024':\n//             state = params['ASM24_MN_ELECTRIC_STATE'];\n//             break;\n//         case '2025':\n//             state = params['ASM25_MN_ELECTRIC_STATE'];\n//             break;\n//         case '2026':\n//             state = params['ASM26_MN_ELECTRIC_STATE'];\n//             break;\n//         default:\n//             // Handle default case\n//             break;\n//     }\n//     console.log(state, state.map(item => parseInt(item.GEO_ST) === parseInt(geoSt) ? item : null).find(item => item !== null) || null)\n//     return state.map(item => parseInt(item.GEO_ST) === parseInt(geoSt) ? item : null).find(item => item !== null) || null;\n// }\n// const parameter = getParameterByGeoSt(T_STFIPS);\n\n// // console.log(parameter, T_STFIPS, input.EXPS_ELEC_VAL, input.ELEC_PRCH_KWH_NUM)\n// console.log(\"Electricity\", parameter)\n// function electricEnergyModule(input) {\n//     const { EXPS_ELEC_VAL, ELEC_PRCH_KWH_NUM } = input;\n//     console.log({ EXPS_ELEC_VAL, ELEC_PRCH_KWH_NUM, t1:parseInt(EXPS_ELEC_VAL) === 0 && parseInt(ELEC_PRCH_KWH_NUM) === 0,\n//     t2: parseInt(EXPS_ELEC_VAL) === 0 && parseInt(ELEC_PRCH_KWH_NUM) > 0, t3: parameter != null && parseInt(parameter.GEO_ST) === parseInt(T_STFIPS)})\n//     if (parseInt(EXPS_ELEC_VAL) === 0 && parseInt(ELEC_PRCH_KWH_NUM) === 0) {\n//         msg.payload.csv[record_idx].ACTION = \"Go To A\";\n//     } else if (parseInt(EXPS_ELEC_VAL) === 0 && parseInt(ELEC_PRCH_KWH_NUM) > 0) {\n//         msg.payload.csv[record_idx].ELEC_PRCH_KWH_NUM = 0\n//         msg.payload.csv[record_idx].ELEC_PRCH_KWH_NUM_F ='J'\n//         msg.payload.csv[record_idx].ACTION = \"Go To A\";\n//     } \n//     else if (parameter != null && parseInt(parameter.GEO_ST) === parseInt(T_STFIPS)) {\n//         console.log(4)\n//         msg.payload.csv[record_idx].ACTION = \"Go To 2 - (electricEnergyModuleCont ?)\";\n//     } \n//     else {\n//         msg.payload.csv[record_idx].MISSING_ST_FIPS_ELECTRIC = 1;\n//         msg.payload.csv[record_idx].ACTION = \"EXIT\";\n//     }\n//   return msg;\n// }\n\n// return electricEnergyModule(input)\n\nlet record_indx = global.get(\"ptrModuleFacts\")\nlet record = msg.payload.csv[record_indx];\n\nmsg.cache = global.get(\"lookupCache\")\n    .data.find(\n        item =>\n            item.module === \"electric_energy\" &&\n            item.param === 'electric_energy_module' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"estab\"\n    )?.json_values;\n\n    console.log({\n        msg: msg.cache\n    })\n\nif (record['NAICS_SECTOR'] === '31' && record['SUBSAMP_IND_TXT'] != 'MC') {\nconsole.log(1)\n    record['T_STFIPS'] = record['GEO_STATE_FIPS'];\n    console.log(2)\n    if (record['EXPS_ELEC_VAL'] == 0 && record['ELEC_PRCH_KWH_NUM'] == 0) {\n        console.log(3)\n            record['ACTION'] = 'Go To A'\n    } else if (record['EXPS_ELEC_VAL'] == 0 && record['ELEC_PRCH_KWH_NUM'] > 0) {\n        console.log(4)\n        record['ELEC_PRCH_KWH_NUM'] = 0;\n        if (record['ELEC_PRCH_KWH_NUM_F'] && record['ELEC_PRCH_KWH_NUM_F'].length >= 3) {\n            console.log(5)\n            record['ELEC_PRCH_KWH_NUM_F'] = record['ELEC_PRCH_KWH_NUM_F'].substring(0, 2) + 'J';\n        } else {\n            console.log(6)\n            record['ELEC_PRCH_KWH_NUM_F'] = '_J';\n        }\n        console.log(7)\n        record['ACTION'] = 'Go To A'\n    } else {\n        console.log(8)\n        let found = false;\n        for (let key in msg.cache['ELECTRIC_STATE']) {\n            console.log(9)\n            if (Array.isArray(msg.cache[key]) && msg.cache[key].some(entry => entry[\"GEO_ST\"] === record['T_STFIPS'])) {\n                console.log(10)\n                found = true;\n                break;\n            }\n        }\n        if (found) {\n            console.log(11)\n            record['ACTION'] = 'Go To 2'\n        } else {\n            console.log(12)\n            record['Referral_Flag'] = 'MISSING_ST_FIPS_ELECTRIC';\n            record['ACTION'] = 'Go To A'\n\n        }\n    }\n} else {\n    console.log(13)\n    record['ACTION'] = 'Go To A'\n}\nmsg.payload.csv[record_indx] = record;\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -20465,6 +20398,11 @@
                 "label": "KAU To Company Addivity_prep_and_check",
                 "value": "kau_to_company_addivity_prep_and_check",
                 "type": "str"
+            },
+            {
+                "label": "Demo Recipe 1",
+                "value": "demo_recipe_1",
+                "type": "str"
             }
         ],
         "payload": "",
@@ -20636,11 +20574,16 @@
                 "t": "eq",
                 "v": "valid_negative_value",
                 "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "demo_recipe_1",
+                "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 30,
+        "outputs": 31,
         "x": 630,
         "y": 480,
         "wires": [
@@ -20729,6 +20672,9 @@
             [],
             [
                 "854cd7a417cbbc6e"
+            ],
+            [
+                "6c8827ce7a4c83d8"
             ]
         ]
     },
@@ -20858,7 +20804,7 @@
         "order": 1,
         "width": 18,
         "height": 13,
-        "format": "<div ng-switch=\"msg.payload\">\n\n    <!-- <div ng-switch-when=\"balance_module\">\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/balance_module.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div> -->\n\n        <div ng-switch-when=\"br_stat_evaluation\">\n\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/br_stat.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n\n    </div>\n\n    <div ng-switch-when=\"critical_error\">\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/critical_error.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"logical\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/logical.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    \n\n        <div ng-switch-when=\"derive_NAICS_code\">\n\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/derive_naics_code.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n\n    </div>\n\n    <div ng-switch-when=\"classification\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/classification.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"geography\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/geography.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n     </div>\n    <div ng-switch-when=\"electric_energy_module\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/electric_energy_module.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"electric_energy_module_cont\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/electric_energy_module_cont.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"electric_impute_module\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/electric_impute_module.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"best_admin_receipts\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/best_admin_receipt.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"emp_mar12_num\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/emp_mar12_num.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"pay_ann_val\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/pay_ann_val.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"pay_qtr1_val\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/pay_qtr1_val.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"rcpt_tot_val\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/rcpt_tot_val.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"qflow\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/qflow.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"post_edit_status_field\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/post_edit_status_field.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"pre_db_write_back_for_leased\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/pre_db_write_back_for_leased.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"unit_balance\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/unit_balance.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"derived_naics_code\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/derived_naics_code.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"valid_negative_value\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/valid_negative_value.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"valid_zero\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/valid_zero.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"estab_to_kau_addivity_prep_and_check\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/estab_to_kau_addivity_prep_and_check.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"kau_to_company_addivity_prep_and_check\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/kau_to_company_addivity_prep_and_check.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-default>\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/completeness.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n\n\n\n\n</div>",
+        "format": "<div ng-switch=\"msg.payload\">\n\n    <!-- <div ng-switch-when=\"balance_module\">\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/balance_module.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div> -->\n\n        <div ng-switch-when=\"br_stat_evaluation\">\n\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/br_stat.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n\n    </div>\n\n    <div ng-switch-when=\"critical_error\">\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/critical_error.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"logical\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/logical.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    \n\n        <div ng-switch-when=\"derive_NAICS_code\">\n\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/derive_naics_code.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n\n    </div>\n\n    <div ng-switch-when=\"classification\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/classification.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"geography\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/geography.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n     </div>\n    <div ng-switch-when=\"electric_energy_module\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/electric_energy_module.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"electric_energy_module_cont\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/electric_energy_module_cont.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"electric_impute_module\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/electric_impute_module.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"best_admin_receipts\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/best_admin_receipt.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"emp_mar12_num\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/emp_mar12_num.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"pay_ann_val\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/pay_ann_val.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"pay_qtr1_val\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/pay_qtr1_val.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"rcpt_tot_val\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/rcpt_tot_val.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"qflow\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/qflow.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"post_edit_status_field\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/post_edit_status_field.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"pre_db_write_back_for_leased\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/pre_db_write_back_for_leased.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"unit_balance\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/unit_balance.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"derived_naics_code\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/derived_naics_code.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"valid_negative_value\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/valid_negative_value.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"valid_zero\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/valid_zero.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"estab_to_kau_addivity_prep_and_check\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/estab_to_kau_addivity_prep_and_check.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"kau_to_company_addivity_prep_and_check\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/kau_to_company_addivity_prep_and_check.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"demo_recipe_1\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/demo_recipe_1.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    \n    <div ng-switch-default>\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/completeness.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n\n\n\n\n</div>",
         "storeOutMessages": true,
         "fwdInMessages": true,
         "resendOnRefresh": true,
@@ -22454,7 +22400,8 @@
         "name": "link out post edit",
         "mode": "link",
         "links": [
-            "c8919561eea2a059"
+            "c8919561eea2a059",
+            "2094172383ea335e"
         ],
         "x": 845,
         "y": 1360,
@@ -22472,6 +22419,20 @@
         ],
         "x": 845,
         "y": 1400,
+        "wires": []
+    },
+    {
+        "id": "6c8827ce7a4c83d8",
+        "type": "link out",
+        "z": "dad88d9a3132fed6",
+        "g": "4099bf03141f3710",
+        "name": "link out post edit",
+        "mode": "link",
+        "links": [
+            "2094172383ea335e"
+        ],
+        "x": 845,
+        "y": 1440,
         "wires": []
     },
     {
@@ -23020,6 +22981,204 @@
         ],
         "x": 930,
         "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "2094172383ea335e",
+        "type": "link in",
+        "z": "c606c03db54a5be8",
+        "name": "demo_recipe_1 Link",
+        "links": [
+            "45b768d58693d73d",
+            "6c8827ce7a4c83d8"
+        ],
+        "x": 195,
+        "y": 320,
+        "wires": [
+            [
+                "6a6df9470d4911f3"
+            ]
+        ]
+    },
+    {
+        "id": "6a6df9470d4911f3",
+        "type": "function",
+        "z": "c606c03db54a5be8",
+        "name": "BR Stat",
+        "func": "function processRecord(record) {\n    if (['10', '20', '30', '90'].includes(record.RECORD_TYP_TXT)) {\n        record.TABSTAT = 'Y';\n        record.NONTABFL = 'space';\n        if (['10', '20', '90'].includes(record.RECORD_TYP_TXT)) {\n            record.BR_STAT = 'N'\n        }else{\n            record.KAU_STAT = 'N'\n        }\n        record.TABSTAT = 'N';\n        record.NONTABFLD = 'D';\n        exitEdit();\n        \n        if (record.BR_STAT !== 'N' || record.KAU_STAT !== 'N') {\n            return mainRouting()\n        } \n    } else {\n        record.ACTION = \"Invalid RECORD_TYP_TXT value\";\n    }\n}\n\nfunction exitEdit() {\n    console.log(\"Exiting Edit\");\n    record.ACTION = 'Edit Exit';\n}\n\nfunction pointA() {\n    console.log(\"Processing at point A\");\n}\n\nfunction mainRouting() {\n    console.log(\"Going to Main Routing\");\n    record.ACTION = \"Going to Main Routing\";\n}\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nconst record = msg.payload.csv[record_idx];\n\ntry {\n    processRecord(record);\n} catch (error) {\n    console.error(\"Error:\", error.message);\n}\nmsg.payload.csv[record_idx] = record\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 320,
+        "wires": [
+            [
+                "8d7ba5aefc5d0440"
+            ]
+        ]
+    },
+    {
+        "id": "739edc4c44d5eb0b",
+        "type": "link out",
+        "z": "c606c03db54a5be8",
+        "name": "link out classification",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9"
+        ],
+        "x": 1285,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "e531cbc5d253735b",
+        "type": "debug",
+        "z": "c606c03db54a5be8",
+        "name": "BR Stat",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1260,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "8d7ba5aefc5d0440",
+        "type": "function",
+        "z": "c606c03db54a5be8",
+        "name": "critical error",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\nlet status = \"\";\nmsg.payload.status = status;\n\nfunction setResult() {\n    msg.payload.csv[record_idx].TABSTAT = \"N\";\n    msg.payload.csv[record_idx].NONTABFL = \"D\";\n    msg.payload.csv[record_idx].ACTION = \"Exit Edit\";\n}\n\n\n\nfunction parseToNum(val) {\n    return isNaN(val) ? 0 : parseInt(val, 10);\n}\nfunction naicsSectorCheck() {\n    let result =\n        parseToNum(record.PAY_ANN_VAL) +\n        parseToNum(record.EMP_MAR12_NUM) +\n        parseToNum(record.PAY_QTR1_VAL) +\n        parseToNum(record.ECPAYANN) +\n        parseToNum(record.ECPAYQ1) +\n        parseToNum(record.ECEMPQ1) +\n        parseToNum(record.ECPAYANL);\n\n    if (parseToNum(record.NAICS_SECTOR_OLD_NUM) === 31) {\n        return result + parseToNum(record.EXPS_TEMPSTAF_VAL);\n    }\n    return result\n}\nlet data = naicsSectorCheck();\nmsg.payload.csv[record_idx].DATA = data\nconsole.log()\nif (\n    [\"111\", \"131\", \"791\"].includes(record.COV_CHG_CODE.toString()) &&\n    new Date(record.COV_CHG_DATE) <=\n    new Date(\"01-01-\" + record.REF_PER.substring(0, 4)) &&\n    data\n) {\n    msg.payload.csv[record_idx].TABSTAT = \"Y\";\n    return msg;\n\n} else if ([\"181\", \"201\", \"801\", \"091\", \"121\", \"171\"].includes(record.COV_CHG_CODE.toString()) || data === 0) {\n    setResult();\n    return msg;\n} else {\n    msg.payload.csv[record_idx].ACTION = \"Go To Main Routing\";\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 320,
+        "wires": [
+            [
+                "5eb805cdc909d5b1"
+            ]
+        ]
+    },
+    {
+        "id": "fdc9c49086f49063",
+        "type": "function",
+        "z": "c606c03db54a5be8",
+        "name": "Fake PV",
+        "func": "// function setCharAt(str, index, chr) {\n//     if (index > str.length - 1) return str;\n//     return str.substring(0, index) + chr + str.substring(index + 1);\n// }\n\n// function initializeVariables(record) {\n//     record.PAY_ANN_VAL = setCharAt(record.PAY_ANN_VAL.toString(), 2, 'U');\n\n//     record.RCPT_TOT_VAL = setCharAt(record.RCPT_TOT_VAL.toString(), 2, 'X');\n\n//     record.EMP_MAR12_NUM = setCharAt(record.EMP_MAR12_NUM.toString(), 2, 'U');\n\n//     record.PAY_QTR1_VAL = setCharAt(record.PAY_QTR1_VAL.toString(), 2, 'U');\n\n//     return record;\n// }\n\n\n// let record_idx = global.get(\"ptrModuleFacts\");\n// let record = msg.payload.csv[record_idx];\n\n// record.PAY_ANN_VAL = record.PAY_ANN_VAL || \"0\";\n// record.RCPT_TOT_VAL = record.RCPT_TOT_VAL || \"0\";\n// record.EMP_MAR12_NUM = record.EMP_MAR12_NUM || \"0\";\n// record.PAY_QTR1_VAL = record.PAY_QTR1_VAL || \"0\";\n\n// if(parseInt(record['RANDOM']) > 10){\n//     record = initializeVariables(record);\n// }\n\n\n// return msg;\nfunction setCharAt(str, index, chr) {\n    if (index > str.length - 1) return str;\n    return str.substring(0, index) + chr + str.substring(index + 1);\n}\n\nfunction initializeVariables(record) {\n    record.PAY_ANN_VAL = setCharAt(record.PAY_ANN_VAL.toString(), 2, 'U');\n    record.RCPT_TOT_VAL = setCharAt(record.RCPT_TOT_VAL.toString(), 2, 'X');\n    record.EMP_MAR12_NUM = setCharAt(record.EMP_MAR12_NUM.toString(), 2, 'U');\n    record.PAY_QTR1_VAL = setCharAt(record.PAY_QTR1_VAL.toString(), 2, 'U');\n\n    return record;\n}\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nrecord.PAY_ANN_VAL = (record.PAY_ANN_VAL && record.PAY_ANN_VAL !== 'NULL') ? record.PAY_ANN_VAL : \"0\";\nrecord.RCPT_TOT_VAL = (record.RCPT_TOT_VAL && record.RCPT_TOT_VAL !== 'NULL') ? record.RCPT_TOT_VAL : \"0\";\nrecord.EMP_MAR12_NUM = (record.EMP_MAR12_NUM && record.EMP_MAR12_NUM !== 'NULL') ? record.EMP_MAR12_NUM : \"0\";\nrecord.PAY_QTR1_VAL = (record.PAY_QTR1_VAL && record.PAY_QTR1_VAL !== 'NULL') ? record.PAY_QTR1_VAL : \"0\";\n\nif(parseInt(record['RANDOM']) > 10){\n    record = initializeVariables(record);\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1020,
+        "y": 320,
+        "wires": [
+            [
+                "e531cbc5d253735b",
+                "739edc4c44d5eb0b"
+            ]
+        ]
+    },
+    {
+        "id": "5eb805cdc909d5b1",
+        "type": "function",
+        "z": "c606c03db54a5be8",
+        "name": "Set Path",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nrecord['RANDOM'] = Math.floor(Math.random() * 10) + 1\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 320,
+        "wires": [
+            [
+                "fdc9c49086f49063"
+            ]
+        ]
+    },
+    {
+        "id": "8feba05e91ff48f3",
+        "type": "link in",
+        "z": "0a014270e6816fdf",
+        "name": "link in 22",
+        "links": [
+            "b1540f3459d95049",
+            "51e14578de8e4e73"
+        ],
+        "x": 185,
+        "y": 240,
+        "wires": [
+            [
+                "f2eeed6f42b8a31c"
+            ]
+        ]
+    },
+    {
+        "id": "f2eeed6f42b8a31c",
+        "type": "function",
+        "z": "0a014270e6816fdf",
+        "name": "critical error",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\nlet status = \"\";\nmsg.payload.status = status;\n\nfunction setResult() {\n    msg.payload.csv[record_idx].TABSTAT = \"N\";\n    msg.payload.csv[record_idx].NONTABFL = \"D\";\n    msg.payload.csv[record_idx].action = \"Exit Edit\";\n}\n\n\n\nfunction parseToNum(val) {\n    return isNaN(val) ? 0 : parseInt(val, 10);\n}\nfunction naicsSectorCheck() {\n    let result =\n        parseToNum(record.PAY_ANN_VAL) +\n        parseToNum(record.EMP_MAR12_NUM) +\n        parseToNum(record.PAY_QTR1_VAL) +\n        parseToNum(record.ECPAYANN) +\n        parseToNum(record.ECPAYQ1) +\n        parseToNum(record.ECEMPQ1) +\n        parseToNum(record.ECPAYANL);\n\n    if (parseToNum(record.NAICS_SECTOR_OLD_NUM) === 31) {\n        return result + parseToNum(record.EXPS_TEMPSTAF_VAL);\n    }\n    return result\n}\nlet data = naicsSectorCheck();\nmsg.payload.csv[record_idx].DATA = data\nconsole.log()\nif (\n    [\"111\", \"131\", \"791\"].includes(record.COV_CHG_CODE.toString()) &&\n    new Date(record.COV_CHG_DATE) <=\n    new Date(\"01-01-\" + record.REF_PER.substring(0, 4)) &&\n    data\n) {\n    msg.payload.csv[record_idx].TABSTAT = \"Y\";\n    return msg;\n\n} else if ([\"181\", \"201\", \"801\", \"091\", \"121\", \"171\"].includes(record.COV_CHG_CODE.toString()) || data === 0) {\n    setResult();\n    return msg;\n} else {\n    msg.payload.csv[record_idx].action = \"Go To Main Routing\";\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 240,
+        "wires": [
+            [
+                "ff2345470be2965f",
+                "f7e7a2a2e4eb195a"
+            ]
+        ]
+    },
+    {
+        "id": "ff2345470be2965f",
+        "type": "debug",
+        "z": "0a014270e6816fdf",
+        "name": "debug critical error",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 590,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "f7e7a2a2e4eb195a",
+        "type": "link out",
+        "z": "0a014270e6816fdf",
+        "name": "link out 19",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9"
+        ],
+        "x": 485,
+        "y": 240,
         "wires": []
     }
 ]
