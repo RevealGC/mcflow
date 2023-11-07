@@ -1740,9 +1740,7 @@
             "d394b61bcc4755e6"
         ],
         "x": 14,
-        "y": 939,
-        "w": 1532,
-        "h": 82
+        "y": 939
     },
     {
         "id": "ef50b77b253a7883",
@@ -1762,9 +1760,7 @@
             "d587f5de3f4014c8"
         ],
         "x": 14,
-        "y": 239,
-        "w": 1792,
-        "h": 182
+        "y": 239
     },
     {
         "id": "62708d0bbe922798",
@@ -1788,9 +1784,7 @@
             "58df41cd8e54a653"
         ],
         "x": 14,
-        "y": 519,
-        "w": 1432,
-        "h": 322
+        "y": 519
     },
     {
         "id": "19463268a6c67561",
@@ -1808,8 +1802,6 @@
         ],
         "x": 14,
         "y": 99,
-        "w": 1432,
-        "h": 82,
         "info": "# Rules from Parameter Files"
     },
     {
@@ -1825,9 +1817,7 @@
             "a47c991027033263"
         ],
         "x": 34,
-        "y": 19,
-        "w": 432,
-        "h": 82
+        "y": 19
     },
     {
         "id": "4099bf03141f3710",
@@ -1872,9 +1862,7 @@
             "6c8827ce7a4c83d8"
         ],
         "x": 14,
-        "y": 619,
-        "w": 1092,
-        "h": 862
+        "y": 619
     },
     {
         "id": "d1e0f39ddacfeb20",
@@ -17921,7 +17909,7 @@
         "type": "function",
         "z": "0a690414bffb7c2e",
         "name": "pay_qtr1_val",
-        "func": "msg.cache = global.get(\"lookupCache\")\nlet record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\n// Define some helper functions first:\n\nconst setVariable = (variable, value) => {\n    record[variable] = value;\n};\n\n// PAY_QTR1_VAL Logic starts here\n\nif (record['NAICS_SECTOR_OLD_NUM'] === '31' && \n  (record['PAY_QTR1_PRDWRK_VAL'] || record['PAY_QTR1_NONPRDWRK_VAL']) &&\n((parseFloat(record['PAY_QTR1_PRDWRK_VAL']) + parseFloat(record['PAY_QTR1_NONPRDWRK_VAL'])) > 0)\n) {\n    setVariable('PAY_QTR1_VAL', parseFloat(record['PAY_QTR1_PRDWRK_VAL']) + parseFloat(record['PAY_QTR1_NONPRDWRK_VAL']));\n    setVariable('PAY_QTR1_VAL_F', 'L');\n    setVariable('ACTION', 'Go to EMPQ1 Module');\n} else if (record['REPORTING_ID_TYP_TXT'] === 'SU') {\n    if (parseFloat(record['ECPAYQ1']) > 0) {\n        setVariable('PAY_QTR1_VAL', record['ECPAYQ1']);\n        setVariable('PAY_QTR1_VAL_F', 'A');\n        setVariable('ACTION', 'Go to EMPQ1 Module');\n    }else{\n        setVariable('ACTION', 'Go to A');\n    }\n} else if (record['REPORTING_ID_TYP_TXT'] === 'MU' && parseFloat(record['CY_PAY_QTR1']) > 0) {\n    setVariable('PAY_QTR1_VAL', record['CY_PAY_QTR1']);\n    setVariable('PAY_QTR1_VAL_F', record['CY_PAY_QTR1_FLG']);\n    setVariable('ACTION', 'Go to EMPQ1 Module');\n} else if (parseFloat(record['MADB_2022_PAYQTR1']) > 0) {\n    console.log({'yes': parseFloat(record['MADB_2022_PAYQTR1']) * parseFloat(record['CYPYF'])})\n    setVariable('PAY_QTR1_VAL', parseFloat(record['MADB_2022_PAYQTR1']) * parseFloat(record['CYPYF'])); // Assuming 'CYPYF' is a factor from parameter table by NAICS_NUM\n    setVariable('PAY_QTR1_VAL_F', 'H');\n    setVariable('ACTION', 'Go to EMPQ1 Module');\n} else {\n    // Proceed to the EMP_MAR12_NUM module\n    // Placeholder logic if you have specifics for this module transition\n    // TODO: Insert logic for 'Variable name TBD\n    // This is where the logic for transitioning to the EMP_MAR12_NUM module would reside.\n    // For now, I'll put a placeholder:\n    // goToModule('EMP_MAR12_NUM');\n    setVariable('ACTION', 'Go to EMPQ1 Module');\n}\n\n// Define the function to transition to different modules:\n\n// function goToModule(moduleName) {\n//     // Placeholder for module transition logic\n//     // Assuming you'll have a mechanism in place to handle module transitions\n\n//     console.log(`Transitioning to ${moduleName} module...`);\n// }\n\n// This would essentially kick off the transition to the EMP_MAR12_NUM module.\n// If you have any specific code/logic for this transition, please let me know, and I can incorporate it.\n\nmsg.payload.csv[global.get(\"ptrModuleFacts\")] = record;\nreturn msg;",
+        "func": "msg.cache = global.get(\"lookupCache\")\nlet record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\nconst setVariable = (variable, value) => {\n    record[variable] = value;\n};\n\nif (record['NAICS_SECTOR_OLD_NUM'] === '31' && \n  (record['PAY_QTR1_PRDWRK_VAL'] || record['PAY_QTR1_NONPRDWRK_VAL']) &&\n((parseFloat(record['PAY_QTR1_PRDWRK_VAL']) + parseFloat(record['PAY_QTR1_NONPRDWRK_VAL'])) > 0)\n) {\n    setVariable('PAY_QTR1_VAL', parseFloat(record['PAY_QTR1_PRDWRK_VAL']) + parseFloat(record['PAY_QTR1_NONPRDWRK_VAL']));\n    setVariable('PAY_QTR1_VAL_F', 'L');\n    setVariable('ACTION', 'Go to EMPQ1 Module');\n} else if (record['REPORTING_ID_TYP_TXT'] === 'SU') {\n    if (parseFloat(record['ECPAYQ1']) > 0) {\n        setVariable('PAY_QTR1_VAL', record['ECPAYQ1']);\n        setVariable('PAY_QTR1_VAL_F', 'A');\n        setVariable('ACTION', 'Go to EMPQ1 Module');\n    }else{\n        if (parseFloat(record['MADB_2022_PAYQTR1']) > 0) {\n            console.log({ 'yes': parseFloat(record['MADB_2022_PAYQTR1']) * parseFloat(record['CYPYF']) })\n            setVariable('PAY_QTR1_VAL', parseFloat(record['MADB_2022_PAYQTR1']) * parseFloat(record['CYPYF'])); // Assuming 'CYPYF' is a factor from parameter table by NAICS_NUM\n            setVariable('PAY_QTR1_VAL_F', 'H');\n            setVariable('ACTION', 'Go to EMPQ1 Module');\n        } else {\n            setVariable('ACTION', 'Go to EMPQ1 Module');\n        }\n    }\n} else if (record['REPORTING_ID_TYP_TXT'] === 'MU' && parseFloat(record['CY_PAY_QTR1']) > 0) {\n    setVariable('PAY_QTR1_VAL', record['CY_PAY_QTR1']);\n    setVariable('PAY_QTR1_VAL_F', record['CY_PAY_QTR1_FLG']);\n    setVariable('ACTION', 'Go to EMPQ1 Module');\n} else if (parseFloat(record['MADB_2022_PAYQTR1']) > 0) {\n    console.log({'yes': parseFloat(record['MADB_2022_PAYQTR1']) * parseFloat(record['CYPYF'])})\n    setVariable('PAY_QTR1_VAL', parseFloat(record['MADB_2022_PAYQTR1']) * parseFloat(record['CYPYF'])); // Assuming 'CYPYF' is a factor from parameter table by NAICS_NUM\n    setVariable('PAY_QTR1_VAL_F', 'H');\n    setVariable('ACTION', 'Go to EMPQ1 Module');\n} else {\n    setVariable('ACTION', 'Go to EMPQ1 Module');\n}\nmsg.payload.csv[global.get(\"ptrModuleFacts\")] = record;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -17991,7 +17979,7 @@
         "type": "function",
         "z": "f06fc99b8cb78464",
         "name": "rcpt_tot_val",
-        "func": "// Start\nlet record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\nconsole.log({ record });\n\n// Extracting required variables from the record\nconst NAICS_SECTOR_OLD_NUM = record['NAICS_SECTOR_OLD_NUM'];\nconst COVCHGCD = record['COVCHGCD'];\nconst RCPT_TOT_VAL = parseFloat(record['RCPT_TOT_VAL']);\nconst ECRCPTOT = parseFloat(record['ECRCPTOT']);\nconst REPORTING_ID_TYP_TXT = record['REPORTING_ID_TYP_TXT'];\nconst MONTHLY_DATA = parseFloat(record['MONTHLY_DATA']); // assuming the variable name is this\nconst QSS_DATA = parseFloat(record['QSS_DATA']); // assuming the variable name is this\nconst MADB_2022_RCPTOT = parseFloat(record['MADB_2022_RCPTOT']); // assuming the variable name is this\nconst NAPCSBLTOT = parseFloat(record['NAPCSBLTOT']);\n// Assuming default initial values\n// record['RCPT_TOT_VAL'] = 0; // set to 0 by default\nconst monthlyCheck = () => {\n    if (MONTHLY_DATA > 0 && QSS_DATA > 0) {\n        record['RCPT_TOT_VAL'] = 'SUM(Monthly OVER SUM(Quarterly))'; // The exact logic to sum these is not clear from the flowchart\n        record['RCPT_TOT_VAL_F'] = 'Y';\n    }\n}\nif (NAICS_SECTOR_OLD_NUM === '31' && COVCHGCD === '401') {\n    record['RCPT_TOT_VAL'] = 0;\n    record['ACTION'] = 'Go to A';\n    // record['RCPT_TOT_VAL'] = 'NAPCSBLTOT'; // assuming 'NAPCSBLTOT' is a value/variable from somewhere in your system\n    // record['RCPT_TOT_VAL_F3.1'] = 'L';\n} else if (NAICS_SECTOR_OLD_NUM === '31' && NAPCSBLTOT > 0) {\n    record['RCPT_TOT_VAL'] = NAPCSBLTOT;\n    record['RCPT_TOT_VAL_F3'] = 'L';\n    record['ACTION'] = 'Go to PAY_QTR1_VAL';\n    // record['RCPT_TOT_VAL'] = 'NAPCSBLTOT'; // assuming 'NAPCSBLTOT' is a value/variable from somewhere in your system\n    // record['RCPT_TOT_VAL_F3.1'] = 'L';\n} else if (REPORTING_ID_TYP_TXT === 'SU') {\n    if (ECRCPTOT > 0) {\n        record['RCPT_TOT_VAL'] = ECRCPTOT;\n        record['RCPT_TOT_VAL_F'] = 'A';\n        record['ACTION'] = 'Go to PAY_QTR1_VAL';\n    } else{\n        monthlyCheck()\n    }\n   \n} else if (REPORTING_ID_TYP_TXT === 'KAU' && ['22','11','42','44','48','51','52','53','54','55','56','61','62','71','72','81'].includes(NAICS_SECTOR_OLD_NUM)) {\n   monthlyCheck()\n} else if (MADB_2022_RCPTOT > 0) {\n    const CYPYF = parseFloat(record['CYPYF']);  // Fetching the CYPYF value from global context\n    record['RCPT_TOT_VAL'] = MADB_2022_RCPTOT * CYPYF;\n    record['RCPT_TOT_VAL_F'] = 'H';\n    record['ACTION'] = 'Go to PAY_QTR1_VAL';\n} else {\n    record['ACTION'] = 'Go to PAY_QTR1_VAL';\n}\n\n// Saving updated record back to the message payload\nmsg.payload.csv[global.get(\"ptrModuleFacts\")] = record;\nconsole.log({ record });\n\nreturn msg;\n",
+        "func": "// Start\nlet record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\nconsole.log({ record });\n\n// Extracting required variables from the record\nconst NAICS_SECTOR_OLD_NUM = record['NAICS_SECTOR_OLD_NUM'];\nconst COVCHGCD = record['COVCHGCD'];\nconst RCPT_TOT_VAL = parseFloat(record['RCPT_TOT_VAL']);\nconst ECRCPTOT = parseFloat(record['ECRCPTOT']);\nconst REPORTING_ID_TYP_TXT = record['REPORTING_ID_TYP_TXT'];\nconst MONTHLY_DATA = parseFloat(record['MONTHLY_DATA']); // assuming the variable name is this\nconst QSS_DATA = parseFloat(record['QSS_DATA']); // assuming the variable name is this\nconst MADB_2022_RCPTOT = parseFloat(record['MADB_2022_RCPTOT']); // assuming the variable name is this\nconst NAPCSBLTOT = parseFloat(record['NAPCSBLTOT']);\n// Assuming default initial values\n// record['RCPT_TOT_VAL'] = 0; // set to 0 by default\nconst monthlyCheck = () => {\n    if (MONTHLY_DATA > 0 && QSS_DATA > 0) {\n        record['RCPT_TOT_VAL'] = 'SUM(Monthly OVER SUM(Quarterly))'; // The exact logic to sum these is not clear from the flowchart\n        record['RCPT_TOT_VAL_F'] = 'Y';\n    }\n}\nif (NAICS_SECTOR_OLD_NUM === '31' && COVCHGCD === '401') {\n    record['RCPT_TOT_VAL'] = 0;\n    record['ACTION'] = 'Go to PAY_QTR1_VAL';\n    // record['RCPT_TOT_VAL'] = 'NAPCSBLTOT'; // assuming 'NAPCSBLTOT' is a value/variable from somewhere in your system\n    // record['RCPT_TOT_VAL_F3.1'] = 'L';\n} else if (NAICS_SECTOR_OLD_NUM === '31' && NAPCSBLTOT > 0) {\n    record['RCPT_TOT_VAL'] = NAPCSBLTOT;\n    record['RCPT_TOT_VAL_F3'] = 'L';\n    record['ACTION'] = 'Go to PAY_QTR1_VAL';\n    // record['RCPT_TOT_VAL'] = 'NAPCSBLTOT'; // assuming 'NAPCSBLTOT' is a value/variable from somewhere in your system\n    // record['RCPT_TOT_VAL_F3.1'] = 'L';\n} else if (REPORTING_ID_TYP_TXT === 'SU') {\n    if (ECRCPTOT > 0) {\n        record['RCPT_TOT_VAL'] = ECRCPTOT;\n        record['RCPT_TOT_VAL_F'] = 'A';\n        record['ACTION'] = 'Go to PAY_QTR1_VAL';\n    } else{\n        monthlyCheck()\n    }\n   \n} else if (REPORTING_ID_TYP_TXT === 'KAU' && ['22','11','42','44','48','51','52','53','54','55','56','61','62','71','72','81'].includes(NAICS_SECTOR_OLD_NUM)) {\n   monthlyCheck()\n} else if (MADB_2022_RCPTOT > 0) {\n    const CYPYF = parseFloat(record['CYPYF']);  // Fetching the CYPYF value from global context\n    record['RCPT_TOT_VAL'] = MADB_2022_RCPTOT * CYPYF;\n    record['RCPT_TOT_VAL_F'] = 'H';\n    record['ACTION'] = 'Go to PAY_QTR1_VAL';\n} else {\n    record['ACTION'] = 'Go to PAY_QTR1_VAL';\n}\n\n// Saving updated record back to the message payload\nmsg.payload.csv[global.get(\"ptrModuleFacts\")] = record;\nconsole.log({ record });\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -19642,7 +19630,7 @@
         "type": "function",
         "z": "0e31453ffacd3b3c",
         "name": "function 42",
-        "func": "msg.cache = global.get(\"lookupCache\")\n\nconst setVariable = (variable, value) => {\n    record[variable] = value;\n};\n\nlet record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\nif (record['NAICS_SECTOR_OLD_NUM'] === '31' \n&& (record['EMP_MAR12_PRDWRK_NUM'] || record['EMP_MAR12_NONPRDWRK_NUM'])\n&&    (parseFloat(record['EMP_MAR12_PRDWRK_NUM']) + parseFloat(record['EMP_MAR12_NONPRDWRK_NUM'])) > 0\n) {\n    setVariable('EMP_MAR12_VAL', parseFloat(record['EMP_MAR12_PRDWRK_NUM']) + parseFloat(record['EMP_MAR12_NONPRDWRK_NUM']));\n    setVariable('EMP_MAR12_VAL_F', 'L');\n    setVariable('ACTION', 'Return to completeness module');\n} else if (record['REPORTING_ID_TYP_TXT'] === 'SU') {\n    if (parseFloat(record['ECEMPQ1']) > 0) {\n        setVariable('EMP_MAR12_NUM', record['ECEMPQ1']);\n        setVariable('EMP_MAR12_NUM_F3', 'A');\n        setVariable('ACTION', 'Return to completeness module');\n    }else{\n        setVariable('ACTION', 'Return to A');\n    }\n} else if (record['REPORTING_ID_TYP_TXT'] === 'MU' && parseFloat(record['CY_EMP_MAR12']) > 0) {\n    setVariable('EMP_MAR12_NUM', record['CY_EMP_MAR12']);\n    setVariable('EMP_MAR12_NUM_FLG', record['CY_EMP_MAR12_FLG']);\n    setVariable('ACTION', 'Return to completeness module');\n    // setVariable('EMP_MAR12_NUM_FLG', true);\n} else if (parseFloat(record['MADB_2022_EMPQ1']) > 0) {\n    setVariable('EMP_MAR12_VAL', parseFloat(record['MADB_2022_EMPQ1']) * parseFloat(record['CYPYF']));\n    setVariable('EMP_MAR12_NUM_F', 'H');\n    setVariable('ACTION', 'Return to completeness module');\n} else {\n    // goToModule('Completeness');\n    setVariable('ACTION', 'Return to completeness module');\n}\n\n// function goToModule(moduleName) {\n//     console.log(`🔄 Transitioning to ${moduleName} module...`);\n// }\n\nmsg.payload.csv[global.get(\"ptrModuleFacts\")] = record;\nreturn msg;\n",
+        "func": "msg.cache = global.get(\"lookupCache\")\n\nconst setVariable = (variable, value) => {\n    record[variable] = value;\n};\n\nlet record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\nif (record['NAICS_SECTOR_OLD_NUM'] === '31' \n&& (record['EMP_MAR12_PRDWRK_NUM'] || record['EMP_MAR12_NONPRDWRK_NUM'])\n&&    (parseFloat(record['EMP_MAR12_PRDWRK_NUM']) + parseFloat(record['EMP_MAR12_NONPRDWRK_NUM'])) > 0\n) {\n    setVariable('EMP_MAR12_VAL', parseFloat(record['EMP_MAR12_PRDWRK_NUM']) + parseFloat(record['EMP_MAR12_NONPRDWRK_NUM']));\n    setVariable('EMP_MAR12_VAL_F', 'L');\n    setVariable('ACTION', 'Return to completeness module');\n} else if (record['REPORTING_ID_TYP_TXT'] === 'SU') {\n    if (parseFloat(record['ECEMPQ1']) > 0) {\n        setVariable('EMP_MAR12_NUM', record['ECEMPQ1']);\n        setVariable('EMP_MAR12_NUM_F3', 'A');\n        setVariable('ACTION', 'Return to completeness module');\n    }else{\n        if (parseFloat(record['MADB_2022_EMPQ1']) > 0) {\n            setVariable('EMP_MAR12_VAL', parseFloat(record['MADB_2022_EMPQ1']) * parseFloat(record['CYPYF']));\n            setVariable('EMP_MAR12_NUM_F', 'H');\n            setVariable('ACTION', 'Return to completeness module');\n        } else {\n            setVariable('ACTION', 'Return to completeness module');\n        }\n    }\n} else if (record['REPORTING_ID_TYP_TXT'] === 'MU' && parseFloat(record['CY_EMP_MAR12']) > 0) {\n    setVariable('EMP_MAR12_NUM', record['CY_EMP_MAR12']);\n    setVariable('EMP_MAR12_NUM_FLG', record['CY_EMP_MAR12_FLG']);\n    setVariable('ACTION', 'Return to completeness module');\n} else if (parseFloat(record['MADB_2022_EMPQ1']) > 0) {\n    setVariable('EMP_MAR12_VAL', parseFloat(record['MADB_2022_EMPQ1']) * parseFloat(record['CYPYF']));\n    setVariable('EMP_MAR12_NUM_F', 'H');\n    setVariable('ACTION', 'Return to completeness module');\n} else {\n    setVariable('ACTION', 'Return to completeness module');\n}\n\nmsg.payload.csv[global.get(\"ptrModuleFacts\")] = record;\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
