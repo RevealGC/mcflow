@@ -1817,7 +1817,9 @@
             "a47c991027033263"
         ],
         "x": 34,
-        "y": 19
+        "y": 19,
+        "w": 432,
+        "h": 82
     },
     {
         "id": "4099bf03141f3710",
@@ -1862,7 +1864,9 @@
             "6c8827ce7a4c83d8"
         ],
         "x": 14,
-        "y": 619
+        "y": 619,
+        "w": 1092,
+        "h": 862
     },
     {
         "id": "d1e0f39ddacfeb20",
@@ -17097,7 +17101,7 @@
         "type": "function",
         "z": "d416a739a235277c",
         "name": "ElectricEnergyModule",
-        "func": "let record_indx = global.get(\"ptrModuleFacts\")\nlet record = msg.payload.csv[record_indx];\n\nmsg.cache = global.get(\"lookupCache\")\n    .data.find(\n        item =>\n            item.module === \"electric_energy\" &&\n            item.param === 'electric_energy_module' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"estab\"\n    )?.json_values;\n\n    console.log({\n        msg: msg.cache\n    })\n\nif (record['NAICS_SECTOR'] === '31' && record['SUBSAMP_IND_TXT'] != 'MC') {\nconsole.log(1)\n    record['T_STFIPS'] = record['GEO_STATE_FIPS'];\n    console.log(2)\n    if (record['EXPS_ELEC_VAL'] == 0 && record['ELEC_PRCH_KWH_NUM'] == 0) {\n        console.log(3)\n            record['ACTION'] = 'Go To A'\n    } else if (record['EXPS_ELEC_VAL'] == 0 && record['ELEC_PRCH_KWH_NUM'] > 0) {\n        console.log(4)\n        record['ELEC_PRCH_KWH_NUM'] = 0;\n        if (record['ELEC_PRCH_KWH_NUM_F'] && record['ELEC_PRCH_KWH_NUM_F'].length >= 3) {\n            console.log(5)\n            record['ELEC_PRCH_KWH_NUM_F'] = record['ELEC_PRCH_KWH_NUM_F'].substring(0, 2) + 'J';\n        } else {\n            console.log(6)\n            record['ELEC_PRCH_KWH_NUM_F'] = '_J';\n        }\n        console.log(7)\n        record['ACTION'] = 'Go To A'\n    } else {\n        console.log(8)\n        let found = false;\n        for (let key in msg.cache['ELECTRIC_STATE']) {\n            console.log(9)\n            if (Array.isArray(msg.cache[key]) && msg.cache[key].some(entry => entry[\"GEO_ST\"] === record['T_STFIPS'])) {\n                console.log(10)\n                found = true;\n                break;\n            }\n        }\n        if (found) {\n            console.log(11)\n            record['ACTION'] = 'Go To 2'\n        } else {\n            console.log(12)\n            record['Referral_Flag'] = 'MISSING_ST_FIPS_ELECTRIC';\n            record['ACTION'] = 'Go To A'\n\n        }\n    }\n} else {\n    console.log(13)\n    record['ACTION'] = 'Go To A'\n}\nmsg.payload.csv[record_indx] = record;\nreturn msg;\n",
+        "func": "let record_indx = global.get(\"ptrModuleFacts\")\nlet record = msg.payload.csv[record_indx];\n\nmsg.cache = global.get(\"lookupCache\")\n    .data.find(\n        item =>\n            item.module === \"electric_energy\" &&\n            item.param === 'electric_energy_module' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"estab\"\n    )?.json_values;\n\n    console.log({\n        msg: msg.cache['ELECTRIC_STATE']\n    })\n\nif (record['NAICS_SECTOR'] === '31' && record['SUBSAMP_IND_TXT'] != 'MC') {\nconsole.log(1)\n    record['T_STFIPS'] = record['GEO_STATE_FIPS'];\n    console.log(2)\n    if (record['EXPS_ELEC_VAL'] == 0 && record['ELEC_PRCH_KWH_NUM'] == 0) {\n        console.log(3)\n            record['ACTION'] = 'Go To A'\n    } else if (record['EXPS_ELEC_VAL'] == 0 && record['ELEC_PRCH_KWH_NUM'] > 0) {\n        console.log(4)\n        record['ELEC_PRCH_KWH_NUM'] = 0;\n        if (record['ELEC_PRCH_KWH_NUM_F'] && record['ELEC_PRCH_KWH_NUM_F'].length >= 3) {\n            console.log(5)\n            record['ELEC_PRCH_KWH_NUM_F'] = record['ELEC_PRCH_KWH_NUM_F'].substring(0, 2) + 'J';\n        } else {\n            console.log(6)\n            record['ELEC_PRCH_KWH_NUM_F'] = '_J';\n        }\n        console.log(7)\n        record['ACTION'] = 'Go To A'\n    } else {\n        console.log(8)\n        let found = false;\n        for (let key in msg.cache['ELECTRIC_STATE']) {\n            console.log(9)\n            if (Array.isArray(msg.cache['ELECTRIC_STATE']) && msg.cache['ELECTRIC_STATE'].some(entry => parseInt(entry[\"GEO_ST\"]) === parseInt(record['T_STFIPS']))) {\n                console.log(10)\n                found = true;\n                break;\n            }\n        }\n        if (found) {\n            console.log(11)\n            record['ACTION'] = 'Go To 2'\n        } else {\n            console.log(12)\n            record['Referral_Flag'] = 'MISSING_ST_FIPS_ELECTRIC';\n            record['ACTION'] = 'Go To A'\n\n        }\n    }\n} else {\n    console.log(13)\n    record['ACTION'] = 'Go To A'\n}\nmsg.payload.csv[record_indx] = record;\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
