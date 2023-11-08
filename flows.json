@@ -149,14 +149,6 @@
         "env": []
     },
     {
-        "id": "a51d10c50d9dbbe0",
-        "type": "tab",
-        "label": "NONNORM",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
         "id": "0d9e5c860a9703c5",
         "type": "tab",
         "label": "Modules Subflows",
@@ -400,6 +392,14 @@
         "id": "0a014270e6816fdf",
         "type": "tab",
         "label": "Critical Error",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "a51d10c50d9dbbe0",
+        "type": "tab",
+        "label": "NONNORM",
         "disabled": false,
         "info": "",
         "env": []
@@ -1740,7 +1740,9 @@
             "d394b61bcc4755e6"
         ],
         "x": 14,
-        "y": 939
+        "y": 939,
+        "w": 1532,
+        "h": 82
     },
     {
         "id": "ef50b77b253a7883",
@@ -1760,7 +1762,9 @@
             "d587f5de3f4014c8"
         ],
         "x": 14,
-        "y": 239
+        "y": 239,
+        "w": 1792,
+        "h": 182
     },
     {
         "id": "62708d0bbe922798",
@@ -1784,7 +1788,9 @@
             "58df41cd8e54a653"
         ],
         "x": 14,
-        "y": 519
+        "y": 519,
+        "w": 1432,
+        "h": 322
     },
     {
         "id": "19463268a6c67561",
@@ -1802,6 +1808,8 @@
         ],
         "x": 14,
         "y": 99,
+        "w": 1432,
+        "h": 82,
         "info": "# Rules from Parameter Files"
     },
     {
@@ -13185,7 +13193,8 @@
             "2e4029be13b46163",
             "108f9747956b439a",
             "25627bf820122fe8",
-            "739edc4c44d5eb0b"
+            "739edc4c44d5eb0b",
+            "163aa434e03fa911"
         ],
         "x": 205,
         "y": 260,
@@ -13791,8 +13800,9 @@
         "type": "function",
         "z": "2245e192a734f1bb",
         "name": "best admin function",
-        "func": "if (msg.payload.csv[0].REPORTING_ID_TYP == 'SU') {\n    if (msg.payload.csv[0].FORM_CODE_IRS == ' ' || msg.payload.csv[0].FORM_CODE_IRS == 'C1') {\n        msg.payload.csv[0].ECRCPTOT = msg.payload.csv[0].RCPT_NET_IRS_CURR\n    } else if ((parseInt(msg.payload.csv[0].FORM_CODE_IRS) >= 1 && parseInt(msg.payload.csv[0].FORM_CODE_IRS) <= 13) && ['52','53','55'].includes(msg.payload.csv[0].NAICS_SECTOR.toString())) {\n        if (['01', '02', '03', '04', '05'].includes(msg.payload.csv[0].FORM_CODE_IRS.toString())) {\n            msg.payload.csv[0].ECRCPTOT = parseInt(msg.payload.csv[0].RCPT_NET_IRS_CURR) + parseInt(msg.payload.csv[0].RCPT_INTEREST_IRS_CURR) + parseInt(msg.payload.csv[0].RCPT_GROSSRENT_IRS_CURR) + parseInt(msg.payload.csv[0].RCPT_OTHINCOME_IRS_CURR);\n        } else if (['06', '07'].includes(msg.payload.csv[0].FORM_CODE_IRS.toString())) {\n            msg.payload.csv[0].ECRCPTOT = parseInt(msg.payload.csv[0].RCPT_GROSSINC_IRS_CURR) + parseInt(msg.payload.csv[0].RCPT_INTEREST_IRS_CURR);\n        } else if (msg.payload.csv[0].FORM_CODE_IRS == 8) {\n            msg.payload.csv[0].ECRCPTOT = parseInt(msg.payload.csv[0].RCPT_TOTINC_IRS_CURR);\n        } else if (['09', '10', '11'].includes(msg.payload.csv[0].FORM_CODE_IRS.toString())) {\n            msg.payload.csv[0].ECRCPTOT = parseInt(msg.payload.csv[0].RCPT_TOTREV_IRS_CURR);\n        } else if (msg.payload.csv[0].FORM_CODE_IRS == 12) {\n            msg.payload.csv[0].ECRCPTOT = parseInt(msg.payload.csv[0].RCPT_NET_IRS_CURR);\n        } else if (msg.payload.csv[0].FORM_CODE_IRS == 13) {\n            msg.payload.csv[0].ECRCPTOT = parseInt(msg.payload.csv[0].RCPT_TOTINC_IRS_CURR) + parseInt(msg.payload.csv[0].RCPT_INTEREST_IRS_CURR) + parseInt(msg.payload.csv[0].RCPT_GROSSRENT_IRS_CURR);\n        }\n    } else if ((msg.payload.csv[0].FORM_CODE_IRS.toString() == '06' || msg.payload.csv[0].FORM_CODE_IRS.toString() == '07') && !['52', '53', '55'].includes(msg.payload.csv[0].NAICS_SECTOR.toString())) {\n        msg.payload.csv[0].ECRCPTOT = 0\n    } else if ((['01', '02', '03', '04', '05', '08', '09', '10', '11', '12', '13'].includes(msg.payload.csv[0].FORM_CODE_IRS.toString())) && (['51', '54', '56', '61', '62', '71', '81'].includes(msg.payload.csv[0].NAICS_SECTOR.toString()))) {\n        if (['01', '02', '03', '04', '05', '12'].includes(msg.payload.csv[0].FORM_CODE_IRS.toString())) {\n            msg.payload.csv[0].ECRCPTOT = msg.payload.csv[0].RCPT_NET_IRS_CURR;\n        } else if (['08', '13'].includes(msg.payload.csv[0].FORM_CODE_IRS.toString())) {\n            msg.payload.csv[0].ECRCPTOT = msg.payload.csv[0].RCPT_TOTINC_IRS_CURR;\n        } else if (['09', '10'].includes(msg.payload.csv[0].FORM_CODE_IRS.toString())) {\n            msg.payload.csv[0].ECRCPTOT = msg.payload.csv[0].RCPT_TOTREV_IRS_CURR + msg.payload.csv[0].COST_GOODSOLD_IRS_CURR;\n        } else if (msg.payload.csv[0].FORM_CODE_IRS.toString() == '11') {\n            msg.payload.csv[0].ECRCPTOT = msg.payload.csv[0].RCPT_TOTREV_IRS_CURR;\n        }\n    } else if (['01', '02', '03', '04', '05', '08', '09', '10', '11', '12', '13'].includes(msg.payload.csv[0].FORM_CODE_IRS.toString()) && !['21', '23', '31', '33', '42', '44', '45', '51', '52', '53', '55', '54', '56', '61', '62', '71', '72', '81'].includes(msg.payload.csv[0].NAICS_SECTOR.toString())) {\n        if (['01', '02', '03', '04', '05', '12'].includes(msg.payload.csv[0].FORM_CODE_IRS.toString())) {\n            msg.payload.csv[0].ECRCPTOT = msg.payload.csv[0].RCPT_NET_IRS_CURR;\n        } else if (['08', '13'].includes(msg.payload.csv[0].FORM_CODE_IRS.toString())) {\n            msg.payload.csv[0].ECRCPTOT = msg.payload.csv[0].RCPT_TOTINC_IRS_CURR;\n        } else if (['09', '10', '11'].includes(msg.payload.csv[0].FORM_CODE_IRS.toString())) {\n            msg.payload.csv[0].ECRCPTOT = msg.payload.csv[0].RCPT_TOTREV_IRS_CURR;\n        }\n    }\n}\n\nreturn msg",
+        "func": "// if (msg.payload.csv[0].REPORTING_ID_TYP == 'SU') {\n//     if (msg.payload.csv[0].FORM_CODE_IRS == ' ' || msg.payload.csv[0].FORM_CODE_IRS == 'C1') {\n//         msg.payload.csv[0].ECRCPTOT = msg.payload.csv[0].RCPT_NET_IRS_CURR\n//     } else if ((parseInt(msg.payload.csv[0].FORM_CODE_IRS) >= 1 && parseInt(msg.payload.csv[0].FORM_CODE_IRS) <= 13) && ['52','53','55'].includes(msg.payload.csv[0].NAICS_SECTOR.toString())) {\n//         if (['01', '02', '03', '04', '05'].includes(msg.payload.csv[0].FORM_CODE_IRS.toString())) {\n//             msg.payload.csv[0].ECRCPTOT = parseInt(msg.payload.csv[0].RCPT_NET_IRS_CURR) + parseInt(msg.payload.csv[0].RCPT_INTEREST_IRS_CURR) + parseInt(msg.payload.csv[0].RCPT_GROSSRENT_IRS_CURR) + parseInt(msg.payload.csv[0].RCPT_OTHINCOME_IRS_CURR);\n//         } else if (['06', '07'].includes(msg.payload.csv[0].FORM_CODE_IRS.toString())) {\n//             msg.payload.csv[0].ECRCPTOT = parseInt(msg.payload.csv[0].RCPT_GROSSINC_IRS_CURR) + parseInt(msg.payload.csv[0].RCPT_INTEREST_IRS_CURR);\n//         } else if (msg.payload.csv[0].FORM_CODE_IRS == 8) {\n//             msg.payload.csv[0].ECRCPTOT = parseInt(msg.payload.csv[0].RCPT_TOTINC_IRS_CURR);\n//         } else if (['09', '10', '11'].includes(msg.payload.csv[0].FORM_CODE_IRS.toString())) {\n//             msg.payload.csv[0].ECRCPTOT = parseInt(msg.payload.csv[0].RCPT_TOTREV_IRS_CURR);\n//         } else if (msg.payload.csv[0].FORM_CODE_IRS == 12) {\n//             msg.payload.csv[0].ECRCPTOT = parseInt(msg.payload.csv[0].RCPT_NET_IRS_CURR);\n//         } else if (msg.payload.csv[0].FORM_CODE_IRS == 13) {\n//             msg.payload.csv[0].ECRCPTOT = parseInt(msg.payload.csv[0].RCPT_TOTINC_IRS_CURR) + parseInt(msg.payload.csv[0].RCPT_INTEREST_IRS_CURR) + parseInt(msg.payload.csv[0].RCPT_GROSSRENT_IRS_CURR);\n//         }\n//     } else if ((msg.payload.csv[0].FORM_CODE_IRS.toString() == '06' || msg.payload.csv[0].FORM_CODE_IRS.toString() == '07') && !['52', '53', '55'].includes(msg.payload.csv[0].NAICS_SECTOR.toString())) {\n//         msg.payload.csv[0].ECRCPTOT = 0\n//     } else if ((['01', '02', '03', '04', '05', '08', '09', '10', '11', '12', '13'].includes(msg.payload.csv[0].FORM_CODE_IRS.toString())) && (['51', '54', '56', '61', '62', '71', '81'].includes(msg.payload.csv[0].NAICS_SECTOR.toString()))) {\n//         if (['01', '02', '03', '04', '05', '12'].includes(msg.payload.csv[0].FORM_CODE_IRS.toString())) {\n//             msg.payload.csv[0].ECRCPTOT = msg.payload.csv[0].RCPT_NET_IRS_CURR;\n//         } else if (['08', '13'].includes(msg.payload.csv[0].FORM_CODE_IRS.toString())) {\n//             msg.payload.csv[0].ECRCPTOT = msg.payload.csv[0].RCPT_TOTINC_IRS_CURR;\n//         } else if (['09', '10'].includes(msg.payload.csv[0].FORM_CODE_IRS.toString())) {\n//             msg.payload.csv[0].ECRCPTOT = msg.payload.csv[0].RCPT_TOTREV_IRS_CURR + msg.payload.csv[0].COST_GOODSOLD_IRS_CURR;\n//         } else if (msg.payload.csv[0].FORM_CODE_IRS.toString() == '11') {\n//             msg.payload.csv[0].ECRCPTOT = msg.payload.csv[0].RCPT_TOTREV_IRS_CURR;\n//         }\n//     } else if (['01', '02', '03', '04', '05', '08', '09', '10', '11', '12', '13'].includes(msg.payload.csv[0].FORM_CODE_IRS.toString()) && !['21', '23', '31', '33', '42', '44', '45', '51', '52', '53', '55', '54', '56', '61', '62', '71', '72', '81'].includes(msg.payload.csv[0].NAICS_SECTOR.toString())) {\n//         if (['01', '02', '03', '04', '05', '12'].includes(msg.payload.csv[0].FORM_CODE_IRS.toString())) {\n//             msg.payload.csv[0].ECRCPTOT = msg.payload.csv[0].RCPT_NET_IRS_CURR;\n//         } else if (['08', '13'].includes(msg.payload.csv[0].FORM_CODE_IRS.toString())) {\n//             msg.payload.csv[0].ECRCPTOT = msg.payload.csv[0].RCPT_TOTINC_IRS_CURR;\n//         } else if (['09', '10', '11'].includes(msg.payload.csv[0].FORM_CODE_IRS.toString())) {\n//             msg.payload.csv[0].ECRCPTOT = msg.payload.csv[0].RCPT_TOTREV_IRS_CURR;\n//         }\n//     }\n// }\n\n// return msg\n\nlet record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\n// Initialize variables\nlet RECORD_TYP_TXT = record['RECORD_TYP_TXT'];\nlet NAICS_SECTOR_OLD_NUM = record['NAICS_SECTOR_OLD_NUM'];\nlet A_C_FORM_CODE_IRS = record['A_C_FORM_CODE_IRS'];\nlet A_C_RCPT_NET_CURR = parseFloat(record['A_C_RCPT_NET_CURR']);\nlet A_C_RCPT_INTEREST_CURR = parseFloat(record['A_C_RCPT_INTEREST_CURR']);\nlet A_C_RCPT_GROSSRENT_CURR = parseFloat(record['A_C_RCPT_GROSSRENT_CURR']);\nlet A_C_RCPT_OTHINCOME_CURR = parseFloat(record['A_C_RCPT_OTHINCOME_CURR']);\nlet A_C_RCPT_GROSSINC_CURR = parseFloat(record['A_C_RCPT_GROSSINC_CURR']);\nlet A_C_RCPT_TOTINC_CURR = parseFloat(record['A_C_RCPT_TOTINC_CURR']);\nlet A_C_RCPT_TOTREV_CURR = parseFloat(record['A_C_RCPT_TOTREV_CURR']);\nlet A_C_COST_GOODSOLD_CURR = parseFloat(record['A_C_COST_GOODSOLD_CURR']);\nlet A_C_EXPS_RENT_CURR = parseFloat(record['A_C_EXPS_RENT_CURR']);\nlet A_C_EXPS_DIRECT_CURR = parseFloat(record['A_C_EXPS_DIRECT_CURR']);\n\n// Set function\nconst setVariable = (variable, value) => {\n    record[variable] = value;\n};\n\n// Logic\nif (RECORD_TYP_TXT == '90') {\n    if (A_C_FORM_CODE_IRS == ' ' || A_C_FORM_CODE_IRS == 'C1') {\n        setVariable('ECRCPTOT', A_C_RCPT_NET_CURR);\n        setVariable('ACTION', 'Go to Main Routing');\n\n    } else if (['52', '53', '55'].includes(NAICS_SECTOR_OLD_NUM)) {\n        if (['01', '02', '03', '04', '05'].includes(A_C_FORM_CODE_IRS)) {\n            setVariable('ECRCPTOT', A_C_RCPT_NET_CURR + A_C_RCPT_INTEREST_CURR + A_C_RCPT_GROSSRENT_CURR + A_C_RCPT_OTHINCOME_CURR);\n        } else if (['06', '07'].includes(A_C_FORM_CODE_IRS)) {\n            setVariable('ECRCPTOT', A_C_RCPT_GROSSINC_CURR + A_C_RCPT_INTEREST_CURR);\n        } else if (A_C_FORM_CODE_IRS == '08') {\n            setVariable('ECRCPTOT', A_C_RCPT_TOTINC_CURR);\n        } else if (['09', '10', '11'].includes(A_C_FORM_CODE_IRS)) {\n            setVariable('ECRCPTOT', A_C_RCPT_TOTREV_CURR);\n        } else if (A_C_FORM_CODE_IRS == '12') {\n            setVariable('ECRCPTOT', A_C_RCPT_NET_CURR);\n        } else if (A_C_FORM_CODE_IRS == '13') {\n            setVariable('ECRCPTOT', A_C_RCPT_TOTINC_CURR + A_C_RCPT_INTEREST_CURR + A_C_RCPT_GROSSRENT_CURR);\n        }\n        setVariable('ACTION', 'Go to Main Routing');\n    } else if (['06', '07'].includes(A_C_FORM_CODE_IRS)) {\n        setVariable('ACTION', 'Go to Main Routing');\n    } else if (['51', '54', '56', '61', '62', '71', '81'].includes(NAICS_SECTOR_OLD_NUM)) {\n        if (['01', '02', '03', '04', '05', '12'].includes(A_C_FORM_CODE_IRS)) {\n            setVariable('ECRCPTOT', A_C_RCPT_NET_CURR);\n        } else if (['08', '13'].includes(A_C_FORM_CODE_IRS)) {\n            setVariable('ECRCPTOT', A_C_RCPT_TOTINC_CURR);\n        } else if (A_C_FORM_CODE_IRS == '09') {\n            setVariable('ECRCPTOT', A_C_RCPT_TOTREV_CURR + A_C_COST_GOODSOLD_CURR + A_C_EXPS_RENT_CURR + A_C_EXPS_DIRECT_CURR);\n        } else if (A_C_FORM_CODE_IRS == '10') {\n            setVariable('ECRCPTOT', A_C_RCPT_TOTREV_CURR + A_C_COST_GOODSOLD_CURR + A_C_EXPS_DIRECT_CURR);\n        } else if (A_C_FORM_CODE_IRS == '11') {\n            setVariable('ECRCPTOT', A_C_RCPT_TOTREV_CURR);\n        }\n        setVariable('ACTION', 'Go to Main Routing');\n    } else if (['21', '23', '31', '42', '44', '45', '72'].includes(NAICS_SECTOR_OLD_NUM)) {\n        if (['01', '02', '03', '04', '05', '12'].includes(A_C_FORM_CODE_IRS)) {\n            setVariable('ECRCPTOT', A_C_RCPT_NET_CURR);\n        } else if (['08', '13'].includes(A_C_FORM_CODE_IRS)) {\n            setVariable('ECRCPTOT', A_C_RCPT_TOTINC_CURR);\n        } else if (['09', '10'].includes(A_C_FORM_CODE_IRS)) {\n            setVariable('ECRCPTOT', A_C_RCPT_TOTREV_CURR + A_C_COST_GOODSOLD_CURR);\n        } else if (A_C_FORM_CODE_IRS == '11') {\n            setVariable('ECRCPTOT', A_C_RCPT_TOTREV_CURR);\n        }\n        setVariable('ACTION', 'Go to Main Routing');\n    } else if (['11', '22', '48'].includes(NAICS_SECTOR_OLD_NUM)) {\n        if (['01', '02', '03', '04', '05', '12'].includes(A_C_FORM_CODE_IRS)) {\n            setVariable('ECRCPTOT', A_C_RCPT_NET_CURR);\n        } else if (['08', '13'].includes(A_C_FORM_CODE_IRS)) {\n            setVariable('ECRCPTOT', A_C_RCPT_TOTINC_CURR);\n        } else if (['09', '10', '11'].includes(A_C_FORM_CODE_IRS)) {\n            setVariable('ECRCPTOT', A_C_RCPT_TOTREV_CURR);\n        }\n        setVariable('ACTION', 'Go to Main Routing');\n    } else {\n        setVariable('ACTION', 'Go to Main Routing')\n    }\n}\nelse {\n    setVariable('ACTION', 'Go to Main Routing')\n}\n//setVariable('ACTION', 'Go to Completeness');\n\nmsg.payload.csv[global.get(\"ptrModuleFacts\")] = record;\n\nconsole.log({\n    msg: msg.payload.csv[global.get(\"ptrModuleFacts\")]\n})\nreturn msg;",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -14689,74 +14699,6 @@
         ],
         "x": 495,
         "y": 220,
-        "wires": []
-    },
-    {
-        "id": "d97e7c0dec380b3d",
-        "type": "function",
-        "z": "a51d10c50d9dbbe0",
-        "name": "nonnorm function",
-        "func": "// Assign sample values to variables\n//setinit variables (first appearance)\nvar ACTV_MIO_NUM = msg.payload.csv[0].ACTV_MIO_NUM\nvar ACTV_MIO_NUM_FLG = msg.payload.csv[0].ACTV_MIO_NUM_FLG\nvar OPSTATS = msg.payload.csv[0].OPSTATS\nvar OPSTATS_FLG = msg.payload.csv[0].OPSTATS_FLG\nvar COV_CHG_CODE = msg.payload.csv[0].COV_CHG_CODE\nvar ACTVMIO_R = msg.payload.csv[0].ACTVMIO_R\nvar COV_CHG_DATE = new Date(msg.payload.csv[0].COV_CHG_DATE)\nvar OPSTAT = msg.payload.csv[0].OPSTAT\nvar OPSTAT_FLAG = msg.payload.csv[0].OPSTAT_FLAG\n\n//nonorm router Variables (first appearance)\nvar RECORD_TYP = msg.payload.csv[0].RECORD_TYP\nvar BMF_FR941 = msg.payload.csv[0].BMF_FR941\nvar EPPAYANN = msg.payload.csv[0].EPPAYANN\nvar NONNORM_FLG = msg.payload.csv[0].NONNORM_FLG\nvar NONNORM = msg.payload.csv[0].NONNORM\nvar PAY_QTR1_VAL = msg.payload.csv[0].PAY_QTR1_VAL\nvar EMP_MAR12_NUM = msg.payload.csv[0].EMP_MAR12_NUM\nvar OPSTATS_F = msg.payload.csv[0].OPSTATS_F\n\n// Flow: set_OPSTATS_ACTIV_MIO_NUM (first appearance)\nvar TEMPMIO = msg.payload.csv[0].TEMPMIO\nvar ECPAYQ1 = msg.payload.csv[0].ECPAYQ1\nvar EPPAYANN = msg.payload.csv[0].EPPAYANN\nvar ACTV_MIO_VAL = msg.payload.csv[0].ACTV_MIO_VAL\nvar ACTV_MIO_VAL_FLG = msg.payload.csv[0].ACTV_MIO_VAL_FLG\nvar BMF_FR941 = msg.payload.csv[0].BMF_FR941\nvar ECPAYQ2 = msg.payload.csv[0].ECPAYQ2\nvar ECPAYQ3 = msg.payload.csv[0].ECPAYQ3\nvar ECPAYQ4 = msg.payload.csv[0].ECPAYQ4\nvar ECPAYQ4_F = msg.payload.csv[0].ECPAYQ4_F\n\n// Flow: set_NONNORM (first appearance)\nvar REFPER = msg.payload.csv[0].REFPER\nvar MADBPAYANN = msg.payload.csv[0].MADBPAYANN\nvar EMP_MAR12_NUM_F = msg.payload.csv[0].EMP_MAR12_NUM_F\nvar PAY_ANN_VAL = msg.payload.csv[0].PAY_ANN_VAL\n\n// Flow: set_BASIC_0 (first appearance)\nvar PAY_QTR1_VAL_R = msg.payload.csv[0].PAY_QTR1_VAL_R\nvar PAY_QTR1_VAL_FLG = msg.payload.csv[0].PAY_QTR1_VAL_FLG\nvar EMP_MAR12_NUM = msg.payload.csv[0].EMP_MAR12_NUM\nvar EMP_MAR12_NUM_FLG = msg.payload.csv[0].EMP_MAR12_NUM_FLG\n\n// Flow: SPECIAL_SEASON (first appearance)\nvar CY_PAY_QTR1_VAL = msg.payload.csv[0].CY_PAY_QTR1_VAL\nvar ECPAYQ1ZERO = msg.payload.csv[0].ECPAYQ1ZERO\nvar CY_EMP_MAR12_NUM = msg.payload.csv[0].CY_EMP_MAR12_NUM\nvar ECEMPQ1 = msg.payload.csv[0].ECEMPQ1\n\n// Function to process the payload\nfunction processPayload() {\n    var result = {}\n    function pathX() {\n        if (OPSTATS === '') {\n            return pathY();\n        } else {\n            return pathF();\n        }\n    }\n    // Main logic flow\n    if (ACTV_MIO_NUM < 0 || ACTV_MIO_NUM > 12) {\n        ACTV_MIO_NUM = 12;\n        ACTV_MIO_NUM_FLG = ACTV_MIO_NUM_FLG.substring(1, 2) + 'J' + ACTV_MIO_NUM_FLG.substring(2, 3);\n        result.payload = pathX();\n        result.ACTV_MIO_NUM = ACTV_MIO_NUM;\n        result.ACTV_MIO_NUM_FLG = ACTV_MIO_NUM_FLG;\n        result.OPSTATS = OPSTATS;\n        result.OPSTATS_FLG = OPSTATS_FLG;\n        result.COV_CHG_CODE = COV_CHG_CODE;\n        result.ACTVMIO_R = ACTVMIO_R;\n        result.COV_CHG_DATE = COV_CHG_DATE;\n        result.OPSTAT = OPSTAT;\n        result.OPSTAT_FLAG = OPSTAT_FLAG;\n        result.RECORD_TYP = RECORD_TYP;\n        result.BMF_FR941 = BMF_FR941;\n        result.EPPAYANN = EPPAYANN;\n        result.NONNORM_FLG = NONNORM_FLG;\n        result.NONNORM = NONNORM;\n        result.PAY_QTR1_VAL = PAY_QTR1_VAL;\n        result.EMP_MAR12_NUM = EMP_MAR12_NUM;\n        result.OPSTATS_F = OPSTATS_F\n        result.TEMPMIO = TEMPMIO ;\n        result.ECPAYQ1 = ECPAYQ1;\n        result.EPPAYANN = EPPAYANN;\n        result.ACTV_MIO_VAL = ACTV_MIO_VAL;\n        result.ACTV_MIO_VAL_FLG = ACTV_MIO_VAL_FLG;\n        result.BMF_FR941 = BMF_FR941;\n        result.ECPAYQ2 = ECPAYQ2;\n        result.ECPAYQ3 = ECPAYQ3;\n        result.ECPAYQ4 = ECPAYQ4;\n        result.ECPAYQ4_F = ECPAYQ4_F;\n        result.REFPER = REFPER;\n        result.MADBPAYANN = MADBPAYANN;\n        result.EMP_MAR12_NUM_F = EMP_MAR12_NUM_F;\n        result.PAY_ANN_VAL = PAY_ANN_VAL;\n        result.PAY_QTR1_VAL_R = PAY_QTR1_VAL_R;\n        result.PAY_QTR1_VAL_FLG = PAY_QTR1_VAL_FLG;\n        result.EMP_MAR12_NUM = EMP_MAR12_NUM;\n        result.EMP_MAR12_NUM_FLG = EMP_MAR12_NUM_FLG;\n        result.CY_PAY_QTR1_VAL = CY_PAY_QTR1_VAL;\n        result.ECPAYQ1ZERO = ECPAYQ1ZERO;\n        result.CY_EMP_MAR12_NUM = CY_EMP_MAR12_NUM;\n        result.ECEMPQ1 = ECEMPQ1;\n    } else {\n        result.payload = pathX();\n        result.ACTV_MIO_NUM = ACTV_MIO_NUM;\n        result.ACTV_MIO_NUM_FLG = ACTV_MIO_NUM_FLG;\n        result.OPSTATS = OPSTATS;\n        result.OPSTATS_FLG = OPSTATS_FLG;\n        result.COV_CHG_CODE = COV_CHG_CODE;\n        result.ACTVMIO_R = ACTVMIO_R;\n        result.COV_CHG_DATE = COV_CHG_DATE;\n        result.OPSTAT = OPSTAT;\n        result.OPSTAT_FLAG = OPSTAT_FLAG;\n        result.RECORD_TYP = RECORD_TYP;\n        result.BMF_FR941 = BMF_FR941;\n        result.EPPAYANN = EPPAYANN;\n        result.NONNORM_FLG = NONNORM_FLG;\n        result.NONNORM = NONNORM;\n        result.PAY_QTR1_VAL = PAY_QTR1_VAL;\n        result.EMP_MAR12_NUM = EMP_MAR12_NUM;\n        result.OPSTATS_F = OPSTATS_F\n        result.TEMPMIO = TEMPMIO;\n        result.ECPAYQ1 = ECPAYQ1;\n        result.EPPAYANN = EPPAYANN;\n        result.ACTV_MIO_VAL = ACTV_MIO_VAL;\n        result.ACTV_MIO_VAL_FLG = ACTV_MIO_VAL_FLG;\n        result.BMF_FR941 = BMF_FR941;\n        result.ECPAYQ2 = ECPAYQ2;\n        result.ECPAYQ3 = ECPAYQ3;\n        result.ECPAYQ4 = ECPAYQ4;\n        result.ECPAYQ4_F = ECPAYQ4_F;\n        result.REFPER = REFPER;\n        result.MADBPAYANN = MADBPAYANN;\n        result.EMP_MAR12_NUM_F = EMP_MAR12_NUM_F;\n        result.PAY_ANN_VAL = PAY_ANN_VAL;\n        result.PAY_QTR1_VAL_R = PAY_QTR1_VAL_R;\n        result.PAY_QTR1_VAL_FLG = PAY_QTR1_VAL_FLG;\n        result.EMP_MAR12_NUM = EMP_MAR12_NUM;\n        result.EMP_MAR12_NUM_FLG = EMP_MAR12_NUM_FLG;\n        result.CY_PAY_QTR1_VAL = CY_PAY_QTR1_VAL;\n        result.ECPAYQ1ZERO = ECPAYQ1ZERO;\n        result.CY_EMP_MAR12_NUM = CY_EMP_MAR12_NUM;\n        result.ECEMPQ1 = ECEMPQ1;\n    }\n    return result;\n}\nfunction pathF() {\n    if (OPSTATS_FLG.substring(0, 2) !== 'R ' && OPSTATS_FLG.substring(1, 2) !== 'C') {\n        return pathY();\n    } else {\n        return nonNormRouter();\n    }\n}\n\nfunction pathY() {\n    if ((COV_CHG_CODE === 111 || COV_CHG_CODE === 131 || (COV_CHG_CODE === 791 && ACTVMIO_R < 12)) && COV_CHG_DATE < new Date('2024-01-01')) {\n        return pathA();\n    } else if (OPSTAT_FLAG.substring(0, 1) === 'R') {\n        return pathZ();\n    } else {\n        return pathB();\n    }\n}\n\nfunction pathA() {\n    OPSTATS = 'N';\n    return pathD();\n}\n\nfunction pathZ() {\n    if (OPSTAT === 4) {\n        return pathA();\n    } else if (OPSTAT === 5) {\n        return pathE();\n    } else {\n        return pathB();\n    }\n}\n\nfunction pathE() {\n    if (ACTV_MIO_NUM === 12) {\n        return pathB();\n    } else {\n        return pathA();\n    }\n}\n\nfunction pathB() {\n    OPSTATS = 'Y';\n    return pathD();\n}\n\nfunction pathD() {\n    if (OPSTAT_FLAG.substring(0, 1) === 'R') {\n        OPSTATS_FLG = 'R' + OPSTATS_FLG.substring(1);\n        return nonNormRouter();\n    } else {\n        OPSTATS_FLG = OPSTATS_FLG.substring(0, 1) + 'J' + OPSTATS_FLG.substring(2);\n        return nonNormRouter();\n    }\n}\n\nfunction nonNormRouter() {\n    if (ACTV_MIO_NUM_FLG.substring(0, 1) === 'R') {\n        return pathG();\n    } else {\n        return pathH();\n    }\n}\n\n\nfunction pathG() {\n    if (RECORD_TYP === 90) {\n        return pathI();\n    } else {\n        return pathH();\n    }\n}\n\nfunction pathH() {\n    if (BMF_FR941 === 97 || BMF_FR941 === 98 || BMF_FR941 === 99) {\n        return pathA1();\n    } else {\n        return pathL();\n    }\n}\n\nfunction pathI() {\n    if (ACTV_MIO_NUM < 12 && EPPAYANN === 0) {\n        NONNORM = 'B';\n        NONNORM_FLG = NONNORM_FLG.substring(0, 1) + 'L';\n        return pathA1();\n    } else {\n        return pathA1();\n    }\n}\n\nfunction pathL() {\n    if (ACTV_MIO_NUM_FLG.substring(1, 2) !== 'C' && OPSTATS_F.substring(1, 2) !== 'C') {\n        return set_OPSTATS_ACTIV_MIO_NUM() + pathA1();\n    } else {\n        return pathA1();\n    }\n}\n\nfunction pathA1() {\n    if (NONNORM_FLG === '' || NONNORM_FLG.substring(1, 2) === 'J') {\n        return set_NONNORM();\n    } else {\n        return pathN();\n    }\n}\n\nfunction pathN() {\n    if (NONNORM === 'B') {\n        return set_BASIC_0();\n    } else {\n        return pathO();\n    }\n}\n\nfunction pathO() {\n    if (NONNORM === 'S' && ACTV_MIO_NUM < 10 && PAY_QTR1_VAL === 0 && EMP_MAR12_NUM === 0) {\n        return SPECIAL_SEASON();\n    } else {\n        return (\"Exit to AEIS main\");\n    }\n}\n\n// Flow: set_OPSTATS_ACTIV_MIO_NUM\nfunction set_OPSTATS_ACTIV_MIO_NUM() {\n    if (RECORD_TYP === 90) {\n        TEMPMIO = 0;\n        return pathP();\n    } else if (OPSTATS_FLG === 'R ' && ACTV_MIO_NUM_FLG === 'R ') {\n        return pathA2();\n    } else {\n        return pathQ();\n    }\n}\n\n\nfunction pathP() {\n    if (PAY_QTR1_VAL + ECPAYQ1 > 0) {\n        TEMPMIO += 3;\n        return pathD1();\n    } else if (EPPAYANN > 0) {\n        return pathD1();\n    } else {\n        NONNORM = 'B';\n        NONNORM_FLG = NONNORM_FLG.substring(0, 1) + 'L';\n        return pathD1();\n    }\n}\n\nfunction pathA2() {\n    return nonNormRouter();\n}\n\nfunction pathQ() {\n    if ([211, 221, 241, 311, 321, 341, 401, 511, 741].includes(COV_CHG_CODE)) {\n        return pathR();\n    } else if ([111, 131, 791].includes(COV_CHG_CODE)) {\n        return pathS();\n    } else {\n        return pathA2();\n    }\n}\n\nfunction pathD1() {\n    if (ECPAYQ2 > 0) {\n        TEMPMIO += 3;\n        return pathT();\n    } else {\n        return pathT();\n    }\n}\n\nfunction pathT() {\n    if (ECPAYQ3 > 0) {\n        TEMPMIO += 3;\n        return pathU();\n    } else {\n        return pathU();\n    }\n}\n\nfunction pathU() {\n    if (ECPAYQ4 > 0 || ECPAYQ4_F === '') {\n        TEMPMIO += 3;\n        return pathV();\n    } else if (OPSTATS_FLG === 'R ') {\n        return pathB1();\n    } else {\n        return pathC1();\n    }\n}\n\nfunction pathV() {\n    if ([3, 51, 0].includes(BMF_FR941)) {\n        return pathC1();\n    } else {\n        return pathB1();\n    }\n}\n\nfunction pathB1() {\n    ACTV_MIO_NUM = TEMPMIO;\n    ACTV_MIO_NUM_FLG = ACTV_MIO_NUM_FLG.substring(0, 1) + 'L ';\n    return pathA2();\n}\n\nfunction pathC1() {\n    OPSTATS = 'N';\n    OPSTATS_FLG = OPSTATS_FLG.substring(0, 1) + 'L ';\n    return pathB1();\n}\n\nfunction pathR() {\n    if (COV_CHG_DATE > new Date('2023-01-31') && COV_CHG_DATE < new Date('2024-01-01')) {\n        ACTV_MIO_VAL = 13 - new Date(COV_CHG_DATE).getMonth();\n        ACTV_MIO_VAL_FLG = ACTV_MIO_VAL_FLG.substring(0, 1) + 'L ';\n        return pathA2();\n    } else {\n        return pathA2();\n    }\n}\n\nfunction pathS() {\n    if (COV_CHG_DATE < new Date('2024-01-01')) {\n        ACTV_MIO_NUM = new Date(COV_CHG_DATE).getMonth() + 1;\n        ACTV_MIO_NUM_FLG = ACTV_MIO_NUM_FLG.substring(0, 1) + 'L ';\n        OPSTATS = 'N';\n        OPSTATS_FLG = OPSTATS_FLG.substring(0, 1) + 'L ';\n        return pathA2();\n    } else {\n        return pathA2();\n    }\n}\n\n\n// Flow: set_NONNORM\nfunction set_NONNORM() {\n    NONNORM = '';\n    if (OPSTATS === 'Y') {\n        return pathW();\n    } else {\n        NONNORM = 'D';\n        NONNORM_FLG = NONNORM_FLG.substring(0, 1) + 'J';\n        return pathA2();\n    }\n}\n\n\nfunction pathW() {\n    if (REFPER > '2023A1') {\n        return path1();\n    } else if (RECORD_TYP === 20 && ACTV_MIO_NUM < 12 && (ACTV_MIO_NUM_FLG.substring(1, 2) === 'L' || (MADBPAYANN === 0 && REFPER === '2022U1'))) {\n        return pathB2();\n    } else {\n        return path2();\n    }\n}\n\nfunction path1() {\n    if (RECORD_TYP === 20 && ACTV_MIO_NUM < 12 && (ACTV_MIO_NUM_FLG.substring(1, 2) === 'L' || (PAY_ANN_VAL === 0 && REFPER === 'REFPER - 1'))) {\n        return pathB2();\n    } else {\n        return path2();\n    }\n}\n\nfunction pathB2() {\n    NONNORM = 'B';\n    NONNORM_FLG = NONNORM_FLG.substring(0, 1) + 'J';\n    return pathA2();\n}\n\nfunction path2() {\n    if (ACTV_MIO_NUM < 12) {\n        NONNORM = 'S';\n        NONNORM_FLG = NONNORM_FLG.substring(0, 1) + 'J';\n        return pathA2();\n    } else {\n        return pathA2();\n    }\n}\n\n\n// Flow: set_BASIC_0\nfunction set_BASIC_0() {\n    if (ACTV_MIO_NUM < 10) {\n        path3();\n    } else if (PAY_QTR1_VAL_R === 0 && PAY_QTR1_VAL_FLG.substring(0, 1) === 'R' && !['C', 'G'].includes(PAY_QTR1_VAL_FLG.substring(1, 2))) {\n        PAY_QTR1_VAL = 0;\n        PAY_QTR1_VAL_FLG = PAY_QTR1_VAL_FLG.substring(0, 1) + 'Z ';\n        EMP_MAR12_NUM = 0;\n        EMP_MAR12_NUM_FLG = EMP_MAR12_NUM_FLG.substring(0, 1) + 'Z ';\n        return pathA2();\n    } else {\n        return pathA2();\n    }\n}\n\n\nfunction path3() {\n    if (PAY_QTR1_VAL_FLG.substring(1, 2) === 'G') {\n        return pathB3();\n    } else {\n        PAY_QTR1_VAL = 0;\n        PAY_QTR1_VAL_FLG = PAY_QTR1_VAL_FLG.substring(0, 1) + 'Z ';\n        return pathB3();\n    }\n}\n\nfunction pathB3() {\n    if (EMP_MAR12_NUM_F.substring(1, 2) === 'G') {\n        return pathA2();\n    } else {\n        EMP_MAR12_NUM = 0;\n        EMP_MAR12_NUM_FLG = EMP_MAR12_NUM_FLG.substring(0, 1) + 'Z ';\n        return pathA2();\n    }\n}\n\n\n// Flow: SPECIAL_SEASON\nfunction SPECIAL_SEASON() {\n    if (PAY_QTR1_VAL_FLG.substring(0, 2) !== 'R ' && !['C', 'G', 'L', 'N', 'Z'].includes(PAY_QTR1_VAL_FLG.substring(1, 2))) {\n        return path4();\n    } else {\n        return pathA2();\n    }\n}\n\nfunction path4() {\n    if (RECORD_TYP === 90) {\n        return path5();\n    } else if (CY_PAY_QTR1_VAL === 0) {\n        ECPAYQ1ZERO = 'TRUE';\n        return path6();\n    } else {\n        return pathA2();\n    }\n}\n\nfunction path5() {\n    if (ECPAYQ1 === 0) {\n        ECPAYQ1ZERO = 'TRUE';\n        return path6();\n    } else {\n        return pathA2();\n    }\n}\n\nfunction path6() {\n    if (EMP_MAR12_NUM_FLG.substring(0, 2) !== 'R ' && !['C', 'G', 'L', 'N', 'Z'].includes(EMP_MAR12_NUM_FLG.substring(1, 2)) && ECPAYQ1ZERO === 'TRUE') {\n        return path7();\n    } else {\n        return pathA2();\n    }\n}\n\nfunction path7() {\n    if (RECORD_TYP === 90) {\n        return path8();\n    } else if (CY_EMP_MAR12_NUM === 0) {\n        EMP_MAR12_NUM_FLG = EMP_MAR12_NUM_FLG.substring(0, 1) + 'Z ';\n        PAY_QTR1_VAL_FLG = PAY_QTR1_VAL_FLG.substring(0, 1) + 'Z ';\n        return pathA2();\n    } else {\n        return pathA2();\n    }\n}\n\nfunction path8() {\n    if (ECEMPQ1 === 0) {\n        EMP_MAR12_NUM_FLG = EMP_MAR12_NUM_FLG.substring(0, 1) + 'Z ';\n        PAY_QTR1_VAL_FLG = PAY_QTR1_VAL_FLG.substring(0, 1) + 'Z ';\n        return pathA2();\n    } else {\n        return pathA2();\n    }\n}\n\nmsg.payload.csv[0] = processPayload();\nreturn msg;\n\n\n\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 450,
-        "y": 180,
-        "wires": [
-            [
-                "106e02af56dc00ee",
-                "d6c45ec5ceb3d90d"
-            ]
-        ]
-    },
-    {
-        "id": "106e02af56dc00ee",
-        "type": "debug",
-        "z": "a51d10c50d9dbbe0",
-        "name": "nonnorm debug",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 680,
-        "y": 120,
-        "wires": []
-    },
-    {
-        "id": "8807ce2046dc8a32",
-        "type": "link in",
-        "z": "a51d10c50d9dbbe0",
-        "name": "link in 27",
-        "links": [
-            "cd8a05808eedb5f3",
-            "9b4f297579e277a4"
-        ],
-        "x": 295,
-        "y": 180,
-        "wires": [
-            [
-                "d97e7c0dec380b3d"
-            ]
-        ]
-    },
-    {
-        "id": "d6c45ec5ceb3d90d",
-        "type": "link out",
-        "z": "a51d10c50d9dbbe0",
-        "name": "link out 21",
-        "mode": "link",
-        "links": [
-            "7d91540d69ac16c1",
-            "688a39b3e0070fe9"
-        ],
-        "x": 595,
-        "y": 180,
         "wires": []
     },
     {
@@ -19478,7 +19420,7 @@
         "type": "function",
         "z": "112a2e5b60c3f3a8",
         "name": "classification function",
-        "func": "// let record_idx = global.get(\"ptrModuleFacts\");\n// let record = msg.payload.csv[record_idx];\n// let cache = global.get(\"lookupCache\");\n// console.log({cache: cache.data})\n// msg.payload.record_typ_txt = record.RECORD_TYP_TXT;\n// msg.payload.aies_scope = record.AIES_SCOPE;\n// msg.payload.naics_num = record.NAICS_NUM;\n\n\n// let status = \"\";\n// function checkStr(str) {\n//     return typeof str === 'undefined' ||\n//         str === null ||\n//         str === \"NULL\"\n//         ? \"\"\n//         : str\n// }\n\n// function recTypeMatch(recArr) {\n//     console.log((\n//         (record.RECORD_TYP_TXT ? recArr.includes(record.RECORD_TYP_TXT) : false)\n//     ))\n//     return (\n//         (record.RECORD_TYP_TXT ? recArr.includes(record.RECORD_TYP_TXT) : false)\n//     );\n// }\n// function checkMinimumLength(inputString) {\n//     return typeof inputString === 'string' && inputString.length >= 8;\n// }\n// function partialNaicsNum(length) {\n//     msg.payload.NAICS_NUM = record.NAICS_NUM.substring(0, length);\n//     console.log(msg.payload.NAICS_NUM)\n//     return record.NAICS_NUM.substring(0, length) || \"\";\n// }\n// function partialKAUNaicsNum(length) {\n//     msg.payload.KAU_NAICS = record.KAU_NAICS.substring(0, length);\n//     console.log(msg.payload.KAU_NAICS)\n//     return record.KAU_NAICS.substring(0, length) || \"\";\n// }\n// function setFlag() {\n//     msg.payload.csv[record_idx].TABSTAT = \"N\";\n//     msg.payload.csv[record_idx].NONTABFL = \"R\";\n//     msg.payload.csv[record_idx].ACTION = \"Exit Edit\";\n// }\n// function setAction(action) {\n//     console.log(action)\n//     msg.payload.csv[record_idx].ACTION = action;\n// }\n// function stopExit(val) {\n//     setFlag()\n//     if (val === 1) {\n//         msg.payload.csv[record_idx].REFERRAL_FLAG = \"INVALID_NAICS_KAU\";\n//     } else {\n//         msg.payload.csv[record_idx].REFERRAL_FLAG = \"INVALID_NAICS_ESTAB\";\n//     }\n\n// }\n\n// function checkNaicsValidation(field, cache, record, naicsValdnColumn = 0) {\n//     if (!cache || !Array.isArray(cache.data)) {\n//         cache = { data: [] };\n//     }\n\n//     const naicsValData = cache.data.find(\n//         item =>\n//             item.module === \"classification\" &&\n//             item.program === \"aies\" &&\n//             item.unit_type === \"estab\"\n//     )?.json_values;\n\n//     return (\n//         record['NAICS_NUM'] &&\n//         (\n//             (naicsValData &&\n//                 typeof naicsValData === \"object\" &&\n//                 naicsValData[\"col_\" + naicsValdnColumn]) ||\n//             []\n//         ).some(item => checkStr((item).toString()) === checkStr((field).toString()))\n//     );\n// }\n// function callMeInElse() {\n//     if (recTypeMatch([\"20\", \"90\"])) {\n//         stopExit(20 || 90)\n//     } else {\n//         stopExit(1)\n//     }\n// }\n// if (recTypeMatch([\"30\", \"20\", \"90\"])) {\n//     if (checkMinimumLength(record.NAICS_NUM)) {\n//         if (\n//             checkNaicsValidation(partialNaicsNum(4), cache, record, 0) ||\n//             checkNaicsValidation(partialNaicsNum(7), cache, record, 1) ||\n//             checkNaicsValidation(partialNaicsNum(6), cache, record, 2)\n//         ) {\n//             setAction(\"Link to Derive Naics code Module\");\n//         } else {\n//             callMeInElse()\n//         }\n//         return msg;\n//     } else if (recTypeMatch([\"20\", \"90\"])) {\n//         callMeInElse()\n//         return msg;\n//     } else {\n//         stopExit(1)\n//     }\n//     return msg;\n\n// } else {\n//     setAction(\"Error - Record should not have entered this module\");\n//     return msg;\n// }\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\nlet cache = global.get(\"lookupCache\");\n\nfunction setFlagAndExit(referralFlagValue) {\n    msg.payload.csv[record_idx].TABSTAT = \"N\";\n    msg.payload.csv[record_idx].NONTABFL = \"R\";\n    msg.payload.csv[record_idx].ACTION = \"Exit Edit\";\n    msg.payload.csv[record_idx].REFERRAL_FLAG = referralFlagValue;\n}\nfunction recTypeMatch(recArr) {\n    console.log((\n        (record.RECORD_TYP_TXT ? recArr.includes(record.RECORD_TYP_TXT) : false)\n    ))\n    return (\n        (record.RECORD_TYP_TXT ? recArr.includes(record.RECORD_TYP_TXT) : false)\n    );\n}\nfunction checkNaicsValidation(columnIndex) {\n    const naicsValidationData = cache.data.find(\n        item =>\n            item.module === \"classification\" &&\n            item.program === \"aies\" &&\n            item.unit_type === \"estab\"\n    )?.json_values;\n\n    const columnKey = \"col_\" + columnIndex;\n    const partialNum = record.NAICS_NUM.substring(0, columnIndex);\n\n    return (\n        naicsValidationData &&\n        naicsValidationData[columnKey] &&\n        naicsValidationData[columnKey].includes(partialNum)\n    );\n}\n\nif (recTypeMatch([\"20\", \"90\"]) && record['AIES_SCOPE'] == 'Y' && record['BR_STAT'] == 'Y') {\n    if (checkNaicsValidation(4) || checkNaicsValidation(7) || checkNaicsValidation(6)) {\n        msg.payload.csv[record_idx].ACTION = \"Go to: Derive NAICS Code Module\";\n    } else {\n        setFlagAndExit(\"INVALID_NAICS_ESTAB\");\n    }\n    return msg;\n} else if (recTypeMatch([\"30\"]) && record['AIES_SCOPE'] == 'Y' && record['BR_STAT'] == 'Y') {\n    if (checkNaicsValidation(1) || checkNaicsValidation(2) || checkNaicsValidation(3)) {\n        msg.payload.csv[record_idx].ACTION = \"Go to Main Routing\";\n    } else {\n        setFlagAndExit(\"INVALID_NAICS_KAU\");\n    }\n    return msg;\n} else {\n    msg.payload.csv[record_idx].ACTION = \"Error - Record should not have entered this module\";\n    return msg;\n}\n",
+        "func": "// let record_idx = global.get(\"ptrModuleFacts\");\n// let record = msg.payload.csv[record_idx];\n// let cache = global.get(\"lookupCache\");\n\n// function setFlagAndExit(referralFlagValue) {\n//     msg.payload.csv[record_idx].TABSTAT = \"N\";\n//     msg.payload.csv[record_idx].NONTABFL = \"R\";\n//     msg.payload.csv[record_idx].ACTION = \"Exit Edit\";\n//     msg.payload.csv[record_idx].REFERRAL_FLAG = referralFlagValue;\n// }\n// function recTypeMatch(recArr) {\n//     console.log((\n//         (record.RECORD_TYP_TXT ? recArr.includes(record.RECORD_TYP_TXT) : false)\n//     ))\n//     return (\n//         (record.RECORD_TYP_TXT ? recArr.includes(record.RECORD_TYP_TXT) : false)\n//     );\n// }\n// function checkNaicsValidation(columnIndex) {\n//     const naicsValidationData = cache.data.find(\n//         item =>\n//             item.module === \"classification\" &&\n//             item.program === \"aies\" &&\n//             item.unit_type === \"estab\"\n//     )?.json_values;\n\n//     const columnKey = \"col_\" + columnIndex;\n//     const partialNum = record.NAICS_NUM.substring(0, columnIndex);\n\n//     return (\n//         naicsValidationData &&\n//         naicsValidationData[columnKey] &&\n//         naicsValidationData[columnKey].includes(partialNum)\n//     );\n// }\n\n// if (recTypeMatch([\"20\", \"90\"]) && record['AIES_SCOPE'] == 'Y' && record['BR_STAT'] == 'Y') {\n//     if (checkNaicsValidation(4) || checkNaicsValidation(7) || checkNaicsValidation(6)) {\n//         msg.payload.csv[record_idx].ACTION = \"Go to: Derive NAICS Code Module\";\n//     } else {\n//         setFlagAndExit(\"INVALID_NAICS_ESTAB\");\n//     }\n//     return msg;\n// } else if (recTypeMatch([\"30\"]) && record['AIES_SCOPE'] == 'Y' && record['BR_STAT'] == 'Y') {\n//     if (checkNaicsValidation(1) || checkNaicsValidation(2) || checkNaicsValidation(3)) {\n//         msg.payload.csv[record_idx].ACTION = \"Go to Main Routing\";\n//     } else {\n//         setFlagAndExit(\"INVALID_NAICS_KAU\");\n//     }\n//     return msg;\n// } else {\n//     msg.payload.csv[record_idx].ACTION = \"Error - Record should not have entered this module\";\n//     return msg;\n// }\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\nlet cache = global.get(\"lookupCache\");\nconst record_type = record['RECORD_TYP_TXT'];\n\nfunction setFlagAndExit(referralFlagValue) {\n    msg.payload.csv[record_idx].TABSTAT = \"N\";\n    msg.payload.csv[record_idx].NONTABFL = \"R\";\n    msg.payload.csv[record_idx].ACTION = \"Exit Edit\";\n    msg.payload.csv[record_idx].REFERRAL_FLAG = referralFlagValue;\n}\nfunction recTypeMatch(recArr) {\n    console.log((\n        (record.RECORD_TYP_TXT ? recArr.includes(record.RECORD_TYP_TXT) : false)\n    ))\n    return (\n        (record.RECORD_TYP_TXT ? recArr.includes(record.RECORD_TYP_TXT) : false)\n    );\n}\n\nfunction checkNaicsValidation(columnIndex, recordtyp) {\n    const naicsValidationData = cache.data.find(\n        item =>\n            item.module === \"classification\" &&\n            item.param === 'naics_validation' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"estab\"\n    )?.json_values;\n    let columnKey = ''\n    if (columnIndex === 4) {\n        columnKey = 'col_0';\n    } else if (columnIndex === 7) {\n        columnKey = 'col_1';\n    } else {\n        columnKey = \"col_2\";\n    }\n\n    let partialNum = ''\n    if (['20', '90', 20, 90].includes(recordtyp)) {\n        partialNum = record.NAICS_NUM.substring(0, columnIndex);\n    } else if ([30, '30'].includes(recordtyp)) {\n        partialNum = record.KAU_NAICS.substring(0, columnIndex);\n    }\n\n    return (\n        naicsValidationData[columnKey].find(row => parseInt(row) == parseInt(partialNum))\n        //     naicsValidationData &&\n        //     naicsValidationData[columnKey] &&\n        //     naicsValidationData[columnKey].includes(partialNum)\n    );\n}\n\nif (recTypeMatch([\"20\", \"90\"]) && record['AIES_SCOPE'] == 'Y' && record['BR_STAT'] == 'Y') {\n    if (checkNaicsValidation(4, record_type)) {\n        msg.payload.csv[record_idx].ACTION = \"Go to: Derive NAICS Code Module\";\n    } else if (checkNaicsValidation(7, record_type)) {\n        msg.payload.csv[record_idx].ACTION = \"Go to: Derive NAICS Code Module\";\n    } else if (checkNaicsValidation(6, record_type)) {\n        msg.payload.csv[record_idx].ACTION = \"Go to: Derive NAICS Code Module\";\n    } else {\n        setFlagAndExit(\"INVALID_NAICS_ESTAB\");\n    }\n    return msg;\n} else if (recTypeMatch([\"30\"]) && record['AIES_SCOPE'] == 'Y' && record['BR_STAT'] == 'Y') {\n    if (checkNaicsValidation(4, record_type)) {\n        msg.payload.csv[record_idx].ACTION = \"Go to Main Routing\";\n    } else if (checkNaicsValidation(7, record_type)) {\n        msg.payload.csv[record_idx].ACTION = \"Go to Main Routing\";\n    } else if (checkNaicsValidation(6, record_type)) {\n        msg.payload.csv[record_idx].ACTION = \"Go to Main Routing\";\n    } else {\n        setFlagAndExit(\"INVALID_NAICS_KAU\");\n    }\n    return msg;\n} else {\n    msg.payload.csv[record_idx].ACTION = \"Error - Record should not have entered this module\";\n    return msg;\n}\n",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -23217,6 +23159,75 @@
         ],
         "x": 485,
         "y": 240,
+        "wires": []
+    },
+    {
+        "id": "d97e7c0dec380b3d",
+        "type": "function",
+        "z": "a51d10c50d9dbbe0",
+        "name": "nonnorm function",
+        "func": "const setCharAtPosition = (str, index, char) => {\n    if (index > str.length - 1) return str;\n    return str.substring(0, index) + char + str.substring(index + 1);\n};\nfunction setCharAt(str, index, chr) {\n    if (typeof str === 'undefined' || str === null || str === '') {\n        return '__' + chr;\n    } else {\n        if (index > str.length - 1) {\n            return str.padEnd(index, '_') + chr;\n        }\n        return str.substring(0, index) + chr + str.substring(index + 1);\n    }\n}\nconst pathA = (record) => {\n    if (record.OPSTATS === '4') {\n        record.OPSTATS = 'N';\n    } else if (record.OPSTATS === '5' && parseInt(record.ACTV_MIO_NUM) > 12) {\n        record.OPSTATS = 'Y';\n    }\n};\n\nconst pathB = (record) => {\n    record.OPSTATS = setCharAtPosition(record.OPSTATS || '   ', 2, 'R');\n};\n\nconst pathC = (record) => {\n    record.OPSTATS = setCharAtPosition(record.OPSTATS || '   ', 2, '*');\n};\n\nconst pathD = (record) => {\n    record.OPSTATS = 'N';\n};\n\nconst pathX = (record) => {\n   record['ACTION'] = \"Invalid RECORD_TYP_TXT value\";\n};\n\nconst initACTVMIONUMAndSetOPSTATS = (record) => {\n    const mioNum = parseInt(record.ACTV_MIO_NUM) || 0;\n    if (mioNum === 0 || mioNum > 12) {\n        record.ACTV_MIO_NUM = '12';\n        record[\"ACTV_MIO_NUM_F\"] = setCharAt(record[\"ACTV_MIO_NUM_F\"], 2, 'J');\n        record.OPSTATS = ' ';\n        return pathC(record);\n    } else {\n        return setOPSTATS_RorAsterisk(record);\n    }\n};\n\nconst setOPSTATS_RorAsterisk = (record) => {\n    if ((record.COVCODE === '111' || record.COVCODE === '113' || record.COVCODE === '791') &&\n        parseInt(record.ACTV_MIO_NUM) < 12 &&\n        record.COVC_CHG_DATE.startsWith('JAN-204')) {\n        record.OPSTATS = setCharAtPosition(record.OPSTATS || '   ', 2, 'R');\n    } else {\n        record.OPSTATS = setCharAtPosition(record.OPSTATS || '   ', 1, '*');\n    }\n    return pathC(record);\n};\n\nconst processRecord = (record) => {\n    if (!['10', '20', '30', '90'].includes(record.RECORD_TYP_TXT)) {\n        return pathX(record);\n    }\n    initACTVMIONUMAndSetOPSTATS(record);\n\n    if (record.OPSTAT_STAT === '4') {\n        pathD(record);\n    } else if (record.OPSTAT_STAT === '5' && parseInt(record.ACTV_MIO_NUM) > 12) {\n        pathA(record);\n    } else {\n        pathC(record);\n    }\n};\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nconst record = msg.payload.csv[record_idx];\n\ntry {\n    processRecord(record);\n} catch (error) {\n    console.error(\"Error:\", error.message);\n    record.ACTION = \"Error processing record\";\n}\n\nmsg.payload.csv[record_idx] = record;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 180,
+        "wires": [
+            [
+                "106e02af56dc00ee",
+                "d6c45ec5ceb3d90d"
+            ]
+        ]
+    },
+    {
+        "id": "106e02af56dc00ee",
+        "type": "debug",
+        "z": "a51d10c50d9dbbe0",
+        "name": "nonnorm debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 680,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "8807ce2046dc8a32",
+        "type": "link in",
+        "z": "a51d10c50d9dbbe0",
+        "name": "link in 27",
+        "links": [
+            "cd8a05808eedb5f3",
+            "9b4f297579e277a4"
+        ],
+        "x": 295,
+        "y": 180,
+        "wires": [
+            [
+                "d97e7c0dec380b3d"
+            ]
+        ]
+    },
+    {
+        "id": "d6c45ec5ceb3d90d",
+        "type": "link out",
+        "z": "a51d10c50d9dbbe0",
+        "name": "link out 21",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9"
+        ],
+        "x": 595,
+        "y": 180,
         "wires": []
     }
 ]
