@@ -22997,7 +22997,7 @@
             "7d91540d69ac16c1",
             "688a39b3e0070fe9"
         ],
-        "x": 1285,
+        "x": 1495,
         "y": 400,
         "wires": []
     },
@@ -23014,7 +23014,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1260,
+        "x": 1540,
         "y": 320,
         "wires": []
     },
@@ -23054,8 +23054,7 @@
         "y": 320,
         "wires": [
             [
-                "e531cbc5d253735b",
-                "739edc4c44d5eb0b"
+                "c55cb2c58636fcd2"
             ]
         ]
     },
@@ -23076,6 +23075,27 @@
         "wires": [
             [
                 "fdc9c49086f49063"
+            ]
+        ]
+    },
+    {
+        "id": "c55cb2c58636fcd2",
+        "type": "function",
+        "z": "c606c03db54a5be8",
+        "name": "Unit balance",
+        "func": "function setCharAt(str, index, char) {\n    if (index > str.length - 1) return str;\n    return str.substring(0, index) + char + str.substring(index + 1);\n}\n\nfunction setTotal(record, details) {\n    record.TOTAL = details.reduce((sum, detail) => sum + (parseFloat(detail) || 0), 0);\n    record.TOTAL_FLG = setCharAt(record.TOTAL_FLG || '  ', 1, 'L');\n}\n\nfunction rakeDetailsToTotal(record, details) {\n    const total = parseFloat(record.TOT) || 0;\n    details.forEach((detail, index) => {\n        detail = parseFloat(detail);\n        if (!isNaN(detail) && detail !== 0) {\n            record[`DETAILS_${index + 1}`] = (detail / total).toFixed(2);\n            record.DETAILS_FLG = setCharAt(record.DETAILS_FLG || '  ', index, 'X');\n        }\n    });\n}\n\n// function checkForImbalances(record, details) {\n//     const sumDetails = details.reduce((sum, detail) => sum + (parseFloat(detail) || 0), 0);\n//     if (sumDetails > 0 && record.TOT <= 0) {\n//         record.FAILURE = 1;\n//         return false;\n//     }\n//     return true;\n// }\n\n// function processUnitBalance(record, details) {\n//     if (!checkForImbalances(record, details)) {\n//         return pathA(record); // Path A for imbalance detected\n//     }\n//     if (sumDetails === 0 && record.TOT > 0) {\n//         rakeDetailsToTotal(record, details);\n//         return pathA(record); // Path A after raking details to total\n//     }\n//     if (sumDetails > 0 && record.TOT > 0) {\n//         const toleranceCheck = checkTolerance(record, details);\n//         if (!toleranceCheck) {\n//             markForImputation(record, details);\n//         }\n//         return pathA(record); // Path A for all other cases\n//     }\n//     return pathA(record); // Default path\n// }\nfunction processUnitBalance(record, details) {\n    const sumDetails = details.reduce((sum, detail) => sum + (parseFloat(detail) || 0), 0); // Define sumDetails here\n\n    if (sumDetails > 0 && parseFloat(record.TOT) <= 0) {\n        record.FAILURE = 1;\n        return pathA(record); // Path A for imbalance detected\n    }\n    if (sumDetails === 0 && parseFloat(record.TOT) > 0) {\n        rakeDetailsToTotal(record, details);\n        return pathA(record); // Path A after raking details to total\n    }\n    if (sumDetails > 0 && parseFloat(record.TOT) > 0) {\n        const toleranceCheck = checkTolerance(record, sumDetails); // Pass sumDetails to checkTolerance\n        if (!toleranceCheck) {\n            markForImputation(record, details);\n        }\n        return pathA(record); // Path A for all other cases\n    }\n    return pathA(record); // Default path\n}\n\n\nfunction checkTolerance(record, details) {\n    // Placeholder for tolerance check logic\n    return true; // Assuming tolerance check passed for placeholder\n}\n\nfunction markForImputation(record, details) {\n    record.DETAILS_FLG = setCharAt(record.DETAILS_FLG || '  ', 1, 'X');\n}\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\nlet details = []; // Array of detail values, to be populated\n\n// Populate details array with actual detail values from the record\nfor (let i = 1; i <= 4; i++) {\n    details.push(record[`VAR_DET${i}`]);\n}\n\n// Define the function to transition to different paths:\nfunction pathA(record) {\n    record.ACTION = 'Go To Main Routing';\n}\n\ntry {\n    processUnitBalance(record, details);\n} catch (error) {\n    console.error(\"Error in processUnitBalance:\", error);\n    record.ERROR = 'Unit Balance Processing Error';\n}\n\nmsg.payload.csv[record_idx] = record;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1210,
+        "y": 320,
+        "wires": [
+            [
+                "e531cbc5d253735b",
+                "739edc4c44d5eb0b"
             ]
         ]
     },
