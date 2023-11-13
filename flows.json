@@ -1756,9 +1756,7 @@
             "d394b61bcc4755e6"
         ],
         "x": 14,
-        "y": 939,
-        "w": 1532,
-        "h": 82
+        "y": 939
     },
     {
         "id": "ef50b77b253a7883",
@@ -1778,9 +1776,7 @@
             "d587f5de3f4014c8"
         ],
         "x": 14,
-        "y": 239,
-        "w": 1792,
-        "h": 182
+        "y": 239
     },
     {
         "id": "62708d0bbe922798",
@@ -1804,9 +1800,7 @@
             "58df41cd8e54a653"
         ],
         "x": 14,
-        "y": 519,
-        "w": 1432,
-        "h": 322
+        "y": 519
     },
     {
         "id": "19463268a6c67561",
@@ -1824,8 +1818,6 @@
         ],
         "x": 14,
         "y": 99,
-        "w": 1432,
-        "h": 82,
         "info": "# Rules from Parameter Files"
     },
     {
@@ -19505,11 +19497,6 @@
         "passthru": true,
         "multiple": false,
         "options": [
-            {
-                "label": "Balance Module",
-                "value": "balance_module",
-                "type": "str"
-            },
             {
                 "label": "BR Stat Evaluation",
                 "value": "br_stat_evaluation",
