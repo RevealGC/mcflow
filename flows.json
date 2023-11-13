@@ -381,14 +381,6 @@
         "env": []
     },
     {
-        "id": "c606c03db54a5be8",
-        "type": "tab",
-        "label": "demo_recipe_1",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
         "id": "0a014270e6816fdf",
         "type": "tab",
         "label": "Critical Error",
@@ -400,6 +392,46 @@
         "id": "a51d10c50d9dbbe0",
         "type": "tab",
         "label": "NONNORM",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "857de6d7143aac67",
+        "type": "tab",
+        "label": "Unit Balance",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c606c03db54a5be8",
+        "type": "tab",
+        "label": "demo_recipe_1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "8790b12c7efb6fa0",
+        "type": "tab",
+        "label": "Interactive Mode",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "e1c94d5011366338",
+        "type": "tab",
+        "label": "Batch Mode 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "cd5dca18afec6561",
+        "type": "tab",
+        "label": "Batch Mode 2",
         "disabled": false,
         "info": "",
         "env": []
@@ -1817,9 +1849,7 @@
             "a47c991027033263"
         ],
         "x": 34,
-        "y": 19,
-        "w": 432,
-        "h": 82
+        "y": 19
     },
     {
         "id": "4099bf03141f3710",
@@ -1864,9 +1894,7 @@
             "6c8827ce7a4c83d8"
         ],
         "x": 14,
-        "y": 619,
-        "w": 1092,
-        "h": 862
+        "y": 619
     },
     {
         "id": "d1e0f39ddacfeb20",
@@ -12535,7 +12563,6 @@
         "z": "ebc615704b7e2ae8",
         "name": "link in 14",
         "links": [
-            "7520a5a2d8404846",
             "1d6882431fd8622b"
         ],
         "x": 1435,
@@ -13186,7 +13213,9 @@
             "108f9747956b439a",
             "25627bf820122fe8",
             "739edc4c44d5eb0b",
-            "163aa434e03fa911"
+            "163aa434e03fa911",
+            "ec6bfe4f7818633f",
+            "246d06dd46410f88"
         ],
         "x": 205,
         "y": 260,
@@ -16503,7 +16532,11 @@
         "name": "link out gotQBES",
         "mode": "link",
         "links": [
-            "4480a2673228edf6"
+            "4480a2673228edf6",
+            "f6ed151858aa9d62",
+            "f765d14d056bec8a",
+            "e0d75497828e672b",
+            "7524317b716e4316"
         ],
         "x": 375,
         "y": 360,
@@ -16660,6 +16693,7 @@
         "name": "updateResultToPayload",
         "func": "\nconst findChangedKeyValuePairs = (oldObj, newObj) => {\n    const changedKeyValuePairs = [];\n\n    for (const key in newObj) {\n        if (oldObj[key] !== newObj[key]) {\n            changedKeyValuePairs.push({\n                key,\n                oldValue: oldObj[key],\n                newValue: newObj[key],\n                service: {\n                    name: 'qflow',\n                    timestamp: new Date()\n                }\n            });\n        }\n    }\n\n    return changedKeyValuePairs;\n}\n\nconst qFlowdelta = findChangedKeyValuePairs(msg.payload.qflowInputFacts[0], msg.payload.facts[0]);\n\nmsg.payload.delta.push(...qFlowdelta);\nmsg.payload.fact = msg.payload.facts[0];\ndelete msg.payload.facts;\ndelete msg.payload.qflowInputFacts;\n\nvar currentStepIndex = msg.payload.recipe.currentStepIndex;\nconst startTime = msg.payload.recipe.steps[currentStepIndex].tsStart;\n\nconst endTime = new Date().getTime();\n\nmsg.payload.recipe.steps[currentStepIndex].tsEnd = endTime;\nmsg.payload.recipe.steps[currentStepIndex].processedTime = endTime - startTime;\n\nmsg.payload.recipe.steps[currentStepIndex].delta = qFlowdelta;\nmsg.payload.recipe.currentStepIndex = currentStepIndex + 1\nmsg.topicName = msg.payload.recipe.steps[currentStepIndex+1].msName;\n\nmsg.payload = JSON.stringify(msg.payload)\n\nreturn msg;",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -20654,7 +20688,7 @@
         "name": "link out to unit balance",
         "mode": "link",
         "links": [
-            "d43d98523cecf095"
+            "94c85958382e30a5"
         ],
         "x": 845,
         "y": 320,
@@ -22397,7 +22431,10 @@
         "name": "link out post edit",
         "mode": "link",
         "links": [
-            "2094172383ea335e"
+            "2094172383ea335e",
+            "e94185dee80f378a",
+            "7ecad38d9222e8f0",
+            "39652b99db6e7c2b"
         ],
         "x": 845,
         "y": 1440,
@@ -22952,154 +22989,6 @@
         "wires": []
     },
     {
-        "id": "2094172383ea335e",
-        "type": "link in",
-        "z": "c606c03db54a5be8",
-        "name": "demo_recipe_1 Link",
-        "links": [
-            "6c8827ce7a4c83d8"
-        ],
-        "x": 195,
-        "y": 320,
-        "wires": [
-            [
-                "6a6df9470d4911f3"
-            ]
-        ]
-    },
-    {
-        "id": "6a6df9470d4911f3",
-        "type": "function",
-        "z": "c606c03db54a5be8",
-        "name": "BR Stat",
-        "func": "function processRecord(record) {\n    if (['10', '20', '30', '90'].includes(record.RECORD_TYP_TXT)) {\n        record.TABSTAT = 'Y';\n        record.NONTABFL = 'space';\n        if (['10', '20', '90'].includes(record.RECORD_TYP_TXT)) {\n            record.BR_STAT = 'N'\n        }else{\n            record.KAU_STAT = 'N'\n        }\n        record.TABSTAT = 'N';\n        record.NONTABFLD = 'D';\n        exitEdit();\n        \n        if (record.BR_STAT !== 'N' || record.KAU_STAT !== 'N') {\n            return mainRouting()\n        } \n    } else {\n        record.ACTION = \"Invalid RECORD_TYP_TXT value\";\n    }\n}\n\nfunction exitEdit() {\n    console.log(\"Exiting Edit\");\n    record.ACTION = 'Edit Exit';\n}\n\nfunction pointA() {\n    console.log(\"Processing at point A\");\n}\n\nfunction mainRouting() {\n    console.log(\"Going to Main Routing\");\n    record.ACTION = \"Going to Main Routing\";\n}\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nconst record = msg.payload.csv[record_idx];\n\ntry {\n    processRecord(record);\n} catch (error) {\n    console.error(\"Error:\", error.message);\n}\nmsg.payload.csv[record_idx] = record\n\nreturn msg;\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 420,
-        "y": 320,
-        "wires": [
-            [
-                "8d7ba5aefc5d0440"
-            ]
-        ]
-    },
-    {
-        "id": "739edc4c44d5eb0b",
-        "type": "link out",
-        "z": "c606c03db54a5be8",
-        "name": "link out classification",
-        "mode": "link",
-        "links": [
-            "7d91540d69ac16c1",
-            "688a39b3e0070fe9"
-        ],
-        "x": 1495,
-        "y": 400,
-        "wires": []
-    },
-    {
-        "id": "e531cbc5d253735b",
-        "type": "debug",
-        "z": "c606c03db54a5be8",
-        "name": "BR Stat",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1540,
-        "y": 320,
-        "wires": []
-    },
-    {
-        "id": "8d7ba5aefc5d0440",
-        "type": "function",
-        "z": "c606c03db54a5be8",
-        "name": "critical error",
-        "func": "// let record_idx = global.get(\"ptrModuleFacts\");\n// let record = msg.payload.csv[record_idx];\n// let status = \"\";\n// msg.payload.status = status;\n\n// function setResult() {\n//     msg.payload.csv[record_idx].TABSTAT = \"N\";\n//     msg.payload.csv[record_idx].NONTABFL = \"D\";\n//     msg.payload.csv[record_idx].ACTION = \"Exit Edit\";\n// }\n\n\n\n// function parseToNum(val) {\n//     return isNaN(val) ? 0 : parseInt(val, 10);\n// }\n// function naicsSectorCheck() {\n//     let result =\n//         parseToNum(record.PAY_ANN_VAL) +\n//         parseToNum(record.EMP_MAR12_NUM) +\n//         parseToNum(record.PAY_QTR1_VAL) +\n//         parseToNum(record.ECPAYANN) +\n//         parseToNum(record.ECPAYQ1) +\n//         parseToNum(record.ECEMPQ1) +\n//         parseToNum(record.ECPAYANL);\n\n//     if (parseToNum(record.NAICS_SECTOR_OLD_NUM) === 31) {\n//         return result + parseToNum(record.EXPS_TEMPSTAF_VAL);\n//     }\n//     return result\n// }\n// let data = naicsSectorCheck();\n// msg.payload.csv[record_idx].DATA = data\n// console.log()\n// if (\n//     [\"111\", \"131\", \"791\"].includes(record.COV_CHG_CODE.toString()) &&\n//     new Date(record.COV_CHG_DATE) <=\n//     new Date(\"01-01-\" + record.REF_PER.substring(0, 4)) &&\n//     data\n// ) {\n//     msg.payload.csv[record_idx].TABSTAT = \"Y\";\n//     return msg;\n\n// } else if ([\"181\", \"201\", \"801\", \"091\", \"121\", \"171\"].includes(record.COV_CHG_CODE.toString()) || data === 0) {\n//     setResult();\n//     return msg;\n// } else {\n//     msg.payload.csv[record_idx].ACTION = \"Go To Main Routing\";\n//     return msg;\n// }\n\n// let record_idx = global.get(\"ptrModuleFacts\");\n// let record = msg.payload.csv[record_idx];\n// let status = \"\";\n// msg.payload.status = status;\n\n// function setResult() {\n//     msg.payload.csv[record_idx].TABSTAT = \"N\";\n//     msg.payload.csv[record_idx].NONTABFL = \"D\";\n//     msg.payload.csv[record_idx].action = \"Exit Edit\";\n// }\n\n\n\n// function parseToNum(val) {\n//     return isNaN(val) ? 0 : parseInt(val, 10);\n// }\n// function naicsSectorCheck() {\n//     let result =\n//         parseToNum(record.PAY_ANN_VAL) +\n//         parseToNum(record.EMP_MAR12_NUM) +\n//         parseToNum(record.PAY_QTR1_VAL) +\n//         parseToNum(record.ECPAYANN) +\n//         parseToNum(record.ECPAYQ1) +\n//         parseToNum(record.ECEMPQ1) +\n//         parseToNum(record.ECPAYANL);\n\n//     if (parseToNum(record.NAICS_SECTOR_OLD_NUM) === 31) {\n//         return result + parseToNum(record.EXPS_TEMPSTAF_VAL);\n//     }\n//     return result\n// }\n// let data = naicsSectorCheck();\n// msg.payload.csv[record_idx].DATA = data\n// console.log()\n// if (\n//     [\"111\", \"131\", \"791\"].includes(record.COV_CHG_CODE.toString()) &&\n//     new Date(record.COV_CHG_DATE) <=\n//     new Date(\"01-01-\" + record.REF_PER.substring(0, 4)) &&\n//     data\n// ) {\n//     msg.payload.csv[record_idx].TABSTAT = \"Y\";\n//     return msg;\n\n// } else if ([\"181\", \"201\", \"801\", \"091\", \"121\", \"171\"].includes(record.COV_CHG_CODE.toString()) || data === 0) {\n//     setResult();\n//     return msg;\n// } else {\n//     msg.payload.csv[record_idx].action = \"Go To Main Routing\";\n//     return msg;\n// }\n\n\nlet record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\nfunction setResult() {\n    record['TABSTAT'] = \"N\";\n    record['NONTABFL'] = \"D\";\n    record['ACTION'] = \"Exit Edit\";\n}\n\n// function parseToNum(val) {\n//     return isNaN(val) ? 0 : parseInt(val, 10);\n// }\nfunction naicsSectorCheck() {\n    let result =\n        parseFloat(record['PAY_ANN_VAL']) +\n        parseFloat(record['EMP_MAR12_NUM']) +\n        parseFloat(record['PAY_QTR1_VAL']) +\n        parseFloat(record['ECPAYANN']) +\n        parseFloat(record['ECPAYQ1']) +\n        parseFloat(record['ECEMPQ1']) +\n        parseFloat(record['ECPAYANL']);\n\n    if (parseFloat(record['NAICS_SECTOR_OLD_NUM']) === 31) {\n        result = parseFloat(result) + parseFloat(record['EXPS_TEMPSTAF_VAL']);\n    }\n    return result\n}\nlet data = naicsSectorCheck();\nrecord['DATA'] = data\n\nif (\n    [\"111\", \"131\", \"791\"].includes(record['COV_CHG_CODE'].toString()) &&\n    new Date(record['COV_CHG_DATE']) <=\n    new Date(\"01-01-\" + record.REF_PER.substring(0, 4)) &&\n    data == 0\n) {\n    setResult();\n    return msg;\n\n} else if ([\"181\", \"201\", \"801\", \"091\", \"121\", \"171\"].includes(record['COV_CHG_CODE'].toString())) {\n    setResult();\n    return msg;\n} else {\n    record['ACTION'] = \"Go To Main Routing\";\n    return msg;\n}",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 610,
-        "y": 320,
-        "wires": [
-            [
-                "5eb805cdc909d5b1"
-            ]
-        ]
-    },
-    {
-        "id": "fdc9c49086f49063",
-        "type": "function",
-        "z": "c606c03db54a5be8",
-        "name": "Fake PV",
-        "func": "// function setCharAt(str, index, chr) {\n//     if (index > str.length - 1) return str;\n//     return str.substring(0, index) + chr + str.substring(index + 1);\n// }\n\n// function initializeVariables(record) {\n//     record.PAY_ANN_VAL = setCharAt(record.PAY_ANN_VAL.toString(), 2, 'U');\n\n//     record.RCPT_TOT_VAL = setCharAt(record.RCPT_TOT_VAL.toString(), 2, 'X');\n\n//     record.EMP_MAR12_NUM = setCharAt(record.EMP_MAR12_NUM.toString(), 2, 'U');\n\n//     record.PAY_QTR1_VAL = setCharAt(record.PAY_QTR1_VAL.toString(), 2, 'U');\n\n//     return record;\n// }\n\n\n// let record_idx = global.get(\"ptrModuleFacts\");\n// let record = msg.payload.csv[record_idx];\n\n// record.PAY_ANN_VAL = record.PAY_ANN_VAL || \"0\";\n// record.RCPT_TOT_VAL = record.RCPT_TOT_VAL || \"0\";\n// record.EMP_MAR12_NUM = record.EMP_MAR12_NUM || \"0\";\n// record.PAY_QTR1_VAL = record.PAY_QTR1_VAL || \"0\";\n\n// if(parseInt(record['RANDOM']) > 10){\n//     record = initializeVariables(record);\n// }\n\n\n// return msg;\nfunction setCharAt(str, index, chr) {\n    if (index > str.length - 1) return str;\n    return str.substring(0, index) + chr + str.substring(index + 1);\n}\n\nfunction initializeVariables(record) {\n    record.PAY_ANN_VAL = setCharAt(record.PAY_ANN_VAL.toString(), 2, 'U');\n    record.RCPT_TOT_VAL = setCharAt(record.RCPT_TOT_VAL.toString(), 2, 'X');\n    record.EMP_MAR12_NUM = setCharAt(record.EMP_MAR12_NUM.toString(), 2, 'U');\n    record.PAY_QTR1_VAL = setCharAt(record.PAY_QTR1_VAL.toString(), 2, 'U');\n\n    return record;\n}\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nrecord.PAY_ANN_VAL = (record.PAY_ANN_VAL && record.PAY_ANN_VAL !== 'NULL') ? record.PAY_ANN_VAL : \"0\";\nrecord.RCPT_TOT_VAL = (record.RCPT_TOT_VAL && record.RCPT_TOT_VAL !== 'NULL') ? record.RCPT_TOT_VAL : \"0\";\nrecord.EMP_MAR12_NUM = (record.EMP_MAR12_NUM && record.EMP_MAR12_NUM !== 'NULL') ? record.EMP_MAR12_NUM : \"0\";\nrecord.PAY_QTR1_VAL = (record.PAY_QTR1_VAL && record.PAY_QTR1_VAL !== 'NULL') ? record.PAY_QTR1_VAL : \"0\";\n\nif(parseInt(record['RANDOM']) > 5){\n    record = initializeVariables(record);\n}\n\nreturn msg;\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1020,
-        "y": 320,
-        "wires": [
-            [
-                "c55cb2c58636fcd2"
-            ]
-        ]
-    },
-    {
-        "id": "5eb805cdc909d5b1",
-        "type": "function",
-        "z": "c606c03db54a5be8",
-        "name": "Set Path",
-        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nrecord['RANDOM'] = Math.floor(Math.random() * 10) + 1\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 800,
-        "y": 320,
-        "wires": [
-            [
-                "fdc9c49086f49063"
-            ]
-        ]
-    },
-    {
-        "id": "c55cb2c58636fcd2",
-        "type": "function",
-        "z": "c606c03db54a5be8",
-        "name": "Unit balance",
-        "func": "function setCharAt(str, index, char) {\n    if (index > str.length - 1) return str;\n    return str.substring(0, index) + char + str.substring(index + 1);\n}\n\nfunction setTotal(record, details) {\n    record.TOTAL = details.reduce((sum, detail) => sum + (parseFloat(detail) || 0), 0);\n    record.TOTAL_FLG = setCharAt(record.TOTAL_FLG || '  ', 1, 'L');\n}\n\nfunction rakeDetailsToTotal(record, details) {\n    const total = parseFloat(record.TOT) || 0;\n    details.forEach((detail, index) => {\n        detail = parseFloat(detail);\n        if (!isNaN(detail) && detail !== 0) {\n            record[`DETAILS_${index + 1}`] = (detail / total).toFixed(2);\n            record.DETAILS_FLG = setCharAt(record.DETAILS_FLG || '  ', index, 'X');\n        }\n    });\n}\n\n// function checkForImbalances(record, details) {\n//     const sumDetails = details.reduce((sum, detail) => sum + (parseFloat(detail) || 0), 0);\n//     if (sumDetails > 0 && record.TOT <= 0) {\n//         record.FAILURE = 1;\n//         return false;\n//     }\n//     return true;\n// }\n\n// function processUnitBalance(record, details) {\n//     if (!checkForImbalances(record, details)) {\n//         return pathA(record); // Path A for imbalance detected\n//     }\n//     if (sumDetails === 0 && record.TOT > 0) {\n//         rakeDetailsToTotal(record, details);\n//         return pathA(record); // Path A after raking details to total\n//     }\n//     if (sumDetails > 0 && record.TOT > 0) {\n//         const toleranceCheck = checkTolerance(record, details);\n//         if (!toleranceCheck) {\n//             markForImputation(record, details);\n//         }\n//         return pathA(record); // Path A for all other cases\n//     }\n//     return pathA(record); // Default path\n// }\nfunction processUnitBalance(record, details) {\n    const sumDetails = details.reduce((sum, detail) => sum + (parseFloat(detail) || 0), 0); // Define sumDetails here\n\n    if (sumDetails > 0 && parseFloat(record.TOT) <= 0) {\n        record.FAILURE = 1;\n        return pathA(record); // Path A for imbalance detected\n    }\n    if (sumDetails === 0 && parseFloat(record.TOT) > 0) {\n        rakeDetailsToTotal(record, details);\n        return pathA(record); // Path A after raking details to total\n    }\n    if (sumDetails > 0 && parseFloat(record.TOT) > 0) {\n        const toleranceCheck = checkTolerance(record, sumDetails); // Pass sumDetails to checkTolerance\n        if (!toleranceCheck) {\n            markForImputation(record, details);\n        }\n        return pathA(record); // Path A for all other cases\n    }\n    return pathA(record); // Default path\n}\n\n\nfunction checkTolerance(record, details) {\n    // Placeholder for tolerance check logic\n    return true; // Assuming tolerance check passed for placeholder\n}\n\nfunction markForImputation(record, details) {\n    record.DETAILS_FLG = setCharAt(record.DETAILS_FLG || '  ', 1, 'X');\n}\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\nlet details = []; // Array of detail values, to be populated\n\n// Populate details array with actual detail values from the record\nfor (let i = 1; i <= 4; i++) {\n    details.push(record[`VAR_DET${i}`]);\n}\n\n// Define the function to transition to different paths:\nfunction pathA(record) {\n    record.ACTION = 'Go To Main Routing';\n}\n\ntry {\n    processUnitBalance(record, details);\n} catch (error) {\n    console.error(\"Error in processUnitBalance:\", error);\n    record.ERROR = 'Unit Balance Processing Error';\n}\n\nmsg.payload.csv[record_idx] = record;\nreturn msg;\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1210,
-        "y": 320,
-        "wires": [
-            [
-                "e531cbc5d253735b",
-                "739edc4c44d5eb0b"
-            ]
-        ]
-    },
-    {
         "id": "8feba05e91ff48f3",
         "type": "link in",
         "z": "0a014270e6816fdf",
@@ -23236,5 +23125,691 @@
         "x": 595,
         "y": 180,
         "wires": []
+    },
+    {
+        "id": "373bb2a6f4053a31",
+        "type": "function",
+        "z": "857de6d7143aac67",
+        "name": "Unit Balance Function",
+        "func": "let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\nmsg.cache = global.get(\"lookupCache\").data.find(\n    item =>\n        item.module === \"balance\" &&\n        item.param === \"unit_balance\" &&\n        item.program === \"aies\" &&\n        item.unit_type === \"estab\"\n)?.json_values;\n\nfunction checkNaics(data, naics, rec_typ) {\n    let list = data['NAICS']\n    let unit = data['UNIT TYPE']\n    let rectyp = rec_typ\n    if (['SU', 'MU'].includes(rectyp)) {\n        rec_typ = 'ESTAB'\n    }\n    if (rec_typ === unit) {\n        if ([\"ALL\", \"All\"].includes(list)) {\n            return (true);\n        } else {\n            list = list.replace(/ /g, \"\");\n            list = list.replace(/'/g, \"\");\n            var array = list.split(',')\n\n            if (array.find(r => naics.startsWith(r))) {\n                return (true);\n            } else {\n                return (false)\n            }\n        }\n    }\n}\n\nfunction sumRow(data) {\n    let sum = 0;\n    var keys = [];\n    for (var key in data) {\n        if (key.startsWith('DETAIL') && data[key] != null) {\n            let variable = data[key]\n            // console.log(variable)\n            sum = parseFloat(sum) + parseFloat(record[variable])\n            keys.push(variable)\n        }\n    }\n    return [sum, keys];\n}\n\nfunction raking(rectot, sum, keys, tol) {\n    if ((Math.abs(rectot - sum) / rectot) <= tol) {\n        keys.sort((a, b) => record[b] - record[a]);\n        let remainder = 0\n        for (let i = 0; i < keys.length; i++) {\n            let num1 = (rectot / sum) * parseFloat(record[keys[i]]) + remainder\n            let num2 = Math.round(num1)\n            remainder = num1 - num2\n            record[keys[i]] = num2\n        }\n    }\n}\n\nlet naics = record['NAICS_NUM']\nnaics = '' + naics\n\nconst REPORTING_ID_TYP_TXT = record['REPORTING_ID_TYP_TXT']\n// console.log(naics)\n\nfor (let i in msg.cache['UNIT_BALANCE']) {\n    let unitBalance = msg.cache['UNIT_BALANCE'][i]\n    if (checkNaics(unitBalance, naics, REPORTING_ID_TYP_TXT)) {\n        let tot = unitBalance['TOTAL']\n        let rectot = 0\n        if ([100, '100'].includes(tot)) {\n            rectot = 100\n        } else {\n            rectot = parseFloat(record[tot])\n        }\n        // tot = tot.trim()\n        let name = 'DET_' + tot\n        let name_f = tot + '_F'\n        let [sum, keys] = sumRow(unitBalance)\n        sum = parseFloat(sum)\n        // record[name] = sum\n\n        // begin fail logic\n        if (rectot === sum && rectot != 0) {\n            record['ACTION'] = 'Go To: Main Routing'\n        } else {\n            const tolerance = parseFloat(unitBalance['Tolerance'])\n            if (sum > 0 && rectot <= 0) {\n                record[tot] = sum\n                if (record[name_f] && record[name_f].length >= 2) {\n                    record[name_f] = record[name_f].substring(0, 1) + 'L' + record[name_f].substring(2);\n                } else if (record[name_f] && record[name_f].length >= 1) {\n                    record[name_f] = record[name_f].substring(0, 1) + 'L ';\n                } else {\n                    record[name_f] = ' L ';\n                }\n                record['ACTION'] = 'Go To: Main Routing'\n            } else if (sum == 0 && rectot > 0) {\n                raking(rectot, sum, keys, tolerance)\n                for (let i = 0; i < keys.length; i++) {\n                    let det_f = keys[i] + '_F'\n                    if (record[det_f] && record[det_f].length >= 2) {\n                        record[det_f] = record[det_f].substring(0, 1) + 'X' + record[det_f].substring(2);\n                    } else if (record[det_f] && record[det_f].length >= 1) {\n                        record[det_f] = record[det_f].substring(0, 1) + 'X ';\n                    } else {\n                        record[det_f] = ' X ';\n                    }\n                }\n                record['ACTION'] = 'Go To: Main Routing'\n            } else if (sum > 0 && rectot > 0) {\n                // check range\n                const low = 1 - tolerance\n                const high = 1 + tolerance\n                if (low <= sum / rectot && sum / rectot <= high) {\n                    let flag_check1 = ''\n                    if (['P', 'C', 'A', 'S', 'O', 'E', 'F'].includes(record[name_f].substring(2, 3))) {\n                        flag_check1 = 'Yes'\n                    }\n                    let flag_check2 = ''\n                    for (let i = 0; i < keys.length; i++) {\n                        let det_f = keys[i] + '_F'\n                        if (['P', 'C', 'A', 'S', 'O', 'E', 'F'].includes(record[det_f].substring(2, 3))) {\n                            flag_check2 = 'Yes'\n                        }\n                    }\n                    if (flag_check2 == 'Yes') {\n                        record[tot] = sum\n                        if (record[name_f] && record[name_f].length >= 2) {\n                            record[name_f] = record[name_f].substring(0, 1) + 'L' + record[name_f].substring(2);\n                        } else if (record[name_f] && record[name_f].length >= 1) {\n                            record[name_f] = record[name_f].substring(0, 1) + 'L ';\n                        } else {\n                            record[name_f] = ' L ';\n                        }\n                    } else {\n                        raking(rectot, sum, keys, tolerance)\n                        for (let i = 0; i < keys.length; i++) {\n                            let det_f = keys[i] + '_F'\n                            if (record[det_f] && record[det_f].length >= 2) {\n                                record[det_f] = record[det_f].substring(0, 1) + 'K' + record[det_f].substring(2);\n                            } else if (record[det_f] && record[det_f].length >= 1) {\n                                record[det_f] = record[det_f].substring(0, 1) + 'K ';\n                            } else {\n                                record[det_f] = ' K ';\n                            }\n                        }\n                    }\n                    record['ACTION'] = 'Go To: Main Routing'\n                } else {\n                    raking(rectot, sum, keys, tolerance)\n                    for (let i = 0; i < keys.length; i++) {\n                        let det_f = keys[i] + '_F'\n                        if (record[det_f] && record[det_f].length >= 2) {\n                            record[det_f] = record[det_f].substring(0, 1) + 'X' + record[det_f].substring(2);\n                        } else if (record[det_f] && record[det_f].length >= 1) {\n                            record[det_f] = record[det_f].substring(0, 1) + 'X ';\n                        } else {\n                            record[det_f] = ' X ';\n                        }\n                    }\n                    record['ACTION'] = 'Go To: Main Routing'\n                }\n            } else if (sum == 0 && rectot <= 0) {\n                for (let i = 0; i < keys.length; i++) {\n                    let det_f = keys[i] + '_F'\n                    if (record[det_f] && record[det_f].length >= 2) {\n                        record[det_f] = record[det_f].substring(0, 1) + 'X' + record[det_f].substring(2);\n                    } else if (record[det_f] && record[det_f].length >= 1) {\n                        record[det_f] = record[det_f].substring(0, 1) + 'X ';\n                    } else {\n                        record[det_f] = ' X ';\n                    }\n                }\n                record['ACTION'] = 'Go To: Main Routing'\n            } else {\n                record['ACTION'] = 'Go To: Main Routing'\n            }\n        }\n    }\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 160,
+        "wires": [
+            [
+                "76fb53953310f0e9",
+                "246d06dd46410f88"
+            ]
+        ]
+    },
+    {
+        "id": "246d06dd46410f88",
+        "type": "link out",
+        "z": "857de6d7143aac67",
+        "name": "link out 63",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9"
+        ],
+        "x": 775,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "76fb53953310f0e9",
+        "type": "debug",
+        "z": "857de6d7143aac67",
+        "name": "nonnorm debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "94c85958382e30a5",
+        "type": "link in",
+        "z": "857de6d7143aac67",
+        "name": "link in 53",
+        "links": [
+            "7520a5a2d8404846"
+        ],
+        "x": 385,
+        "y": 160,
+        "wires": [
+            [
+                "373bb2a6f4053a31"
+            ]
+        ]
+    },
+    {
+        "id": "2094172383ea335e",
+        "type": "link in",
+        "z": "c606c03db54a5be8",
+        "name": "demo_recipe_1 Link",
+        "links": [
+            "6c8827ce7a4c83d8"
+        ],
+        "x": 135,
+        "y": 220,
+        "wires": [
+            [
+                "6a6df9470d4911f3"
+            ]
+        ]
+    },
+    {
+        "id": "6a6df9470d4911f3",
+        "type": "function",
+        "z": "c606c03db54a5be8",
+        "name": "BR Stat",
+        "func": "function processRecord(record) {\n    if (['10', '20', '30', '90'].includes(record.RECORD_TYP_TXT)) {\n        record.TABSTAT = 'Y';\n        record.NONTABFL = 'space';\n        if (['10', '20', '90'].includes(record.RECORD_TYP_TXT)) {\n            record.BR_STAT = 'N'\n        }else{\n            record.KAU_STAT = 'N'\n        }\n        record.TABSTAT = 'N';\n        record.NONTABFLD = 'D';\n        exitEdit();\n        \n        if (record.BR_STAT !== 'N' || record.KAU_STAT !== 'N') {\n            return mainRouting()\n        } \n    } else {\n        record.ACTION = \"Invalid RECORD_TYP_TXT value\";\n    }\n}\n\nfunction exitEdit() {\n    console.log(\"Exiting Edit\");\n    record.ACTION = 'Edit Exit';\n}\n\nfunction pointA() {\n    console.log(\"Processing at point A\");\n}\n\nfunction mainRouting() {\n    console.log(\"Going to Main Routing\");\n    record.ACTION = \"Going to Main Routing\";\n}\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nconst record = msg.payload.csv[record_idx];\n\ntry {\n    processRecord(record);\n} catch (error) {\n    console.error(\"Error:\", error.message);\n}\nmsg.payload.csv[record_idx] = record\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 320,
+        "wires": [
+            [
+                "8d7ba5aefc5d0440"
+            ]
+        ]
+    },
+    {
+        "id": "739edc4c44d5eb0b",
+        "type": "link out",
+        "z": "c606c03db54a5be8",
+        "name": "link out classification",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9"
+        ],
+        "x": 1385,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "e531cbc5d253735b",
+        "type": "debug",
+        "z": "c606c03db54a5be8",
+        "name": "Flow Complete",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1280,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "8d7ba5aefc5d0440",
+        "type": "function",
+        "z": "c606c03db54a5be8",
+        "name": "critical error",
+        "func": "// let record_idx = global.get(\"ptrModuleFacts\");\n// let record = msg.payload.csv[record_idx];\n// let status = \"\";\n// msg.payload.status = status;\n\n// function setResult() {\n//     msg.payload.csv[record_idx].TABSTAT = \"N\";\n//     msg.payload.csv[record_idx].NONTABFL = \"D\";\n//     msg.payload.csv[record_idx].ACTION = \"Exit Edit\";\n// }\n\n\n\n// function parseToNum(val) {\n//     return isNaN(val) ? 0 : parseInt(val, 10);\n// }\n// function naicsSectorCheck() {\n//     let result =\n//         parseToNum(record.PAY_ANN_VAL) +\n//         parseToNum(record.EMP_MAR12_NUM) +\n//         parseToNum(record.PAY_QTR1_VAL) +\n//         parseToNum(record.ECPAYANN) +\n//         parseToNum(record.ECPAYQ1) +\n//         parseToNum(record.ECEMPQ1) +\n//         parseToNum(record.ECPAYANL);\n\n//     if (parseToNum(record.NAICS_SECTOR_OLD_NUM) === 31) {\n//         return result + parseToNum(record.EXPS_TEMPSTAF_VAL);\n//     }\n//     return result\n// }\n// let data = naicsSectorCheck();\n// msg.payload.csv[record_idx].DATA = data\n// console.log()\n// if (\n//     [\"111\", \"131\", \"791\"].includes(record.COV_CHG_CODE.toString()) &&\n//     new Date(record.COV_CHG_DATE) <=\n//     new Date(\"01-01-\" + record.REF_PER.substring(0, 4)) &&\n//     data\n// ) {\n//     msg.payload.csv[record_idx].TABSTAT = \"Y\";\n//     return msg;\n\n// } else if ([\"181\", \"201\", \"801\", \"091\", \"121\", \"171\"].includes(record.COV_CHG_CODE.toString()) || data === 0) {\n//     setResult();\n//     return msg;\n// } else {\n//     msg.payload.csv[record_idx].ACTION = \"Go To Main Routing\";\n//     return msg;\n// }\n\n// let record_idx = global.get(\"ptrModuleFacts\");\n// let record = msg.payload.csv[record_idx];\n// let status = \"\";\n// msg.payload.status = status;\n\n// function setResult() {\n//     msg.payload.csv[record_idx].TABSTAT = \"N\";\n//     msg.payload.csv[record_idx].NONTABFL = \"D\";\n//     msg.payload.csv[record_idx].action = \"Exit Edit\";\n// }\n\n\n\n// function parseToNum(val) {\n//     return isNaN(val) ? 0 : parseInt(val, 10);\n// }\n// function naicsSectorCheck() {\n//     let result =\n//         parseToNum(record.PAY_ANN_VAL) +\n//         parseToNum(record.EMP_MAR12_NUM) +\n//         parseToNum(record.PAY_QTR1_VAL) +\n//         parseToNum(record.ECPAYANN) +\n//         parseToNum(record.ECPAYQ1) +\n//         parseToNum(record.ECEMPQ1) +\n//         parseToNum(record.ECPAYANL);\n\n//     if (parseToNum(record.NAICS_SECTOR_OLD_NUM) === 31) {\n//         return result + parseToNum(record.EXPS_TEMPSTAF_VAL);\n//     }\n//     return result\n// }\n// let data = naicsSectorCheck();\n// msg.payload.csv[record_idx].DATA = data\n// console.log()\n// if (\n//     [\"111\", \"131\", \"791\"].includes(record.COV_CHG_CODE.toString()) &&\n//     new Date(record.COV_CHG_DATE) <=\n//     new Date(\"01-01-\" + record.REF_PER.substring(0, 4)) &&\n//     data\n// ) {\n//     msg.payload.csv[record_idx].TABSTAT = \"Y\";\n//     return msg;\n\n// } else if ([\"181\", \"201\", \"801\", \"091\", \"121\", \"171\"].includes(record.COV_CHG_CODE.toString()) || data === 0) {\n//     setResult();\n//     return msg;\n// } else {\n//     msg.payload.csv[record_idx].action = \"Go To Main Routing\";\n//     return msg;\n// }\n\n\nlet record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\nfunction setResult() {\n    record['TABSTAT'] = \"N\";\n    record['NONTABFL'] = \"D\";\n    record['ACTION'] = \"Exit Edit\";\n}\n\n// function parseToNum(val) {\n//     return isNaN(val) ? 0 : parseInt(val, 10);\n// }\nfunction naicsSectorCheck() {\n    let result =\n        parseFloat(record['PAY_ANN_VAL']) +\n        parseFloat(record['EMP_MAR12_NUM']) +\n        parseFloat(record['PAY_QTR1_VAL']) +\n        parseFloat(record['ECPAYANN']) +\n        parseFloat(record['ECPAYQ1']) +\n        parseFloat(record['ECEMPQ1']) +\n        parseFloat(record['ECPAYANL']);\n\n    if (parseFloat(record['NAICS_SECTOR_OLD_NUM']) === 31) {\n        result = parseFloat(result) + parseFloat(record['EXPS_TEMPSTAF_VAL']);\n    }\n    return result\n}\nlet data = naicsSectorCheck();\nrecord['DATA'] = data\n\nif (\n    [\"111\", \"131\", \"791\"].includes(record['COV_CHG_CODE'].toString()) &&\n    new Date(record['COV_CHG_DATE']) <=\n    new Date(\"01-01-\" + record.REF_PER.substring(0, 4)) &&\n    data == 0\n) {\n    setResult();\n    return msg;\n\n} else if ([\"181\", \"201\", \"801\", \"091\", \"121\", \"171\"].includes(record['COV_CHG_CODE'].toString())) {\n    setResult();\n    return msg;\n} else {\n    record['ACTION'] = \"Go To Main Routing\";\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 320,
+        "wires": [
+            [
+                "da423a9fd902bfa4"
+            ]
+        ]
+    },
+    {
+        "id": "fdc9c49086f49063",
+        "type": "function",
+        "z": "c606c03db54a5be8",
+        "name": "Fake PV",
+        "func": "// function setCharAt(str, index, chr) {\n//     if (index > str.length - 1) return str;\n//     return str.substring(0, index) + chr + str.substring(index + 1);\n// }\n\n// function initializeVariables(record) {\n//     record.PAY_ANN_VAL = setCharAt(record.PAY_ANN_VAL.toString(), 2, 'U');\n\n//     record.RCPT_TOT_VAL = setCharAt(record.RCPT_TOT_VAL.toString(), 2, 'X');\n\n//     record.EMP_MAR12_NUM = setCharAt(record.EMP_MAR12_NUM.toString(), 2, 'U');\n\n//     record.PAY_QTR1_VAL = setCharAt(record.PAY_QTR1_VAL.toString(), 2, 'U');\n\n//     return record;\n// }\n\n\n// let record_idx = global.get(\"ptrModuleFacts\");\n// let record = msg.payload.csv[record_idx];\n\n// record.PAY_ANN_VAL = record.PAY_ANN_VAL || \"0\";\n// record.RCPT_TOT_VAL = record.RCPT_TOT_VAL || \"0\";\n// record.EMP_MAR12_NUM = record.EMP_MAR12_NUM || \"0\";\n// record.PAY_QTR1_VAL = record.PAY_QTR1_VAL || \"0\";\n\n// if(parseInt(record['RANDOM']) > 10){\n//     record = initializeVariables(record);\n// }\n\n\n// return msg;\nfunction setCharAt(str, index, chr) {\n    if (index > str.length - 1) return str;\n    return str.substring(0, index) + chr + str.substring(index + 1);\n}\n\nfunction initializeVariables(record) {\n    record.PAY_ANN_VAL = setCharAt(record.PAY_ANN_VAL.toString(), 2, 'U');\n    record.RCPT_TOT_VAL = setCharAt(record.RCPT_TOT_VAL.toString(), 2, 'X');\n    record.EMP_MAR12_NUM = setCharAt(record.EMP_MAR12_NUM.toString(), 2, 'U');\n    record.PAY_QTR1_VAL = setCharAt(record.PAY_QTR1_VAL.toString(), 2, 'U');\n\n    return record;\n}\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nrecord.PAY_ANN_VAL = (record.PAY_ANN_VAL && record.PAY_ANN_VAL !== 'NULL') ? record.PAY_ANN_VAL : \"0\";\nrecord.RCPT_TOT_VAL = (record.RCPT_TOT_VAL && record.RCPT_TOT_VAL !== 'NULL') ? record.RCPT_TOT_VAL : \"0\";\nrecord.EMP_MAR12_NUM = (record.EMP_MAR12_NUM && record.EMP_MAR12_NUM !== 'NULL') ? record.EMP_MAR12_NUM : \"0\";\nrecord.PAY_QTR1_VAL = (record.PAY_QTR1_VAL && record.PAY_QTR1_VAL !== 'NULL') ? record.PAY_QTR1_VAL : \"0\";\n\nif(parseInt(record['RANDOM']) > 5){\n    record = initializeVariables(record);\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1040,
+        "y": 440,
+        "wires": [
+            [
+                "e531cbc5d253735b",
+                "739edc4c44d5eb0b"
+            ]
+        ]
+    },
+    {
+        "id": "5eb805cdc909d5b1",
+        "type": "function",
+        "z": "c606c03db54a5be8",
+        "name": "Set Path",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nrecord['RANDOM'] = Math.floor(Math.random() * 10) + 1\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c55cb2c58636fcd2",
+        "type": "function",
+        "z": "c606c03db54a5be8",
+        "name": "Unit balance",
+        "func": "function setCharAt(str, index, char) {\n    if (index > str.length - 1) return str;\n    return str.substring(0, index) + char + str.substring(index + 1);\n}\n\nfunction setTotal(record, details) {\n    record.TOTAL = details.reduce((sum, detail) => sum + (parseFloat(detail) || 0), 0);\n    record.TOTAL_FLG = setCharAt(record.TOTAL_FLG || '  ', 1, 'L');\n}\n\nfunction rakeDetailsToTotal(record, details) {\n    const total = parseFloat(record.TOT) || 0;\n    details.forEach((detail, index) => {\n        detail = parseFloat(detail);\n        if (!isNaN(detail) && detail !== 0) {\n            record[`DETAILS_${index + 1}`] = (detail / total).toFixed(2);\n            record.DETAILS_FLG = setCharAt(record.DETAILS_FLG || '  ', index, 'X');\n        }\n    });\n}\n\n// function checkForImbalances(record, details) {\n//     const sumDetails = details.reduce((sum, detail) => sum + (parseFloat(detail) || 0), 0);\n//     if (sumDetails > 0 && record.TOT <= 0) {\n//         record.FAILURE = 1;\n//         return false;\n//     }\n//     return true;\n// }\n\n// function processUnitBalance(record, details) {\n//     if (!checkForImbalances(record, details)) {\n//         return pathA(record); // Path A for imbalance detected\n//     }\n//     if (sumDetails === 0 && record.TOT > 0) {\n//         rakeDetailsToTotal(record, details);\n//         return pathA(record); // Path A after raking details to total\n//     }\n//     if (sumDetails > 0 && record.TOT > 0) {\n//         const toleranceCheck = checkTolerance(record, details);\n//         if (!toleranceCheck) {\n//             markForImputation(record, details);\n//         }\n//         return pathA(record); // Path A for all other cases\n//     }\n//     return pathA(record); // Default path\n// }\nfunction processUnitBalance(record, details) {\n    const sumDetails = details.reduce((sum, detail) => sum + (parseFloat(detail) || 0), 0); // Define sumDetails here\n\n    if (sumDetails > 0 && parseFloat(record.TOT) <= 0) {\n        record.FAILURE = 1;\n        return pathA(record); // Path A for imbalance detected\n    }\n    if (sumDetails === 0 && parseFloat(record.TOT) > 0) {\n        rakeDetailsToTotal(record, details);\n        return pathA(record); // Path A after raking details to total\n    }\n    if (sumDetails > 0 && parseFloat(record.TOT) > 0) {\n        const toleranceCheck = checkTolerance(record, sumDetails); // Pass sumDetails to checkTolerance\n        if (!toleranceCheck) {\n            markForImputation(record, details);\n        }\n        return pathA(record); // Path A for all other cases\n    }\n    return pathA(record); // Default path\n}\n\n\nfunction checkTolerance(record, details) {\n    // Placeholder for tolerance check logic\n    return true; // Assuming tolerance check passed for placeholder\n}\n\nfunction markForImputation(record, details) {\n    record.DETAILS_FLG = setCharAt(record.DETAILS_FLG || '  ', 1, 'X');\n}\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\nlet details = []; // Array of detail values, to be populated\n\n// Populate details array with actual detail values from the record\nfor (let i = 1; i <= 4; i++) {\n    details.push(record[`VAR_DET${i}`]);\n}\n\n// Define the function to transition to different paths:\nfunction pathA(record) {\n    record.ACTION = 'Go To Main Routing';\n}\n\ntry {\n    processUnitBalance(record, details);\n} catch (error) {\n    console.error(\"Error in processUnitBalance:\", error);\n    record.ERROR = 'Unit Balance Processing Error';\n}\n\nmsg.payload.csv[record_idx] = record;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1160,
+        "y": 900,
+        "wires": [
+            [
+                "7d9d148b94eb4a78",
+                "ec6bfe4f7818633f"
+            ]
+        ]
+    },
+    {
+        "id": "ec6bfe4f7818633f",
+        "type": "link out",
+        "z": "c606c03db54a5be8",
+        "name": "link out classification",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9"
+        ],
+        "x": 1445,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "7d9d148b94eb4a78",
+        "type": "debug",
+        "z": "c606c03db54a5be8",
+        "name": "Unit Balance: Debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1530,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "b28fb4066ea3ea40",
+        "type": "function",
+        "z": "c606c03db54a5be8",
+        "name": "Getting Data and Makeing Index",
+        "func": "msg.payload = JSON.parse(msg.payload.value)\n\nconst currentStepIndex = msg.payload.recipe.currentStepIndex;\nconst startTime = new Date().getTime();\n\nmsg.payload.recipe.steps[currentStepIndex].tsStart = startTime;\n\nmsg.payload.facts = [msg.payload.fact]\n\n\nmsg.payload.qflowInputFacts = JSON.parse(JSON.stringify(msg.payload.facts))\n\nmsg.payload.csv = JSON.parse(JSON.stringify(msg.payload.facts))\n\nglobal.set(\"ptrModuleFacts\", 0);\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 880,
+        "wires": [
+            [
+                "1c1392cadb54291f",
+                "2f66137cdbf509c3"
+            ]
+        ]
+    },
+    {
+        "id": "ed7571ccf781605e",
+        "type": "kafka-consumer",
+        "z": "c606c03db54a5be8",
+        "name": "Listening",
+        "broker": "a734a95fe6c7b3dc",
+        "outOfRangeOffset": "earliest",
+        "fromOffset": "latest",
+        "topic": "qflow",
+        "groupid": "",
+        "x": 250,
+        "y": 1020,
+        "wires": [
+            [
+                "b28fb4066ea3ea40",
+                "af6015c91b0afeae"
+            ]
+        ]
+    },
+    {
+        "id": "1c1392cadb54291f",
+        "type": "debug",
+        "z": "c606c03db54a5be8",
+        "name": "kafka consumer: gotFacts",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "2f66137cdbf509c3",
+        "type": "link out",
+        "z": "c606c03db54a5be8",
+        "name": "link out gotQBES",
+        "mode": "link",
+        "links": [
+            "f6ed151858aa9d62",
+            "f765d14d056bec8a",
+            "e0d75497828e672b",
+            "7524317b716e4316"
+        ],
+        "x": 105,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "973be62d59cc821b",
+        "type": "switch",
+        "z": "c606c03db54a5be8",
+        "name": "AIES_SCOPE = Y?",
+        "property": "payload.csv[0].AIES_SCOPE",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "neq",
+                "v": "Y",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Y",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 490,
+        "y": 120,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "f6ed151858aa9d62",
+        "type": "link in",
+        "z": "c606c03db54a5be8",
+        "name": "link in gotQBES",
+        "links": [
+            "47bbe840e0da7226",
+            "3ec01d49fbdfba54",
+            "2f66137cdbf509c3"
+        ],
+        "x": 265,
+        "y": 320,
+        "wires": [
+            [
+                "6a6df9470d4911f3"
+            ]
+        ]
+    },
+    {
+        "id": "af6015c91b0afeae",
+        "type": "debug",
+        "z": "c606c03db54a5be8",
+        "name": "Got Kafka Connection",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 470,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "4dbef0a345edae84",
+        "type": "inject",
+        "z": "c606c03db54a5be8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 160,
+        "y": 620,
+        "wires": [
+            [
+                "612b1351b8cebad9"
+            ]
+        ]
+    },
+    {
+        "id": "612b1351b8cebad9",
+        "type": "function",
+        "z": "c606c03db54a5be8",
+        "name": "Raw data",
+        "func": "msg.payload.csv = [\n    {\n    \"job\": {\n        \"history\": [],\n        \"jobName\": \"mark1\",\n        \"recipeID\": 1,\n        \"initiatedTs\": \"2023-09-11T17:51:55.574Z\"\n    },\n    \"fact\": {\n        \"ID\": 33133,\n        \"ENT_ID\": \"2099021295\",\n        \"KAU_ID\": \"3000003933\",\n        \"NR_ADJ\": \"1\",\n        \"NR_WGT\": \"1\",\n        \"PS_ADJ\": \"1\",\n        \"PS_WGT\": \"1\",\n        \"SMPCDE\": \"6\",\n        \"SMPWGT\": \"1\",\n        \"WSWTCH\": \"C\",\n        \"DUPFACT\": \"1\",\n        \"EIN_NUM\": \"730584841SUCCESS\",\n        \"OUTLIER\": \"1\",\n        \"SMPOWGT\": \"1\",\n        \"SUBSAMP\": \"1\",\n        \"TABSTAT\": \"Y\",\n        \"UNB_WGT\": \"1\",\n        \"VERSION\": \"PO\",\n        \"EXP_DPCT\": null,\n        \"INV_STAT\": null,\n        \"NONTABFL\": \"ABC\",\n        \"ZERO_VAL\": \"0\",\n        \"BIRTH_ADJ\": \"1\",\n        \"NAICS_NUM\": 51212000,\n        \"OPSTAT_STAT\": \"Y    \",\n        \"PAY_ANN_VAL\": 62229,\n        \"ACTV_MIO_NUM\": 2,\n        \"EXPS_TAX_VAL\": null,\n        \"EXPS_TOT_VAL\": null,\n        \"ITEM_OUTLIER\": \"1\",\n        \"NAICS_SECTOR\": \"51\",\n        \"PAY_QTR1_VAL\": 15525,\n        \"RATIO_FACTOR\": \"1\",\n        \"RCPT_TOT_VAL\": 52698,\n        \"RCPT_UFO_VAL\": null,\n        \"REPORTING_ID\": 2099024640,\n        \"ADD_OPEN_DATE\": \"2018-12-04T00:00:00\",\n        \"EMP_MAR12_NUM\": 115,\n        \"EXPS_ELEC_VAL\": null,\n        \"EXPS_FUEL_VAL\": null,\n        \"GROUP_KEY_TXT\": \"5121200000Y\",\n        \"INV_B_AVG_VAL\": null,\n        \"INV_B_FIN_VAL\": null,\n        \"INV_B_MAT_VAL\": null,\n        \"INV_B_STD_VAL\": null,\n        \"INV_B_TOT_VAL\": null,\n        \"INV_B_WIP_VAL\": null,\n        \"INV_E_AVG_VAL\": null,\n        \"INV_E_FIN_VAL\": null,\n        \"INV_E_MAT_VAL\": null,\n        \"INV_E_STD_VAL\": null,\n        \"INV_E_TOT_VAL\": null,\n        \"INV_E_WIP_VAL\": null,\n        \"NONPROFT_STAT\": \"N    \",\n        \"PAY_ANN_VAL_F\": \"t\",\n        \"RCPT_UFO_STAT\": null,\n        \"REPORTING_ID2\": \"2099024640\",\n        \"CAPEX_AUTO_VAL\": null,\n        \"CAPEX_TOT_DVAL\": null,\n        \"EXPS_OTHER_VAL\": null,\n        \"EXPS_SLVR_DVAL\": 0,\n        \"EXPS_TAX_VAL_F\": \"t\",\n        \"EXPS_TOT_VAL_F\": \"r\",\n        \"INV_B_FIFO_VAL\": null,\n        \"INV_B_LIFO_VAL\": null,\n        \"INV_E_FIFO_VAL\": null,\n        \"INV_E_LIFO_VAL\": null,\n        \"OPSTAT_SY_STAT\": \"4    \",\n        \"PAYANN_EMP_RAT\": \"541.0347826086957\",\n        \"PAY_QTR1_VAL_F\": \"k\",\n        \"RCPT_ESHIP_PCT\": null,\n        \"RCPT_TOT_VAL_F\": \"k\",\n        \"RCPT_UFO_VAL_F\": \"k\",\n        \"RECORD_TYP_TXT\": \"20\",\n        \"EMP_MAR12_NUM_F\": \"r\",\n        \"EXPS_ADVERT_VAL\": null,\n        \"EXPS_ELEC_VAL_F\": \"k\",\n        \"EXPS_EXSOFT_VAL\": null,\n        \"EXPS_FUEL_VAL_F\": \"k\",\n        \"EXPS_MAT_V1_VAL\": null,\n        \"EXPS_PCHTT_DVAL\": null,\n        \"EXPS_REFUSE_VAL\": null,\n        \"EXPS_RESALE_VAL\": null,\n        \"EXPS_RPTOT_DVAL\": null,\n        \"INV_B_AVG_VAL_F\": \"t\",\n        \"INV_B_FIN_VAL_F\": \"t\",\n        \"INV_B_MAT_VAL_F\": \"t\",\n        \"INV_B_OTHNL_VAL\": null,\n        \"INV_B_STD_VAL_F\": \"r\",\n        \"INV_B_TOT_VAL_F\": \"r\",\n        \"INV_B_WIP_VAL_F\": \"t\",\n        \"INV_E_AVG_VAL_F\": \"t\",\n        \"INV_E_FIN_VAL_F\": \"t\",\n        \"INV_E_MAT_VAL_F\": \"r\",\n        \"INV_E_OTHNL_VAL\": null,\n        \"INV_E_STD_VAL_F\": \"r\",\n        \"INV_E_TOT_VAL_F\": \"k\",\n        \"INV_E_WIP_VAL_F\": \"t\",\n        \"NAICS_WRTIN_TXT\": \"lorem ipsum\",\n        \"PAY_ANN_OM_DVAL\": null,\n        \"RCPT_TOT_PY_VAL\": 42721,\n        \"ROBOT_INDST_VAL\": null,\n        \"ROBOT_WRTIN_TXT\": null,\n        \"TAX_EXEMPT_STAT\": \"N    \",\n        \"TYPOP_CODE_STAT\": null,\n        \"CAPEX_AUTO_VAL_F\": \"t\",\n        \"CAPEX_COMPTR_VAL\": null,\n        \"ELEC_GEN_KWH_NUM\": null,\n        \"EXPS_COMMSVC_VAL\": null,\n        \"EXPS_OTHER_VAL_F\": \"k\",\n        \"HOURS_PRDWRK_NUM\": null,\n        \"INV_B_FIFO_VAL_F\": \"k\",\n        \"INV_B_LIFO_VAL_F\": \"r\",\n        \"INV_E_FIFO_VAL_F\": \"k\",\n        \"INV_E_LIFO_VAL_F\": \"k\",\n        \"INV_FIN_DIF_DVAL\": null,\n        \"INV_WIP_DIF_DVAL\": null,\n        \"RCPT_ESHIP_PCT_F\": \"t\",\n        \"REPORTING_TYP_ID\": \"MU\",\n        \"VALUE_ADDED_DVAL\": null,\n        \"CAPEX_OTHMACH_VAL\": null,\n        \"CAPEX_OTH_NEW_VAL\": null,\n        \"ELEC_PRCH_KWH_NUM\": null,\n        \"ELEC_SOLD_KWH_NUM\": null,\n        \"EMP_MAR12_OM_DNUM\": null,\n        \"EXPS_ADVERT_VAL_F\": \"t\",\n        \"EXPS_CONTRACT_VAL\": null,\n        \"EXPS_CSTMTOT_DVAL\": null,\n        \"EXPS_DATAPROC_VAL\": null,\n        \"EXPS_EXSOFT_VAL_F\": \"t\",\n        \"EXPS_MACH_REP_VAL\": null,\n        \"EXPS_MAT_V1_VAL_F\": \"k\",\n        \"EXPS_PROFTECH_VAL\": null,\n        \"EXPS_REFUSE_VAL_F\": \"t\",\n        \"EXPS_RESALE_VAL_F\": \"t\",\n        \"EXPS_TEMPSTAF_VAL\": null,\n        \"INV_B_NL_TOT_DVAL\": null,\n        \"INV_B_OTHNL_VAL_F\": \"t\",\n        \"INV_E_NL_TOT_DVAL\": null,\n        \"INV_E_OTHNL_VAL_F\": \"t\",\n        \"PAY_ANN_SLVR_DVAL\": 46694,\n        \"RCPT_TOT_PY_VAL_F\": \"k\",\n        \"ROBOT_INDST_VAL_F\": \"t\",\n        \"CAPEX_COMPTR_VAL_F\": \"t\",\n        \"CAPEX_NEW_TOT_DVAL\": null,\n        \"CAPEX_OTH_TOT_DVAL\": null,\n        \"CAPEX_OTH_USED_VAL\": null,\n        \"ELEC_GEN_KWH_NUM_F\": \"r\",\n        \"EXPS_BUILD_REP_VAL\": null,\n        \"EXPS_COMMSVC_VAL_F\": \"k\",\n        \"EXPS_RENT_MACH_VAL\": null,\n        \"HOURS_PRDWRK_NUM_F\": \"k\",\n        \"INV_B_LIFO_RSV_VAL\": null,\n        \"INV_E_LIFO_RSV_VAL\": null,\n        \"NEG_INV_B_TOT_DVAL\": null,\n        \"PAY_ANN_PRDWRK_VAL\": null,\n        \"CAPEX_BUILD_NEW_VAL\": null,\n        \"CAPEX_MACH_TOT_DVAL\": null,\n        \"CAPEX_MACH_USED_VAL\": null,\n        \"CAPEX_OTHMACH_VAL_F\": \"r\",\n        \"CAPEX_OTH_NEW_VAL_F\": \"t\",\n        \"CAPEX_USED_TOT_DVAL\": null,\n        \"ELEC_PRCH_KWH_NUM_F\": \"r\",\n        \"ELEC_SOLD_KWH_NUM_F\": \"k\",\n        \"EXPS_CONTRACT_VAL_F\": \"r\",\n        \"EXPS_DATAPROC_VAL_F\": \"k\",\n        \"EXPS_MACH_REP_VAL_F\": \"k\",\n        \"EXPS_PROFTECH_VAL_F\": \"t\",\n        \"EXPS_RENT_BUILD_VAL\": null,\n        \"EXPS_TEMPSTAF_VAL_F\": \"t\",\n        \"INV_B_IVAL_TOT_DVAL\": null,\n        \"INV_B_NL_TOT_DVAL_F\": \"r\",\n        \"INV_E_IVAL_TOT_DVAL\": null,\n        \"INV_E_LIFO_NET_DVAL\": null,\n        \"INV_E_NL_TOT_DVAL_F\": \"r\",\n        \"MAJOR_ACT_CODE_STAT\": \"18\",\n        \"PAY_QTR1_PRDWRK_VAL\": null,\n        \"PHYSLOC_ADDR_ST_TXT\": \"KS\",\n        \"TYPOP_OTH_WRTIN_TXT\": null,\n        \"CAPEX_BUILD_TOT_DVAL\": null,\n        \"CAPEX_BUILD_USED_VAL\": null,\n        \"CAPEX_OTH_TOT_DVAL_F\": \"r\",\n        \"CAPEX_OTH_USED_VAL_F\": \"r\",\n        \"EMP_MAR12_PRDWRK_NUM\": null,\n        \"EXPS_BUILD_REP_VAL_F\": \"k\",\n        \"EXPS_OTHER_WRTIN_TXT\": null,\n        \"EXPS_RENT_MACH_VAL_F\": \"r\",\n        \"INV_B_LIFO_RSV_VAL_F\": \"k\",\n        \"INV_E_LIFO_RSV_VAL_F\": \"t\",\n        \"PAY_ANN_PRDWRK_VAL_F\": \"r\",\n        \"ROBOT_INDST_INOP_NUM\": null,\n        \"ROBOT_INDST_PRCH_NUM\": null,\n        \"CAPEX_BUILD_NEW_VAL_F\": \"k\",\n        \"CAPEX_MACH_USED_VAL_F\": \"k\",\n        \"EXPS_COMPTR_OTHEQ_VAL\": null,\n        \"EXPS_FRNG_BENEFIT_VAL\": null,\n        \"EXPS_RENT_BUILD_VAL_F\": \"t\",\n        \"INV_B_IVAL_TOT_DVAL_F\": \"k\",\n        \"INV_E_IVAL_TOT_DVAL_F\": \"r\",\n        \"NEG_EXPS_CSTMTOT_DVAL\": null,\n        \"PAY_ANN_NONPRDWRK_VAL\": null,\n        \"PAY_QTR1_PRDWRK_VAL_F\": \"r\",\n        \"CAPEX_BUILD_USED_VAL_F\": \"t\",\n        \"EMP_MAR12_PRDWRK_NUM_F\": \"r\",\n        \"PAY_QTR1_NONPRDWRK_VAL\": null,\n        \"ROBOT_INDST_INOP_NUM_F\": \"r\",\n        \"ROBOT_INDST_PRCH_NUM_F\": \"k\",\n        \"CAPEX_OTH_NEW_WRTIN_TXT\": null,\n        \"EMP_MAR12_NONPRDWRK_NUM\": null,\n        \"EXPS_COMPTR_OTHEQ_VAL_F\": \"t\",\n        \"EXPS_FRNG_BENEFIT_VAL_F\": \"r\",\n        \"PAY_ANN_NONPRDWRK_VAL_F\": \"r\",\n        \"CAPEX_OTH_USED_WRTIN_TXT\": null,\n        \"MAJOR_ACT_CODE_WRTIN_TXT\": \"lorem ipsum\",\n        \"PAY_QTR1_NONPRDWRK_VAL_F\": \"r\",\n        \"EMP_MAR12_NONPRDWRK_NUM_F\": \"k\",\n        \"ROBOT_INDST_INOP_WRTIN_TXT\": null,\n        \"ROBOT_INDST_PRCH_WRTIN_TXT\": null\n    },\n    \"meta\": {\n        \"id\": 758671,\n        \"type\": \"ESTAB\",\n        \"ent_id\": \"2099021295\",\n        \"kau_id\": \"3000003933\",\n        \"version\": null,\n        \"estab_id\": \"33133\"\n    },\n    \"delta\": [\n        {\n            \"key\": \"EIN_NUM\",\n            \"service\": {\n                \"name\": \"qbes\",\n                \"timestamp\": \"2023-09-11T17:52:03.848Z\"\n            },\n            \"newValue\": \"730584841SUCCESS\",\n            \"oldValue\": 730584841\n        },\n        {\n            \"key\": \"PAY_ANN_VAL\",\n            \"service\": {\n                \"name\": \"qbes\",\n                \"timestamp\": \"2023-09-11T17:52:03.848Z\"\n            },\n            \"newValue\": 62229,\n            \"oldValue\": 62219\n        }\n    ],\n    \"rules\": [\n        {\n            \"event\": {\n                \"name\": \"Set review flag for estab\",\n                \"type\": 238,\n                \"active\": true,\n                \"params\": {\n                    \"action\": [\n                        {\n                            \"Action\": \"\\\"Set Review for Flag\\\"\"\n                        }\n                    ],\n                    \"message\": \"Setting the review flag for ESTAB.\",\n                    \"rvsJSON\": [\n                        \"TYPOP_CODE_STAT\"\n                    ],\n                    \"apiSource\": {},\n                    \"actionType\": \"impute\",\n                    \"apiChecked\": false\n                },\n                \"ruleId\": 238,\n                \"actionType\": \"impute\",\n                \"rulePriority\": \"5\",\n                \"validationType\": \"estab\"\n            },\n            \"index\": -1,\n            \"priority\": 5,\n            \"conditions\": {\n                \"all\": [\n                    {\n                        \"fact\": \"checkCondition\",\n                        \"path\": \"$.value\",\n                        \"value\": true,\n                        \"params\": {\n                            \"conditionstring\": \"VERSION == \\\"ADJ\\\"\"\n                        },\n                        \"operator\": \"equal\"\n                    }\n                ]\n            }\n        },\n        {\n            \"event\": {\n                \"name\": \"Append Success to EIN NUMBER\",\n                \"type\": 239,\n                \"active\": true,\n                \"params\": {\n                    \"action\": [\n                        {\n                            \"EIN_NUM\": \"concat(EIN_NUM, \\\"SUCCESS\\\")\"\n                        }\n                    ],\n                    \"message\": \"Setting the review flag for ESTAB.\",\n                    \"rvsJSON\": [\n                        \"TYPOP_CODE_STAT\"\n                    ],\n                    \"apiSource\": {},\n                    \"actionType\": \"impute\",\n                    \"apiChecked\": false\n                },\n                \"ruleId\": 238,\n                \"actionType\": \"impute\",\n                \"rulePriority\": \"5\",\n                \"validationType\": \"estab\"\n            },\n            \"index\": -1,\n            \"priority\": 5,\n            \"conditions\": {\n                \"all\": [\n                    {\n                        \"fact\": \"checkCondition\",\n                        \"path\": \"$.value\",\n                        \"value\": true,\n                        \"params\": {\n                            \"conditionstring\": \"EIN_NUM != \\\"\\\"\"\n                        },\n                        \"operator\": \"equal\"\n                    }\n                ]\n            }\n        },\n        {\n            \"event\": {\n                \"name\": \"PAY_ANN_VAL test 1\",\n                \"type\": \"new_1\",\n                \"active\": true,\n                \"params\": {\n                    \"rvs\": [],\n                    \"action\": [\n                        {\n                            \"PAY_ANN_VAL\": \"PAY_ANN_VAL + 1\"\n                        }\n                    ],\n                    \"message\": \"PAY_ANN_VAL TEST\",\n                    \"rvsJSON\": []\n                },\n                \"actionType\": \"impute\",\n                \"validationType\": \"new_1\"\n            },\n            \"index\": -1,\n            \"priority\": null,\n            \"conditions\": {\n                \"all\": [\n                    {\n                        \"fact\": \"checkCondition\",\n                        \"path\": \"$.value\",\n                        \"value\": true,\n                        \"params\": {\n                            \"conditionString\": \"1 == 1\"\n                        },\n                        \"operator\": \"equal\"\n                    }\n                ]\n            }\n        },\n        {\n            \"event\": {\n                \"name\": \"PAY_ANN RULE\",\n                \"type\": \"new_1\",\n                \"active\": true,\n                \"params\": {\n                    \"rvs\": [\n                        \"PAY_ANN_VAL\"\n                    ],\n                    \"action\": [\n                        {\n                            \"PAY_ANN_VAL\": \"PAY_ANN_VAL + 10\"\n                        }\n                    ],\n                    \"message\": \"PAY_ANN_VAL_1\",\n                    \"rvsJSON\": [\n                        \"PAY_ANN_VAL\"\n                    ]\n                },\n                \"actionType\": \"impute\",\n                \"rulePriority\": \"4\",\n                \"validationType\": \"new_1\"\n            },\n            \"index\": -1,\n            \"priority\": 4,\n            \"conditions\": {\n                \"all\": [\n                    {\n                        \"fact\": \"checkCondition\",\n                        \"path\": \"$.value\",\n                        \"value\": true,\n                        \"params\": {\n                            \"conditionstring\": \"PAY_ANN_VAL != \\\"\\\"\"\n                        },\n                        \"operator\": \"equal\"\n                    }\n                ]\n            }\n        }\n    ],\n    \"recipe\": {\n        \"steps\": [\n            {\n                \"delta\": [\n                    {\n                        \"key\": \"EIN_NUM\",\n                        \"service\": {\n                            \"name\": \"qbes\",\n                            \"timestamp\": \"2023-09-11T17:52:03.848Z\"\n                        },\n                        \"newValue\": \"730584841SUCCESS\",\n                        \"oldValue\": 730584841\n                    },\n                    {\n                        \"key\": \"PAY_ANN_VAL\",\n                        \"service\": {\n                            \"name\": \"qbes\",\n                            \"timestamp\": \"2023-09-11T17:52:03.848Z\"\n                        },\n                        \"newValue\": 62229,\n                        \"oldValue\": 62219\n                    }\n                ],\n                \"tsEnd\": 1694454723848,\n                \"msName\": \"qbes\",\n                \"tsStart\": 1694454723842,\n                \"validRules\": [\n                    {\n                        \"id\": 239,\n                        \"rvs\": [],\n                        \"action\": [\n                            {\n                                \"EIN_NUM\": \"concat(EIN_NUM, \\\"SUCCESS\\\")\"\n                            }\n                        ],\n                        \"message\": \"Setting the review flag for ESTAB.\",\n                        \"computedRVS\": {\n                            \"EIN_NUM\": \"730584841SUCCESS\"\n                        }\n                    },\n                    {\n                        \"id\": \"new_1\",\n                        \"rvs\": [],\n                        \"action\": [\n                            {\n                                \"PAY_ANN_VAL\": \"PAY_ANN_VAL + 10\"\n                            }\n                        ],\n                        \"message\": \"PAY_ANN_VAL_1\",\n                        \"computedRVS\": {\n                            \"EIN_NUM\": \"730584841SUCCESS\",\n                            \"PAY_ANN_VAL\": 62229\n                        }\n                    }\n                ],\n                \"invalidRules\": [\n                    {\n                        \"id\": 238,\n                        \"rvs\": [],\n                        \"action\": [\n                            {\n                                \"Action\": \"\\\"Set Review for Flag\\\"\"\n                            }\n                        ],\n                        \"message\": \"Setting the review flag for ESTAB.\"\n                    },\n                    {\n                        \"id\": \"new_1\",\n                        \"rvs\": [],\n                        \"action\": [\n                            {\n                                \"PAY_ANN_VAL\": \"PAY_ANN_VAL + 1\"\n                            }\n                        ],\n                        \"message\": \"PAY_ANN_VAL TEST\"\n                    }\n                ],\n                \"processedTime\": 6\n            },\n            {\n                \"tsEnd\": 0,\n                \"msName\": \"jobOutput\",\n                \"jobType\": \"spadJob\",\n                \"tsStart\": 0,\n                \"destinationTable\": \"product_aies.spad_2\"\n            }\n        ],\n        \"currentStepIndex\": 1\n    },\n    \"upsert\": true\n}]\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 620,
+        "wires": [
+            [
+                "b28fb4066ea3ea40"
+            ]
+        ]
+    },
+    {
+        "id": "da423a9fd902bfa4",
+        "type": "function",
+        "z": "c606c03db54a5be8",
+        "name": "Unit Balance Function",
+        "func": "let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\nmsg.cache = global.get(\"lookupCache\").data.find(\n    item =>\n        item.module === \"balance\" &&\n        item.param === \"unit_balance\" &&\n        item.program === \"aies\" &&\n        item.unit_type === \"estab\"\n)?.json_values;\n\nfunction checkNaics(data, naics, rec_typ) {\n    let list = data['NAICS']\n    let unit = data['UNIT TYPE']\n    let rectyp = rec_typ\n    if (['SU', 'MU'].includes(rectyp)) {\n        rec_typ = 'ESTAB'\n    }\n    if (rec_typ === unit) {\n        if ([\"ALL\", \"All\"].includes(list)) {\n            return (true);\n        } else {\n            list = list.replace(/ /g, \"\");\n            list = list.replace(/'/g, \"\");\n            var array = list.split(',')\n\n            if (array.find(r => naics.startsWith(r))) {\n                return (true);\n            } else {\n                return (false)\n            }\n        }\n    }\n}\n\nfunction sumRow(data) {\n    let sum = 0;\n    var keys = [];\n    for (var key in data) {\n        if (key.startsWith('DETAIL') && data[key] != null) {\n            let variable = data[key]\n            // console.log(variable)\n            sum = parseFloat(sum) + parseFloat(record[variable])\n            keys.push(variable)\n        }\n    }\n    return [sum, keys];\n}\n\nfunction raking(rectot, sum, keys, tol) {\n    if ((Math.abs(rectot - sum) / rectot) <= tol) {\n        keys.sort((a, b) => record[b] - record[a]);\n        let remainder = 0\n        for (let i = 0; i < keys.length; i++) {\n            let num1 = (rectot / sum) * parseFloat(record[keys[i]]) + remainder\n            let num2 = Math.round(num1)\n            remainder = num1 - num2\n            record[keys[i]] = num2\n        }\n    }\n}\n\nlet naics = record['NAICS_NUM']\nnaics = '' + naics\n\nconst REPORTING_ID_TYP_TXT = record['REPORTING_ID_TYP_TXT']\n// console.log(naics)\n\nfor (let i in msg.cache['UNIT_BALANCE']) {\n    let unitBalance = msg.cache['UNIT_BALANCE'][i]\n    if (checkNaics(unitBalance, naics, REPORTING_ID_TYP_TXT)) {\n        let tot = unitBalance['TOTAL']\n        let rectot = 0\n        if ([100, '100'].includes(tot)) {\n            rectot = 100\n        } else {\n            rectot = parseFloat(record[tot])\n        }\n        // tot = tot.trim()\n        let name = 'DET_' + tot\n        let name_f = tot + '_F'\n        let [sum, keys] = sumRow(unitBalance)\n        sum = parseFloat(sum)\n        // record[name] = sum\n\n        // begin fail logic\n        if (rectot === sum && rectot != 0) {\n            record['ACTION'] = 'Go To: Main Routing'\n        } else {\n            const tolerance = parseFloat(unitBalance['Tolerance'])\n            if (sum > 0 && rectot <= 0) {\n                record[tot] = sum\n                if (record[name_f] && record[name_f].length >= 2) {\n                    record[name_f] = record[name_f].substring(0, 1) + 'L' + record[name_f].substring(2);\n                } else if (record[name_f] && record[name_f].length >= 1) {\n                    record[name_f] = record[name_f].substring(0, 1) + 'L ';\n                } else {\n                    record[name_f] = ' L ';\n                }\n                record['ACTION'] = 'Go To: Main Routing'\n            } else if (sum == 0 && rectot > 0) {\n                raking(rectot, sum, keys, tolerance)\n                for (let i = 0; i < keys.length; i++) {\n                    let det_f = keys[i] + '_F'\n                    if (record[det_f] && record[det_f].length >= 2) {\n                        record[det_f] = record[det_f].substring(0, 1) + 'X' + record[det_f].substring(2);\n                    } else if (record[det_f] && record[det_f].length >= 1) {\n                        record[det_f] = record[det_f].substring(0, 1) + 'X ';\n                    } else {\n                        record[det_f] = ' X ';\n                    }\n                }\n                record['ACTION'] = 'Go To: Main Routing'\n            } else if (sum > 0 && rectot > 0) {\n                // check range\n                const low = 1 - tolerance\n                const high = 1 + tolerance\n                if (low <= sum / rectot && sum / rectot <= high) {\n                    let flag_check1 = ''\n                    if (['P', 'C', 'A', 'S', 'O', 'E', 'F'].includes(record[name_f].substring(2, 3))) {\n                        flag_check1 = 'Yes'\n                    }\n                    let flag_check2 = ''\n                    for (let i = 0; i < keys.length; i++) {\n                        let det_f = keys[i] + '_F'\n                        if (['P', 'C', 'A', 'S', 'O', 'E', 'F'].includes(record[det_f].substring(2, 3))) {\n                            flag_check2 = 'Yes'\n                        }\n                    }\n                    if (flag_check2 == 'Yes') {\n                        record[tot] = sum\n                        if (record[name_f] && record[name_f].length >= 2) {\n                            record[name_f] = record[name_f].substring(0, 1) + 'L' + record[name_f].substring(2);\n                        } else if (record[name_f] && record[name_f].length >= 1) {\n                            record[name_f] = record[name_f].substring(0, 1) + 'L ';\n                        } else {\n                            record[name_f] = ' L ';\n                        }\n                    } else {\n                        raking(rectot, sum, keys, tolerance)\n                        for (let i = 0; i < keys.length; i++) {\n                            let det_f = keys[i] + '_F'\n                            if (record[det_f] && record[det_f].length >= 2) {\n                                record[det_f] = record[det_f].substring(0, 1) + 'K' + record[det_f].substring(2);\n                            } else if (record[det_f] && record[det_f].length >= 1) {\n                                record[det_f] = record[det_f].substring(0, 1) + 'K ';\n                            } else {\n                                record[det_f] = ' K ';\n                            }\n                        }\n                    }\n                    record['ACTION'] = 'Go To: Main Routing'\n                } else {\n                    raking(rectot, sum, keys, tolerance)\n                    for (let i = 0; i < keys.length; i++) {\n                        let det_f = keys[i] + '_F'\n                        if (record[det_f] && record[det_f].length >= 2) {\n                            record[det_f] = record[det_f].substring(0, 1) + 'X' + record[det_f].substring(2);\n                        } else if (record[det_f] && record[det_f].length >= 1) {\n                            record[det_f] = record[det_f].substring(0, 1) + 'X ';\n                        } else {\n                            record[det_f] = ' X ';\n                        }\n                    }\n                    record['ACTION'] = 'Go To: Main Routing'\n                }\n            } else if (sum == 0 && rectot <= 0) {\n                for (let i = 0; i < keys.length; i++) {\n                    let det_f = keys[i] + '_F'\n                    if (record[det_f] && record[det_f].length >= 2) {\n                        record[det_f] = record[det_f].substring(0, 1) + 'X' + record[det_f].substring(2);\n                    } else if (record[det_f] && record[det_f].length >= 1) {\n                        record[det_f] = record[det_f].substring(0, 1) + 'X ';\n                    } else {\n                        record[det_f] = ' X ';\n                    }\n                }\n                record['ACTION'] = 'Go To: Main Routing'\n            } else {\n                record['ACTION'] = 'Go To: Main Routing'\n            }\n        }\n    }\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e94185dee80f378a",
+        "type": "link in",
+        "z": "8790b12c7efb6fa0",
+        "name": "demo_recipe_1 Link",
+        "links": [
+            "6c8827ce7a4c83d8"
+        ],
+        "x": 335,
+        "y": 220,
+        "wires": [
+            [
+                "2b0da269e060551a"
+            ]
+        ]
+    },
+    {
+        "id": "2b0da269e060551a",
+        "type": "function",
+        "z": "8790b12c7efb6fa0",
+        "name": "BR Stat",
+        "func": "function processRecord(record) {\n    if (['10', '20', '30', '90'].includes(record.RECORD_TYP_TXT)) {\n        record.TABSTAT = 'Y';\n        record.NONTABFL = 'space';\n        if (['10', '20', '90'].includes(record.RECORD_TYP_TXT)) {\n            record.BR_STAT = 'N'\n        }else{\n            record.KAU_STAT = 'N'\n        }\n        record.TABSTAT = 'N';\n        record.NONTABFLD = 'D';\n        exitEdit();\n        \n        if (record.BR_STAT !== 'N' || record.KAU_STAT !== 'N') {\n            return mainRouting()\n        } \n    } else {\n        record.ACTION = \"Invalid RECORD_TYP_TXT value\";\n    }\n}\n\nfunction exitEdit() {\n    console.log(\"Exiting Edit\");\n    record.ACTION = 'Edit Exit';\n}\n\nfunction pointA() {\n    console.log(\"Processing at point A\");\n}\n\nfunction mainRouting() {\n    console.log(\"Going to Main Routing\");\n    record.ACTION = \"Going to Main Routing\";\n}\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nconst record = msg.payload.csv[record_idx];\n\ntry {\n    processRecord(record);\n} catch (error) {\n    console.error(\"Error:\", error.message);\n}\nmsg.payload.csv[record_idx] = record\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 320,
+        "wires": [
+            [
+                "1896ba9181e71d58"
+            ]
+        ]
+    },
+    {
+        "id": "1896ba9181e71d58",
+        "type": "function",
+        "z": "8790b12c7efb6fa0",
+        "name": "critical error",
+        "func": "// let record_idx = global.get(\"ptrModuleFacts\");\n// let record = msg.payload.csv[record_idx];\n// let status = \"\";\n// msg.payload.status = status;\n\n// function setResult() {\n//     msg.payload.csv[record_idx].TABSTAT = \"N\";\n//     msg.payload.csv[record_idx].NONTABFL = \"D\";\n//     msg.payload.csv[record_idx].ACTION = \"Exit Edit\";\n// }\n\n\n\n// function parseToNum(val) {\n//     return isNaN(val) ? 0 : parseInt(val, 10);\n// }\n// function naicsSectorCheck() {\n//     let result =\n//         parseToNum(record.PAY_ANN_VAL) +\n//         parseToNum(record.EMP_MAR12_NUM) +\n//         parseToNum(record.PAY_QTR1_VAL) +\n//         parseToNum(record.ECPAYANN) +\n//         parseToNum(record.ECPAYQ1) +\n//         parseToNum(record.ECEMPQ1) +\n//         parseToNum(record.ECPAYANL);\n\n//     if (parseToNum(record.NAICS_SECTOR_OLD_NUM) === 31) {\n//         return result + parseToNum(record.EXPS_TEMPSTAF_VAL);\n//     }\n//     return result\n// }\n// let data = naicsSectorCheck();\n// msg.payload.csv[record_idx].DATA = data\n// console.log()\n// if (\n//     [\"111\", \"131\", \"791\"].includes(record.COV_CHG_CODE.toString()) &&\n//     new Date(record.COV_CHG_DATE) <=\n//     new Date(\"01-01-\" + record.REF_PER.substring(0, 4)) &&\n//     data\n// ) {\n//     msg.payload.csv[record_idx].TABSTAT = \"Y\";\n//     return msg;\n\n// } else if ([\"181\", \"201\", \"801\", \"091\", \"121\", \"171\"].includes(record.COV_CHG_CODE.toString()) || data === 0) {\n//     setResult();\n//     return msg;\n// } else {\n//     msg.payload.csv[record_idx].ACTION = \"Go To Main Routing\";\n//     return msg;\n// }\n\n// let record_idx = global.get(\"ptrModuleFacts\");\n// let record = msg.payload.csv[record_idx];\n// let status = \"\";\n// msg.payload.status = status;\n\n// function setResult() {\n//     msg.payload.csv[record_idx].TABSTAT = \"N\";\n//     msg.payload.csv[record_idx].NONTABFL = \"D\";\n//     msg.payload.csv[record_idx].action = \"Exit Edit\";\n// }\n\n\n\n// function parseToNum(val) {\n//     return isNaN(val) ? 0 : parseInt(val, 10);\n// }\n// function naicsSectorCheck() {\n//     let result =\n//         parseToNum(record.PAY_ANN_VAL) +\n//         parseToNum(record.EMP_MAR12_NUM) +\n//         parseToNum(record.PAY_QTR1_VAL) +\n//         parseToNum(record.ECPAYANN) +\n//         parseToNum(record.ECPAYQ1) +\n//         parseToNum(record.ECEMPQ1) +\n//         parseToNum(record.ECPAYANL);\n\n//     if (parseToNum(record.NAICS_SECTOR_OLD_NUM) === 31) {\n//         return result + parseToNum(record.EXPS_TEMPSTAF_VAL);\n//     }\n//     return result\n// }\n// let data = naicsSectorCheck();\n// msg.payload.csv[record_idx].DATA = data\n// console.log()\n// if (\n//     [\"111\", \"131\", \"791\"].includes(record.COV_CHG_CODE.toString()) &&\n//     new Date(record.COV_CHG_DATE) <=\n//     new Date(\"01-01-\" + record.REF_PER.substring(0, 4)) &&\n//     data\n// ) {\n//     msg.payload.csv[record_idx].TABSTAT = \"Y\";\n//     return msg;\n\n// } else if ([\"181\", \"201\", \"801\", \"091\", \"121\", \"171\"].includes(record.COV_CHG_CODE.toString()) || data === 0) {\n//     setResult();\n//     return msg;\n// } else {\n//     msg.payload.csv[record_idx].action = \"Go To Main Routing\";\n//     return msg;\n// }\n\n\nlet record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\nfunction setResult() {\n    record['TABSTAT'] = \"N\";\n    record['NONTABFL'] = \"D\";\n    record['ACTION'] = \"Exit Edit\";\n}\n\n// function parseToNum(val) {\n//     return isNaN(val) ? 0 : parseInt(val, 10);\n// }\nfunction naicsSectorCheck() {\n    let result =\n        parseFloat(record['PAY_ANN_VAL']) +\n        parseFloat(record['EMP_MAR12_NUM']) +\n        parseFloat(record['PAY_QTR1_VAL']) +\n        parseFloat(record['ECPAYANN']) +\n        parseFloat(record['ECPAYQ1']) +\n        parseFloat(record['ECEMPQ1']) +\n        parseFloat(record['ECPAYANL']);\n\n    if (parseFloat(record['NAICS_SECTOR_OLD_NUM']) === 31) {\n        result = parseFloat(result) + parseFloat(record['EXPS_TEMPSTAF_VAL']);\n    }\n    return result\n}\nlet data = naicsSectorCheck();\nrecord['DATA'] = data\n\nif (\n    [\"111\", \"131\", \"791\"].includes(record['COV_CHG_CODE'].toString()) &&\n    new Date(record['COV_CHG_DATE']) <=\n    new Date(\"01-01-\" + record.REF_PER.substring(0, 4)) &&\n    data == 0\n) {\n    setResult();\n    return msg;\n\n} else if ([\"181\", \"201\", \"801\", \"091\", \"121\", \"171\"].includes(record['COV_CHG_CODE'].toString())) {\n    setResult();\n    return msg;\n} else {\n    record['ACTION'] = \"Go To Main Routing\";\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 810,
+        "y": 320,
+        "wires": [
+            [
+                "9ecd10de158f1425"
+            ]
+        ]
+    },
+    {
+        "id": "f765d14d056bec8a",
+        "type": "link in",
+        "z": "8790b12c7efb6fa0",
+        "name": "link in gotQBES",
+        "links": [
+            "47bbe840e0da7226",
+            "3ec01d49fbdfba54",
+            "2f66137cdbf509c3"
+        ],
+        "x": 465,
+        "y": 320,
+        "wires": [
+            [
+                "2b0da269e060551a"
+            ]
+        ]
+    },
+    {
+        "id": "9ecd10de158f1425",
+        "type": "function",
+        "z": "8790b12c7efb6fa0",
+        "name": "Unit Balance Function",
+        "func": "let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\nmsg.cache = global.get(\"lookupCache\").data.find(\n    item =>\n        item.module === \"balance\" &&\n        item.param === \"unit_balance\" &&\n        item.program === \"aies\" &&\n        item.unit_type === \"estab\"\n)?.json_values;\n\nfunction checkNaics(data, naics, rec_typ) {\n    let list = data['NAICS']\n    let unit = data['UNIT TYPE']\n    let rectyp = rec_typ\n    if (['SU', 'MU'].includes(rectyp)) {\n        rec_typ = 'ESTAB'\n    }\n    if (rec_typ === unit) {\n        if ([\"ALL\", \"All\"].includes(list)) {\n            return (true);\n        } else {\n            list = list.replace(/ /g, \"\");\n            list = list.replace(/'/g, \"\");\n            var array = list.split(',')\n\n            if (array.find(r => naics.startsWith(r))) {\n                return (true);\n            } else {\n                return (false)\n            }\n        }\n    }\n}\n\nfunction sumRow(data) {\n    let sum = 0;\n    var keys = [];\n    for (var key in data) {\n        if (key.startsWith('DETAIL') && data[key] != null) {\n            let variable = data[key]\n            // console.log(variable)\n            sum = parseFloat(sum) + parseFloat(record[variable])\n            keys.push(variable)\n        }\n    }\n    return [sum, keys];\n}\n\nfunction raking(rectot, sum, keys, tol) {\n    if ((Math.abs(rectot - sum) / rectot) <= tol) {\n        keys.sort((a, b) => record[b] - record[a]);\n        let remainder = 0\n        for (let i = 0; i < keys.length; i++) {\n            let num1 = (rectot / sum) * parseFloat(record[keys[i]]) + remainder\n            let num2 = Math.round(num1)\n            remainder = num1 - num2\n            record[keys[i]] = num2\n        }\n    }\n}\n\nlet naics = record['NAICS_NUM']\nnaics = '' + naics\n\nconst REPORTING_ID_TYP_TXT = record['REPORTING_ID_TYP_TXT']\n// console.log(naics)\n\nfor (let i in msg.cache['UNIT_BALANCE']) {\n    let unitBalance = msg.cache['UNIT_BALANCE'][i]\n    if (checkNaics(unitBalance, naics, REPORTING_ID_TYP_TXT)) {\n        let tot = unitBalance['TOTAL']\n        let rectot = 0\n        if ([100, '100'].includes(tot)) {\n            rectot = 100\n        } else {\n            rectot = parseFloat(record[tot])\n        }\n        // tot = tot.trim()\n        let name = 'DET_' + tot\n        let name_f = tot + '_F'\n        let [sum, keys] = sumRow(unitBalance)\n        sum = parseFloat(sum)\n        // record[name] = sum\n\n        // begin fail logic\n        if (rectot === sum && rectot != 0) {\n            record['ACTION'] = 'Go To: Main Routing'\n        } else {\n            const tolerance = parseFloat(unitBalance['Tolerance'])\n            if (sum > 0 && rectot <= 0) {\n                record[tot] = sum\n                if (record[name_f] && record[name_f].length >= 2) {\n                    record[name_f] = record[name_f].substring(0, 1) + 'L' + record[name_f].substring(2);\n                } else if (record[name_f] && record[name_f].length >= 1) {\n                    record[name_f] = record[name_f].substring(0, 1) + 'L ';\n                } else {\n                    record[name_f] = ' L ';\n                }\n                record['ACTION'] = 'Go To: Main Routing'\n            } else if (sum == 0 && rectot > 0) {\n                raking(rectot, sum, keys, tolerance)\n                for (let i = 0; i < keys.length; i++) {\n                    let det_f = keys[i] + '_F'\n                    if (record[det_f] && record[det_f].length >= 2) {\n                        record[det_f] = record[det_f].substring(0, 1) + 'X' + record[det_f].substring(2);\n                    } else if (record[det_f] && record[det_f].length >= 1) {\n                        record[det_f] = record[det_f].substring(0, 1) + 'X ';\n                    } else {\n                        record[det_f] = ' X ';\n                    }\n                }\n                record['ACTION'] = 'Go To: Main Routing'\n            } else if (sum > 0 && rectot > 0) {\n                // check range\n                const low = 1 - tolerance\n                const high = 1 + tolerance\n                if (low <= sum / rectot && sum / rectot <= high) {\n                    let flag_check1 = ''\n                    if (['P', 'C', 'A', 'S', 'O', 'E', 'F'].includes(record[name_f].substring(2, 3))) {\n                        flag_check1 = 'Yes'\n                    }\n                    let flag_check2 = ''\n                    for (let i = 0; i < keys.length; i++) {\n                        let det_f = keys[i] + '_F'\n                        if (['P', 'C', 'A', 'S', 'O', 'E', 'F'].includes(record[det_f].substring(2, 3))) {\n                            flag_check2 = 'Yes'\n                        }\n                    }\n                    if (flag_check2 == 'Yes') {\n                        record[tot] = sum\n                        if (record[name_f] && record[name_f].length >= 2) {\n                            record[name_f] = record[name_f].substring(0, 1) + 'L' + record[name_f].substring(2);\n                        } else if (record[name_f] && record[name_f].length >= 1) {\n                            record[name_f] = record[name_f].substring(0, 1) + 'L ';\n                        } else {\n                            record[name_f] = ' L ';\n                        }\n                    } else {\n                        raking(rectot, sum, keys, tolerance)\n                        for (let i = 0; i < keys.length; i++) {\n                            let det_f = keys[i] + '_F'\n                            if (record[det_f] && record[det_f].length >= 2) {\n                                record[det_f] = record[det_f].substring(0, 1) + 'K' + record[det_f].substring(2);\n                            } else if (record[det_f] && record[det_f].length >= 1) {\n                                record[det_f] = record[det_f].substring(0, 1) + 'K ';\n                            } else {\n                                record[det_f] = ' K ';\n                            }\n                        }\n                    }\n                    record['ACTION'] = 'Go To: Main Routing'\n                } else {\n                    raking(rectot, sum, keys, tolerance)\n                    for (let i = 0; i < keys.length; i++) {\n                        let det_f = keys[i] + '_F'\n                        if (record[det_f] && record[det_f].length >= 2) {\n                            record[det_f] = record[det_f].substring(0, 1) + 'X' + record[det_f].substring(2);\n                        } else if (record[det_f] && record[det_f].length >= 1) {\n                            record[det_f] = record[det_f].substring(0, 1) + 'X ';\n                        } else {\n                            record[det_f] = ' X ';\n                        }\n                    }\n                    record['ACTION'] = 'Go To: Main Routing'\n                }\n            } else if (sum == 0 && rectot <= 0) {\n                for (let i = 0; i < keys.length; i++) {\n                    let det_f = keys[i] + '_F'\n                    if (record[det_f] && record[det_f].length >= 2) {\n                        record[det_f] = record[det_f].substring(0, 1) + 'X' + record[det_f].substring(2);\n                    } else if (record[det_f] && record[det_f].length >= 1) {\n                        record[det_f] = record[det_f].substring(0, 1) + 'X ';\n                    } else {\n                        record[det_f] = ' X ';\n                    }\n                }\n                record['ACTION'] = 'Go To: Main Routing'\n            } else {\n                record['ACTION'] = 'Go To: Main Routing'\n            }\n        }\n    }\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1040,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7ecad38d9222e8f0",
+        "type": "link in",
+        "z": "e1c94d5011366338",
+        "name": "demo_recipe_1 Link",
+        "links": [
+            "6c8827ce7a4c83d8"
+        ],
+        "x": 345,
+        "y": 300,
+        "wires": [
+            [
+                "5240135610e4c2a8"
+            ]
+        ]
+    },
+    {
+        "id": "5240135610e4c2a8",
+        "type": "function",
+        "z": "e1c94d5011366338",
+        "name": "BR Stat",
+        "func": "function processRecord(record) {\n    if (['10', '20', '30', '90'].includes(record.RECORD_TYP_TXT)) {\n        record.TABSTAT = 'Y';\n        record.NONTABFL = 'space';\n        if (['10', '20', '90'].includes(record.RECORD_TYP_TXT)) {\n            record.BR_STAT = 'N'\n        }else{\n            record.KAU_STAT = 'N'\n        }\n        record.TABSTAT = 'N';\n        record.NONTABFLD = 'D';\n        exitEdit();\n        \n        if (record.BR_STAT !== 'N' || record.KAU_STAT !== 'N') {\n            return mainRouting()\n        } \n    } else {\n        record.ACTION = \"Invalid RECORD_TYP_TXT value\";\n    }\n}\n\nfunction exitEdit() {\n    console.log(\"Exiting Edit\");\n    record.ACTION = 'Edit Exit';\n}\n\nfunction pointA() {\n    console.log(\"Processing at point A\");\n}\n\nfunction mainRouting() {\n    console.log(\"Going to Main Routing\");\n    record.ACTION = \"Going to Main Routing\";\n}\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nconst record = msg.payload.csv[record_idx];\n\ntry {\n    processRecord(record);\n} catch (error) {\n    console.error(\"Error:\", error.message);\n}\nmsg.payload.csv[record_idx] = record\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 400,
+        "wires": [
+            [
+                "5573212a8344ce1f"
+            ]
+        ]
+    },
+    {
+        "id": "5573212a8344ce1f",
+        "type": "function",
+        "z": "e1c94d5011366338",
+        "name": "critical error",
+        "func": "// let record_idx = global.get(\"ptrModuleFacts\");\n// let record = msg.payload.csv[record_idx];\n// let status = \"\";\n// msg.payload.status = status;\n\n// function setResult() {\n//     msg.payload.csv[record_idx].TABSTAT = \"N\";\n//     msg.payload.csv[record_idx].NONTABFL = \"D\";\n//     msg.payload.csv[record_idx].ACTION = \"Exit Edit\";\n// }\n\n\n\n// function parseToNum(val) {\n//     return isNaN(val) ? 0 : parseInt(val, 10);\n// }\n// function naicsSectorCheck() {\n//     let result =\n//         parseToNum(record.PAY_ANN_VAL) +\n//         parseToNum(record.EMP_MAR12_NUM) +\n//         parseToNum(record.PAY_QTR1_VAL) +\n//         parseToNum(record.ECPAYANN) +\n//         parseToNum(record.ECPAYQ1) +\n//         parseToNum(record.ECEMPQ1) +\n//         parseToNum(record.ECPAYANL);\n\n//     if (parseToNum(record.NAICS_SECTOR_OLD_NUM) === 31) {\n//         return result + parseToNum(record.EXPS_TEMPSTAF_VAL);\n//     }\n//     return result\n// }\n// let data = naicsSectorCheck();\n// msg.payload.csv[record_idx].DATA = data\n// console.log()\n// if (\n//     [\"111\", \"131\", \"791\"].includes(record.COV_CHG_CODE.toString()) &&\n//     new Date(record.COV_CHG_DATE) <=\n//     new Date(\"01-01-\" + record.REF_PER.substring(0, 4)) &&\n//     data\n// ) {\n//     msg.payload.csv[record_idx].TABSTAT = \"Y\";\n//     return msg;\n\n// } else if ([\"181\", \"201\", \"801\", \"091\", \"121\", \"171\"].includes(record.COV_CHG_CODE.toString()) || data === 0) {\n//     setResult();\n//     return msg;\n// } else {\n//     msg.payload.csv[record_idx].ACTION = \"Go To Main Routing\";\n//     return msg;\n// }\n\n// let record_idx = global.get(\"ptrModuleFacts\");\n// let record = msg.payload.csv[record_idx];\n// let status = \"\";\n// msg.payload.status = status;\n\n// function setResult() {\n//     msg.payload.csv[record_idx].TABSTAT = \"N\";\n//     msg.payload.csv[record_idx].NONTABFL = \"D\";\n//     msg.payload.csv[record_idx].action = \"Exit Edit\";\n// }\n\n\n\n// function parseToNum(val) {\n//     return isNaN(val) ? 0 : parseInt(val, 10);\n// }\n// function naicsSectorCheck() {\n//     let result =\n//         parseToNum(record.PAY_ANN_VAL) +\n//         parseToNum(record.EMP_MAR12_NUM) +\n//         parseToNum(record.PAY_QTR1_VAL) +\n//         parseToNum(record.ECPAYANN) +\n//         parseToNum(record.ECPAYQ1) +\n//         parseToNum(record.ECEMPQ1) +\n//         parseToNum(record.ECPAYANL);\n\n//     if (parseToNum(record.NAICS_SECTOR_OLD_NUM) === 31) {\n//         return result + parseToNum(record.EXPS_TEMPSTAF_VAL);\n//     }\n//     return result\n// }\n// let data = naicsSectorCheck();\n// msg.payload.csv[record_idx].DATA = data\n// console.log()\n// if (\n//     [\"111\", \"131\", \"791\"].includes(record.COV_CHG_CODE.toString()) &&\n//     new Date(record.COV_CHG_DATE) <=\n//     new Date(\"01-01-\" + record.REF_PER.substring(0, 4)) &&\n//     data\n// ) {\n//     msg.payload.csv[record_idx].TABSTAT = \"Y\";\n//     return msg;\n\n// } else if ([\"181\", \"201\", \"801\", \"091\", \"121\", \"171\"].includes(record.COV_CHG_CODE.toString()) || data === 0) {\n//     setResult();\n//     return msg;\n// } else {\n//     msg.payload.csv[record_idx].action = \"Go To Main Routing\";\n//     return msg;\n// }\n\n\nlet record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\nfunction setResult() {\n    record['TABSTAT'] = \"N\";\n    record['NONTABFL'] = \"D\";\n    record['ACTION'] = \"Exit Edit\";\n}\n\n// function parseToNum(val) {\n//     return isNaN(val) ? 0 : parseInt(val, 10);\n// }\nfunction naicsSectorCheck() {\n    let result =\n        parseFloat(record['PAY_ANN_VAL']) +\n        parseFloat(record['EMP_MAR12_NUM']) +\n        parseFloat(record['PAY_QTR1_VAL']) +\n        parseFloat(record['ECPAYANN']) +\n        parseFloat(record['ECPAYQ1']) +\n        parseFloat(record['ECEMPQ1']) +\n        parseFloat(record['ECPAYANL']);\n\n    if (parseFloat(record['NAICS_SECTOR_OLD_NUM']) === 31) {\n        result = parseFloat(result) + parseFloat(record['EXPS_TEMPSTAF_VAL']);\n    }\n    return result\n}\nlet data = naicsSectorCheck();\nrecord['DATA'] = data\n\nif (\n    [\"111\", \"131\", \"791\"].includes(record['COV_CHG_CODE'].toString()) &&\n    new Date(record['COV_CHG_DATE']) <=\n    new Date(\"01-01-\" + record.REF_PER.substring(0, 4)) &&\n    data == 0\n) {\n    setResult();\n    return msg;\n\n} else if ([\"181\", \"201\", \"801\", \"091\", \"121\", \"171\"].includes(record['COV_CHG_CODE'].toString())) {\n    setResult();\n    return msg;\n} else {\n    record['ACTION'] = \"Go To Main Routing\";\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 400,
+        "wires": [
+            [
+                "c9f1b90676a7bee6"
+            ]
+        ]
+    },
+    {
+        "id": "e0d75497828e672b",
+        "type": "link in",
+        "z": "e1c94d5011366338",
+        "name": "link in gotQBES",
+        "links": [
+            "47bbe840e0da7226",
+            "3ec01d49fbdfba54",
+            "2f66137cdbf509c3"
+        ],
+        "x": 475,
+        "y": 400,
+        "wires": [
+            [
+                "5240135610e4c2a8"
+            ]
+        ]
+    },
+    {
+        "id": "c9f1b90676a7bee6",
+        "type": "function",
+        "z": "e1c94d5011366338",
+        "name": "Fake PV",
+        "func": "// function setCharAt(str, index, chr) {\n//     if (index > str.length - 1) return str;\n//     return str.substring(0, index) + chr + str.substring(index + 1);\n// }\n\n// function initializeVariables(record) {\n//     record.PAY_ANN_VAL = setCharAt(record.PAY_ANN_VAL.toString(), 2, 'U');\n\n//     record.RCPT_TOT_VAL = setCharAt(record.RCPT_TOT_VAL.toString(), 2, 'X');\n\n//     record.EMP_MAR12_NUM = setCharAt(record.EMP_MAR12_NUM.toString(), 2, 'U');\n\n//     record.PAY_QTR1_VAL = setCharAt(record.PAY_QTR1_VAL.toString(), 2, 'U');\n\n//     return record;\n// }\n\n\n// let record_idx = global.get(\"ptrModuleFacts\");\n// let record = msg.payload.csv[record_idx];\n\n// record.PAY_ANN_VAL = record.PAY_ANN_VAL || \"0\";\n// record.RCPT_TOT_VAL = record.RCPT_TOT_VAL || \"0\";\n// record.EMP_MAR12_NUM = record.EMP_MAR12_NUM || \"0\";\n// record.PAY_QTR1_VAL = record.PAY_QTR1_VAL || \"0\";\n\n// if(parseInt(record['RANDOM']) > 10){\n//     record = initializeVariables(record);\n// }\n\n\n// return msg;\nfunction setCharAt(str, index, chr) {\n    if (index > str.length - 1) return str;\n    return str.substring(0, index) + chr + str.substring(index + 1);\n}\n\nfunction initializeVariables(record) {\n    record.PAY_ANN_VAL = setCharAt(record.PAY_ANN_VAL.toString(), 2, 'U');\n    record.RCPT_TOT_VAL = setCharAt(record.RCPT_TOT_VAL.toString(), 2, 'X');\n    record.EMP_MAR12_NUM = setCharAt(record.EMP_MAR12_NUM.toString(), 2, 'U');\n    record.PAY_QTR1_VAL = setCharAt(record.PAY_QTR1_VAL.toString(), 2, 'U');\n\n    return record;\n}\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nrecord.PAY_ANN_VAL = (record.PAY_ANN_VAL && record.PAY_ANN_VAL !== 'NULL') ? record.PAY_ANN_VAL : \"0\";\nrecord.RCPT_TOT_VAL = (record.RCPT_TOT_VAL && record.RCPT_TOT_VAL !== 'NULL') ? record.RCPT_TOT_VAL : \"0\";\nrecord.EMP_MAR12_NUM = (record.EMP_MAR12_NUM && record.EMP_MAR12_NUM !== 'NULL') ? record.EMP_MAR12_NUM : \"0\";\nrecord.PAY_QTR1_VAL = (record.PAY_QTR1_VAL && record.PAY_QTR1_VAL !== 'NULL') ? record.PAY_QTR1_VAL : \"0\";\n\nif(parseInt(record['RANDOM']) > 5){\n    record = initializeVariables(record);\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1000,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "30cba14a34807b8f",
+        "type": "function",
+        "z": "cd5dca18afec6561",
+        "name": "Unit Balance Function",
+        "func": "let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\nmsg.cache = global.get(\"lookupCache\").data.find(\n    item =>\n        item.module === \"balance\" &&\n        item.param === \"unit_balance\" &&\n        item.program === \"aies\" &&\n        item.unit_type === \"estab\"\n)?.json_values;\n\nfunction checkNaics(data, naics, rec_typ) {\n    let list = data['NAICS']\n    let unit = data['UNIT TYPE']\n    let rectyp = rec_typ\n    if (['SU', 'MU'].includes(rectyp)) {\n        rec_typ = 'ESTAB'\n    }\n    if (rec_typ === unit) {\n        if ([\"ALL\", \"All\"].includes(list)) {\n            return (true);\n        } else {\n            list = list.replace(/ /g, \"\");\n            list = list.replace(/'/g, \"\");\n            var array = list.split(',')\n\n            if (array.find(r => naics.startsWith(r))) {\n                return (true);\n            } else {\n                return (false)\n            }\n        }\n    }\n}\n\nfunction sumRow(data) {\n    let sum = 0;\n    var keys = [];\n    for (var key in data) {\n        if (key.startsWith('DETAIL') && data[key] != null) {\n            let variable = data[key]\n            // console.log(variable)\n            sum = parseFloat(sum) + parseFloat(record[variable])\n            keys.push(variable)\n        }\n    }\n    return [sum, keys];\n}\n\nfunction raking(rectot, sum, keys, tol) {\n    if ((Math.abs(rectot - sum) / rectot) <= tol) {\n        keys.sort((a, b) => record[b] - record[a]);\n        let remainder = 0\n        for (let i = 0; i < keys.length; i++) {\n            let num1 = (rectot / sum) * parseFloat(record[keys[i]]) + remainder\n            let num2 = Math.round(num1)\n            remainder = num1 - num2\n            record[keys[i]] = num2\n        }\n    }\n}\n\nlet naics = record['NAICS_NUM']\nnaics = '' + naics\n\nconst REPORTING_ID_TYP_TXT = record['REPORTING_ID_TYP_TXT']\n// console.log(naics)\n\nfor (let i in msg.cache['UNIT_BALANCE']) {\n    let unitBalance = msg.cache['UNIT_BALANCE'][i]\n    if (checkNaics(unitBalance, naics, REPORTING_ID_TYP_TXT)) {\n        let tot = unitBalance['TOTAL']\n        let rectot = 0\n        if ([100, '100'].includes(tot)) {\n            rectot = 100\n        } else {\n            rectot = parseFloat(record[tot])\n        }\n        // tot = tot.trim()\n        let name = 'DET_' + tot\n        let name_f = tot + '_F'\n        let [sum, keys] = sumRow(unitBalance)\n        sum = parseFloat(sum)\n        // record[name] = sum\n\n        // begin fail logic\n        if (rectot === sum && rectot != 0) {\n            record['ACTION'] = 'Go To: Main Routing'\n        } else {\n            const tolerance = parseFloat(unitBalance['Tolerance'])\n            if (sum > 0 && rectot <= 0) {\n                record[tot] = sum\n                if (record[name_f] && record[name_f].length >= 2) {\n                    record[name_f] = record[name_f].substring(0, 1) + 'L' + record[name_f].substring(2);\n                } else if (record[name_f] && record[name_f].length >= 1) {\n                    record[name_f] = record[name_f].substring(0, 1) + 'L ';\n                } else {\n                    record[name_f] = ' L ';\n                }\n                record['ACTION'] = 'Go To: Main Routing'\n            } else if (sum == 0 && rectot > 0) {\n                raking(rectot, sum, keys, tolerance)\n                for (let i = 0; i < keys.length; i++) {\n                    let det_f = keys[i] + '_F'\n                    if (record[det_f] && record[det_f].length >= 2) {\n                        record[det_f] = record[det_f].substring(0, 1) + 'X' + record[det_f].substring(2);\n                    } else if (record[det_f] && record[det_f].length >= 1) {\n                        record[det_f] = record[det_f].substring(0, 1) + 'X ';\n                    } else {\n                        record[det_f] = ' X ';\n                    }\n                }\n                record['ACTION'] = 'Go To: Main Routing'\n            } else if (sum > 0 && rectot > 0) {\n                // check range\n                const low = 1 - tolerance\n                const high = 1 + tolerance\n                if (low <= sum / rectot && sum / rectot <= high) {\n                    let flag_check1 = ''\n                    if (['P', 'C', 'A', 'S', 'O', 'E', 'F'].includes(record[name_f].substring(2, 3))) {\n                        flag_check1 = 'Yes'\n                    }\n                    let flag_check2 = ''\n                    for (let i = 0; i < keys.length; i++) {\n                        let det_f = keys[i] + '_F'\n                        if (['P', 'C', 'A', 'S', 'O', 'E', 'F'].includes(record[det_f].substring(2, 3))) {\n                            flag_check2 = 'Yes'\n                        }\n                    }\n                    if (flag_check2 == 'Yes') {\n                        record[tot] = sum\n                        if (record[name_f] && record[name_f].length >= 2) {\n                            record[name_f] = record[name_f].substring(0, 1) + 'L' + record[name_f].substring(2);\n                        } else if (record[name_f] && record[name_f].length >= 1) {\n                            record[name_f] = record[name_f].substring(0, 1) + 'L ';\n                        } else {\n                            record[name_f] = ' L ';\n                        }\n                    } else {\n                        raking(rectot, sum, keys, tolerance)\n                        for (let i = 0; i < keys.length; i++) {\n                            let det_f = keys[i] + '_F'\n                            if (record[det_f] && record[det_f].length >= 2) {\n                                record[det_f] = record[det_f].substring(0, 1) + 'K' + record[det_f].substring(2);\n                            } else if (record[det_f] && record[det_f].length >= 1) {\n                                record[det_f] = record[det_f].substring(0, 1) + 'K ';\n                            } else {\n                                record[det_f] = ' K ';\n                            }\n                        }\n                    }\n                    record['ACTION'] = 'Go To: Main Routing'\n                } else {\n                    raking(rectot, sum, keys, tolerance)\n                    for (let i = 0; i < keys.length; i++) {\n                        let det_f = keys[i] + '_F'\n                        if (record[det_f] && record[det_f].length >= 2) {\n                            record[det_f] = record[det_f].substring(0, 1) + 'X' + record[det_f].substring(2);\n                        } else if (record[det_f] && record[det_f].length >= 1) {\n                            record[det_f] = record[det_f].substring(0, 1) + 'X ';\n                        } else {\n                            record[det_f] = ' X ';\n                        }\n                    }\n                    record['ACTION'] = 'Go To: Main Routing'\n                }\n            } else if (sum == 0 && rectot <= 0) {\n                for (let i = 0; i < keys.length; i++) {\n                    let det_f = keys[i] + '_F'\n                    if (record[det_f] && record[det_f].length >= 2) {\n                        record[det_f] = record[det_f].substring(0, 1) + 'X' + record[det_f].substring(2);\n                    } else if (record[det_f] && record[det_f].length >= 1) {\n                        record[det_f] = record[det_f].substring(0, 1) + 'X ';\n                    } else {\n                        record[det_f] = ' X ';\n                    }\n                }\n                record['ACTION'] = 'Go To: Main Routing'\n            } else {\n                record['ACTION'] = 'Go To: Main Routing'\n            }\n        }\n    }\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "39652b99db6e7c2b",
+        "type": "link in",
+        "z": "cd5dca18afec6561",
+        "name": "demo_recipe_1 Link",
+        "links": [
+            "6c8827ce7a4c83d8"
+        ],
+        "x": 485,
+        "y": 220,
+        "wires": [
+            [
+                "30cba14a34807b8f"
+            ]
+        ]
+    },
+    {
+        "id": "7524317b716e4316",
+        "type": "link in",
+        "z": "cd5dca18afec6561",
+        "name": "link in gotQBES",
+        "links": [
+            "47bbe840e0da7226",
+            "3ec01d49fbdfba54",
+            "2f66137cdbf509c3"
+        ],
+        "x": 615,
+        "y": 320,
+        "wires": [
+            [
+                "30cba14a34807b8f"
+            ]
+        ]
     }
 ]
