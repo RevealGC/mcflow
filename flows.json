@@ -397,14 +397,6 @@
         "env": []
     },
     {
-        "id": "857de6d7143aac67",
-        "type": "tab",
-        "label": "Unit Balance",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
         "id": "c606c03db54a5be8",
         "type": "tab",
         "label": "demo_recipe_1",
@@ -899,19 +891,11 @@
         ],
         "out": [
             {
-                "x": 1720,
-                "y": 980,
+                "x": 940,
+                "y": 800,
                 "wires": [
                     {
-                        "id": "e9b8267a9a508b5b",
-                        "port": 0
-                    },
-                    {
-                        "id": "6fca77ca827d850d",
-                        "port": 0
-                    },
-                    {
-                        "id": "750daba2cd27f0bf",
+                        "id": "df0f14404b9779f3",
                         "port": 0
                     }
                 ]
@@ -1772,7 +1756,9 @@
             "d394b61bcc4755e6"
         ],
         "x": 14,
-        "y": 939
+        "y": 939,
+        "w": 1532,
+        "h": 82
     },
     {
         "id": "ef50b77b253a7883",
@@ -1792,7 +1778,9 @@
             "d587f5de3f4014c8"
         ],
         "x": 14,
-        "y": 239
+        "y": 239,
+        "w": 1792,
+        "h": 182
     },
     {
         "id": "62708d0bbe922798",
@@ -1816,7 +1804,9 @@
             "58df41cd8e54a653"
         ],
         "x": 14,
-        "y": 519
+        "y": 519,
+        "w": 1432,
+        "h": 322
     },
     {
         "id": "19463268a6c67561",
@@ -1834,6 +1824,8 @@
         ],
         "x": 14,
         "y": 99,
+        "w": 1432,
+        "h": 82,
         "info": "# Rules from Parameter Files"
     },
     {
@@ -1849,7 +1841,9 @@
             "a47c991027033263"
         ],
         "x": 34,
-        "y": 19
+        "y": 19,
+        "w": 432,
+        "h": 82
     },
     {
         "id": "4099bf03141f3710",
@@ -1894,7 +1888,9 @@
             "6c8827ce7a4c83d8"
         ],
         "x": 14,
-        "y": 619
+        "y": 619,
+        "w": 1092,
+        "h": 862
     },
     {
         "id": "d1e0f39ddacfeb20",
@@ -4568,745 +4564,6 @@
         "wires": []
     },
     {
-        "id": "b577047a453e09e2",
-        "type": "debug",
-        "z": "e4fb9739caef0397",
-        "name": "Go To: Company Additivity Check",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 800,
-        "y": 120,
-        "wires": []
-    },
-    {
-        "id": "0ff8421a7b8e6db8",
-        "type": "switch",
-        "z": "e4fb9739caef0397",
-        "name": "Failure Present?",
-        "property": "payload.csv[0].failure",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "0",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "1",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 300,
-        "y": 260,
-        "wires": [
-            [
-                "f9f2616d4b2e77aa"
-            ],
-            [
-                "63e93f8b86886fb5"
-            ]
-        ]
-    },
-    {
-        "id": "f9f2616d4b2e77aa",
-        "type": "function",
-        "z": "e4fb9739caef0397",
-        "name": "Failure is not present",
-        "func": "msg.payload.csv[0].action = \"Go To: Company Additivity Check\"\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 540,
-        "y": 120,
-        "wires": [
-            [
-                "b577047a453e09e2"
-            ]
-        ]
-    },
-    {
-        "id": "63e93f8b86886fb5",
-        "type": "switch",
-        "z": "e4fb9739caef0397",
-        "name": "SUM(DET) = 0 || SUM(DET) > 0",
-        "property": "payload.csv[0][\"SUM(DET)\"]",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "0",
-                "vt": "str"
-            },
-            {
-                "t": "gt",
-                "v": "0",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 570,
-        "y": 440,
-        "wires": [
-            [
-                "11f769517190762f"
-            ],
-            [
-                "458aee89809aab2f"
-            ]
-        ]
-    },
-    {
-        "id": "11f769517190762f",
-        "type": "switch",
-        "z": "e4fb9739caef0397",
-        "name": "SUM(DET)=0 && [TOT = 0 || TOT >0]",
-        "property": "payload.csv[0][\"TOT\"]",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "0",
-                "vt": "str"
-            },
-            {
-                "t": "gt",
-                "v": "0",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 910,
-        "y": 360,
-        "wires": [
-            [
-                "c4dd21c47b5c560d"
-            ],
-            [
-                "95342923afe33dcc"
-            ]
-        ]
-    },
-    {
-        "id": "458aee89809aab2f",
-        "type": "switch",
-        "z": "e4fb9739caef0397",
-        "name": "SUM(DET)=0 && [TOT = 0 || TOT >0]",
-        "property": "payload.csv[0][\"TOT\"]",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "0",
-                "vt": "str"
-            },
-            {
-                "t": "gt",
-                "v": "0",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 910,
-        "y": 520,
-        "wires": [
-            [
-                "e29e53837aa85b4a"
-            ],
-            [
-                "e959e7fb6afb3eed"
-            ]
-        ]
-    },
-    {
-        "id": "e29e53837aa85b4a",
-        "type": "function",
-        "z": "e4fb9739caef0397",
-        "name": "SUM(DET)>0 and TOT=0",
-        "func": "msg.payload.csv[0][\"TOTAL\"] = msg.payload.csv[0][\"SUM(DET)\"]\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1190,
-        "y": 500,
-        "wires": [
-            [
-                "788b3a84934aa271"
-            ]
-        ]
-    },
-    {
-        "id": "95342923afe33dcc",
-        "type": "function",
-        "z": "e4fb9739caef0397",
-        "name": "SUM(DET)=0 and TOT>0",
-        "func": "msg.payload.csv[0].action = \"Proate data based on X(DET) = TOT\"\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1190,
-        "y": 380,
-        "wires": [
-            [
-                "14dc631e2b06f6dc"
-            ]
-        ]
-    },
-    {
-        "id": "c4dd21c47b5c560d",
-        "type": "function",
-        "z": "e4fb9739caef0397",
-        "name": "SUM(DET)=0 and TOT=0",
-        "func": "msg.payload.csv[0].action = \"Impute?\";\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1190,
-        "y": 340,
-        "wires": [
-            [
-                "66ae65c186690293"
-            ]
-        ]
-    },
-    {
-        "id": "e959e7fb6afb3eed",
-        "type": "function",
-        "z": "e4fb9739caef0397",
-        "name": "SUM(DET)>0 and TOT>0",
-        "func": "msg.payload.csv[0][\"ESMD\"] = msg.payload.csv[0][\"SUM(DET)\"] / msg.payload.csv[0][\"TOT\"]\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1190,
-        "y": 620,
-        "wires": [
-            [
-                "9c1aeb1ed7cbe919"
-            ]
-        ]
-    },
-    {
-        "id": "66ae65c186690293",
-        "type": "debug",
-        "z": "e4fb9739caef0397",
-        "name": "balance output 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1410,
-        "y": 340,
-        "wires": []
-    },
-    {
-        "id": "14dc631e2b06f6dc",
-        "type": "debug",
-        "z": "e4fb9739caef0397",
-        "name": "balance output 2",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1410,
-        "y": 380,
-        "wires": []
-    },
-    {
-        "id": "788b3a84934aa271",
-        "type": "debug",
-        "z": "e4fb9739caef0397",
-        "name": "balance output 3",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1410,
-        "y": 500,
-        "wires": []
-    },
-    {
-        "id": "9c1aeb1ed7cbe919",
-        "type": "switch",
-        "z": "e4fb9739caef0397",
-        "name": "msg.payload[\"ESMD\"]",
-        "property": "payload.csv[0][\"ESMD\"]",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "btwn",
-                "v": "0.8",
-                "vt": "num",
-                "v2": "1.2",
-                "v2t": "num"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 1420,
-        "y": 620,
-        "wires": [
-            [
-                "6fb927f1b01fb35e"
-            ],
-            [
-                "14dc76c93de5c2f3"
-            ]
-        ]
-    },
-    {
-        "id": "6fb927f1b01fb35e",
-        "type": "function",
-        "z": "e4fb9739caef0397",
-        "name": "Set TOTAL = SUM(DET)",
-        "func": "msg.payload.csv[0][\"TOTAL\"] = msg.payload.csv[0][\"SUM(DET)\"]\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1670,
-        "y": 580,
-        "wires": [
-            [
-                "75e116bc1eada138"
-            ]
-        ]
-    },
-    {
-        "id": "14dc76c93de5c2f3",
-        "type": "switch",
-        "z": "e4fb9739caef0397",
-        "name": "INDP(ind and geo)>1?",
-        "property": "payload.csv[0].INDP",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "gt",
-                "v": "1",
-                "vt": "str"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 1660,
-        "y": 680,
-        "wires": [
-            [
-                "649aa1c8c8a908df"
-            ],
-            [
-                "96963e24bf75debd"
-            ]
-        ]
-    },
-    {
-        "id": "75e116bc1eada138",
-        "type": "debug",
-        "z": "e4fb9739caef0397",
-        "name": "balance output 4",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1890,
-        "y": 580,
-        "wires": []
-    },
-    {
-        "id": "b603e4fb34a7151e",
-        "type": "debug",
-        "z": "e4fb9739caef0397",
-        "name": "balance output 5",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 2110,
-        "y": 660,
-        "wires": []
-    },
-    {
-        "id": "c1fc577fdc63918a",
-        "type": "debug",
-        "z": "e4fb9739caef0397",
-        "name": "balance output 6",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 2070,
-        "y": 700,
-        "wires": []
-    },
-    {
-        "id": "649aa1c8c8a908df",
-        "type": "function",
-        "z": "e4fb9739caef0397",
-        "name": "SET IMPUTATION FLAG",
-        "func": "msg.payload.csv[0].action = \"SET IMPUTATION FLAG?\"\nmsg.payload.csv[0][\"Varx-IMBALANCE\"] = true\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1890,
-        "y": 660,
-        "wires": [
-            [
-                "b603e4fb34a7151e"
-            ]
-        ]
-    },
-    {
-        "id": "96963e24bf75debd",
-        "type": "function",
-        "z": "e4fb9739caef0397",
-        "name": "Rake (DET) = TOT",
-        "func": "msg.payload.csv[0][\"Rake(DET)\"] = msg.payload.csv[0][\"TOT\"]\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1870,
-        "y": 700,
-        "wires": [
-            [
-                "c1fc577fdc63918a"
-            ]
-        ]
-    },
-    {
-        "id": "bb1d1ce83a8e64e0",
-        "type": "debug",
-        "z": "e4fb9739caef0397",
-        "name": "Go To: Derived Items",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1820,
-        "y": 1060,
-        "wires": []
-    },
-    {
-        "id": "7fb3a7954f65f930",
-        "type": "switch",
-        "z": "e4fb9739caef0397",
-        "name": "Failure Present?",
-        "property": "payload.record.FAILURE",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "1",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "0",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 660,
-        "y": 1160,
-        "wires": [
-            [
-                "b205aa20e62e14a0",
-                "5b994e13da4732a8"
-            ],
-            [
-                "750daba2cd27f0bf",
-                "25e60a92f3663f4a"
-            ]
-        ]
-    },
-    {
-        "id": "750daba2cd27f0bf",
-        "type": "function",
-        "z": "e4fb9739caef0397",
-        "name": "Failure is not present",
-        "func": "msg.payload.csv[global.get(\"ptrModuleFacts\")].action = \"Go To: Derived Items\"\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 960,
-        "y": 1020,
-        "wires": [
-            [
-                "bb1d1ce83a8e64e0"
-            ]
-        ]
-    },
-    {
-        "id": "b205aa20e62e14a0",
-        "type": "switch",
-        "z": "e4fb9739caef0397",
-        "name": "SUM(DET) > 0",
-        "property": "payload.record[\"SUM(DET)\"]",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "gt",
-                "v": "0",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "0",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 720,
-        "y": 1340,
-        "wires": [
-            [
-                "2b129a8ea32d8957"
-            ],
-            [
-                "3ab57dc4d768d9a9"
-            ]
-        ]
-    },
-    {
-        "id": "2b129a8ea32d8957",
-        "type": "switch",
-        "z": "e4fb9739caef0397",
-        "name": "TOT == 0",
-        "property": "payload.record[\"TOT\"]",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "0",
-                "vt": "str"
-            },
-            {
-                "t": "gt",
-                "v": "0",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 920,
-        "y": 1240,
-        "wires": [
-            [
-                "e9b8267a9a508b5b"
-            ],
-            [
-                "b6e1815105608c81"
-            ]
-        ]
-    },
-    {
-        "id": "e9b8267a9a508b5b",
-        "type": "function",
-        "z": "e4fb9739caef0397",
-        "name": "SUM(DET)>0 and TOT=0",
-        "func": "msg.payload.csv[global.get(\"ptrModuleFacts\")][\"TOTAL\"] = msg.payload.csv[global.get(\"ptrModuleFacts\")][\"SUM(DET)\"]\n\nif (msg.payload.csv[global.get(\"ptrModuleFacts\")][\"TOTAL_FLG\"] && msg.payload.csv[global.get(\"ptrModuleFacts\")][\"TOTAL_FLG\"].length >= 2) {\n    msg.payload.csv[global.get(\"ptrModuleFacts\")][\"TOTAL_FLG\"] = msg.payload.csv[global.get(\"ptrModuleFacts\")][\"TOTAL_FLG\"].substring(0, 1) + 'L' + msg.payload.csv[global.get(\"ptrModuleFacts\")][\"TOTAL_FLG\"].substring(2);\n} else if (!msg.payload.csv[global.get(\"ptrModuleFacts\")][\"TOTAL_FLG\"] || msg.payload.csv[global.get(\"ptrModuleFacts\")][\"TOTAL_FLG\"].length == 0) {\n    msg.payload.csv[global.get(\"ptrModuleFacts\")][\"TOTAL_FLG\"] = '_L_';\n} else if (msg.payload.csv[global.get(\"ptrModuleFacts\")][\"TOTAL_FLG\"].length == 1) {\n    msg.payload.csv[global.get(\"ptrModuleFacts\")][\"TOTAL_FLG\"] = msg.payload.csv[global.get(\"ptrModuleFacts\")][\"TOTAL_FLG\"][0] + 'L_';\n}\nreturn msg;",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1170,
-        "y": 1180,
-        "wires": [
-            [
-                "bb1d1ce83a8e64e0"
-            ]
-        ]
-    },
-    {
-        "id": "3ab57dc4d768d9a9",
-        "type": "switch",
-        "z": "e4fb9739caef0397",
-        "name": "TOT == 0",
-        "property": "payload.record[\"TOT\"]",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "0",
-                "vt": "str"
-            },
-            {
-                "t": "gt",
-                "v": "0",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 920,
-        "y": 1400,
-        "wires": [
-            [
-                "e9d0317261129c4e"
-            ],
-            [
-                "6fca77ca827d850d"
-            ]
-        ]
-    },
-    {
-        "id": "b6e1815105608c81",
-        "type": "function",
-        "z": "e4fb9739caef0397",
-        "name": "SUM(DET)>0 and TOT>0",
-        "func": "if (msg.payload.csv[global.get(\"ptrModuleFacts\")][\"DETAILS_FLAG\"] && msg.payload.csv[global.get(\"ptrModuleFacts\")][\"DETAILS_FLAG\"].length >= 2) {\n    msg.payload.csv[global.get(\"ptrModuleFacts\")][\"DETAILS_FLAG\"] = msg.payload.csv[global.get(\"ptrModuleFacts\")][\"DETAILS_FLAG\"].substring(0, 1) + 'K' + msg.payload.csv[global.get(\"ptrModuleFacts\")][\"DETAILS_FLAG\"].substring(2);\n} else if (!msg.payload.csv[global.get(\"ptrModuleFacts\")][\"DETAILS_FLAG\"] || msg.payload.csv[global.get(\"ptrModuleFacts\")][\"DETAILS_FLAG\"].length == 0) {\n    msg.payload.csv[global.get(\"ptrModuleFacts\")][\"DETAILS_FLAG\"] = '_K_';\n} else if (msg.payload.csv[global.get(\"ptrModuleFacts\")][\"DETAILS_FLAG\"].length == 1) {\n    msg.payload.csv[global.get(\"ptrModuleFacts\")][\"DETAILS_FLAG\"] = msg.payload.csv[global.get(\"ptrModuleFacts\")][\"DETAILS_FLAG\"][0] + 'K_';\n}\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1170,
-        "y": 1260,
-        "wires": [
-            [
-                "bb1d1ce83a8e64e0"
-            ]
-        ]
-    },
-    {
-        "id": "e9d0317261129c4e",
-        "type": "function",
-        "z": "e4fb9739caef0397",
-        "name": "SUM(DET)=0 and TOT=0",
-        "func": "if (msg.payload.csv[global.get(\"ptrModuleFacts\")][\"DETAILS_FLAG\"] && msg.payload.csv[global.get(\"ptrModuleFacts\")][\"DETAILS_FLAG\"].length >= 2) {\n    msg.payload.csv[global.get(\"ptrModuleFacts\")][\"DETAILS_FLAG\"] = msg.payload.csv[global.get(\"ptrModuleFacts\")][\"DETAILS_FLAG\"].substring(0, 1) + 'X' + msg.payload.csv[global.get(\"ptrModuleFacts\")][\"DETAILS_FLAG\"].substring(2);\n} else if (!msg.payload.csv[global.get(\"ptrModuleFacts\")][\"DETAILS_FLAG\"] || msg.payload.csv[global.get(\"ptrModuleFacts\")][\"DETAILS_FLAG\"].length == 0) {\n    msg.payload.csv[global.get(\"ptrModuleFacts\")][\"DETAILS_FLAG\"] = '_X_';\n} else if (msg.payload.csv[global.get(\"ptrModuleFacts\")][\"DETAILS_FLAG\"].length == 1) {\n    msg.payload.csv[global.get(\"ptrModuleFacts\")][\"DETAILS_FLAG\"] = msg.payload.csv[global.get(\"ptrModuleFacts\")][\"DETAILS_FLAG\"][0] + 'X_';\n}\nreturn msg;",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1170,
-        "y": 1340,
-        "wires": [
-            [
-                "bb1d1ce83a8e64e0"
-            ]
-        ]
-    },
-    {
-        "id": "6fca77ca827d850d",
-        "type": "function",
-        "z": "e4fb9739caef0397",
-        "name": "SUM(DET)=0 and TOT>0",
-        "func": "if (msg.payload.csv[global.get(\"ptrModuleFacts\")][\"DETAILS_FLAG\"] && msg.payload.csv[global.get(\"ptrModuleFacts\")][\"DETAILS_FLAG\"].length >= 2) {\n    msg.payload.csv[global.get(\"ptrModuleFacts\")][\"DETAILS_FLAG\"] = msg.payload.csv[global.get(\"ptrModuleFacts\")][\"DETAILS_FLAG\"].substring(0, 1) + 'X' + msg.payload.csv[global.get(\"ptrModuleFacts\")][\"DETAILS_FLAG\"].substring(2);\n} else if (!msg.payload.csv[global.get(\"ptrModuleFacts\")][\"DETAILS_FLAG\"] || msg.payload.csv[global.get(\"ptrModuleFacts\")][\"DETAILS_FLAG\"].length == 0) {\n    msg.payload.csv[global.get(\"ptrModuleFacts\")][\"DETAILS_FLAG\"] = '_X_';\n} else if (msg.payload.csv[global.get(\"ptrModuleFacts\")][\"DETAILS_FLAG\"].length == 1) {\n    msg.payload.csv[global.get(\"ptrModuleFacts\")][\"DETAILS_FLAG\"] = msg.payload.csv[global.get(\"ptrModuleFacts\")][\"DETAILS_FLAG\"][0] + 'X_';\n}\nreturn msg;",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1170,
-        "y": 1420,
-        "wires": [
-            [
-                "bb1d1ce83a8e64e0"
-            ]
-        ]
-    },
-    {
-        "id": "2648cf894d426f6b",
-        "type": "function",
-        "z": "e4fb9739caef0397",
-        "name": "Set Index",
-        "func": "msg.payload.record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\nlet cache = global.get(\"lookupCache\");\nconsole.log({cache})\nconst balanceParamsData = cache.data.find(\n    item =>\n        item.module === \"balance\" &&\n        item.program === \"aies\" &&\n        item.unit_type === \"estab\"\n)?.json_values;\n\n// console.log({ t1: cache.data, balanceParamsData, record: msg.payload.record })\nmsg.payload.balanceParamsData = balanceParamsData\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 480,
-        "y": 1160,
-        "wires": [
-            [
-                "7fb3a7954f65f930",
-                "0ad8ef98192f34e0"
-            ]
-        ]
-    },
-    {
         "id": "b44b9fdec27454f0",
         "type": "change",
         "z": "e4fb9739caef0397",
@@ -5338,63 +4595,49 @@
         "type": "subflow:0be109393cb5f28a",
         "z": "e4fb9739caef0397",
         "name": "",
-        "x": 550,
+        "x": 670,
         "y": 1020,
         "wires": [
             [
-                "2648cf894d426f6b"
+                "df0f14404b9779f3"
             ]
         ]
     },
     {
-        "id": "25e60a92f3663f4a",
-        "type": "debug",
+        "id": "df0f14404b9779f3",
+        "type": "function",
         "z": "e4fb9739caef0397",
-        "name": "Failed",
-        "active": true,
-        "tosidebar": true,
-        "console": true,
-        "tostatus": false,
-        "complete": "payload.record.FAILURE",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 780,
-        "y": 920,
-        "wires": []
+        "name": "Unit Balance Function",
+        "func": "let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\nmsg.cache = global.get(\"lookupCache\").data.find(\n    item =>\n        item.module === \"balance\" &&\n        item.param === \"unit_balance\" &&\n        item.program === \"aies\" &&\n        item.unit_type === \"estab\"\n)?.json_values;\n\nfunction checkNaics(data, naics, rec_typ) {\n    let list = data['NAICS']\n    let unit = data['UNIT TYPE']\n    let rectyp = rec_typ\n    if (['SU', 'MU'].includes(rectyp)) {\n        rec_typ = 'ESTAB'\n    }\n    if (rec_typ === unit) {\n        if ([\"ALL\", \"All\"].includes(list)) {\n            return (true);\n        } else {\n            list = list.replace(/ /g, \"\");\n            list = list.replace(/'/g, \"\");\n            var array = list.split(',')\n\n            if (array.find(r => naics.startsWith(r))) {\n                return (true);\n            } else {\n                return (false)\n            }\n        }\n    }\n}\n\nfunction sumRow(data) {\n    let sum = 0;\n    var keys = [];\n    for (var key in data) {\n        if (key.startsWith('DETAIL') && data[key] != null) {\n            let variable = data[key]\n            // console.log(variable)\n            sum = parseFloat(sum) + parseFloat(record[variable])\n            keys.push(variable)\n        }\n    }\n    return [sum, keys];\n}\n\nfunction raking(rectot, sum, keys, tol) {\n    if ((Math.abs(rectot - sum) / rectot) <= tol) {\n        keys.sort((a, b) => record[b] - record[a]);\n        let remainder = 0\n        for (let i = 0; i < keys.length; i++) {\n            let num1 = (rectot / sum) * parseFloat(record[keys[i]]) + remainder\n            let num2 = Math.round(num1)\n            remainder = num1 - num2\n            record[keys[i]] = num2\n        }\n    }\n}\n\nlet naics = record['NAICS_NUM']\nnaics = '' + naics\n\nconst REPORTING_ID_TYP_TXT = record['REPORTING_ID_TYP_TXT']\n// console.log(naics)\n\nfor (let i in msg.cache['UNIT_BALANCE']) {\n    let unitBalance = msg.cache['UNIT_BALANCE'][i]\n    if (checkNaics(unitBalance, naics, REPORTING_ID_TYP_TXT)) {\n        let tot = unitBalance['TOTAL']\n        let rectot = 0\n        if ([100, '100'].includes(tot)) {\n            rectot = 100\n        } else {\n            rectot = parseFloat(record[tot])\n        }\n        // tot = tot.trim()\n        let name = 'DET_' + tot\n        let name_f = tot + '_F'\n        let [sum, keys] = sumRow(unitBalance)\n        sum = parseFloat(sum)\n        // record[name] = sum\n\n        // begin fail logic\n        if (rectot === sum && rectot != 0) {\n            record['ACTION'] = 'Go To: Main Routing'\n        } else {\n            const tolerance = parseFloat(unitBalance['Tolerance'])\n            if (sum > 0 && rectot <= 0) {\n                record[tot] = sum\n                if (record[name_f] && record[name_f].length >= 2) {\n                    record[name_f] = record[name_f].substring(0, 1) + 'L' + record[name_f].substring(2);\n                } else if (record[name_f] && record[name_f].length >= 1) {\n                    record[name_f] = record[name_f].substring(0, 1) + 'L ';\n                } else {\n                    record[name_f] = ' L ';\n                }\n                record['ACTION'] = 'Go To: Main Routing'\n            } else if (sum == 0 && rectot > 0) {\n                raking(rectot, sum, keys, tolerance)\n                for (let i = 0; i < keys.length; i++) {\n                    let det_f = keys[i] + '_F'\n                    if (record[det_f] && record[det_f].length >= 2) {\n                        record[det_f] = record[det_f].substring(0, 1) + 'X' + record[det_f].substring(2);\n                    } else if (record[det_f] && record[det_f].length >= 1) {\n                        record[det_f] = record[det_f].substring(0, 1) + 'X ';\n                    } else {\n                        record[det_f] = ' X ';\n                    }\n                }\n                record['ACTION'] = 'Go To: Main Routing'\n            } else if (sum > 0 && rectot > 0) {\n                // check range\n                const low = 1 - tolerance\n                const high = 1 + tolerance\n                if (low <= sum / rectot && sum / rectot <= high) {\n                    let flag_check1 = ''\n                    if (['P', 'C', 'A', 'S', 'O', 'E', 'F'].includes(record[name_f].substring(2, 3))) {\n                        flag_check1 = 'Yes'\n                    }\n                    let flag_check2 = ''\n                    for (let i = 0; i < keys.length; i++) {\n                        let det_f = keys[i] + '_F'\n                        if (['P', 'C', 'A', 'S', 'O', 'E', 'F'].includes(record[det_f].substring(2, 3))) {\n                            flag_check2 = 'Yes'\n                        }\n                    }\n                    if (flag_check2 == 'Yes') {\n                        record[tot] = sum\n                        if (record[name_f] && record[name_f].length >= 2) {\n                            record[name_f] = record[name_f].substring(0, 1) + 'L' + record[name_f].substring(2);\n                        } else if (record[name_f] && record[name_f].length >= 1) {\n                            record[name_f] = record[name_f].substring(0, 1) + 'L ';\n                        } else {\n                            record[name_f] = ' L ';\n                        }\n                    } else {\n                        raking(rectot, sum, keys, tolerance)\n                        for (let i = 0; i < keys.length; i++) {\n                            let det_f = keys[i] + '_F'\n                            if (record[det_f] && record[det_f].length >= 2) {\n                                record[det_f] = record[det_f].substring(0, 1) + 'K' + record[det_f].substring(2);\n                            } else if (record[det_f] && record[det_f].length >= 1) {\n                                record[det_f] = record[det_f].substring(0, 1) + 'K ';\n                            } else {\n                                record[det_f] = ' K ';\n                            }\n                        }\n                    }\n                    record['ACTION'] = 'Go To: Main Routing'\n                } else {\n                    raking(rectot, sum, keys, tolerance)\n                    for (let i = 0; i < keys.length; i++) {\n                        let det_f = keys[i] + '_F'\n                        if (record[det_f] && record[det_f].length >= 2) {\n                            record[det_f] = record[det_f].substring(0, 1) + 'X' + record[det_f].substring(2);\n                        } else if (record[det_f] && record[det_f].length >= 1) {\n                            record[det_f] = record[det_f].substring(0, 1) + 'X ';\n                        } else {\n                            record[det_f] = ' X ';\n                        }\n                    }\n                    record['ACTION'] = 'Go To: Main Routing'\n                }\n            } else if (sum == 0 && rectot <= 0) {\n                for (let i = 0; i < keys.length; i++) {\n                    let det_f = keys[i] + '_F'\n                    if (record[det_f] && record[det_f].length >= 2) {\n                        record[det_f] = record[det_f].substring(0, 1) + 'X' + record[det_f].substring(2);\n                    } else if (record[det_f] && record[det_f].length >= 1) {\n                        record[det_f] = record[det_f].substring(0, 1) + 'X ';\n                    } else {\n                        record[det_f] = ' X ';\n                    }\n                }\n                record['ACTION'] = 'Go To: Main Routing'\n            } else {\n                record['ACTION'] = 'Go To: Main Routing'\n            }\n        }\n    }\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 740,
+        "wires": [
+            [
+                "075b0595a3c4f309"
+            ]
+        ]
     },
     {
-        "id": "5b994e13da4732a8",
+        "id": "075b0595a3c4f309",
         "type": "debug",
         "z": "e4fb9739caef0397",
-        "name": "Passed",
+        "name": "Unit balance debug",
         "active": true,
         "tosidebar": true,
-        "console": true,
+        "console": false,
         "tostatus": false,
-        "complete": "payload.record.FAILURE",
-        "targetType": "msg",
+        "complete": "true",
+        "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 760,
-        "y": 1520,
-        "wires": []
-    },
-    {
-        "id": "0ad8ef98192f34e0",
-        "type": "debug",
-        "z": "e4fb9739caef0397",
-        "name": "Check",
-        "active": true,
-        "tosidebar": true,
-        "console": true,
-        "tostatus": false,
-        "complete": "payload.record.FAILURE",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 540,
-        "y": 1400,
+        "x": 890,
+        "y": 720,
         "wires": []
     },
     {
@@ -20430,11 +19673,6 @@
         "rules": [
             {
                 "t": "eq",
-                "v": "balance_module",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
                 "v": "br_stat_evaluation",
                 "vt": "str"
             },
@@ -20586,13 +19824,10 @@
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 31,
+        "outputs": 30,
         "x": 630,
         "y": 480,
         "wires": [
-            [
-                "7520a5a2d8404846"
-            ],
             [
                 "dc2a2ca809797dbd"
             ],
@@ -20680,19 +19915,6 @@
                 "6c8827ce7a4c83d8"
             ]
         ]
-    },
-    {
-        "id": "7520a5a2d8404846",
-        "type": "link out",
-        "z": "dad88d9a3132fed6",
-        "name": "link out to unit balance",
-        "mode": "link",
-        "links": [
-            "94c85958382e30a5"
-        ],
-        "x": 845,
-        "y": 320,
-        "wires": []
     },
     {
         "id": "0f1620a9dfb42cf6",
@@ -23125,74 +22347,6 @@
         "x": 595,
         "y": 180,
         "wires": []
-    },
-    {
-        "id": "373bb2a6f4053a31",
-        "type": "function",
-        "z": "857de6d7143aac67",
-        "name": "Unit Balance Function",
-        "func": "let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\nmsg.cache = global.get(\"lookupCache\").data.find(\n    item =>\n        item.module === \"balance\" &&\n        item.param === \"unit_balance\" &&\n        item.program === \"aies\" &&\n        item.unit_type === \"estab\"\n)?.json_values;\n\nfunction checkNaics(data, naics, rec_typ) {\n    let list = data['NAICS']\n    let unit = data['UNIT TYPE']\n    let rectyp = rec_typ\n    if (['SU', 'MU'].includes(rectyp)) {\n        rec_typ = 'ESTAB'\n    }\n    if (rec_typ === unit) {\n        if ([\"ALL\", \"All\"].includes(list)) {\n            return (true);\n        } else {\n            list = list.replace(/ /g, \"\");\n            list = list.replace(/'/g, \"\");\n            var array = list.split(',')\n\n            if (array.find(r => naics.startsWith(r))) {\n                return (true);\n            } else {\n                return (false)\n            }\n        }\n    }\n}\n\nfunction sumRow(data) {\n    let sum = 0;\n    var keys = [];\n    for (var key in data) {\n        if (key.startsWith('DETAIL') && data[key] != null) {\n            let variable = data[key]\n            // console.log(variable)\n            sum = parseFloat(sum) + parseFloat(record[variable])\n            keys.push(variable)\n        }\n    }\n    return [sum, keys];\n}\n\nfunction raking(rectot, sum, keys, tol) {\n    if ((Math.abs(rectot - sum) / rectot) <= tol) {\n        keys.sort((a, b) => record[b] - record[a]);\n        let remainder = 0\n        for (let i = 0; i < keys.length; i++) {\n            let num1 = (rectot / sum) * parseFloat(record[keys[i]]) + remainder\n            let num2 = Math.round(num1)\n            remainder = num1 - num2\n            record[keys[i]] = num2\n        }\n    }\n}\n\nlet naics = record['NAICS_NUM']\nnaics = '' + naics\n\nconst REPORTING_ID_TYP_TXT = record['REPORTING_ID_TYP_TXT']\n// console.log(naics)\n\nfor (let i in msg.cache['UNIT_BALANCE']) {\n    let unitBalance = msg.cache['UNIT_BALANCE'][i]\n    if (checkNaics(unitBalance, naics, REPORTING_ID_TYP_TXT)) {\n        let tot = unitBalance['TOTAL']\n        let rectot = 0\n        if ([100, '100'].includes(tot)) {\n            rectot = 100\n        } else {\n            rectot = parseFloat(record[tot])\n        }\n        // tot = tot.trim()\n        let name = 'DET_' + tot\n        let name_f = tot + '_F'\n        let [sum, keys] = sumRow(unitBalance)\n        sum = parseFloat(sum)\n        // record[name] = sum\n\n        // begin fail logic\n        if (rectot === sum && rectot != 0) {\n            record['ACTION'] = 'Go To: Main Routing'\n        } else {\n            const tolerance = parseFloat(unitBalance['Tolerance'])\n            if (sum > 0 && rectot <= 0) {\n                record[tot] = sum\n                if (record[name_f] && record[name_f].length >= 2) {\n                    record[name_f] = record[name_f].substring(0, 1) + 'L' + record[name_f].substring(2);\n                } else if (record[name_f] && record[name_f].length >= 1) {\n                    record[name_f] = record[name_f].substring(0, 1) + 'L ';\n                } else {\n                    record[name_f] = ' L ';\n                }\n                record['ACTION'] = 'Go To: Main Routing'\n            } else if (sum == 0 && rectot > 0) {\n                raking(rectot, sum, keys, tolerance)\n                for (let i = 0; i < keys.length; i++) {\n                    let det_f = keys[i] + '_F'\n                    if (record[det_f] && record[det_f].length >= 2) {\n                        record[det_f] = record[det_f].substring(0, 1) + 'X' + record[det_f].substring(2);\n                    } else if (record[det_f] && record[det_f].length >= 1) {\n                        record[det_f] = record[det_f].substring(0, 1) + 'X ';\n                    } else {\n                        record[det_f] = ' X ';\n                    }\n                }\n                record['ACTION'] = 'Go To: Main Routing'\n            } else if (sum > 0 && rectot > 0) {\n                // check range\n                const low = 1 - tolerance\n                const high = 1 + tolerance\n                if (low <= sum / rectot && sum / rectot <= high) {\n                    let flag_check1 = ''\n                    if (['P', 'C', 'A', 'S', 'O', 'E', 'F'].includes(record[name_f].substring(2, 3))) {\n                        flag_check1 = 'Yes'\n                    }\n                    let flag_check2 = ''\n                    for (let i = 0; i < keys.length; i++) {\n                        let det_f = keys[i] + '_F'\n                        if (['P', 'C', 'A', 'S', 'O', 'E', 'F'].includes(record[det_f].substring(2, 3))) {\n                            flag_check2 = 'Yes'\n                        }\n                    }\n                    if (flag_check2 == 'Yes') {\n                        record[tot] = sum\n                        if (record[name_f] && record[name_f].length >= 2) {\n                            record[name_f] = record[name_f].substring(0, 1) + 'L' + record[name_f].substring(2);\n                        } else if (record[name_f] && record[name_f].length >= 1) {\n                            record[name_f] = record[name_f].substring(0, 1) + 'L ';\n                        } else {\n                            record[name_f] = ' L ';\n                        }\n                    } else {\n                        raking(rectot, sum, keys, tolerance)\n                        for (let i = 0; i < keys.length; i++) {\n                            let det_f = keys[i] + '_F'\n                            if (record[det_f] && record[det_f].length >= 2) {\n                                record[det_f] = record[det_f].substring(0, 1) + 'K' + record[det_f].substring(2);\n                            } else if (record[det_f] && record[det_f].length >= 1) {\n                                record[det_f] = record[det_f].substring(0, 1) + 'K ';\n                            } else {\n                                record[det_f] = ' K ';\n                            }\n                        }\n                    }\n                    record['ACTION'] = 'Go To: Main Routing'\n                } else {\n                    raking(rectot, sum, keys, tolerance)\n                    for (let i = 0; i < keys.length; i++) {\n                        let det_f = keys[i] + '_F'\n                        if (record[det_f] && record[det_f].length >= 2) {\n                            record[det_f] = record[det_f].substring(0, 1) + 'X' + record[det_f].substring(2);\n                        } else if (record[det_f] && record[det_f].length >= 1) {\n                            record[det_f] = record[det_f].substring(0, 1) + 'X ';\n                        } else {\n                            record[det_f] = ' X ';\n                        }\n                    }\n                    record['ACTION'] = 'Go To: Main Routing'\n                }\n            } else if (sum == 0 && rectot <= 0) {\n                for (let i = 0; i < keys.length; i++) {\n                    let det_f = keys[i] + '_F'\n                    if (record[det_f] && record[det_f].length >= 2) {\n                        record[det_f] = record[det_f].substring(0, 1) + 'X' + record[det_f].substring(2);\n                    } else if (record[det_f] && record[det_f].length >= 1) {\n                        record[det_f] = record[det_f].substring(0, 1) + 'X ';\n                    } else {\n                        record[det_f] = ' X ';\n                    }\n                }\n                record['ACTION'] = 'Go To: Main Routing'\n            } else {\n                record['ACTION'] = 'Go To: Main Routing'\n            }\n        }\n    }\n}\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 620,
-        "y": 160,
-        "wires": [
-            [
-                "76fb53953310f0e9",
-                "246d06dd46410f88"
-            ]
-        ]
-    },
-    {
-        "id": "246d06dd46410f88",
-        "type": "link out",
-        "z": "857de6d7143aac67",
-        "name": "link out 63",
-        "mode": "link",
-        "links": [
-            "7d91540d69ac16c1",
-            "688a39b3e0070fe9"
-        ],
-        "x": 775,
-        "y": 200,
-        "wires": []
-    },
-    {
-        "id": "76fb53953310f0e9",
-        "type": "debug",
-        "z": "857de6d7143aac67",
-        "name": "nonnorm debug",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 860,
-        "y": 140,
-        "wires": []
-    },
-    {
-        "id": "94c85958382e30a5",
-        "type": "link in",
-        "z": "857de6d7143aac67",
-        "name": "link in 53",
-        "links": [
-            "7520a5a2d8404846"
-        ],
-        "x": 385,
-        "y": 160,
-        "wires": [
-            [
-                "373bb2a6f4053a31"
-            ]
-        ]
     },
     {
         "id": "2094172383ea335e",
