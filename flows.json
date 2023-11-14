@@ -1833,9 +1833,7 @@
             "a47c991027033263"
         ],
         "x": 34,
-        "y": 19,
-        "w": 432,
-        "h": 82
+        "y": 19
     },
     {
         "id": "4099bf03141f3710",
@@ -1882,9 +1880,7 @@
             "6982bc340b585149"
         ],
         "x": 14,
-        "y": 619,
-        "w": 1312,
-        "h": 942
+        "y": 619
     },
     {
         "id": "d1e0f39ddacfeb20",
@@ -22316,7 +22312,7 @@
         "type": "function",
         "z": "d7d109e0d89be1c6",
         "name": "Getting Data and Makeing Index",
-        "func": "msg.payload = JSON.parse(msg.payload.value)\n\nconst currentStepIndex = msg.payload.recipe.currentStepIndex;\nconst startTime = new Date().getTime();\n\nmsg.payload.recipe.steps[currentStepIndex].tsStart = startTime;\n\nmsg.payload.facts = [msg.payload.fact]\n\n\nmsg.payload.qflowInputFacts = JSON.parse(JSON.stringify(msg.payload.facts))\n\nmsg.payload.csv = JSON.parse(JSON.stringify(msg.payload.facts))\n\nglobal.set(\"ptrModuleFacts\", 0);\n\nmsg.modeName = 'interactiveMode'\n\n\nreturn msg;",
+        "func": "msg.payload = JSON.parse(msg.payload.value)\n\nconst currentStepIndex = msg.payload.recipe.currentStepIndex;\nconst startTime = new Date().getTime();\n\nmsg.payload.recipe.steps[currentStepIndex].tsStart = startTime;\n\nmsg.payload.facts = [msg.payload.fact]\n\n\nmsg.payload.qflowInputFacts = JSON.parse(JSON.stringify(msg.payload.facts))\n\nmsg.payload.csv = JSON.parse(JSON.stringify(msg.payload.facts))\n\nglobal.set(\"ptrModuleFacts\", 0);\n\nmsg.modeName = msg.payload.recipe.steps[currentStepIndex].hasOwnProperty('testModule') ? msg.payload.recipe.steps[currentStepIndex].testModule : 'interactive_mode';\n\n\nreturn msg;",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -22374,7 +22370,7 @@
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "payload.csv",
+        "complete": "payload",
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
@@ -22439,17 +22435,17 @@
         "rules": [
             {
                 "t": "eq",
-                "v": "interactiveMode",
+                "v": "interactive_mode",
                 "vt": "str"
             },
             {
                 "t": "eq",
-                "v": "batchMode1",
+                "v": "batch_mode_1",
                 "vt": "str"
             },
             {
                 "t": "eq",
-                "v": "batchMode2",
+                "v": "batch_mode_2",
                 "vt": "str"
             }
         ],
@@ -22576,10 +22572,10 @@
         "finalize": "",
         "libs": [],
         "x": 520,
-        "y": 300,
+        "y": 340,
         "wires": [
             [
-                "cb91d01113e85c8f"
+                "703c3a33c4d3fb46"
             ]
         ]
     },
@@ -22595,11 +22591,12 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 690,
-        "y": 300,
+        "x": 730,
+        "y": 360,
         "wires": [
             [
-                "83f06f426c2b3701"
+                "83f06f426c2b3701",
+                "8c4f5376a2841311"
             ]
         ]
     },
@@ -22632,7 +22629,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 900,
+        "x": 1060,
         "y": 300,
         "wires": [
             [
@@ -22694,7 +22691,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 1340,
-        "y": 380,
+        "y": 660,
         "wires": []
     },
     {
@@ -22709,8 +22706,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1170,
-        "y": 300,
+        "x": 1290,
+        "y": 240,
         "wires": [
             [
                 "4d991871cc121830",
@@ -22729,7 +22726,7 @@
             "8ad2ab7c27d8d248"
         ],
         "x": 1355,
-        "y": 300,
+        "y": 580,
         "wires": []
     },
     {
@@ -22759,8 +22756,78 @@
             "688a39b3e0070fe9"
         ],
         "x": 1345,
-        "y": 240,
+        "y": 520,
         "wires": []
+    },
+    {
+        "id": "703c3a33c4d3fb46",
+        "type": "switch",
+        "z": "8790b12c7efb6fa0",
+        "name": "Exit Check",
+        "property": "payload.csv[0].ACTION",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 610,
+        "y": 420,
+        "wires": [
+            [
+                "70c4debe9a1adfae",
+                "c481f6b945425e82",
+                "4d991871cc121830"
+            ],
+            [
+                "cb91d01113e85c8f"
+            ]
+        ]
+    },
+    {
+        "id": "8c4f5376a2841311",
+        "type": "switch",
+        "z": "8790b12c7efb6fa0",
+        "name": "Exit Check",
+        "property": "payload.csv[0].ACTION",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 910,
+        "y": 420,
+        "wires": [
+            [
+                "70c4debe9a1adfae",
+                "c481f6b945425e82",
+                "4d991871cc121830"
+            ],
+            [
+                "83f06f426c2b3701"
+            ]
+        ]
     },
     {
         "id": "6a2c84e1dce8bff9",
@@ -22774,11 +22841,11 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 520,
-        "y": 160,
+        "x": 340,
+        "y": 180,
         "wires": [
             [
-                "d1302884ac348646"
+                "c74136ccac77c41a"
             ]
         ]
     },
@@ -22795,10 +22862,11 @@
         "finalize": "",
         "libs": [],
         "x": 690,
-        "y": 160,
+        "y": 240,
         "wires": [
             [
-                "c9b7e7142a50a57a"
+                "c9b7e7142a50a57a",
+                "8dd01db339ac1096"
             ]
         ]
     },
@@ -22811,7 +22879,7 @@
             "8eb6f6b4ca5cb88d",
             "54cb70dfe4b43956"
         ],
-        "x": 375,
+        "x": 235,
         "y": 160,
         "wires": [
             [
@@ -22832,7 +22900,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1140,
+        "x": 1220,
         "y": 220,
         "wires": []
     },
@@ -22846,7 +22914,7 @@
             "8ad2ab7c27d8d248"
         ],
         "x": 1415,
-        "y": 160,
+        "y": 340,
         "wires": []
     },
     {
@@ -22861,7 +22929,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 840,
+        "x": 920,
         "y": 160,
         "wires": [
             [
@@ -22881,7 +22949,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 980,
+        "x": 1060,
         "y": 160,
         "wires": [
             [
@@ -22902,7 +22970,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1210,
+        "x": 1290,
         "y": 160,
         "wires": [
             [
@@ -22919,7 +22987,7 @@
         "links": [
             "6386460ff91d3960"
         ],
-        "x": 365,
+        "x": 225,
         "y": 260,
         "wires": [
             [
@@ -22938,8 +23006,76 @@
             "688a39b3e0070fe9"
         ],
         "x": 1415,
-        "y": 220,
+        "y": 420,
         "wires": []
+    },
+    {
+        "id": "c74136ccac77c41a",
+        "type": "switch",
+        "z": "e1c94d5011366338",
+        "name": "Exit Check",
+        "property": "payload.csv[0].ACTION",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 510,
+        "y": 320,
+        "wires": [
+            [
+                "67cb21d2f5fc02bd",
+                "7cdbce6d4b28412b"
+            ],
+            [
+                "d1302884ac348646"
+            ]
+        ]
+    },
+    {
+        "id": "8dd01db339ac1096",
+        "type": "switch",
+        "z": "e1c94d5011366338",
+        "name": "Exit Check",
+        "property": "payload.csv[0].ACTION",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 850,
+        "y": 280,
+        "wires": [
+            [
+                "7cdbce6d4b28412b",
+                "67cb21d2f5fc02bd"
+            ],
+            [
+                "c9b7e7142a50a57a"
+            ]
+        ]
     },
     {
         "id": "30cba14a34807b8f",
