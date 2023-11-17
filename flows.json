@@ -1756,9 +1756,7 @@
             "d394b61bcc4755e6"
         ],
         "x": 14,
-        "y": 939,
-        "w": 1532,
-        "h": 82
+        "y": 939
     },
     {
         "id": "ef50b77b253a7883",
@@ -1778,9 +1776,7 @@
             "d587f5de3f4014c8"
         ],
         "x": 14,
-        "y": 239,
-        "w": 1792,
-        "h": 182
+        "y": 239
     },
     {
         "id": "62708d0bbe922798",
@@ -1804,9 +1800,7 @@
             "58df41cd8e54a653"
         ],
         "x": 14,
-        "y": 519,
-        "w": 1432,
-        "h": 322
+        "y": 519
     },
     {
         "id": "19463268a6c67561",
@@ -1824,8 +1818,6 @@
         ],
         "x": 14,
         "y": 99,
-        "w": 1432,
-        "h": 82,
         "info": "# Rules from Parameter Files"
     },
     {
@@ -1841,9 +1833,7 @@
             "a47c991027033263"
         ],
         "x": 34,
-        "y": 19,
-        "w": 432,
-        "h": 82
+        "y": 19
     },
     {
         "id": "4099bf03141f3710",
@@ -1890,9 +1880,7 @@
             "6982bc340b585149"
         ],
         "x": 14,
-        "y": 619,
-        "w": 1312,
-        "h": 942
+        "y": 619
     },
     {
         "id": "d1e0f39ddacfeb20",
@@ -21881,22 +21869,6 @@
         "wires": []
     },
     {
-        "id": "7c47572277e0ed15",
-        "type": "kafka-consumer",
-        "z": "d7d109e0d89be1c6",
-        "name": "Listen to QFLOW",
-        "broker": "a734a95fe6c7b3dc",
-        "outOfRangeOffset": "earliest",
-        "fromOffset": "latest",
-        "topic": "qflow",
-        "groupid": "",
-        "x": 100,
-        "y": 400,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "bed4b9a48e50c41c",
         "type": "debug",
         "z": "d7d109e0d89be1c6",
@@ -22487,6 +22459,22 @@
         "wires": []
     },
     {
+        "id": "7c47572277e0ed15",
+        "type": "kafka-consumer",
+        "z": "d7d109e0d89be1c6",
+        "name": "Listen to QFLOW",
+        "broker": "a734a95fe6c7b3dc",
+        "outOfRangeOffset": "earliest",
+        "fromOffset": "latest",
+        "topic": "qflow",
+        "groupid": "",
+        "x": 100,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
         "id": "ade7fc1412e3e6ed",
         "type": "function",
         "z": "8790b12c7efb6fa0",
@@ -22894,7 +22882,7 @@
         "type": "function",
         "z": "e1c94d5011366338",
         "name": "Fake PV",
-        "func": "\n// function setCharAt(str, index, chr) {\n//     if (index > str.length - 1) return str;\n//     return str.substring(0, index) + chr + str.substring(index + 1);\n// }\n\n// function initializeVariables(record) {\n//     record.PAY_ANN_VAL = setCharAt(record.PAY_ANN_VAL.toString(), 2, 'U');\n//     record.RCPT_TOT_VAL = setCharAt(record.RCPT_TOT_VAL.toString(), 2, 'X');\n//     record.EMP_MAR12_NUM = setCharAt(record.EMP_MAR12_NUM.toString(), 2, 'U');\n//     record.PAY_QTR1_VAL = setCharAt(record.PAY_QTR1_VAL.toString(), 2, 'U');\n\n//     return record;\n// }\n\n// let record_idx = global.get(\"ptrModuleFacts\");\n// let record = msg.payload.csv[record_idx];\n\n// record.PAY_ANN_VAL = (record.PAY_ANN_VAL && record.PAY_ANN_VAL !== 'NULL') ? record.PAY_ANN_VAL : \"0\";\n// record.RCPT_TOT_VAL = (record.RCPT_TOT_VAL && record.RCPT_TOT_VAL !== 'NULL') ? record.RCPT_TOT_VAL : \"0\";\n// record.EMP_MAR12_NUM = (record.EMP_MAR12_NUM && record.EMP_MAR12_NUM !== 'NULL') ? record.EMP_MAR12_NUM : \"0\";\n// record.PAY_QTR1_VAL = (record.PAY_QTR1_VAL && record.PAY_QTR1_VAL !== 'NULL') ? record.PAY_QTR1_VAL : \"0\";\n\n// if(parseInt(record['RANDOM']) > 5){\n//     record = initializeVariables(record);\n// }\n\n// return msg;\n\n// function setCharAt(str, index, chr) {\n//     if (index > str.length - 1) return str;\n//     return str.substring(0, index) + chr + str.substring(index + 1);\n// }\n\n// function initializeVariables(record) {\n//     record.PAY_ANN_VAL = setCharAt(record.PAY_ANN_VAL.toString(), 2, 'U');\n\n//     record.RCPT_TOT_VAL = setCharAt(record.RCPT_TOT_VAL.toString(), 2, 'X');\n\n//     record.EMP_MAR12_NUM = setCharAt(record.EMP_MAR12_NUM.toString(), 2, 'U');\n\n//     record.PAY_QTR1_VAL = setCharAt(record.PAY_QTR1_VAL.toString(), 2, 'U');\n\n//     return record;\n// }\n\n\n// let record_idx = global.get(\"ptrModuleFacts\");\n// let record = msg.payload.csv[record_idx];\n\n// record.PAY_ANN_VAL = record.PAY_ANN_VAL || \"0\";\n// record.RCPT_TOT_VAL = record.RCPT_TOT_VAL || \"0\";\n// record.EMP_MAR12_NUM = record.EMP_MAR12_NUM || \"0\";\n// record.PAY_QTR1_VAL = record.PAY_QTR1_VAL || \"0\";\n\n// if(parseInt(record['RANDOM']) > 10){\n//     record = initializeVariables(record);\n// }\n\n\n// return msg;\nfunction setCharAt(str, index, chr) {\n    if (index > str.length - 1) {\n        let addstr = index - str.length\n        let newstr = str\n        for (let i = 0; i < addstr; i++) {\n            newstr = newstr + ' ';            \n        }\n        newstr = newstr + chr \n        return newstr;\n    } else { return str.substring(0, index) + chr + str.substring(index + 1);\n    }\n}\n\nfunction initializeVariables(record) {\n    record.PAY_ANN_VAL_F = setCharAt(record.PAY_ANN_VAL_F.toString(), 2, 'X');\n    record.RCPT_TOT_VAL_F = setCharAt(record.RCPT_TOT_VAL_F.toString(), 2, 'X');\n    record.EMP_MAR12_NUM_F = setCharAt(record.EMP_MAR12_NUM_F.toString(), 2, 'X');\n    record.PAY_QTR1_VAL_F = setCharAt(record.PAY_QTR1_VAL_F.toString(), 2, 'U');\n    record.PAY_ANN_VAL = 0\n    record.RCPT_TOT_VAL = 0\n    record.EMP_MAR12_NUM = 0\n    record.PAY_QTR1_VAL = 0\n    return record;\n}\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\n// record.PAY_ANN_VAL = (record.PAY_ANN_VAL && record.PAY_ANN_VAL != 'NULL') ? record.PAY_ANN_VAL : \"0\";\n// record.RCPT_TOT_VAL = (record.RCPT_TOT_VAL && record.RCPT_TOT_VAL != 'NULL') ? record.RCPT_TOT_VAL : \"0\";\n// record.EMP_MAR12_NUM = (record.EMP_MAR12_NUM && record.EMP_MAR12_NUM != 'NULL') ? record.EMP_MAR12_NUM : \"0\";\n// record.PAY_QTR1_VAL = (record.PAY_QTR1_VAL && record.PAY_QTR1_VAL != 'NULL') ? record.PAY_QTR1_VAL : \"0\";\n\nif(parseInt(record['RANDOM']) > 5){\n    record = initializeVariables(record);\n}\n\nreturn msg;\n\n",
+        "func": "\n// function setCharAt(str, index, chr) {\n//     if (index > str.length - 1) {\n//         let addstr = index - str.length\n//         let newstr = str\n//         for (let i = 0; i < addstr; i++) {\n//             newstr = newstr + ' ';            \n//         }\n//         newstr = newstr + chr \n//         return newstr;\n//     } else { return str.substring(0, index) + chr + str.substring(index + 1);\n//     }\n// }\n\n// function initializeVariables(record) {\n//     record.PAY_ANN_VAL_F = setCharAt(record.PAY_ANN_VAL_F.toString(), 2, 'X');\n//     record.RCPT_TOT_VAL_F = setCharAt(record.RCPT_TOT_VAL_F.toString(), 2, 'X');\n//     record.EMP_MAR12_NUM_F = setCharAt(record.EMP_MAR12_NUM_F.toString(), 2, 'X');\n//     record.PAY_QTR1_VAL_F = setCharAt(record.PAY_QTR1_VAL_F.toString(), 2, 'U');\n//     record.PAY_ANN_VAL = 0\n//     record.RCPT_TOT_VAL = 0\n//     record.EMP_MAR12_NUM = 0\n//     record.PAY_QTR1_VAL = 0\n//     return record;\n// }\n\n// let record_idx = global.get(\"ptrModuleFacts\");\n// let record = msg.payload.csv[record_idx];\n\n// // record.PAY_ANN_VAL = (record.PAY_ANN_VAL && record.PAY_ANN_VAL != 'NULL') ? record.PAY_ANN_VAL : \"0\";\n// // record.RCPT_TOT_VAL = (record.RCPT_TOT_VAL && record.RCPT_TOT_VAL != 'NULL') ? record.RCPT_TOT_VAL : \"0\";\n// // record.EMP_MAR12_NUM = (record.EMP_MAR12_NUM && record.EMP_MAR12_NUM != 'NULL') ? record.EMP_MAR12_NUM : \"0\";\n// // record.PAY_QTR1_VAL = (record.PAY_QTR1_VAL && record.PAY_QTR1_VAL != 'NULL') ? record.PAY_QTR1_VAL : \"0\";\n\n// if(parseInt(record['RANDOM']) > 5){\n//     record = initializeVariables(record);\n// }\n\n// return msg;\n\n\n// function setCharAt(str, index, chr) {\n//     if (index > str.length - 1) return str;\n//     return str.substring(0, index) + chr + str.substring(index + 1);\n// }\n\n// function initializeVariables(record) {\n//     record.PAY_ANN_VAL = setCharAt(record.PAY_ANN_VAL.toString(), 2, 'U');\n//     record.RCPT_TOT_VAL = setCharAt(record.RCPT_TOT_VAL.toString(), 2, 'X');\n//     record.EMP_MAR12_NUM = setCharAt(record.EMP_MAR12_NUM.toString(), 2, 'U');\n//     record.PAY_QTR1_VAL = setCharAt(record.PAY_QTR1_VAL.toString(), 2, 'U');\n\n//     return record;\n// }\n\n// let record_idx = global.get(\"ptrModuleFacts\");\n// let record = msg.payload.csv[record_idx];\n\n// record.PAY_ANN_VAL = (record.PAY_ANN_VAL && record.PAY_ANN_VAL !== 'NULL') ? record.PAY_ANN_VAL : \"0\";\n// record.RCPT_TOT_VAL = (record.RCPT_TOT_VAL && record.RCPT_TOT_VAL !== 'NULL') ? record.RCPT_TOT_VAL : \"0\";\n// record.EMP_MAR12_NUM = (record.EMP_MAR12_NUM && record.EMP_MAR12_NUM !== 'NULL') ? record.EMP_MAR12_NUM : \"0\";\n// record.PAY_QTR1_VAL = (record.PAY_QTR1_VAL && record.PAY_QTR1_VAL !== 'NULL') ? record.PAY_QTR1_VAL : \"0\";\n\n// if(parseInt(record['RANDOM']) > 5){\n//     record = initializeVariables(record);\n// }\n\n// return msg;\n\n// function setCharAt(str, index, chr) {\n//     if (index > str.length - 1) return str;\n//     return str.substring(0, index) + chr + str.substring(index + 1);\n// }\n\n// function initializeVariables(record) {\n//     record.PAY_ANN_VAL = setCharAt(record.PAY_ANN_VAL.toString(), 2, 'U');\n\n//     record.RCPT_TOT_VAL = setCharAt(record.RCPT_TOT_VAL.toString(), 2, 'X');\n\n//     record.EMP_MAR12_NUM = setCharAt(record.EMP_MAR12_NUM.toString(), 2, 'U');\n\n//     record.PAY_QTR1_VAL = setCharAt(record.PAY_QTR1_VAL.toString(), 2, 'U');\n\n//     return record;\n// }\n\n\n// let record_idx = global.get(\"ptrModuleFacts\");\n// let record = msg.payload.csv[record_idx];\n\n// record.PAY_ANN_VAL = record.PAY_ANN_VAL || \"0\";\n// record.RCPT_TOT_VAL = record.RCPT_TOT_VAL || \"0\";\n// record.EMP_MAR12_NUM = record.EMP_MAR12_NUM || \"0\";\n// record.PAY_QTR1_VAL = record.PAY_QTR1_VAL || \"0\";\n\n// if(parseInt(record['RANDOM']) > 10){\n//     record = initializeVariables(record);\n// }\n\n\n// return msg;\nfunction setCharAt(str, index, chr) {\n    if ([null, undefined].includes(str)) {\n        let newstr = ''\n        for (let i = 0; i < index; i++) {\n            newstr = newstr + ' ';\n        }\n        newstr = newstr + chr\n        return newstr;\n    } else {\n        if (index > str.length - 1) {\n            let addstr = index - str.length\n            let newstr = str\n            for (let i = 0; i < addstr; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            return str.substring(0, index) + chr + str.substring(index + 1);\n        }\n    }\n}\n\n\nfunction initializeVariables(record) {\n    record.PAY_ANN_VAL_F = setCharAt(record.PAY_ANN_VAL_F, 2, 'X');\n    record.RCPT_TOT_VAL_F = setCharAt(record.RCPT_TOT_VAL_F, 2, 'X');\n    record.EMP_MAR12_NUM_F = setCharAt(record.EMP_MAR12_NUM_F, 2, 'X');\n    record.PAY_QTR1_VAL_F = setCharAt(record.PAY_QTR1_VAL_F, 2, 'U');\n    record.PAY_ANN_VAL = 0\n    record.RCPT_TOT_VAL = 0\n    record.EMP_MAR12_NUM = 0\n    record.PAY_QTR1_VAL = 0\n    return record;\n}\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\n// record.PAY_ANN_VAL = (record.PAY_ANN_VAL && record.PAY_ANN_VAL != 'NULL') ? record.PAY_ANN_VAL : \"0\";\n// record.RCPT_TOT_VAL = (record.RCPT_TOT_VAL && record.RCPT_TOT_VAL != 'NULL') ? record.RCPT_TOT_VAL : \"0\";\n// record.EMP_MAR12_NUM = (record.EMP_MAR12_NUM && record.EMP_MAR12_NUM != 'NULL') ? record.EMP_MAR12_NUM : \"0\";\n// record.PAY_QTR1_VAL = (record.PAY_QTR1_VAL && record.PAY_QTR1_VAL != 'NULL') ? record.PAY_QTR1_VAL : \"0\";\n\nif (parseInt(record['RANDOM']) > 5) {\n    record = initializeVariables(record);\n}\n\nreturn msg;\n\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
