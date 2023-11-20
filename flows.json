@@ -429,6 +429,54 @@
         "env": []
     },
     {
+        "id": "10a17d9f63b31aef",
+        "type": "tab",
+        "label": "NONNORM: Init Set ACTVMIO & OPSTATS",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "0a29fbfc598a6eb6",
+        "type": "tab",
+        "label": "NONNORM: Router",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "1ff0abce01e8a9b4",
+        "type": "tab",
+        "label": "NONNORM: Set OPSTATS & ACTVMIO",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "749f57d4ab869e77",
+        "type": "tab",
+        "label": "NONNORM: Set NONORM",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "cc39e0013d1bbd14",
+        "type": "tab",
+        "label": "NONNORM: Set Basic to 0",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "2214caf84b0847ec",
+        "type": "tab",
+        "label": "NONNORM: Special Season final",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "c5ce2d38887016b2",
         "type": "subflow",
         "name": "Apply rules by level type",
@@ -1756,7 +1804,9 @@
             "d394b61bcc4755e6"
         ],
         "x": 14,
-        "y": 939
+        "y": 939,
+        "w": 1532,
+        "h": 82
     },
     {
         "id": "ef50b77b253a7883",
@@ -1776,7 +1826,9 @@
             "d587f5de3f4014c8"
         ],
         "x": 14,
-        "y": 239
+        "y": 239,
+        "w": 1792,
+        "h": 182
     },
     {
         "id": "62708d0bbe922798",
@@ -1800,7 +1852,9 @@
             "58df41cd8e54a653"
         ],
         "x": 14,
-        "y": 519
+        "y": 519,
+        "w": 1432,
+        "h": 322
     },
     {
         "id": "19463268a6c67561",
@@ -1818,6 +1872,8 @@
         ],
         "x": 14,
         "y": 99,
+        "w": 1432,
+        "h": 82,
         "info": "# Rules from Parameter Files"
     },
     {
@@ -1833,7 +1889,9 @@
             "a47c991027033263"
         ],
         "x": 34,
-        "y": 19
+        "y": 19,
+        "w": 432,
+        "h": 82
     },
     {
         "id": "4099bf03141f3710",
@@ -1880,7 +1938,9 @@
             "6982bc340b585149"
         ],
         "x": 14,
-        "y": 619
+        "y": 659,
+        "w": 1312,
+        "h": 942
     },
     {
         "id": "d1e0f39ddacfeb20",
@@ -12393,7 +12453,13 @@
             "246d06dd46410f88",
             "70c4debe9a1adfae",
             "67cb21d2f5fc02bd",
-            "5f40acc0f51bf3a2"
+            "5f40acc0f51bf3a2",
+            "01595edbd5bb3ca9",
+            "ada77cfa9573c816",
+            "9fe7f21d3c9037a4",
+            "daf2afc7f182f934",
+            "9343c59ba9dd4152",
+            "55d8b26f48ef05bd"
         ],
         "x": 205,
         "y": 260,
@@ -19196,6 +19262,36 @@
                 "label": "Demo: Batch Mode 2",
                 "value": "batch_mode_2",
                 "type": "str"
+            },
+            {
+                "label": "NONNORM: Init Set ACTVMIO & OPSTATS",
+                "value": "nonorm_init_set",
+                "type": "str"
+            },
+            {
+                "label": "NONNORM: Router",
+                "value": "nonorm_router",
+                "type": "str"
+            },
+            {
+                "label": "NONNORM: Set OPSTATS & ACTVMIO",
+                "value": "nonorm_set_opstats_and_actvmio",
+                "type": "str"
+            },
+            {
+                "label": "NONNORM: Set NONORM",
+                "value": "nonorm_set",
+                "type": "str"
+            },
+            {
+                "label": "NONNORM: Set Basic to 0",
+                "value": "nonorm_set_basic_to_zero",
+                "type": "str"
+            },
+            {
+                "label": "NONNORM: Special Season final",
+                "value": "nonorm_special_season_final",
+                "type": "str"
             }
         ],
         "payload": "",
@@ -19377,11 +19473,41 @@
                 "t": "eq",
                 "v": "batch_mode_2",
                 "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "nonorm_init_set",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "nonorm_router",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "nonorm_set_opstats_and_actvmio",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "nonorm_set",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "nonorm_set_basic_to_zero",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "nonorm_special_season_final",
+                "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 32,
+        "outputs": 38,
         "x": 630,
         "y": 480,
         "wires": [
@@ -19476,6 +19602,24 @@
             ],
             [
                 "6982bc340b585149"
+            ],
+            [
+                "48c2bbd321b77688"
+            ],
+            [
+                "a0a9a69afb297619"
+            ],
+            [
+                "879c5a04e7f7b3ba"
+            ],
+            [
+                "601d06243349006e"
+            ],
+            [
+                "9924458ebb7935cd"
+            ],
+            [
+                "51d4f6e460537ff8"
             ]
         ]
     },
@@ -19592,7 +19736,7 @@
         "order": 1,
         "width": 18,
         "height": 13,
-        "format": "<div ng-switch=\"msg.payload\">\n\n    <!-- <div ng-switch-when=\"balance_module\">\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/balance_module.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div> -->\n\n        <div ng-switch-when=\"br_stat_evaluation\">\n\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/br_stat.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n\n    </div>\n\n    <div ng-switch-when=\"critical_error\">\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/critical_error.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"logical\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/logical.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    \n\n        <div ng-switch-when=\"derive_NAICS_code\">\n\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/derive_naics_code.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n\n    </div>\n\n    <div ng-switch-when=\"classification\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/classification.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"geography\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/geography.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n     </div>\n    <div ng-switch-when=\"electric_energy_module\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/electric_energy_module.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"electric_energy_module_cont\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/electric_energy_module_cont.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"electric_impute_module\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/electric_impute_module.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"best_admin_receipts\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/best_admin_receipt.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"emp_mar12_num\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/emp_mar12_num.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"pay_ann_val\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/pay_ann_val.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"pay_qtr1_val\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/pay_qtr1_val.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"rcpt_tot_val\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/rcpt_tot_val.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"qflow\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/qflow.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"post_edit_status_field\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/post_edit_status_field.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"pre_db_write_back_for_leased\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/pre_db_write_back_for_leased.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"unit_balance\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/unit_balance.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"derived_naics_code\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/derived_naics_code.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"valid_negative_value\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/valid_negative_value.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"valid_zero\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/valid_zero.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"estab_to_kau_addivity_prep_and_check\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/estab_to_kau_addivity_prep_and_check.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"kau_to_company_addivity_prep_and_check\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/kau_to_company_addivity_prep_and_check.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"interactive_mode\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/interactive_mode.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"batch_mode_1\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/batch_mode_1.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"batch_mode_2\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/batch_mode_2.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-default>\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/completeness.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n\n\n\n\n</div>",
+        "format": "<div ng-switch=\"msg.payload\">\n\n    <!-- <div ng-switch-when=\"balance_module\">\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/balance_module.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div> -->\n\n        <div ng-switch-when=\"br_stat_evaluation\">\n\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/br_stat.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n\n    </div>\n\n    <div ng-switch-when=\"critical_error\">\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/critical_error.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"logical\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/logical.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    \n\n        <div ng-switch-when=\"derive_NAICS_code\">\n\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/derive_naics_code.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n\n    </div>\n\n    <div ng-switch-when=\"classification\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/classification.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"geography\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/geography.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n     </div>\n    <div ng-switch-when=\"electric_energy_module\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/electric_energy_module.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"electric_energy_module_cont\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/electric_energy_module_cont.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"electric_impute_module\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/electric_impute_module.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"best_admin_receipts\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/best_admin_receipt.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"emp_mar12_num\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/emp_mar12_num.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"pay_ann_val\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/pay_ann_val.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"pay_qtr1_val\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/pay_qtr1_val.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"rcpt_tot_val\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/rcpt_tot_val.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"qflow\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/qflow.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"post_edit_status_field\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/post_edit_status_field.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"pre_db_write_back_for_leased\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/pre_db_write_back_for_leased.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"unit_balance\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/unit_balance.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"derived_naics_code\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/derived_naics_code.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"valid_negative_value\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/valid_negative_value.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"valid_zero\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/valid_zero.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"estab_to_kau_addivity_prep_and_check\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/estab_to_kau_addivity_prep_and_check.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"kau_to_company_addivity_prep_and_check\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/kau_to_company_addivity_prep_and_check.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"interactive_mode\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/interactive_mode.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"batch_mode_1\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/batch_mode_1.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"batch_mode_2\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/batch_mode_2.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"nonorm_special_season_final\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/nonorm_special_season_final.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"nonorm_set\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/nonorm_set.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"nonorm_set_opstats_and_actvmio\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/nonorm_set_opstats_and_actvmio.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"nonorm_set_basic_to_zero\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/nonorm_set_basic_to_zero.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"nonorm_router\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/nonorm_router.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"nonorm_init_set\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/nonorm_init_set.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-default>\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/completeness.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n\n\n\n\n</div>",
         "storeOutMessages": true,
         "fwdInMessages": true,
         "resendOnRefresh": true,
@@ -20029,7 +20173,7 @@
         "upload": false,
         "swaggerDoc": "",
         "x": 130,
-        "y": 700,
+        "y": 740,
         "wires": [
             [
                 "3153fbd3.203a64"
@@ -20049,7 +20193,7 @@
         "template": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Upload CSV File</title>\n    <!-- Include Materialize CSS and JS -->\n    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css\">\n    <link href=\"https://fonts.googleapis.com/icon?family=Material+Icons\" rel=\"stylesheet\">\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js\"></script>\n</head>\n<body>\n  <nav>\n    <div class=\"blue nav-wrapper\">\n      <a href=\"#\" data-target=\"mobile-demo\" class=\"sidenav-trigger\"><i class=\"material-icons\">menu</i></a>\n      <ul class=\"left hide-on-med-and-down\">\n        <li><a class=\"bold\" href=\"/update_params\">Params</a></li>\n        <li><a class=\"bold\" href=\"/upload_page\">Upload csv</a></li>\n        <li><a class=\"bold\" href=\"/ui_wrapper\">UI</a></li>\n        <li><a class=\"bold\" href=\"/test_ui\">Load DB</a></li>\n      </ul>\n    </div>\n  </nav>\n\n  <ul class=\"blue sidenav\" id=\"mobile-demo\">\n      <li><a class=\"bold\" href=\"/update_params\">Params</a></li>\n        <li><a class=\"bold\" href=\"/upload_page\">Upload csv</a></li>\n        <li><a class=\"bold\" href=\"/ui_wrapper\">UI</a></li>\n        <li><a class=\"bold\" href=\"/test_ui\">Load DB</a></li>\n  </ul>\n<div class=\"container\">\n    <h1 class=\"center-align\">Upload CSV File</h1>\n    \n    <div class=\"row\">\n        <form action=\"/upload\" method=\"POST\" enctype=\"multipart/form-data\" class=\"col s12\">\n            <div class=\"file-field input-field\">\n                <div class=\"btn\">\n                    <span>File</span>\n                    <input type=\"file\" name=\"myFile\">\n                </div>\n                <div class=\"file-path-wrapper\">\n                    <input class=\"file-path validate\" type=\"text\" placeholder=\"Upload a CSV file\">\n                </div>\n            </div>\n            <div class=\"input-field center-align\">\n                <button onclick=\"showToast()\" class=\"btn waves-effect waves-light\" type=\"submit\">Submit\n                    <i class=\"material-icons right\">send</i>\n                </button>\n            </div>\n        </form>\n    </div>\n</div>\n<div class=\"container\">\n  <h4> CSV Links </h4>\n  <table class=\"responsive-table\">\n        <thead>\n          <tr>\n              <th>Name</th>\n              <th>Link</th>\n          </tr>\n        </thead>\n\n        <tbody>\n          <tr>\n            <td>rcpt_tot_val</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/rcpt_tot_val.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n          <tr>\n            <td>pay_qtr1_val</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/pay_qtr1_val.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n          <tr>\n            <td>pay_ann_val</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/pay_ann_val.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n          <tr>\n            <td>emp_mar12_num</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/emp_mar12_num.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n           <tr>\n            <td>post_edit_status_fields</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/post_edit_status_ields.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n           <tr>\n            <td>pre_db_write_back_for_leased</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/post_edit_status_ields.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n           <tr>\n            <td>unit_balance</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/unit_balance.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n           <tr>\n            <td>electricity</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/electricity.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n           <tr>\n            <td>derived_naics_code</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/derived_naics_code.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n          </tr>\n           <tr>\n            <td>classification</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/classification.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n            <tr>\n            <td>valid_zero</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/valid_zero.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n          <tr>\n            <td>best_admin_receipts</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/calculate_best_admin.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n          <tr>\n            <td>critical_error</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/critical_error.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n          <tr>\n            <td>completeness</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/completeness.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n          <tr>\n            <td>Interactive Mode</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/interactive_mode.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n          <tr>\n            <td>Geography</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/geography.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n        </tbody>\n      </table>\n</div>\n<!-- Initialize Materialize Components -->\n<script>\n    M.AutoInit();\n    function showToast() {\n        M.toast({html: 'Uploading...'});\n    }\n</script>\n\n</body>\n</html>\n",
         "output": "str",
         "x": 450,
-        "y": 700,
+        "y": 740,
         "wires": [
             [
                 "737e44d2.373a64"
@@ -20065,7 +20209,7 @@
         "statusCode": "",
         "headers": {},
         "x": 590,
-        "y": 700,
+        "y": 740,
         "wires": []
     },
     {
@@ -20076,7 +20220,7 @@
         "name": "Simple upload a file",
         "info": "",
         "x": 130,
-        "y": 660,
+        "y": 700,
         "wires": []
     },
     {
@@ -20086,7 +20230,7 @@
         "g": "4099bf03141f3710",
         "name": "",
         "x": 670,
-        "y": 1340,
+        "y": 1380,
         "wires": []
     },
     {
@@ -20100,7 +20244,7 @@
         "upload": true,
         "swaggerDoc": "",
         "x": 110,
-        "y": 760,
+        "y": 800,
         "wires": [
             [
                 "d7e5df8b.97a4e8"
@@ -20120,7 +20264,7 @@
         "template": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Upload CSV File</title>\n    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css\">\n    <link href=\"https://fonts.googleapis.com/icon?family=Material+Icons\" rel=\"stylesheet\">\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js\"></script>\n    <style>\n        /* Add custom styles for responsiveness */\n         .table-container {\n            width: 95%;\n            overflow-x: auto;\n            margin: 2%;\n        }\n        table {\n            width: 100%;\n            border-collapse: collapse;\n        }\n\n        th, td {\n            border: 1px solid #dddddd;\n            text-align: left;\n            padding: 8px;\n        }\n\n        tr:nth-child(even) {\n            background-color: #f2f2f2;\n        }\n    </style>\n</head>\n<body>\n<nav>\n    <div class=\"blue nav-wrapper\">\n      <a href=\"#\" data-target=\"mobile-demo\" class=\"sidenav-trigger\"><i class=\"material-icons\">menu</i></a>\n      <ul class=\"left hide-on-med-and-down\">\n        <li><a class=\"bold\" href=\"/update_params\">Params</a></li>\n        <li><a class=\"bold\" href=\"/upload_page\">Upload csv</a></li>\n        <li><a class=\"bold\" href=\"/ui_wrapper\">UI</a></li>\n      </ul>\n    </div>\n  </nav>\n\n  <ul class=\"blue sidenav\" id=\"mobile-demo\">\n      <li><a class=\"bold\" href=\"/update_params\">Params</a></li>\n        <li><a class=\"bold\" href=\"/upload_page\">Upload csv</a></li>\n        <li><a class=\"bold\" href=\"/ui_wrapper\">UI</a></li>\n  </ul>\n\n  <div class=\"container\">\n    {{!-- <h1 class=\"center-align\">Uploaded</h1> --}}\n  </div>\n  <div id=\"hide_this_to_load\">{{payload}}</div>\n    <div class=\"table-container\">\n  <div id=\"load_table\"></div>\n  </div>\n  <p id=\"file_name\">{{name}}</p>\n    <div class=\"input-field center-align\">\n    <button onclick='saveCsv()' class=\"btn waves-effect waves-light\" type=\"submit\">Save\n    </button>\n     <a href='/ui_wrapper' class=\"btn waves-effect waves-light\" type=\"submit\">Go {{msg.filename}}\n    </a>\n  </div>\n<script>\n  let data = document.getElementById('hide_this_to_load').innerHTML\n  let file_name = document.getElementById('file_name').innerHTML\n  document.getElementById('hide_this_to_load').style.display = 'none';\n  document.getElementById('file_name').style.display = 'none';\n  data = JSON.parse(data);\n  let headers; \n  document.addEventListener('DOMContentLoaded', function() {\n    const loadTableDiv = document.getElementById('load_table');\n    const table = document.createElement('table');\n    table.classList.add('striped');\n    const tableHeader = document.createElement('thead');\n    const headerRow = document.createElement('tr');\n    headers = Object.keys(data[0]); // Set headers here\n    headers.forEach(headerText => {\n      const th = document.createElement('th');\n      th.textContent = headerText;\n      headerRow.appendChild(th);\n    });\n    tableHeader.appendChild(headerRow);\n    table.appendChild(tableHeader);\n    const tableBody = document.createElement('tbody');\n    data.forEach((item, index) => {\n      const row = document.createElement('tr');\n      headers.forEach(header => {\n        const cell = document.createElement('td');\n        if (index !== 0) { // Make fields editable for all rows except the header row\n          const input = document.createElement('input');\n          input.value = item[header];\n          input.addEventListener('input', function() {\n            item[header] = this.value;\n            const updatedJData = getUpdatedData();\n            // console.log(updatedJData);\n          });\n          cell.appendChild(input);\n        } else {\n          cell.textContent = item[header];\n        }\n        row.appendChild(cell);\n      });\n      tableBody.appendChild(row);\n    });\n    table.appendChild(tableBody);\n    loadTableDiv.appendChild(table);\n  });\n\n  function getUpdatedData() {\n    const updatedData = [];\n    const rows = document.querySelectorAll('#load_table tbody tr');\n    rows.forEach(row => {\n      const rowData = {};\n      const cells = row.querySelectorAll('td');\n      cells.forEach((cell, index) => {\n        const header = headers[index];\n        if (header) {\n          rowData[header] = cell.firstChild.value || cell.textContent;\n        }\n      });\n      updatedData.push(rowData);\n    });\n    return updatedData;\n  }\n  const jsonToCSV = (jsonArray) => {\n    const headers = Object.keys(jsonArray[0]);\n\n    let csv = headers.join(',') + '\\n';\n\n    jsonArray.forEach(obj => {\n        const values = headers.map(header => {\n            const escapedValue = obj[header].replace(/\"/g, '\\\\\"');\n            return `\"${escapedValue}\"`;\n        });\n        csv += values.join(',') + '\\n';\n    });\n\n    return csv;\n};\n  function saveCsv(){\n    console.log(JSON.stringify({filename: file_name, csvData:jsonToCSV(getUpdatedData())}))\n     fetch('/saveCsv', {\n      method: 'POST',\n      headers: {\n        'Content-Type': 'application/json'\n      },\n      body: JSON.stringify({filename: file_name, csvData:jsonToCSV(getUpdatedData())})\n    })\n    .then(response => {\n      if (response.ok) {\n        console.log('Update successful!');\n      } else {\n        console.error('Error updating params:', response.status);\n      }\n    })\n    .catch(error => {\n      console.error('Error:', error);\n    });\n  }\n</script>\n\n\n</body>\n</html>\n",
         "output": "str",
         "x": 670,
-        "y": 1280,
+        "y": 1320,
         "wires": [
             [
                 "7d8e179a.283e4"
@@ -20141,7 +20285,7 @@
         "finalize": "",
         "libs": [],
         "x": 600,
-        "y": 760,
+        "y": 800,
         "wires": [
             [
                 "0464e4eb98976890",
@@ -20163,7 +20307,7 @@
         "overwriteFile": "true",
         "encoding": "none",
         "x": 510,
-        "y": 820,
+        "y": 860,
         "wires": [
             []
         ]
@@ -20319,7 +20463,7 @@
         "finalize": "",
         "libs": [],
         "x": 310,
-        "y": 860,
+        "y": 900,
         "wires": [
             [
                 "12c94ce38056fc20"
@@ -20462,7 +20606,7 @@
         "senderr": false,
         "headers": [],
         "x": 970,
-        "y": 1100,
+        "y": 1140,
         "wires": [
             [
                 "6f78481c2e90771f",
@@ -20497,7 +20641,7 @@
         "upload": false,
         "swaggerDoc": "",
         "x": 1220,
-        "y": 1380,
+        "y": 1420,
         "wires": [
             [
                 "ea0778e9f5cd9498"
@@ -20598,7 +20742,7 @@
         "finalize": "",
         "libs": [],
         "x": 610,
-        "y": 1180,
+        "y": 1220,
         "wires": [
             [
                 "e1643981.20d7c8"
@@ -20632,7 +20776,7 @@
         "upload": true,
         "swaggerDoc": "",
         "x": 120,
-        "y": 1180,
+        "y": 1220,
         "wires": [
             [
                 "20ef4922bea8d7fd"
@@ -20653,7 +20797,7 @@
         "finalize": "",
         "libs": [],
         "x": 300,
-        "y": 1260,
+        "y": 1300,
         "wires": [
             [
                 "0464e4eb98976890"
@@ -20671,7 +20815,7 @@
             "f2f56f84d002ec0f"
         ],
         "x": 845,
-        "y": 800,
+        "y": 840,
         "wires": []
     },
     {
@@ -20685,7 +20829,7 @@
             "d946e5bca62e02d1"
         ],
         "x": 845,
-        "y": 840,
+        "y": 880,
         "wires": []
     },
     {
@@ -20699,7 +20843,7 @@
             "3cd3e107ac0789b7"
         ],
         "x": 845,
-        "y": 880,
+        "y": 920,
         "wires": []
     },
     {
@@ -20713,7 +20857,7 @@
             "affe73445eec8a4f"
         ],
         "x": 845,
-        "y": 920,
+        "y": 960,
         "wires": []
     },
     {
@@ -20727,7 +20871,7 @@
             "1c611eb0c30a9863"
         ],
         "x": 845,
-        "y": 960,
+        "y": 1000,
         "wires": []
     },
     {
@@ -20741,7 +20885,7 @@
             "a9fa566fb3fb1f74"
         ],
         "x": 845,
-        "y": 1000,
+        "y": 1040,
         "wires": []
     },
     {
@@ -20755,7 +20899,7 @@
             "b16c9d56493fb914"
         ],
         "x": 845,
-        "y": 1040,
+        "y": 1080,
         "wires": []
     },
     {
@@ -20769,7 +20913,7 @@
             "b9aedad7e15bc0ed"
         ],
         "x": 845,
-        "y": 1120,
+        "y": 1160,
         "wires": []
     },
     {
@@ -20783,7 +20927,7 @@
             "76691f5ac3362ba9"
         ],
         "x": 845,
-        "y": 1080,
+        "y": 1120,
         "wires": []
     },
     {
@@ -20797,7 +20941,7 @@
             "8eacd61d364bbafe"
         ],
         "x": 845,
-        "y": 1160,
+        "y": 1200,
         "wires": []
     },
     {
@@ -20926,8 +21070,8 @@
         "syntax": "mustache",
         "template": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Upload CSV File</title>\n    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css\">\n    <link href=\"https://fonts.googleapis.com/icon?family=Material+Icons\" rel=\"stylesheet\">\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js\"></script>\n    <style>\n        /* Add custom styles for responsiveness */\n         .table-container {\n            width: 95%;\n            overflow-x: auto;\n            margin: 2%;\n        }\n        table {\n            width: 100%;\n            border-collapse: collapse;\n        }\n\n        th, td {\n            border: 1px solid #dddddd;\n            text-align: left;\n            padding: 8px;\n        }\n\n        tr:nth-child(even) {\n            background-color: #f2f2f2;\n        }\n    </style>\n</head>\n<body>\n<nav>\n    <div class=\"blue nav-wrapper\">\n      <a href=\"#\" data-target=\"mobile-demo\" class=\"sidenav-trigger\"><i class=\"material-icons\">menu</i></a>\n      <ul class=\"left hide-on-med-and-down\">\n        <li><a class=\"bold\" href=\"/update_params\">Params</a></li>\n        <li><a class=\"bold\" href=\"/upload_page\">Upload csv</a></li>\n        <li><a class=\"bold\" href=\"/ui_wrapper\">UI</a></li>\n        <li><a class=\"bold\" href=\"/test_ui\">Load DB</a></li>\n      </ul>\n    </div>\n  </nav>\n\n  <ul class=\"blue sidenav\" id=\"mobile-demo\">\n      <li><a class=\"bold\" href=\"/update_params\">Params</a></li>\n        <li><a class=\"bold\" href=\"/upload_page\">Upload csv</a></li>\n        <li><a class=\"bold\" href=\"/ui_wrapper\">UI</a></li>\n        <li><a class=\"bold\" href=\"/test_ui\">Load DB</a></li>\n  </ul>\n\n  <div class=\"container\">\n    {{!-- <h1 class=\"center-align\">Uploaded</h1> --}}\n  </div>\n  <div id=\"hide_this_to_load\">{{payload}}</div>\n    <div class=\"table-container\">\n  <div id=\"load_table\"></div>\n  </div>\n  <p id=\"file_name\">{{name}}</p>\n   <p id=\"new_vars\">{{newVars}}</p>\n    <div class=\"input-field center-align\">\n    <button onclick='saveCsv()' class=\"btn waves-effect waves-light\" type=\"submit\">Save\n    </button>\n     <a href='/ui_wrapper' class=\"btn waves-effect waves-light\" type=\"submit\">Go {{name}}\n    </a>\n  </div>\n<script>\n  let data = document.getElementById('hide_this_to_load').innerHTML\n  let file_name = document.getElementById('file_name').innerHTML\n  let new_vars = document.getElementById('new_vars').innerHTML\n  \n  document.getElementById('new_vars').style.display = 'none';\n  document.getElementById('hide_this_to_load').style.display = 'none';\n  document.getElementById('file_name').style.display = 'none';\n  data = JSON.parse(data);\n  new_vars = JSON.parse(new_vars);\n  let headers; \n  document.addEventListener('DOMContentLoaded', function() {\n    const loadTableDiv = document.getElementById('load_table');\n    const table = document.createElement('table');\n    table.classList.add('striped');\n    const tableHeader = document.createElement('thead');\n    const headerRow = document.createElement('tr');\n    headers = [...new_vars.newVars.map(i=>i.toUpperCase()), ...(Object.keys(data[0]))]; // Set headers here\n    headers.forEach(headerText => {\n      const th = document.createElement('th');\n      th.textContent = headerText;\n      headerRow.appendChild(th);\n    });\n    tableHeader.appendChild(headerRow);\n    table.appendChild(tableHeader);\n    const tableBody = document.createElement('tbody');\n    data.forEach((item, index) => {\n      const row = document.createElement('tr');\n      headers.forEach(header => {\n        const cell = document.createElement('td');\n        cell.style.minWidth = '200px';\n        if (index !== -1) { // Make fields editable for all rows except the header row\n          const input = document.createElement('input');\n          input.value = item[header] == undefined ? 'NULL': item[header];\n          input.addEventListener('input', function() {\n            item[header] = this.value;\n            const updatedJData = getUpdatedData();\n            // console.log(updatedJData);\n          });\n          cell.appendChild(input);\n        } else {\n          cell.textContent = item[header];\n        }\n        row.appendChild(cell);\n      });\n      tableBody.appendChild(row);\n    });\n    table.appendChild(tableBody);\n    loadTableDiv.appendChild(table);\n  });\n\n  function getUpdatedData() {\n    const updatedData = [];\n    const rows = document.querySelectorAll('#load_table tbody tr');\n    rows.forEach(row => {\n      const rowData = {};\n      const cells = row.querySelectorAll('td');\n      cells.forEach((cell, index) => {\n        const header = headers[index];\n        if (header) {\n          rowData[header] = cell.firstChild.value || cell.textContent;\n        }\n      });\n      updatedData.push(rowData);\n    });\n    return updatedData;\n  }\n  const jsonToCSV = (jsonArray) => {\n    const headers = Object.keys(jsonArray[0]);\n\n    let csv = headers.join(',') + '\\n';\n\n    jsonArray.forEach(obj => {\n        const values = headers.map(header => {\n            const escapedValue = obj[header].replace(/\"/g, '\\\\\"');\n            return `\"${escapedValue}\"`;\n        });\n        csv += values.join(',') + '\\n';\n    });\n\n    return csv;\n};\n\n  function saveCsv(){\n    console.log(JSON.stringify({filename: file_name, csvData:jsonToCSV(getUpdatedData())}))\n     fetch('/saveCsv', {\n      method: 'POST',\n      headers: {\n        'Content-Type': 'application/json'\n      },\n      body: JSON.stringify({filename: '/tmp/' + file_name, csvData:jsonToCSV(getUpdatedData())})\n    })\n    .then(response => {\n      if (response.ok) {\n        console.log('Update successful!');\n      } else {\n        console.error('Error updating params:', response.status);\n      }\n    })\n    .catch(error => {\n      console.error('Error:', error);\n    });\n  }\n</script>\n\n\n</body>\n</html>\n",
         "output": "str",
-        "x": 1050,
-        "y": 1700,
+        "x": 1030,
+        "y": 1880,
         "wires": [
             [
                 "9ff082949b495698"
@@ -20943,8 +21087,8 @@
         "method": "post",
         "upload": true,
         "swaggerDoc": "",
-        "x": 170,
-        "y": 1700,
+        "x": 150,
+        "y": 1880,
         "wires": [
             [
                 "f192e59528bfd677"
@@ -20961,8 +21105,8 @@
         "split": false,
         "rowsPerMsg": "1",
         "outputs": 1,
-        "x": 580,
-        "y": 1700,
+        "x": 560,
+        "y": 1880,
         "wires": [
             [
                 "aecaf71d99c7d88b"
@@ -20981,8 +21125,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 360,
-        "y": 1700,
+        "x": 340,
+        "y": 1880,
         "wires": [
             [
                 "4b28156dce4522c1"
@@ -20997,7 +21141,7 @@
         "statusCode": "",
         "headers": {},
         "x": 1210,
-        "y": 1700,
+        "y": 1880,
         "wires": []
     },
     {
@@ -21012,8 +21156,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 820,
-        "y": 1700,
+        "x": 800,
+        "y": 1880,
         "wires": [
             [
                 "3a09eefeb46e3070"
@@ -21031,7 +21175,7 @@
             "3a3f1620dbce8bb0"
         ],
         "x": 845,
-        "y": 1200,
+        "y": 1240,
         "wires": []
     },
     {
@@ -21046,7 +21190,7 @@
             "75f86abbfa78b4ab"
         ],
         "x": 845,
-        "y": 1240,
+        "y": 1280,
         "wires": []
     },
     {
@@ -21163,7 +21307,7 @@
             "df20d97837fa1d09"
         ],
         "x": 845,
-        "y": 1280,
+        "y": 1320,
         "wires": []
     },
     {
@@ -21177,7 +21321,7 @@
             "24fea5e6f5d0c6b0"
         ],
         "x": 845,
-        "y": 1320,
+        "y": 1360,
         "wires": []
     },
     {
@@ -21191,7 +21335,7 @@
             "c8919561eea2a059"
         ],
         "x": 845,
-        "y": 1360,
+        "y": 1400,
         "wires": []
     },
     {
@@ -21205,7 +21349,7 @@
             "8671a6e9c3be6ad6"
         ],
         "x": 845,
-        "y": 1400,
+        "y": 1440,
         "wires": []
     },
     {
@@ -21219,7 +21363,7 @@
             "d389bc5bbb58e3cb"
         ],
         "x": 845,
-        "y": 1440,
+        "y": 1480,
         "wires": []
     },
     {
@@ -21233,7 +21377,7 @@
             "a7f0c8bc56765c6a"
         ],
         "x": 845,
-        "y": 1480,
+        "y": 1520,
         "wires": []
     },
     {
@@ -21247,7 +21391,98 @@
             "f0c5660583e686c0"
         ],
         "x": 845,
-        "y": 1520,
+        "y": 1560,
+        "wires": []
+    },
+    {
+        "id": "f2d1653b5ba3e5d2",
+        "type": "link out",
+        "z": "dad88d9a3132fed6",
+        "name": "link out batchMode2",
+        "mode": "link",
+        "links": [
+            "f0c5660583e686c0"
+        ],
+        "x": 845,
+        "y": 1560,
+        "wires": []
+    },
+    {
+        "id": "48c2bbd321b77688",
+        "type": "link out",
+        "z": "dad88d9a3132fed6",
+        "name": "link out NONNORM: Init Set ACTVMIO & OPSTATS",
+        "mode": "link",
+        "links": [
+            "447f05b7589104a7"
+        ],
+        "x": 845,
+        "y": 1600,
+        "wires": []
+    },
+    {
+        "id": "a0a9a69afb297619",
+        "type": "link out",
+        "z": "dad88d9a3132fed6",
+        "name": "link out NONNORM: Router",
+        "mode": "link",
+        "links": [
+            "918d1db8979aef15"
+        ],
+        "x": 845,
+        "y": 1640,
+        "wires": []
+    },
+    {
+        "id": "879c5a04e7f7b3ba",
+        "type": "link out",
+        "z": "dad88d9a3132fed6",
+        "name": "link out NONNORM: Set OPSTATS & ACTVMIO",
+        "mode": "link",
+        "links": [
+            "7439226c767a87a3"
+        ],
+        "x": 845,
+        "y": 1680,
+        "wires": []
+    },
+    {
+        "id": "601d06243349006e",
+        "type": "link out",
+        "z": "dad88d9a3132fed6",
+        "name": "link out NONNORM: Set NONORM",
+        "mode": "link",
+        "links": [
+            "bc67815db9dee1e7"
+        ],
+        "x": 845,
+        "y": 1720,
+        "wires": []
+    },
+    {
+        "id": "9924458ebb7935cd",
+        "type": "link out",
+        "z": "dad88d9a3132fed6",
+        "name": "link out NONNORM: Set Basic to 0",
+        "mode": "link",
+        "links": [
+            "b7d9dea2a407d5ab"
+        ],
+        "x": 845,
+        "y": 1760,
+        "wires": []
+    },
+    {
+        "id": "51d4f6e460537ff8",
+        "type": "link out",
+        "z": "dad88d9a3132fed6",
+        "name": "link out NONNORM: Special Season final",
+        "mode": "link",
+        "links": [
+            "7191fc9544f07b32"
+        ],
+        "x": 845,
+        "y": 1800,
         "wires": []
     },
     {
@@ -23179,7 +23414,8 @@
         "z": "cd5dca18afec6561",
         "name": "Interactive Mode Batch Mode 2 UI Input",
         "links": [
-            "6982bc340b585149"
+            "6982bc340b585149",
+            "f2d1653b5ba3e5d2"
         ],
         "x": 165,
         "y": 360,
@@ -23369,6 +23605,323 @@
         "wires": [
             [
                 "1abaa7a06c805651"
+            ]
+        ]
+    },
+    {
+        "id": "447f05b7589104a7",
+        "type": "link in",
+        "z": "10a17d9f63b31aef",
+        "name": "NONNORM: Init Set ACTVMIO & OPSTATS Link",
+        "links": [
+            "48c2bbd321b77688"
+        ],
+        "x": 195,
+        "y": 240,
+        "wires": [
+            [
+                "2e5501e16398d095"
+            ]
+        ]
+    },
+    {
+        "id": "2e5501e16398d095",
+        "type": "function",
+        "z": "10a17d9f63b31aef",
+        "name": "Init Set ACTVMIO & OPSTATS",
+        "func": "// let record_idx = global.get(\"ptrModuleFacts\");\n// let record = msg.payload.csv[record_idx]\n\n// function setCharAt(str, index, char) {\n//     if (index > str.length - 1) return str;\n//     return str.substring(0, index) + char + str.substring(index + 1);\n// }\n// const checkOPSTAT_STAT_F = (record) => {\n//   const char = record.OPSTAT_STAT_F ? record.OPSTAT_STAT_F.charAt(1) : ' ';\n\n//   if (['R', 'T', 'K'].includes(char)) {\n//     return true;\n//   } else {\n//     return false;\n//   }\n// };\n\n// function processACTV_MIO_NUM(record) {\n//     let mioNum = parseInt(record?.ACTV_MIO_NUM);\n//     if (mioNum === 0 || mioNum > 12) {\n//         record.ACTV_MIO_NUM = 12;\n//         record.ACTV_MIO_NUM_F = setCharAt(record.ACTV_MIO_NUM_F || '   ', 2, 'J');\n//     }\n// }\n\n// function checkCOV_CHG_CODE(record) {\n//     if (['111', '131', '791'].includes(record.COV_CHG_CODE) &&\n//         parseInt(record.ACTV_MIO_NUM) < 12 &&\n//         new Date(record.COV_CHG_DATE.split('-').reverse().join('-')) < new Date('2024-01-01')) {\n//         record.OPSTATS = 'N'\n//         record.ACTION = 'Go to D'\n\n//     }else{\n//         if(checkOPSTAT_STAT_F(record)){\n//             if( record.OPSTAT_STAT == '4'){\n//                 record.OPSTATS = 'N'\n//                 record.ACTION = 'Go to D'\n//             }else if(record.OPSTAT_STAT == '5'){\n//                  let mioNum = parseInt(record?.ACTV_MIO_NUM);\n//                 if(mioNum ==12){\n//                     record.ACTION = 'Go to B'\n//                 }else{\n//                 record.ACTION = 'Go to A'\n//                 record.OPSTATS = 'N'\n//                 record.ACTION = 'Go to D'\n//                 }\n//             }else{\n//                 record.OPSTATS = 'Y'\n//                 if(checkOPSTAT_STAT_F(record)){\n//                     record.OPSTATS = setCharAt(record.OPSTATS_F || '   ', 3, 'R');\n//                 }else{\n//                     record.OPSTATS = setCharAt(record.OPSTATS_F || '   ', 3, 'J');\n//                 }\n//                 record.ACTION = 'Go to NONORM Router';\n//             }\n//         }\n//     }\n// }\n\n// function processRecord(record) {\n//     processACTV_MIO_NUM(record);\n//     if (record.OPSTATS === 'space') {\n//           checkCOV_CHG_CODE(record);\n//     } else{\n//         if (record?.OPSTATS_F?.charAt(2) == 'R' && record?.OPSTATS_F?.charAt(1) == ' '){\n//             record.ACTION = 'Go to NONORM Router';\n//         }\n//     }\n//     // msg.payload.csv[record_idx] = record;\n//     return msg;\n// }\n\n// let result = processRecord(record);\n// return result;\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\n// Helper function to set a character at a specific index in a string\nfunction setCharAt(str, index, char) {\n    if (index > str.length - 1) return str;\n    return str.substring(0, index) + char + str.substring(index + 1);\n}\n\n// Function to check if OPSTAT_STAT_F contains 'R', 'T', or 'K' at the second position\nconst checkOPSTAT_STAT_F = (record) => {\n    const char = record.OPSTAT_STAT_F ? record.OPSTAT_STAT_F.charAt(1) : ' ';\n    return ['R', 'T', 'K'].includes(char);\n};\n\n// Function to process ACTV_MIO_NUM and set ACTV_MIO_NUM_F accordingly\nfunction processACTV_MIO_NUM(record) {\n    let mioNum = parseInt(record.ACTV_MIO_NUM) || 0;\n    if (mioNum === 0 || mioNum > 12) {\n        record.ACTV_MIO_NUM = '12';\n        record.ACTV_MIO_NUM_F = setCharAt(record.ACTV_MIO_NUM_F || '   ', 2, 'J');\n    }\n}\n\n// Function to determine the flow based on COV_CHG_CODE and other conditions\nfunction determineFlow(record) {\n    if (['111', '131', '791'].includes(record.COV_CHG_CODE) &&\n        parseInt(record.ACTV_MIO_NUM) < 12 &&\n        new Date(record.COV_CHG_DATE.split('-').reverse().join('-')) < new Date('2024-01-01')) {\n        record.OPSTATS = 'N';\n        record.ACTION = 'Go to D';\n    } else if (checkOPSTAT_STAT_F(record)) {\n        if (record.OPSTAT_STAT === '4') {\n            record.OPSTATS = 'N';\n            record.ACTION = 'Go to D';\n        } else if (record.OPSTAT_STAT === '5') {\n            if (parseInt(record.ACTV_MIO_NUM) === 12) {\n                record.ACTION = 'Go to B';\n            } else {\n                record.ACTION = 'Go to A';\n                record.OPSTATS = 'N';\n                record.ACTION = 'Go to D';\n            }\n        } else {\n            record.OPSTATS = 'Y';\n            record.OPSTATS_F = setCharAt(record.OPSTATS_F || '   ', 2, checkOPSTAT_STAT_F(record) ? 'R' : 'J');\n            record.ACTION = 'Go to NONORM Router';\n        }\n    }\n}\n\n// Main function to process the record\nfunction processRecord(record) {\n    processACTV_MIO_NUM(record);\n    if (record?.OPSTATS === 'space') {\n        determineFlow(record);\n    } else {\n        if (record?.OPSTATS_F?.charAt(2) === 'R' && record?.OPSTATS_F?.charAt(1) === ' ') {\n            record.ACTION = 'Go to NONORM Router';\n        }\n    }\n    msg.payload.csv[record_idx] = record\n}\n\nprocessRecord(record);\nreturn msg;\n\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 240,
+        "wires": [
+            [
+                "01595edbd5bb3ca9",
+                "9c4817c7e47831f7"
+            ]
+        ]
+    },
+    {
+        "id": "01595edbd5bb3ca9",
+        "type": "link out",
+        "z": "10a17d9f63b31aef",
+        "name": "link out 66",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9"
+        ],
+        "x": 585,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "9c4817c7e47831f7",
+        "type": "debug",
+        "z": "10a17d9f63b31aef",
+        "name": "debug 116",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 610,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "918d1db8979aef15",
+        "type": "link in",
+        "z": "0a29fbfc598a6eb6",
+        "name": "NONNORM: Router Link",
+        "links": [
+            "a0a9a69afb297619"
+        ],
+        "x": 225,
+        "y": 260,
+        "wires": [
+            [
+                "da9df6f3b05b96e6"
+            ]
+        ]
+    },
+    {
+        "id": "da9df6f3b05b96e6",
+        "type": "function",
+        "z": "0a29fbfc598a6eb6",
+        "name": "NONNORM: Router",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 260,
+        "wires": [
+            [
+                "ada77cfa9573c816"
+            ]
+        ]
+    },
+    {
+        "id": "ada77cfa9573c816",
+        "type": "link out",
+        "z": "0a29fbfc598a6eb6",
+        "name": "link out 67",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9"
+        ],
+        "x": 545,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "7439226c767a87a3",
+        "type": "link in",
+        "z": "1ff0abce01e8a9b4",
+        "name": "NONNORM: Set OPSTATS & ACTVMIO Link",
+        "links": [
+            "879c5a04e7f7b3ba"
+        ],
+        "x": 205,
+        "y": 260,
+        "wires": [
+            [
+                "9511bc37f025a9ac"
+            ]
+        ]
+    },
+    {
+        "id": "9fe7f21d3c9037a4",
+        "type": "link out",
+        "z": "1ff0abce01e8a9b4",
+        "name": "link out 68",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9"
+        ],
+        "x": 605,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "9511bc37f025a9ac",
+        "type": "function",
+        "z": "1ff0abce01e8a9b4",
+        "name": "Set OPSTATS & ACTVMIO",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 260,
+        "wires": [
+            [
+                "9fe7f21d3c9037a4"
+            ]
+        ]
+    },
+    {
+        "id": "bc67815db9dee1e7",
+        "type": "link in",
+        "z": "749f57d4ab869e77",
+        "name": "NONNORM: Set NONORM Link",
+        "links": [
+            "601d06243349006e"
+        ],
+        "x": 215,
+        "y": 280,
+        "wires": [
+            [
+                "1bb9ec440766bd2c"
+            ]
+        ]
+    },
+    {
+        "id": "daf2afc7f182f934",
+        "type": "link out",
+        "z": "749f57d4ab869e77",
+        "name": "link out 69",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9"
+        ],
+        "x": 585,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "1bb9ec440766bd2c",
+        "type": "function",
+        "z": "749f57d4ab869e77",
+        "name": "Set NONORM",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 280,
+        "wires": [
+            [
+                "daf2afc7f182f934"
+            ]
+        ]
+    },
+    {
+        "id": "b7d9dea2a407d5ab",
+        "type": "link in",
+        "z": "cc39e0013d1bbd14",
+        "name": "NONNORM: Router Link",
+        "links": [
+            "9924458ebb7935cd"
+        ],
+        "x": 265,
+        "y": 280,
+        "wires": [
+            [
+                "46531482d43b4cae"
+            ]
+        ]
+    },
+    {
+        "id": "9343c59ba9dd4152",
+        "type": "link out",
+        "z": "cc39e0013d1bbd14",
+        "name": "link out 70",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9"
+        ],
+        "x": 525,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "46531482d43b4cae",
+        "type": "function",
+        "z": "cc39e0013d1bbd14",
+        "name": "Set Basic to 0",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 280,
+        "wires": [
+            [
+                "9343c59ba9dd4152"
+            ]
+        ]
+    },
+    {
+        "id": "7191fc9544f07b32",
+        "type": "link in",
+        "z": "2214caf84b0847ec",
+        "name": "NONNORM: Special Season final",
+        "links": [
+            "51d4f6e460537ff8"
+        ],
+        "x": 265,
+        "y": 320,
+        "wires": [
+            [
+                "e2f7739eee5de74c"
+            ]
+        ]
+    },
+    {
+        "id": "55d8b26f48ef05bd",
+        "type": "link out",
+        "z": "2214caf84b0847ec",
+        "name": "link out 71",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9"
+        ],
+        "x": 565,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "e2f7739eee5de74c",
+        "type": "function",
+        "z": "2214caf84b0847ec",
+        "name": "Special Season final",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 320,
+        "wires": [
+            [
+                "55d8b26f48ef05bd"
             ]
         ]
     }
