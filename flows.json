@@ -509,6 +509,22 @@
         "env": []
     },
     {
+        "id": "2eed7cf661bbf727",
+        "type": "tab",
+        "label": "KAU To Company Additivity Check",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "184cce6ee0df3c6f",
+        "type": "tab",
+        "label": "NAPCS Balance",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "c5ce2d38887016b2",
         "type": "subflow",
         "name": "Apply rules by level type",
@@ -12487,7 +12503,8 @@
             "b683e25439a951d1",
             "e74d8d0f9702bdb7",
             "b72ac573a0a35c8a",
-            "93b50ff4956eb444"
+            "93b50ff4956eb444",
+            "2b91281b80bace6b"
         ],
         "x": 205,
         "y": 260,
@@ -19335,6 +19352,11 @@
                 "label": "mfg_empq1",
                 "value": "mfg_empq1",
                 "type": "str"
+            },
+            {
+                "label": "KAU To Company Additivity Check",
+                "value": "kau_to_company_additivity_check",
+                "type": "str"
             }
         ],
         "payload": "",
@@ -19561,11 +19583,16 @@
                 "t": "eq",
                 "v": "mfg_empq1",
                 "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "kau_to_company_additivity_check",
+                "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 41,
+        "outputs": 42,
         "x": 630,
         "y": 480,
         "wires": [
@@ -19687,6 +19714,9 @@
             ],
             [
                 "405380585cc28809"
+            ],
+            [
+                "8ab5edfeddc79fdc"
             ]
         ]
     },
@@ -19803,7 +19833,7 @@
         "order": 1,
         "width": 18,
         "height": 13,
-        "format": "<div ng-switch=\"msg.payload\">\n\n    <!-- <div ng-switch-when=\"balance_module\">\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/balance_module.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div> -->\n\n        <div ng-switch-when=\"br_stat_evaluation\">\n\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/br_stat.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n\n    </div>\n\n    <div ng-switch-when=\"critical_error\">\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/critical_error.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"logical\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/logical.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    \n\n        <div ng-switch-when=\"derive_NAICS_code\">\n\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/derive_naics_code.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n\n    </div>\n\n    <div ng-switch-when=\"classification\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/classification.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"geography\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/geography.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n     </div>\n    <div ng-switch-when=\"electric_energy_module\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/electric_energy_module.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"electric_energy_module_cont\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/electric_energy_module_cont.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"electric_impute_module\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/electric_impute_module.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"best_admin_receipts\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/best_admin_receipt.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"emp_mar12_num\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/emp_mar12_num.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"pay_ann_val\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/pay_ann_val.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"pay_qtr1_val\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/pay_qtr1_val.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"rcpt_tot_val\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/rcpt_tot_val.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"qflow\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/qflow.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"post_edit_status_field\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/post_edit_status_field.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"pre_db_write_back_for_leased\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/pre_db_write_back_for_leased.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"unit_balance\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/unit_balance.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"derived_naics_code\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/derived_naics_code.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"valid_negative_value\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/valid_negative_value.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"valid_zero\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/valid_zero.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"estab_to_kau_addivity_prep_and_check\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/estab_to_kau_addivity_prep_and_check.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"kau_to_company_addivity_prep_and_check\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/kau_to_company_addivity_prep_and_check.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"interactive_mode\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/interactive_mode.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"batch_mode_1\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/batch_mode_1.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"batch_mode_2\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/batch_mode_2.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"nonorm_special_season_final\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/nonorm_special_season_final.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"nonorm_set\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/nonorm_set.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"nonorm_set_opstats_and_actvmio\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/nonorm_set_opstats_and_actvmio.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"nonorm_set_basic_to_zero\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/nonorm_set_basic_to_zero.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"nonorm_router\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/nonorm_router.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"nonorm_init_set\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/nonorm_init_set.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n        <div ng-switch-when=\"mfg_payqtr1\">\n            <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/mfg_payqtr1.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n        </div>\n            <div ng-switch-when=\"mfg_payann\">\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/mfg_payann.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n            </div>\n                <div ng-switch-when=\"mfg_empq1\">\n                    <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/mfg_empq1.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n                </div>\n    <div ng-switch-default>\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/completeness.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n\n\n\n\n</div>",
+        "format": "<div ng-switch=\"msg.payload\">\n\n    <!-- <div ng-switch-when=\"balance_module\">\n                <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/balance_module.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div> -->\n\n        <div ng-switch-when=\"br_stat_evaluation\">\n\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/br_stat.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n\n   \n    </div>\n\n    <div ng-switch-when=\"critical_error\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/critical_error.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"logical\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/logical.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n\n\n        <div ng-switch-when=\"derive_NAICS_code\">\n\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/derive_naics_code.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n\n    </div>\n\n    <div ng-switch-when=\"classification\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/classification.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"geography\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/geography.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n     </div>\n    <div ng-switch-when=\"electric_energy_module\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/electric_energy_module.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"electric_energy_module_cont\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/electric_energy_module_cont.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"electric_impute_module\">\n             <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/electric_impute_module.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"best_admin_receipts\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/best_admin_receipt.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"emp_mar12_num\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/emp_mar12_num.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"pay_ann_val\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/pay_ann_val.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"pay_qtr1_val\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/pay_qtr1_val.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"rcpt_tot_val\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/rcpt_tot_val.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"qflow\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/qflow.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"post_edit_status_field\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/post_edit_status_field.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"pre_db_write_back_for_leased\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/pre_db_write_back_for_leased.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"unit_balance\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/unit_balance.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"derived_naics_code\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/derived_naics_code.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"valid_negative_value\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/valid_negative_value.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"valid_zero\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/valid_zero.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"estab_to_kau_addivity_prep_and_check\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/estab_to_kau_addivity_prep_and_check.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"kau_to_company_addivity_prep_and_check\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/kau_to_company_addivity_prep_and_check.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"interactive_mode\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/interactive_mode.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"batch_mode_1\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/batch_mode_1.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"batch_mode_2\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/batch_mode_2.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"nonorm_special_season_final\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/nonorm_special_season_final.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"nonorm_set\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/nonorm_set.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"nonorm_set_opstats_and_actvmio\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/nonorm_set_opstats_and_actvmio.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"nonorm_set_basic_to_zero\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/nonorm_set_basic_to_zero.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"nonorm_router\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/nonorm_router.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"nonorm_init_set\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/nonorm_init_set.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"mfg_payqtr1\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/mfg_payqtr1.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"mfg_payann\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/mfg_payann.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"mfg_empq1\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/mfg_empq1.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n    <div ng-switch-when=\"kau_to_company_additivity_check\">\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/kau_to_company_additivity_check.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n    </div>\n        <div ng-switch-default>\n        <img src=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/completeness.png?version={{msg.version}}\" style=\"max-width: 100%; height: auto;\">\n   \n    </div>\n\n\n\n\n</div>",
         "storeOutMessages": true,
         "fwdInMessages": true,
         "resendOnRefresh": true,
@@ -21588,6 +21618,19 @@
             "c6e825877bca50ae"
         ],
         "x": 845,
+        "y": 1920,
+        "wires": []
+    },
+    {
+        "id": "8ab5edfeddc79fdc",
+        "type": "link out",
+        "z": "dad88d9a3132fed6",
+        "name": "kau_to_company_additivity_check_link",
+        "mode": "link",
+        "links": [
+            "cd68a9923d85636d"
+        ],
+        "x": 655,
         "y": 1920,
         "wires": []
     },
@@ -24220,5 +24263,91 @@
         "x": 955,
         "y": 320,
         "wires": []
+    },
+    {
+        "id": "cd68a9923d85636d",
+        "type": "link in",
+        "z": "2eed7cf661bbf727",
+        "name": "KAU To Company Additivity Check Link",
+        "links": [
+            "8ab5edfeddc79fdc"
+        ],
+        "x": 805,
+        "y": 300,
+        "wires": [
+            [
+                "7dbfcdc951fc4a9f"
+            ]
+        ]
+    },
+    {
+        "id": "7dbfcdc951fc4a9f",
+        "type": "function",
+        "z": "2eed7cf661bbf727",
+        "name": "KAU To Company Additivity Check",
+        "func": "function setCharAt(str, index, chr) {\n    if ([null, undefined].includes(str)) {\n        let newstr = ''\n        for (let i = 0; i < index; i++) {\n            newstr = newstr + ' ';\n        }\n        newstr = newstr + chr\n        return newstr;\n    } else {\n        if (index > str.length - 1) {\n            let addstr = index - str.length\n            let newstr = str\n            for (let i = 0; i < addstr; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            return str.substring(0, index) + chr + str.substring(index + 1);\n        }\n    }\n}\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nconst PAY_ANN_VAL = parseFloat(record['PAY_ANN_VAL'])\nconst PAY_ANN_PRDWRK_VAL = parseFloat(record['PAY_ANN_PRDWRK_VAL'])\nconst PAY_ANN_NONPRDWRK_VAL = parseFloat(record['PAY_ANN_NONPRDWRK_VAL'])\nconst EMP_MAR12_NUM = parseFloat(record['EMP_MAR12_NUM'])\nconst EMP_MAR12_PRDWRK_NUM = parseFloat(record['EMP_MAR12_PRDWRK_NUM'])\nconst EMP_MAR12_NONPRDWRK_NUM = parseFloat(record['EMP_MAR12_NONPRDWRK_NUM'])\nconst PAY_QTR1_VAL = parseFloat(record['PAY_QTR1_VAL'])\nconst PAY_QTR1_PRDWRK_VAL = parseFloat(record['PAY_QTR1_PRDWRK_VAL'])\nconst PAY_QTR1_NONPRDWRK_VAL = parseFloat(record['PAY_QTR1_NONPRDWRK_VAL'])\n\nif ((EMP_MAR12_PRDWRK_NUM + EMP_MAR12_NONPRDWRK_NUM == 0) && EMP_MAR12_NUM > 0) {\n    if (PAY_ANN_PRDWRK_VAL > 0 && PAY_ANN_NONPRDWRK_VAL > 0 && PAY_ANN_VAL > 0) {\n        record['EMP_MAR12_PRDWRK_NUM'] = Math.round((PAY_ANN_PRDWRK_VAL / PAY_ANN_VAL) * EMP_MAR12_NUM)\n        record['EMP_MAR12_NONPRDWRK_NUM'] = Math.round((PAY_ANN_NONPRDWRK_VAL / PAY_ANN_VAL) * EMP_MAR12_NUM)\n        record['EMP_MAR12_PRDWRK_NUM_F'] = setCharAt(record['EMP_MAR12_PRDWRK_NUM_F'], 2, 'J');\n        record['EMP_MAR12_NONPRDWRK_NUM_F'] = setCharAt(record['EMP_MAR12_NONPRDWRK_NUM_F'], 2, 'J');\n    } else if (PAY_QTR1_NONPRDWRK_VAL > 0 && PAY_QTR1_PRDWRK_VAL > 0 && PAY_QTR1_VAL > 0) {\n        record['EMP_MAR12_PRDWRK_NUM'] = Math.round((PAY_QTR1_PRDWRK_VAL / PAY_QTR1_VAL) * EMP_MAR12_NUM)\n        record['EMP_MAR12_NONPRDWRK_NUM'] = Math.round((PAY_QTR1_NONPRDWRK_VAL / PAY_QTR1_VAL) * EMP_MAR12_NUM)\n        record['EMP_MAR12_PRDWRK_NUM_F'] = setCharAt(record['EMP_MAR12_PRDWRK_NUM_F'], 2, 'J');\n        record['EMP_MAR12_NONPRDWRK_NUM_F'] = setCharAt(record['EMP_MAR12_NONPRDWRK_NUM_F'], 2, 'J');\n    } else {\n        record['EMP_MAR12_PRDWRK_NUM_F'] = setCharAt(record['EMP_MAR12_PRDWRK_NUM_F'], 2, 'X');\n        record['EMP_MAR12_NONPRDWRK_NUM_F'] = setCharAt(record['EMP_MAR12_NONPRDWRK_NUM_F'], 2, 'X');\n    }\n} else if ((EMP_MAR12_NONPRDWRK_NUM + EMP_MAR12_PRDWRK_NUM > 0) && EMP_MAR12_NUM > 0) {\n    if (EMP_MAR12_NONPRDWRK_NUM + EMP_MAR12_PRDWRK_NUM != EMP_MAR12_NUM) {\n        if (EMP_MAR12_PRDWRK_NUM == 0 && (EMP_MAR12_NONPRDWRK_NUM < EMP_MAR12_NUM)) {\n            record['EMP_MAR12_PRDWRK_NUM'] = EMP_MAR12_NUM - EMP_MAR12_NONPRDWRK_NUM\n            record['EMP_MAR12_PRDWRK_NUM_F'] = setCharAt(record['EMP_MAR12_PRDWRK_NUM_F'], 2, 'J');\n        } else if (EMP_MAR12_NONPRDWRK_NUM == 0 && (EMP_MAR12_PRDWRK_NUM < EMP_MAR12_NUM)) {\n            record['EMP_MAR12_NONPRDWRK_NUM'] = EMP_MAR12_NUM - EMP_MAR12_PRDWRK_NUM\n            record['EMP_MAR12_NONPRDWRK_NUM_F'] = setCharAt(record['EMP_MAR12_NONPRDWRK_NUM_F'], 2, 'J');\n        } else if (.8 <= (EMP_MAR12_PRDWRK_NUM + EMP_MAR12_NONPRDWRK_NUM) / EMP_MAR12_NUM &&\n            (EMP_MAR12_PRDWRK_NUM + EMP_MAR12_NONPRDWRK_NUM) / EMP_MAR12_NUM <= 1.2) {\n            const TEMP_DET_TOT = EMP_MAR12_PRDWRK_NUM + EMP_MAR12_NONPRDWRK_NUM\n            const TEMP_EMP_PRDWORK = Math.round((EMP_MAR12_PRDWRK_NUM / TEMP_DET_TOT) * EMP_MAR12_NUM)\n            const TEMP_EMP_NONPRDWORK = Math.round((EMP_MAR12_NONPRDWRK_NUM / TEMP_DET_TOT) * EMP_MAR12_NUM)\n            if (TEMP_EMP_PRDWORK + TEMP_EMP_NONPRDWORK == EMP_MAR12_NUM) {\n                record['EMP_MAR12_NONPRDWRK_NUM'] = TEMP_EMP_NONPRDWORK\n                record['EMP_MAR12_PRDWRK_NUM'] = TEMP_EMP_PRDWORK\n            } else if (TEMP_EMP_PRDWORK > TEMP_EMP_NONPRDWORK) {\n                record['EMP_MAR12_PRDWRK_NUM'] = TEMP_EMP_PRDWORK + Math.round(EMP_MAR12_NUM - TEMP_EMP_NONPRDWORK)\n                record['EMP_MAR12_PRDWRK_NUM_F'] = setCharAt(record['EMP_MAR12_PRDWRK_NUM_F'], 2, 'K');\n            } else {\n                record['EMP_MAR12_NONPRDWRK_NUM'] = TEMP_EMP_NONPRDWORK + Math.round(EMP_MAR12_NUM - TEMP_EMP_PRDWORK)\n                record['EMP_MAR12_NONPRDWRK_NUM_F'] = setCharAt(record['EMP_MAR12_NONPRDWRK_NUM_F'], 2, 'K');\n            }\n        } else {\n            record['EMP_MAR12_PRDWRK_NUM_F'] = setCharAt(record['EMP_MAR12_PRDWRK_NUM_F'], 2, 'X');\n            record['EMP_MAR12_NONPRDWRK_NUM_F'] = setCharAt(record['EMP_MAR12_NONPRDWRK_NUM_F'], 2, 'X');\n        }\n    }\n}\n\nrecord['ACTION'] = 'Go To: PAYQTR1'\n// global.set('action', 'Go To: PAYQTR1')\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 300,
+        "wires": [
+            [
+                "2b91281b80bace6b"
+            ]
+        ]
+    },
+    {
+        "id": "2b91281b80bace6b",
+        "type": "link out",
+        "z": "2eed7cf661bbf727",
+        "name": "link out 75",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9"
+        ],
+        "x": 1215,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "401fdae063b57aa5",
+        "type": "function",
+        "z": "184cce6ee0df3c6f",
+        "name": "NAPCS Balance",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nconst setCharAt = (str, index, char) => {\n    if (index > str.length - 1) return str.padEnd(index, ' ') + char;\n    return str.substr(0, index) + char + str.substr(index + char.length);\n};\n\nfunction NAPCSBalancing() {\n\n    if (record?.NAICS_SECTOR == '31' && record?.SUBSAMP_IND_TXT != 'MC') {\n        if (record?.NAPCS_IND == '') {\n            if (record?.HISTSTAT == 'Y' &&\n                record?.H_NAPCSIND == 'U' &&\n                parseInt(record?.H_NAPCSBLTOT) > 0 &&\n                parseInt(record?.H_RCPT_TOT_VAL > 0) &&\n                parseInt(record?.RCPT_TOT_VAL > 0) &&\n                record?.NAPCSIMP == 'Y') {\n                record.NAPCSIND = 'U'\n                record.NAPCSIMP = 'Y'\n\n                record.NAPCS_IND = 'U'\n                record.NAPCS_IMP = 'Y'\n                record.NAPCS_BLTOT\n                // Append on Current REF_PER NAPCS Table Todo\n\n                let PROD_CODE = record?.H_PROD_CODE\n                let USABLE = 'U'\n                let PROD_CODE_VAL = parseFloat(record?.H_PROD_CODE_VAL) * (\n                    parseFloat(record?.RCPT_TOT_VAL) /\n                    parseFloat(record?.H_RCPT_TOT_VAL)\n                )\n                let REPORTING_ID = record?.REPORTING_ID\n                let REF_PER = record?.REF_PER\n                PROD_CODE = setCharAt(PROD_CODE.toString(), 2, 'H');\n\n                // Set Set NAPCS_BLTOT = sum of PROD_CODE_VAL where PROD_CODE(7: 3) = ‘000’\n                NAPCSBalancepathA()\n            } else {\n                NAPCSBalancepathB()\n            }\n\n        } else {\n            NAPCSBalancepathA()\n        }\n    } else {\n        record.ACTION = 'Go To main Routing'\n    }\n\n    function NAPCSBalancepathA() {\n        // call Balancing Module\n        if (record?.NAPCS_IND == 'U') {\n            // call BL Rounding Module\n        }\n        // for Each Prod_code on record\n        if (record?.PROD_CODE_VAL == 0) {\n            record.USABLE = 'D'\n        }\n        // Recalculate NAPCS Field Module\n        if (record?.NAPCS_BAL < 0 || record?.NAPCS_BAL > 0 ||) {\n            record.NAPCS_IND = 'N'\n        }\n        NAPCSBalancepathB()\n    }\n    function NAPCSBalancepathB() {\n        // call NO DONOR\n        // call HDICAT\n        // END\n        msg.payload.csv[record_idx] = record\n        return msg;\n    }\n}\nNAPCSBalancing()",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 8,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1fe10b7b2609c70b",
+        "type": "function",
+        "z": "184cce6ee0df3c6f",
+        "name": "Balancing",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\nlet params = {\n    UL: 0,\n    LL: 0\n}\nconst setCharAt = (str, index, char) => {\n    if (index > str.length - 1) return str.padEnd(index, ' ') + char;\n    return str.substr(0, index) + char + str.substr(index + char.length);\n};\n\nfunction Balancing(){\n    if (parseInt(record?.RCPT_TOT_VAL) > 0){\n        if([/*parameter table */].includes(record?.NAICS_OLD_CODE)){\n            record.TABSTAT = 'N'\n            record.NONTABFL = 'R'\n            record.STOP = 'T'\n            record.MIS_NAICSOLD_NAICSTOLERANCE = 'Y' // need to check what neeeds to set here\n            balancePathA()\n        }else if(record.NAPCS_BLTOT == record.RCPT_TOT_VAL ){\n            balancePathA()\n        } else if (params.LL <= parseFloat(record?.NAPCS_BLTOT) && parseFloat(record?.RCPT_TOT_VAL) <= params.UL){\n            // need to check from where this variables are comming from\n            record.PROD_CODE_VAL = (parseFloat(record?.PROD_CODE_VAL) / parseFloat(record?.NAPCS_BLTOT) * parseFloat(record?.RCPT_TOT_VAL))\n            record.PROD_CODE_F = setCharAt(record?.PROD_CODE_F || '  ', 2, 'K')\n            balancePathA()\n            // from where this PI comming from \n        } else if ((parseFloat(record?.RCPT_TOT_VAL) == parseFloat(record?.RCPT_TOT_VAL_PI)) || (parseFloat(record?.RCPT_TOT_VAL_PI) == 0)){\n            balancePathB()\n            // where this PI is comming from\n        } else if (params.LL <= parseFloat(record?.NAPCS_BLTOT) && parseFloat(record?.RCPT_TOT_VAL_PI) <= params.UL) {\n            record.PROD_CODE_VAL = (parseFloat(record?.PROD_CODE_VAL) / parseFloat(record?.NAPCS_BLTOT) * parseFloat(record?.RCPT_TOT_VAL))\n            record.PROD_CODE_F = setCharAt(record?.PROD_CODE_F || '  ', 2, 'K')\n        }else{\n            balancePathB()\n        }\n    }else{\n        balancePathB()\n    }\n}\nfunction balancePathA(){\n    msg.payload.csv[record_idx] = record;\n    return msg\n}\nfunction balancePathB(){\n    record.NAPCS_IND = 'N'\n    balancePathA()\n}\nBalancing()",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 940,
+        "y": 440,
+        "wires": [
+            []
+        ]
     }
 ]
