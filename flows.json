@@ -1929,9 +1929,7 @@
             "a47c991027033263"
         ],
         "x": 34,
-        "y": 19,
-        "w": 432,
-        "h": 82
+        "y": 19
     },
     {
         "id": "4099bf03141f3710",
@@ -1978,9 +1976,7 @@
             "6982bc340b585149"
         ],
         "x": 14,
-        "y": 659,
-        "w": 1312,
-        "h": 942
+        "y": 659
     },
     {
         "id": "d1e0f39ddacfeb20",
@@ -21429,7 +21425,8 @@
         "name": "link out post edit",
         "mode": "link",
         "links": [
-            "c8919561eea2a059"
+            "c8919561eea2a059",
+            "b0b456eac2b51685"
         ],
         "x": 845,
         "y": 1400,
@@ -23694,7 +23691,7 @@
         "type": "function",
         "z": "236c2e1a5554a6f0",
         "name": "Valid Zero",
-        "func": "// let record_idx = global.get(\"ptrModuleFacts\");\n// let record = msg.payload.csv[record_idx]\n\n// let valid_zero_file = {\n//     VALID_ZERO: [\n//         { \"ITEM\": \"EMP_MAR12_NUM\", \"LEVEL\": \"ESTAB\" },\n//         { \"ITEM\": \"PAY_ANN_VAL\", \"LEVEL\": \"ESTAB\" },\n//         { \"ITEM\": \"PAY_QTR1_VAL\", \"LEVEL\": \"ESTAB\" },\n//         { \"ITEM\": \"RCPT_TOT_VAL\", \"LEVEL\": \"ESTAB\" },\n//         { \"ITEM\": \"EXPS_EXSOFT_VAL\", \"LEVEL\": \"KAU\" },\n//         { \"ITEM\": \"EXPS_DATAPROC_VAL\", \"LEVEL\": \"KAU\" },\n//         { \"ITEM\": \"EXPS_COMMSVC_VAL\", \"LEVEL\": \"KAU\" },\n//         { \"ITEM\": \"EXPS_COMPTR_OTHEQ_VAL\", \"LEVEL\": \"KAU\" },\n//         { \"ITEM\": \"EXPS_ADVERT_VAL\", \"LEVEL\": \"KAU\" },\n//         { \"ITEM\": \"EXPS_PROFTECH_VAL\", \"LEVEL\": \"KAU\" },\n//         { \"ITEM\": \"EXPS_MACH_REP_VAL\", \"LEVEL\": \"KAU\" },\n//         { \"ITEM\": \"EXPS_BUILD_REP_VAL\", \"LEVEL\": \"KAU\" },\n//         { \"ITEM\": \"EXPS_REFUSE_VAL\", \"LEVEL\": \"KAU\" },\n//         { \"ITEM\": \"EXPS_RENT_BUILD_VAL\", \"LEVEL\": \"KAU\" },\n//         { \"ITEM\": \"EXPS_ELEC_VAL\", \"LEVEL\": \"KAU\" },\n//         { \"ITEM\": \"EXPS_FUEL_VAL\", \"LEVEL\": \"KAU\" },\n//         { \"ITEM\": \"EXPS_TAX_VAL\", \"LEVEL\": \"KAU\" },\n//         { \"ITEM\": \"EXPS_OTHER_VAL\", \"LEVEL\": \"KAU\" },\n//         { \"ITEM\": \"EXPS_DEPR_VAL\", \"LEVEL\": \"KAU\" },\n//         { \"ITEM\": \"EXPS_TOT_VAL\", \"LEVEL\": \"KAU\" },\n//         { \"ITEM\": \"RCPT_TOT_PY_VAL\", \"LEVEL\": \"KAU\" },\n//         { \"ITEM\": \"INV_E_TOT_VAL\", \"LEVEL\": \"KAU\" }\n//     ]\n   \n// }\n\n// let getEstabFields = valid_zero_file['VALID_ZERO']\n//   .filter(i => i['LEVEL'] == 'ESTAB')\n//   .map(i => i['ITEM']);\n\n// // let fieldsWithValidZeros = getEstabFields.filter(field => {\n// //   return record[field] !== undefined && parseInt(record[field]) === 0;\n// // });\n// let allZeros = getEstabFields.every(field => parseInt(record[field]) === 0);\n\n// if (allZeros){\n//     if (msg.payload.csv[record_idx]['VAR_F3_1'] && msg.payload.csv[record_idx]['VAR_F3_1'].length >= 3) {\n//         msg.payload.csv[record_idx]['VAR_F3_1'] = msg.payload.csv[record_idx]['VAR_F3_1'].substring(0, 2) + 'G';\n//     } else {\n//         msg.payload.csv[record_idx]['VAR_F3_1'] = '_G';\n//     }\n// }\n// msg.payload.csv[record_idx]['ACTION'] = 'Going to main routing...'\n// return msg;\n\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx]\nlet cache = global.get(\"lookupCache\");\n\nlet valid_zero_file = cache.data.find(\n    item =>\n        item.module === \"valid_zero\" &&\n        item.param === 'valid_zero' &&\n        item.program === \"aies\" &&\n        item.unit_type === \"all\"\n)?.json_values;\n\nfunction isZero(column, type) {\n    if (valid_zero_file.VALID_ZERO.some(element =>\n        (element.LEVEL) === type &&\n        (element.ITEM) === column)) {\n \n        let column_f = column + '_F'\n        if (record[column_f] && record[column_f].length >= 3) {\n            record[column_f] = record[column_f].substring(0, 2) + 'G' + record[column_f].substring(3);\n        } else if (record[column_f] && record[column_f].length >= 2) {\n            record[column_f] = record[column_f].substring(0, 2) + 'G';\n        } else if (record[column_f] && record[column_f].length >= 1) {\n            record[column_f] = record[column_f].substring(0, 1) + ' G';\n        } else {\n            record[column_f] = '  G';\n        }\n    }\n}\n\nlet type = ''\nif (['MU','SU'].includes(record['REPORTING_ID_TYP_TXT'])) {\n    type = 'ESTAB'\n} else if (['KAU'].includes(record['REPORTING_ID_TYP_TXT'])) {\n    type = 'KAU'\n}\n\nfor (var key in record) {\n    if (parseFloat(record[key]) == 0) {\n        isZero(key,type)\n    }\n}\n\nrecord['ACTION'] = 'Go to Main Routing'\n// global.set('action','Go to Main Routing')\nreturn msg;\n",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx]\nlet cache = global.get(\"lookupCache\");\n\nlet valid_zero_file = cache.data.find(\n    item =>\n        item.module === \"valid_zero\" &&\n        item.param === 'valid_zero' &&\n        item.program === \"aies\" &&\n        item.unit_type === \"all\"\n)?.json_values;\n\nfunction isZero(column, type) {\n    if (valid_zero_file.VALID_ZERO.some(element =>\n        (element.LEVEL) === type &&\n        (element.ITEM) === column)) {\n \n        let column_f = column + '_F'\n        if (record[column_f] && record[column_f].length >= 3) {\n            record[column_f] = record[column_f].substring(0, 2) + 'G' + record[column_f].substring(3);\n        } else if (record[column_f] && record[column_f].length >= 2) {\n            record[column_f] = record[column_f].substring(0, 2) + 'G';\n        } else if (record[column_f] && record[column_f].length >= 1) {\n            record[column_f] = record[column_f].substring(0, 1) + ' G';\n        } else {\n            record[column_f] = '  G';\n        }\n    }\n}\n\nlet type = ''\nif (['MU','SU'].includes(record['REPORTING_ID_TYP_TXT'])) {\n    type = 'ESTAB'\n} else if (['KAU'].includes(record['REPORTING_ID_TYP_TXT'])) {\n    type = 'KAU'\n}\n\nfor (var key in record) {\n    if (parseFloat(record[key]) == 0) {\n        isZero(key,type)\n    }\n}\n\nrecord['ACTION'] = 'Go to Main Routing'\n// global.set('action','Go to Main Routing')\nreturn msg;\n",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -24346,6 +24343,152 @@
         "libs": [],
         "x": 940,
         "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4ddcca6cfb35501a",
+        "type": "function",
+        "z": "184cce6ee0df3c6f",
+        "name": "AIES NAPCS PREP",
+        "func": "function AIESNAPCSPrep(){\n    if(record?.NAICS_SECTOR == '31' && record?.SUBSAMP_IND_TXT != 'MC'){\n        // call Reset NAPCS\n        // call Imputing with Historic NAPCS\n        let NAPCS_BLTOT = record?.reduce((sum, item) => {\n            return item.PROD_CODE.substring(6, 9) === '000' ? sum + item.PROD_CODE_VAL : sum;\n        }, 0);\n\n        let NAPCS_BAL = record?.RCPT_TOT_VAL - NAPCS_BLTOT;\n\n        let NAPCS_PRM = record?.reduce((sum, item) => {\n            return item.PROD_CODE.substring(0, 1) === '2' ? sum + item.PROD_CODE_VAL : sum;\n        }, 0);\n\n        let NAPCS_OTH = record?.reduce((sum, item) => {\n            return item.PROD_CODE.substring(0, 1) < '2' ? sum + item.PROD_CODE_VAL : sum;\n        }, 0);\n\n        let sumOfSpecificPROD_CODE_VAL = record?.reduce((sum, item) => {\n            return item.PROD_CODE.substring(0, 7) === '9000000' ? sum + item.PROD_CODE_VAL : sum;\n        }, 0);\n    }\n    \n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 19,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1190,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "29d71411aa13a380",
+        "type": "function",
+        "z": "184cce6ee0df3c6f",
+        "name": "MIV: Inventories Balance",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\nlet params = {\n    UL: 0,\n    LL: 0\n}\nconst setCharAt = (str, index, char) => {\n    if (index > str.length - 1) return str.padEnd(index, ' ') + char;\n    return str.substr(0, index) + char + str.substr(index + char.length);\n};\nlet control = {}\nlet ec = {}\nfunction MIVInventoriesBalance(){\n    if(record?.NAICS_SECTOR == '31' && record?.SABSAMP_IND_TXT != 'MC'){\n        // call LIFO valuation method module\n        // Call Non LIFO Valuation method module\n        if(control?.NAICS_Sector == '31' && control?.HISTAT == 'Y' && record?.INV_B_LIFO_VAL == ec?.INV_E_LIFO_VAL ){\n            if(record?.INV_B_LIFO_RSV_VAL == ec?.INV_B_LIFO_RSV_VAL){\n            }else{\n                record.INV_B_LIFO_RSV_VAL = ec?.INV_E_LIFO_RSV_VAL\n                record.INV_B_LIFO_RSV_VAL_F = setCharAt(record.INV_B_LIFO_RSV_VAL_F || '  ', 2, 'J')\n            }\n            record.ACTION = 'Go To main Routing'\n        }else if(control?.NAICS_SECTOR == '31' && record?.INV_B_LIFO_VAL > 0 && ec?.INV_E_LIFO_VAL ==0){\n            record.ACTION = 'Go To main Routing'\n        }else{\n            record.ACTION = 'Go To main Routing'\n        }\n\n    }else{\n        record.ACTION = 'Go To main Routing'\n    }\n\n}\nMIVInventoriesBalance()",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 270,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9a63a08fcc6c11c3",
+        "type": "function",
+        "z": "184cce6ee0df3c6f",
+        "name": "MIV: LIFO Valuation Method",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\nlet params = {\n    UL: 0,\n    LL: 0\n}\nconst setCharAt = (str, index, char) => {\n    if (index > str.length - 1) return str.padEnd(index, ' ') + char;\n    return str.substr(0, index) + char + str.substr(index + char.length);\n};\nlet control = {}\nlet ec = {}\nfunction LIFOValuationMethod() {\n    record.i = 0\n    pathA()\n\n    return msg;\n}\nlet item = {}\nfunction replaceI(n, str) {\n    if (n == 1) return str.replace(/xy/g, \"A\");\n    if (n == 2) return str.replace(/xy/g, \"B\");\n}\nfunction pathA() {\n    record.i = parseInt(record.i) + 1\n    let INV_xy_TOT_VAL = 'INV_xy_TOT_VAL'\n    let INV_xy_LIFO_RSV_VAL = 'INV_xy_LIFO_RSV_VAL'\n    let INV_xy_LIFO_VAL = 'INV_xy_LIFO_VAL'\n    \n    INV_xy_TOT_VAL = replaceI(record.i, INV_xy_TOT_VAL)\n    INV_xy_LIFO_RSV_VAL = replaceI(record.i, INV_xy_LIFO_RSV_VAL)\n    INV_xy_LIFO_VAL = replaceI(record.i, INV_xy_LIFO_VAL)\n\n    // Evaluate LIFI REVERSE Module\n    // Evaluate LIFI Module\n\n    if (parseInt(record.i) == 2){\n        // return to inventories balance\n    }else{\n        pathA()\n    }\n\n}\nLIFOValuationMethod()",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2aefe1848ae82c98",
+        "type": "function",
+        "z": "184cce6ee0df3c6f",
+        "name": "MIV: Evaluate Reverse Module",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nlet cache = global.get(\"lookupCache\");\n\nlet inv_reserve_file = cache.data.find(\n    item =>\n        item.module === \"inv_reserve\" &&\n        item.param === 'inv_reserve' &&\n        item.program === \"aies\" &&\n        item.unit_type === \"estab\"\n)?.json_values;\n\n\nlet params = {\n    UL: 0,\n    LL: 0\n}\nconst setCharAt = (str, index, char) => {\n    if (index > str.length - 1) return str.padEnd(index, ' ') + char;\n    return str.substr(0, index) + char + str.substr(index + char.length);\n};\nlet control = {}\nlet ec = {}\nlet item = {}\nfunction EvaluateLIFOReverseModule() {\n    if (parseInt(item?.INV_x_TOT_VAL) == 0){\n        if(parseInt(item?.INV_x_LIFO_VAL) != 0  || parseInt(item?.INV_x_LIFO_RSV_VAL) != 0){\n            item.INV_x_LIFO_VAL = 0 \n            item.INV_x_LIFO_VAL_F = setCharAt(item?.INV_x_LIFO_VAL_F || '  ', 2, 'J')\n\n            item.INV_x_LIFO_RSV_VAL = 0\n            item.INV_x_LIFO_RSV_VAL_F = setCharAt(item?.INV_x_LIFO_RSV_VAL_F || '  ', 2, 'J')\n\n        }\n    } else if (parseInt(item?.INV_x_LIFO_RSV_VAL) < 0 || parseInt(item?.INV_x_LIFO_RSV_VAL) > 0){\n        // Abs(INV_x_LIFO_RSV_VAL)/INV_x_TOT_VAL < rsvx_totx_UL from 1 / for NAICNEW\n        // inv_reserve_file file has many values how to get specific data\n        \n        item.INV_x_LIFO_RSV_VAL = Math.round(parseFloat(inv_reserve_file?.BETA_x) * parseFloat(item?.INV_x_TOT_VAL))\n        item.INV_x_LIFO_RSV_VAL_F = setCharAt(item.INV_x_LIFO_RSV_VAL_F || '  ', 2, 'B')\n\n    }\n    record.ACTION = 'Return to LIFO Valuation Method'\n    return msg\n}\n\nEvaluateLIFOReverseModule()",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 750,
+        "y": 960,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c4f38f25a401fb78",
+        "type": "subflow:0be109393cb5f28a",
+        "z": "184cce6ee0df3c6f",
+        "name": "",
+        "x": 450,
+        "y": 960,
+        "wires": [
+            [
+                "2aefe1848ae82c98"
+            ]
+        ]
+    },
+    {
+        "id": "74648299b2662bf4",
+        "type": "change",
+        "z": "184cce6ee0df3c6f",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.lookup",
+                "pt": "msg",
+                "to": "{\"moduleName\":\"inv_reserve\",\"program\":\"aies\",\"unit_type\":\"estab\",\"params\":\"inv_reserve\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 190,
+        "y": 960,
+        "wires": [
+            [
+                "c4f38f25a401fb78"
+            ]
+        ]
+    },
+    {
+        "id": "b0b456eac2b51685",
+        "type": "link in",
+        "z": "184cce6ee0df3c6f",
+        "name": "Valid Zero Link",
+        "links": [
+            "45b768d58693d73d"
+        ],
+        "x": 275,
+        "y": 1140,
+        "wires": [
+            [
+                "74648299b2662bf4"
+            ]
+        ]
+    },
+    {
+        "id": "b78377ba255063ad",
+        "type": "function",
+        "z": "184cce6ee0df3c6f",
+        "name": "MIV: Evaluate LIFO Module",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nlet cache = global.get(\"lookupCache\");\n\nlet inv_reserve_file = cache.data.find(\n    item =>\n        item.module === \"inv_reserve\" &&\n        item.param === 'inv_reserve' &&\n        item.program === \"aies\" &&\n        item.unit_type === \"estab\"\n)?.json_values;\n\n\nlet params = {\n    UL: 0,\n    LL: 0\n}\nconst setCharAt = (str, index, char) => {\n    if (index > str.length - 1) return str.padEnd(index, ' ') + char;\n    return str.substr(0, index) + char + str.substr(index + char.length);\n};\nlet control = {}\nlet ec = {}\nlet item = {}\nfunction EvaluateLIFOModule() {\n    if (parseInt(item?.INV_x_TOT_VAL) == 0) {\n        if (parseInt(item?.INV_x_LIFO_RSV_VAL) == 0) {\n\n        }\n    } else if (parseInt(item?.INV_x_LIFO_RSV_VAL) ==  0) {\n\n    }\n    record.ACTION = 'Return to LIFO Valuation Method'\n    return msg\n}\n\nEvaluateLIFOModule()\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 760,
+        "y": 1260,
         "wires": [
             []
         ]
