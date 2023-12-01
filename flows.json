@@ -1929,7 +1929,9 @@
             "a47c991027033263"
         ],
         "x": 34,
-        "y": 19
+        "y": 19,
+        "w": 432,
+        "h": 82
     },
     {
         "id": "4099bf03141f3710",
@@ -1976,7 +1978,9 @@
             "6982bc340b585149"
         ],
         "x": 14,
-        "y": 659
+        "y": 659,
+        "w": 1312,
+        "h": 942
     },
     {
         "id": "d1e0f39ddacfeb20",
@@ -24489,6 +24493,96 @@
         "libs": [],
         "x": 760,
         "y": 1260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bf9971d8a4012ed3",
+        "type": "function",
+        "z": "184cce6ee0df3c6f",
+        "name": "MIV: NONLIFOValuationMethodsModule",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nlet cache = global.get(\"lookupCache\");\n\nlet inv_reserve_file = cache.data.find(\n    item =>\n        item.module === \"inv_reserve\" &&\n        item.param === 'inv_reserve' &&\n        item.program === \"aies\" &&\n        item.unit_type === \"estab\"\n)?.json_values;\n\n\nconst setCharAt = (str, index, char) => {\n    if (index > str.length - 1) return str.padEnd(index, ' ') + char;\n    return str.substr(0, index) + char + str.substr(index + char.length);\n};\nlet item = {}\nfunction replaceI(n, str) {\n    if (n == 1) return str.replace(/xy/g, \"A\");\n    if (n == 2) return str.replace(/xy/g, \"B\");\n}\nfunction NonLIFOValuationMethodsModulePathA(){\n    record.i = parseInt(record.i) + 1\n    let INV_xy_TOT_VAL = 'INV_xy_TOT_VAL'\n    let INV_xy_LIFO_RSV_VAL = 'INV_xy_LIFO_RSV_VAL'\n    let INV_xy_LIFO_VAL = 'INV_xy_LIFO_VAL'\n    let INV_xy_FIFO_VAL = 'INV_xy_FIFO_VAL'\n    let INV_xy_AVG_VAL = 'INV_xy_AVG_VAL'\n    let INV_xy_STD_VAL = 'INV_xy_STD_VAL'\n    let INV_xy_OTHNL_VAL = 'INV_xy_OTHNL_VAL'\n    let INV_xy_IVAL_TOT_DVAL = 'INV_xy_IVAL_TOT_DVAL'\n    let INV_xy_NL_TOT_DVAL = 'INV_xy_NL_TOT_DVAL'\n\n\n\n    INV_xy_TOT_VAL = replaceI(record?.i, INV_xy_TOT_VAL)\n    INV_xy_LIFO_RSV_VAL = replaceI(record?.i, INV_xy_LIFO_RSV_VAL)\n    INV_xy_LIFO_VAL = replaceI(record?.i, INV_xy_LIFO_VAL)\n    INV_xy_FIFO_VAL = replaceI(record?.i, INV_xy_FIFO_VAL)\n    INV_xy_AVG_VAL = replaceI(record?.i, INV_xy_AVG_VAL)\n    INV_xy_STD_VAL = replaceI(record?.i, INV_xy_STD_VAL)\n    INV_xy_OTHNL_VAL = replaceI(record?.i, INV_xy_OTHNL_VAL)\n    INV_xy_IVAL_TOT_DVAL = replaceI(record?.i, INV_xy_IVAL_TOT_DVAL)\n    INV_xy_NL_TOT_DVAL = replaceI(record?.i, INV_xy_NL_TOT_DVAL)\n\n    // Call Evaluate Valuation Methods Module\n    if (parseInt(record?.i) == 2){\n        record.ACTION = 'Return inventories Balnce'\n    }else{\n        NonLIFOValuationMethodsModulePathA()\n    }\n}\nfunction NonLIFOValuationMethodsModule() {\n    record.i = 0;\n    NonLIFOValuationMethodsModulePathA()\n    return msg\n}\n\nNonLIFOValuationMethodsModule()",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 1420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9f9833d11c2323e2",
+        "type": "function",
+        "z": "184cce6ee0df3c6f",
+        "name": "MIV: EvaluateNoNLIFOValuationMethodsModule",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nlet cache = global.get(\"lookupCache\");\n\nlet inv_reserve_file = cache.data.find(\n    item =>\n        item.module === \"inv_reserve\" &&\n        item.param === 'inv_reserve' &&\n        item.program === \"aies\" &&\n        item.unit_type === \"estab\"\n)?.json_values;\n\n\nlet params = {\n    UL: 0,\n    LL: 0\n}\nconst setCharAt = (str, index, char) => {\n    if (index > str.length - 1) return str.padEnd(index, ' ') + char;\n    return str.substr(0, index) + char + str.substr(index + char.length);\n};\nlet control = {}\nlet ec = {}\nlet item = {}\nfunction EvaluateNoNLIFOValuationMethodsModulePathB() {\n    record.ACTION = 'Return to Non LIFO Valuation Methods'\n    msg.payload.csv[record_idx] = record\n    return msg\n}\nfunction EvaluateNoNLIFOValuationMethodsModulePathA() {\n    item.INVDIFFx = parseFloat(item?.INV_X_IVAL_TOT_DVAL) - parseFloat(item?.INV_X_LIFO_VAL)\n    // call Evaluate Details Valuation Methods Module\n    EvaluateNoNLIFOValuationMethodsModulePathB()\n}\nfunction EvaluateNoNLIFOValuationMethodsModule() {\n    if (parseInt(item?.INV_XY_TOT_VAL) == 0) {\n        if ((parseFloat(item?.INV_X_LIFO_VAL) + parseFloat(item?.INV_X_FIFO_VAL) + parseFloat(item?.INV_X_AVG_VAL) + parseFloat(item?.INV_X_STD_VAL) + parseFloat(item?.INV_X_OTHNL_VAL) + parseFloat(item?.INV_X_IVAL_TOT_DVAL) + parseFloat(item?.INV_X_NL_TOT_DVAL)) > 0 || parseInt(item?.INV_X_LIFO_RSV_VAL) != 0) {\n            item.INV_x_LIFO_VAL = 0;\n            item.INV_x_LIFO_VAL_F = setCharAt(item?.INV_x_FIFO_VAL || '', 3, 'Z');\n            item.INV_x_FIFO_VAL = 0\n            item.INV_x_FIFO_VAL_F = setCharAt(item?.INV_x_FIFO_VAL || '', 3, 'Z');\n            item.INV_x_AVG_VAL = 0;\n            item.INV_x_AVG_VAL_F = setCharAt(item?.INV_x_STD_VAL || '', 3, 'Z');\n            item.INV_x_STD_VAL = 0;\n            item.INV_x_STD_VAL_F = setCharAt(item?.INV_x_STD_VAL || '', 3, 'Z');\n            item.INV_x_OTHNL_VAL = 0;\n            item.INV_x_OTHNL_VAL = setCharAt(item?.INV_x_STD_VAL || '', 3, 'Z');\n            item.INV_x_IVAL_TOT_DVAL = 0;\n            item.INV_x_IVAL_TOT_DVAL_F = setCharAt(item?.INV_x_STD_VAL || '', 3, 'Z');\n            item.INV_x_NL_TOT_DVAL = 0;\n            item.INV_x_NL_TOT_DVAL_F = setCharAt(item?.INV_x_STD_VAL || '', 3, 'Z');\n            item.INV_x_LIFO_RSV_VAL = 0;\n            item.INV_x_LIFO_RSV_VAL_F = setCharAt(item?.INV_x_LIFO_RSV_VAL_F || '', 3, 'Z');\n        }\n        EvaluateNoNLIFOValuationMethodsModulePathB()\n\n    } else if (parseFloat(item?.INV_X_TOT_VAL) == parseFloat(item?.INV_X_IVAL_TOT_DVAL)) {\n        // where the INVVSUMx comming from ?\n        if (parseFloat(item?.INV_X_IVAL_TOT_DVAL) == parseFloat(item?.INV_X_LIFO_VAL) + parseFloat(item?.INVVSUMx)) {\n            if (parseFloat(item?.INV_X_NL_TOT_DVAL) == parseFloat(item?.INVVSUMx)) {\n                EvaluateNoNLIFOValuationMethodsModulePathB()\n            } else {\n                item.INV_X_NL_TOT_DVAL = item?.INVVSUMx\n                item.INV_X_NL_TOT_DVAL_F = setCharAt(item?.INV_x_LIFO_RSV_VAL_F || '', 3, 'L');\n            }\n            EvaluateNoNLIFOValuationMethodsModulePathB()\n        } else {\n\n            EvaluateNoNLIFOValuationMethodsModulePathA()\n        }\n    } else {\n        item.INV_X_IVAL_TOT_DVAL = item.INV_X_TOT_DVAL\n        item.INV_X_IVAL_TOT_DVAL = setCharAt(item.INV_X_IVAL_TOT_DVAL, 2, 'L')\n        function EvaluateNoNLIFOValuationMethodsModulePathA() \n    }\n}\n\nEvaluateNoNLIFOValuationMethodsModule()",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 1500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7c98b0321d9624dd",
+        "type": "function",
+        "z": "184cce6ee0df3c6f",
+        "name": "MIV: EvaluateDetailValuationMethods",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nlet cache = global.get(\"lookupCache\");\n\nlet inv_reserve_file = cache.data.find(\n    item =>\n        item.module === \"inv_reserve\" &&\n        item.param === 'inv_reserve' &&\n        item.program === \"aies\" &&\n        item.unit_type === \"estab\"\n)?.json_values;\n\n\nlet params = {\n    UL: 0,\n    LL: 0\n}\nconst setCharAt = (str, index, char) => {\n    if (index > str.length - 1) return str.padEnd(index, ' ') + char;\n    return str.substr(0, index) + char + str.substr(index + char.length);\n};\nlet control = {}\nlet ec = {}\nlet item = {}\nfunction EvaluateDetailValuationMethodsPathB(){\n    record.ACTION = 'Return to Evaluate Valuation Methods Module'\n    msg.payload.csv[record_idx] = record\n    return msg;\n}\nfunction EvaluateDetailValuationMethodsPathC(){\n    if (parseFloat(item?.INV_X_OTHNL_VAL) < 0) {\n        // how to calculate absolute for this like abs(item?.INV_X_OTHNL_VAL)\n        item.INV_X_OTHNL_VAL = item?.INV_X_OTHNL_VAL\n        // need to check this line \n        item.INV_X_OTHNL_VAL = (parseFloat(item?.INV_X_FIFO_VAL) + parseFloat(item?.INV_X_AVG_VAL) + parseFloat(item?.INV_X_STD_VAL))\n        item.INV_X_OTHNL_VAL = 0\n        item.INV_X_OTHNL_VAL_F = setCharAt(item.INV_X_OTHNL_VAL_F, 2, 'Z');\n        EvaluateDetailValuationMethodsPathA()\n    }\n    EvaluateDetailValuationMethodsPathA()\n}\nfunction EvaluateDetailValuationMethodsPathA(){\n    if (parseFloat(item.INV_X_NL_TOT_DVAL) != (parseFloat(item?.INV_X_FIFO_VAL) + parseFloat(item?.INV_X_AVG_VAL) + parseFloat(item?.INV_X_STD_VAL) + parseFloat(item?.INV_X_OTHNL_VAL))) {\n        item.INV_X_NL_TOT_DVAL = parseFloat(item?.INV_X_FIFO_VAL) + parseFloat(item?.INV_X_AVG_VAL) + parseFloat(item?.INV_X_STD_VAL) + parseFloat(item?.INV_X_OTHNL_VAL)\n        item.INV_X_NL_TOT_DVAL_F = setCharAt(item.INV_X_NL_TOT_DVAL_F, 2, 'L')\n    }\n    EvaluateDetailValuationMethodsPathB()\n}\nfunction EvaluateDetailValuationMethods() {\n    if(parseFloat(item?.INV_X_LIFO_VAL) == 0){\n        if (parseFloat(item?.INVVSUMX) == 0){\n            if (parseFloat(ec?.INV_X_VAL_TOT_DVAL) == 0){\n                //call NON LIFO Random Module\n                EvaluateDetailValuationMethodsPathB()\n            }else{\n                item.INV_X_FIFO_VAL = (parseFloat(ec?.INV_XY_FIFO_VAL)/ parseFloat(ec?.INV_X_IVAL_TOT_DVAL)) * parseFloat(ec?.INV_X_IVAL_TOT_DVAL)\n                item.INV_XY_FIFO_VAL_F = setCharAt(item?.INV_XY_FIFO_VAL_F, 2, 'H')\n                item.INV_X_AVG_VAL = (parseFloat(ec?.INV_XY_AVG_VAL) / parseFloat(ec?.INV_X_IVAL_TOT_DVAL)) * parseFloat(ec?.INV_X_IVAL_TOT_DVAL)\n                item.INV_XY_AVG_VAL_F = setCharAt(item?.INV_XY_AVG_VAL_F, 2, 'H')\n                item.INV_X_STD_VAL = (parseFloat(ec?.INV_XY_STD_VAL) / parseFloat(ec?.INV_X_IVAL_TOT_DVAL)) * parseFloat(ec?.INV_X_IVAL_TOT_DVAL)\n                item.INV_XY_STD_VAL_F = setCharAt(item?.INV_XY_STD_VAL_F, 2, 'H')\n                item.INV_X_OTHNL_VAL = parseFloat(item?.INV_X_IVAL_TOT_DVAL) - \n                (\n                    parseFloat(item?.INV_X_LIFO_VAL) + parseFloat(item?.INV_X_FIFO_VAL) + parseFloat(item?.INV_X_AVG_VAL) + parseFloat(item?.INV_X_STD_VAL)\n                ) \n                item.INV_XY_OTHNL_VAL_F = setCharAt(item?.INV_XY_OTHNL_VAL_F, 2, 'H')\n                EvaluateDetailValuationMethodsPathC()\n            } \n        }else{\n            // call Evaluate NONLIFO Valuation Methods Module\n            EvaluateDetailValuationMethodsPathC()\n        }\n    } else if (parseFloat(item?.INVVSUMX) == 0) {\n        if(parseFloat(item?.INV_X_LIFO_VAL) == parseFloat(item?.INV_X_IVAL_TOT_DVAL)){\n            EvaluateDetailValuationMethodsPathA()\n        }else{\n            item.INV_X_LIFO_VAL = item?.INV_X_IVAL_TOT_DVAL\n            item.INV_X_LIFO_VAL_F = setCharAt(item.INV_X_LIFO_VAL_F, 2, 'L')\n            EvaluateDetailValuationMethodsPathA()\n        }\n    }else{\n        // where INVDIFFX comming from \n        item.INV_X_FIFO_VAL = Math.round((parseFloat(item?.INV_X_FIFO_VAL) / parseFloat(item?.INVVSUMX)) * parseFloat(item?.INVDIFFX))\n        item.INV_X_FIFO_VAL_F = setCharAt(item.INV_X_FIFO_VAL_F, 2, 'K')\n\n        item.INV_X_AVG_VAL = Math.round((parseFloat(ec?.INV_X_AVG_VAL) / parseFloat(item?.INVVSUMX)) * parseFloat(item?.INVDIFFX));\n        item.INV_X_AVG_VAL_F = setCharAt(item.INV_X_AVG_VAL_F, 2, 'K');\n\n        item.INV_X_STD_VAL = Math.round((parseFloat(ec?.INV_X_STD_VAL) / parseFloat(item?.INVVSUMX)) * parseFloat(item?.INVDIFFX));\n        item.INV_X_STD_VAL_F = setCharAt(item.INV_X_STD_VAL_F, 2, 'K');\n\n        item.INV_X_OTHNL_VAL = parseFloat(item?.INV_X_IVAL_TOT_DVAL) - (parseFloat(item?.INV_X_LIFO_VAL) + parseFloat(item?.INV_X_FIFO_VAL) + parseFloat(item?.INV_X_AVG_VAL) + parseFloat(item?.INV_X_STD_VAL));\n        item.INV_X_OTHNL_VAL_F = setCharAt(item.INV_X_OTHNL_VAL_F, 2, 'K');\n\n        EvaluateDetailValuationMethodsPathC()\n    }   \n    return msg\n}\n\nEvaluateDetailValuationMethods()",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 750,
+        "y": 1580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2bda237fe1cd2f49",
+        "type": "function",
+        "z": "184cce6ee0df3c6f",
+        "name": "MIV: EvaluateNoNLIFOValuationMethodModule",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nlet cache = global.get(\"lookupCache\");\n\nlet inv_reserve_file = cache.data.find(\n    item =>\n        item.module === \"inv_reserve\" &&\n        item.param === 'inv_reserve' &&\n        item.program === \"aies\" &&\n        item.unit_type === \"estab\"\n)?.json_values;\n\n\nlet params = {\n    UL: 0,\n    LL: 0\n}\nconst setCharAt = (str, index, char) => {\n    if (index > str.length - 1) return str.padEnd(index, ' ') + char;\n    return str.substr(0, index) + char + str.substr(index + char.length);\n};\nlet control = {}\nlet ec = {}\nlet item = {}\nfunction EvaluateNoNLIFOValuationMethodModulePathA(){\n\n}\nfunction EvaluateNoNLIFOValuationMethodModule() {\n    if(parseFloat(item?.INV_X_FIFO_VAL) > 0){\n        if (0 == (parseFloat(item?.INV_X_AVG_VAL) + parseFloat(item?.INV_X_STD_VAL) + parseFloat(item?.INV_X_OTHNL_VAL))){\n            if(parseFloat(item?.INV_X_FIFO_VAL) != parseFloat(item?.INV_X_IVAL_TOT_DVAL)){\n                item.INV_X_FIFO_VAL = item?.INV_X_IVAL_TOT_DVAL\n                item.INV_X_FIFO_VAL_F = setCharAt(item?.INV_X_FIFO_VAL_F , 2, 'L')\n            }\n            EvaluateNoNLIFOValuationMethodModulePathA()\n        }else{\n            item.INV_X_FIFO_VAL = (parseFloat(ec?.INV_XY_FIFO_VAL) / parseFloat(item?.INV_XY_NL_TOT_DVAL)) * parseFloat(item?.INV_X_IVAL_TOT_DVAL)\n            item.INV_X_FIFO_VAL_F = setCharAt(item.INV_X_FIFO_VAL_F, 2, 'K')\n            item.INV_X_STD_VAL = (parseFloat(ec?.INV_XY_STD_VAL) / parseFloat(item?.INV_XY_NL_TOT_DVAL)) * parseFloat(item?.INV_X_IVAL_TOT_DVAL)\n            item.INV_X_STD_VAL_F = setCharAt(item.INV_X_STD_VAL_F, 2, 'K')\n            item.INV_X_OTHNL_VAL = parseFloat(item?.INV_X_IVAL_TOT_DVAL) - (parseFloat(item?.INV_X_FIFO_VAL)  + parseFloat(item?.INV_X_AVG_VAL) + parseFloat(item?.INV_X_STD_VAL))\n            item.INV_X_OTHNL_VAL_F = setCharAt(item.INV_X_OTHNL_VAL_F, 2, 'K')\n            EvaluateNoNLIFOValuationMethodModulePathA()\n        }\n    } else if (parseFloat(item?.INV_X_AVG_VAL) > 0){\n        if((parseFloat(item?.INV_X_STD_VAL) + parseFloat(item?.INV_X_OTHNL_VAL)) == 0){\n            if (parseFloat(item?.INV_X_AVG_VAL) != parseFloat(item?.INV_X_IVAL_TOT_DVAL)) {\n                item.INV_X_AVGCOST_VAL = item?.INV_X_IVAL_TOT_DVAL\n                item.INV_X_AVGCOST_VAL_F = setCharAt(item?.INV_X_FIFO_VAL_F, 2, 'L') \n            }\n            EvaluateNoNLIFOValuationMethodModulePathA()\n        }else{\n            item.INV_X_AVG_VAL = (parseFloat(ec?.INV_XY_AVG_VAL) / parseFloat(item?.INV_XY_NL_TOT_DVAL)) * parseFloat(item?.INV_X_IVAL_TOT_DVAL)\n            item.INV_X_AVG_VAL_F = setCharAt(item.INV_X_AVG_VAL_F, 2, 'K')\n            item.INV_X_STD_VAL = (parseFloat(ec?.INV_XY_STD_VAL) / parseFloat(item?.INV_XY_NL_TOT_DVAL)) * parseFloat(item?.INV_X_IVAL_TOT_DVAL)\n            item.INV_X_STD_VAL_F = setCharAt(item.INV_X_STD_VAL_F, 2, 'K')\n            item.INV_X_OTHNL_VAL = parseFloat(item?.INV_X_IVAL_TOT_DVAL) - (parseFloat(item?.INV_X_AVG_VAL) + parseFloat(item?.INV_X_STD_VAL))\n            item.INV_X_OTHNL_VAL_F = setCharAt(item.INV_X_OTHNL_VAL_F, 2, 'K')\n            EvaluateNoNLIFOValuationMethodModulePathA()\n\n        }\n\n    }else if(parseFloat(item?.INV_X_STDCOST_VAL) > 0){\n        if(parseFloat(item?.INV_X_OTHNL_VAL) == 0){\n                if(parseFloat(item?.INV_X_STD_VAL) != parseFloat(item?.INV_X_IVAL_TOT_DVAL)){\n                    item.INV_X_STD_VAL = item?.INV_X_IVAL_TOT_DVAL\n                    item.INV_X_STD_VAL_F = setCharAt(item.INV_X_STD_VAL_F, 2, 'L')\n                }\n                EvaluateNoNLIFOValuationMethodModulePathA()\n\n        }else{\n            item.INV_X_STDCOST_VAL = (parseFloat(ec?.INV_XY_STDCOST_VAL) / parseFloat(item?.INV_XY_NONLIFO_TOT_VAL)) * parseFloat(item?.INV_X_IVAL_TOT_DVAL)\n            item.INV_X_STD_VAL_F = setCharAt(item.INV_X_STD_VAL_F, 2, 'K')\n            item.INV_X_OTHNL_VAL = parseFloat(item?.INV_X_IVAL_TOT_DVAL) - parseFloat(item?.INV_X_STDCOST_VAL)\n            item.INV_X_OTHNL_VAL_F = setCharAt(item.INV_X_OTHNL_VAL_F, 2, 'K')\n            EvaluateNoNLIFOValuationMethodModulePathA()\n        }\n    }else if(parseFloat(item?.INV_X_OTHNL_VAL) == parseFloat(item?.INV_X_IVAL_TOT_DVAL)){\n        EvaluateNoNLIFOValuationMethodModulePathA()\n    }else{\n        item.INV_X_OTHNL_VAL = parseFloat(item.INV_X_IVAL_TOT_DVAL)\n        item.INV_X_OTHNL_VAL = setCharAt(item.INV_X_OTHNL_VAL, 2, 'L')\n        EvaluateNoNLIFOValuationMethodModulePathA()\n    }\n    return msg\n}\n\nEvaluateNoNLIFOValuationMethodModule()\n\n\n// item.INV_X_STD_COST_VAL = (parseFloat(ec?.INV_XY_STDCOST_VAL) / parseFloat(item?.INV_XY_NONLIFO_TOT_DVAL)) * parseFloat(item?.INV_X_IVAL_TOT_DVAL)\n// item.INV_X_STDCOST_VAL_F = setCharAt(item.INV_X_STDCOST_VAL_F, 2, 'K')\n// item.INV_X_OTHNLLIFO_VAL = parseFloat(item?.INV_X_IVAL_TOT_DVAL) - parseFloat(item?.INV_X_STDCOST_VAL)\n// item.INV_X_OTHNONLIFO_VAL_F = setCharAt(item.INV_X_OTHNONLIFO_VAL_F, 2, 'K')\n// EvaluateNoNLIFOValuationMethodModulePathA()",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 780,
+        "y": 1680,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5c958e901a16d2a1",
+        "type": "function",
+        "z": "184cce6ee0df3c6f",
+        "name": "MIV: NonLIFORANDOMModule",
+        "func": "\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nlet cache = global.get(\"lookupCache\");\n\nlet inv_reserve_file = cache.data.find(\n    item =>\n        item.module === \"inv_reserve\" &&\n        item.param === 'inv_reserve' &&\n        item.program === \"aies\" &&\n        item.unit_type === \"estab\"\n)?.json_values;\n\n\nlet params = {\n    UL: 0,\n    LL: 0\n}\nconst setCharAt = (str, index, char) => {\n    if (index > str.length - 1) return str.padEnd(index, ' ') + char;\n    return str.substr(0, index) + char + str.substr(index + char.length);\n};\nlet control = {}\nlet ec = {}\nlet item = {}\nfunction NonLIFORANDOMModulePathA(){\n    item.INV_X_NL_TOT_DVAL = parseFloat(item?.INV_X_FIFO_VAL) + parseFloat(item?.INV_X_AVG_VAL) + parseFloat(item?.INV_X_STD_VAL) + parseFloat(item?.INV_X_OTHNL_VAL)\n    item.INV_X_NL_TOT_DVAL = setCharAt(item?.INV_X_NL_TOT_DVAL, 2, 'J')\n    record.ACTION = 'Return to Evaluate Details Valuation Methods'\n    msg.payload.csv[record_idx] = record\n    return msg\n\n}\nfunction NonLIFORANDOMModulePathB(){\n    if ((0 <= parseFloat(item?.NLFLO)) && (30 >= parseFloat(item?.NLFLO))){\n        item.INV_X_STD_VAL = parseFloat(item?.INV_X_IVAL_TOT_DVAL) - parseFloat(item?.INV_X_LIFO_VAL)\n        item.INV_X_STD_VAL = setCharAt(item?.INV_X_STD_VAL, 2, 'J')\n        item.INV_X_FIFO_VAL = 0\n        item.INV_X_FIFO_VAL_F = setCharAt(item?.INV_X_FIFO_VAL_F, 2, 'J')\n        item.INV_X_AVG_VAL = 0\n        item.INV_X_AVG_VAL_F = setCharAt(item?.INV_X_AVG_VAL_F, 2, 'J')\n        item.INV_X_OTHNL_VAL = 0\n        item.INV_X_OTHNL_VAL_F = setCharAt(item?.INV_X_OTHNL_VAL_F, 2, 'J')\n        NonLIFORANDOMModulePathA()\n\n    }else if((31 <= parseFloat(31)) && ( parseFloat(item?.NLFLO) <=40)){\n        item.INV_X_AVG_VAL = parseFloat(item?.INV_X_IVAL_TOT_DVAL) - parseFloat(item?.INV_X_LIFO_VAL)\n        item.INV_X_AVG_VAL_F = setCharAt(item?.INV_X_AVG_VAL_F, 2, 'J')\n        item.INV_X_FIFO_VAL = 0\n        item.INV_X_FIFO_VAL_F = setCharAt(item?.INV_X_FIFO_VAL_F, 2, 'J')\n        item.INV_X_STD_VAL = parseFloat(item?.INV_X_IVAL_TOT_DVAL) - parseFloat(item?.INV_X_LIFO_VAL)\n        item.INV_X_STD_VAL = 0\n        item.INV_X_OTHNL_VAL = 0\n        item.INV_X_OTHNL_VAL_F = setCharAt(item?.INV_X_OTHNL_VAL_F, 2, 'J')\n        NonLIFORANDOMModulePathA()\n\n    }else if((41 <= parseFloat(item?.NLFLO)) && (parseFloat(item?.NLFLO) <=50)){\n        item.INV_X_OTHNL_VAL = parseFloat(item?.INV_X_IVAL_TOT_DVAL) - parseFloat(item?.INV_X_LIFO_VAL)\n        item.INV_X_OTHNL_VAL_F = setCharAt(item?.INV_X_OTHNL_VAL_F, 2, 'J')\n        item.INV_X_FIFO_VAL = 0\n        item.INV_X_FIFO_VAL_F = setCharAt(item?.INV_X_FIFO_VAL_F, 2, 'J')\n        item.INV_X_AVG_VAL = 0\n        item.INV_X_AVG_VAL_F = setCharAt(item?.INV_X_AVG_VAL_F, 2, 'J')\n        item.INV_X_STD_VAL = parseFloat(item?.INV_X_IVAL_TOT_DVAL) - parseFloat(item?.INV_X_LIFO_VAL)\n        item.INV_X_STD_VAL = 0\n        NonLIFORANDOMModulePathA()\n    }else{\n        item.INV_X_FIFO_VAL = parseFloat(item?.INV_X_IVAL_TOT_DVAL) - parseFloat(item?.INV_X_LIFO_VAL)\n        item.INV_X_FIFO_VAL_F = setCharAt(item?.INV_X_FIFO_VAL_F, 2, 'J')\n        item.INV_X_OTHNL_VAL = 0\n        item.INV_X_OTHNL_VAL_F = setCharAt(item?.INV_X_OTHNL_VAL_F, 2, 'J')\n        item.INV_X_AVG_VAL = 0\n        item.INV_X_AVG_VAL_F = setCharAt(item?.INV_X_AVG_VAL_F, 2, 'J')\n        item.INV_X_STD_VAL = 0\n        item.INV_X_STD_VAL = 0\n        NonLIFORANDOMModulePathA()\n\n    }\n\n}\nfunction NonLIFORANDOMModule() {\n    if(parseInt(record.i) == 2){\n        NonLIFORANDOMModulePathB()\n    }else{\n        // from where NLFO = 00\n        item.NLFO = 0\n        // \n        item.NLIFO = Math.floor(Math.random() * 100)\n        NonLIFORANDOMModulePathB()\n    }\n    return msg\n}\n\nNonLIFORANDOMModule()",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1000,
+        "y": 1780,
         "wires": [
             []
         ]
