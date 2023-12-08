@@ -613,6 +613,38 @@
         "env": []
     },
     {
+        "id": "601cd75dc2c42d32",
+        "type": "tab",
+        "label": "NAPCS BL Rounding",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "fe75af5be53552a9",
+        "type": "tab",
+        "label": "NAPCS HDICAT",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "69164b36a28c9eff",
+        "type": "tab",
+        "label": "NAPCS GOCO",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "6ca99eb94adab0b6",
+        "type": "tab",
+        "label": "NAPCS NO DONOR",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "c5ce2d38887016b2",
         "type": "subflow",
         "name": "Apply rules by level type",
@@ -2008,6 +2040,7 @@
         "id": "302cb8040ecade52",
         "type": "group",
         "z": "dad88d9a3132fed6",
+        "g": "4099bf03141f3710",
         "name": "Initialize File Name and Global set moduleFacts",
         "style": {
             "label": true
@@ -2016,8 +2049,8 @@
             "12c94ce38056fc20",
             "a47c991027033263"
         ],
-        "x": 34,
-        "y": 19,
+        "x": 1194,
+        "y": 859,
         "w": 432,
         "h": 82
     },
@@ -2112,12 +2145,14 @@
             "23ffb00caa077b23",
             "6b05d518e4c1bc47",
             "bf95042aa95f74b7",
-            "67218bea97f26dc5"
+            "67218bea97f26dc5",
+            "302cb8040ecade52",
+            "2b5207ce5d20fc0a"
         ],
         "x": 14,
-        "y": 559,
+        "y": 659,
         "w": 2252,
-        "h": 2922
+        "h": 2822
     },
     {
         "id": "d1e0f39ddacfeb20",
@@ -20325,8 +20360,8 @@
         "sendOnBlur": true,
         "className": "",
         "topicType": "msg",
-        "x": 120,
-        "y": 60,
+        "x": 1280,
+        "y": 900,
         "wires": [
             [
                 "a47c991027033263"
@@ -20428,8 +20463,7 @@
         "y": 260,
         "wires": [
             [
-                "499c2706ea3d919f",
-                "40d9b466bfb45d06"
+                "499c2706ea3d919f"
             ]
         ]
     },
@@ -20445,8 +20479,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 360,
-        "y": 60,
+        "x": 1520,
+        "y": 900,
         "wires": [
             []
         ]
@@ -20594,8 +20628,8 @@
         "syntax": "mustache",
         "template": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Upload CSV File</title>\n    <!-- Include Materialize CSS and JS -->\n    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css\">\n    <link href=\"https://fonts.googleapis.com/icon?family=Material+Icons\" rel=\"stylesheet\">\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js\"></script>\n</head>\n<body>\n  <nav>\n    <div class=\"blue nav-wrapper\">\n      <a href=\"#\" data-target=\"mobile-demo\" class=\"sidenav-trigger\"><i class=\"material-icons\">menu</i></a>\n      <ul class=\"left hide-on-med-and-down\">\n        <li><a class=\"bold\" href=\"/update_params\">Params</a></li>\n        <li><a class=\"bold\" href=\"/upload_page\">Upload csv</a></li>\n        <li><a class=\"bold\" href=\"/ui_wrapper\">UI</a></li>\n        <li><a class=\"bold\" href=\"/test_ui\">Load DB</a></li>\n      </ul>\n    </div>\n  </nav>\n\n  <ul class=\"blue sidenav\" id=\"mobile-demo\">\n      <li><a class=\"bold\" href=\"/update_params\">Params</a></li>\n        <li><a class=\"bold\" href=\"/upload_page\">Upload csv</a></li>\n        <li><a class=\"bold\" href=\"/ui_wrapper\">UI</a></li>\n        <li><a class=\"bold\" href=\"/test_ui\">Load DB</a></li>\n  </ul>\n<div class=\"container\">\n    <h1 class=\"center-align\">Upload CSV File</h1>\n    \n    <div class=\"row\">\n        <form action=\"/upload\" method=\"POST\" enctype=\"multipart/form-data\" class=\"col s12\">\n            <div class=\"file-field input-field\">\n                <div class=\"btn\">\n                    <span>File</span>\n                    <input type=\"file\" name=\"myFile\">\n                </div>\n                <div class=\"file-path-wrapper\">\n                    <input class=\"file-path validate\" type=\"text\" placeholder=\"Upload a CSV file\">\n                </div>\n            </div>\n            <div class=\"input-field center-align\">\n                <button onclick=\"showToast()\" class=\"btn waves-effect waves-light\" type=\"submit\">Submit\n                    <i class=\"material-icons right\">send</i>\n                </button>\n            </div>\n        </form>\n    </div>\n</div>\n<div class=\"container\">\n  <h4> CSV Links </h4>\n  <table class=\"responsive-table\">\n        <thead>\n          <tr>\n              <th>Name</th>\n              <th>Link</th>\n          </tr>\n        </thead>\n\n        <tbody>\n          <tr>\n            <td>rcpt_tot_val</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/rcpt_tot_val.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n          <tr>\n            <td>pay_qtr1_val</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/pay_qtr1_val.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n          <tr>\n            <td>pay_ann_val</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/pay_ann_val.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n          <tr>\n            <td>emp_mar12_num</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/emp_mar12_num.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n           <tr>\n            <td>post_edit_status_fields</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/post_edit_status_ields.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n           <tr>\n            <td>pre_db_writeback_for_leased</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/pre_db_writeback_for_leased.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n           <tr>\n            <td>unit_balance</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/unit_balance.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n           <tr>\n            <td>electricity</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/electricity.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n           <tr>\n            <td>derived_naics_code</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/derived_naics_code.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n          </tr>\n           <tr>\n            <td>classification</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/classification.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n            <tr>\n            <td>valid_zero</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/valid_zero.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n          <tr>\n            <td>best_admin_receipts</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/calculate_best_admin.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n          <tr>\n            <td>critical_error</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/critical_error.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n          <tr>\n            <td>completeness</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/completeness.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n          <tr>\n            <td>Interactive Mode</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/interactive_mode.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n          <tr>\n            <td>Geography</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/geography.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n           <tr>\n            <td>mfg_payqtr1</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/mfg_payroll_and_employment.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n           <tr>\n            <td>mfg_payann</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/mfg_payroll_and_employment.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n           <tr>\n            <td>mfg_empq1</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/mfg_payroll_and_employment.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n          <tr>\n            <td>valid_negative_value</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/valid_negative_value.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n            <tr>\n            <td>nonnorm_init_set_actvmio_opstats</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/nonnorm_init_set_actvmio_opstats.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n          <tr>\n            <td>set_basic_to_0</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/set_basic_to_0.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>Ï\n                    <tr>\n            <td>set_nonnorm</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/set_nonnorm.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n          <tr>\n            <td>nonnorm_set_opstats_actvmio</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/nonnorm_set_opstats_actvmio.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n            <tr>\n            <td>nonnorm_special_season_final</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/nonnorm_special_season_final.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n            <tr>\n            <td>nonnorm_router</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/nonnorm_router.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n\n           <tr>\n            <td>miv_lifo_valuation_method</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/miv_lifo_valuation_method.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n\n           <tr>\n            <td>evaluate_lifo_reserve</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/evaluate_lifo_reserve.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n\n           <tr>\n            <td>miv_evaluate_lifo_module</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/miv_evaluate_lifo_module.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n\n           <tr>\n            <td>miv_nonlifo_random</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/miv_nonlifo_random.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n\n           <tr>\n            <td>miv_evaluate_nonlifo_valuation_method</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/miv_evaluate_nonlifo_valuation_method.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n\n           <tr>\n            <td>miv_evaluate_detail_valuation_method</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/miv_evaluate_detail_valuation_method.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n\n           <tr>\n            <td>miv_evaluate_valuation_method_module</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/miv_evaluate_valuation_method_module.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n\n           <tr>\n            <td>miv_nonlifo_valuation_methods_module</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/miv_nonlifo_valuation_methods_module.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n\n           <tr>\n            <td>miv_inventories_balance</td>\n            <td>\n              <a href=\"https://aies-qflow-modules.s3.us-gov-east-1.amazonaws.com/miv_inventories_balance.csv?version={{msg.version}}\">\n                link\n              </a>\n            </td>\n          </tr>\n\n        </tbody>\n      </table>\n</div>\n<!-- Initialize Materialize Components -->\n<script>\n    M.AutoInit();\n    function showToast() {\n        M.toast({html: 'Uploading...'});\n    }\n</script>\n\n</body>\n</html>\n",
         "output": "str",
-        "x": 290,
-        "y": 780,
+        "x": 310,
+        "y": 740,
         "wires": [
             [
                 "737e44d2.373a64"
@@ -20610,8 +20644,8 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 230,
-        "y": 600,
+        "x": 490,
+        "y": 740,
         "wires": []
     },
     {
@@ -20631,8 +20665,8 @@
         "z": "dad88d9a3132fed6",
         "g": "4099bf03141f3710",
         "name": "",
-        "x": 910,
-        "y": 1220,
+        "x": 990,
+        "y": 800,
         "wires": []
     },
     {
@@ -20665,8 +20699,8 @@
         "syntax": "mustache",
         "template": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Upload CSV File</title>\n    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css\">\n    <link href=\"https://fonts.googleapis.com/icon?family=Material+Icons\" rel=\"stylesheet\">\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js\"></script>\n    <style>\n        /* Add custom styles for responsiveness */\n         .table-container {\n            width: 95%;\n            overflow-x: auto;\n            margin: 2%;\n        }\n        table {\n            width: 100%;\n            border-collapse: collapse;\n        }\n\n        th, td {\n            border: 1px solid #dddddd;\n            text-align: left;\n            padding: 8px;\n        }\n\n        tr:nth-child(even) {\n            background-color: #f2f2f2;\n        }\n    </style>\n</head>\n<body>\n<nav>\n    <div class=\"blue nav-wrapper\">\n      <a href=\"#\" data-target=\"mobile-demo\" class=\"sidenav-trigger\"><i class=\"material-icons\">menu</i></a>\n      <ul class=\"left hide-on-med-and-down\">\n        <li><a class=\"bold\" href=\"/update_params\">Params</a></li>\n        <li><a class=\"bold\" href=\"/upload_page\">Upload csv</a></li>\n        <li><a class=\"bold\" href=\"/ui_wrapper\">UI</a></li>\n      </ul>\n    </div>\n  </nav>\n\n  <ul class=\"blue sidenav\" id=\"mobile-demo\">\n      <li><a class=\"bold\" href=\"/update_params\">Params</a></li>\n        <li><a class=\"bold\" href=\"/upload_page\">Upload csv</a></li>\n        <li><a class=\"bold\" href=\"/ui_wrapper\">UI</a></li>\n  </ul>\n\n  <div class=\"container\">\n    {{!-- <h1 class=\"center-align\">Uploaded</h1> --}}\n  </div>\n  <div id=\"hide_this_to_load\">{{payload}}</div>\n    <div class=\"table-container\">\n  <div id=\"load_table\"></div>\n  </div>\n  <p id=\"file_name\">{{name}}</p>\n    <div class=\"input-field center-align\">\n    <button onclick='saveCsv()' class=\"btn waves-effect waves-light\" type=\"submit\">Save\n    </button>\n     <a href='/ui_wrapper' class=\"btn waves-effect waves-light\" type=\"submit\">Go {{msg.filename}}\n    </a>\n  </div>\n<script>\n  let data = document.getElementById('hide_this_to_load').innerHTML\n  let file_name = document.getElementById('file_name').innerHTML\n  document.getElementById('hide_this_to_load').style.display = 'none';\n  document.getElementById('file_name').style.display = 'none';\n  data = JSON.parse(data);\n  let headers; \n  document.addEventListener('DOMContentLoaded', function() {\n    const loadTableDiv = document.getElementById('load_table');\n    const table = document.createElement('table');\n    table.classList.add('striped');\n    const tableHeader = document.createElement('thead');\n    const headerRow = document.createElement('tr');\n    headers = Object.keys(data[0]); // Set headers here\n    headers.forEach(headerText => {\n      const th = document.createElement('th');\n      th.textContent = headerText;\n      headerRow.appendChild(th);\n    });\n    tableHeader.appendChild(headerRow);\n    table.appendChild(tableHeader);\n    const tableBody = document.createElement('tbody');\n    data.forEach((item, index) => {\n      const row = document.createElement('tr');\n      headers.forEach(header => {\n        const cell = document.createElement('td');\n        if (index !== 0) { // Make fields editable for all rows except the header row\n          const input = document.createElement('input');\n          input.value = item[header];\n          input.addEventListener('input', function() {\n            item[header] = this.value;\n            const updatedJData = getUpdatedData();\n            // console.log(updatedJData);\n          });\n          cell.appendChild(input);\n        } else {\n          cell.textContent = item[header];\n        }\n        row.appendChild(cell);\n      });\n      tableBody.appendChild(row);\n    });\n    table.appendChild(tableBody);\n    loadTableDiv.appendChild(table);\n  });\n\n  function getUpdatedData() {\n    const updatedData = [];\n    const rows = document.querySelectorAll('#load_table tbody tr');\n    rows.forEach(row => {\n      const rowData = {};\n      const cells = row.querySelectorAll('td');\n      cells.forEach((cell, index) => {\n        const header = headers[index];\n        if (header) {\n          rowData[header] = cell.firstChild.value || cell.textContent;\n        }\n      });\n      updatedData.push(rowData);\n    });\n    return updatedData;\n  }\n  const jsonToCSV = (jsonArray) => {\n    const headers = Object.keys(jsonArray[0]);\n\n    let csv = headers.join(',') + '\\n';\n\n    jsonArray.forEach(obj => {\n        const values = headers.map(header => {\n            const escapedValue = obj[header].replace(/\"/g, '\\\\\"');\n            return `\"${escapedValue}\"`;\n        });\n        csv += values.join(',') + '\\n';\n    });\n\n    return csv;\n};\n  function saveCsv(){\n    console.log(JSON.stringify({filename: file_name, csvData:jsonToCSV(getUpdatedData())}))\n     fetch('/saveCsv', {\n      method: 'POST',\n      headers: {\n        'Content-Type': 'application/json'\n      },\n      body: JSON.stringify({filename: file_name, csvData:jsonToCSV(getUpdatedData())})\n    })\n    .then(response => {\n      if (response.ok) {\n        console.log('Update successful!');\n      } else {\n        console.error('Error updating params:', response.status);\n      }\n    })\n    .catch(error => {\n      console.error('Error:', error);\n    });\n  }\n</script>\n\n\n</body>\n</html>\n",
         "output": "str",
-        "x": 770,
-        "y": 1220,
+        "x": 830,
+        "y": 800,
         "wires": [
             [
                 "7d8e179a.283e4"
@@ -20686,8 +20720,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 300,
-        "y": 820,
+        "x": 320,
+        "y": 800,
         "wires": [
             [
                 "0464e4eb98976890",
@@ -20708,7 +20742,7 @@
         "createDir": false,
         "overwriteFile": "true",
         "encoding": "none",
-        "x": 510,
+        "x": 550,
         "y": 860,
         "wires": [
             []
@@ -20862,10 +20896,11 @@
         "id": "2b5207ce5d20fc0a",
         "type": "comment",
         "z": "dad88d9a3132fed6",
+        "g": "4099bf03141f3710",
         "name": "Simple upload a file",
         "info": "",
-        "x": 990,
-        "y": 820,
+        "x": 1390,
+        "y": 780,
         "wires": []
     },
     {
@@ -21103,29 +21138,13 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 610,
-        "y": 1220,
+        "x": 670,
+        "y": 800,
         "wires": [
             [
                 "e1643981.20d7c8"
             ]
         ]
-    },
-    {
-        "id": "40d9b466bfb45d06",
-        "type": "debug",
-        "z": "dad88d9a3132fed6",
-        "name": "debug 101",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 610,
-        "y": 80,
-        "wires": []
     },
     {
         "id": "2e210837e211c8be",
@@ -21138,7 +21157,7 @@
         "upload": true,
         "swaggerDoc": "",
         "x": 120,
-        "y": 1220,
+        "y": 1020,
         "wires": [
             [
                 "20ef4922bea8d7fd"
@@ -21159,7 +21178,7 @@
         "finalize": "",
         "libs": [],
         "x": 300,
-        "y": 1300,
+        "y": 1020,
         "wires": [
             [
                 "0464e4eb98976890"
@@ -25274,15 +25293,15 @@
         "type": "function",
         "z": "05f39827e3106c22",
         "name": "MIV: NonLIFORANDOMModule",
-        "func": "\n// let record_idx = global.get(\"ptrModuleFacts\");\n// let record = msg.payload.csv[record_idx];\n\n// let cache = global.get(\"lookupCache\");\n\n// let inv_reserve_file = cache.data.find(\n//     item =>\n//         item.module === \"inv_reserve\" &&\n//         item.param === 'inv_reserve' &&\n//         item.program === \"aies\" &&\n//         item.unit_type === \"estab\"\n// )?.json_values;\n\n\n// let params = {\n//     UL: 0,\n//     LL: 0\n// }\n// const setCharAt = (str, index, char) => {\n//     if (index > str.length - 1) return str.padEnd(index, ' ') + char;\n//     return str.substr(0, index) + char + str.substr(index + char.length);\n// };\n// let control = {}\n// let ec = {}\n// let item = {}\n// function NonLIFORANDOMModulePathA(){\n//     item.INV_X_NL_TOT_DVAL = parseFloat(item?.INV_X_FIFO_VAL) + parseFloat(item?.INV_X_AVG_VAL) + parseFloat(item?.INV_X_STD_VAL) + parseFloat(item?.INV_X_OTHNL_VAL)\n//     item.INV_X_NL_TOT_DVAL = setCharAt(item?.INV_X_NL_TOT_DVAL, 2, 'J')\n//     record.ACTION = 'Return to Evaluate Details Valuation Methods'\n//     msg.payload.csv[record_idx] = record\n//     return msg\n\n// }\n// function NonLIFORANDOMModulePathB(){\n//     if ((0 <= parseFloat(item?.NLFLO)) && (30 >= parseFloat(item?.NLFLO))){\n//         item.INV_X_STD_VAL = parseFloat(item?.INV_X_IVAL_TOT_DVAL) - parseFloat(item?.INV_X_LIFO_VAL)\n//         item.INV_X_STD_VAL = setCharAt(item?.INV_X_STD_VAL, 2, 'J')\n//         item.INV_X_FIFO_VAL = 0\n//         item.INV_X_FIFO_VAL_F = setCharAt(item?.INV_X_FIFO_VAL_F, 2, 'J')\n//         item.INV_X_AVG_VAL = 0\n//         item.INV_X_AVG_VAL_F = setCharAt(item?.INV_X_AVG_VAL_F, 2, 'J')\n//         item.INV_X_OTHNL_VAL = 0\n//         item.INV_X_OTHNL_VAL_F = setCharAt(item?.INV_X_OTHNL_VAL_F, 2, 'J')\n//         NonLIFORANDOMModulePathA()\n\n//     }else if((31 <= parseFloat(31)) && ( parseFloat(item?.NLFLO) <=40)){\n//         item.INV_X_AVG_VAL = parseFloat(item?.INV_X_IVAL_TOT_DVAL) - parseFloat(item?.INV_X_LIFO_VAL)\n//         item.INV_X_AVG_VAL_F = setCharAt(item?.INV_X_AVG_VAL_F, 2, 'J')\n//         item.INV_X_FIFO_VAL = 0\n//         item.INV_X_FIFO_VAL_F = setCharAt(item?.INV_X_FIFO_VAL_F, 2, 'J')\n//         item.INV_X_STD_VAL = parseFloat(item?.INV_X_IVAL_TOT_DVAL) - parseFloat(item?.INV_X_LIFO_VAL)\n//         item.INV_X_STD_VAL = 0\n//         item.INV_X_OTHNL_VAL = 0\n//         item.INV_X_OTHNL_VAL_F = setCharAt(item?.INV_X_OTHNL_VAL_F, 2, 'J')\n//         NonLIFORANDOMModulePathA()\n\n//     }else if((41 <= parseFloat(item?.NLFLO)) && (parseFloat(item?.NLFLO) <=50)){\n//         item.INV_X_OTHNL_VAL = parseFloat(item?.INV_X_IVAL_TOT_DVAL) - parseFloat(item?.INV_X_LIFO_VAL)\n//         item.INV_X_OTHNL_VAL_F = setCharAt(item?.INV_X_OTHNL_VAL_F, 2, 'J')\n//         item.INV_X_FIFO_VAL = 0\n//         item.INV_X_FIFO_VAL_F = setCharAt(item?.INV_X_FIFO_VAL_F, 2, 'J')\n//         item.INV_X_AVG_VAL = 0\n//         item.INV_X_AVG_VAL_F = setCharAt(item?.INV_X_AVG_VAL_F, 2, 'J')\n//         item.INV_X_STD_VAL = parseFloat(item?.INV_X_IVAL_TOT_DVAL) - parseFloat(item?.INV_X_LIFO_VAL)\n//         item.INV_X_STD_VAL = 0\n//         NonLIFORANDOMModulePathA()\n//     }else{\n//         item.INV_X_FIFO_VAL = parseFloat(item?.INV_X_IVAL_TOT_DVAL) - parseFloat(item?.INV_X_LIFO_VAL)\n//         item.INV_X_FIFO_VAL_F = setCharAt(item?.INV_X_FIFO_VAL_F, 2, 'J')\n//         item.INV_X_OTHNL_VAL = 0\n//         item.INV_X_OTHNL_VAL_F = setCharAt(item?.INV_X_OTHNL_VAL_F, 2, 'J')\n//         item.INV_X_AVG_VAL = 0\n//         item.INV_X_AVG_VAL_F = setCharAt(item?.INV_X_AVG_VAL_F, 2, 'J')\n//         item.INV_X_STD_VAL = 0\n//         item.INV_X_STD_VAL = 0\n//         NonLIFORANDOMModulePathA()\n\n//     }\n\n// }\n// function NonLIFORANDOMModule() {\n//     if(parseInt(record.i) == 2){\n//         NonLIFORANDOMModulePathB()\n//     }else{\n//         // from where NLFO = 00\n//         item.NLFO = 0\n//         // \n//         item.NLIFO = Math.floor(Math.random() * 100)\n//         NonLIFORANDOMModulePathB()\n//     }\n//     return msg\n// }\n\n// NonLIFORANDOMModule()\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nfunction setCharAt(str, index, chr) {\n    if ([null, undefined].includes(str)) {\n        let newstr = ''\n        for (let i = 0; i < index; i++) {\n            newstr = newstr + ' ';\n        }\n        newstr = newstr + chr\n        return newstr;\n    } else {\n        if (index > str.length - 1) {\n            let addstr = index - str.length\n            let newstr = str\n            for (let i = 0; i < addstr; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            return str.substring(0, index) + chr + str.substring(index + 1);\n        }\n    }\n}\n\nfunction NonLIFORANDOMModulePath(variable) {\n    let avg = ''\n    let avg_f = ''\n    let fifo = ''\n    let fifo_f = ''\n    let std = ''\n    let std_f = ''\n    let othnl = ''\n    let othnl_f = ''\n    let ival_tot = ''\n    let nl_tot = ''\n    let nl_tot_f = ''\n    let lifo = ''\n    if (variable == 'E') {\n        avg = 'INV_E_AVG_VAL'\n        avg_f = 'INV_E_AVG_VAL_F'\n        fifo = 'INV_E_FIFO_VAL'\n        fifo_f = 'INV_E_FIFO_VAL_F'\n        std = 'INV_E_STD_VAL'\n        std_f = 'INV_E_STD_VAL_F'\n        othnl = 'INV_E_OTHNL_VAL'\n        othnl_f = 'INV_E_OTHNL_VAL_F'\n        ival_tot = 'INV_E_IVAL_TOT_DVAL'\n        nl_tot = 'INV_E_NL_TOT_DVAL'\n        nl_tot_f = 'INV_E_NL_TOT_DVAL_F'\n        lifo = 'INV_E_LIFO_VAL'\n    } else if (variable == 'B') {\n        avg = 'INV_B_AVG_VAL'\n        avg_f = 'INV_B_AVG_VAL_F'\n        fifo = 'INV_B_FIFO_VAL'\n        fifo_f = 'INV_B_FIFO_VAL_F'\n        std = 'INV_B_STD_VAL'\n        std_f = 'INV_B_STD_VAL_F'\n        othnl = 'INV_B_OTHNL_VAL'\n        othnl_f = 'INV_B_OTHNL_VAL_F'\n        ival_tot = 'INV_B_IVAL_TOT_DVAL'\n        nl_tot = 'INV_B_NL_TOT_DVAL'\n        nl_tot_f = 'INV_B_NL_TOT_DVAL_F'\n        lifo = 'INV_B_LIFO_VAL'\n    }\n    if ((0 <= parseInt(record?.NLFLO)) && (30 >= parseInt(record?.NLFLO))) {\n        record[std] = parseFloat(record?.[ival_tot]) - parseFloat(record?.[lifo])\n        record[std_f] = setCharAt(record?.[std_f], 2, 'J')\n        record[fifo] = 0\n        record[fifo_f] = setCharAt(record?.[fifo_f], 2, 'J')\n        record[avg] = 0\n        record[avg_f] = setCharAt(record?.[avg_f], 2, 'J')\n        record[othnl] = 0\n        record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'J')\n\n    } else if ((31 <= parseInt(record?.NLFLO)) && (40 >= parseInt(record?.NLFLO))) {\n        record[avg] = parseFloat(record?.[ival_tot]) - parseFloat(record?.[lifo])\n        record[avg_f] = setCharAt(record?.[avg_f], 2, 'J')\n        record[fifo] = 0\n        record[fifo_f] = setCharAt(record?.[fifo_f], 2, 'J')\n        record[std] = 0\n        record[std_f] = setCharAt(record?.[std_f], 2, 'J')\n        record[othnl] = 0\n        record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'J')\n\n    } else if ((41 <= parseInt(record?.NLFLO)) && (50 >= parseInt(record?.NLFLO))) {\n        record[othnl] = parseFloat(record?.[ival_tot]) - parseFloat(record?.[lifo])\n        record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'J')\n        record[fifo] = 0\n        record[fifo_f] = setCharAt(record?.[fifo_f], 2, 'J')\n        record[std] = 0\n        record[std_f] = setCharAt(record?.[std_f], 2, 'J')\n        record[avg] = 0\n        record[avg_f] = setCharAt(record?.[avg_f], 2, 'J')\n\n    } else {\n        record[fifo] = parseFloat(record?.[ival_tot]) - parseFloat(record?.[lifo])\n        record[fifo_f] = setCharAt(record?.[fifo_f], 2, 'J')\n        record[avg] = 0\n        record[avg_f] = setCharAt(record?.[avg_f], 2, 'J')\n        record[std] = 0\n        record[std_f] = setCharAt(record?.[std_f], 2, 'J')\n        record[othnl] = 0\n        record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'J')\n    }\n    record[nl_tot] = parseFloat(record?.[fifo]) + parseFloat(record?.[avg]) + parseFloat(record?.[std]) + parseFloat(record?.[othnl])\n    record[nl_tot_f] = setCharAt(record?.[nl_tot_f], 2, 'J')\n}\nfunction NonLIFORANDOMModule() {\n    record.NLFLO = 0\n    record.NLFLO = parseInt(Math.floor(Math.random() * 100))\n    if (record.NLFLO < 10) {\n        record.NLFLO = '0' + record.NLFLO\n    } else {\n        record.NLFLO = '' + record.NLFLO\n    }\n    NonLIFORANDOMModulePath('B')\n    NonLIFORANDOMModulePath('E')\n    record.ACTION = 'Return to Evaluate Details Valuation Methods'\n}\n\nNonLIFORANDOMModule()\nreturn msg\n",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nfunction setCharAt(str, index, chr) {\n    if ([null, undefined].includes(str)) {\n        let newstr = ''\n        for (let i = 0; i < index; i++) {\n            newstr = newstr + ' ';\n        }\n        newstr = newstr + chr\n        return newstr;\n    } else {\n        if (index > str.length - 1) {\n            let addstr = index - str.length\n            let newstr = str\n            for (let i = 0; i < addstr; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            return str.substring(0, index) + chr + str.substring(index + 1);\n        }\n    }\n}\n\nfunction NonLIFORANDOMModulePath(variable) {\n    let avg = ''\n    let avg_f = ''\n    let fifo = ''\n    let fifo_f = ''\n    let std = ''\n    let std_f = ''\n    let othnl = ''\n    let othnl_f = ''\n    let ival_tot = ''\n    let nl_tot = ''\n    let nl_tot_f = ''\n    let lifo = ''\n    if (variable == 'E') {\n        avg = 'INV_E_AVG_VAL'\n        avg_f = 'INV_E_AVG_VAL_F'\n        fifo = 'INV_E_FIFO_VAL'\n        fifo_f = 'INV_E_FIFO_VAL_F'\n        std = 'INV_E_STD_VAL'\n        std_f = 'INV_E_STD_VAL_F'\n        othnl = 'INV_E_OTHNL_VAL'\n        othnl_f = 'INV_E_OTHNL_VAL_F'\n        ival_tot = 'INV_E_IVAL_TOT_DVAL'\n        nl_tot = 'INV_E_NL_TOT_DVAL'\n        nl_tot_f = 'INV_E_NL_TOT_DVAL_F'\n        lifo = 'INV_E_LIFO_VAL'\n    } else if (variable == 'B') {\n        avg = 'INV_B_AVG_VAL'\n        avg_f = 'INV_B_AVG_VAL_F'\n        fifo = 'INV_B_FIFO_VAL'\n        fifo_f = 'INV_B_FIFO_VAL_F'\n        std = 'INV_B_STD_VAL'\n        std_f = 'INV_B_STD_VAL_F'\n        othnl = 'INV_B_OTHNL_VAL'\n        othnl_f = 'INV_B_OTHNL_VAL_F'\n        ival_tot = 'INV_B_IVAL_TOT_DVAL'\n        nl_tot = 'INV_B_NL_TOT_DVAL'\n        nl_tot_f = 'INV_B_NL_TOT_DVAL_F'\n        lifo = 'INV_B_LIFO_VAL'\n    }\n    if ((0 <= parseInt(record?.NLFLO)) && (30 >= parseInt(record?.NLFLO))) {\n        record[std] = parseFloat(record?.[ival_tot]) - parseFloat(record?.[lifo])\n        record[std_f] = setCharAt(record?.[std_f], 2, 'J')\n        record[fifo] = 0\n        record[fifo_f] = setCharAt(record?.[fifo_f], 2, 'J')\n        record[avg] = 0\n        record[avg_f] = setCharAt(record?.[avg_f], 2, 'J')\n        record[othnl] = 0\n        record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'J')\n\n    } else if ((31 <= parseInt(record?.NLFLO)) && (40 >= parseInt(record?.NLFLO))) {\n        record[avg] = parseFloat(record?.[ival_tot]) - parseFloat(record?.[lifo])\n        record[avg_f] = setCharAt(record?.[avg_f], 2, 'J')\n        record[fifo] = 0\n        record[fifo_f] = setCharAt(record?.[fifo_f], 2, 'J')\n        record[std] = 0\n        record[std_f] = setCharAt(record?.[std_f], 2, 'J')\n        record[othnl] = 0\n        record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'J')\n\n    } else if ((41 <= parseInt(record?.NLFLO)) && (50 >= parseInt(record?.NLFLO))) {\n        record[othnl] = parseFloat(record?.[ival_tot]) - parseFloat(record?.[lifo])\n        record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'J')\n        record[fifo] = 0\n        record[fifo_f] = setCharAt(record?.[fifo_f], 2, 'J')\n        record[std] = 0\n        record[std_f] = setCharAt(record?.[std_f], 2, 'J')\n        record[avg] = 0\n        record[avg_f] = setCharAt(record?.[avg_f], 2, 'J')\n\n    } else {\n        record[fifo] = parseFloat(record?.[ival_tot]) - parseFloat(record?.[lifo])\n        record[fifo_f] = setCharAt(record?.[fifo_f], 2, 'J')\n        record[avg] = 0\n        record[avg_f] = setCharAt(record?.[avg_f], 2, 'J')\n        record[std] = 0\n        record[std_f] = setCharAt(record?.[std_f], 2, 'J')\n        record[othnl] = 0\n        record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'J')\n    }\n    record[nl_tot] = parseFloat(record?.[fifo]) + parseFloat(record?.[avg]) + parseFloat(record?.[std]) + parseFloat(record?.[othnl])\n    record[nl_tot_f] = setCharAt(record?.[nl_tot_f], 2, 'J')\n}\nfunction NonLIFORANDOMModule() {\n    record.NLFLO = 0\n    record.NLFLO = parseInt(Math.floor(Math.random() * 100))\n    if (record.NLFLO < 10) {\n        record.NLFLO = '0' + record.NLFLO\n    } else {\n        record.NLFLO = '' + record.NLFLO\n    }\n    NonLIFORANDOMModulePath('B')\n    NonLIFORANDOMModulePath('E')\n    record.ACTION = 'Return to Evaluate Details Valuation Methods'\n}\n\nNonLIFORANDOMModule()\nreturn msg\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 980,
-        "y": 480,
+        "x": 970,
+        "y": 560,
         "wires": [
             [
                 "e75b332d63ba3e20"
@@ -25516,5 +25535,77 @@
         "x": 1075,
         "y": 320,
         "wires": []
+    },
+    {
+        "id": "b2afff84193f1485",
+        "type": "function",
+        "z": "601cd75dc2c42d32",
+        "name": "NAPCS BL ROUNDING",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nfunction setCharAt(str, index, chr) {\n    if ([null, undefined].includes(str)) {\n        let newstr = ''\n        for (let i = 0; i < index; i++) {\n            newstr = newstr + ' ';\n        }\n        newstr = newstr + chr\n        return newstr;\n    } else {\n        if (index > str.length - 1) {\n            let addstr = index - str.length\n            let newstr = str\n            for (let i = 0; i < addstr; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            return str.substring(0, index) + chr + str.substring(index + 1);\n        }\n    }\n}\nfunction NAPCSBLRounding() {\n    // Create Table \n    record?.PROD_CODE \n    record?.RCPT_TOT_VAL\n    record?.PROD_CODE_MF\n    \n    record.ACTION = 'Return to Evaluate Details Valuation Methods'\n}\n\nNAPCSBLRounding()\nreturn msg\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 850,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f6885c586821c8cd",
+        "type": "function",
+        "z": "fe75af5be53552a9",
+        "name": "NAPCS HDICAT",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nfunction setCharAt(str, index, chr) {\n    if ([null, undefined].includes(str)) {\n        let newstr = ''\n        for (let i = 0; i < index; i++) {\n            newstr = newstr + ' ';\n        }\n        newstr = newstr + chr\n        return newstr;\n    } else {\n        if (index > str.length - 1) {\n            let addstr = index - str.length\n            let newstr = str\n            for (let i = 0; i < addstr; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            return str.substring(0, index) + chr + str.substring(index + 1);\n        }\n    }\n}\nfunction NAPCSHDICAT() {\n   if(record?.TABSTAT == 'Y' && parseFloat(record?.RCPT_TOT_VAL) > 0 && ['20','90'].includes(record?.RECORD_TYP_TXT)){\n        if(record?.NAPCS_IND == 'U'){\n            // Need to ask this first box here\n            if(['T','E'].includes(record?.NAPCS_NODONOR)){\n                setCharAt(record.NAPCS_HDICAT || ' ', 1, 'NC')\n            }else{\n                setCharAt(record.NAPCS_HDICAT || ' ', 1, 'C')\n            }\n\n        }else{\n            setCharAt(record?.NAPCS_HDICAT || ' ', 1, 'F')\n        }\n   }else{\n    record.NAPCS_HDICAT = ' '\n   }\n    record.ACTION = 'END'\n}\n\nNAPCSHDICAT()\nmsg.payload.csv[record_idx] = record\nreturn msg\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9d938e0309949c09",
+        "type": "function",
+        "z": "69164b36a28c9eff",
+        "name": "NAPCS: M_GOCO",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nfunction setCharAt(str, index, chr) {\n    if ([null, undefined].includes(str)) {\n        let newstr = ''\n        for (let i = 0; i < index; i++) {\n            newstr = newstr + ' ';\n        }\n        newstr = newstr + chr\n        return newstr;\n    } else {\n        if (index > str.length - 1) {\n            let addstr = index - str.length\n            let newstr = str\n            for (let i = 0; i < addstr; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            return str.substring(0, index) + chr + str.substring(index + 1);\n        }\n    }\n}\nfunction NAPCSMGOCO() {\n  if(record?.NAPCS_IND == 'Y'){\n    record.PROD_CODE_VAL= 0\n    record.USABLE = 'D'\n      setCharAt(record.PROD_CODE_F || ' ', 1, 'J')\n  }\n  if(record?.NAICS_CODE.charAt(3) == 1) // need to understand this condition\n  {\n       record.NAPCS_IND = 'Y'\n    \n      const fields = [\n          \"CAPEX_BUILD_NEW_VAL\", \"CAPEX_BUILD_USED_VAL\", \"CAPEX_BUILD_TOT_DVAL\",\n          \"CAPEX_MACH_NEW_VAL\", \"CAPEX_MACH_USED_VAL\", \"CAPEX_MACH_TOT_DVAL\",\n          \"CAPEX_AUTO_VAL\", \"CAPEX_COMPTR_VAL\", \"CAPEX_OTHMACH_VAL\",\n          \"CAPEX_OTH_NEW_VAL\", \"CAPEX_OTH_NEW_WRTIN_TXT\", \"CAPEX_OTH_USED_VAL\",\n          \"CAPEX_OTH_USED_WRTIN_TXT\", \"CAPEX_OTH_TOT_DVAL\", \"CAPEX_NEW_TOT_DVAL\",\n          \"CAPEX_USED_TOT_DVAL\", \"CAPEX_TOT_DVAL\",\n            // need to verify following _F are correctly understood\n          \"CAPEX_BUILD_NEW_VAL_F\", \"CAPEX_BUILD_USED_VAL_F\", \"CAPEX_BUILD_TOT_DVAL_F\",\n          \"CAPEX_MACH_NEW_VAL_F\", \"CAPEX_MACH_USED_VAL_F\", \"CAPEX_MACH_TOT_DVAL_F\",\n          \"CAPEX_AUTO_VAL_F\", \"CAPEX_COMPTR_VAL_F\", \"CAPEX_OTHMACH_VAL_F\",\n          \"CAPEX_OTH_NEW_VAL_F\", \"CAPEX_OTH_NEW_WRTIN_TXT_F\", \"CAPEX_OTH_USED_VAL_F\",\n          \"CAPEX_OTH_USED_WRTIN_TXT_F\", \"CAPEX_OTH_TOT_DVAL_F\", \"CAPEX_NEW_TOT_DVAL_F\",\n          \"CAPEX_USED_TOT_DVAL_F\", \"CAPEX_TOT_DVAL_F\", \n          \n          \"INV_E_FIN_VAL\", \"INV_E_WIP_VAL\", \"INV_E_MAT_VAL\",\n          \"INV_E_TOT_VAL\", \"INV_B_FIN_VAL\", \"INV_B_WIP_VAL\",\n          \"INV_B_MAT_VAL\", \"INV_B_TOT_VAL\", \"INV_E_FIFO_VAL\",\n          \"INV_E_AVG_VAL\", \"INV_E_STD_VAL\", \"INV_E_OTHNL_VAL\",\n          \"INV_E_NL_TOT_DVAL\", \"INV_B_FIFO_VAL\", \"INV_B_AVG_VAL\",\n          \"INV_B_STD_VAL\", \"INV_B_OTHNL_VAL\", \"INV_B_NL_TOT_DVAL\", \"INV_E_LIFO_VAL\", \"INV_B_LIFO_VAL\",\n          \"INV_E_IVAL_TOT_DVAL\", \"INV_B_IVAL_TOT_DVAL\", \"INV_E_LIFO_RSV_VAL\",\n          \"INV_B_LIFO_RSV_VAL\", \n          \n          \"INV_E_FIN_VAL_F\", \"INV_E_WIP_VAL_F\",\n          \"INV_E_MAT_VAL_F\", \"INV_E_TOT_VAL_F\", \"INV_B_FIN_VAL_F\",\n          \"INV_B_WIP_VAL_F\", \"INV_B_MAT_VAL_F\", \"INV_B_TOT_VAL_F\",\n          \"INV_E_FIFO_VAL_F\", \"INV_E_AVG_VAL_F\", \"INV_E_STD_VAL_F\",\n          \"INV_E_OTHNL_VAL_F\", \"INV_E_NL_TOT_DVAL_F\", \"INV_B_FIFO_VAL_F\",\n          \"INV_B_AVG_VAL_F\", \"INV_B_STD_VAL_F\", \"INV_B_OTHNL_VAL_F\",\n          \"INV_B_NL_TOT_DVAL_F\", \"INV_E_LIFO_VAL_F\", \"INV_B_LIFO_VAL_F\",\n          \"INV_E_IVAL_TOT_DVAL_F\", \"INV_B_IVAL_TOT_DVAL_F\", \"INV_E_LIFO_RSV_VAL_F\",\n          \"INV_B_LIFO_RSV_VAL_F\"\n      ];\n\n      fields.forEach(field => {\n          if (field.includes('F(3,1)')) {\n              record[field] = setCharAt(record[field] || '  ', 3, 'J')\n          }else{\n              record[field] = 0;\n          }\n      });\n      record.EXPS_MAT_V1_VAL = 0;\n      record.CSTMTOT_F = setCharAt(record.CSTMTOT_F, 3, 'L');\n\n      record.EXPS_CSTMTOT_DVAL = \n            (parseFloat(record?.EXPS_ELEC_VAL) || 0)\n          + (parseFloat(record?.EXPS_FUEL_VAL) || 0)\n          + (parseFloat(record?.EXPS_CONTRACT_VAL) || 0)\n          + (parseFloat(record?.EXPS_RESALE_VAL) || 0);\n\n  }else{\n    record.TABSTAT = 'N'\n    record.NONTABFL = 'R'\n    record.STOP = 'T'\n  }\n    record.ACTION = 'END'\n}\n\nNAPCSMGOCO()\nreturn msg\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4569aee5c3cfae11",
+        "type": "function",
+        "z": "6ca99eb94adab0b6",
+        "name": "NAPCS: NO DONOR",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nfunction setCharAt(str, index, chr) {\n    if ([null, undefined].includes(str)) {\n        let newstr = ''\n        for (let i = 0; i < index; i++) {\n            newstr = newstr + ' ';\n        }\n        newstr = newstr + chr\n        return newstr;\n    } else {\n        if (index > str.length - 1) {\n            let addstr = index - str.length\n            let newstr = str\n            for (let i = 0; i < addstr; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            return str.substring(0, index) + chr + str.substring(index + 1);\n        }\n    }\n}\nfunction NAPCSNODONOR() {\n    \n}\n\nNAPCSNODONOR()\nreturn msg\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 300,
+        "wires": [
+            []
+        ]
     }
 ]
