@@ -22622,10 +22622,10 @@
         "type": "function",
         "z": "184cce6ee0df3c6f",
         "name": "NAPCS Balance",
-        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nconst setCharAt = (str, index, char) => {\n    if (index > str.length - 1) return str.padEnd(index, ' ') + char;\n    return str.substr(0, index) + char + str.substr(index + char.length);\n};\n\nfunction NAPCSBalancing() {\n\n    if (record?.NAICS_SECTOR == '31' && record?.SUBSAMP_IND_TXT != 'MC') {\n        if (record?.NAPCS_IND == '') {\n            if (record?.HISTSTAT == 'Y' &&\n                record?.H_NAPCSIND == 'U' &&\n                parseInt(record?.H_NAPCSBLTOT) > 0 &&\n                parseInt(record?.H_RCPT_TOT_VAL > 0) &&\n                parseInt(record?.RCPT_TOT_VAL > 0) &&\n                record?.NAPCSIMP == 'Y') {\n                record.NAPCSIND = 'U'\n                record.NAPCSIMP = 'Y'\n\n                record.NAPCS_IND = 'U'\n                record.NAPCS_IMP = 'Y'\n                record.NAPCS_BLTOT\n                // Append on Current REF_PER NAPCS Table Todo\n\n                let PROD_CODE = record?.H_PROD_CODE\n                let USABLE = 'U'\n                let PROD_CODE_VAL = parseFloat(record?.H_PROD_CODE_VAL) * (\n                    parseFloat(record?.RCPT_TOT_VAL) /\n                    parseFloat(record?.H_RCPT_TOT_VAL)\n                )\n                let REPORTING_ID = record?.REPORTING_ID\n                let REF_PER = record?.REF_PER\n                PROD_CODE = setCharAt(PROD_CODE.toString(), 2, 'H');\n\n                // Set Set NAPCS_BLTOT = sum of PROD_CODE_VAL where PROD_CODE(7: 3) = ‘000’\n                NAPCSBalancepathA()\n            } else {\n                NAPCSBalancepathB()\n            }\n\n        } else {\n            NAPCSBalancepathA()\n        }\n    } else {\n        record.ACTION = 'Go To main Routing'\n    }\n\n    function NAPCSBalancepathA() {\n        // call Balancing Module\n        if (record?.NAPCS_IND == 'U') {\n            // call BL Rounding Module\n        }\n        // for Each Prod_code on record\n        if (record?.PROD_CODE_VAL == 0) {\n            record.USABLE = 'D'\n        }\n        // Recalculate NAPCS Field Module\n        if (record?.NAPCS_BAL < 0 || record?.NAPCS_BAL > 0 ||) {\n            record.NAPCS_IND = 'N'\n        }\n        NAPCSBalancepathB()\n    }\n    function NAPCSBalancepathB() {\n        // call NO DONOR\n        // call HDICAT\n        // END\n        msg.payload.csv[record_idx] = record\n        return msg;\n    }\n}\nNAPCSBalancing()",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nconst setCharAt = (str, index, char) => {\n    if (index > str.length - 1) return str.padEnd(index, ' ') + char;\n    return str.substr(0, index) + char + str.substr(index + char.length);\n};\n\nfunction NAPCSBalancing() {\n    console.log(\"-------------\")\n    record.ACTION = (\"-------------\")\n    // if (record?.NAICS_SECTOR == '31' && record?.SUBSAMP_IND_TXT != 'MC') {\n    //     console.log(\"1\")\n    //     if (record?.NAPCS_IND == '') {\n    //         console.log(\"2\")\n    //         if (record?.HISTSTAT == 'Y' &&\n    //             record?.H_NAPCSIND == 'U' &&\n    //             parseInt(record?.H_NAPCSBLTOT) > 0 &&\n    //             parseInt(record?.H_RCPT_TOT_VAL > 0) &&\n    //             parseInt(record?.RCPT_TOT_VAL > 0) &&\n    //             record?.NAPCSIMP == 'Y') {\n    //             console.log(\"3\")\n    //             record.NAPCSIND = 'U'\n    //             record.NAPCSIMP = 'Y'\n    //             record.NAPCS_IND = 'U'\n    //             record.NAPCS_IMP = 'Y'\n    //             record.NAPCS_BLTOT\n    //             // Append on Current REF_PER NAPCS Table Todo\n    //             let PROD_CODE = record?.H_PROD_CODE\n    //             let USABLE = 'U'\n    //             let PROD_CODE_VAL = parseFloat(record?.H_PROD_CODE_VAL) * (\n    //                 parseFloat(record?.RCPT_TOT_VAL) /\n    //                 parseFloat(record?.H_RCPT_TOT_VAL)\n    //             )\n    //             let REPORTING_ID = record?.REPORTING_ID\n    //             let REF_PER = record?.REF_PER\n    //             PROD_CODE = setCharAt(PROD_CODE.toString(), 2, 'H');\n    //             // Set Set NAPCS_BLTOT = sum of PROD_CODE_VAL where PROD_CODE(7: 3) = ‘000’\n    //             NAPCSBalancepathA()\n    //         } else {\n    //             console.log(\"4\")\n    //             NAPCSBalancepathB()\n    //         }\n    //         console.log(\"5\")\n\n    //     } else {\n    //         console.log(\"6\")\n    //         NAPCSBalancepathA()\n    //     }\n    // } else {\n    //     record.ACTION = 'Go To main Routing'\n    // }\n}\n// function NAPCSBalancepathA() {\n//     console.log(\"7\")\n//     // call Balancing Module\n//     if (record?.NAPCS_IND == 'U') {\n//         console.log(\"8\")\n//         // call BL Rounding Module\n//     }\n//     // for Each Prod_code on record\n//     if (record?.PROD_CODE_VAL == 0) {\n//         console.log(\"9\")\n//         record.USABLE = 'D'\n//     }\n//     // Recalculate NAPCS Field Module\n//     if (record?.NAPCS_BAL < 0 || record?.NAPCS_BAL > 0 ||) {\n//         console.log(\"10\")\n//         record.NAPCS_IND = 'N'\n//     }\n//     NAPCSBalancepathB()\n// }\n// function NAPCSBalancepathB() {\n//     console.log(\"11\")\n//     // call NO DONOR\n//     // call HDICAT\n//     // END\n//     msg.payload.csv[record_idx] = record\n//     return msg;\n// }\nNAPCSBalancing()",
         "outputs": 1,
         "timeout": 0,
-        "noerr": 8,
+        "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
@@ -22633,7 +22633,8 @@
         "y": 200,
         "wires": [
             [
-                "bb4dba28bc4486e1"
+                "bb4dba28bc4486e1",
+                "022bd4979cc55b86"
             ]
         ]
     },
@@ -22718,6 +22719,23 @@
         ],
         "x": 1305,
         "y": 200,
+        "wires": []
+    },
+    {
+        "id": "022bd4979cc55b86",
+        "type": "debug",
+        "z": "184cce6ee0df3c6f",
+        "name": "NAPCS Balance",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1380,
+        "y": 260,
         "wires": []
     },
     {
@@ -22880,7 +22898,9 @@
         "x": 820,
         "y": 420,
         "wires": [
-            []
+            [
+                "b8f1ae7b487a68f6"
+            ]
         ]
     },
     {
@@ -22891,10 +22911,12 @@
         "links": [
             "628a357ebf92b85e"
         ],
-        "x": 678.05126953125,
-        "y": 420.18634033203125,
+        "x": 615,
+        "y": 420,
         "wires": [
-            []
+            [
+                "4569aee5c3cfae11"
+            ]
         ]
     },
     {
@@ -22964,7 +22986,7 @@
         "type": "function",
         "z": "5f0ae7529035d4ee",
         "name": "napcs_recalculate_napcs_fields",
-        "func": "\nreturn msg;",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nconst dataArray = [\n    { \"PROD_CODE\": \"000001\", \"PROD_CODE_VAL\": 100 },\n    { \"PROD_CODE\": \"100000\", \"PROD_CODE_VAL\": 200 },\n    { \"PROD_CODE\": \"200000\", \"PROD_CODE_VAL\": 300 },\n    { \"PROD_CODE\": \"300000\", \"PROD_CODE_VAL\": 400 },\n    { \"PROD_CODE\": \"400000\", \"PROD_CODE_VAL\": 500 },\n    { \"PROD_CODE\": \"500000\", \"PROD_CODE_VAL\": 600 },\n    { \"PROD_CODE\": \"600000\", \"PROD_CODE_VAL\": 700 },\n    { \"PROD_CODE\": \"700000\", \"PROD_CODE_VAL\": 800 },\n    { \"PROD_CODE\": \"800000\", \"PROD_CODE_VAL\": 900 },\n    { \"PROD_CODE\": \"900000\", \"PROD_CODE_VAL\": 1000 },\n    { \"PROD_CODE\": \"200100\", \"PROD_CODE_VAL\": 150 },\n    { \"PROD_CODE\": \"9000000\", \"PROD_CODE_VAL\": 10000 },\n    { \"PROD_CODE\": \"000000\", \"PROD_CODE_VAL\": 2000 }, // Case where PROD_CODE ends with '000'\n    { \"PROD_CODE\": \"2000000\", \"PROD_CODE_VAL\": 3000 }, // Case where PROD_CODE starts with '2'\n    { \"PROD_CODE\": \"1000000\", \"PROD_CODE_VAL\": 4000 }, // Other cases\n];\n\nfunction calculateNAPCS(dataArray) {\n    let NAPCS_BLTOT = dataArray.reduce((acc, item) => {\n        if (item.PROD_CODE.substring(6) === '000') {\n            return acc + item.PROD_CODE_VAL;\n        }\n        return acc;\n    }, 0);\n\n    let RCPT_TOT_VAL = dataArray.reduce((acc, item) => acc + item.PROD_CODE_VAL, 0);\n\n    let NAPCS_BAL = RCPT_TOT_VAL - NAPCS_BLTOT;\n\n    let NAPCS_PRM = dataArray.reduce((acc, item) => {\n        if (item.PROD_CODE.startsWith('2')) {\n            return acc + item.PROD_CODE_VAL;\n        }\n        return acc;\n    }, 0);\n\n    let NAPCS_OTH = dataArray.reduce((acc, item) => {\n        if (!item.PROD_CODE.startsWith('2') && item.PROD_CODE !== '9000000') {\n            return acc + item.PROD_CODE_VAL;\n        }\n        return acc;\n    }, 0);\n\n    return { NAPCS_BLTOT, NAPCS_BAL, NAPCS_PRM, NAPCS_OTH };\n}\n\nrecord = { ...record, ...calculateNAPCS(dataArray) }\n\nmsg.payload.csv[record_idx] = record\nreturn msg\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
