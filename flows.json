@@ -605,14 +605,6 @@
         "env": []
     },
     {
-        "id": "69164b36a28c9eff",
-        "type": "tab",
-        "label": "NAPCS GOCO",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
         "id": "6ca99eb94adab0b6",
         "type": "tab",
         "label": "NAPCS NO DONOR",
@@ -648,6 +640,14 @@
         "id": "dad88d9a3132fed6",
         "type": "tab",
         "label": "Run Modules",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "69164b36a28c9eff",
+        "type": "tab",
+        "label": "NAPCS M GOCO",
         "disabled": false,
         "info": "",
         "env": []
@@ -1980,7 +1980,9 @@
             "d394b61bcc4755e6"
         ],
         "x": 14,
-        "y": 939
+        "y": 939,
+        "w": 1532,
+        "h": 82
     },
     {
         "id": "ef50b77b253a7883",
@@ -2000,7 +2002,9 @@
             "d587f5de3f4014c8"
         ],
         "x": 14,
-        "y": 239
+        "y": 239,
+        "w": 1792,
+        "h": 182
     },
     {
         "id": "62708d0bbe922798",
@@ -2024,7 +2028,9 @@
             "58df41cd8e54a653"
         ],
         "x": 14,
-        "y": 519
+        "y": 519,
+        "w": 1432,
+        "h": 322
     },
     {
         "id": "19463268a6c67561",
@@ -2042,6 +2048,8 @@
         ],
         "x": 14,
         "y": 99,
+        "w": 1432,
+        "h": 82,
         "info": "# Rules from Parameter Files"
     },
     {
@@ -2145,9 +2153,7 @@
             "f96645ae14ef8fb7"
         ],
         "x": 14,
-        "y": 659,
-        "w": 2252,
-        "h": 2922
+        "y": 659
     },
     {
         "id": "302cb8040ecade52",
@@ -2163,9 +2169,7 @@
             "a47c991027033263"
         ],
         "x": 1194,
-        "y": 859,
-        "w": 432,
-        "h": 82
+        "y": 859
     },
     {
         "id": "d1e0f39ddacfeb20",
@@ -22903,55 +22907,6 @@
         "wires": []
     },
     {
-        "id": "9d938e0309949c09",
-        "type": "function",
-        "z": "69164b36a28c9eff",
-        "name": "NAPCS: M_GOCO",
-        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nfunction setCharAt(str, index, chr) {\n    if ([null, undefined].includes(str)) {\n        let newstr = ''\n        for (let i = 0; i < index; i++) {\n            newstr = newstr + ' ';\n        }\n        newstr = newstr + chr\n        return newstr;\n    } else {\n        if (index > str.length - 1) {\n            let addstr = index - str.length\n            let newstr = str\n            for (let i = 0; i < addstr; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            return str.substring(0, index) + chr + str.substring(index + 1);\n        }\n    }\n}\nfunction NAPCSMGOCO() {\n  if(record?.NAPCS_IND == 'Y'){\n    record.PROD_CODE_VAL= 0\n    record.USABLE = 'D'\n      setCharAt(record.PROD_CODE_F || ' ', 1, 'J')\n  }\n  if(record?.NAICS_CODE.charAt(3) == 1) // need to understand this condition\n  {\n       record.NAPCS_IND = 'Y'\n    \n      const fields = [\n          \"CAPEX_BUILD_NEW_VAL\", \"CAPEX_BUILD_USED_VAL\", \"CAPEX_BUILD_TOT_DVAL\",\n          \"CAPEX_MACH_NEW_VAL\", \"CAPEX_MACH_USED_VAL\", \"CAPEX_MACH_TOT_DVAL\",\n          \"CAPEX_AUTO_VAL\", \"CAPEX_COMPTR_VAL\", \"CAPEX_OTHMACH_VAL\",\n          \"CAPEX_OTH_NEW_VAL\", \"CAPEX_OTH_NEW_WRTIN_TXT\", \"CAPEX_OTH_USED_VAL\",\n          \"CAPEX_OTH_USED_WRTIN_TXT\", \"CAPEX_OTH_TOT_DVAL\", \"CAPEX_NEW_TOT_DVAL\",\n          \"CAPEX_USED_TOT_DVAL\", \"CAPEX_TOT_DVAL\",\n            // need to verify following _F are correctly understood\n          \"CAPEX_BUILD_NEW_VAL_F\", \"CAPEX_BUILD_USED_VAL_F\", \"CAPEX_BUILD_TOT_DVAL_F\",\n          \"CAPEX_MACH_NEW_VAL_F\", \"CAPEX_MACH_USED_VAL_F\", \"CAPEX_MACH_TOT_DVAL_F\",\n          \"CAPEX_AUTO_VAL_F\", \"CAPEX_COMPTR_VAL_F\", \"CAPEX_OTHMACH_VAL_F\",\n          \"CAPEX_OTH_NEW_VAL_F\", \"CAPEX_OTH_NEW_WRTIN_TXT_F\", \"CAPEX_OTH_USED_VAL_F\",\n          \"CAPEX_OTH_USED_WRTIN_TXT_F\", \"CAPEX_OTH_TOT_DVAL_F\", \"CAPEX_NEW_TOT_DVAL_F\",\n          \"CAPEX_USED_TOT_DVAL_F\", \"CAPEX_TOT_DVAL_F\", \n          \n          \"INV_E_FIN_VAL\", \"INV_E_WIP_VAL\", \"INV_E_MAT_VAL\",\n          \"INV_E_TOT_VAL\", \"INV_B_FIN_VAL\", \"INV_B_WIP_VAL\",\n          \"INV_B_MAT_VAL\", \"INV_B_TOT_VAL\", \"INV_E_FIFO_VAL\",\n          \"INV_E_AVG_VAL\", \"INV_E_STD_VAL\", \"INV_E_OTHNL_VAL\",\n          \"INV_E_NL_TOT_DVAL\", \"INV_B_FIFO_VAL\", \"INV_B_AVG_VAL\",\n          \"INV_B_STD_VAL\", \"INV_B_OTHNL_VAL\", \"INV_B_NL_TOT_DVAL\", \"INV_E_LIFO_VAL\", \"INV_B_LIFO_VAL\",\n          \"INV_E_IVAL_TOT_DVAL\", \"INV_B_IVAL_TOT_DVAL\", \"INV_E_LIFO_RSV_VAL\",\n          \"INV_B_LIFO_RSV_VAL\", \n          \n          \"INV_E_FIN_VAL_F\", \"INV_E_WIP_VAL_F\",\n          \"INV_E_MAT_VAL_F\", \"INV_E_TOT_VAL_F\", \"INV_B_FIN_VAL_F\",\n          \"INV_B_WIP_VAL_F\", \"INV_B_MAT_VAL_F\", \"INV_B_TOT_VAL_F\",\n          \"INV_E_FIFO_VAL_F\", \"INV_E_AVG_VAL_F\", \"INV_E_STD_VAL_F\",\n          \"INV_E_OTHNL_VAL_F\", \"INV_E_NL_TOT_DVAL_F\", \"INV_B_FIFO_VAL_F\",\n          \"INV_B_AVG_VAL_F\", \"INV_B_STD_VAL_F\", \"INV_B_OTHNL_VAL_F\",\n          \"INV_B_NL_TOT_DVAL_F\", \"INV_E_LIFO_VAL_F\", \"INV_B_LIFO_VAL_F\",\n          \"INV_E_IVAL_TOT_DVAL_F\", \"INV_B_IVAL_TOT_DVAL_F\", \"INV_E_LIFO_RSV_VAL_F\",\n          \"INV_B_LIFO_RSV_VAL_F\"\n      ];\n\n      fields.forEach(field => {\n          if (field.includes('F(3,1)')) {\n              record[field] = setCharAt(record[field] || '  ', 3, 'J')\n          }else{\n              record[field] = 0;\n          }\n      });\n      record.EXPS_MAT_V1_VAL = 0;\n      record.CSTMTOT_F = setCharAt(record.CSTMTOT_F, 3, 'L');\n\n      record.EXPS_CSTMTOT_DVAL = \n            (parseFloat(record?.EXPS_ELEC_VAL) || 0)\n          + (parseFloat(record?.EXPS_FUEL_VAL) || 0)\n          + (parseFloat(record?.EXPS_CONTRACT_VAL) || 0)\n          + (parseFloat(record?.EXPS_RESALE_VAL) || 0);\n\n  }else{\n    record.TABSTAT = 'N'\n    record.NONTABFL = 'R'\n    record.STOP = 'T'\n  }\n    record.ACTION = 'END'\n}\n\nNAPCSMGOCO()\nreturn msg\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 850,
-        "y": 440,
-        "wires": [
-            [
-                "2dcb1956c632490d"
-            ]
-        ]
-    },
-    {
-        "id": "b93299e2e56af480",
-        "type": "link in",
-        "z": "69164b36a28c9eff",
-        "name": "NAPCS M GOCO Link",
-        "links": [
-            "23110971cf0ed68c"
-        ],
-        "x": 695,
-        "y": 440,
-        "wires": [
-            [
-                "9d938e0309949c09"
-            ]
-        ]
-    },
-    {
-        "id": "2dcb1956c632490d",
-        "type": "link out",
-        "z": "69164b36a28c9eff",
-        "name": "link out 90",
-        "mode": "link",
-        "links": [
-            "7d91540d69ac16c1"
-        ],
-        "x": 1025,
-        "y": 440,
-        "wires": []
-    },
-    {
         "id": "4569aee5c3cfae11",
         "type": "function",
         "z": "6ca99eb94adab0b6",
@@ -26049,6 +26004,113 @@
         ],
         "x": 815,
         "y": 3580,
+        "wires": []
+    },
+    {
+        "id": "9d938e0309949c09",
+        "type": "function",
+        "z": "69164b36a28c9eff",
+        "name": "NAPCS: M_GOCO",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nfunction setCharAt(str, index, chr) {\n    if ([null, undefined].includes(str)) {\n        let newstr = ''\n        for (let i = 0; i < index; i++) {\n            newstr = newstr + ' ';\n        }\n        newstr = newstr + chr\n        return newstr;\n    } else {\n        if (index > str.length - 1) {\n            let addstr = index - str.length\n            let newstr = str\n            for (let i = 0; i < addstr; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            return str.substring(0, index) + chr + str.substring(index + 1);\n        }\n    }\n}\n\nlet cache = global.get(\"lookupCache\");\nlet naics_m_goco_naics_to_napcs_file = cache.data.find(\n    item =>\n        item.module === \"napcs\" &&\n        item.param === 'naics_to_napcs_m_goco' &&\n        item.program === \"aies\" &&\n        item.unit_type === \"all\"\n)?.json_values;\n\nlet isNaicsCodeFound = naics_m_goco_naics_to_napcs_file?.NAICS_TO_NAPCS_M_GOCO.some(n => n['NAICS-3'] == record?.NAICS_CODE.substr(0, 3));\n\n\n\n\nfunction NAPCSMGOCO() {\n    if (record?.NAPCS_IND == 'Y') {\n        record.PROD_CODE_VAL = 0\n        record.USABLE = 'D'\n        setCharAt(record.PROD_CODE_F || ' ', 1, 'J')\n    }\n\n    if (isNaicsCodeFound) {\n        record.NAPCS_IND = 'Y'\n\n        const fields = [\n            \"CAPEX_BUILD_NEW_VAL\", \"CAPEX_BUILD_USED_VAL\", \"CAPEX_BUILD_TOT_DVAL\",\n            \"CAPEX_MACH_NEW_VAL\", \"CAPEX_MACH_USED_VAL\", \"CAPEX_MACH_TOT_DVAL\",\n            \"CAPEX_AUTO_VAL\", \"CAPEX_COMPTR_VAL\", \"CAPEX_OTHMACH_VAL\",\n            \"CAPEX_OTH_NEW_VAL\", \"CAPEX_OTH_NEW_WRTIN_TXT\", \"CAPEX_OTH_USED_VAL\",\n            \"CAPEX_OTH_USED_WRTIN_TXT\", \"CAPEX_OTH_TOT_DVAL\", \"CAPEX_NEW_TOT_DVAL\",\n            \"CAPEX_USED_TOT_DVAL\", \"CAPEX_TOT_DVAL\",\n\n            // need to verify following _F are correctly understood\n\n            \"CAPEX_BUILD_NEW_VAL_F\", \"CAPEX_BUILD_USED_VAL_F\", \"CAPEX_BUILD_TOT_DVAL_F\",\n            \"CAPEX_MACH_NEW_VAL_F\", \"CAPEX_MACH_USED_VAL_F\", \"CAPEX_MACH_TOT_DVAL_F\",\n            \"CAPEX_AUTO_VAL_F\", \"CAPEX_COMPTR_VAL_F\", \"CAPEX_OTHMACH_VAL_F\",\n            \"CAPEX_OTH_NEW_VAL_F\", \"CAPEX_OTH_NEW_WRTIN_TXT_F\", \"CAPEX_OTH_USED_VAL_F\",\n            \"CAPEX_OTH_USED_WRTIN_TXT_F\", \"CAPEX_OTH_TOT_DVAL_F\", \"CAPEX_NEW_TOT_DVAL_F\",\n            \"CAPEX_USED_TOT_DVAL_F\", \"CAPEX_TOT_DVAL_F\",\n\n            \"INV_E_FIN_VAL\", \"INV_E_WIP_VAL\", \"INV_E_MAT_VAL\",\n            \"INV_E_TOT_VAL\", \"INV_B_FIN_VAL\", \"INV_B_WIP_VAL\",\n            \"INV_B_MAT_VAL\", \"INV_B_TOT_VAL\", \"INV_E_FIFO_VAL\",\n            \"INV_E_AVG_VAL\", \"INV_E_STD_VAL\", \"INV_E_OTHNL_VAL\",\n            \"INV_E_NL_TOT_DVAL\", \"INV_B_FIFO_VAL\", \"INV_B_AVG_VAL\",\n            \"INV_B_STD_VAL\", \"INV_B_OTHNL_VAL\", \"INV_B_NL_TOT_DVAL\", \"INV_E_LIFO_VAL\", \"INV_B_LIFO_VAL\",\n            \"INV_E_IVAL_TOT_DVAL\", \"INV_B_IVAL_TOT_DVAL\", \"INV_E_LIFO_RSV_VAL\",\n            \"INV_B_LIFO_RSV_VAL\",\n\n            \"INV_E_FIN_VAL_F\", \"INV_E_WIP_VAL_F\",\n            \"INV_E_MAT_VAL_F\", \"INV_E_TOT_VAL_F\", \"INV_B_FIN_VAL_F\",\n            \"INV_B_WIP_VAL_F\", \"INV_B_MAT_VAL_F\", \"INV_B_TOT_VAL_F\",\n            \"INV_E_FIFO_VAL_F\", \"INV_E_AVG_VAL_F\", \"INV_E_STD_VAL_F\",\n            \"INV_E_OTHNL_VAL_F\", \"INV_E_NL_TOT_DVAL_F\", \"INV_B_FIFO_VAL_F\",\n            \"INV_B_AVG_VAL_F\", \"INV_B_STD_VAL_F\", \"INV_B_OTHNL_VAL_F\",\n            \"INV_B_NL_TOT_DVAL_F\", \"INV_E_LIFO_VAL_F\", \"INV_B_LIFO_VAL_F\",\n            \"INV_E_IVAL_TOT_DVAL_F\", \"INV_B_IVAL_TOT_DVAL_F\", \"INV_E_LIFO_RSV_VAL_F\",\n            \"INV_B_LIFO_RSV_VAL_F\"\n        ];\n\n        fields.forEach(field => {\n            if (field.endsWith(\"_F\")) {\n                record[field] = setCharAt(record[field] || '  ', 3, 'J')\n            } else {\n                record[field] = 0;\n            }\n        });\n        record.EXPS_MAT_V1_VAL = 0;\n        record.CSTMTOT_F = setCharAt(record.CSTMTOT_F, 3, 'L');\n\n        record.EXPS_CSTMTOT_DVAL =\n            (parseFloat(record?.EXPS_ELEC_VAL) || 0)\n            + (parseFloat(record?.EXPS_FUEL_VAL) || 0)\n            + (parseFloat(record?.EXPS_CONTRACT_VAL) || 0)\n            + (parseFloat(record?.EXPS_RESALE_VAL) || 0);\n\n    } else {\n        record.TABSTAT = 'N'\n        record.NONTABFL = 'R'\n        record.STOP = 'T'\n        record.GOCO_NAICS = 'No Match'\n    }\n    record.ACTION = 'END'\n}\n\nNAPCSMGOCO()\nmsg.payload.csv[record_idx] = record\n\nreturn msg\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1190,
+        "y": 440,
+        "wires": [
+            [
+                "2dcb1956c632490d",
+                "fdb129d4e5333574"
+            ]
+        ]
+    },
+    {
+        "id": "b93299e2e56af480",
+        "type": "link in",
+        "z": "69164b36a28c9eff",
+        "name": "NAPCS M GOCO Link",
+        "links": [
+            "23110971cf0ed68c"
+        ],
+        "x": 505,
+        "y": 440,
+        "wires": [
+            [
+                "35f2b43c111b054d"
+            ]
+        ]
+    },
+    {
+        "id": "2dcb1956c632490d",
+        "type": "link out",
+        "z": "69164b36a28c9eff",
+        "name": "link out 90",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1"
+        ],
+        "x": 1345,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "35f2b43c111b054d",
+        "type": "change",
+        "z": "69164b36a28c9eff",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.lookup",
+                "pt": "msg",
+                "to": "{\"moduleName\":\"napcs\",\"program\":\"aies\",\"unit_type\":\"all\",\"params\":\"naics_to_napcs_m_goco\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 690,
+        "y": 440,
+        "wires": [
+            [
+                "062b989d8eb3de9e"
+            ]
+        ]
+    },
+    {
+        "id": "062b989d8eb3de9e",
+        "type": "subflow:0be109393cb5f28a",
+        "z": "69164b36a28c9eff",
+        "name": "",
+        "x": 950,
+        "y": 440,
+        "wires": [
+            [
+                "9d938e0309949c09"
+            ]
+        ]
+    },
+    {
+        "id": "fdb129d4e5333574",
+        "type": "debug",
+        "z": "69164b36a28c9eff",
+        "name": "naics_m_goco_file",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.naics_m_goco_file",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1050,
+        "y": 580,
         "wires": []
     }
 ]
