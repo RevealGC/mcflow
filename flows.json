@@ -2153,7 +2153,9 @@
             "f96645ae14ef8fb7"
         ],
         "x": 14,
-        "y": 659
+        "y": 659,
+        "w": 2252,
+        "h": 2922
     },
     {
         "id": "302cb8040ecade52",
@@ -2169,7 +2171,9 @@
             "a47c991027033263"
         ],
         "x": 1194,
-        "y": 859
+        "y": 859,
+        "w": 432,
+        "h": 82
     },
     {
         "id": "d1e0f39ddacfeb20",
@@ -22911,7 +22915,7 @@
         "type": "function",
         "z": "6ca99eb94adab0b6",
         "name": "NAPCS: NO DONOR",
-        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nfunction setCharAt(str, index, chr) {\n    if ([null, undefined].includes(str)) {\n        let newstr = ''\n        for (let i = 0; i < index; i++) {\n            newstr = newstr + ' ';\n        }\n        newstr = newstr + chr\n        return newstr;\n    } else {\n        if (index > str.length - 1) {\n            let addstr = index - str.length\n            let newstr = str\n            for (let i = 0; i < addstr; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            return str.substring(0, index) + chr + str.substring(index + 1);\n        }\n    }\n}\nfunction NAPCSNODONOR() {\n    \n}\n\nNAPCSNODONOR()\nreturn msg\n",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nfunction setCharAt(str, index, chr) {\n    if (index > str.length - 1) return str.padEnd(index, ' ') + chr;\n    return str.substring(0, index) + chr + str.substring(index + 1);\n}\n\nfunction NAPCSNODONOR() {\n    if (record?.SURVEYID_FROM_M_GOCO && record?.parentH_ID_Mustaskas) {\n        // Call M_GOCO module\n    } else if (['T', 'B'].includes(record?.NAPCS_NODONOR) && ['20', '90'].includes(record?.RECORD_TYP_TXT)) {\n        // Condition is met, further actions should be defined here\n    } else {\n        record.NAPCS_NODONOR = 'I';\n        if (record?.NAPCS_IND === 'U' && parseFloat(record?.RCPT_VAL_TOT) > 0) {\n            if (record?.NAPCS_CODE_OLD && record?.NAPCS_CODE_OLD.trim() in ['NAPCS_NODONOR_CUTOFF', 'NAPCS_NODONOR', 'NAPCS_OTHER_RCPT_TOT_VAL']) {\n                record.TABSTAT = 'N';\n                record.NONTABLE_F = 'R';\n            } else {\n                let sumOfProdCodeVal = calculateSumOfProdCodeVal(record);\n                let prodCodeCutoff = record.NAPCSOTH / record.RCPT_TOT_VAL >= 0.50;\n                if (prodCodeCutoff) {\n                    // Condition is met, further actions should be defined here\n                } else {\n                    let anotherSumOfProdCodeVal = calculateAnotherSumOfProdCodeVal(record);\n                    if (anotherSumOfProdCodeVal >= 0.50) {\n                        // Condition is met, further actions should be defined here\n                    } else if (record?.NAPCS_IMP === 'Y') {\n                        // Condition is met, further actions should be defined here\n                    }\n                }\n            }\n        }\n    }\n}\n\nfunction calculateSumOfProdCodeVal(record) {\n    return 0;\n}\n\nfunction calculateAnotherSumOfProdCodeVal(record) {\n    return 0;\n}\n\nNAPCSNODONOR();\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -22960,7 +22964,7 @@
         "type": "function",
         "z": "fe75af5be53552a9",
         "name": "NAPCS HDICAT",
-        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nfunction setCharAt(str, index, chr) {\n    if ([null, undefined].includes(str)) {\n        let newstr = ''\n        for (let i = 0; i < index; i++) {\n            newstr = newstr + ' ';\n        }\n        newstr = newstr + chr\n        return newstr;\n    } else {\n        if (index > str.length - 1) {\n            let addstr = index - str.length\n            let newstr = str\n            for (let i = 0; i < addstr; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            return str.substring(0, index) + chr + str.substring(index + 1);\n        }\n    }\n}\nfunction NAPCSHDICAT() {\n   if(record?.TABSTAT == 'Y' && parseFloat(record?.RCPT_TOT_VAL) > 0 && ['20','90'].includes(record?.RECORD_TYP_TXT)){\n        if(record?.NAPCS_IND == 'U'){\n            // Need to ask this first box here\n            if(['T','E'].includes(record?.NAPCS_NODONOR)){\n                setCharAt(record.NAPCS_HDICAT || ' ', 1, 'NC')\n            }else{\n                setCharAt(record.NAPCS_HDICAT || ' ', 1, 'C')\n            }\n\n        }else{\n            setCharAt(record?.NAPCS_HDICAT || ' ', 1, 'F')\n        }\n   }else{\n    record.NAPCS_HDICAT = ' '\n   }\n    record.ACTION = 'END'\n}\n\nNAPCSHDICAT()\nmsg.payload.csv[record_idx] = record\nreturn msg\n",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nfunction setCharAt(str, index, chr) {\n    if ([null, undefined].includes(str)) {\n        let newstr = ''\n        for (let i = 0; i < index; i++) {\n            newstr = newstr + ' ';\n        }\n        newstr = newstr + chr\n        return newstr;\n    } else {\n        if (index > str.length - 1) {\n            let addstr = index - str.length\n            let newstr = str\n            for (let i = 0; i < addstr; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            return str.substring(0, index) + chr + str.substring(index + 1);\n        }\n    }\n}\nfunction NAPCSHDICAT() {\n    console.log(1)\n   if(record?.TABSTAT == 'Y' && parseFloat(record?.RCPT_TOT_VAL) > 0 && ['20','90'].includes(record?.RECORD_TYP_TXT)){\n       console.log(2)\n        if(record?.NAPCS_IND == 'U'){\n            console.log(3)\n            if(['T','E'].includes(record?.NAPCS_NODONOR)){\n                console.log(4)\n                // setCharAt(record.NAPCS_HDICAT || ' ', 1, 'NC')\n                record.NAPCS_HDICAT = 'NC'\n            }else{\n                console.log(5)\n                // setCharAt(record.NAPCS_HDICAT || ' ', 1, 'C')\n                record.NAPCS_HDICAT = 'C'\n            }\n        }else{\n            console.log(6)\n            // setCharAt(record.NAPCS_HDICAT || ' ', 1, 'F')\n            record.NAPCS_HDICAT = 'F'\n        }\n   }else{\n       console.log(7)\n    record.NAPCS_HDICAT = ' '\n   }\n    console.log(8)\n    record.ACTION = 'END'\n}\nNAPCSHDICAT()\nmsg.payload.csv[record_idx] = record\nreturn msg\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
