@@ -1980,9 +1980,7 @@
             "d394b61bcc4755e6"
         ],
         "x": 14,
-        "y": 939,
-        "w": 1532,
-        "h": 82
+        "y": 939
     },
     {
         "id": "ef50b77b253a7883",
@@ -2002,9 +2000,7 @@
             "d587f5de3f4014c8"
         ],
         "x": 14,
-        "y": 239,
-        "w": 1792,
-        "h": 182
+        "y": 239
     },
     {
         "id": "62708d0bbe922798",
@@ -2028,9 +2024,7 @@
             "58df41cd8e54a653"
         ],
         "x": 14,
-        "y": 519,
-        "w": 1432,
-        "h": 322
+        "y": 519
     },
     {
         "id": "19463268a6c67561",
@@ -2048,8 +2042,6 @@
         ],
         "x": 14,
         "y": 99,
-        "w": 1432,
-        "h": 82,
         "info": "# Rules from Parameter Files"
     },
     {
@@ -2153,9 +2145,7 @@
             "f96645ae14ef8fb7"
         ],
         "x": 14,
-        "y": 659,
-        "w": 2252,
-        "h": 2922
+        "y": 659
     },
     {
         "id": "302cb8040ecade52",
@@ -2171,9 +2161,7 @@
             "a47c991027033263"
         ],
         "x": 1194,
-        "y": 859,
-        "w": 432,
-        "h": 82
+        "y": 859
     },
     {
         "id": "d1e0f39ddacfeb20",
@@ -22743,7 +22731,7 @@
         "type": "function",
         "z": "05f553d24173a3fe",
         "name": "Balancing",
-        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\n\nlet cache = global.get(\"lookupCache\");\n\nlet naics_tolerance_file = cache.data.find(\n    item =>\n        item.module === \"naics\" &&\n        item.param === 'naics_tolerance' &&\n        item.program === \"aies\" &&\n        item.unit_type === \"all\"\n)?.json_values;\nmsg.test = naics_tolerance_file\nlet params = {\n    UL: 0,\n    LL: 0\n}\nconst setCharAt = (str, index, char) => {\n    if (index > str.length - 1) return str.padEnd(index, ' ') + char;\n    return str.substr(0, index) + char + str.substr(index + char.length);\n};\n\nfunction Balancing(){\n    if (parseInt(record?.RCPT_TOT_VAL) > 0){\n        if([/*parameter table */].includes(record?.NAICS_OLD_CODE)){\n            record.TABSTAT = 'N'\n            record.NONTABFL = 'R'\n            record.STOP = 'T'\n            record.MIS_NAICSOLD_NAICSTOLERANCE = 'Y' // need to check what neeeds to set here\n            balancePathA()\n        }else if(record.NAPCS_BLTOT == record.RCPT_TOT_VAL ){\n            balancePathA()\n        } else if (params.LL <= parseFloat(record?.NAPCS_BLTOT) && parseFloat(record?.RCPT_TOT_VAL) <= params.UL){\n            // need to check from where this variables are comming from\n            record.PROD_CODE_VAL = (parseFloat(record?.PROD_CODE_VAL) / parseFloat(record?.NAPCS_BLTOT) * parseFloat(record?.RCPT_TOT_VAL))\n            record.PROD_CODE_F = setCharAt(record?.PROD_CODE_F || '  ', 2, 'K')\n            balancePathA()\n            // from where this PI comming from \n        } else if ((parseFloat(record?.RCPT_TOT_VAL) == parseFloat(record?.RCPT_TOT_VAL_PI)) || (parseFloat(record?.RCPT_TOT_VAL_PI) == 0)){\n            balancePathB()\n            // where this PI is comming from\n        } else if (params.LL <= parseFloat(record?.NAPCS_BLTOT) && parseFloat(record?.RCPT_TOT_VAL_PI) <= params.UL) {\n            record.PROD_CODE_VAL = (parseFloat(record?.PROD_CODE_VAL) / parseFloat(record?.NAPCS_BLTOT) * parseFloat(record?.RCPT_TOT_VAL))\n            record.PROD_CODE_F = setCharAt(record?.PROD_CODE_F || '  ', 2, 'K')\n        }else{\n            balancePathB()\n        }\n    }else{\n        balancePathB()\n    }\n}\nfunction balancePathA(){\n    msg.payload.csv[record_idx] = record;\n    return msg\n}\nfunction balancePathB(){\n    record.NAPCS_IND = 'N'\n    balancePathA()\n}\nBalancing()",
+        "func": "// let record_idx = global.get(\"ptrModuleFacts\");\n// let record = msg.payload.csv[record_idx];\n\n\n// let cache = global.get(\"lookupCache\");\n\n// let naics_tolerance_file = cache.data.find(\n//     item =>\n//         item.module === \"naics\" &&\n//         item.param === 'naics_tolerance' &&\n//         item.program === \"aies\" &&\n//         item.unit_type === \"all\"\n// )?.json_values;\n// msg.test = naics_tolerance_file\n// let params = {\n//     UL: 0,\n//     LL: 0\n// }\n// const setCharAt = (str, index, char) => {\n//     if (index > str.length - 1) return str.padEnd(index, ' ') + char;\n//     return str.substr(0, index) + char + str.substr(index + char.length);\n// };\n\n// function Balancing(){\n//     if (parseInt(record?.RCPT_TOT_VAL) > 0){\n//         if([/*parameter table */].includes(record?.NAICS_OLD_CODE)){\n//             record.TABSTAT = 'N'\n//             record.NONTABFL = 'R'\n//             record.STOP = 'T'\n//             record.MIS_NAICSOLD_NAICSTOLERANCE = 'Y' // need to check what neeeds to set here\n//             balancePathA()\n//         }else if(record.NAPCS_BLTOT == record.RCPT_TOT_VAL ){\n//             balancePathA()\n//         } else if (params.LL <= parseFloat(record?.NAPCS_BLTOT) && parseFloat(record?.RCPT_TOT_VAL) <= params.UL){\n//             // need to check from where this variables are comming from\n//             record.PROD_CODE_VAL = (parseFloat(record?.PROD_CODE_VAL) / parseFloat(record?.NAPCS_BLTOT) * parseFloat(record?.RCPT_TOT_VAL))\n//             record.PROD_CODE_F = setCharAt(record?.PROD_CODE_F || '  ', 2, 'K')\n//             balancePathA()\n//             // from where this PI comming from \n//         } else if ((parseFloat(record?.RCPT_TOT_VAL) == parseFloat(record?.RCPT_TOT_VAL_PI)) || (parseFloat(record?.RCPT_TOT_VAL_PI) == 0)){\n//             balancePathB()\n//             // where this PI is comming from\n//         } else if (params.LL <= parseFloat(record?.NAPCS_BLTOT) && parseFloat(record?.RCPT_TOT_VAL_PI) <= params.UL) {\n//             record.PROD_CODE_VAL = (parseFloat(record?.PROD_CODE_VAL) / parseFloat(record?.NAPCS_BLTOT) * parseFloat(record?.RCPT_TOT_VAL))\n//             record.PROD_CODE_F = setCharAt(record?.PROD_CODE_F || '  ', 2, 'K')\n//         }else{\n//             balancePathB()\n//         }\n//     }else{\n//         balancePathB()\n//     }\n// }\n// function balancePathA(){\n//     msg.payload.csv[record_idx] = record;\n//     return msg\n// }\n// function balancePathB(){\n//     record.NAPCS_IND = 'N'\n//     balancePathA()\n// }\n// Balancing()\n\n\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\n//The napcs balancing module uses naics_tolerance params \nmsg.cache = global.get(\"lookupCache\")\n    .data.find(\n        item =>\n            item.module === 'naics' &&\n            item.param === 'naics_tolerance' &&\n            item.program === 'aies' &&\n            item.unit_type === 'all'\n    )?.json_values;\n\nconsole.log({\n    msg: msg.cache['NAICS_TOLERANCE']\n})\n\nvar jsonData = msg.cache\n\n// can remove the console logs after\nconsole.log('blahbahblah', msg.cache, 'json man') // prints naics_tolerance json as is\nconsole.log('I can get csv naics', record.NAICS_CODE_OLD)\n\nconst setCharAt = (str, index, char) => {\n    if (index > str.length - 1) return str.padEnd(index, ' ') + char;\n    return str.substr(0, index) + char + str.substr(index + char.length);\n};\n\nfunction naicsFind() {\n    let found = false;\n    for (let i = 0; i < jsonData.NAICS_TOLERANCE.length; i++) {\n        if (jsonData.NAICS_TOLERANCE[i].NAICS !== record.NAICS_CODE_OLD) {\n            found = true;\n        }\n        else {\n            break;\n        }\n    }\n\n    if (found) {\n        console.log('Lets see if this is the found', found)\n        record.TABSTAT = 'N'\n        record.NONTABFL = 'R'\n        record.STOP = 'T'\n        record.REFERRAL_FLAG = 'MIS_NAICSOLD_NAICSTOLERANCE' // checked with Census\n        balancePathA()\n    }\n    else if (record.NAPCS_BLTOT == record.RCPT_TOT_VAL) {\n        balancePathA()\n    } else if (record.NAPCS_BLTOT != record.RCPT_TOT_VAL) {\n        setProdCodeVal()\n    }\n\n}\n\nfunction setProdCodeVal() {\n    let found1 = false;\n    for (let i = 0; i < jsonData.NAICS_TOLERANCE.length; i++) {\n        if (jsonData.NAICS_TOLERANCE[i].LL <= parseFloat(record.NAPCSBLTOT) || jsonData.NAICS_TOLERANCE[i].UL >= parseFloat(record.RCPT_TOT_VAL)) {\n            found1 = true;\n        }\n        else {\n            break;\n        }\n    }\n    if (found1) {\n        record.PROD_CODE_VAL = (parseFloat(record.PROD_CODE_VAL) / parseFloat(record.NAPCSBLTOT) * parseFloat(record.RCPT_TOT_VAL))\n        record.PROD_CODE_F = setCharAt(record?.PROD_CODE_F || '  ', 2, 'K')\n        balancePathA()\n    }\n    else if ((parseFloat(record?.RCPT_TOT_VAL) == parseFloat(record?.RCPT_TOT_VAL_PI)) || (parseFloat(record?.RCPT_TOT_VAL_PI) == 0)) {\n        balancePathB()\n    }\n    else if ((parseFloat(record?.RCPT_TOT_VAL) != parseFloat(record?.RCPT_TOT_VAL_PI)) && (parseFloat(record?.RCPT_TOT_VAL_PI) != 0)) {\n        setProdCodeValPi()\n    }\n}\n\nfunction setProdCodeValPi() {\n    let found1 = false;\n    for (let i = 0; i < jsonData.NAICS_TOLERANCE.length; i++) {\n        if (jsonData.NAICS_TOLERANCE[i].LL <= parseFloat(record.NAPCSBLTOT) || jsonData.NAICS_TOLERANCE[i].UL >= parseFloat(record.RCPT_TOT_VAL_PI)) {\n            found1 = true;\n        }\n        else {\n            break;\n        }\n    }\n    if (found1) {\n        record.PROD_CODE_VAL = (parseFloat(record.PROD_CODE_VAL) / parseFloat(record.NAPCSBLTOT) * parseFloat(record.RCPT_TOT_VAL))\n        record.PROD_CODE_F = setCharAt(record?.PROD_CODE_F || '  ', 2, 'K')\n        balancePathA()\n    } else {\n        balancePathB()\n    }\n}\n\nif (parseInt(record?.RCPT_TOT_VAL) > 0) {\n    naicsFind()\n} else {\n    balancePathB()\n}\n\nfunction balancePathA() {\n    record['ACTION is for A '] = 'This is path A'\n    msg.payload.csv[record_idx] = record;\n    return msg\n}\nfunction balancePathB() {\n    record.NAPCS_IND = 'N'\n    balancePathA()\n    record['ACTION is for B'] = 'This is path B'\n}\n\nmsg.payload.csv[record_idx] = record\nreturn msg",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
