@@ -1937,7 +1937,9 @@
             "d015bbe8f3761f7f"
         ],
         "x": 54,
-        "y": -1
+        "y": -1,
+        "w": 838,
+        "h": 208
     },
     {
         "id": "5a28e866a67c90ec",
@@ -1962,7 +1964,9 @@
             "8764792a5250d529"
         ],
         "x": 14,
-        "y": 279
+        "y": 279,
+        "w": 1152,
+        "h": 262
     },
     {
         "id": "c0b83f35fdc02130",
@@ -1980,7 +1984,9 @@
             "d394b61bcc4755e6"
         ],
         "x": 14,
-        "y": 939
+        "y": 939,
+        "w": 1532,
+        "h": 82
     },
     {
         "id": "ef50b77b253a7883",
@@ -2000,7 +2006,9 @@
             "d587f5de3f4014c8"
         ],
         "x": 14,
-        "y": 239
+        "y": 239,
+        "w": 1792,
+        "h": 182
     },
     {
         "id": "62708d0bbe922798",
@@ -2024,7 +2032,9 @@
             "58df41cd8e54a653"
         ],
         "x": 14,
-        "y": 519
+        "y": 519,
+        "w": 1432,
+        "h": 322
     },
     {
         "id": "19463268a6c67561",
@@ -2042,6 +2052,8 @@
         ],
         "x": 14,
         "y": 99,
+        "w": 1432,
+        "h": 82,
         "info": "# Rules from Parameter Files"
     },
     {
@@ -2145,7 +2157,9 @@
             "f96645ae14ef8fb7"
         ],
         "x": 14,
-        "y": 659
+        "y": 659,
+        "w": 2252,
+        "h": 2922
     },
     {
         "id": "302cb8040ecade52",
@@ -2161,7 +2175,9 @@
             "a47c991027033263"
         ],
         "x": 1194,
-        "y": 859
+        "y": 859,
+        "w": 422,
+        "h": 82
     },
     {
         "id": "d1e0f39ddacfeb20",
@@ -2181,7 +2197,9 @@
             "e5ca7c9975e3a6b5"
         ],
         "x": 474,
-        "y": 99
+        "y": 99,
+        "w": 392,
+        "h": 82
     },
     {
         "id": "748ca46ea16faad4",
@@ -6344,7 +6362,7 @@
         "type": "function",
         "z": "0be109393cb5f28a",
         "name": "prepare API Request",
-        "func": "// Fetch the required parameters from msg.payload.lookup\nconst { moduleName, program, unit_type, missingParams } = msg.payload.lookup;\n\n// Construct the params query parameter from missingParams.\nconst params = (missingParams.length && missingParams.join(\",\")) || \"\";\n\n// Construct the full API URL\n// localhost needs to be replace with the actual domain where the API is hosted. The port needs to be 80 or 443\n// const apiurl = `${env.get('CENSUS_API').trim()}params?module=${moduleName}&params=${params}&program=${program}&unit_type=${unit_type}`;\nconst apiurl = `${(env.get('CENSUS_API') || 'http://a6c96ef7c10b34f19b8fd6be9af60229-1618264183.us-gov-east-1.elb.amazonaws.com/api/').trim()}params?module=${moduleName}&params=${params}&program=${program}&unit_type=${unit_type}`;\n// console.log(apiurl)\n// Append the constructed API URL to msg.payload.lookup.apiurl\nmsg.url = apiurl;\nmsg.payloadBackup = msg.payload;\nreturn msg;\n",
+        "func": "// Fetch the required parameters from msg.payload.lookup\nconst { moduleName, program, unit_type, missingParams } = msg.payload.lookup;\n\n// Construct the params query parameter from missingParams.\nconst params = (missingParams.length && missingParams.join(\",\")) || \"\";\n\n// Construct the full API URL\n// localhost needs to be replace with the actual domain where the API is hosted. The port needs to be 80 or 443\n// const apiurl = `${env.get('CENSUS_API').trim()}params?module=${moduleName}&params=${params}&program=${program}&unit_type=${unit_type}`;\nconst apiurl = `${(env.get('CENSUS_API') || 'http://a301cb45559c445acaec11ab01bbbee1-2115632777.us-gov-east-1.elb.amazonaws.com/api/').trim()}params?module=${moduleName}&params=${params}&program=${program}&unit_type=${unit_type}`;\n// console.log(apiurl)\n// Append the constructed API URL to msg.payload.lookup.apiurl\nmsg.url = apiurl;\nmsg.payloadBackup = msg.payload;\nreturn msg;\n",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -24849,7 +24867,7 @@
         "method": "GET",
         "ret": "obj",
         "paytoqs": "ignore",
-        "url": "http://a6c96ef7c10b34f19b8fd6be9af60229-1618264183.us-gov-east-1.elb.amazonaws.com/api/params/params",
+        "url": "http://a301cb45559c445acaec11ab01bbbee1-2115632777.us-gov-east-1.elb.amazonaws.com/api/params/params",
         "tls": "",
         "persist": false,
         "proxy": "",
@@ -26003,7 +26021,7 @@
         "type": "function",
         "z": "69164b36a28c9eff",
         "name": "NAPCS: M_GOCO",
-        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nfunction setCharAt(str, index, chr) {\n    if ([null, undefined].includes(str)) {\n        let newstr = ''\n        for (let i = 0; i < index; i++) {\n            newstr = newstr + ' ';\n        }\n        newstr = newstr + chr\n        return newstr;\n    } else {\n        if (index > str.length - 1) {\n            let addstr = index - str.length\n            let newstr = str\n            for (let i = 0; i < addstr; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            return str.substring(0, index) + chr + str.substring(index + 1);\n        }\n    }\n}\n\nlet cache = global.get(\"lookupCache\");\nlet naics_m_goco_naics_to_napcs_file = cache.data.find(\n    item =>\n        item.module === \"napcs\" &&\n        item.param === 'naics_to_napcs_m_goco' &&\n        item.program === \"aies\" &&\n        item.unit_type === \"all\"\n)?.json_values;\n\nlet isNaicsCodeFound = naics_m_goco_naics_to_napcs_file?.NAICS_TO_NAPCS_M_GOCO.some(n => n['NAICS-3'] == record?.NAICS_CODE.substr(0, 3));\n\n\n\n\nfunction NAPCSMGOCO() {\n    if (record?.NAPCS_IND == 'Y') {\n        record.PROD_CODE_VAL = 0\n        record.USABLE = 'D'\n        setCharAt(record.PROD_CODE_F || ' ', 1, 'J')\n    }\n\n    if (isNaicsCodeFound) {\n        record.NAPCS_IND = 'Y'\n\n        const fields = [\n            \"CAPEX_BUILD_NEW_VAL\", \"CAPEX_BUILD_USED_VAL\", \"CAPEX_BUILD_TOT_DVAL\",\n            \"CAPEX_MACH_NEW_VAL\", \"CAPEX_MACH_USED_VAL\", \"CAPEX_MACH_TOT_DVAL\",\n            \"CAPEX_AUTO_VAL\", \"CAPEX_COMPTR_VAL\", \"CAPEX_OTHMACH_VAL\",\n            \"CAPEX_OTH_NEW_VAL\", \"CAPEX_OTH_NEW_WRTIN_TXT\", \"CAPEX_OTH_USED_VAL\",\n            \"CAPEX_OTH_USED_WRTIN_TXT\", \"CAPEX_OTH_TOT_DVAL\", \"CAPEX_NEW_TOT_DVAL\",\n            \"CAPEX_USED_TOT_DVAL\", \"CAPEX_TOT_DVAL\",\n\n            // need to verify following _F are correctly understood\n\n            \"CAPEX_BUILD_NEW_VAL_F\", \"CAPEX_BUILD_USED_VAL_F\", \"CAPEX_BUILD_TOT_DVAL_F\",\n            \"CAPEX_MACH_NEW_VAL_F\", \"CAPEX_MACH_USED_VAL_F\", \"CAPEX_MACH_TOT_DVAL_F\",\n            \"CAPEX_AUTO_VAL_F\", \"CAPEX_COMPTR_VAL_F\", \"CAPEX_OTHMACH_VAL_F\",\n            \"CAPEX_OTH_NEW_VAL_F\", \"CAPEX_OTH_NEW_WRTIN_TXT_F\", \"CAPEX_OTH_USED_VAL_F\",\n            \"CAPEX_OTH_USED_WRTIN_TXT_F\", \"CAPEX_OTH_TOT_DVAL_F\", \"CAPEX_NEW_TOT_DVAL_F\",\n            \"CAPEX_USED_TOT_DVAL_F\", \"CAPEX_TOT_DVAL_F\",\n\n            \"INV_E_FIN_VAL\", \"INV_E_WIP_VAL\", \"INV_E_MAT_VAL\",\n            \"INV_E_TOT_VAL\", \"INV_B_FIN_VAL\", \"INV_B_WIP_VAL\",\n            \"INV_B_MAT_VAL\", \"INV_B_TOT_VAL\", \"INV_E_FIFO_VAL\",\n            \"INV_E_AVG_VAL\", \"INV_E_STD_VAL\", \"INV_E_OTHNL_VAL\",\n            \"INV_E_NL_TOT_DVAL\", \"INV_B_FIFO_VAL\", \"INV_B_AVG_VAL\",\n            \"INV_B_STD_VAL\", \"INV_B_OTHNL_VAL\", \"INV_B_NL_TOT_DVAL\", \"INV_E_LIFO_VAL\", \"INV_B_LIFO_VAL\",\n            \"INV_E_IVAL_TOT_DVAL\", \"INV_B_IVAL_TOT_DVAL\", \"INV_E_LIFO_RSV_VAL\",\n            \"INV_B_LIFO_RSV_VAL\",\n\n            \"INV_E_FIN_VAL_F\", \"INV_E_WIP_VAL_F\",\n            \"INV_E_MAT_VAL_F\", \"INV_E_TOT_VAL_F\", \"INV_B_FIN_VAL_F\",\n            \"INV_B_WIP_VAL_F\", \"INV_B_MAT_VAL_F\", \"INV_B_TOT_VAL_F\",\n            \"INV_E_FIFO_VAL_F\", \"INV_E_AVG_VAL_F\", \"INV_E_STD_VAL_F\",\n            \"INV_E_OTHNL_VAL_F\", \"INV_E_NL_TOT_DVAL_F\", \"INV_B_FIFO_VAL_F\",\n            \"INV_B_AVG_VAL_F\", \"INV_B_STD_VAL_F\", \"INV_B_OTHNL_VAL_F\",\n            \"INV_B_NL_TOT_DVAL_F\", \"INV_E_LIFO_VAL_F\", \"INV_B_LIFO_VAL_F\",\n            \"INV_E_IVAL_TOT_DVAL_F\", \"INV_B_IVAL_TOT_DVAL_F\", \"INV_E_LIFO_RSV_VAL_F\",\n            \"INV_B_LIFO_RSV_VAL_F\"\n        ];\n\n        fields.forEach(field => {\n            if (field.endsWith(\"_F\")) {\n                record[field] = setCharAt(record[field] || '  ', 3, 'J')\n            } else {\n                record[field] = 0;\n            }\n        });\n        record.EXPS_MAT_V1_VAL = 0;\n        record.CSTMTOT_F = setCharAt(record.CSTMTOT_F, 3, 'L');\n\n        record.EXPS_CSTMTOT_DVAL =\n            (parseFloat(record?.EXPS_ELEC_VAL) || 0)\n            + (parseFloat(record?.EXPS_FUEL_VAL) || 0)\n            + (parseFloat(record?.EXPS_CONTRACT_VAL) || 0)\n            + (parseFloat(record?.EXPS_RESALE_VAL) || 0);\n\n    } else {\n        record.TABSTAT = 'N'\n        record.NONTABFL = 'R'\n        record.STOP = 'T'\n        record.GOCO_NAICS = 'No Match'\n    }\n    record.ACTION = 'END'\n}\n\nNAPCSMGOCO()\nmsg.payload.csv[record_idx] = record\n\nreturn msg\n",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nfunction setCharAt(str, index, chr) {\n    if ([null, undefined].includes(str)) {\n        let newstr = ''\n        for (let i = 0; i < index; i++) {\n            newstr = newstr + ' ';\n        }\n        newstr = newstr + chr\n        return newstr;\n    } else {\n        if (index > str.length - 1) {\n            let addstr = index - str.length\n            let newstr = str\n            for (let i = 0; i < addstr; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            return str.substring(0, index) + chr + str.substring(index + 1);\n        }\n    }\n}\n\nlet cache = global.get(\"lookupCache\");\nlet naics_m_goco_naics_to_napcs_file = cache.data.find(\n    item =>\n        item.module === \"napcs\" &&\n        item.param === 'naics_to_napcs_m_goco' &&\n        item.program === \"aies\" &&\n        item.unit_type === \"all\"\n)?.json_values;\n\nlet isNaicsCodeFound = naics_m_goco_naics_to_napcs_file?.NAICS_TO_NAPCS_M_GOCO.some(n => n['NAICS-3'] == record?.NAICS_CODE.substr(0, 3));\n\n\n\n\nfunction NAPCSMGOCO() {\n    if (record?.NAPCS_IND == 'U') {\n        record.PROD_CODE_VAL = 0\n        record.USABLE = 'D'\n        setCharAt(record.PROD_CODE_F || ' ', 1, 'J')\n    }\n\n    if (isNaicsCodeFound) {\n        record.NAPCS_IND = 'U'\n\n        const fields = [\n            \"CAPEX_BUILD_NEW_VAL\", \"CAPEX_BUILD_USED_VAL\", \"CAPEX_BUILD_TOT_DVAL\",\n            \"CAPEX_MACH_NEW_VAL\", \"CAPEX_MACH_USED_VAL\", \"CAPEX_MACH_TOT_DVAL\",\n            \"CAPEX_AUTO_VAL\", \"CAPEX_COMPTR_VAL\", \"CAPEX_OTHMACH_VAL\",\n            \"CAPEX_OTH_NEW_VAL\", \"CAPEX_OTH_NEW_WRTIN_TXT\", \"CAPEX_OTH_USED_VAL\",\n            \"CAPEX_OTH_USED_WRTIN_TXT\", \"CAPEX_OTH_TOT_DVAL\", \"CAPEX_NEW_TOT_DVAL\",\n            \"CAPEX_USED_TOT_DVAL\", \"CAPEX_TOT_DVAL\",\n\n            // need to verify following _F are correctly understood\n\n            \"CAPEX_BUILD_NEW_VAL_F\", \"CAPEX_BUILD_USED_VAL_F\", \"CAPEX_BUILD_TOT_DVAL_F\",\n            \"CAPEX_MACH_NEW_VAL_F\", \"CAPEX_MACH_USED_VAL_F\", \"CAPEX_MACH_TOT_DVAL_F\",\n            \"CAPEX_AUTO_VAL_F\", \"CAPEX_COMPTR_VAL_F\", \"CAPEX_OTHMACH_VAL_F\",\n            \"CAPEX_OTH_NEW_VAL_F\", \"CAPEX_OTH_NEW_WRTIN_TXT_F\", \"CAPEX_OTH_USED_VAL_F\",\n            \"CAPEX_OTH_USED_WRTIN_TXT_F\", \"CAPEX_OTH_TOT_DVAL_F\", \"CAPEX_NEW_TOT_DVAL_F\",\n            \"CAPEX_USED_TOT_DVAL_F\", \"CAPEX_TOT_DVAL_F\",\n\n            \"INV_E_FIN_VAL\", \"INV_E_WIP_VAL\", \"INV_E_MAT_VAL\",\n            \"INV_E_TOT_VAL\", \"INV_B_FIN_VAL\", \"INV_B_WIP_VAL\",\n            \"INV_B_MAT_VAL\", \"INV_B_TOT_VAL\", \"INV_E_FIFO_VAL\",\n            \"INV_E_AVG_VAL\", \"INV_E_STD_VAL\", \"INV_E_OTHNL_VAL\",\n            \"INV_E_NL_TOT_DVAL\", \"INV_B_FIFO_VAL\", \"INV_B_AVG_VAL\",\n            \"INV_B_STD_VAL\", \"INV_B_OTHNL_VAL\", \"INV_B_NL_TOT_DVAL\", \"INV_E_LIFO_VAL\", \"INV_B_LIFO_VAL\",\n            \"INV_E_IVAL_TOT_DVAL\", \"INV_B_IVAL_TOT_DVAL\", \"INV_E_LIFO_RSV_VAL\",\n            \"INV_B_LIFO_RSV_VAL\",\n\n            \"INV_E_FIN_VAL_F\", \"INV_E_WIP_VAL_F\",\n            \"INV_E_MAT_VAL_F\", \"INV_E_TOT_VAL_F\", \"INV_B_FIN_VAL_F\",\n            \"INV_B_WIP_VAL_F\", \"INV_B_MAT_VAL_F\", \"INV_B_TOT_VAL_F\",\n            \"INV_E_FIFO_VAL_F\", \"INV_E_AVG_VAL_F\", \"INV_E_STD_VAL_F\",\n            \"INV_E_OTHNL_VAL_F\", \"INV_E_NL_TOT_DVAL_F\", \"INV_B_FIFO_VAL_F\",\n            \"INV_B_AVG_VAL_F\", \"INV_B_STD_VAL_F\", \"INV_B_OTHNL_VAL_F\",\n            \"INV_B_NL_TOT_DVAL_F\", \"INV_E_LIFO_VAL_F\", \"INV_B_LIFO_VAL_F\",\n            \"INV_E_IVAL_TOT_DVAL_F\", \"INV_B_IVAL_TOT_DVAL_F\", \"INV_E_LIFO_RSV_VAL_F\",\n            \"INV_B_LIFO_RSV_VAL_F\"\n        ];\n\n        fields.forEach(field => {\n            if (field.endsWith(\"_F\")) {\n                record[field] = setCharAt(record[field] || '  ', 3, 'J')\n            } else {\n                record[field] = 0;\n            }\n        });\n        record.EXPS_MAT_V1_VAL = 0;\n        record.CSTMTOT_F = setCharAt(record.CSTMTOT_F, 3, 'L');\n\n        record.EXPS_CSTMTOT_DVAL =\n            (parseFloat(record?.EXPS_ELEC_VAL) || 0)\n            + (parseFloat(record?.EXPS_FUEL_VAL) || 0)\n            + (parseFloat(record?.EXPS_CONTRACT_VAL) || 0)\n            + (parseFloat(record?.EXPS_RESALE_VAL) || 0);\n\n    } else {\n        record.TABSTAT = 'N'\n        record.NONTABFL = 'R'\n        record.STOP = 'T'\n        record.GOCO_NAICS = 'No Match'\n    }\n    record.ACTION = 'END'\n}\n\nNAPCSMGOCO()\nmsg.payload.csv[record_idx] = record\n\nreturn msg\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
