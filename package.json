@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "set CENSUS_API=http://a6c96ef7c10b34f19b8fd6be9af60229-1618264183.us-gov-east-1.elb.amazonaws.com/api/ &&  node-red -s settings.js -u . -p 1880 -f flows.json",
-    "start:linux": "CENSUS_API=http://a6c96ef7c10b34f19b8fd6be9af60229-1618264183.us-gov-east-1.elb.amazonaws.com/api/ node-red -s settings.js -u . -p 1880 -f flows.json"
+    "start": "set CENSUS_API=https://mc.edl-7529180-ite.ite.edl.census.gov/api/ &&  node-red -s settings.js -u . -p 1880 -f flows.json",
+    "start:linux": "CENSUS_API=https://mc.edl-7529180-ite.ite.edl.census.gov/api/ node-red -s settings.js -u . -p 1880 -f flows.json"
   },
   "keywords": [],
   "author": "",

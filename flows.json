@@ -2175,7 +2175,6 @@
             "9ff082949b495698",
             "76ae33256827ae89",
             "f192e59528bfd677",
-            "4b28156dce4522c1",
             "aecaf71d99c7d88b",
             "3a09eefeb46e3070",
             "9e0c70dcbb4236fd",
@@ -2203,7 +2202,7 @@
         ],
         "x": 1194,
         "y": 859,
-        "w": 422,
+        "w": 432,
         "h": 82
     },
     {
@@ -3438,6 +3437,21 @@
         "userFieldType": "str",
         "password": "RootNew123!!",
         "passwordFieldType": "str"
+    },
+    {
+        "id": "96a4a629f038cff3",
+        "type": "tls-config",
+        "z": "e28cd8ccfbe21b33",
+        "name": "",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "",
+        "keyname": "",
+        "caname": "",
+        "servername": "",
+        "verifyservercert": false,
+        "alpnprotocol": ""
     },
     {
         "id": "9a0d32273f30aad5",
@@ -6387,7 +6401,7 @@
         "type": "function",
         "z": "0be109393cb5f28a",
         "name": "prepare API Request",
-        "func": "// Fetch the required parameters from msg.payload.lookup\nconst { moduleName, program, unit_type, missingParams } = msg.payload.lookup;\n\n// Construct the params query parameter from missingParams.\nconst params = (missingParams.length && missingParams.join(\",\")) || \"\";\n\n// Construct the full API URL\n// localhost needs to be replace with the actual domain where the API is hosted. The port needs to be 80 or 443\n// const apiurl = `${env.get('CENSUS_API').trim()}params?module=${moduleName}&params=${params}&program=${program}&unit_type=${unit_type}`;\n// https://mc.edl-7529180-ite.ite.edl.census.gov/api/db_query/q\n// http://a301cb45559c445acaec11ab01bbbee1-2115632777.us-gov-east-1.elb.amazonaws.com\nconst apiurl = `${(env.get('CENSUS_API') || 'https://mc.edl-7529180-ite.ite.edl.census.gov/api/').trim()}params?module=${moduleName}&params=${params}&program=${program}&unit_type=${unit_type}`;\n// console.log(apiurl)\n// Append the constructed API URL to msg.payload.lookup.apiurl\nmsg.url = apiurl;\nmsg.payloadBackup = msg.payload;\nreturn msg;\n",
+        "func": "const { moduleName, program, unit_type, missingParams } = msg.payload.lookup;\nconst params = (missingParams.length && missingParams.join(\",\")) || \"\";\nconst apiurl = `${(env.get('CENSUS_API') || 'https://mc.edl-7529180-ite.ite.edl.census.gov/api/').trim()}params?module=${moduleName}&params=${params}&program=${program}&unit_type=${unit_type}`;\nmsg.url = apiurl;\nmsg.payloadBackup = msg.payload;\nreturn msg;\n",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -6441,131 +6455,8 @@
         "x": 1030,
         "y": 400,
         "wires": [
-            [
-                "8e742fb0ecc16bec"
-            ]
-        ]
-    },
-    {
-        "id": "bb064be1769ac7e7",
-        "type": "postgresql",
-        "z": "0be109393cb5f28a",
-        "name": "SELECT",
-        "query": "",
-        "postgreSQLConfig": "481a641c4005d1c8",
-        "split": false,
-        "rowsPerMsg": "1",
-        "outputs": 1,
-        "x": 840,
-        "y": 600,
-        "wires": [
-            [
-                "58d22e9ed7ad9b5a"
-            ]
-        ]
-    },
-    {
-        "id": "58d22e9ed7ad9b5a",
-        "type": "function",
-        "z": "0be109393cb5f28a",
-        "name": "cache result",
-        "func": "let cache = global.get(\"lookupCache\");\ncache = Array.isArray(cache?.data) ? cache : {\"data\":[]}\ncache.data = []\n\nconsole.log({cache: cache?.data})\n// Get the payload\nlet payload = msg.payload;\n\n// Check if the API call was successful\nif (msg.pgsql.rowCount > 0) {\n\n    // Get the data array\n    let dataArr = payload;\n\n    // Extract the necessary fields from the API response and update the cache\n    for (let item of dataArr) {\n        const { id, module, param, values, json_values, program, unit_type } = item;\n        cache.data.push({ id, module, param, values, json_values, program, unit_type });\n    }\n    msg.payload = { ...msg.payloadBackup, dataArr };\n\n}\n// Save the updated cache\nglobal.set(\"lookupCache\", cache)\n// msg.payload = { ...msg.payloadBackup, dataArr };\n// msg.payload.cache = cache;\ndelete msg.payloadBackup;\nreturn msg;",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1030,
-        "y": 600,
-        "wires": [
             []
         ]
-    },
-    {
-        "id": "9755131b10a45865",
-        "type": "function",
-        "z": "0be109393cb5f28a",
-        "name": "prepare API Request",
-        "func": "// // Fetch the required parameters from msg.payload.lookup\nconst { moduleName, program, unit_type, missingParams } = msg.payload.lookup;\n\n// // Construct the params query parameter from missingParams.\nconst params = (missingParams.length && `'${missingParams.join(\"','\")}'`) || \"\";\nconsole.log({ params })\n// // Construct the full API URL\n// // localhost needs to be replace with the actual domain where the API is hosted. The port needs to be 80 or 443\n// const apiurl = `${env.get('CENSUS_API').trim()}params?module=${moduleName}&params=${params}&program=${program}&unit_type=${unit_type}`;\n// console.log(apiurl)\n// // Append the constructed API URL to msg.payload.lookup.apiurl\n// msg.url = apiurl;\nmsg.payloadBackup = msg.payload;\nmsg.query = `SELECT *\nFROM product_aies.params\nWHERE module = '${moduleName}'\n    AND param IN (${params})\n    AND program = '${program}'\n    AND unit_type ILIKE '%${unit_type}%';`\nconsole.log({\n    query: msg.query\n})\nreturn msg;\n// 'naics_alt', 'naics_validation'",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 640,
-        "y": 600,
-        "wires": [
-            [
-                "bb064be1769ac7e7"
-            ]
-        ]
-    },
-    {
-        "id": "08e57db90d2f075a",
-        "type": "function",
-        "z": "0be109393cb5f28a",
-        "name": "check cache",
-        "func": "// Retrieve the lookupCache\nlet cache = global.get(\"lookupCache\") || { data: [] };\n\n// Initialize msg.payload.lookup if it's not already an object\nmsg.payload.lookup = msg.payload.lookup || {};\n\n// List to keep track of missing parameters\nlet missingParams = [];\n\n// Check if the required params and their types exist in the cache\nif (msg?.payload?.lookup?.params){\n    for (let param of msg.payload.lookup.params.split(\",\")) {\n        let cachedValue = cache?.data && cache.data.find(\n            (cacheItem) =>\n                cacheItem.param === param.key && cacheItem.type === param.type\n        );\n\n        if (!cachedValue) {\n            missingParams.push(param);\n        }\n    }\n}\n\n\n// If there are missing parameters, set msg.payload.lookup.needsFetch to true\nif (missingParams.length > 0) {\n    msg.payload.lookup.needsFetch = true;\n    msg.payload.lookup.missingParams = missingParams;\n} else {\n    msg.payload.lookup.needsFetch = false;\n}\n\nreturn msg;\n",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 430,
-        "y": 600,
-        "wires": [
-            [
-                "9755131b10a45865"
-            ]
-        ]
-    },
-    {
-        "id": "bb8cafa23ab55feb",
-        "type": "inject",
-        "z": "0be109393cb5f28a",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 240,
-        "y": 600,
-        "wires": [
-            [
-                "08e57db90d2f075a"
-            ]
-        ]
-    },
-    {
-        "id": "8e742fb0ecc16bec",
-        "type": "debug",
-        "z": "0be109393cb5f28a",
-        "name": "debug 116",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 970,
-        "y": 280,
-        "wires": []
     },
     {
         "id": "e4588ba92d2276e3",
@@ -6590,7 +6481,7 @@
         "type": "function",
         "z": "e28cd8ccfbe21b33",
         "name": "Get Body",
-        "func": "return msg;",
+        "func": "msg.payload.NODE_TLS_REJECT_UNAUTHORIZED = env.get('NODE_TLS_REJECT_UNAUTHORIZED')\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -6600,7 +6491,9 @@
         "x": 740,
         "y": 240,
         "wires": [
-            []
+            [
+                "fdf0c55f5d8a63e3"
+            ]
         ]
     },
     {
@@ -6608,14 +6501,14 @@
         "type": "http request",
         "z": "e28cd8ccfbe21b33",
         "name": "",
-        "method": "POST",
+        "method": "GET",
         "ret": "obj",
         "paytoqs": "ignore",
         "url": "",
-        "tls": "",
+        "tls": "96a4a629f038cff3",
         "persist": false,
         "proxy": "",
-        "insecureHTTPParser": false,
+        "insecureHTTPParser": true,
         "authType": "",
         "senderr": false,
         "headers": [],
@@ -6632,7 +6525,7 @@
         "type": "function",
         "z": "e28cd8ccfbe21b33",
         "name": "POST API ",
-        "func": "// msg.payload.body = JSON.stringify({\n//     \"q\": \"SELECT * from product_aies.synthetic_responses_10_csv limit 1\"\n// })\n// return msg;\n\n// msg.url = \"http://a301cb45559c445acaec11ab01bbbee1-2115632777.us-gov-east-1.elb.amazonaws.com/api/db_query/q\";\n\nmsg.url = \"https://mc.edl-7529180-ite.ite.edl.census.gov/api/db_query/q\";\n\nmsg.headers = {\n    \"Content-Type\": \"application/json\"\n};\nmsg.payload = {\n    q: \"SELECT * from product_aies.synthetic_responses_20_90_csv limit 10\"\n};\nreturn msg;\n",
+        "func": "// msg.url = \"https://a301cb45559c445acaec11ab01bbbee1-2115632777.us-gov-east-1.elb.amazonaws.com/api/db_query/q\";\n\nmsg.url = \"https://mc.edl-7529180-ite.ite.edl.census.gov/api/db_query/q\";\n\nmsg.headers = {\n    \"Content-Type\": \"application/json\"\n};\nmsg.payload = {\n    q: \"SELECT * from product_aies.synthetic_responses_20_90_csv limit 10\"\n};\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -6646,6 +6539,22 @@
                 "5507f546d88c96b5"
             ]
         ]
+    },
+    {
+        "id": "fdf0c55f5d8a63e3",
+        "type": "debug",
+        "z": "e28cd8ccfbe21b33",
+        "name": "debug 117",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 970,
+        "y": 140,
+        "wires": []
     },
     {
         "id": "9a7a7971.dbc4b8",
@@ -23216,8 +23125,7 @@
         "y": 440,
         "wires": [
             [
-                "2dcb1956c632490d",
-                "fdb129d4e5333574"
+                "2dcb1956c632490d"
             ]
         ]
     },
@@ -23289,23 +23197,6 @@
                 "9d938e0309949c09"
             ]
         ]
-    },
-    {
-        "id": "fdb129d4e5333574",
-        "type": "debug",
-        "z": "69164b36a28c9eff",
-        "name": "naics_m_goco_file",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload.naics_m_goco_file",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1050,
-        "y": 580,
-        "wires": []
     },
     {
         "id": "523b46f795f0a997",
@@ -25533,23 +25424,6 @@
             [
                 "f192e59528bfd677"
             ]
-        ]
-    },
-    {
-        "id": "4b28156dce4522c1",
-        "type": "postgresql",
-        "z": "dad88d9a3132fed6",
-        "g": "4099bf03141f3710",
-        "name": "SELECT",
-        "query": "SELECT * FROM product_aies.item_estabs_2023a1 limit 10;\n",
-        "postgreSQLConfig": "481a641c4005d1c8",
-        "split": false,
-        "rowsPerMsg": "1",
-        "outputs": 1,
-        "x": 460,
-        "y": 2620,
-        "wires": [
-            []
         ]
     },
     {
