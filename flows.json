@@ -293,14 +293,6 @@
         "env": []
     },
     {
-        "id": "112a2e5b60c3f3a8",
-        "type": "tab",
-        "label": "Classification",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
         "id": "0952db06f674f8bc",
         "type": "tab",
         "label": "Logical Edits",
@@ -328,14 +320,6 @@
         "id": "ed71400b88bb6305",
         "type": "tab",
         "label": "Derived Naics",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
-        "id": "067b1d1ff9443ad3",
-        "type": "tab",
-        "label": "Valid Negative Value",
         "disabled": false,
         "info": "",
         "env": []
@@ -408,14 +392,6 @@
         "id": "9edb2d8ae946822f",
         "type": "tab",
         "label": "Unit Balance",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
-        "id": "236c2e1a5554a6f0",
-        "type": "tab",
-        "label": "Valid Zero",
         "disabled": false,
         "info": "",
         "env": []
@@ -653,6 +629,30 @@
         "env": []
     },
     {
+        "id": "112a2e5b60c3f3a8",
+        "type": "tab",
+        "label": "Classification",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "236c2e1a5554a6f0",
+        "type": "tab",
+        "label": "Valid Zero",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "067b1d1ff9443ad3",
+        "type": "tab",
+        "label": "Valid Negative Value",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "c5ce2d38887016b2",
         "type": "subflow",
         "name": "Apply rules by level type",
@@ -696,39 +696,6 @@
         "color": "#DDAA99"
     },
     {
-        "id": "0111e67f54e25c8c",
-        "type": "subflow",
-        "name": "1.1 Classification",
-        "info": "",
-        "category": "",
-        "in": [
-            {
-                "x": 80,
-                "y": 160,
-                "wires": [
-                    {
-                        "id": "bcea1437bb5bb1a3"
-                    }
-                ]
-            }
-        ],
-        "out": [
-            {
-                "x": 500,
-                "y": 140,
-                "wires": [
-                    {
-                        "id": "bcea1437bb5bb1a3",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
-        "env": [],
-        "meta": {},
-        "color": "#DDAA99"
-    },
-    {
         "id": "831dceaabaf975f9",
         "type": "subflow",
         "name": "2.1 Geogrpahy",
@@ -752,39 +719,6 @@
                 "wires": [
                     {
                         "id": "f710ad2a1b56dbec",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
-        "env": [],
-        "meta": {},
-        "color": "#DDAA99"
-    },
-    {
-        "id": "10e53f47b43ab89e",
-        "type": "subflow",
-        "name": "4.0 Subflow Completeness Check",
-        "info": "",
-        "category": "",
-        "in": [
-            {
-                "x": 50,
-                "y": 30,
-                "wires": [
-                    {
-                        "id": "0fc84963f887090f"
-                    }
-                ]
-            }
-        ],
-        "out": [
-            {
-                "x": 500,
-                "y": 80,
-                "wires": [
-                    {
-                        "id": "0fc84963f887090f",
                         "port": 0
                     }
                 ]
@@ -1346,49 +1280,6 @@
         }
     },
     {
-        "id": "a3d425ba6d3b6a6a",
-        "type": "subflow",
-        "name": "Classification Subflow",
-        "info": "",
-        "category": "",
-        "in": [
-            {
-                "x": 60,
-                "y": 160,
-                "wires": [
-                    {
-                        "id": "a9488a8d395e57ca"
-                    }
-                ]
-            }
-        ],
-        "out": [
-            {
-                "x": 360,
-                "y": 160,
-                "wires": [
-                    {
-                        "id": "a9488a8d395e57ca",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
-        "env": [],
-        "meta": {},
-        "color": "#DDAA99",
-        "status": {
-            "x": 200,
-            "y": 60,
-            "wires": [
-                {
-                    "id": "85c4a58489514054",
-                    "port": 0
-                }
-            ]
-        }
-    },
-    {
         "id": "4ed21c9150f5597a",
         "type": "subflow",
         "name": "Geography Subflow",
@@ -1469,49 +1360,6 @@
             "wires": [
                 {
                     "id": "7079068ecbbe7a0c",
-                    "port": 0
-                }
-            ]
-        }
-    },
-    {
-        "id": "1e75121bac78652a",
-        "type": "subflow",
-        "name": "Completeness Subflow",
-        "info": "",
-        "category": "",
-        "in": [
-            {
-                "x": 40,
-                "y": 180,
-                "wires": [
-                    {
-                        "id": "c8cdb6c161debc28"
-                    }
-                ]
-            }
-        ],
-        "out": [
-            {
-                "x": 360,
-                "y": 180,
-                "wires": [
-                    {
-                        "id": "c8cdb6c161debc28",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
-        "env": [],
-        "meta": {},
-        "color": "#DDAA99",
-        "status": {
-            "x": 215,
-            "y": 30,
-            "wires": [
-                {
-                    "id": "b471fc927cf789d7",
                     "port": 0
                 }
             ]
@@ -1751,25 +1599,22 @@
         "category": "",
         "in": [
             {
-                "x": 40,
-                "y": 80,
+                "x": 390,
+                "y": 160,
                 "wires": [
                     {
-                        "id": "2c13cd1702f219b4"
-                    },
-                    {
-                        "id": "18ba959db21960e4"
+                        "id": "f924038bf9ba3790"
                     }
                 ]
             }
         ],
         "out": [
             {
-                "x": 700,
-                "y": 180,
+                "x": 1250,
+                "y": 160,
                 "wires": [
                     {
-                        "id": "32bcf1022944c0d1",
+                        "id": "0a9f67e1bc33b824",
                         "port": 0
                     }
                 ]
@@ -1938,6 +1783,104 @@
                         "port": 0
                     }
                 ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "2c46d53f4cdbe93f",
+        "type": "subflow",
+        "name": "Subflow 12",
+        "info": "",
+        "in": [],
+        "out": []
+    },
+    {
+        "id": "998aa04bd1bb677d",
+        "type": "subflow",
+        "name": "Valid Zero",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 200,
+                "y": 340,
+                "wires": [
+                    {
+                        "id": "978e9426a1803b88"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 980,
+                "y": 340,
+                "wires": [
+                    {
+                        "id": "15222fbe79033cfa",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "c79b244779411ead",
+        "type": "subflow",
+        "name": "Valid Negative",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 360,
+                "y": 340,
+                "wires": [
+                    {
+                        "id": "49bca15a17b08352"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 1160,
+                "y": 340,
+                "wires": [
+                    {
+                        "id": "dd9091221ca2c1cf",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "89f071f1deb9a1b1",
+        "type": "subflow",
+        "name": "Completeness",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 50,
+                "y": 30,
+                "wires": []
+            }
+        ],
+        "out": [
+            {
+                "x": 160,
+                "y": 30,
+                "wires": []
             }
         ],
         "env": [],
@@ -2163,8 +2106,6 @@
             "2fd70cb03d1b3cb7",
             "23ffb00caa077b23",
             "6b05d518e4c1bc47",
-            "bf95042aa95f74b7",
-            "67218bea97f26dc5",
             "302cb8040ecade52",
             "2b5207ce5d20fc0a",
             "184f643c8c0c9483",
@@ -2179,7 +2120,6 @@
             "3a09eefeb46e3070",
             "9e0c70dcbb4236fd",
             "4009a991edd2db54",
-            "afdbcfd37a282ff3",
             "3243d670e9d24a2d"
         ],
         "x": 14,
@@ -3697,42 +3637,6 @@
         "wires": []
     },
     {
-        "id": "bcea1437bb5bb1a3",
-        "type": "function",
-        "z": "0111e67f54e25c8c",
-        "name": "1.1.1 Classification",
-        "func": "msg.actions.classificationCompleted = true\n\n\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 290,
-        "y": 140,
-        "wires": [
-            [
-                "2e40abf0ac9d09f7"
-            ]
-        ]
-    },
-    {
-        "id": "2e40abf0ac9d09f7",
-        "type": "debug",
-        "z": "0111e67f54e25c8c",
-        "name": "Classified Facts",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "facts",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 640,
-        "y": 40,
-        "wires": []
-    },
-    {
         "id": "f710ad2a1b56dbec",
         "type": "function",
         "z": "831dceaabaf975f9",
@@ -3745,23 +3649,6 @@
         "libs": [],
         "x": 270,
         "y": 180,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "0fc84963f887090f",
-        "type": "function",
-        "z": "10e53f47b43ab89e",
-        "name": "4.0 Completeness Check",
-        "func": "\nmsg.actions.completenessCheckCompleted = true\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 190,
-        "y": 80,
         "wires": [
             []
         ]
@@ -5217,55 +5104,6 @@
         ]
     },
     {
-        "id": "b2a5330c1460830d",
-        "type": "debug",
-        "z": "a3d425ba6d3b6a6a",
-        "name": "debug classification",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 400,
-        "y": 80,
-        "wires": []
-    },
-    {
-        "id": "a9488a8d395e57ca",
-        "type": "function",
-        "z": "a3d425ba6d3b6a6a",
-        "name": "classification function",
-        "func": "// node.status({ fill: \"green\", shape: \"dot\", text: \"processing\" });\n\n// if ((msg.payload.csv[0].RECORD_TYP == 20 || msg.payload.csv[0].RECORD_TYP == 90) && msg.payload.csv[0].BR_STAT == \"Y\") {\n//     if ((msg.payload.csv[0].NAICS_CODE_OLD).toString().substring(1, 4) == \"4821\" || (msg.payload.csv[0].NAICS_CODE_OLD).toString().substring(1, 7) == \"6221101\" || (msg.payload.csv[0].NAICS_CODE_OLD).toString().substring(1, 6) == \"113110\") {\n//         if (!msg.payload.csv[0].NAICS_WRITIN_TEXT) {\n//             msg.payload.csv[0].analysisRef = \"NAICS_WRITIN\"\n//         }\n//     } else {\n//         msg.payload.csv[0].TABSTAT = \"N\"\n//         msg.payload.csv[0].NONTABFL = \"R\"\n//     }\n//     msg.payload.csv[0].action = \"Go to Geography\"\n\n// } else if (msg.payload.csv[0].RECORD_TYP == 30 && msg.payload.csv[0].BR_STAT == \"Y\") {\n//     if (msg.payload.csv[0].KAU_NAICS == \"4821\" + \" \" || msg.payload.csv[0].KAU_NAICS == \"6221101\" || msg.payload.csv[0].KAU_NAICS + \" \" == \"113110\") {\n//         msg.payload.csv[0].action = \"Go to Geography\"\n//     } else {\n//         msg.payload.csv[0].TABSTAT = \"N\"\n//         msg.payload.csv[0].NONTABFL = \"R\"\n//     }\n// } else {\n//     msg.payload.csv[0].error = \"Record should not have entered this module\"\n// }\n\n// msg.payload.csv[0].module = \"Classification\"\n\n// // setTimeout(function () {\n// node.status({ fill: \"gray\", shape: \"ring\", text: \"complete\" });\n// //     node.send(msg);\n// // }, 1000);\n\n// return msg\nmsg.topic = 'Classification'\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\nlet cache = global.get(\"lookupCache\");\n\nmsg.payload.record_typ_txt = record.RECORD_TYP_TXT;\nmsg.payload.aies_scope = record.AIES_SCOPE;\nmsg.payload.naics_num = record.NAICS_NUM;\n\nmsg.payload.csv[record_idx].TOPIC = 'Classification';\n\nlet status = \"\";\nfunction checkStr(str) {\n    return typeof str === 'undefined' ||\n        str === null ||\n        str === \"NULL\"\n        ? \"\"\n        : str\n}\n\nfunction recTypeMatch(recArr) {\n    console.log((\n        (record.RECORD_TYP_TXT ? recArr.includes(record.RECORD_TYP_TXT) : false)\n    ))\n    return (\n        (record.RECORD_TYP_TXT ? recArr.includes(record.RECORD_TYP_TXT) : false)\n    );\n}\nfunction checkMinimumLength(inputString) {\n    return typeof inputString === 'string' && inputString.length >= 8;\n}\nfunction partialNaicsNum(length) {\n    msg.payload.NAICS_NUM = record.NAICS_NUM.substring(0, length);\n    console.log(msg.payload.NAICS_NUM)\n    return record.NAICS_NUM.substring(0, length) || \"\";\n}\nfunction partialKAUNaicsNum(length) {\n    msg.payload.KAU_NAICS = record.KAU_NAICS.substring(0, length);\n    console.log(msg.payload.KAU_NAICS)\n    return record.KAU_NAICS.substring(0, length) || \"\";\n}\nfunction setFlag() {\n    msg.payload.csv[record_idx].TABSTAT = \"N\";\n    msg.payload.csv[record_idx].NONTABFL = \"R\";\n    msg.payload.csv[record_idx].ACTION = \"Exit Edit\";\n}\nfunction setAction(action) {\n    console.log(action)\n    msg.payload.csv[record_idx].ACTION = action;\n}\nfunction stopExit(val) {\n    setFlag()\n    if (val === 1) {\n        msg.payload.csv[record_idx].REFERRAL_FLAG = \"INVALID_NAICS_KAU\";\n    } else {\n        msg.payload.csv[record_idx].REFERRAL_FLAG = \"INVALID_NAICS_ESTAB\";\n    }\n\n}\n\nfunction checkNaicsValidation(field, cache, record, naicsValdnColumn = 0) {\n    if (!cache || !Array.isArray(cache.data)) {\n        cache = { data: [] };\n    }\n\n    const naicsValData = cache.data.find(\n        item =>\n            item.module === \"classification\" &&\n            item.program === \"aies\" &&\n            item.unit_type === \"estab\"\n    )?.json_values;\n    console.log({\n        test1: record['NAICS_NUM'] &&\n            (\n                (naicsValData &&\n                    typeof naicsValData === \"object\" &&\n                    naicsValData[\"col_\" + naicsValdnColumn]) ||\n                []\n            ).some(item => checkStr((item).toString()) === checkStr((field).toString()))\n    })\n\n    return (\n        record['NAICS_NUM'] &&\n        (\n            (naicsValData &&\n                typeof naicsValData === \"object\" &&\n                naicsValData[\"col_\" + naicsValdnColumn]) ||\n            []\n        ).some(item => checkStr((item).toString()) === checkStr((field).toString()))\n    );\n}\nfunction callMeInElse() {\n    if (recTypeMatch([\"20\", \"90\"])) {\n        stopExit(20 || 90)\n    } else {\n        stopExit(1)\n    }\n}\nif (recTypeMatch([\"30\", \"20\", \"90\"])) {\n    if (checkMinimumLength(record.NAICS_NUM)) {\n        if (checkNaicsValidation(partialNaicsNum(4), cache, record, 0)) {\n            if (recTypeMatch([\"20\", \"90\"])) {\n                setAction(\"Link to Derive Naics code Module\");\n            } else {\n                setAction(\"Go to main Routing\");\n            }\n        }\n        else if (\n            checkNaicsValidation(partialNaicsNum(7), cache, record, 1) ||\n            checkNaicsValidation(partialNaicsNum(6), cache, record, 2)\n        ) {\n            setAction(\"Link to Derive Naics code Module\");\n        } else {\n            callMeInElse()\n        }\n        return msg;\n    } else if (recTypeMatch([\"20\", \"90\"])) {\n        callMeInElse()\n        return msg;\n    } else {\n        stopExit(1)\n    }\n    return msg;\n\n} else {\n    setAction(\"Error - Record should not have entered this module\");\n    return msg;\n}",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 200,
-        "y": 160,
-        "wires": [
-            [
-                "b2a5330c1460830d"
-            ]
-        ]
-    },
-    {
-        "id": "85c4a58489514054",
-        "type": "status",
-        "z": "a3d425ba6d3b6a6a",
-        "name": "",
-        "scope": null,
-        "x": 80,
-        "y": 60,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "fe11cb6a6a8eb0ed",
         "type": "debug",
         "z": "4ed21c9150f5597a",
@@ -5358,55 +5196,6 @@
         "scope": null,
         "x": 100,
         "y": 20,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "c8cdb6c161debc28",
-        "type": "function",
-        "z": "1e75121bac78652a",
-        "name": "completeness function",
-        "func": "// msg.topic = 'Estab - Completeness Check'\n// msg.startTime = Date.now();\n\n// let arr = []\n// // PAY_ANN_VAL\n// for (let i = 0; i < msg.payload.rows.length; i++) {\n//     let row = msg.payload.rows[i];\n//     if (row.PAY_ANN_VAL === 0 || typeof row.PAY_ANN_VAL === 'undefined') {\n//         if (row.UNIT === 'ESTAB') {\n//             if (row.PAY_ANN_LSD && row.PAY_ANN_LSD > 0) {\n//                 row.MARK = 'Leased Employer';\n//             } else if (row.EXPS_TEMPSTAF_VAL && row.EXPS_TEMPSTAF_VAL > 0) {\n//                 row.PAY_ANN_VAL = row.EXPS_TEMPSTAF_VAL;\n//                 row.PAY_ANN_VAL_FLG = 'J' + row.PAY_ANN_VAL_FLG\n//                 row.MARK = 'Leased Employer';\n//             } else if (row.PROCESS_DIV_CODE === 'I' && (row.PAY_ANN_PRDWRK_VAL + row.PAY_ANN_NONPRDWRK_VAL) > 0) {\n//                 row.PAY_ANN_VAL = row.PAY_ANN_PRDWRK_VAL + row.PAY_ANN_NONPRDWRK_VAL;\n//                 row.PAY_ANN_VAL_FLG = 'L' + row.PAY_ANN_VAL_FLG\n//             } else if (row.REPORTING_ID_TYP === 'SU') {\n//                 if (row.ECPAYANN > 0) {\n//                     row.PAY_ANN_VAL = row.ECPAYANN;\n//                     row.PAY_ANN_VAL_FLG = 'A' + row.PAY_ANN_VAL_FLG\n//                 } else {\n//                     row.MARK = 'Non-Employer';\n//                     row.TABSTAT = 'N'\n//                     row.NONTABFL = 'N'\n//                     // STOP PROCESSING\n//                 }\n//             } else if (row.REPORTING_ID_TYP === 'MU' && row.CY_PAY_ANN > 0) {\n//                 row.PAY_ANN_VAL = row.CY_PAY_ANN;\n//                 if (row.CY_PAY_ANN_FLG) {\n//                     row.PAY_ANN_VAL_FLG = row.CY_PAY_ANN_FLG;\n//                 }\n//             } else if ((row.ESTABS - row.HISTORIC_ECON_CENSUS) > 0) {\n//                 row.PAY_ANN_VAL = row.MADB_2022_PAYANN;\n//                 row.PAY_ANN_VAL_FLG = 'H' + row.PAY_ANN_VAL_FLG\n//             } else {\n//                 row.MARK = 'Non-Employer';\n//                 row.TABSTAT = 'N'\n//                 row.NONTABFL = 'N'\n//                 // STOP PROCESSING\n//             }\n//         } \n//     }\n\n//     // RCPTOT\n//     if (row.RCPT_TOT_VAL === 0 || typeof row.RCPT_TOT_VAL === 'undefined') {\n//         if (row.PROCESS_DIV_CODE === 'I' && row.COVCHGCD === '401') {\n//             row.RCPT_TOT_VAL = 0;\n//         } else if (row.REPORTING_ID_TYP === 'SU') {\n//             if (row.ECRCPTOT > 0) {\n//                 row.RCPT_TOT_VAL = row.ECRCPTOT;\n//                 row.RCPT_TOT_VAL_FLG = 'A' + row.RCPT_TOT_VAL_FLG;\n//             } else if (row.MONTHLY_data > 0 && row.QSS_data > 0) {\n//                 row.RCPT_TOT_VAL = (row.MONTHLY_CMON / 1000) + row.QUARTERLY_QREV;\n//                 row.RCPT_TOT_VAL_FLG = 'J' + row.RCPT_TOT_VAL_FLG;\n//             } else if ((row.ESTABS - row.HISTORIC_ECON_CENSUS) > 0) {\n//                 row.RCPT_TOT_VAL = row.MADB_2022_RCPTOT;\n//                 row.RCPT_TOT_VAL = 'H' + row.RCPT_TOT_VAL\n//             }\n//         } else if (row.REPORTING_ID_TYP === 'KAU') {\n//             if ((row.ESTABS - row.HISTORIC_ECON_CENSUS) > 0) {\n//                 row.RCPT_TOT_VAL = row.MADB_2022_RCPTOT;\n//                 row.RCPT_TOT_VAL = 'H' + row.RCPT_TOT_VAL\n//             }    \n//         }\n//     }\n\n//     // PAYQTR1\n//     if (row.PAY_QTR1_VAL === 0 || row.PAY_QTR1_VAL === undefined) {\n//         if (row.PAY_ANN_LSD > 0) {\n//             row.NOTE = 'Leased Employer';\n//             row.PAY_QTR1_VAL = 0;\n//         } else if (row.PROCESS_DIV_CODE === 'I' && (row.PAY_QTR1_PRDWRK_VAL + row.PAY_QTR1_NONPRDWRK_VAL) > 0) {\n//             row.PAY_QTR1_VAL = row.PAY_QTR1_PRDWRK_VAL + row.PAY_QTR1_NONPRDWRK_VAL\n//             row.PAY_QTR1_VAL_FLG = 'L' + row.PAY_QTR1_VAL_FLG;\n//         } else if (row.REPORTING_ID_TYP === 'SU') {\n//             if (row.ECPAYQ1 > 0) {\n//                 row.PAY_QTR1_VAL = row.ECPAYQ1;\n//                 row.PAY_QTR1_VAL_FLG = 'A' + row.PAY_QTR1_VAL_FLG;\n//             } else {\n//                 if ((row.ESTABS - row.HISTORIC_ECON_CENSUS) > 0) {\n//                     row.PAY_QTR1_VAL = row.MADB_2022_PAYQ1;\n//                     row.PAY_QTR1_VAL_FLG = 'H' + row.PAY_QTR1_VAL_FLG\n//                 }    \n//             }\n//         } else if (row.REPORTING_ID_TYP === 'MU' && row.CY_PAY_QTR1 > 0) {\n//             row.PAY_QTR1_VAL = row.CY_PAY_QTR1;\n//             if (row.CY_PAY_QTR1_FLG) {\n//                 row.PAY_QTR1_VAL_FLG = row.CY_PAY_QTR1_FLG;\n//             }\n//         } else if ((row.ESTABS - row.HISTORIC_ECON_CENSUS) > 0) {\n//             row.PAY_QTR1_VAL = row.MADB_2022_PAYQ1;\n//             row.PAY_QTR1_VAL_FLG = 'H' + row.PAY_QTR1_VAL_FLG\n//         }\n//     }\n\n//     // EMPQ1\n//     if (row.EMP_MAR12_VAL === 0 || row.EMP_MAR12_VAL === undefined) {\n//         if (row.PAY_ANN_LSD > 0) {\n//             row.NOTE = 'Leased Employer';\n//             row.EMP_MAR12_VAL = 0;\n//         } else if (row.PROCESS_DIV_CODE === 'I' && (row.EMP_MAR12_PRDWRK_NUM + row.EMP_MAR12_NONPRDWRK_NUM) > 0) {\n//             row.EMP_MAR12_VAL = row.EMP_MAR12_PRDWRK_NUM + row.EMP_MAR12_NONPRDWRK_NUM\n//             row.EMP_MAR12_VAL_FLG = 'L' + row.EMP_MAR12_VAL_FLG;\n//         } else if (row.REPORTING_ID_TYP === 'SU') {\n//             if (row.ECEMPQ1 > 0) {\n//                 row.EMP_MAR12_NUM = row.ECEMPQ1;\n//                 row.EMP_MAR12_NUM_FLG = 'A' + row.EMP_MAR12_NUM_FLG;\n//             } else {\n//                 if ((row.ESTABS - row.HISTORIC_ECON_CENSUS) > 0) {\n//                     row.EMP_MAR12_VAL = row.MADB_2022_EMPQ1;\n//                     row.EMP_MAR12_NUM_FLG = 'H' + row.EMP_MAR12_NUM_FLG\n//                 }\n//             }\n//         } else if (row.REPORTING_ID_TYP === 'MU' && row.CY_EMP_MAR12 > 0) {\n//             row.EMP_MAR12_NUM = row.CY_EMP_MAR12;\n//             if (row.CY_EMP_MAR12_FLG) {\n//                 row.EMP_MAR12_NUM_FLG = row.CY_EMP_MAR12_FLG;\n//             } \n//         } else if ((row.ESTABS - row.HISTORIC_ECON_CENSUS) > 0) {\n//             row.EMP_MAR12_VAL = row.MADB_2022_EMPQ1;\n//             row.EMP_MAR12_VAL_FLG = 'H' + row.EMP_MAR12_VAL_FLG\n//         }\n//     }\n//     arr.push(row)\n// }\n\n// msg.payload.rowsN = arr;\n\n// // row.module = \"Completeness Check\"\n// msg.duration = Date.now() - msg.startTime;\n\n\n// return msg\nmsg.topic = 'Completeness Check'\n\nmsg.cache = global.get(\"lookupCache\")\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nmsg.payload.csv[record_idx].TOPIC = 'Completeness Check';\n\nconst isValueMissing = value => value === null || value === undefined || value === 'NULL';\n\nconst isCoreVariableMissing = variables => {\n    const coreVariables = ['PAY_ANN_VAL', 'EMP_MAR12_NUM', 'PAY_QTR1_VAL', 'RCPT_TOT_VAL'];\n    return coreVariables.some(variable => isValueMissing(variables[variable]));\n};\n\nconst handleYesFlow = variables => {\n    goToPVPrep(variables)\n};\n\nconst handleNoFlow = variables => completenessCheckForAIES(variables);\n\nconst completenessCheckForAIES = variables => {\n    const moduleOrder = ['PAY_ANN_VAL', 'EMP_MAR12_NUM', 'PAY_QTR1_VAL', 'RCPT_TOT_VAL'];\n    for (let item of moduleOrder) {\n        if (isValueMissing(variables[item])) {\n            msg.payload.csv[record_idx].ACTION = variables.join(', ') + 'Will be executed'\n        }\n    }\n};\n\nconst goToPVPrep = variables => {\n    msg.payload.csv[record_idx].ACTION = 'Go To PV Prep'\n};\n\nconst isValueZero = value => parseInt(value) === 0;\n\nconst checkVariables = (variables) => {\n    variables.PO_F = '' // Remove Todo\n    const coreVariables = ['PAY_ANN_VAL', 'EMP_MAR12_NUM', 'PAY_QTR1_VAL', 'RCPT_TOT_VAL'];\n\n    const shouldProceed = [];\n    const shouldNotProceed = [];\n\n    const isPoF_G = variables.PO_F[1] === 'G';\n\n    const notInArray = !['A', 'P', 'V', 'H', 'M', 'E', 'B', 'W', 'U', 'X'].includes(variables.PO_F[1]);\n    coreVariables.forEach(variable => {\n        if (variable === 'RCPT_TOT_VAL' && notInArray && !isValueZero(variables[variable])) {\n            shouldProceed.push(variable);\n        } else if (variable !== 'RCPT_TOT_VAL' && (isPoF_G || !isValueZero(variables[variable]))) {\n            shouldProceed.push(variable);\n        } else {\n            shouldNotProceed.push(variable);\n        }\n    });\n\n    return { shouldProceed, shouldNotProceed };\n};\n\n\nconst completenessCheck = variables => {\n    const checkVariablesToProceed = checkVariables(record)\n    if (variables['REPORTING_TYP_ID'] && ['MU', 'SU', 'KAU'].includes(variables['REPORTING_TYP_ID'])) {\n        if (!isCoreVariableMissing(variables)) {\n            console.log({ isCoreVariableMissing })\n            if (checkVariablesToProceed.shouldProceed.length === 4) {\n                console.log('All PASS')\n                handleYesFlow(checkVariablesToProceed.shouldProceed);\n            }\n        }\n    }\n    handleNoFlow(checkVariablesToProceed?.shouldNotProceed);\n    return msg;\n};\n\nconst result = completenessCheck(record);\nreturn result\n",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 200,
-        "y": 180,
-        "wires": [
-            [
-                "9905b611fd98c517"
-            ]
-        ]
-    },
-    {
-        "id": "9905b611fd98c517",
-        "type": "debug",
-        "z": "1e75121bac78652a",
-        "name": "debug completeness",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 400,
-        "y": 80,
-        "wires": []
-    },
-    {
-        "id": "b471fc927cf789d7",
-        "type": "status",
-        "z": "1e75121bac78652a",
-        "name": "",
-        "scope": null,
-        "x": 100,
-        "y": 40,
         "wires": [
             []
         ]
@@ -6203,105 +5992,61 @@
         ]
     },
     {
-        "id": "ec12a60787949694",
-        "type": "debug",
-        "z": "bfe1ab19e0cbe2cf",
-        "name": "debug classification",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "duration",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 750,
-        "y": 80,
-        "wires": []
-    },
-    {
-        "id": "18ba959db21960e4",
-        "type": "function",
-        "z": "bfe1ab19e0cbe2cf",
-        "name": "transpose params",
-        "func": "let data = [{ \"Column 1\": 4821, \"Column 2\": 6221101, \"Column 3\": 113110 }, { \"Column 2\": 6221102, \"Column 3\": 113210 }, { \"Column 2\": 6222101, \"Column 3\": 113310 }, { \"Column 2\": 6222102, \"Column 3\": 114111 }, { \"Column 2\": 6223101, \"Column 3\": 114112 }, { \"Column 2\": 6223102, \"Column 3\": 114119 }, { \"Column 2\": 7112111, \"Column 3\": 114210 }, { \"Column 2\": 7112112, \"Column 3\": 115111 }, { \"Column 2\": 7112119, \"Column 3\": 115112 }, { \"Column 2\": 7112121, \"Column 3\": 115113 }, { \"Column 2\": 7112122, \"Column 3\": 115114 }, { \"Column 2\": 7112123, \"Column 3\": 115115 }, { \"Column 2\": 7112191, \"Column 3\": 115116 }, { \"Column 2\": 7112192, \"Column 3\": 115210 }, { \"Column 3\": 115310 }, { \"Column 3\": 211120 }, { \"Column 3\": 211130 }, { \"Column 3\": 212111 }, { \"Column 3\": 212112 }, { \"Column 3\": 212113 }, { \"Column 3\": 212210 }, { \"Column 3\": 212221 }, { \"Column 3\": 212222 }, { \"Column 3\": 212230 }, { \"Column 3\": 212291 }, { \"Column 3\": 212299 }, { \"Column 3\": 212311 }, { \"Column 3\": 212312 }, { \"Column 3\": 212313 }, { \"Column 3\": 212319 }, { \"Column 3\": 212321 }, { \"Column 3\": 212322 }, { \"Column 3\": 212324 }, { \"Column 3\": 212325 }, { \"Column 3\": 212391 }, { \"Column 3\": 212392 }, { \"Column 3\": 212393 }, { \"Column 3\": 212399 }, { \"Column 3\": 213111 }, { \"Column 3\": 213112 }, { \"Column 3\": 213113 }, { \"Column 3\": 213114 }, { \"Column 3\": 213115 }, { \"Column 3\": 221111 }, { \"Column 3\": 221112 }, { \"Column 3\": 221113 }, { \"Column 3\": 221114 }, { \"Column 3\": 221115 }, { \"Column 3\": 221116 }, { \"Column 3\": 221117 }, { \"Column 3\": 221118 }, { \"Column 3\": 221121 }, { \"Column 3\": 221122 }, { \"Column 3\": 221210 }, { \"Column 3\": 221310 }, { \"Column 3\": 221320 }, { \"Column 3\": 221330 }, { \"Column 3\": 236115 }, { \"Column 3\": 236116 }, { \"Column 3\": 236117 }, { \"Column 3\": 236118 }, { \"Column 3\": 236210 }, { \"Column 3\": 236220 }, { \"Column 3\": 237110 }, { \"Column 3\": 237120 }, { \"Column 3\": 237130 }, { \"Column 3\": 237210 }, { \"Column 3\": 237310 }, { \"Column 3\": 237990 }, { \"Column 3\": 238110 }, { \"Column 3\": 238120 }, { \"Column 3\": 238130 }, { \"Column 3\": 238140 }, { \"Column 3\": 238150 }, { \"Column 3\": 238160 }, { \"Column 3\": 238170 }, { \"Column 3\": 238190 }, { \"Column 3\": 238210 }, { \"Column 3\": 238220 }, { \"Column 3\": 238290 }, { \"Column 3\": 238310 }, { \"Column 3\": 238320 }, { \"Column 3\": 238330 }, { \"Column 3\": 238340 }, { \"Column 3\": 238350 }, { \"Column 3\": 238390 }, { \"Column 3\": 238910 }, { \"Column 3\": 238990 }, { \"Column 3\": 311111 }, { \"Column 3\": 311119 }, { \"Column 3\": 311211 }, { \"Column 3\": 311212 }, { \"Column 3\": 311213 }, { \"Column 3\": 311221 }, { \"Column 3\": 311224 }, { \"Column 3\": 311225 }, { \"Column 3\": 311230 }, { \"Column 3\": 311313 }, { \"Column 3\": 311314 }, { \"Column 3\": 311340 }, { \"Column 3\": 311351 }, { \"Column 3\": 311352 }, { \"Column 3\": 311411 }, { \"Column 3\": 311412 }, { \"Column 3\": 311421 }, { \"Column 3\": 311422 }, { \"Column 3\": 311423 }, { \"Column 3\": 311511 }, { \"Column 3\": 311512 }, { \"Column 3\": 311513 }, { \"Column 3\": 311514 }, { \"Column 3\": 311520 }, { \"Column 3\": 311611 }, { \"Column 3\": 311612 }, { \"Column 3\": 311613 }, { \"Column 3\": 311615 }, { \"Column 3\": 311710 }, { \"Column 3\": 311811 }, { \"Column 3\": 311812 }, { \"Column 3\": 311813 }, { \"Column 3\": 311821 }, { \"Column 3\": 311824 }, { \"Column 3\": 311830 }, { \"Column 3\": 311911 }, { \"Column 3\": 311919 }, { \"Column 3\": 311920 }, { \"Column 3\": 311930 }, { \"Column 3\": 311941 }, { \"Column 3\": 311942 }, { \"Column 3\": 311991 }, { \"Column 3\": 311999 }, { \"Column 3\": 312111 }, { \"Column 3\": 312112 }, { \"Column 3\": 312113 }, { \"Column 3\": 312120 }, { \"Column 3\": 312130 }, { \"Column 3\": 312140 }, { \"Column 3\": 312230 }, { \"Column 3\": 313110 }, { \"Column 3\": 313210 }, { \"Column 3\": 313220 }, { \"Column 3\": 313230 }, { \"Column 3\": 313240 }, { \"Column 3\": 313310 }, { \"Column 3\": 313320 }, { \"Column 3\": 314110 }, { \"Column 3\": 314120 }, { \"Column 3\": 314910 }, { \"Column 3\": 314994 }, { \"Column 3\": 314999 }, { \"Column 3\": 315110 }, { \"Column 3\": 315190 }, { \"Column 3\": 315210 }, { \"Column 3\": 315220 }, { \"Column 3\": 315240 }, { \"Column 3\": 315280 }, { \"Column 3\": 315990 }, { \"Column 3\": 316110 }, { \"Column 3\": 316210 }, { \"Column 3\": 316992 }, { \"Column 3\": 316998 }, { \"Column 3\": 321113 }, { \"Column 3\": 321114 }, { \"Column 3\": 321211 }, { \"Column 3\": 321212 }, { \"Column 3\": 321213 }, { \"Column 3\": 321214 }, { \"Column 3\": 321219 }, { \"Column 3\": 321911 }, { \"Column 3\": 321912 }, { \"Column 3\": 321918 }, { \"Column 3\": 321920 }, { \"Column 3\": 321991 }, { \"Column 3\": 321992 }, { \"Column 3\": 321999 }, { \"Column 3\": 322110 }, { \"Column 3\": 322121 }, { \"Column 3\": 322122 }, { \"Column 3\": 322130 }, { \"Column 3\": 322211 }, { \"Column 3\": 322212 }, { \"Column 3\": 322219 }, { \"Column 3\": 322220 }, { \"Column 3\": 322230 }, { \"Column 3\": 322291 }, { \"Column 3\": 322299 }, { \"Column 3\": 323111 }, { \"Column 3\": 323113 }, { \"Column 3\": 323117 }, { \"Column 3\": 323120 }, { \"Column 3\": 324110 }, { \"Column 3\": 324121 }, { \"Column 3\": 324122 }, { \"Column 3\": 324191 }, { \"Column 3\": 324199 }, { \"Column 3\": 325110 }, { \"Column 3\": 325120 }, { \"Column 3\": 325130 }, { \"Column 3\": 325180 }, { \"Column 3\": 325193 }, { \"Column 3\": 325194 }, { \"Column 3\": 325199 }, { \"Column 3\": 325211 }, { \"Column 3\": 325212 }, { \"Column 3\": 325220 }, { \"Column 3\": 325311 }, { \"Column 3\": 325312 }, { \"Column 3\": 325314 }, { \"Column 3\": 325320 }, { \"Column 3\": 325411 }, { \"Column 3\": 325412 }, { \"Column 3\": 325413 }, { \"Column 3\": 325414 }, { \"Column 3\": 325510 }, { \"Column 3\": 325520 }, { \"Column 3\": 325611 }, { \"Column 3\": 325612 }, { \"Column 3\": 325613 }, { \"Column 3\": 325620 }, { \"Column 3\": 325910 }, { \"Column 3\": 325920 }, { \"Column 3\": 325991 }, { \"Column 3\": 325992 }, { \"Column 3\": 325998 }, { \"Column 3\": 326111 }, { \"Column 3\": 326112 }, { \"Column 3\": 326113 }, { \"Column 3\": 326121 }, { \"Column 3\": 326122 }, { \"Column 3\": 326130 }, { \"Column 3\": 326140 }, { \"Column 3\": 326150 }, { \"Column 3\": 326160 }, { \"Column 3\": 326191 }, { \"Column 3\": 326199 }, { \"Column 3\": 326211 }, { \"Column 3\": 326212 }, { \"Column 3\": 326220 }, { \"Column 3\": 326291 }, { \"Column 3\": 326299 }, { \"Column 3\": 327110 }, { \"Column 3\": 327120 }, { \"Column 3\": 327211 }, { \"Column 3\": 327212 }, { \"Column 3\": 327213 }, { \"Column 3\": 327215 }, { \"Column 3\": 327310 }, { \"Column 3\": 327320 }, { \"Column 3\": 327331 }, { \"Column 3\": 327332 }, { \"Column 3\": 327390 }, { \"Column 3\": 327410 }, { \"Column 3\": 327420 }, { \"Column 3\": 327910 }, { \"Column 3\": 327991 }, { \"Column 3\": 327992 }, { \"Column 3\": 327993 }, { \"Column 3\": 327999 }, { \"Column 3\": 331110 }, { \"Column 3\": 331210 }, { \"Column 3\": 331221 }, { \"Column 3\": 331222 }, { \"Column 3\": 331313 }, { \"Column 3\": 331314 }, { \"Column 3\": 331315 }, { \"Column 3\": 331318 }, { \"Column 3\": 331410 }, { \"Column 3\": 331420 }, { \"Column 3\": 331491 }, { \"Column 3\": 331492 }, { \"Column 3\": 331511 }, { \"Column 3\": 331512 }, { \"Column 3\": 331513 }, { \"Column 3\": 331523 }, { \"Column 3\": 331524 }, { \"Column 3\": 331529 }, { \"Column 3\": 332111 }, { \"Column 3\": 332112 }, { \"Column 3\": 332114 }, { \"Column 3\": 332117 }, { \"Column 3\": 332119 }, { \"Column 3\": 332215 }, { \"Column 3\": 332216 }, { \"Column 3\": 332311 }, { \"Column 3\": 332312 }, { \"Column 3\": 332313 }, { \"Column 3\": 332321 }, { \"Column 3\": 332322 }, { \"Column 3\": 332323 }, { \"Column 3\": 332410 }, { \"Column 3\": 332420 }, { \"Column 3\": 332431 }, { \"Column 3\": 332439 }, { \"Column 3\": 332510 }, { \"Column 3\": 332613 }, { \"Column 3\": 332618 }, { \"Column 3\": 332710 }, { \"Column 3\": 332721 }, { \"Column 3\": 332722 }, { \"Column 3\": 332811 }, { \"Column 3\": 332812 }, { \"Column 3\": 332813 }, { \"Column 3\": 332911 }, { \"Column 3\": 332912 }, { \"Column 3\": 332913 }, { \"Column 3\": 332919 }, { \"Column 3\": 332991 }, { \"Column 3\": 332992 }, { \"Column 3\": 332993 }, { \"Column 3\": 332994 }, { \"Column 3\": 332996 }, { \"Column 3\": 332999 }, { \"Column 3\": 333111 }, { \"Column 3\": 333112 }, { \"Column 3\": 333120 }, { \"Column 3\": 333131 }, { \"Column 3\": 333132 }, { \"Column 3\": 333241 }, { \"Column 3\": 333242 }, { \"Column 3\": 333243 }, { \"Column 3\": 333244 }, { \"Column 3\": 333249 }, { \"Column 3\": 333314 }, { \"Column 3\": 333316 }, { \"Column 3\": 333318 }, { \"Column 3\": 333413 }, { \"Column 3\": 333414 }, { \"Column 3\": 333415 }, { \"Column 3\": 333511 }, { \"Column 3\": 333514 }, { \"Column 3\": 333515 }, { \"Column 3\": 333517 }, { \"Column 3\": 333519 }, { \"Column 3\": 333611 }, { \"Column 3\": 333612 }, { \"Column 3\": 333613 }, { \"Column 3\": 333618 }, { \"Column 3\": 333912 }, { \"Column 3\": 333914 }, { \"Column 3\": 333921 }, { \"Column 3\": 333922 }, { \"Column 3\": 333923 }, { \"Column 3\": 333924 }, { \"Column 3\": 333991 }, { \"Column 3\": 333992 }, { \"Column 3\": 333993 }, { \"Column 3\": 333994 }, { \"Column 3\": 333995 }, { \"Column 3\": 333996 }, { \"Column 3\": 333997 }, { \"Column 3\": 333999 }, { \"Column 3\": 334111 }, { \"Column 3\": 334112 }, { \"Column 3\": 334118 }, { \"Column 3\": 334210 }, { \"Column 3\": 334220 }, { \"Column 3\": 334290 }, { \"Column 3\": 334310 }, { \"Column 3\": 334412 }, { \"Column 3\": 334413 }, { \"Column 3\": 334416 }, { \"Column 3\": 334417 }, { \"Column 3\": 334418 }, { \"Column 3\": 334419 }, { \"Column 3\": 334510 }, { \"Column 3\": 334511 }, { \"Column 3\": 334512 }, { \"Column 3\": 334513 }, { \"Column 3\": 334514 }, { \"Column 3\": 334515 }, { \"Column 3\": 334516 }, { \"Column 3\": 334517 }, { \"Column 3\": 334519 }, { \"Column 3\": 334613 }, { \"Column 3\": 334614 }, { \"Column 3\": 335110 }, { \"Column 3\": 335121 }, { \"Column 3\": 335122 }, { \"Column 3\": 335129 }, { \"Column 3\": 335210 }, { \"Column 3\": 335220 }, { \"Column 3\": 335311 }, { \"Column 3\": 335312 }, { \"Column 3\": 335313 }, { \"Column 3\": 335314 }, { \"Column 3\": 335911 }, { \"Column 3\": 335912 }, { \"Column 3\": 335921 }, { \"Column 3\": 335929 }, { \"Column 3\": 335931 }, { \"Column 3\": 335932 }, { \"Column 3\": 335991 }, { \"Column 3\": 335999 }, { \"Column 3\": 336111 }, { \"Column 3\": 336112 }, { \"Column 3\": 336120 }, { \"Column 3\": 336211 }, { \"Column 3\": 336212 }, { \"Column 3\": 336213 }, { \"Column 3\": 336214 }, { \"Column 3\": 336310 }, { \"Column 3\": 336320 }, { \"Column 3\": 336330 }, { \"Column 3\": 336340 }, { \"Column 3\": 336350 }, { \"Column 3\": 336360 }, { \"Column 3\": 336370 }, { \"Column 3\": 336390 }, { \"Column 3\": 336411 }, { \"Column 3\": 336412 }, { \"Column 3\": 336413 }, { \"Column 3\": 336414 }, { \"Column 3\": 336415 }, { \"Column 3\": 336419 }, { \"Column 3\": 336510 }, { \"Column 3\": 336611 }, { \"Column 3\": 336612 }, { \"Column 3\": 336991 }, { \"Column 3\": 336992 }, { \"Column 3\": 336999 }, { \"Column 3\": 337110 }, { \"Column 3\": 337121 }, { \"Column 3\": 337122 }, { \"Column 3\": 337124 }, { \"Column 3\": 337125 }, { \"Column 3\": 337127 }, { \"Column 3\": 337211 }, { \"Column 3\": 337212 }, { \"Column 3\": 337214 }, { \"Column 3\": 337215 }, { \"Column 3\": 337910 }, { \"Column 3\": 337920 }, { \"Column 3\": 339112 }, { \"Column 3\": 339113 }, { \"Column 3\": 339114 }, { \"Column 3\": 339115 }, { \"Column 3\": 339116 }, { \"Column 3\": 339910 }, { \"Column 3\": 339920 }, { \"Column 3\": 339930 }, { \"Column 3\": 339940 }, { \"Column 3\": 339950 }, { \"Column 3\": 339991 }, { \"Column 3\": 339992 }, { \"Column 3\": 339993 }, { \"Column 3\": 339994 }, { \"Column 3\": 339995 }, { \"Column 3\": 339999 }, { \"Column 3\": 423110 }, { \"Column 3\": 423120 }, { \"Column 3\": 423130 }, { \"Column 3\": 423140 }, { \"Column 3\": 423210 }, { \"Column 3\": 423220 }, { \"Column 3\": 423310 }, { \"Column 3\": 423320 }, { \"Column 3\": 423330 }, { \"Column 3\": 423390 }, { \"Column 3\": 423410 }, { \"Column 3\": 423420 }, { \"Column 3\": 423430 }, { \"Column 3\": 423440 }, { \"Column 3\": 423450 }, { \"Column 3\": 423460 }, { \"Column 3\": 423490 }, { \"Column 3\": 423510 }, { \"Column 3\": 423520 }, { \"Column 3\": 423610 }, { \"Column 3\": 423620 }, { \"Column 3\": 423690 }, { \"Column 3\": 423710 }, { \"Column 3\": 423720 }, { \"Column 3\": 423730 }, { \"Column 3\": 423740 }, { \"Column 3\": 423810 }, { \"Column 3\": 423820 }, { \"Column 3\": 423830 }, { \"Column 3\": 423840 }, { \"Column 3\": 423850 }, { \"Column 3\": 423860 }, { \"Column 3\": 423910 }, { \"Column 3\": 423920 }, { \"Column 3\": 423930 }, { \"Column 3\": 423940 }, { \"Column 3\": 423990 }, { \"Column 3\": 424110 }, { \"Column 3\": 424120 }, { \"Column 3\": 424130 }, { \"Column 3\": 424210 }, { \"Column 3\": 424310 }, { \"Column 3\": 424320 }, { \"Column 3\": 424330 }, { \"Column 3\": 424340 }, { \"Column 3\": 424410 }, { \"Column 3\": 424420 }, { \"Column 3\": 424430 }, { \"Column 3\": 424440 }, { \"Column 3\": 424450 }, { \"Column 3\": 424460 }, { \"Column 3\": 424470 }, { \"Column 3\": 424480 }, { \"Column 3\": 424490 }, { \"Column 3\": 424510 }, { \"Column 3\": 424520 }, { \"Column 3\": 424590 }, { \"Column 3\": 424610 }, { \"Column 3\": 424690 }, { \"Column 3\": 424710 }, { \"Column 3\": 424720 }, { \"Column 3\": 424810 }, { \"Column 3\": 424820 }, { \"Column 3\": 424910 }, { \"Column 3\": 424920 }, { \"Column 3\": 424930 }, { \"Column 3\": 424940 }, { \"Column 3\": 424950 }, { \"Column 3\": 424990 }, { \"Column 3\": 425110 }, { \"Column 3\": 425120 }, { \"Column 3\": 441110 }, { \"Column 3\": 441120 }, { \"Column 3\": 441210 }, { \"Column 3\": 441222 }, { \"Column 3\": 441228 }, { \"Column 3\": 441310 }, { \"Column 3\": 441320 }, { \"Column 3\": 442110 }, { \"Column 3\": 442210 }, { \"Column 3\": 442291 }, { \"Column 3\": 442299 }, { \"Column 3\": 443141 }, { \"Column 3\": 443142 }, { \"Column 3\": 444110 }, { \"Column 3\": 444120 }, { \"Column 3\": 444130 }, { \"Column 3\": 444190 }, { \"Column 3\": 444210 }, { \"Column 3\": 444220 }, { \"Column 3\": 445110 }, { \"Column 3\": 445120 }, { \"Column 3\": 445210 }, { \"Column 3\": 445220 }, { \"Column 3\": 445230 }, { \"Column 3\": 445291 }, { \"Column 3\": 445292 }, { \"Column 3\": 445299 }, { \"Column 3\": 445310 }, { \"Column 3\": 446110 }, { \"Column 3\": 446120 }, { \"Column 3\": 446130 }, { \"Column 3\": 446191 }, { \"Column 3\": 446199 }, { \"Column 3\": 447110 }, { \"Column 3\": 447190 }, { \"Column 3\": 448110 }, { \"Column 3\": 448120 }, { \"Column 3\": 448130 }, { \"Column 3\": 448140 }, { \"Column 3\": 448150 }, { \"Column 3\": 448190 }, { \"Column 3\": 448210 }, { \"Column 3\": 448310 }, { \"Column 3\": 448320 }, { \"Column 3\": 451110 }, { \"Column 3\": 451120 }, { \"Column 3\": 451130 }, { \"Column 3\": 451140 }, { \"Column 3\": 451211 }, { \"Column 3\": 451212 }, { \"Column 3\": 452210 }, { \"Column 3\": 452311 }, { \"Column 3\": 452319 }, { \"Column 3\": 453110 }, { \"Column 3\": 453210 }, { \"Column 3\": 453220 }, { \"Column 3\": 453310 }, { \"Column 3\": 453910 }, { \"Column 3\": 453920 }, { \"Column 3\": 453930 }, { \"Column 3\": 453991 }, { \"Column 3\": 453998 }, { \"Column 3\": 454110 }, { \"Column 3\": 454210 }, { \"Column 3\": 454310 }, { \"Column 3\": 454390 }, { \"Column 3\": 481111 }, { \"Column 3\": 481112 }, { \"Column 3\": 481211 }, { \"Column 3\": 481212 }, { \"Column 3\": 481219 }, { \"Column 3\": 482100 }, { \"Column 3\": 483111 }, { \"Column 3\": 483112 }, { \"Column 3\": 483113 }, { \"Column 3\": 483114 }, { \"Column 3\": 483211 }, { \"Column 3\": 483212 }, { \"Column 3\": 484110 }, { \"Column 3\": 484121 }, { \"Column 3\": 484122 }, { \"Column 3\": 484210 }, { \"Column 3\": 484220 }, { \"Column 3\": 484230 }, { \"Column 3\": 485111 }, { \"Column 3\": 485112 }, { \"Column 3\": 485113 }, { \"Column 3\": 485119 }, { \"Column 3\": 485210 }, { \"Column 3\": 485310 }, { \"Column 3\": 485320 }, { \"Column 3\": 485410 }, { \"Column 3\": 485510 }, { \"Column 3\": 485991 }, { \"Column 3\": 485999 }, { \"Column 3\": 486110 }, { \"Column 3\": 486210 }, { \"Column 3\": 486910 }, { \"Column 3\": 486990 }, { \"Column 3\": 487110 }, { \"Column 3\": 487210 }, { \"Column 3\": 487990 }, { \"Column 3\": 488111 }, { \"Column 3\": 488119 }, { \"Column 3\": 488190 }, { \"Column 3\": 488210 }, { \"Column 3\": 488310 }, { \"Column 3\": 488320 }, { \"Column 3\": 488330 }, { \"Column 3\": 488390 }, { \"Column 3\": 488410 }, { \"Column 3\": 488490 }, { \"Column 3\": 488510 }, { \"Column 3\": 488991 }, { \"Column 3\": 488999 }, { \"Column 3\": 492110 }, { \"Column 3\": 492210 }, { \"Column 3\": 493110 }, { \"Column 3\": 493120 }, { \"Column 3\": 493130 }, { \"Column 3\": 493190 }, { \"Column 3\": 511110 }, { \"Column 3\": 511120 }, { \"Column 3\": 511130 }, { \"Column 3\": 511140 }, { \"Column 3\": 511191 }, { \"Column 3\": 511199 }, { \"Column 3\": 511210 }, { \"Column 3\": 512110 }, { \"Column 3\": 512120 }, { \"Column 3\": 512131 }, { \"Column 3\": 512132 }, { \"Column 3\": 512191 }, { \"Column 3\": 512199 }, { \"Column 3\": 512230 }, { \"Column 3\": 512240 }, { \"Column 3\": 512250 }, { \"Column 3\": 512290 }, { \"Column 3\": 515111 }, { \"Column 3\": 515112 }, { \"Column 3\": 515120 }, { \"Column 3\": 515210 }, { \"Column 3\": 517311 }, { \"Column 3\": 517312 }, { \"Column 3\": 517410 }, { \"Column 3\": 517911 }, { \"Column 3\": 517919 }, { \"Column 3\": 518210 }, { \"Column 3\": 519110 }, { \"Column 3\": 519120 }, { \"Column 3\": 519130 }, { \"Column 3\": 519190 }, { \"Column 3\": 521110 }, { \"Column 3\": 522110 }, { \"Column 3\": 522120 }, { \"Column 3\": 522130 }, { \"Column 3\": 522190 }, { \"Column 3\": 522210 }, { \"Column 3\": 522220 }, { \"Column 3\": 522291 }, { \"Column 3\": 522292 }, { \"Column 3\": 522293 }, { \"Column 3\": 522294 }, { \"Column 3\": 522298 }, { \"Column 3\": 522310 }, { \"Column 3\": 522320 }, { \"Column 3\": 522390 }, { \"Column 3\": 523110 }, { \"Column 3\": 523120 }, { \"Column 3\": 523130 }, { \"Column 3\": 523140 }, { \"Column 3\": 523210 }, { \"Column 3\": 523910 }, { \"Column 3\": 523920 }, { \"Column 3\": 523930 }, { \"Column 3\": 523991 }, { \"Column 3\": 523999 }, { \"Column 3\": 524113 }, { \"Column 3\": 524114 }, { \"Column 3\": 524126 }, { \"Column 3\": 524127 }, { \"Column 3\": 524128 }, { \"Column 3\": 524130 }, { \"Column 3\": 524210 }, { \"Column 3\": 524291 }, { \"Column 3\": 524292 }, { \"Column 3\": 524298 }, { \"Column 3\": 525000 }, { \"Column 3\": 531110 }, { \"Column 3\": 531120 }, { \"Column 3\": 531130 }, { \"Column 3\": 531190 }, { \"Column 3\": 531210 }, { \"Column 3\": 531311 }, { \"Column 3\": 531312 }, { \"Column 3\": 531320 }, { \"Column 3\": 531390 }, { \"Column 3\": 532111 }, { \"Column 3\": 532112 }, { \"Column 3\": 532120 }, { \"Column 3\": 532210 }, { \"Column 3\": 532281 }, { \"Column 3\": 532282 }, { \"Column 3\": 532283 }, { \"Column 3\": 532284 }, { \"Column 3\": 532289 }, { \"Column 3\": 532310 }, { \"Column 3\": 532411 }, { \"Column 3\": 532412 }, { \"Column 3\": 532420 }, { \"Column 3\": 532490 }, { \"Column 3\": 533110 }, { \"Column 3\": 541110 }, { \"Column 3\": 541191 }, { \"Column 3\": 541199 }, { \"Column 3\": 541211 }, { \"Column 3\": 541213 }, { \"Column 3\": 541214 }, { \"Column 3\": 541219 }, { \"Column 3\": 541310 }, { \"Column 3\": 541320 }, { \"Column 3\": 541330 }, { \"Column 3\": 541340 }, { \"Column 3\": 541350 }, { \"Column 3\": 541360 }, { \"Column 3\": 541370 }, { \"Column 3\": 541380 }, { \"Column 3\": 541410 }, { \"Column 3\": 541420 }, { \"Column 3\": 541430 }, { \"Column 3\": 541490 }, { \"Column 3\": 541511 }, { \"Column 3\": 541512 }, { \"Column 3\": 541513 }, { \"Column 3\": 541519 }, { \"Column 3\": 541611 }, { \"Column 3\": 541612 }, { \"Column 3\": 541613 }, { \"Column 3\": 541614 }, { \"Column 3\": 541618 }, { \"Column 3\": 541620 }, { \"Column 3\": 541690 }, { \"Column 3\": 541713 }, { \"Column 3\": 541714 }, { \"Column 3\": 541715 }, { \"Column 3\": 541720 }, { \"Column 3\": 541810 }, { \"Column 3\": 541820 }, { \"Column 3\": 541830 }, { \"Column 3\": 541840 }, { \"Column 3\": 541850 }, { \"Column 3\": 541860 }, { \"Column 3\": 541870 }, { \"Column 3\": 541890 }, { \"Column 3\": 541910 }, { \"Column 3\": 541921 }, { \"Column 3\": 541922 }, { \"Column 3\": 541930 }, { \"Column 3\": 541940 }, { \"Column 3\": 541990 }, { \"Column 3\": 551111 }, { \"Column 3\": 551112 }, { \"Column 3\": 551114 }, { \"Column 3\": 561110 }, { \"Column 3\": 561210 }, { \"Column 3\": 561311 }, { \"Column 3\": 561312 }, { \"Column 3\": 561320 }, { \"Column 3\": 561330 }, { \"Column 3\": 561410 }, { \"Column 3\": 561421 }, { \"Column 3\": 561422 }, { \"Column 3\": 561431 }, { \"Column 3\": 561439 }, { \"Column 3\": 561440 }, { \"Column 3\": 561450 }, { \"Column 3\": 561491 }, { \"Column 3\": 561492 }, { \"Column 3\": 561499 }, { \"Column 3\": 561510 }, { \"Column 3\": 561520 }, { \"Column 3\": 561591 }, { \"Column 3\": 561599 }, { \"Column 3\": 561611 }, { \"Column 3\": 561612 }, { \"Column 3\": 561613 }, { \"Column 3\": 561621 }, { \"Column 3\": 561622 }, { \"Column 3\": 561710 }, { \"Column 3\": 561720 }, { \"Column 3\": 561730 }, { \"Column 3\": 561740 }, { \"Column 3\": 561790 }, { \"Column 3\": 561910 }, { \"Column 3\": 561920 }, { \"Column 3\": 561990 }, { \"Column 3\": 562111 }, { \"Column 3\": 562112 }, { \"Column 3\": 562119 }, { \"Column 3\": 562211 }, { \"Column 3\": 562212 }, { \"Column 3\": 562213 }, { \"Column 3\": 562219 }, { \"Column 3\": 562910 }, { \"Column 3\": 562920 }, { \"Column 3\": 562991 }, { \"Column 3\": 562998 }, { \"Column 3\": 611100 }, { \"Column 3\": 611200 }, { \"Column 3\": 611300 }, { \"Column 3\": 611410 }, { \"Column 3\": 611420 }, { \"Column 3\": 611430 }, { \"Column 3\": 611511 }, { \"Column 3\": 611512 }, { \"Column 3\": 611513 }, { \"Column 3\": 611519 }, { \"Column 3\": 611610 }, { \"Column 3\": 611620 }, { \"Column 3\": 611630 }, { \"Column 3\": 611691 }, { \"Column 3\": 611692 }, { \"Column 3\": 611699 }, { \"Column 3\": 611710 }, { \"Column 3\": 621111 }, { \"Column 3\": 621112 }, { \"Column 3\": 621210 }, { \"Column 3\": 621310 }, { \"Column 3\": 621320 }, { \"Column 3\": 621330 }, { \"Column 3\": 621340 }, { \"Column 3\": 621391 }, { \"Column 3\": 621399 }, { \"Column 3\": 621410 }, { \"Column 3\": 621420 }, { \"Column 3\": 621491 }, { \"Column 3\": 621492 }, { \"Column 3\": 621493 }, { \"Column 3\": 621498 }, { \"Column 3\": 621511 }, { \"Column 3\": 621512 }, { \"Column 3\": 621610 }, { \"Column 3\": 621910 }, { \"Column 3\": 621991 }, { \"Column 3\": 621999 }, { \"Column 3\": 623110 }, { \"Column 3\": 623210 }, { \"Column 3\": 623220 }, { \"Column 3\": 623311 }, { \"Column 3\": 623312 }, { \"Column 3\": 623990 }, { \"Column 3\": 624110 }, { \"Column 3\": 624120 }, { \"Column 3\": 624190 }, { \"Column 3\": 624210 }, { \"Column 3\": 624221 }, { \"Column 3\": 624229 }, { \"Column 3\": 624230 }, { \"Column 3\": 624310 }, { \"Column 3\": 624410 }, { \"Column 3\": 711110 }, { \"Column 3\": 711120 }, { \"Column 3\": 711130 }, { \"Column 3\": 711190 }, { \"Column 3\": 711310 }, { \"Column 3\": 711320 }, { \"Column 3\": 711410 }, { \"Column 3\": 711510 }, { \"Column 3\": 712110 }, { \"Column 3\": 712120 }, { \"Column 3\": 712130 }, { \"Column 3\": 712190 }, { \"Column 3\": 713110 }, { \"Column 3\": 713120 }, { \"Column 3\": 713210 }, { \"Column 3\": 713290 }, { \"Column 3\": 713910 }, { \"Column 3\": 713920 }, { \"Column 3\": 713930 }, { \"Column 3\": 713940 }, { \"Column 3\": 713950 }, { \"Column 3\": 713990 }, { \"Column 3\": 721110 }, { \"Column 3\": 721120 }, { \"Column 3\": 721191 }, { \"Column 3\": 721199 }, { \"Column 3\": 721211 }, { \"Column 3\": 721214 }, { \"Column 3\": 721310 }, { \"Column 3\": 722310 }, { \"Column 3\": 722320 }, { \"Column 3\": 722330 }, { \"Column 3\": 722410 }, { \"Column 3\": 722511 }, { \"Column 3\": 722513 }, { \"Column 3\": 722514 }, { \"Column 3\": 722515 }, { \"Column 3\": 811111 }, { \"Column 3\": 811112 }, { \"Column 3\": 811113 }, { \"Column 3\": 811118 }, { \"Column 3\": 811121 }, { \"Column 3\": 811122 }, { \"Column 3\": 811191 }, { \"Column 3\": 811192 }, { \"Column 3\": 811198 }, { \"Column 3\": 811211 }, { \"Column 3\": 811212 }, { \"Column 3\": 811213 }, { \"Column 3\": 811219 }, { \"Column 3\": 811310 }, { \"Column 3\": 811411 }, { \"Column 3\": 811412 }, { \"Column 3\": 811420 }, { \"Column 3\": 811430 }, { \"Column 3\": 811490 }, { \"Column 3\": 812111 }, { \"Column 3\": 812112 }, { \"Column 3\": 812113 }, { \"Column 3\": 812191 }, { \"Column 3\": 812199 }, { \"Column 3\": 812210 }, { \"Column 3\": 812220 }, { \"Column 3\": 812310 }, { \"Column 3\": 812320 }, { \"Column 3\": 812331 }, { \"Column 3\": 812332 }, { \"Column 3\": 812910 }, { \"Column 3\": 812921 }, { \"Column 3\": 812922 }, { \"Column 3\": 812930 }, { \"Column 3\": 812990 }, { \"Column 3\": 813100 }, { \"Column 3\": 813211 }, { \"Column 3\": 813212 }, { \"Column 3\": 813219 }, { \"Column 3\": 813311 }, { \"Column 3\": 813312 }, { \"Column 3\": 813319 }, { \"Column 3\": 813410 }, { \"Column 3\": 813910 }, { \"Column 3\": 813920 }, { \"Column 3\": 813930 }, { \"Column 3\": 813940 }, { \"Column 3\": 813990 }];\nmsg.topic = 'param';\nlet reshaped = {\n    \"Column 1\": [],\n    \"Column 2\": [],\n    \"Column 3\": []\n};\n\n// Populate the reshaped object\ndata.forEach(item => {\n    reshaped[\"Column 1\"].push(item[\"Column 1\"] || null);\n    reshaped[\"Column 2\"].push(item[\"Column 2\"] || null);\n    reshaped[\"Column 3\"].push(item[\"Column 3\"] || null);\n});\n\nmsg.payload = reshaped;\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 190,
-        "y": 200,
-        "wires": [
-            [
-                "32bcf1022944c0d1"
-            ]
-        ]
-    },
-    {
-        "id": "32bcf1022944c0d1",
-        "type": "join",
+        "id": "f924038bf9ba3790",
+        "type": "change",
         "z": "bfe1ab19e0cbe2cf",
         "name": "",
-        "mode": "custom",
-        "build": "object",
-        "property": "payload",
-        "propertyType": "msg",
-        "key": "topic",
-        "joiner": "\\n",
-        "joinerType": "str",
-        "accumulate": true,
-        "timeout": "",
-        "count": "2",
-        "reduceRight": false,
-        "reduceExp": "",
-        "reduceInit": "",
-        "reduceInitType": "",
-        "reduceFixup": "",
-        "x": 330,
-        "y": 80,
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.lookup",
+                "pt": "msg",
+                "to": "{\"moduleName\":\"classification\",\"program\":\"aies\",\"unit_type\":\"estab\",\"params\":\"naics_alt,naics_validation\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 570,
+        "y": 160,
         "wires": [
             [
-                "da1879c1827427f2"
+                "9d7b5173ac8dfe70"
             ]
         ]
     },
     {
-        "id": "da1879c1827427f2",
+        "id": "9d7b5173ac8dfe70",
+        "type": "subflow:0be109393cb5f28a",
+        "z": "bfe1ab19e0cbe2cf",
+        "name": "",
+        "x": 830,
+        "y": 160,
+        "wires": [
+            [
+                "0a9f67e1bc33b824"
+            ]
+        ]
+    },
+    {
+        "id": "0a9f67e1bc33b824",
         "type": "function",
         "z": "bfe1ab19e0cbe2cf",
         "name": "classification function",
-        "func": "msg.topic = 'Classification'\nmsg.startTime = Date.now();\nlet arr = msg.payload.main.rowsY;\nlet arrY = [];\nlet arrN = msg.payload.main.rowsN;\nlet nvpC1 = msg.payload.param['Column 1'].filter(val => { return val !== null; });\nlet nvpC2 = msg.payload.param['Column 2'].filter(val => { return val !== null; });\nlet nvpC3 = msg.payload.param['Column 3'].filter(val => { return val !== null; });\n\n\narr.forEach(item => {\n    if (item.br_stat == \"Y\") {\n        if (nvpC1.includes(parseInt(item.naics_num.slice(0, 4))) || nvpC2.includes(parseInt(item.naics_num.slice(0, 7))) || nvpC3.includes(parseInt(item.naics_num.slice(0, 6)))) {\n            if (item.naics_wrtin_txt != '') {\n                arrY.push({ ...item, naics_wrtin_f: \"1\" });\n            }\n        } else {\n            arrN.push({ ...item, tabstat: \"N\", nontabfl: \"R\" });\n        }\n    } else {\n        arrN.push({ ...item, error: \"record should not have entered this module\" });\n    }\n});\n\nmsg.payload = msg.payload.main;\nmsg.payload.rowsN = arrN;\nmsg.payload.rowsY = arrY;\nmsg.payload.param = typeof (nvpC1);\nmsg.duration = Date.now() - msg.startTime;\nreturn msg;",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\nlet cache = global.get(\"lookupCache\");\nconst record_type = record['RECORD_TYP_TXT'];\n\nfunction setFlagAndExit(referralFlagValue) {\n    msg.payload.csv[record_idx].TABSTAT = \"N\";\n    msg.payload.csv[record_idx].NONTABFL = \"R\";\n    msg.payload.csv[record_idx].ACTION = \"Exit Edit\";\n    msg.payload.csv[record_idx].REFERRAL_FLAG = referralFlagValue;\n}\nfunction recTypeMatch(recArr) {\n    console.log((\n        (record.RECORD_TYP_TXT ? recArr.includes(record.RECORD_TYP_TXT) : false)\n    ))\n    return (\n        (record.RECORD_TYP_TXT ? recArr.includes(record.RECORD_TYP_TXT) : false)\n    );\n}\n\nfunction checkNaicsValidation(columnIndex, recordtyp) {\n    const naicsValidationData = cache.data.find(\n        item =>\n            item.module === \"classification\" &&\n            item.param === 'naics_validation' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"estab\"\n    )?.json_values;\n    let columnKey = ''\n    if (columnIndex === 4) {\n        columnKey = 'col_0';\n    } else if (columnIndex === 7) {\n        columnKey = 'col_1';\n    } else {\n        columnKey = \"col_2\";\n    }\n\n    let partialNum = ''\n    if (['20', '90', 20, 90].includes(recordtyp)) {\n        partialNum = record.NAICS_NUM.substring(0, columnIndex);\n    } else if ([30, '30'].includes(recordtyp)) {\n        partialNum = record.KAU_NAICS.substring(0, columnIndex);\n    }\n\n    return (\n        naicsValidationData[columnKey].find(row => parseInt(row) == parseInt(partialNum))\n        //     naicsValidationData &&\n        //     naicsValidationData[columnKey] &&\n        //     naicsValidationData[columnKey].includes(partialNum)\n    );\n}\n\nif (recTypeMatch([\"20\", \"90\"]) && record['AIES_SCOPE'] == 'Y' && record['BR_STAT'] == 'Y') {\n    if (checkNaicsValidation(4, record_type)) {\n        msg.payload.csv[record_idx].ACTION = \"Go to: Derive NAICS Code Module\";\n    } else if (checkNaicsValidation(7, record_type)) {\n        msg.payload.csv[record_idx].ACTION = \"Go to: Derive NAICS Code Module\";\n    } else if (checkNaicsValidation(6, record_type)) {\n        msg.payload.csv[record_idx].ACTION = \"Go to: Derive NAICS Code Module\";\n    } else {\n        setFlagAndExit(\"INVALID_NAICS_ESTAB\");\n    }\n    return msg;\n} else if (recTypeMatch([\"30\"]) && record['AIES_SCOPE'] == 'Y' && record['BR_STAT'] == 'Y') {\n    if (checkNaicsValidation(4, record_type)) {\n        msg.payload.csv[record_idx].ACTION = \"Go to Main Routing\";\n    } else if (checkNaicsValidation(7, record_type)) {\n        msg.payload.csv[record_idx].ACTION = \"Go to Main Routing\";\n    } else if (checkNaicsValidation(6, record_type)) {\n        msg.payload.csv[record_idx].ACTION = \"Go to Main Routing\";\n    } else {\n        setFlagAndExit(\"INVALID_NAICS_KAU\");\n    }\n    return msg;\n} else {\n    msg.payload.csv[record_idx].ACTION = \"Error - Record should not have entered this module\";\n    return msg;\n}\n",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 520,
-        "y": 80,
+        "x": 1080,
+        "y": 160,
         "wires": [
-            [
-                "ec12a60787949694"
-            ]
-        ]
-    },
-    {
-        "id": "2c13cd1702f219b4",
-        "type": "function",
-        "z": "bfe1ab19e0cbe2cf",
-        "name": "function 12",
-        "func": "msg.topic = 'main';\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 150,
-        "y": 80,
-        "wires": [
-            [
-                "32bcf1022944c0d1"
-            ]
+            []
         ]
     },
     {
@@ -6525,7 +6270,7 @@
         "type": "function",
         "z": "e28cd8ccfbe21b33",
         "name": "POST API ",
-        "func": "// msg.url = \"https://a301cb45559c445acaec11ab01bbbee1-2115632777.us-gov-east-1.elb.amazonaws.com/api/db_query/q\";\n\nmsg.url = \"https://mc.edl-7529180-ite.ite.edl.census.gov/api/db_query/q\";\n\nmsg.headers = {\n    \"Content-Type\": \"application/json\"\n};\nmsg.payload = {\n    q: \"SELECT * from product_aies.synthetic_responses_20_90_csv limit 10\"\n};\nreturn msg;\n",
+        "func": "// msg.url = \"https://a301cb45559c445acaec11ab01bbbee1-2115632777.us-gov-east-1.elb.amazonaws.com/api/db_query/q\";\n\nmsg.url = \"https://mc.edl-7529180-ite.ite.edl.census.gov/api/db_query/q\";\n\nmsg.headers = {\n    \"Content-Type\": \"application/json\"\n};\nmsg.payload = {\n    q: \"SELECT * from space_uat.space_product_aies.item_estabs limit 100\"\n};\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -6555,6 +6300,122 @@
         "x": 970,
         "y": 140,
         "wires": []
+    },
+    {
+        "id": "15222fbe79033cfa",
+        "type": "function",
+        "z": "998aa04bd1bb677d",
+        "name": "Valid Zero",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx]\nlet cache = global.get(\"lookupCache\");\n\nlet valid_zero_file = cache.data.find(\n    item =>\n        item.module === \"valid_zero\" &&\n        item.param === 'valid_zero' &&\n        item.program === \"aies\" &&\n        item.unit_type === \"all\"\n)?.json_values;\n\nfunction isZero(column, type) {\n    if (valid_zero_file.VALID_ZERO.some(element =>\n        (element.LEVEL) === type &&\n        (element.ITEM) === column)) {\n \n        let column_f = column + '_F'\n        if (record[column_f] && record[column_f].length >= 3) {\n            record[column_f] = record[column_f].substring(0, 2) + 'G' + record[column_f].substring(3);\n        } else if (record[column_f] && record[column_f].length >= 2) {\n            record[column_f] = record[column_f].substring(0, 2) + 'G';\n        } else if (record[column_f] && record[column_f].length >= 1) {\n            record[column_f] = record[column_f].substring(0, 1) + ' G';\n        } else {\n            record[column_f] = '  G';\n        }\n    }\n}\n\nlet type = ''\nif (['MU','SU'].includes(record['REPORTING_ID_TYP_TXT'])) {\n    type = 'ESTAB'\n} else if (['KAU'].includes(record['REPORTING_ID_TYP_TXT'])) {\n    type = 'KAU'\n}\n\nfor (var key in record) {\n    if (parseFloat(record[key]) == 0) {\n        isZero(key,type)\n    }\n}\n\nrecord['ACTION'] = 'Go to Main Routing'\n// global.set('action','Go to Main Routing')\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1d9f4963787d9cc6",
+        "type": "subflow:0be109393cb5f28a",
+        "z": "998aa04bd1bb677d",
+        "name": "",
+        "x": 630,
+        "y": 340,
+        "wires": [
+            [
+                "15222fbe79033cfa"
+            ]
+        ]
+    },
+    {
+        "id": "978e9426a1803b88",
+        "type": "change",
+        "z": "998aa04bd1bb677d",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.lookup",
+                "pt": "msg",
+                "to": "{\"moduleName\":\"valid_zero\",\"program\":\"aies\",\"unit_type\":\"all\",\"params\":\"valid_zero\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 390,
+        "y": 340,
+        "wires": [
+            [
+                "1d9f4963787d9cc6"
+            ]
+        ]
+    },
+    {
+        "id": "49bca15a17b08352",
+        "type": "change",
+        "z": "c79b244779411ead",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.lookup",
+                "pt": "msg",
+                "to": "{\"moduleName\":\"valid_negative\",\"program\":\"aies\",\"unit_type\":\"all\",\"params\":\"valid_negative_value\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 530,
+        "y": 340,
+        "wires": [
+            [
+                "8a019b7abd631568"
+            ]
+        ]
+    },
+    {
+        "id": "8a019b7abd631568",
+        "type": "subflow:0be109393cb5f28a",
+        "z": "c79b244779411ead",
+        "name": "",
+        "x": 790,
+        "y": 340,
+        "wires": [
+            [
+                "dd9091221ca2c1cf"
+            ]
+        ]
+    },
+    {
+        "id": "dd9091221ca2c1cf",
+        "type": "function",
+        "z": "c79b244779411ead",
+        "name": "Valid Negative Link",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx]\nlet cache = global.get(\"lookupCache\");\n\nlet valid_negative_file = cache.data.find(\n    item =>\n        item.module === \"valid_negative\" &&\n        item.param === 'valid_negative_value' &&\n        item.program === \"aies\" &&\n        item.unit_type === \"all\"\n)?.json_values;\n\nfunction isNegative(naics, column, type, tax) {\n    if (valid_negative_file.VALID_NEGATIVE.some(element =>\n    (element.LEVEL === type &&\n        [null, undefined, tax].includes(element.TAX_EXEMPT_STAT) &&\n        element.ITEM === column &&\n        [naics, parseInt(naics), 'ALL', 'all', 'All', '', null, undefined].includes(element.NAICS)))) {\n        if (['ESTAB', 'KAU'].includes(type)) {\n            record['EXIMP'] = 'E'\n        }\n    } else {\n        record[column] = 0\n        if (column == 'RCPT_TOT_VAL') {\n            let column_f = column + '_F'\n            if (record[column_f] && record[column_f].length >= 3) {\n                record[column_f] = record[column_f].substring(0, 2) + 'G' + record[column_f].substring(3);\n            } else if (record[column_f] && record[column_f].length >= 2) {\n                record[column_f] = record[column_f].substring(0, 2) + 'G';\n            } else if (record[column_f] && record[column_f].length >= 1) {\n                record[column_f] = record[column_f].substring(0, 1) + ' G';\n            } else {\n                record[column_f] = '  G';\n            }\n        } else {\n            let column_f = column + '_F'\n            if (record[column_f] && record[column_f].length >= 3) {\n                record[column_f] = record[column_f].substring(0, 2) + 'L' + record[column_f].substring(3);\n            } else if (record[column_f] && record[column_f].length >= 2) {\n                record[column_f] = record[column_f].substring(0, 2) + 'L';\n            } else if (record[column_f] && record[column_f].length >= 1) {\n                record[column_f] = record[column_f].substring(0, 1) + ' L';\n            } else {\n                record[column_f] = '  L';\n            }\n        }\n    }\n}\n\nlet type = ''\nif (['MU', 'SU'].includes(record['REPORTING_ID_TYP_TXT'])) {\n    type = 'ESTAB'\n} else if (['KAU'].includes(record['REPORTING_ID_TYP_TXT'])) {\n    type = 'KAU'\n} else if (['ENT'].includes(record['REPORTING_ID_TYP_TXT'])) {\n    type = 'COMPANY'\n}\n\nlet naics = '' + record['NAICS_NUM']\nlet tax = record['TAXSTAT']\n\nif ([null, undefined, 'null', 'undefined', ''].includes(tax)) {\n    tax = null\n}\n\nfor (var key in record) {\n    if (parseFloat(record[key]) < 0) {\n        isNegative(naics, key, type, tax)\n    }\n}\n\nrecord['ACTION'] = 'Go to Main Routing'\n// global.set('action','Go to Main Routing')\nreturn msg;\n\n\n\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 340,
+        "wires": [
+            []
+        ]
     },
     {
         "id": "9a7a7971.dbc4b8",
@@ -9314,25 +9175,8 @@
         "x": 310,
         "y": 60,
         "wires": [
-            [
-                "d45b30e5c09c6653"
-            ],
-            [
-                "d45b30e5c09c6653"
-            ],
-            [
-                "d457c366c48ae1e9"
-            ]
-        ]
-    },
-    {
-        "id": "d45b30e5c09c6653",
-        "type": "subflow:0111e67f54e25c8c",
-        "z": "d886a3864a88d832",
-        "name": "",
-        "x": 580,
-        "y": 40,
-        "wires": [
+            [],
+            [],
             [
                 "d457c366c48ae1e9"
             ]
@@ -9379,19 +9223,6 @@
         "wires": [
             [
                 "48c251e7e1851bb1"
-            ]
-        ]
-    },
-    {
-        "id": "4e38bfa9e516a9d7",
-        "type": "subflow:10e53f47b43ab89e",
-        "z": "d886a3864a88d832",
-        "name": "4.0 Subflow Completeness",
-        "x": 1220,
-        "y": 300,
-        "wires": [
-            [
-                "1393263d0d520dfd"
             ]
         ]
     },
@@ -9510,9 +9341,7 @@
         "x": 1200,
         "y": 200,
         "wires": [
-            [
-                "4e38bfa9e516a9d7"
-            ]
+            []
         ]
     },
     {
@@ -14077,9 +13906,7 @@
         "x": 810,
         "y": 120,
         "wires": [
-            [
-                "8feedc3d66066cd5"
-            ]
+            []
         ]
     },
     {
@@ -14092,19 +13919,6 @@
         "wires": [
             [
                 "ba03caac1e9d4066"
-            ]
-        ]
-    },
-    {
-        "id": "8feedc3d66066cd5",
-        "type": "subflow:a3d425ba6d3b6a6a",
-        "z": "6f369789c773517d",
-        "name": "Classification",
-        "x": 370,
-        "y": 200,
-        "wires": [
-            [
-                "4bfa93860450cdbf"
             ]
         ]
     },
@@ -14129,22 +13943,7 @@
         "x": 790,
         "y": 200,
         "wires": [
-            [
-                "6ecf88b269cef917"
-            ]
-        ]
-    },
-    {
-        "id": "6ecf88b269cef917",
-        "type": "subflow:1e75121bac78652a",
-        "z": "6f369789c773517d",
-        "name": "Completeness Check / Core Variables",
-        "x": 1110,
-        "y": 200,
-        "wires": [
-            [
-                "4ee1acdd5f25eedf"
-            ]
+            []
         ]
     },
     {
@@ -14259,17 +14058,6 @@
         ]
     },
     {
-        "id": "353a67bfb86ddc5e",
-        "type": "subflow:a3d425ba6d3b6a6a",
-        "z": "0d9e5c860a9703c5",
-        "name": "Classification",
-        "x": 250,
-        "y": 340,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "e3bfa58d95033efb",
         "type": "subflow:4ed21c9150f5597a",
         "z": "0d9e5c860a9703c5",
@@ -14287,17 +14075,6 @@
         "name": "Calculate Best Admin Receipts",
         "x": 310,
         "y": 500,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "9b43712ccf6f86b3",
-        "type": "subflow:1e75121bac78652a",
-        "z": "0d9e5c860a9703c5",
-        "name": "Completeness",
-        "x": 250,
-        "y": 580,
         "wires": [
             []
         ]
@@ -14636,22 +14413,7 @@
         "x": 790,
         "y": 160,
         "wires": [
-            [
-                "37c87e66e2017ba7"
-            ]
-        ]
-    },
-    {
-        "id": "37c87e66e2017ba7",
-        "type": "subflow:1e75121bac78652a",
-        "z": "d772b64609d590ad",
-        "name": "Completeness",
-        "x": 1040,
-        "y": 160,
-        "wires": [
-            [
-                "4e1eb988afc0a7c4"
-            ]
+            []
         ]
     },
     {
@@ -16881,39 +16643,21 @@
         ]
     },
     {
-        "id": "26b6d9f356114422",
-        "type": "debug",
-        "z": "3248e82e44cba772",
-        "name": "debug 108",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1130,
-        "y": 320,
-        "wires": []
-    },
-    {
         "id": "44cfe99b5f9e273f",
         "type": "function",
         "z": "3248e82e44cba772",
-        "name": "function 38",
-        "func": "// msg.cache = global.get(\"lookupCache\")\n// let record_idx = global.get(\"ptrModuleFacts\");\n// let record = msg.payload.csv[record_idx];\n\n// const isValueMissing = value => value === null || value === undefined || value === 'NULL';\n\n// const isCoreVariableMissing = variables => {\n//     const coreVariables = ['PAY_ANN_VAL', 'EMP_MAR12_NUM', 'PAY_QTR_VAL', 'RCPT_TOT_VAL'];\n//     return coreVariables.some(variable => isValueMissing(variables[variable]));\n// };\n\n// const handleYesFlow = variables => {\n//     goToPVPrep(variables)\n// };\n\n// const handleNoFlow = variables => completenessCheckForAIES(variables);\n\n// const completenessCheckForAIES = variables => {\n//     const moduleOrder = ['PAY_ANN_VAL', 'EMP_MAR12_NUM', 'PAY_QTR_VAL', 'RCPT_TOT_VAL'];\n//     for (let item of moduleOrder) {\n//         if (isValueMissing(variables[item])) {\n//             msg.payload.csv[record_idx].ACTION = variables.join(', ') + 'Will be executed'\n//         }\n//     }\n// };\n\n// const goToPVPrep = variables => {\n//     msg.payload.csv[record_idx].ACTION = 'Go To PV Prep'\n// };\n\n// const isValueZero = value => parseInt(value) === 0;\n\n// const checkVariables = (variables) => {\n//     const coreVariables = ['PAY_ANN_VAL', 'EMP_MAR12_NUM', 'PAY_QTR_VAL', 'RCPT_TOT_VAL'];\n\n//     const shouldProceed = [];\n//     const shouldNotProceed = [];\n\n//     const isPoF_G = variables.PO_F[1] === 'G';\n\n//     const notInArray = !['A', 'P', 'V', 'H', 'M', 'E', 'B', 'W', 'U', 'X'].includes(variables.PO_F[1]);\n//     coreVariables.forEach(variable => {\n//         if (variable === 'RCPT_TOT_VAL' && notInArray && !isValueZero(variables[variable])) {\n//             shouldProceed.push(variable);\n//         } else if (variable !== 'RCPT_TOT_VAL' && (isPoF_G || !isValueZero(variables[variable]))) {\n//             shouldProceed.push(variable);\n//         } else {\n//             shouldNotProceed.push(variable);\n//         }\n//     });\n\n//     return { shouldProceed, shouldNotProceed };\n// };\n\n\n// const completenessCheck = variables => {\n//     const checkVariablesToProceed = checkVariables(record)\n//     if (variables['REPORTING_ID_TYP_TXT'] && ['MU', 'SU', 'KAU'].includes(variables['REPORTING_ID_TYP_TXT'])) {\n//         if (!isCoreVariableMissing(variables)) {\n//             console.log({ isCoreVariableMissing  })\n//             if (checkVariablesToProceed.shouldProceed.length === 4) {\n//                 console.log('All PASS')\n//                 handleYesFlow(checkVariablesToProceed.shouldProceed);\n//             }\n//         }\n//     }\n//      handleNoFlow(checkVariablesToProceed?.shouldNotProceed);\n//      return msg;\n// };\n\n// const result = completenessCheck(record);\n// return result\n\n// msg.cache = global.get(\"lookupCache\")\n// let record_idx = global.get(\"ptrModuleFacts\");\n// let record = msg.payload.csv[record_idx];\n\n// const isValueMissing = value => value === null || value === undefined || value === 'NULL';\n\n// const isCoreVariableMissing = variables => {\n//     const coreVariables = ['PAY_ANN_VAL', 'EMP_MAR12_NUM', 'PAY_QTR_VAL', 'RCPT_TOT_VAL'];\n//     return coreVariables.some(variable => isValueMissing(variables[variable]));\n// };\n\n// const handleYesFlow = variables => {\n//     goToPVPrep(variables)\n// };\n\n// const handleNoFlow = variables => completenessCheckForAIES(variables);\n\n// const completenessCheckForAIES = variables => {\n//     const moduleOrder = ['PAY_ANN_VAL', 'EMP_MAR12_NUM', 'PAY_QTR_VAL', 'RCPT_TOT_VAL'];\n//     for (let item of moduleOrder) {\n//         if (isValueMissing(variables[item])) {\n//             msg.payload.csv[record_idx].ACTION = variables.join(', ') + 'Will be executed'\n//         }\n//     }\n// };\n\n// const goToPVPrep = variables => {\n//     msg.payload.csv[record_idx].ACTION = 'Go To PV Prep'\n// };\n\n// const isValueZero = value => parseInt(value) === 0;\n\n// const checkVariables = (variables) => {\n//     const coreVariables = ['PAY_ANN_VAL', 'EMP_MAR12_NUM', 'PAY_QTR_VAL', 'RCPT_TOT_VAL'];\n\n//     const shouldProceed = [];\n//     const shouldNotProceed = [];\n\n//     const isPoF_G = variables.PO_F[1] === 'G';\n\n//     const notInArray = !['A', 'P', 'V', 'H', 'M', 'E', 'B', 'W', 'U', 'X'].includes(variables.PO_F[1]);\n//     coreVariables.forEach(variable => {\n//         if (variable === 'RCPT_TOT_VAL' && notInArray && !isValueZero(variables[variable])) {\n//             shouldProceed.push(variable);\n//         } else if (variable !== 'RCPT_TOT_VAL' && (isPoF_G || !isValueZero(variables[variable]))) {\n//             shouldProceed.push(variable);\n//         } else {\n//             shouldNotProceed.push(variable);\n//         }\n//     });\n\n//     return { shouldProceed, shouldNotProceed };\n// };\n\n\n// const completenessCheck = variables => {\n//     const checkVariablesToProceed = checkVariables(record)\n//     if (variables['REPORTING_ID_TYP_TXT'] && ['MU', 'SU', 'KAU'].includes(variables['REPORTING_ID_TYP_TXT'])) {\n//         if (!isCoreVariableMissing(variables)) {\n//             console.log({ isCoreVariableMissing  })\n//             if (checkVariablesToProceed.shouldProceed.length === 4) {\n//                 console.log('All PASS')\n//                 handleYesFlow(checkVariablesToProceed.shouldProceed);\n//             }\n//         }\n//     }\n//      handleNoFlow(checkVariablesToProceed?.shouldNotProceed);\n//      return msg;\n// };\n\n// const result = completenessCheck(record);\n// return result\n\n\nlet record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\nlet PAY_ANN_VAL = parseFloat(record['PAY_ANN_VAL']);\nlet PAY_QTR1_VAL = parseFloat(record['PAY_QTR1_VAL']);\nlet EMP_MAR12_NUM = parseFloat(record['EMP_MAR12_NUM']);\nlet RCPT_TOT_VAL = parseFloat(record['RCPT_TOT_VAL']);\nlet REPORTING_ID_TYP_TXT = record['REPORTING_ID_TYP_TXT'];\nlet EXIMP = record['EXIMP']\n\n// let record = msg.payload.csv[record_idx];\nfunction isMissing(variable) {\n    let missing = ''\n    if ([null, undefined, 'NULL', ''].includes(record[variable])) {\n        missing = 'Yes'\n    } else if (!record[variable]) {\n        missing = 'Yes'\n    }\n    if (missing != '') {\n        return (missing);\n    }\n}\n\nfunction core3(variable, variable_f) {\n    let error = ''\n    if (parseFloat(record[variable]) == 0) {\n        // console.log(record[variable_f].substring(2,3))\n        if (record[variable_f].substring(2, 3) != 'G') {\n            error = 'Yes'\n        }\n    } else {\n        if (['A', 'P', 'V', 'H', 'M', 'E', 'B', 'W', 'U', 'X', 'Z'].includes(record[variable_f].substring(2, 3)) || EXIMP != 'E' || record[variable_f] == 'HOTDECK') {\n            error = 'Yes'\n        }\n    }\n    if (error != '') {\n        return (error);\n    }\n}\n\nfunction rcptot(variable, variable_f) {\n    let error = ''\n    if (parseFloat(record[variable]) == 0) {\n        error = 'Yes'\n    } else {\n        if (['A', 'P', 'V', 'H', 'M', 'E', 'B', 'W', 'U', 'X'].includes(record[variable_f].substring(1, 2)) || record[variable_f] == 'HOTDECK') {\n            error = 'Yes'\n        }\n    }\n    if (error != '') {\n        return (error);\n    }\n}\n\nif (['MU', 'SU', 'KAU'].includes(REPORTING_ID_TYP_TXT)) {\n    var list = []\n    // pay_ann_val\n    if (isMissing('PAY_ANN_VAL')) {\n        list.push('PAY_ANN_VAL')\n    } else if (core3('PAY_ANN_VAL', 'PAY_ANN_VAL_F')) {\n        list.push('PAY_ANN_VAL')\n    }\n    // rcpt_tot_val\n    if (isMissing('RCPT_TOT_VAL')) {\n        list.push('RCPT_TOT_VAL')\n    } else if (rcptot('RCPT_TOT_VAL', 'RCPT_TOT_VAL_F')) {\n        list.push('RCPT_TOT_VAL')\n    }\n    // pay_qtr1_val\n    if (isMissing('PAY_QTR1_VAL')) {\n        list.push('PAY_QTR1_VAL')\n    } else if (core3('PAY_QTR1_VAL', 'PAY_QTR1_VAL_F')) {\n        list.push('PAY_QTR1_VAL')\n    }\n    // emp_mar12_num\n    if (isMissing('EMP_MAR12_NUM')) {\n        list.push('EMP_MAR12_NUM')\n    } else if (core3('EMP_MAR12_NUM', 'EMP_MAR12_NUM_F')) {\n        list.push('EMP_MAR12_NUM')\n    }\n\n    // console.log('list ' + list)\n    // console.log(list.length)\n    if (list.length != 0) {\n        // record['list'] = list\n        record['ACTION'] = list + ' Will Be Executed In Previous Order'\n    } else {\n        record['ACTION'] = 'Go To Main Routing'\n    }\n\n} else {\n    record['ACTION'] = 'Go To Main Routing'\n}\nreturn msg;",
+        "name": "Completeness",
+        "func": "let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\nlet PAY_ANN_VAL = parseFloat(record['PAY_ANN_VAL']);\nlet PAY_QTR1_VAL = parseFloat(record['PAY_QTR1_VAL']);\nlet EMP_MAR12_NUM = parseFloat(record['EMP_MAR12_NUM']);\nlet RCPT_TOT_VAL = parseFloat(record['RCPT_TOT_VAL']);\nlet REPORTING_ID_TYP_TXT = record['REPORTING_ID_TYP_TXT'];\nlet EXIMP = record['EXIMP']\n\n// let record = msg.payload.csv[record_idx];\nfunction isMissing(variable) {\n    let missing = ''\n    if ([null, undefined, 'NULL', ''].includes(record[variable])) {\n        missing = 'Yes'\n    } else if (!record[variable]) {\n        missing = 'Yes'\n    }\n    if (missing != '') {\n        return (missing);\n    }\n}\n\nfunction core3(variable, variable_f) {\n    let error = ''\n    if (parseFloat(record[variable]) == 0) {\n        // console.log(record[variable_f].substring(2,3))\n        if (record[variable_f].substring(2, 3) != 'G') {\n            error = 'Yes'\n        }\n    } else {\n        if (['A', 'P', 'V', 'H', 'M', 'E', 'B', 'W', 'U', 'X', 'Z'].includes(record[variable_f].substring(2, 3)) || EXIMP != 'E' || record[variable_f] == 'HOTDECK') {\n            error = 'Yes'\n        }\n    }\n    if (error != '') {\n        return (error);\n    }\n}\n\nfunction rcptot(variable, variable_f) {\n    let error = ''\n    if (parseFloat(record[variable]) == 0) {\n        error = 'Yes'\n    } else {\n        if (['A', 'P', 'V', 'H', 'M', 'E', 'B', 'W', 'U', 'X'].includes(record[variable_f].substring(1, 2)) || record[variable_f] == 'HOTDECK') {\n            error = 'Yes'\n        }\n    }\n    if (error != '') {\n        return (error);\n    }\n}\n\nif (['MU', 'SU', 'KAU'].includes(REPORTING_ID_TYP_TXT)) {\n    var list = []\n    // pay_ann_val\n    if (isMissing('PAY_ANN_VAL')) {\n        list.push('PAY_ANN_VAL')\n    } else if (core3('PAY_ANN_VAL', 'PAY_ANN_VAL_F')) {\n        list.push('PAY_ANN_VAL')\n    }\n    // rcpt_tot_val\n    if (isMissing('RCPT_TOT_VAL')) {\n        list.push('RCPT_TOT_VAL')\n    } else if (rcptot('RCPT_TOT_VAL', 'RCPT_TOT_VAL_F')) {\n        list.push('RCPT_TOT_VAL')\n    }\n    // pay_qtr1_val\n    if (isMissing('PAY_QTR1_VAL')) {\n        list.push('PAY_QTR1_VAL')\n    } else if (core3('PAY_QTR1_VAL', 'PAY_QTR1_VAL_F')) {\n        list.push('PAY_QTR1_VAL')\n    }\n    // emp_mar12_num\n    if (isMissing('EMP_MAR12_NUM')) {\n        list.push('EMP_MAR12_NUM')\n    } else if (core3('EMP_MAR12_NUM', 'EMP_MAR12_NUM_F')) {\n        list.push('EMP_MAR12_NUM')\n    }\n\n    // console.log('list ' + list)\n    // console.log(list.length)\n    if (list.length != 0) {\n        // record['list'] = list\n        record['ACTION'] = list + ' Will Be Executed In Previous Order'\n    } else {\n        record['ACTION'] = 'Go To Main Routing'\n    }\n\n} else {\n    record['ACTION'] = 'Go To Main Routing'\n}\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 930,
+        "x": 940,
         "y": 320,
         "wires": [
             [
-                "26b6d9f356114422",
                 "daa2e09cc7fbb842"
             ]
         ]
@@ -16974,7 +16718,7 @@
             "688a39b3e0070fe9"
         ],
         "x": 1065,
-        "y": 380,
+        "y": 320,
         "wires": []
     },
     {
@@ -16982,7 +16726,7 @@
         "type": "function",
         "z": "4afed9425459216e",
         "name": "pay_ann_val",
-        "func": "// msg.cache = global.get(\"lookupCache\")\n// let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n// // console.log({ record })\n\n// // let cache = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n// // Initialize variables\n// const NAICS_SECTOR_OLD_NUM = parseFloat(record['NAICS_SECTOR_OLD_NUM']);\n// const PAY_ANN_PRDWRK_VAL = parseFloat(record['PAY_ANN_PRDWRK_VAL']);\n// const PAY_ANN_NONPRDWRK_VAL = parseFloat(record['PAY_ANN_NONPRDWRK_VAL']);\n// const ECPAYANN = parseFloat(record['ECPAYANN']);\n// const REPORTING_ID_TYP_TXT = record['REPORTING_ID_TYP_TXT'];\n// const CY_PAY_ANN = parseFloat(record['CY_PAY_ANN']);\n// const CY_PAY_ANN_LSD = parseFloat(record['CY_PAY_ANN_LSD']);\n// const EXPS_TEMPSTAF_VAL = record['EXPS_TEMPSTAF_VAL'];\n// const MADB_2022_PAYANN = parseFloat(record['MADB_2022_PAYANN']);\n// const CY_PAY_ANN_FLG = record['CY_PAY_ANN_FLG']\n// const CY_PAY_ANN_LSD_FLG = record['CY_PAY_ANN_LSD_FLG']\n// const RCPT_TOT_VAL_R = parseFloat(record['RCPT_TOT_VAL_R'])\n// const CYPYF = parseFloat(record['CYPYF'])\n// // Set function\n// const setVariable = (variable, value) => {\n//     record[variable] = value;\n// };\n// const setVals = () => {\n//     setVariable('PAY_QTR1_VAL', 0);\n//     setVariable('PAY_QTR1_VAL_FLG', 'G');\n//     setVariable('EMP_MAR12_NUM', 0);\n//     setVariable('EMP_MAR12_NUM_FLG', 'G');\n//     setVariable('NODONER', 'E');\n//     setVariable('ReferralFlag', 'LEASED_ONLY');\n//     setVariable('ACTION', 'Continue to RCPT_TOT_VAL if it failed completeness test elase skip, then skip PAY_QTR1_VAL and EMP_MAR12_VAL and go back to completeness');\n// }\n// // Logic\n// if (NAICS_SECTOR_OLD_NUM === 31 && (PAY_ANN_PRDWRK_VAL + PAY_ANN_NONPRDWRK_VAL) > 0) {\n//     setVariable('PAY_ANN_VAL', PAY_ANN_PRDWRK_VAL + PAY_ANN_NONPRDWRK_VAL);\n//     setVariable('PAY_ANN_VAL_F', 'L');\n//     setVariable('ACTION', 'Go to RCPT_TOT_VAL Module');\n// } else if (REPORTING_ID_TYP_TXT === 'SU') {\n//     if (ECPAYANN > 0) {\n//         setVariable('PAY_ANN_VAL', ECPAYANN);\n//         setVariable('PAY_ANN_VAL_F', 'A');\n//         setVariable('ACTION', 'Go to RCPT_TOT_VAL Module');\n//     }\n//     else{\n//          setVariable('ACTION', 'Go to A');\n//     }\n// } else if (REPORTING_ID_TYP_TXT === 'MU' && CY_PAY_ANN > 0) {\n//     setVariable('PAY_ANN_VAL', CY_PAY_ANN);\n//     setVariable('PAY_ANN_VAL_F', CY_PAY_ANN_FLG);\n//     setVariable('ACTION', 'Go to RCPT_TOT_VAL Module');\n// } else if (CY_PAY_ANN_LSD > 0) {\n//     setVariable('PAY_ANN_VAL', CY_PAY_ANN_LSD);\n//     setVariable('PAY_ANN_VAL_FLG', CY_PAY_ANN_LSD_FLG);\n    \n//    setVals()\n// } else if (EXPS_TEMPSTAF_VAL > 0) {\n//     setVariable('PAY_ANN_VAL', EXPS_TEMPSTAF_VAL);\n//     setVariable('PAY_ANN_VAL_FLG', 'J');\n//     setVals()\n// } else if (MADB_2022_PAYANN > 0) {\n//     setVariable('PAY_ANN_VAL', MADB_2022_PAYANN * CYPYF);\n//     setVariable('PAY_ANN_VAL_F', 'H');\n//     setVariable('ACTION', 'Go to RCPT_TOT_VAL Module');\n// } else {\n//     // Setting defaults as per flowchart for non-employer\n//     // setVariable('PAY_ANN_VAL', 0);\n//     // setVariable('PAY_ANN_VAL_FLG', 'G');\n//     // setVariable('EMP_MAR12_NUM', 0);\n//     // setVariable('EMP_MAR12_NUM_FLG', 'G');\n//     // setVariable('Referral_FLAG', 'LEASED_ONLY');\n//     // setVariable('NODONOR', 'E');\n//     setVariable('TABSTAT', 'N')\n//     setVariable('NONTABFL', 'N')\n//     if(RCPT_TOT_VAL_R > 0){\n//         setVariable('ReferralFlag', 'NO_PAYROLL_W_RECEIPTS')\n//     }\n//     else{\n//         setVariable('ACTION', 'STOP Processing')\n//     }\n// }\n\n// msg.payload.csv[global.get(\"ptrModuleFacts\")] = record;\n// console.log({ record })\n// return msg;\n\n// msg.cache = global.get(\"lookupCache\")\nlet record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\nconsole.log({ record })\n// Initialize variables\nconst NAICS_SECTOR_OLD_NUM = parseFloat(record['NAICS_SECTOR_OLD_NUM']);\nconst PAY_ANN_PRDWRK_VAL = parseFloat(record['PAY_ANN_PRDWRK_VAL']);\nconst PAY_ANN_NONPRDWRK_VAL = parseFloat(record['PAY_ANN_NONPRDWRK_VAL']);\nconst ECPAYANN = parseFloat(record['ECPAYANN']);\nconst REPORTING_ID_TYP_TXT = record['REPORTING_ID_TYP_TXT'];\nconst CY_PAY_ANN = parseFloat(record['CY_PAY_ANN']);\nconst CY_PAY_ANN_LSD = parseFloat(record['CY_PAY_ANN_LSD']);\nconst EXPS_TEMPSTAF_VAL = record['EXPS_TEMPSTAF_VAL'];\nconst MADB_2022_PAYANN = parseFloat(record['MADB_2022_PAYANN']);\nconst CY_PAY_ANN_F = record['CY_PAY_ANN_F']\nconst CY_PAY_ANN_LSD_F = record['CY_PAY_ANN_LSD_F']\nconst RCPT_TOT_VAL_R = parseFloat(record['RCPT_TOT_VAL_R'])\nconst CYPYF = parseFloat(record['CYPYF'])\n// Set function\nconst setVariable = (variable, value) => {\n    record[variable] = value;\n};\nconst setVals = () => {\n    setVariable('PAY_QTR1_VAL', 0);\n    if (record['PAY_QTR1_VAL_F'] && record['PAY_QTR1_VAL_F'].length >= 2) {\n        record['PAY_QTR1_VAL_F'] = record['PAY_QTR1_VAL_F'].substring(0, 1) + 'G' + record['PAY_QTR1_VAL_F'].substring(2);\n    } else if (record['PAY_QTR1_VAL_F'] && record['PAY_QTR1_VAL_F'].length >= 1) {\n        record['PAY_QTR1_VAL_F'] = record['PAY_QTR1_VAL_F'].substring(0, 1) + 'G ';\n    } else {\n        record['PAY_QTR1_VAL_F'] = ' G ';\n    }\n    setVariable('EMP_MAR12_NUM', 0);\n    if (record['EMP_MAR12_NUM_F'] && record['EMP_MAR12_NUM_F'].length >= 2) {\n        record['EMP_MAR12_NUM_F'] = record['EMP_MAR12_NUM_F'].substring(0, 1) + 'G' + record['EMP_MAR12_NUM_F'].substring(2);\n    } else if (record['EMP_MAR12_NUM_F'] && record['EMP_MAR12_NUM_F'].length >= 1) {\n        record['EMP_MAR12_NUM_F'] = record['EMP_MAR12_NUM_F'].substring(0, 1) + 'G ';\n    } else {\n        record['EMP_MAR12_NUM_F'] = ' G ';\n    }\n    setVariable('EXIMP', 'E');\n    setVariable('ReferralFlag', 'LEASED_ONLY');\n    setVariable('ACTION', 'Continue to RCPT_TOT_VAL if it failed completeness test elase skip, then skip PAY_QTR1_VAL and EMP_MAR12_VAL and go back to completeness');\n}\n// Logic\nif (NAICS_SECTOR_OLD_NUM === 31 && (PAY_ANN_PRDWRK_VAL + PAY_ANN_NONPRDWRK_VAL) > 0) {\n    setVariable('PAY_ANN_VAL', PAY_ANN_PRDWRK_VAL + PAY_ANN_NONPRDWRK_VAL);\n    if (record['PAY_ANN_VAL_F'] && record['PAY_ANN_VAL_F'].length >= 3) {\n        record['PAY_ANN_VAL_F'] = record['PAY_ANN_VAL_F'].substring(0, 2) + 'L' + record['PAY_ANN_VAL_F'].substring(3);\n    } else if (record['PAY_ANN_VAL_F'] && record['PAY_ANN_VAL_F'].length >= 2) {\n        record['PAY_ANN_VAL_F'] = record['PAY_ANN_VAL_F'].substring(0, 2) + 'L';\n    } else if (record['PAY_ANN_VAL_F'] && record['PAY_ANN_VAL_F'].length >= 1) {\n        record['PAY_ANN_VAL_F'] = record['PAY_ANN_VAL_F'].substring(0, 1) + ' L';\n    } else {\n        record['PAY_ANN_VAL_F'] = '  L';\n    }\n    setVariable('ACTION', 'Go to RCPT_TOT_VAL Module');\n} else if (REPORTING_ID_TYP_TXT === 'SU' && ECPAYANN > 0) {\n    setVariable('PAY_ANN_VAL', ECPAYANN);\n    if (record['PAY_ANN_VAL_F'] && record['PAY_ANN_VAL_F'].length >= 3) {\n        record['PAY_ANN_VAL_F'] = record['PAY_ANN_VAL_F'].substring(0, 2) + 'A' + record['PAY_ANN_VAL_F'].substring(3);\n    } else if (record['PAY_ANN_VAL_F'] && record['PAY_ANN_VAL_F'].length >= 2) {\n        record['PAY_ANN_VAL_F'] = record['PAY_ANN_VAL_F'].substring(0, 2) + 'A';\n    } else if (record['PAY_ANN_VAL_F'] && record['PAY_ANN_VAL_F'].length >= 1) {\n        record['PAY_ANN_VAL_F'] = record['PAY_ANN_VAL_F'].substring(0, 1) + ' A';\n    } else {\n        record['PAY_ANN_VAL_F'] = '  A';\n    }\n    setVariable('ACTION', 'Go to RCPT_TOT_VAL Module');\n} else if (REPORTING_ID_TYP_TXT === 'MU' && CY_PAY_ANN > 0) {\n    setVariable('PAY_ANN_VAL', CY_PAY_ANN);\n    setVariable('PAY_ANN_VAL_F', CY_PAY_ANN_F);\n    setVariable('ACTION', 'Go to RCPT_TOT_VAL Module');\n} else if (CY_PAY_ANN_LSD > 0) {\n    setVariable('PAY_ANN_VAL', CY_PAY_ANN_LSD);\n    setVariable('PAY_ANN_VAL_F', CY_PAY_ANN_LSD_F);\n\n    setVals()\n} else if (EXPS_TEMPSTAF_VAL > 0) {\n    setVariable('PAY_ANN_VAL', EXPS_TEMPSTAF_VAL);\n    if (record['PAY_ANN_VAL_F'] && record['PAY_ANN_VAL_F'].length >= 2) {\n        record['PAY_ANN_VAL_F'] = record['PAY_ANN_VAL_F'].substring(0, 1) + 'J' + record['PAY_ANN_VAL_F'].substring(2);\n    } else if (record['PAY_ANN_VAL_F'] && record['PAY_ANN_VAL_F'].length >= 1) {\n        record['PAY_ANN_VAL_F'] = record['PAY_ANN_VAL_F'].substring(0, 1) + 'J ';\n    } else {\n        record['PAY_ANN_VAL_F'] = ' J ';\n    }\n    setVals()\n} else if (MADB_2022_PAYANN > 0) {\n    setVariable('PAY_ANN_VAL', MADB_2022_PAYANN * CYPYF);\n    if (record['PAY_ANN_VAL_F'] && record['PAY_ANN_VAL_F'].length >= 3) {\n        record['PAY_ANN_VAL_F'] = record['PAY_ANN_VAL_F'].substring(0, 2) + 'H' + record['PAY_ANN_VAL_F'].substring(3);\n    } else if (record['PAY_ANN_VAL_F'] && record['PAY_ANN_VAL_F'].length >= 2) {\n        record['PAY_ANN_VAL_F'] = record['PAY_ANN_VAL_F'].substring(0, 2) + 'H';\n    } else if (record['PAY_ANN_VAL_F'] && record['PAY_ANN_VAL_F'].length >= 1) {\n        record['PAY_ANN_VAL_F'] = record['PAY_ANN_VAL_F'].substring(0, 1) + ' H';\n    } else {\n        record['PAY_ANN_VAL_F'] = '  H';\n    }\n    setVariable('ACTION', 'Go to RCPT_TOT_VAL Module');\n} else {\n    // Setting defaults as per flowchart for non-employer\n    // setVariable('PAY_ANN_VAL', 0);\n    // setVariable('PAY_ANN_VAL_FLG', 'G');\n    // setVariable('EMP_MAR12_NUM', 0);\n    // setVariable('EMP_MAR12_NUM_FLG', 'G');\n    // setVariable('Referral_FLAG', 'LEASED_ONLY');\n    // setVariable('NODONOR', 'E');\n    setVariable('TABSTAT', 'N')\n    setVariable('NONTABFL', 'N')\n    if (RCPT_TOT_VAL_R > 0) {\n        setVariable('ReferralFlag', 'NO_PAYROLL_W_RECEIPTS')\n        setVariable('ACTION', 'EXIT EDIT')\n    }\n    else {\n        setVariable('ACTION', 'EXIT EDIT')\n    }\n}\n\nmsg.payload.csv[global.get(\"ptrModuleFacts\")] = record;\nconsole.log({ record })\nreturn msg;",
+        "func": "// msg.cache = global.get(\"lookupCache\")\nlet record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\nconsole.log({ record })\n// Initialize variables\nconst NAICS_SECTOR_OLD_NUM = parseFloat(record['NAICS_SECTOR_OLD_NUM']);\nconst PAY_ANN_PRDWRK_VAL = parseFloat(record['PAY_ANN_PRDWRK_VAL']);\nconst PAY_ANN_NONPRDWRK_VAL = parseFloat(record['PAY_ANN_NONPRDWRK_VAL']);\nconst ECPAYANN = parseFloat(record['ECPAYANN']);\nconst REPORTING_ID_TYP_TXT = record['REPORTING_ID_TYP_TXT'];\nconst CY_PAY_ANN = parseFloat(record['CY_PAY_ANN']);\nconst CY_PAY_ANN_LSD = parseFloat(record['CY_PAY_ANN_LSD']);\nconst EXPS_TEMPSTAF_VAL = record['EXPS_TEMPSTAF_VAL'];\nconst MADB_2022_PAYANN = parseFloat(record['MADB_2022_PAYANN']);\nconst CY_PAY_ANN_F = record['CY_PAY_ANN_F']\nconst CY_PAY_ANN_LSD_F = record['CY_PAY_ANN_LSD_F']\nconst RCPT_TOT_VAL_R = parseFloat(record['RCPT_TOT_VAL_R'])\nconst CYPYF = parseFloat(record['CYPYF'])\n// Set function\nconst setVariable = (variable, value) => {\n    record[variable] = value;\n};\nconst setVals = () => {\n    setVariable('PAY_QTR1_VAL', 0);\n    if (record['PAY_QTR1_VAL_F'] && record['PAY_QTR1_VAL_F'].length >= 2) {\n        record['PAY_QTR1_VAL_F'] = record['PAY_QTR1_VAL_F'].substring(0, 1) + 'G' + record['PAY_QTR1_VAL_F'].substring(2);\n    } else if (record['PAY_QTR1_VAL_F'] && record['PAY_QTR1_VAL_F'].length >= 1) {\n        record['PAY_QTR1_VAL_F'] = record['PAY_QTR1_VAL_F'].substring(0, 1) + 'G ';\n    } else {\n        record['PAY_QTR1_VAL_F'] = ' G ';\n    }\n    setVariable('EMP_MAR12_NUM', 0);\n    if (record['EMP_MAR12_NUM_F'] && record['EMP_MAR12_NUM_F'].length >= 2) {\n        record['EMP_MAR12_NUM_F'] = record['EMP_MAR12_NUM_F'].substring(0, 1) + 'G' + record['EMP_MAR12_NUM_F'].substring(2);\n    } else if (record['EMP_MAR12_NUM_F'] && record['EMP_MAR12_NUM_F'].length >= 1) {\n        record['EMP_MAR12_NUM_F'] = record['EMP_MAR12_NUM_F'].substring(0, 1) + 'G ';\n    } else {\n        record['EMP_MAR12_NUM_F'] = ' G ';\n    }\n    setVariable('EXIMP', 'E');\n    setVariable('ReferralFlag', 'LEASED_ONLY');\n    setVariable('ACTION', 'Continue to RCPT_TOT_VAL if it failed completeness test elase skip, then skip PAY_QTR1_VAL and EMP_MAR12_VAL and go back to completeness');\n}\n// Logic\nif (NAICS_SECTOR_OLD_NUM === 31 && (PAY_ANN_PRDWRK_VAL + PAY_ANN_NONPRDWRK_VAL) > 0) {\n    setVariable('PAY_ANN_VAL', PAY_ANN_PRDWRK_VAL + PAY_ANN_NONPRDWRK_VAL);\n    if (record['PAY_ANN_VAL_F'] && record['PAY_ANN_VAL_F'].length >= 3) {\n        record['PAY_ANN_VAL_F'] = record['PAY_ANN_VAL_F'].substring(0, 2) + 'L' + record['PAY_ANN_VAL_F'].substring(3);\n    } else if (record['PAY_ANN_VAL_F'] && record['PAY_ANN_VAL_F'].length >= 2) {\n        record['PAY_ANN_VAL_F'] = record['PAY_ANN_VAL_F'].substring(0, 2) + 'L';\n    } else if (record['PAY_ANN_VAL_F'] && record['PAY_ANN_VAL_F'].length >= 1) {\n        record['PAY_ANN_VAL_F'] = record['PAY_ANN_VAL_F'].substring(0, 1) + ' L';\n    } else {\n        record['PAY_ANN_VAL_F'] = '  L';\n    }\n    setVariable('ACTION', 'Go to RCPT_TOT_VAL Module');\n} else if (REPORTING_ID_TYP_TXT === 'SU' && ECPAYANN > 0) {\n    setVariable('PAY_ANN_VAL', ECPAYANN);\n    if (record['PAY_ANN_VAL_F'] && record['PAY_ANN_VAL_F'].length >= 3) {\n        record['PAY_ANN_VAL_F'] = record['PAY_ANN_VAL_F'].substring(0, 2) + 'A' + record['PAY_ANN_VAL_F'].substring(3);\n    } else if (record['PAY_ANN_VAL_F'] && record['PAY_ANN_VAL_F'].length >= 2) {\n        record['PAY_ANN_VAL_F'] = record['PAY_ANN_VAL_F'].substring(0, 2) + 'A';\n    } else if (record['PAY_ANN_VAL_F'] && record['PAY_ANN_VAL_F'].length >= 1) {\n        record['PAY_ANN_VAL_F'] = record['PAY_ANN_VAL_F'].substring(0, 1) + ' A';\n    } else {\n        record['PAY_ANN_VAL_F'] = '  A';\n    }\n    setVariable('ACTION', 'Go to RCPT_TOT_VAL Module');\n} else if (REPORTING_ID_TYP_TXT === 'MU' && CY_PAY_ANN > 0) {\n    setVariable('PAY_ANN_VAL', CY_PAY_ANN);\n    setVariable('PAY_ANN_VAL_F', CY_PAY_ANN_F);\n    setVariable('ACTION', 'Go to RCPT_TOT_VAL Module');\n} else if (CY_PAY_ANN_LSD > 0) {\n    setVariable('PAY_ANN_VAL', CY_PAY_ANN_LSD);\n    setVariable('PAY_ANN_VAL_F', CY_PAY_ANN_LSD_F);\n\n    setVals()\n} else if (EXPS_TEMPSTAF_VAL > 0) {\n    setVariable('PAY_ANN_VAL', EXPS_TEMPSTAF_VAL);\n    if (record['PAY_ANN_VAL_F'] && record['PAY_ANN_VAL_F'].length >= 2) {\n        record['PAY_ANN_VAL_F'] = record['PAY_ANN_VAL_F'].substring(0, 1) + 'J' + record['PAY_ANN_VAL_F'].substring(2);\n    } else if (record['PAY_ANN_VAL_F'] && record['PAY_ANN_VAL_F'].length >= 1) {\n        record['PAY_ANN_VAL_F'] = record['PAY_ANN_VAL_F'].substring(0, 1) + 'J ';\n    } else {\n        record['PAY_ANN_VAL_F'] = ' J ';\n    }\n    setVals()\n} else if (MADB_2022_PAYANN > 0) {\n    setVariable('PAY_ANN_VAL', MADB_2022_PAYANN * CYPYF);\n    if (record['PAY_ANN_VAL_F'] && record['PAY_ANN_VAL_F'].length >= 3) {\n        record['PAY_ANN_VAL_F'] = record['PAY_ANN_VAL_F'].substring(0, 2) + 'H' + record['PAY_ANN_VAL_F'].substring(3);\n    } else if (record['PAY_ANN_VAL_F'] && record['PAY_ANN_VAL_F'].length >= 2) {\n        record['PAY_ANN_VAL_F'] = record['PAY_ANN_VAL_F'].substring(0, 2) + 'H';\n    } else if (record['PAY_ANN_VAL_F'] && record['PAY_ANN_VAL_F'].length >= 1) {\n        record['PAY_ANN_VAL_F'] = record['PAY_ANN_VAL_F'].substring(0, 1) + ' H';\n    } else {\n        record['PAY_ANN_VAL_F'] = '  H';\n    }\n    setVariable('ACTION', 'Go to RCPT_TOT_VAL Module');\n} else {\n    // Setting defaults as per flowchart for non-employer\n    // setVariable('PAY_ANN_VAL', 0);\n    // setVariable('PAY_ANN_VAL_FLG', 'G');\n    // setVariable('EMP_MAR12_NUM', 0);\n    // setVariable('EMP_MAR12_NUM_FLG', 'G');\n    // setVariable('Referral_FLAG', 'LEASED_ONLY');\n    // setVariable('NODONOR', 'E');\n    setVariable('TABSTAT', 'N')\n    setVariable('NONTABFL', 'N')\n    if (RCPT_TOT_VAL_R > 0) {\n        setVariable('ReferralFlag', 'NO_PAYROLL_W_RECEIPTS')\n        setVariable('ACTION', 'EXIT EDIT')\n    }\n    else {\n        setVariable('ACTION', 'EXIT EDIT')\n    }\n}\n\nmsg.payload.csv[global.get(\"ptrModuleFacts\")] = record;\nconsole.log({ record })\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -16993,8 +16737,7 @@
         "y": 320,
         "wires": [
             [
-                "6de317f273718e08",
-                "8a9c9b9f567f8a2a"
+                "6de317f273718e08"
             ]
         ]
     },
@@ -17008,24 +16751,7 @@
             "7d91540d69ac16c1",
             "688a39b3e0070fe9"
         ],
-        "x": 1015,
-        "y": 400,
-        "wires": []
-    },
-    {
-        "id": "8a9c9b9f567f8a2a",
-        "type": "debug",
-        "z": "4afed9425459216e",
-        "name": "debug 109",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1090,
+        "x": 1035,
         "y": 320,
         "wires": []
     },
@@ -17039,7 +16765,7 @@
             "36c4687d5f1bee6b",
             "43545e3b96e7f60c"
         ],
-        "x": 125,
+        "x": 185,
         "y": 320,
         "wires": [
             [
@@ -17066,8 +16792,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 270,
-        "y": 220,
+        "x": 390,
+        "y": 320,
         "wires": [
             [
                 "5e8a2056aa1b8d56"
@@ -17079,8 +16805,8 @@
         "type": "subflow:0be109393cb5f28a",
         "z": "4afed9425459216e",
         "name": "",
-        "x": 550,
-        "y": 220,
+        "x": 650,
+        "y": 320,
         "wires": [
             [
                 "2de457b33efc9b3e"
@@ -17092,18 +16818,17 @@
         "type": "function",
         "z": "0a690414bffb7c2e",
         "name": "pay_qtr1_val",
-        "func": "// msg.cache = global.get(\"lookupCache\")\n// let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\n// const setVariable = (variable, value) => {\n//     record[variable] = value;\n// };\n\n// if (record['NAICS_SECTOR_OLD_NUM'] === '31' && \n//   (record['PAY_QTR1_PRDWRK_VAL'] || record['PAY_QTR1_NONPRDWRK_VAL']) &&\n// ((parseFloat(record['PAY_QTR1_PRDWRK_VAL']) + parseFloat(record['PAY_QTR1_NONPRDWRK_VAL'])) > 0)\n// ) {\n//     setVariable('PAY_QTR1_VAL', parseFloat(record['PAY_QTR1_PRDWRK_VAL']) + parseFloat(record['PAY_QTR1_NONPRDWRK_VAL']));\n//     setVariable('PAY_QTR1_VAL_F', 'L');\n//     setVariable('ACTION', 'Go to EMPQ1 Module');\n// } else if (record['REPORTING_ID_TYP_TXT'] === 'SU') {\n//     if (parseFloat(record['ECPAYQ1']) > 0) {\n//         setVariable('PAY_QTR1_VAL', record['ECPAYQ1']);\n//         setVariable('PAY_QTR1_VAL_F', 'A');\n//         setVariable('ACTION', 'Go to EMPQ1 Module');\n//     }else{\n//         if (parseFloat(record['MADB_2022_PAYQTR1']) > 0) {\n//             console.log({ 'yes': parseFloat(record['MADB_2022_PAYQTR1']) * parseFloat(record['CYPYF']) })\n//             setVariable('PAY_QTR1_VAL', parseFloat(record['MADB_2022_PAYQTR1']) * parseFloat(record['CYPYF'])); // Assuming 'CYPYF' is a factor from parameter table by NAICS_NUM\n//             setVariable('PAY_QTR1_VAL_F', 'H');\n//             setVariable('ACTION', 'Go to EMPQ1 Module');\n//         } else {\n//             setVariable('ACTION', 'Go to EMPQ1 Module');\n//         }\n//     }\n// } else if (record['REPORTING_ID_TYP_TXT'] === 'MU' && parseFloat(record['CY_PAY_QTR1']) > 0) {\n//     setVariable('PAY_QTR1_VAL', record['CY_PAY_QTR1']);\n//     setVariable('PAY_QTR1_VAL_F', record['CY_PAY_QTR1_FLG']);\n//     setVariable('ACTION', 'Go to EMPQ1 Module');\n// } else if (parseFloat(record['MADB_2022_PAYQTR1']) > 0) {\n//     console.log({'yes': parseFloat(record['MADB_2022_PAYQTR1']) * parseFloat(record['CYPYF'])})\n//     setVariable('PAY_QTR1_VAL', parseFloat(record['MADB_2022_PAYQTR1']) * parseFloat(record['CYPYF'])); // Assuming 'CYPYF' is a factor from parameter table by NAICS_NUM\n//     setVariable('PAY_QTR1_VAL_F', 'H');\n//     setVariable('ACTION', 'Go to EMPQ1 Module');\n// } else {\n//     setVariable('ACTION', 'Go to EMPQ1 Module');\n// }\n// msg.payload.csv[global.get(\"ptrModuleFacts\")] = record;\n// return msg;\nmsg.cache = global.get(\"lookupCache\")\nlet record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\nconst setVariable = (variable, value) => {\n    record[variable] = value;\n};\n\nif (record['NAICS_SECTOR_OLD_NUM'] === '31' &&\n    ((parseFloat(record['PAY_QTR1_PRDWRK_VAL']) + parseFloat(record['PAY_QTR1_NONPRDWRK_VAL'])) > 0)\n) {\n    setVariable('PAY_QTR1_VAL', parseFloat(record['PAY_QTR1_PRDWRK_VAL']) + parseFloat(record['PAY_QTR1_NONPRDWRK_VAL']));\n    if (record['PAY_QTR1_VAL_F'] && record['PAY_QTR1_VAL_F'].length >= 3) {\n        record['PAY_QTR1_VAL_F'] = record['PAY_QTR1_VAL_F'].substring(0, 2) + 'L' + record['PAY_QTR1_VAL_F'].substring(3);\n    } else if (record['PAY_QTR1_VAL_F'] && record['PAY_QTR1_VAL_F'].length >= 2) {\n        record['PAY_QTR1_VAL_F'] = record['PAY_QTR1_VAL_F'].substring(0, 2) + 'L';\n    } else if (record['PAY_QTR1_VAL_F'] && record['PAY_QTR1_VAL_F'].length >= 1) {\n        record['PAY_QTR1_VAL_F'] = record['PAY_QTR1_VAL_F'].substring(0, 1) + ' L';\n    } else {\n        record['PAY_QTR1_VAL_F'] = '  L';\n    }\n    setVariable('ACTION', 'Go to EMP_MAR12_NUM Module');\n} else if (record['REPORTING_ID_TYP_TXT'] === 'SU') {\n    if (parseFloat(record['ECPAYQ1']) > 0) {\n        setVariable('PAY_QTR1_VAL', record['ECPAYQ1']);\n        if (record['PAY_QTR1_VAL_F'] && record['PAY_QTR1_VAL_F'].length >= 3) {\n            record['PAY_QTR1_VAL_F'] = record['PAY_QTR1_VAL_F'].substring(0, 2) + 'A' + record['PAY_QTR1_VAL_F'].substring(3);\n        } else if (record['PAY_QTR1_VAL_F'] && record['PAY_QTR1_VAL_F'].length >= 2) {\n            record['PAY_QTR1_VAL_F'] = record['PAY_QTR1_VAL_F'].substring(0, 2) + 'A';\n        } else if (record['PAY_QTR1_VAL_F'] && record['PAY_QTR1_VAL_F'].length >= 1) {\n            record['PAY_QTR1_VAL_F'] = record['PAY_QTR1_VAL_F'].substring(0, 1) + ' A';\n        } else {\n            record['PAY_QTR1_VAL_F'] = '  A';\n        }\n        setVariable('ACTION', 'Go to EMP_MAR12_NUM Module');\n    } else {\n        if (parseFloat(record['MADB_2022_PAYQTR1']) > 0) {\n            setVariable('PAY_QTR1_VAL', parseFloat(record['MADB_2022_PAYQTR1']) * parseFloat(record['CYPYF'])); // Assuming 'CYPYF' is a factor from parameter table by NAICS_NUM\n            if (record['PAY_QTR1_VAL_F'] && record['PAY_QTR1_VAL_F'].length >= 3) {\n                record['PAY_QTR1_VAL_F'] = record['PAY_QTR1_VAL_F'].substring(0, 2) + 'H' + record['PAY_QTR1_VAL_F'].substring(3);\n            } else if (record['PAY_QTR1_VAL_F'] && record['PAY_QTR1_VAL_F'].length >= 2) {\n                record['PAY_QTR1_VAL_F'] = record['PAY_QTR1_VAL_F'].substring(0, 2) + 'H';\n            } else if (record['PAY_QTR1_VAL_F'] && record['PAY_QTR1_VAL_F'].length >= 1) {\n                record['PAY_QTR1_VAL_F'] = record['PAY_QTR1_VAL_F'].substring(0, 1) + ' H';\n            } else {\n                record['PAY_QTR1_VAL_F'] = '  H';\n            }\n            setVariable('ACTION', 'Go to EMP_MAR12_NUM Module');\n        } else {\n            setVariable('ACTION', 'Go to EMP_MAR12_NUM Module');\n        }\n    }\n} else if (record['REPORTING_ID_TYP_TXT'] === 'MU' && parseFloat(record['CY_PAY_QTR1']) > 0) {\n    setVariable('PAY_QTR1_VAL', record['CY_PAY_QTR1']);\n    setVariable('PAY_QTR1_VAL_F', record['CY_PAY_QTR1_F']);\n    setVariable('ACTION', 'Go to EMP_MAR12_NUM Module');\n} else if (parseFloat(record['MADB_2022_PAYQTR1']) > 0) {\n    console.log({ 'yes': parseFloat(record['MADB_2022_PAYQTR1']) * parseFloat(record['CYPYF']) })\n    setVariable('PAY_QTR1_VAL', parseFloat(record['MADB_2022_PAYQTR1']) * parseFloat(record['CYPYF'])); // Assuming 'CYPYF' is a factor from parameter table by NAICS_NUM\n    if (record['PAY_QTR1_VAL_F'] && record['PAY_QTR1_VAL_F'].length >= 3) {\n        record['PAY_QTR1_VAL_F'] = record['PAY_QTR1_VAL_F'].substring(0, 2) + 'H' + record['PAY_QTR1_VAL_F'].substring(3);\n    } else if (record['PAY_QTR1_VAL_F'] && record['PAY_QTR1_VAL_F'].length >= 2) {\n        record['PAY_QTR1_VAL_F'] = record['PAY_QTR1_VAL_F'].substring(0, 2) + 'H';\n    } else if (record['PAY_QTR1_VAL_F'] && record['PAY_QTR1_VAL_F'].length >= 1) {\n        record['PAY_QTR1_VAL_F'] = record['PAY_QTR1_VAL_F'].substring(0, 1) + ' H';\n    } else {\n        record['PAY_QTR1_VAL_F'] = '  H';\n    }\n    setVariable('ACTION', 'Go to EMP_MAR12_NUM Module');\n} else {\n    setVariable('ACTION', 'Go to EMP_MAR12_NUM Module');\n}\nmsg.payload.csv[global.get(\"ptrModuleFacts\")] = record;\nreturn msg;",
+        "func": "msg.cache = global.get(\"lookupCache\")\nlet record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\nconst setVariable = (variable, value) => {\n    record[variable] = value;\n};\n\nif (record['NAICS_SECTOR_OLD_NUM'] === '31' &&\n    ((parseFloat(record['PAY_QTR1_PRDWRK_VAL']) + parseFloat(record['PAY_QTR1_NONPRDWRK_VAL'])) > 0)\n) {\n    setVariable('PAY_QTR1_VAL', parseFloat(record['PAY_QTR1_PRDWRK_VAL']) + parseFloat(record['PAY_QTR1_NONPRDWRK_VAL']));\n    if (record['PAY_QTR1_VAL_F'] && record['PAY_QTR1_VAL_F'].length >= 3) {\n        record['PAY_QTR1_VAL_F'] = record['PAY_QTR1_VAL_F'].substring(0, 2) + 'L' + record['PAY_QTR1_VAL_F'].substring(3);\n    } else if (record['PAY_QTR1_VAL_F'] && record['PAY_QTR1_VAL_F'].length >= 2) {\n        record['PAY_QTR1_VAL_F'] = record['PAY_QTR1_VAL_F'].substring(0, 2) + 'L';\n    } else if (record['PAY_QTR1_VAL_F'] && record['PAY_QTR1_VAL_F'].length >= 1) {\n        record['PAY_QTR1_VAL_F'] = record['PAY_QTR1_VAL_F'].substring(0, 1) + ' L';\n    } else {\n        record['PAY_QTR1_VAL_F'] = '  L';\n    }\n    setVariable('ACTION', 'Go to EMP_MAR12_NUM Module');\n} else if (record['REPORTING_ID_TYP_TXT'] === 'SU') {\n    if (parseFloat(record['ECPAYQ1']) > 0) {\n        setVariable('PAY_QTR1_VAL', record['ECPAYQ1']);\n        if (record['PAY_QTR1_VAL_F'] && record['PAY_QTR1_VAL_F'].length >= 3) {\n            record['PAY_QTR1_VAL_F'] = record['PAY_QTR1_VAL_F'].substring(0, 2) + 'A' + record['PAY_QTR1_VAL_F'].substring(3);\n        } else if (record['PAY_QTR1_VAL_F'] && record['PAY_QTR1_VAL_F'].length >= 2) {\n            record['PAY_QTR1_VAL_F'] = record['PAY_QTR1_VAL_F'].substring(0, 2) + 'A';\n        } else if (record['PAY_QTR1_VAL_F'] && record['PAY_QTR1_VAL_F'].length >= 1) {\n            record['PAY_QTR1_VAL_F'] = record['PAY_QTR1_VAL_F'].substring(0, 1) + ' A';\n        } else {\n            record['PAY_QTR1_VAL_F'] = '  A';\n        }\n        setVariable('ACTION', 'Go to EMP_MAR12_NUM Module');\n    } else {\n        if (parseFloat(record['MADB_2022_PAYQTR1']) > 0) {\n            setVariable('PAY_QTR1_VAL', parseFloat(record['MADB_2022_PAYQTR1']) * parseFloat(record['CYPYF'])); // Assuming 'CYPYF' is a factor from parameter table by NAICS_NUM\n            if (record['PAY_QTR1_VAL_F'] && record['PAY_QTR1_VAL_F'].length >= 3) {\n                record['PAY_QTR1_VAL_F'] = record['PAY_QTR1_VAL_F'].substring(0, 2) + 'H' + record['PAY_QTR1_VAL_F'].substring(3);\n            } else if (record['PAY_QTR1_VAL_F'] && record['PAY_QTR1_VAL_F'].length >= 2) {\n                record['PAY_QTR1_VAL_F'] = record['PAY_QTR1_VAL_F'].substring(0, 2) + 'H';\n            } else if (record['PAY_QTR1_VAL_F'] && record['PAY_QTR1_VAL_F'].length >= 1) {\n                record['PAY_QTR1_VAL_F'] = record['PAY_QTR1_VAL_F'].substring(0, 1) + ' H';\n            } else {\n                record['PAY_QTR1_VAL_F'] = '  H';\n            }\n            setVariable('ACTION', 'Go to EMP_MAR12_NUM Module');\n        } else {\n            setVariable('ACTION', 'Go to EMP_MAR12_NUM Module');\n        }\n    }\n} else if (record['REPORTING_ID_TYP_TXT'] === 'MU' && parseFloat(record['CY_PAY_QTR1']) > 0) {\n    setVariable('PAY_QTR1_VAL', record['CY_PAY_QTR1']);\n    setVariable('PAY_QTR1_VAL_F', record['CY_PAY_QTR1_F']);\n    setVariable('ACTION', 'Go to EMP_MAR12_NUM Module');\n} else if (parseFloat(record['MADB_2022_PAYQTR1']) > 0) {\n    console.log({ 'yes': parseFloat(record['MADB_2022_PAYQTR1']) * parseFloat(record['CYPYF']) })\n    setVariable('PAY_QTR1_VAL', parseFloat(record['MADB_2022_PAYQTR1']) * parseFloat(record['CYPYF'])); // Assuming 'CYPYF' is a factor from parameter table by NAICS_NUM\n    if (record['PAY_QTR1_VAL_F'] && record['PAY_QTR1_VAL_F'].length >= 3) {\n        record['PAY_QTR1_VAL_F'] = record['PAY_QTR1_VAL_F'].substring(0, 2) + 'H' + record['PAY_QTR1_VAL_F'].substring(3);\n    } else if (record['PAY_QTR1_VAL_F'] && record['PAY_QTR1_VAL_F'].length >= 2) {\n        record['PAY_QTR1_VAL_F'] = record['PAY_QTR1_VAL_F'].substring(0, 2) + 'H';\n    } else if (record['PAY_QTR1_VAL_F'] && record['PAY_QTR1_VAL_F'].length >= 1) {\n        record['PAY_QTR1_VAL_F'] = record['PAY_QTR1_VAL_F'].substring(0, 1) + ' H';\n    } else {\n        record['PAY_QTR1_VAL_F'] = '  H';\n    }\n    setVariable('ACTION', 'Go to EMP_MAR12_NUM Module');\n} else {\n    setVariable('ACTION', 'Go to EMP_MAR12_NUM Module');\n}\nmsg.payload.csv[global.get(\"ptrModuleFacts\")] = record;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 850,
-        "y": 640,
+        "x": 670,
+        "y": 200,
         "wires": [
             [
-                "19a8ac469c9cb69f",
                 "86f363969a0f8d77"
             ]
         ]
@@ -17118,8 +16843,8 @@
             "36c4687d5f1bee6b",
             "5d05b108e4e3f722"
         ],
-        "x": 125,
-        "y": 640,
+        "x": 545,
+        "y": 200,
         "wires": [
             [
                 "8b5375b4024c9c0b"
@@ -17136,25 +16861,8 @@
             "7d91540d69ac16c1",
             "688a39b3e0070fe9"
         ],
-        "x": 985,
-        "y": 720,
-        "wires": []
-    },
-    {
-        "id": "19a8ac469c9cb69f",
-        "type": "debug",
-        "z": "0a690414bffb7c2e",
-        "name": "debug 111",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1060,
-        "y": 640,
+        "x": 795,
+        "y": 200,
         "wires": []
     },
     {
@@ -17162,7 +16870,7 @@
         "type": "function",
         "z": "f06fc99b8cb78464",
         "name": "rcpt_tot_val",
-        "func": "// // Start\n// let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n// console.log({ record });\n\n// // Extracting required variables from the record\n// const NAICS_SECTOR_OLD_NUM = record['NAICS_SECTOR_OLD_NUM'];\n// const COVCHGCD = record['COVCHGCD'];\n// const RCPT_TOT_VAL = parseFloat(record['RCPT_TOT_VAL']);\n// const ECRCPTOT = parseFloat(record['ECRCPTOT']);\n// const REPORTING_ID_TYP_TXT = record['REPORTING_ID_TYP_TXT'];\n// const MONTHLY_DATA = parseFloat(record['MONTHLY_DATA']); // assuming the variable name is this\n// const QSS_DATA = parseFloat(record['QSS_DATA']); // assuming the variable name is this\n// const MADB_2022_RCPTOT = parseFloat(record['MADB_2022_RCPTOT']); // assuming the variable name is this\n// const NAPCSBLTOT = parseFloat(record['NAPCSBLTOT']);\n// // Assuming default initial values\n// // record['RCPT_TOT_VAL'] = 0; // set to 0 by default\n// const monthlyCheck = () => {\n//     if (MONTHLY_DATA > 0 && QSS_DATA > 0) {\n//         record['RCPT_TOT_VAL'] = 'SUM(Monthly OVER SUM(Quarterly))'; // The exact logic to sum these is not clear from the flowchart\n//         record['RCPT_TOT_VAL_F'] = 'Y';\n//     }\n// }\n// if (NAICS_SECTOR_OLD_NUM === '31' && COVCHGCD === '401') {\n//     record['RCPT_TOT_VAL'] = 0;\n//     record['ACTION'] = 'Go to PAY_QTR1_VAL';\n//     // record['RCPT_TOT_VAL'] = 'NAPCSBLTOT'; // assuming 'NAPCSBLTOT' is a value/variable from somewhere in your system\n//     // record['RCPT_TOT_VAL_F3.1'] = 'L';\n// } else if (NAICS_SECTOR_OLD_NUM === '31' && NAPCSBLTOT > 0) {\n//     record['RCPT_TOT_VAL'] = NAPCSBLTOT;\n//     record['RCPT_TOT_VAL_F3'] = 'L';\n//     record['ACTION'] = 'Go to PAY_QTR1_VAL';\n//     // record['RCPT_TOT_VAL'] = 'NAPCSBLTOT'; // assuming 'NAPCSBLTOT' is a value/variable from somewhere in your system\n//     // record['RCPT_TOT_VAL_F3.1'] = 'L';\n// } else if (REPORTING_ID_TYP_TXT === 'SU') {\n//     if (ECRCPTOT > 0) {\n//         record['RCPT_TOT_VAL'] = ECRCPTOT;\n//         record['RCPT_TOT_VAL_F'] = 'A';\n//         record['ACTION'] = 'Go to PAY_QTR1_VAL';\n//     } else{\n//         monthlyCheck()\n//     }\n   \n// } else if (REPORTING_ID_TYP_TXT === 'KAU' && ['22','11','42','44','48','51','52','53','54','55','56','61','62','71','72','81'].includes(NAICS_SECTOR_OLD_NUM)) {\n//    monthlyCheck()\n// } else if (MADB_2022_RCPTOT > 0) {\n//     const CYPYF = parseFloat(record['CYPYF']);  // Fetching the CYPYF value from global context\n//     record['RCPT_TOT_VAL'] = MADB_2022_RCPTOT * CYPYF;\n//     record['RCPT_TOT_VAL_F'] = 'H';\n//     record['ACTION'] = 'Go to PAY_QTR1_VAL';\n// } else {\n//     record['ACTION'] = 'Go to PAY_QTR1_VAL';\n// }\n\n// // Saving updated record back to the message payload\n// msg.payload.csv[global.get(\"ptrModuleFacts\")] = record;\n// console.log({ record });\n\n// return msg;\n\n// Start\nlet record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\nconsole.log({ record });\n\n// Extracting required variables from the record\nconst NAICS_SECTOR_OLD_NUM = record['NAICS_SECTOR_OLD_NUM'];\nconst COVCHGCD = record['COVCHGCD'];\nconst RCPT_TOT_VAL = parseFloat(record['RCPT_TOT_VAL']);\nconst ECRCPTOT = parseFloat(record['ECRCPTOT']);\nconst REPORTING_ID_TYP_TXT = record['REPORTING_ID_TYP_TXT'];\nconst MONTHLY_DATA = parseFloat(record['MONTHLY_DATA']); // assuming the variable name is this\nconst QSS_DATA = parseFloat(record['QSS_DATA']); // assuming the variable name is this\nconst MADB_2022_RCPTOT = parseFloat(record['MADB_2022_RCPTOT']); // assuming the variable name is this\nconst NAPCSBLTOT = parseFloat(record['NAPCSBLTOT']);\n// Assuming default initial values\n// record['RCPT_TOT_VAL'] = 0; // set to 0 by default\n// const monthlyCheck = () => {\n//     if (MONTHLY_DATA > 0 && QSS_DATA > 0) {\n//         record['RCPT_TOT_VAL'] = 'SUM(Monthly OVER SUM(Quarterly))'; // The exact logic to sum these is not clear from the flowchart\n//         record['RCPT_TOT_VAL_F'] = 'Y';\n//     }\n// }\nconst monthlyCheck = () => {\n    if (MONTHLY_DATA > 0) {\n        record['RCPT_TOT_VAL'] = Math.round(MONTHLY_DATA / 1000);\n        if (record['RCPT_TOT_VAL_F'] && record['RCPT_TOT_VAL_F'].length >= 3) {\n            record['RCPT_TOT_VAL_F'] = record['RCPT_TOT_VAL_F'].substring(0, 2) + 'J' + record['RCPT_TOT_VAL_F'].substring(3);\n        } else if (record['RCPT_TOT_VAL_F'] && record['RCPT_TOT_VAL_F'].length >= 2) {\n            record['RCPT_TOT_VAL_F'] = record['RCPT_TOT_VAL_F'].substring(0, 2) + 'J';\n        } else if (record['RCPT_TOT_VAL_F'] && record['RCPT_TOT_VAL_F'].length >= 1) {\n            record['RCPT_TOT_VAL_F'] = record['RCPT_TOT_VAL_F'].substring(0, 1) + ' J';\n        } else {\n            record['RCPT_TOT_VAL_F'] = '  J';\n        }\n    } else if (QSS_DATA > 0) {\n        record['RCPT_TOT_VAL'] = QSS_DATA;\n        if (record['RCPT_TOT_VAL_F'] && record['RCPT_TOT_VAL_F'].length >= 3) {\n            record['RCPT_TOT_VAL_F'] = record['RCPT_TOT_VAL_F'].substring(0, 2) + 'J' + record['RCPT_TOT_VAL_F'].substring(3);\n        } else if (record['RCPT_TOT_VAL_F'] && record['RCPT_TOT_VAL_F'].length >= 2) {\n            record['RCPT_TOT_VAL_F'] = record['RCPT_TOT_VAL_F'].substring(0, 2) + 'J';\n        } else if (record['RCPT_TOT_VAL_F'] && record['RCPT_TOT_VAL_F'].length >= 1) {\n            record['RCPT_TOT_VAL_F'] = record['RCPT_TOT_VAL_F'].substring(0, 1) + ' J';\n        } else {\n            record['RCPT_TOT_VAL_F'] = '  J';\n        }\n    }\n    record['ACTION'] = 'Go to PAY_QTR1_VAL';\n}\n\nif (NAICS_SECTOR_OLD_NUM === '31' && COVCHGCD === '401') {\n    if (RCPT_TOT_VAL === 0) {\n        record['ACTION'] = 'Go to PAY_QTR1_VAL';\n    }\n    else {\n        record['ACTION'] = 'Logic not given in spec if failed'\n    }\n    // record['RCPT_TOT_VAL'] = 'NAPCSBLTOT'; // assuming 'NAPCSBLTOT' is a value/variable from somewhere in your system\n    // record['RCPT_TOT_VAL_F3.1'] = 'L';\n} else if (NAICS_SECTOR_OLD_NUM === '31' && NAPCSBLTOT > 0) {\n    record['RCPT_TOT_VAL'] = NAPCSBLTOT;\n    if (record['RCPT_TOT_VAL_F'] && record['RCPT_TOT_VAL_F'].length >= 3) {\n        record['RCPT_TOT_VAL_F'] = record['RCPT_TOT_VAL_F'].substring(0, 2) + 'L' + record['RCPT_TOT_VAL_F'].substring(3);\n    } else if (record['RCPT_TOT_VAL_F'] && record['RCPT_TOT_VAL_F'].length >= 2) {\n        record['RCPT_TOT_VAL_F'] = record['RCPT_TOT_VAL_F'].substring(0, 2) + 'L';\n    } else if (record['RCPT_TOT_VAL_F'] && record['RCPT_TOT_VAL_F'].length >= 1) {\n        record['RCPT_TOT_VAL_F'] = record['RCPT_TOT_VAL_F'].substring(0, 1) + ' L';\n    } else {\n        record['RCPT_TOT_VAL_F'] = '  L';\n    }\n    record['ACTION'] = 'Go to PAY_QTR1_VAL';\n    // record['RCPT_TOT_VAL'] = 'NAPCSBLTOT'; // assuming 'NAPCSBLTOT' is a value/variable from somewhere in your system\n    // record['RCPT_TOT_VAL_F3.1'] = 'L';\n} else if (REPORTING_ID_TYP_TXT === 'SU') {\n    if (ECRCPTOT > 0) {\n        record['RCPT_TOT_VAL'] = ECRCPTOT;\n        if (record['RCPT_TOT_VAL_F'] && record['RCPT_TOT_VAL_F'].length >= 3) {\n            record['RCPT_TOT_VAL_F'] = record['RCPT_TOT_VAL_F'].substring(0, 2) + 'A' + record['RCPT_TOT_VAL_F'].substring(3);\n        } else if (record['RCPT_TOT_VAL_F'] && record['RCPT_TOT_VAL_F'].length >= 2) {\n            record['RCPT_TOT_VAL_F'] = record['RCPT_TOT_VAL_F'].substring(0, 2) + 'A';\n        } else if (record['RCPT_TOT_VAL_F'] && record['RCPT_TOT_VAL_F'].length >= 1) {\n            record['RCPT_TOT_VAL_F'] = record['RCPT_TOT_VAL_F'].substring(0, 1) + ' A';\n        } else {\n            record['RCPT_TOT_VAL_F'] = '  A';\n        }\n        record['ACTION'] = 'Go to PAY_QTR1_VAL';\n    } else {\n        monthlyCheck()\n    }\n\n} else if (REPORTING_ID_TYP_TXT === 'KAU' && ['22', '11', '42', '44', '48', '51', '52', '53', '54', '55', '56', '61', '62', '71', '72', '81'].includes(NAICS_SECTOR_OLD_NUM)) {\n    monthlyCheck()\n} else if (MADB_2022_RCPTOT > 0) {\n    const CYPYF = parseFloat(record['CYPYF']);  // Fetching the CYPYF value from global context\n    record['RCPT_TOT_VAL'] = MADB_2022_RCPTOT * CYPYF;\n    if (record['RCPT_TOT_VAL_F'] && record['RCPT_TOT_VAL_F'].length >= 3) {\n        record['RCPT_TOT_VAL_F'] = record['RCPT_TOT_VAL_F'].substring(0, 2) + 'H' + record['RCPT_TOT_VAL_F'].substring(3);\n    } else if (record['RCPT_TOT_VAL_F'] && record['RCPT_TOT_VAL_F'].length >= 2) {\n        record['RCPT_TOT_VAL_F'] = record['RCPT_TOT_VAL_F'].substring(0, 2) + 'H';\n    } else if (record['RCPT_TOT_VAL_F'] && record['RCPT_TOT_VAL_F'].length >= 1) {\n        record['RCPT_TOT_VAL_F'] = record['RCPT_TOT_VAL_F'].substring(0, 1) + ' H';\n    } else {\n        record['RCPT_TOT_VAL_F'] = '  H';\n    }\n    record['ACTION'] = 'Go to PAY_QTR1_VAL';\n} else {\n    record['ACTION'] = 'Go to PAY_QTR1_VAL';\n}\n\n// Saving updated record back to the message payload\nmsg.payload.csv[global.get(\"ptrModuleFacts\")] = record;\nconsole.log({ record });\n\nreturn msg;\n",
+        "func": "let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\nconst NAICS_SECTOR_OLD_NUM = record['NAICS_SECTOR_OLD_NUM'];\nconst COVCHGCD = record['COVCHGCD'];\nconst RCPT_TOT_VAL = parseFloat(record['RCPT_TOT_VAL']);\nconst ECRCPTOT = parseFloat(record['ECRCPTOT']);\nconst REPORTING_ID_TYP_TXT = record['REPORTING_ID_TYP_TXT'];\nconst MONTHLY_DATA = parseFloat(record['MONTHLY_DATA']); // assuming the variable name is this\nconst QSS_DATA = parseFloat(record['QSS_DATA']); // assuming the variable name is this\nconst MADB_2022_RCPTOT = parseFloat(record['MADB_2022_RCPTOT']); // assuming the variable name is this\nconst NAPCSBLTOT = parseFloat(record['NAPCSBLTOT']);\n// Assuming default initial values\n// record['RCPT_TOT_VAL'] = 0; // set to 0 by default\n// const monthlyCheck = () => {\n//     if (MONTHLY_DATA > 0 && QSS_DATA > 0) {\n//         record['RCPT_TOT_VAL'] = 'SUM(Monthly OVER SUM(Quarterly))'; // The exact logic to sum these is not clear from the flowchart\n//         record['RCPT_TOT_VAL_F'] = 'Y';\n//     }\n// }\nconst monthlyCheck = () => {\n    if (MONTHLY_DATA > 0) {\n        record['RCPT_TOT_VAL'] = Math.round(MONTHLY_DATA / 1000);\n        if (record['RCPT_TOT_VAL_F'] && record['RCPT_TOT_VAL_F'].length >= 3) {\n            record['RCPT_TOT_VAL_F'] = record['RCPT_TOT_VAL_F'].substring(0, 2) + 'J' + record['RCPT_TOT_VAL_F'].substring(3);\n        } else if (record['RCPT_TOT_VAL_F'] && record['RCPT_TOT_VAL_F'].length >= 2) {\n            record['RCPT_TOT_VAL_F'] = record['RCPT_TOT_VAL_F'].substring(0, 2) + 'J';\n        } else if (record['RCPT_TOT_VAL_F'] && record['RCPT_TOT_VAL_F'].length >= 1) {\n            record['RCPT_TOT_VAL_F'] = record['RCPT_TOT_VAL_F'].substring(0, 1) + ' J';\n        } else {\n            record['RCPT_TOT_VAL_F'] = '  J';\n        }\n    } else if (QSS_DATA > 0) {\n        record['RCPT_TOT_VAL'] = QSS_DATA;\n        if (record['RCPT_TOT_VAL_F'] && record['RCPT_TOT_VAL_F'].length >= 3) {\n            record['RCPT_TOT_VAL_F'] = record['RCPT_TOT_VAL_F'].substring(0, 2) + 'J' + record['RCPT_TOT_VAL_F'].substring(3);\n        } else if (record['RCPT_TOT_VAL_F'] && record['RCPT_TOT_VAL_F'].length >= 2) {\n            record['RCPT_TOT_VAL_F'] = record['RCPT_TOT_VAL_F'].substring(0, 2) + 'J';\n        } else if (record['RCPT_TOT_VAL_F'] && record['RCPT_TOT_VAL_F'].length >= 1) {\n            record['RCPT_TOT_VAL_F'] = record['RCPT_TOT_VAL_F'].substring(0, 1) + ' J';\n        } else {\n            record['RCPT_TOT_VAL_F'] = '  J';\n        }\n    }\n    record['ACTION'] = 'Go to PAY_QTR1_VAL';\n}\n\nif (NAICS_SECTOR_OLD_NUM === '31' && COVCHGCD === '401') {\n    if (RCPT_TOT_VAL === 0) {\n        record['ACTION'] = 'Go to PAY_QTR1_VAL';\n    }\n    else {\n        record['ACTION'] = 'Logic not given in spec if failed'\n    }\n    // record['RCPT_TOT_VAL'] = 'NAPCSBLTOT'; // assuming 'NAPCSBLTOT' is a value/variable from somewhere in your system\n    // record['RCPT_TOT_VAL_F3.1'] = 'L';\n} else if (NAICS_SECTOR_OLD_NUM === '31' && NAPCSBLTOT > 0) {\n    record['RCPT_TOT_VAL'] = NAPCSBLTOT;\n    if (record['RCPT_TOT_VAL_F'] && record['RCPT_TOT_VAL_F'].length >= 3) {\n        record['RCPT_TOT_VAL_F'] = record['RCPT_TOT_VAL_F'].substring(0, 2) + 'L' + record['RCPT_TOT_VAL_F'].substring(3);\n    } else if (record['RCPT_TOT_VAL_F'] && record['RCPT_TOT_VAL_F'].length >= 2) {\n        record['RCPT_TOT_VAL_F'] = record['RCPT_TOT_VAL_F'].substring(0, 2) + 'L';\n    } else if (record['RCPT_TOT_VAL_F'] && record['RCPT_TOT_VAL_F'].length >= 1) {\n        record['RCPT_TOT_VAL_F'] = record['RCPT_TOT_VAL_F'].substring(0, 1) + ' L';\n    } else {\n        record['RCPT_TOT_VAL_F'] = '  L';\n    }\n    record['ACTION'] = 'Go to PAY_QTR1_VAL';\n    // record['RCPT_TOT_VAL'] = 'NAPCSBLTOT'; // assuming 'NAPCSBLTOT' is a value/variable from somewhere in your system\n    // record['RCPT_TOT_VAL_F3.1'] = 'L';\n} else if (REPORTING_ID_TYP_TXT === 'SU') {\n    if (ECRCPTOT > 0) {\n        record['RCPT_TOT_VAL'] = ECRCPTOT;\n        if (record['RCPT_TOT_VAL_F'] && record['RCPT_TOT_VAL_F'].length >= 3) {\n            record['RCPT_TOT_VAL_F'] = record['RCPT_TOT_VAL_F'].substring(0, 2) + 'A' + record['RCPT_TOT_VAL_F'].substring(3);\n        } else if (record['RCPT_TOT_VAL_F'] && record['RCPT_TOT_VAL_F'].length >= 2) {\n            record['RCPT_TOT_VAL_F'] = record['RCPT_TOT_VAL_F'].substring(0, 2) + 'A';\n        } else if (record['RCPT_TOT_VAL_F'] && record['RCPT_TOT_VAL_F'].length >= 1) {\n            record['RCPT_TOT_VAL_F'] = record['RCPT_TOT_VAL_F'].substring(0, 1) + ' A';\n        } else {\n            record['RCPT_TOT_VAL_F'] = '  A';\n        }\n        record['ACTION'] = 'Go to PAY_QTR1_VAL';\n    } else {\n        monthlyCheck()\n    }\n\n} else if (REPORTING_ID_TYP_TXT === 'KAU' && ['22', '11', '42', '44', '48', '51', '52', '53', '54', '55', '56', '61', '62', '71', '72', '81'].includes(NAICS_SECTOR_OLD_NUM)) {\n    monthlyCheck()\n} else if (MADB_2022_RCPTOT > 0) {\n    const CYPYF = parseFloat(record['CYPYF']);  // Fetching the CYPYF value from global context\n    record['RCPT_TOT_VAL'] = MADB_2022_RCPTOT * CYPYF;\n    if (record['RCPT_TOT_VAL_F'] && record['RCPT_TOT_VAL_F'].length >= 3) {\n        record['RCPT_TOT_VAL_F'] = record['RCPT_TOT_VAL_F'].substring(0, 2) + 'H' + record['RCPT_TOT_VAL_F'].substring(3);\n    } else if (record['RCPT_TOT_VAL_F'] && record['RCPT_TOT_VAL_F'].length >= 2) {\n        record['RCPT_TOT_VAL_F'] = record['RCPT_TOT_VAL_F'].substring(0, 2) + 'H';\n    } else if (record['RCPT_TOT_VAL_F'] && record['RCPT_TOT_VAL_F'].length >= 1) {\n        record['RCPT_TOT_VAL_F'] = record['RCPT_TOT_VAL_F'].substring(0, 1) + ' H';\n    } else {\n        record['RCPT_TOT_VAL_F'] = '  H';\n    }\n    record['ACTION'] = 'Go to PAY_QTR1_VAL';\n} else {\n    record['ACTION'] = 'Go to PAY_QTR1_VAL';\n}\n\n// Saving updated record back to the message payload\nmsg.payload.csv[global.get(\"ptrModuleFacts\")] = record;\nconsole.log({ record });\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -17173,7 +16881,6 @@
         "y": 300,
         "wires": [
             [
-                "aa8b3ae76d26a9cc",
                 "42f918976305a0a4"
             ]
         ]
@@ -17206,24 +16913,7 @@
             "7d91540d69ac16c1",
             "688a39b3e0070fe9"
         ],
-        "x": 1005,
-        "y": 380,
-        "wires": []
-    },
-    {
-        "id": "aa8b3ae76d26a9cc",
-        "type": "debug",
-        "z": "f06fc99b8cb78464",
-        "name": "debug 110",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1080,
+        "x": 995,
         "y": 300,
         "wires": []
     },
@@ -17444,20 +17134,6 @@
         "wires": []
     },
     {
-        "id": "29da19c4410c4983",
-        "type": "subflow:a3d425ba6d3b6a6a",
-        "z": "6e9fd4ed1a3126bb",
-        "name": "Classification",
-        "x": 370,
-        "y": 200,
-        "wires": [
-            [
-                "5c9b7f70b971f24b",
-                "f2e55b876978ee47"
-            ]
-        ]
-    },
-    {
         "id": "5c9b7f70b971f24b",
         "type": "subflow:4ed21c9150f5597a",
         "z": "6e9fd4ed1a3126bb",
@@ -17480,22 +17156,7 @@
         "y": 200,
         "wires": [
             [
-                "b941339b73eafbbe",
                 "5a039fea024b882c"
-            ]
-        ]
-    },
-    {
-        "id": "b941339b73eafbbe",
-        "type": "subflow:1e75121bac78652a",
-        "z": "6e9fd4ed1a3126bb",
-        "name": "Completeness Check / Core Variables",
-        "x": 1170,
-        "y": 200,
-        "wires": [
-            [
-                "2a4d52398bb3d587",
-                "0d309d88aeecd224"
             ]
         ]
     },
@@ -18042,20 +17703,6 @@
         ]
     },
     {
-        "id": "a46e51a6c9772793",
-        "type": "subflow:a3d425ba6d3b6a6a",
-        "z": "6e9fd4ed1a3126bb",
-        "name": "Classification",
-        "x": 370,
-        "y": 420,
-        "wires": [
-            [
-                "ba4f6f3992473497",
-                "e45dbbf96d03fe2b"
-            ]
-        ]
-    },
-    {
         "id": "eab9d1159d0ab151",
         "type": "subflow:473d6735cc46fccd",
         "z": "6e9fd4ed1a3126bb",
@@ -18165,8 +17812,7 @@
         "y": 300,
         "wires": [
             [
-                "f8c507b76d49363e",
-                "a46e51a6c9772793"
+                "f8c507b76d49363e"
             ]
         ]
     },
@@ -18195,20 +17841,6 @@
             [
                 "0213c59c5c3e5daa",
                 "316698c0494d4e3b"
-            ]
-        ]
-    },
-    {
-        "id": "e45dbbf96d03fe2b",
-        "type": "subflow:1e75121bac78652a",
-        "z": "6e9fd4ed1a3126bb",
-        "name": "Completeness Check / Core Variables",
-        "x": 650,
-        "y": 420,
-        "wires": [
-            [
-                "4b287c6a84b703e2",
-                "7ace8ac968735bb7"
             ]
         ]
     },
@@ -18311,7 +17943,6 @@
         "y": 120,
         "wires": [
             [
-                "29da19c4410c4983",
                 "455c8bacb3059701"
             ]
         ]
@@ -18428,257 +18059,6 @@
         ],
         "x": 1335,
         "y": 840,
-        "wires": []
-    },
-    {
-        "id": "3e48307d8de2024d",
-        "type": "inject",
-        "z": "112a2e5b60c3f3a8",
-        "name": "Reset Cache",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "{\"lookup\":{\"moduleName\":\"classification\",\"program\":\"aies\",\"unit_type\":\"estab\",\"params\":\"naics_alt,naics_validation\"}}",
-        "payloadType": "json",
-        "x": 270,
-        "y": 600,
-        "wires": [
-            [
-                "dfd56f079cadbf6d"
-            ]
-        ]
-    },
-    {
-        "id": "dfd56f079cadbf6d",
-        "type": "function",
-        "z": "112a2e5b60c3f3a8",
-        "name": "reset cache function",
-        "func": "let cache = global.set(\"lookupCache\", { \"data\": [] });\nmsg.cache = global.get(\"lookupCache\");\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 500,
-        "y": 600,
-        "wires": [
-            [
-                "8e6b9ce262c7a33c"
-            ]
-        ]
-    },
-    {
-        "id": "bb8cfd0edc7b6039",
-        "type": "inject",
-        "z": "112a2e5b60c3f3a8",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "{\"lookup\":{\"moduleName\":\"classification\",\"program\":\"aies\",\"unit_type\":\"estab\",\"params\":\"naics_alt,naics_validation\"}}",
-        "payloadType": "json",
-        "x": 250,
-        "y": 500,
-        "wires": [
-            [
-                "ccdc5863fd12c3f6"
-            ]
-        ]
-    },
-    {
-        "id": "ccdc5863fd12c3f6",
-        "type": "function",
-        "z": "112a2e5b60c3f3a8",
-        "name": "Check cache",
-        "func": "msg.cache = global.get(\"lookupCache\");\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 450,
-        "y": 500,
-        "wires": [
-            [
-                "f24d832341a7b238"
-            ]
-        ]
-    },
-    {
-        "id": "f24d832341a7b238",
-        "type": "debug",
-        "z": "112a2e5b60c3f3a8",
-        "name": "debug 96",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "cache",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 740,
-        "y": 500,
-        "wires": []
-    },
-    {
-        "id": "8e6b9ce262c7a33c",
-        "type": "debug",
-        "z": "112a2e5b60c3f3a8",
-        "name": "debug 97",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "cache",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 740,
-        "y": 600,
-        "wires": []
-    },
-    {
-        "id": "d9650115f85479a9",
-        "type": "link in",
-        "z": "112a2e5b60c3f3a8",
-        "name": "link in 18",
-        "links": [
-            "f14b49f36a5b83fc",
-            "ae36b936ef8f7cc6"
-        ],
-        "x": 197,
-        "y": 79,
-        "wires": [
-            [
-                "e68533f8e220dc5c"
-            ]
-        ]
-    },
-    {
-        "id": "e68533f8e220dc5c",
-        "type": "change",
-        "z": "112a2e5b60c3f3a8",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload.lookup",
-                "pt": "msg",
-                "to": "{\"moduleName\":\"classification\",\"program\":\"aies\",\"unit_type\":\"estab\",\"params\":\"naics_alt,naics_validation\"}",
-                "tot": "json"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 262,
-        "y": 179,
-        "wires": [
-            [
-                "d724d7b540efbda7"
-            ]
-        ]
-    },
-    {
-        "id": "d724d7b540efbda7",
-        "type": "subflow:0be109393cb5f28a",
-        "z": "112a2e5b60c3f3a8",
-        "name": "",
-        "x": 522,
-        "y": 179,
-        "wires": [
-            [
-                "1d09b4bb89816289",
-                "597040e7f9c95810"
-            ]
-        ]
-    },
-    {
-        "id": "1d09b4bb89816289",
-        "type": "function",
-        "z": "112a2e5b60c3f3a8",
-        "name": "classification function",
-        "func": "// let record_idx = global.get(\"ptrModuleFacts\");\n// let record = msg.payload.csv[record_idx];\n// let cache = global.get(\"lookupCache\");\n\n// function setFlagAndExit(referralFlagValue) {\n//     msg.payload.csv[record_idx].TABSTAT = \"N\";\n//     msg.payload.csv[record_idx].NONTABFL = \"R\";\n//     msg.payload.csv[record_idx].ACTION = \"Exit Edit\";\n//     msg.payload.csv[record_idx].REFERRAL_FLAG = referralFlagValue;\n// }\n// function recTypeMatch(recArr) {\n//     console.log((\n//         (record.RECORD_TYP_TXT ? recArr.includes(record.RECORD_TYP_TXT) : false)\n//     ))\n//     return (\n//         (record.RECORD_TYP_TXT ? recArr.includes(record.RECORD_TYP_TXT) : false)\n//     );\n// }\n// function checkNaicsValidation(columnIndex) {\n//     const naicsValidationData = cache.data.find(\n//         item =>\n//             item.module === \"classification\" &&\n//             item.program === \"aies\" &&\n//             item.unit_type === \"estab\"\n//     )?.json_values;\n\n//     const columnKey = \"col_\" + columnIndex;\n//     const partialNum = record.NAICS_NUM.substring(0, columnIndex);\n\n//     return (\n//         naicsValidationData &&\n//         naicsValidationData[columnKey] &&\n//         naicsValidationData[columnKey].includes(partialNum)\n//     );\n// }\n\n// if (recTypeMatch([\"20\", \"90\"]) && record['AIES_SCOPE'] == 'Y' && record['BR_STAT'] == 'Y') {\n//     if (checkNaicsValidation(4) || checkNaicsValidation(7) || checkNaicsValidation(6)) {\n//         msg.payload.csv[record_idx].ACTION = \"Go to: Derive NAICS Code Module\";\n//     } else {\n//         setFlagAndExit(\"INVALID_NAICS_ESTAB\");\n//     }\n//     return msg;\n// } else if (recTypeMatch([\"30\"]) && record['AIES_SCOPE'] == 'Y' && record['BR_STAT'] == 'Y') {\n//     if (checkNaicsValidation(1) || checkNaicsValidation(2) || checkNaicsValidation(3)) {\n//         msg.payload.csv[record_idx].ACTION = \"Go to Main Routing\";\n//     } else {\n//         setFlagAndExit(\"INVALID_NAICS_KAU\");\n//     }\n//     return msg;\n// } else {\n//     msg.payload.csv[record_idx].ACTION = \"Error - Record should not have entered this module\";\n//     return msg;\n// }\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\nlet cache = global.get(\"lookupCache\");\nconst record_type = record['RECORD_TYP_TXT'];\n\nfunction setFlagAndExit(referralFlagValue) {\n    msg.payload.csv[record_idx].TABSTAT = \"N\";\n    msg.payload.csv[record_idx].NONTABFL = \"R\";\n    msg.payload.csv[record_idx].ACTION = \"Exit Edit\";\n    msg.payload.csv[record_idx].REFERRAL_FLAG = referralFlagValue;\n}\nfunction recTypeMatch(recArr) {\n    console.log((\n        (record.RECORD_TYP_TXT ? recArr.includes(record.RECORD_TYP_TXT) : false)\n    ))\n    return (\n        (record.RECORD_TYP_TXT ? recArr.includes(record.RECORD_TYP_TXT) : false)\n    );\n}\n\nfunction checkNaicsValidation(columnIndex, recordtyp) {\n    const naicsValidationData = cache.data.find(\n        item =>\n            item.module === \"classification\" &&\n            item.param === 'naics_validation' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"estab\"\n    )?.json_values;\n    let columnKey = ''\n    if (columnIndex === 4) {\n        columnKey = 'col_0';\n    } else if (columnIndex === 7) {\n        columnKey = 'col_1';\n    } else {\n        columnKey = \"col_2\";\n    }\n\n    let partialNum = ''\n    if (['20', '90', 20, 90].includes(recordtyp)) {\n        partialNum = record.NAICS_NUM.substring(0, columnIndex);\n    } else if ([30, '30'].includes(recordtyp)) {\n        partialNum = record.KAU_NAICS.substring(0, columnIndex);\n    }\n\n    return (\n        naicsValidationData[columnKey].find(row => parseInt(row) == parseInt(partialNum))\n        //     naicsValidationData &&\n        //     naicsValidationData[columnKey] &&\n        //     naicsValidationData[columnKey].includes(partialNum)\n    );\n}\n\nif (recTypeMatch([\"20\", \"90\"]) && record['AIES_SCOPE'] == 'Y' && record['BR_STAT'] == 'Y') {\n    if (checkNaicsValidation(4, record_type)) {\n        msg.payload.csv[record_idx].ACTION = \"Go to: Derive NAICS Code Module\";\n    } else if (checkNaicsValidation(7, record_type)) {\n        msg.payload.csv[record_idx].ACTION = \"Go to: Derive NAICS Code Module\";\n    } else if (checkNaicsValidation(6, record_type)) {\n        msg.payload.csv[record_idx].ACTION = \"Go to: Derive NAICS Code Module\";\n    } else {\n        setFlagAndExit(\"INVALID_NAICS_ESTAB\");\n    }\n    return msg;\n} else if (recTypeMatch([\"30\"]) && record['AIES_SCOPE'] == 'Y' && record['BR_STAT'] == 'Y') {\n    if (checkNaicsValidation(4, record_type)) {\n        msg.payload.csv[record_idx].ACTION = \"Go to Main Routing\";\n    } else if (checkNaicsValidation(7, record_type)) {\n        msg.payload.csv[record_idx].ACTION = \"Go to Main Routing\";\n    } else if (checkNaicsValidation(6, record_type)) {\n        msg.payload.csv[record_idx].ACTION = \"Go to Main Routing\";\n    } else {\n        setFlagAndExit(\"INVALID_NAICS_KAU\");\n    }\n    return msg;\n} else {\n    msg.payload.csv[record_idx].ACTION = \"Error - Record should not have entered this module\";\n    return msg;\n}\n",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 772,
-        "y": 179,
-        "wires": [
-            [
-                "434436c270b7f283",
-                "2252d07a88b97680"
-            ]
-        ]
-    },
-    {
-        "id": "597040e7f9c95810",
-        "type": "debug",
-        "z": "112a2e5b60c3f3a8",
-        "name": "debug 95",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 532,
-        "y": 299,
-        "wires": []
-    },
-    {
-        "id": "434436c270b7f283",
-        "type": "link out",
-        "z": "112a2e5b60c3f3a8",
-        "name": "link out classification",
-        "mode": "link",
-        "links": [
-            "7d91540d69ac16c1",
-            "688a39b3e0070fe9"
-        ],
-        "x": 937,
-        "y": 179,
-        "wires": []
-    },
-    {
-        "id": "2252d07a88b97680",
-        "type": "debug",
-        "z": "112a2e5b60c3f3a8",
-        "name": "debug classification",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 972,
-        "y": 99,
         "wires": []
     },
     {
@@ -18891,37 +18271,7 @@
         "x": 315,
         "y": 420,
         "wires": [
-            [
-                "17855ab1fb4a70dc"
-            ]
-        ]
-    },
-    {
-        "id": "17855ab1fb4a70dc",
-        "type": "subflow:a3d425ba6d3b6a6a",
-        "z": "b2e59c2394f7c26c",
-        "name": "Classification",
-        "x": 490,
-        "y": 420,
-        "wires": [
-            [
-                "78712fa602ae3416",
-                "bda58b35bd2d084b"
-            ]
-        ]
-    },
-    {
-        "id": "bda58b35bd2d084b",
-        "type": "subflow:1e75121bac78652a",
-        "z": "b2e59c2394f7c26c",
-        "name": "Completeness Check / Core Variables",
-        "x": 570,
-        "y": 520,
-        "wires": [
-            [
-                "89e9f2fe19268d92",
-                "565f051f79fb97bc"
-            ]
+            []
         ]
     },
     {
@@ -19356,114 +18706,6 @@
         "x": 1125,
         "y": 560,
         "wires": []
-    },
-    {
-        "id": "ceac326c4b9a08f5",
-        "type": "function",
-        "z": "067b1d1ff9443ad3",
-        "name": "Valid Negative Link",
-        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx]\nlet cache = global.get(\"lookupCache\");\n\nlet valid_negative_file = cache.data.find(\n    item =>\n        item.module === \"valid_negative\" &&\n        item.param === 'valid_negative_value' &&\n        item.program === \"aies\" &&\n        item.unit_type === \"all\"\n)?.json_values;\n\nfunction isNegative(naics, column, type, tax) {\n    if (valid_negative_file.VALID_NEGATIVE.some(element =>\n    (element.LEVEL === type &&\n        [null, undefined, tax].includes(element.TAX_EXEMPT_STAT) &&\n        element.ITEM === column &&\n        [naics, parseInt(naics), 'ALL', 'all', 'All', '', null, undefined].includes(element.NAICS)))) {\n        if (['ESTAB', 'KAU'].includes(type)) {\n            record['EXIMP'] = 'E'\n        }\n    } else {\n        record[column] = 0\n        if (column == 'RCPT_TOT_VAL') {\n            let column_f = column + '_F'\n            if (record[column_f] && record[column_f].length >= 3) {\n                record[column_f] = record[column_f].substring(0, 2) + 'G' + record[column_f].substring(3);\n            } else if (record[column_f] && record[column_f].length >= 2) {\n                record[column_f] = record[column_f].substring(0, 2) + 'G';\n            } else if (record[column_f] && record[column_f].length >= 1) {\n                record[column_f] = record[column_f].substring(0, 1) + ' G';\n            } else {\n                record[column_f] = '  G';\n            }\n        } else {\n            let column_f = column + '_F'\n            if (record[column_f] && record[column_f].length >= 3) {\n                record[column_f] = record[column_f].substring(0, 2) + 'L' + record[column_f].substring(3);\n            } else if (record[column_f] && record[column_f].length >= 2) {\n                record[column_f] = record[column_f].substring(0, 2) + 'L';\n            } else if (record[column_f] && record[column_f].length >= 1) {\n                record[column_f] = record[column_f].substring(0, 1) + ' L';\n            } else {\n                record[column_f] = '  L';\n            }\n        }\n    }\n}\n\nlet type = ''\nif (['MU', 'SU'].includes(record['REPORTING_ID_TYP_TXT'])) {\n    type = 'ESTAB'\n} else if (['KAU'].includes(record['REPORTING_ID_TYP_TXT'])) {\n    type = 'KAU'\n} else if (['ENT'].includes(record['REPORTING_ID_TYP_TXT'])) {\n    type = 'COMPANY'\n}\n\nlet naics = '' + record['NAICS_NUM']\nlet tax = record['TAXSTAT']\n\nif ([null, undefined, 'null', 'undefined', ''].includes(tax)) {\n    tax = null\n}\n\nfor (var key in record) {\n    if (parseFloat(record[key]) < 0) {\n        isNegative(naics, key, type, tax)\n    }\n}\n\nrecord['ACTION'] = 'Go to Main Routing'\n// global.set('action','Go to Main Routing')\nreturn msg;\n\n\n\n",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 690,
-        "y": 360,
-        "wires": [
-            [
-                "ffaa9eb43ef53e9e",
-                "25627bf820122fe8"
-            ]
-        ]
-    },
-    {
-        "id": "25627bf820122fe8",
-        "type": "link out",
-        "z": "067b1d1ff9443ad3",
-        "name": "link out 62",
-        "mode": "link",
-        "links": [
-            "7d91540d69ac16c1",
-            "688a39b3e0070fe9"
-        ],
-        "x": 995,
-        "y": 360,
-        "wires": []
-    },
-    {
-        "id": "ffaa9eb43ef53e9e",
-        "type": "debug",
-        "z": "067b1d1ff9443ad3",
-        "name": "Valid Negative Debug",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1020,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "8671a6e9c3be6ad6",
-        "type": "link in",
-        "z": "067b1d1ff9443ad3",
-        "name": "Valid Negative Value Link",
-        "links": [
-            "854cd7a417cbbc6e"
-        ],
-        "x": 205,
-        "y": 580,
-        "wires": [
-            [
-                "14e26396d5b6cc82"
-            ]
-        ]
-    },
-    {
-        "id": "14e26396d5b6cc82",
-        "type": "change",
-        "z": "067b1d1ff9443ad3",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload.lookup",
-                "pt": "msg",
-                "to": "{\"moduleName\":\"valid_negative\",\"program\":\"aies\",\"unit_type\":\"all\",\"params\":\"valid_negative_value\"}",
-                "tot": "json"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 430,
-        "y": 120,
-        "wires": [
-            [
-                "c453930e4460cef9"
-            ]
-        ]
-    },
-    {
-        "id": "c453930e4460cef9",
-        "type": "subflow:0be109393cb5f28a",
-        "z": "067b1d1ff9443ad3",
-        "name": "",
-        "x": 650,
-        "y": 260,
-        "wires": [
-            [
-                "ceac326c4b9a08f5"
-            ]
-        ]
     },
     {
         "id": "57c75bd58af75621",
@@ -20028,8 +19270,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 480,
-        "y": 460,
+        "x": 620,
+        "y": 400,
         "wires": []
     },
     {
@@ -20043,8 +19285,8 @@
             "f765d14d056bec8a",
             "e0d75497828e672b"
         ],
-        "x": 375,
-        "y": 360,
+        "x": 555,
+        "y": 340,
         "wires": []
     },
     {
@@ -20095,6 +19337,7 @@
         "name": "function 25",
         "func": "msg.payload = JSON.parse(msg.payload.value)\n\nconst currentStepIndex = msg.payload.recipe.currentStepIndex;\nconst startTime = new Date().getTime();\n\nmsg.payload.recipe.steps[currentStepIndex].tsStart = startTime;\n\nmsg.payload.facts = [msg.payload.fact]\nmsg.payload.qflowInputFacts = JSON.parse(JSON.stringify(msg.payload.facts))\nreturn msg;",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -20123,76 +19366,6 @@
         "statusType": "auto",
         "x": 660,
         "y": 780,
-        "wires": []
-    },
-    {
-        "id": "835bb6358497e67d",
-        "type": "digitaloak-postgresql-query",
-        "z": "d7d109e0d89be1c6",
-        "name": "",
-        "server": "ea3e0b5d6b96f47a",
-        "inputs": 1,
-        "outputs": 1,
-        "x": 830,
-        "y": 140,
-        "wires": [
-            [
-                "2cb077f36c21965b"
-            ]
-        ]
-    },
-    {
-        "id": "05fb5a6867d6a53b",
-        "type": "function",
-        "z": "d7d109e0d89be1c6",
-        "name": "Format for spad_2_table",
-        "func": "const payload = msg.payload;\n\nconst findChangedKeyValuePairs = (oldObj, newObj) => {\n    const changedKeyValuePairs = [];\n\n    for (const key in newObj) {\n        if (oldObj[key] !== newObj[key]) {\n            changedKeyValuePairs.push({ \n                key, \n                oldValue: oldObj[key], \n                newValue: newObj[key],\n                service: {\n                    name: 'qflow',\n                    timestamp: new Date()\n                }\n            });\n        }\n    }\n\n    return changedKeyValuePairs;\n} \n\nconst qFlowdelta = findChangedKeyValuePairs(payload.qflowInputFacts[0], payload.facts[0]);\n\nlet delta = payload.delta;\ndelta = [...delta, ...qFlowdelta];\npayload.delta = delta;\nconst factID = payload.facts[0].ID;\nconst tableName = payload.tableName;\nconst facts = JSON.stringify(payload.facts[0]).replace(/'/g, \"''\");\nconst results = JSON.stringify({\n    valid: payload.valid,\n    invalid: payload.invalid,\n    delta: delta,\n    jobName: payload.jobName,\n    analytics: payload.analytics,\n    tableName: payload.tableName\n}).replace(/'/g, \"''\");\nconst jobName = payload.jobName;\ndelta = JSON.stringify(delta);\nconst createdBy = \"qFLOW\"\nconst modifiedBy = \"qFlOW\"\n\n\nmsg.query = `INSERT INTO product_aies.spad_2 (factID, jobname, delta, tablename, facts, results, created_by, modified_by, modified_at)`\nmsg.query += ` VALUES (${factID}, '${jobName}', '${delta}', '${tableName}', '${facts}', '${results}', '${createdBy}', '${modifiedBy}', CURRENT_TIMESTAMP);`\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 570,
-        "y": 140,
-        "wires": [
-            [
-                "3ae44470ea5ec6bf",
-                "835bb6358497e67d"
-            ]
-        ]
-    },
-    {
-        "id": "3ae44470ea5ec6bf",
-        "type": "debug",
-        "z": "d7d109e0d89be1c6",
-        "name": "spad_2",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "query",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 540,
-        "y": 240,
-        "wires": []
-    },
-    {
-        "id": "2cb077f36c21965b",
-        "type": "debug",
-        "z": "d7d109e0d89be1c6",
-        "name": "psql",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 730,
-        "y": 260,
         "wires": []
     },
     {
@@ -20606,22 +19779,6 @@
         "wires": []
     },
     {
-        "id": "7c47572277e0ed15",
-        "type": "kafka-consumer",
-        "z": "d7d109e0d89be1c6",
-        "name": "Listen to QFLOW",
-        "broker": "a734a95fe6c7b3dc",
-        "outOfRangeOffset": "earliest",
-        "fromOffset": "latest",
-        "topic": "qflow",
-        "groupid": "",
-        "x": 100,
-        "y": 400,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "ade7fc1412e3e6ed",
         "type": "function",
         "z": "8790b12c7efb6fa0",
@@ -20633,8 +19790,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 520,
-        "y": 340,
+        "x": 540,
+        "y": 280,
         "wires": [
             [
                 "703c3a33c4d3fb46"
@@ -20653,8 +19810,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 730,
-        "y": 360,
+        "x": 1030,
+        "y": 300,
         "wires": [
             [
                 "8c4f5376a2841311"
@@ -20690,8 +19847,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1060,
-        "y": 300,
+        "x": 1220,
+        "y": 380,
         "wires": [
             [
                 "9270ac3c64d975ee"
@@ -20751,7 +19908,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1340,
+        "x": 1360,
         "y": 660,
         "wires": []
     },
@@ -20842,8 +19999,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 610,
-        "y": 420,
+        "x": 730,
+        "y": 280,
         "wires": [
             [
                 "70c4debe9a1adfae",
@@ -20877,8 +20034,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 910,
-        "y": 420,
+        "x": 770,
+        "y": 480,
         "wires": [
             [
                 "70c4debe9a1adfae",
@@ -20909,8 +20066,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1140,
-        "y": 160,
+        "x": 1060,
+        "y": 200,
         "wires": [
             [
                 "ade7fc1412e3e6ed"
@@ -21410,114 +20567,6 @@
         "x": 930,
         "y": 260,
         "wires": []
-    },
-    {
-        "id": "2beed344b225e7f3",
-        "type": "function",
-        "z": "236c2e1a5554a6f0",
-        "name": "Valid Zero",
-        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx]\nlet cache = global.get(\"lookupCache\");\n\nlet valid_zero_file = cache.data.find(\n    item =>\n        item.module === \"valid_zero\" &&\n        item.param === 'valid_zero' &&\n        item.program === \"aies\" &&\n        item.unit_type === \"all\"\n)?.json_values;\n\nfunction isZero(column, type) {\n    if (valid_zero_file.VALID_ZERO.some(element =>\n        (element.LEVEL) === type &&\n        (element.ITEM) === column)) {\n \n        let column_f = column + '_F'\n        if (record[column_f] && record[column_f].length >= 3) {\n            record[column_f] = record[column_f].substring(0, 2) + 'G' + record[column_f].substring(3);\n        } else if (record[column_f] && record[column_f].length >= 2) {\n            record[column_f] = record[column_f].substring(0, 2) + 'G';\n        } else if (record[column_f] && record[column_f].length >= 1) {\n            record[column_f] = record[column_f].substring(0, 1) + ' G';\n        } else {\n            record[column_f] = '  G';\n        }\n    }\n}\n\nlet type = ''\nif (['MU','SU'].includes(record['REPORTING_ID_TYP_TXT'])) {\n    type = 'ESTAB'\n} else if (['KAU'].includes(record['REPORTING_ID_TYP_TXT'])) {\n    type = 'KAU'\n}\n\nfor (var key in record) {\n    if (parseFloat(record[key]) == 0) {\n        isZero(key,type)\n    }\n}\n\nrecord['ACTION'] = 'Go to Main Routing'\n// global.set('action','Go to Main Routing')\nreturn msg;\n",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 620,
-        "y": 360,
-        "wires": [
-            [
-                "755b6793e22457c7",
-                "108f9747956b439a"
-            ]
-        ]
-    },
-    {
-        "id": "108f9747956b439a",
-        "type": "link out",
-        "z": "236c2e1a5554a6f0",
-        "name": "link out 61",
-        "mode": "link",
-        "links": [
-            "7d91540d69ac16c1",
-            "688a39b3e0070fe9"
-        ],
-        "x": 955,
-        "y": 360,
-        "wires": []
-    },
-    {
-        "id": "755b6793e22457c7",
-        "type": "debug",
-        "z": "236c2e1a5554a6f0",
-        "name": "Valid Zero Debug",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 970,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "c8919561eea2a059",
-        "type": "link in",
-        "z": "236c2e1a5554a6f0",
-        "name": "Valid Zero Link",
-        "links": [
-            "45b768d58693d73d"
-        ],
-        "x": 275,
-        "y": 540,
-        "wires": [
-            [
-                "2036f19505748b0f"
-            ]
-        ]
-    },
-    {
-        "id": "1abaa7a06c805651",
-        "type": "subflow:0be109393cb5f28a",
-        "z": "236c2e1a5554a6f0",
-        "name": "",
-        "x": 430,
-        "y": 360,
-        "wires": [
-            [
-                "2beed344b225e7f3"
-            ]
-        ]
-    },
-    {
-        "id": "2036f19505748b0f",
-        "type": "change",
-        "z": "236c2e1a5554a6f0",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload.lookup",
-                "pt": "msg",
-                "to": "{\"moduleName\":\"valid_zero\",\"program\":\"aies\",\"unit_type\":\"all\",\"params\":\"valid_zero\"}",
-                "tot": "json"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 190,
-        "y": 360,
-        "wires": [
-            [
-                "1abaa7a06c805651"
-            ]
-        ]
     },
     {
         "id": "447f05b7589104a7",
@@ -24095,7 +23144,7 @@
             "30c2b54a06202964",
             "617d768f3414b52e"
         ],
-        "x": 1285,
+        "x": 1545,
         "y": 140,
         "wires": []
     },
@@ -24443,8 +23492,8 @@
         "format": "{{msg.payload}}",
         "layout": "row-spread",
         "className": "",
-        "x": 1370,
-        "y": 320,
+        "x": 1330,
+        "y": 400,
         "wires": []
     },
     {
@@ -24744,12 +23793,11 @@
         "id": "bf95042aa95f74b7",
         "type": "catch",
         "z": "dad88d9a3132fed6",
-        "g": "4099bf03141f3710",
         "name": "",
         "scope": null,
         "uncaught": false,
-        "x": 120,
-        "y": 980,
+        "x": 100,
+        "y": 460,
         "wires": [
             [
                 "67218bea97f26dc5"
@@ -24760,7 +23808,6 @@
         "id": "67218bea97f26dc5",
         "type": "function",
         "z": "dad88d9a3132fed6",
-        "g": "4099bf03141f3710",
         "name": "error message",
         "func": "msg.payload = msg.error.message\nglobal.set(\"ptrModuleFacts\",1)\n\nflow.set(\"moduleFacts\", [])\nflow.set(\"originalData\", [])\n//NK initialize global context\nglobal.set(\"originalData\", [])\nglobal.set(\"moduleFacts\", [])\nglobal.set(\"ptrModuleFacts\", 0)\n\n\n\nreturn msg;",
         "outputs": 1,
@@ -24768,8 +23815,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 300,
-        "y": 980,
+        "x": 320,
+        "y": 460,
         "wires": [
             [
                 "4345bc983bdc5ee2",
@@ -24792,8 +23839,8 @@
         "className": "",
         "topic": "",
         "name": "",
-        "x": 600,
-        "y": 1000,
+        "x": 590,
+        "y": 460,
         "wires": []
     },
     {
@@ -24807,8 +23854,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 690,
-        "y": 920,
+        "x": 660,
+        "y": 400,
         "wires": [
             [
                 "3c92b89522e322f8",
@@ -25400,8 +24447,8 @@
         "syntax": "mustache",
         "template": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Upload CSV File</title>\n    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css\">\n    <link href=\"https://fonts.googleapis.com/icon?family=Material+Icons\" rel=\"stylesheet\">\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js\"></script>\n    <style>\n        /* Add custom styles for responsiveness */\n         .table-container {\n            width: 95%;\n            overflow-x: auto;\n            margin: 2%;\n        }\n        table {\n            width: 100%;\n            border-collapse: collapse;\n        }\n\n        th, td {\n            border: 1px solid #dddddd;\n            text-align: left;\n            padding: 8px;\n        }\n\n        tr:nth-child(even) {\n            background-color: #f2f2f2;\n        }\n    </style>\n</head>\n<body>\n<nav>\n    <div class=\"blue nav-wrapper\">\n      <a href=\"#\" data-target=\"mobile-demo\" class=\"sidenav-trigger\"><i class=\"material-icons\">menu</i></a>\n      <ul class=\"left hide-on-med-and-down\">\n        <li><a class=\"bold\" href=\"/update_params\">Params</a></li>\n        <li><a class=\"bold\" href=\"/upload_page\">Upload csv</a></li>\n        <li><a class=\"bold\" href=\"/ui_wrapper\">UI</a></li>\n        <li><a class=\"bold\" href=\"/test_ui\">Load DB</a></li>\n      </ul>\n    </div>\n  </nav>\n\n  <ul class=\"blue sidenav\" id=\"mobile-demo\">\n      <li><a class=\"bold\" href=\"/update_params\">Params</a></li>\n        <li><a class=\"bold\" href=\"/upload_page\">Upload csv</a></li>\n        <li><a class=\"bold\" href=\"/ui_wrapper\">UI</a></li>\n        <li><a class=\"bold\" href=\"/test_ui\">Load DB</a></li>\n  </ul>\n\n  <div class=\"container\">\n    {{!-- <h1 class=\"center-align\">Uploaded</h1> --}}\n  </div>\n  <div id=\"hide_this_to_load\">{{payload}}</div>\n    <div class=\"table-container\">\n  <div id=\"load_table\"></div>\n  </div>\n  <p id=\"file_name\">{{name}}</p>\n   <p id=\"new_vars\">{{newVars}}</p>\n    <div class=\"input-field center-align\">\n    <button onclick='saveCsv()' class=\"btn waves-effect waves-light\" type=\"submit\">Save\n    </button>\n     <a href='/ui_wrapper' class=\"btn waves-effect waves-light\" type=\"submit\">Go {{name}}\n    </a>\n  </div>\n<script>\n  let data = document.getElementById('hide_this_to_load').innerHTML\n  let file_name = document.getElementById('file_name').innerHTML\n  let new_vars = document.getElementById('new_vars').innerHTML\n  \n  document.getElementById('new_vars').style.display = 'none';\n  document.getElementById('hide_this_to_load').style.display = 'none';\n  document.getElementById('file_name').style.display = 'none';\n  data = JSON.parse(data);\n  new_vars = JSON.parse(new_vars);\n  let headers; \n  document.addEventListener('DOMContentLoaded', function() {\n    const loadTableDiv = document.getElementById('load_table');\n    const table = document.createElement('table');\n    table.classList.add('striped');\n    const tableHeader = document.createElement('thead');\n    const headerRow = document.createElement('tr');\n    headers = [...new_vars.newVars.map(i=>i.toUpperCase()), ...(Object.keys(data[0]))]; // Set headers here\n    headers.forEach(headerText => {\n      const th = document.createElement('th');\n      th.textContent = headerText;\n      headerRow.appendChild(th);\n    });\n    tableHeader.appendChild(headerRow);\n    table.appendChild(tableHeader);\n    const tableBody = document.createElement('tbody');\n    data.forEach((item, index) => {\n      const row = document.createElement('tr');\n      headers.forEach(header => {\n        const cell = document.createElement('td');\n        cell.style.minWidth = '200px';\n        if (index !== -1) { // Make fields editable for all rows except the header row\n          const input = document.createElement('input');\n          input.value = item[header] == undefined ? 'NULL': item[header];\n          input.addEventListener('input', function() {\n            item[header] = this.value;\n            const updatedJData = getUpdatedData();\n            // console.log(updatedJData);\n          });\n          cell.appendChild(input);\n        } else {\n          cell.textContent = item[header];\n        }\n        row.appendChild(cell);\n      });\n      tableBody.appendChild(row);\n    });\n    table.appendChild(tableBody);\n    loadTableDiv.appendChild(table);\n  });\n\n  function getUpdatedData() {\n    const updatedData = [];\n    const rows = document.querySelectorAll('#load_table tbody tr');\n    rows.forEach(row => {\n      const rowData = {};\n      const cells = row.querySelectorAll('td');\n      cells.forEach((cell, index) => {\n        const header = headers[index];\n        if (header) {\n          rowData[header] = cell.firstChild.value || cell.textContent;\n        }\n      });\n      updatedData.push(rowData);\n    });\n    return updatedData;\n  }\n  const jsonToCSV = (jsonArray) => {\n    const headers = Object.keys(jsonArray[0]);\n\n    let csv = headers.join(',') + '\\n';\n\n    jsonArray.forEach(obj => {\n        const values = headers.map(header => {\n            const escapedValue = obj[header].replace(/\"/g, '\\\\\"');\n            return `\"${escapedValue}\"`;\n        });\n        csv += values.join(',') + '\\n';\n    });\n\n    return csv;\n};\n\n  function saveCsv(){\n    console.log(JSON.stringify({filename: file_name, csvData:jsonToCSV(getUpdatedData())}))\n     fetch('/saveCsv', {\n      method: 'POST',\n      headers: {\n        'Content-Type': 'application/json'\n      },\n      body: JSON.stringify({filename: '/tmp/' + file_name, csvData:jsonToCSV(getUpdatedData())})\n    })\n    .then(response => {\n      if (response.ok) {\n        console.log('Update successful!');\n      } else {\n        console.error('Error updating params:', response.status);\n      }\n    })\n    .catch(error => {\n      console.error('Error:', error);\n    });\n  }\n</script>\n\n\n</body>\n</html>\n",
         "output": "str",
-        "x": 1010,
-        "y": 2420,
+        "x": 1110,
+        "y": 2360,
         "wires": [
             [
                 "9ff082949b495698"
@@ -25418,8 +24465,8 @@
         "method": "post",
         "upload": true,
         "swaggerDoc": "",
-        "x": 130,
-        "y": 2420,
+        "x": 230,
+        "y": 2360,
         "wires": [
             [
                 "f192e59528bfd677"
@@ -25439,8 +24486,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 320,
-        "y": 2420,
+        "x": 420,
+        "y": 2360,
         "wires": [
             [
                 "9e0c70dcbb4236fd"
@@ -25455,8 +24502,8 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 1190,
-        "y": 2420,
+        "x": 1290,
+        "y": 2360,
         "wires": []
     },
     {
@@ -25472,8 +24519,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 780,
-        "y": 2420,
+        "x": 880,
+        "y": 2360,
         "wires": [
             [
                 "3a09eefeb46e3070",
@@ -26096,8 +25143,8 @@
         "z": "dad88d9a3132fed6",
         "g": "4099bf03141f3710",
         "name": "",
-        "x": 540,
-        "y": 2420,
+        "x": 640,
+        "y": 2360,
         "wires": [
             [
                 "aecaf71d99c7d88b",
@@ -26119,26 +25166,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 730,
-        "y": 2360,
-        "wires": []
-    },
-    {
-        "id": "afdbcfd37a282ff3",
-        "type": "debug",
-        "z": "dad88d9a3132fed6",
-        "g": "4099bf03141f3710",
-        "name": "DB DEBUG",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 730,
-        "y": 2360,
+        "x": 830,
+        "y": 2280,
         "wires": []
     },
     {
@@ -26155,8 +25184,312 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1000,
-        "y": 2360,
+        "x": 1100,
+        "y": 2300,
         "wires": []
+    },
+    {
+        "id": "d9650115f85479a9",
+        "type": "link in",
+        "z": "112a2e5b60c3f3a8",
+        "name": "link in 18",
+        "links": [
+            "f14b49f36a5b83fc",
+            "ae36b936ef8f7cc6"
+        ],
+        "x": 365,
+        "y": 180,
+        "wires": [
+            [
+                "bd4aeaec47bb4136"
+            ]
+        ]
+    },
+    {
+        "id": "e68533f8e220dc5c",
+        "type": "change",
+        "z": "112a2e5b60c3f3a8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.lookup",
+                "pt": "msg",
+                "to": "{\"moduleName\":\"classification\",\"program\":\"aies\",\"unit_type\":\"estab\",\"params\":\"naics_alt,naics_validation\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 550,
+        "y": 720,
+        "wires": [
+            [
+                "d724d7b540efbda7"
+            ]
+        ]
+    },
+    {
+        "id": "d724d7b540efbda7",
+        "type": "subflow:0be109393cb5f28a",
+        "z": "112a2e5b60c3f3a8",
+        "name": "",
+        "x": 810,
+        "y": 720,
+        "wires": [
+            [
+                "1d09b4bb89816289"
+            ]
+        ]
+    },
+    {
+        "id": "1d09b4bb89816289",
+        "type": "function",
+        "z": "112a2e5b60c3f3a8",
+        "name": "classification function",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\nlet cache = global.get(\"lookupCache\");\nconst record_type = record['RECORD_TYP_TXT'];\n\nfunction setFlagAndExit(referralFlagValue) {\n    msg.payload.csv[record_idx].TABSTAT = \"N\";\n    msg.payload.csv[record_idx].NONTABFL = \"R\";\n    msg.payload.csv[record_idx].ACTION = \"Exit Edit\";\n    msg.payload.csv[record_idx].REFERRAL_FLAG = referralFlagValue;\n}\nfunction recTypeMatch(recArr) {\n    console.log((\n        (record.RECORD_TYP_TXT ? recArr.includes(record.RECORD_TYP_TXT) : false)\n    ))\n    return (\n        (record.RECORD_TYP_TXT ? recArr.includes(record.RECORD_TYP_TXT) : false)\n    );\n}\n\nfunction checkNaicsValidation(columnIndex, recordtyp) {\n    const naicsValidationData = cache.data.find(\n        item =>\n            item.module === \"classification\" &&\n            item.param === 'naics_validation' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"estab\"\n    )?.json_values;\n    let columnKey = ''\n    if (columnIndex === 4) {\n        columnKey = 'col_0';\n    } else if (columnIndex === 7) {\n        columnKey = 'col_1';\n    } else {\n        columnKey = \"col_2\";\n    }\n\n    let partialNum = ''\n    if (['20', '90', 20, 90].includes(recordtyp)) {\n        partialNum = record.NAICS_NUM.substring(0, columnIndex);\n    } else if ([30, '30'].includes(recordtyp)) {\n        partialNum = record.KAU_NAICS.substring(0, columnIndex);\n    }\n\n    return (\n        naicsValidationData[columnKey].find(row => parseInt(row) == parseInt(partialNum))\n        //     naicsValidationData &&\n        //     naicsValidationData[columnKey] &&\n        //     naicsValidationData[columnKey].includes(partialNum)\n    );\n}\n\nif (recTypeMatch([\"20\", \"90\"]) && record['AIES_SCOPE'] == 'Y' && record['BR_STAT'] == 'Y') {\n    if (checkNaicsValidation(4, record_type)) {\n        msg.payload.csv[record_idx].ACTION = \"Go to: Derive NAICS Code Module\";\n    } else if (checkNaicsValidation(7, record_type)) {\n        msg.payload.csv[record_idx].ACTION = \"Go to: Derive NAICS Code Module\";\n    } else if (checkNaicsValidation(6, record_type)) {\n        msg.payload.csv[record_idx].ACTION = \"Go to: Derive NAICS Code Module\";\n    } else {\n        setFlagAndExit(\"INVALID_NAICS_ESTAB\");\n    }\n    return msg;\n} else if (recTypeMatch([\"30\"]) && record['AIES_SCOPE'] == 'Y' && record['BR_STAT'] == 'Y') {\n    if (checkNaicsValidation(4, record_type)) {\n        msg.payload.csv[record_idx].ACTION = \"Go to Main Routing\";\n    } else if (checkNaicsValidation(7, record_type)) {\n        msg.payload.csv[record_idx].ACTION = \"Go to Main Routing\";\n    } else if (checkNaicsValidation(6, record_type)) {\n        msg.payload.csv[record_idx].ACTION = \"Go to Main Routing\";\n    } else {\n        setFlagAndExit(\"INVALID_NAICS_KAU\");\n    }\n    return msg;\n} else {\n    msg.payload.csv[record_idx].ACTION = \"Error - Record should not have entered this module\";\n    return msg;\n}\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1060,
+        "y": 720,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "434436c270b7f283",
+        "type": "link out",
+        "z": "112a2e5b60c3f3a8",
+        "name": "link out classification",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9"
+        ],
+        "x": 585,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "bd4aeaec47bb4136",
+        "type": "subflow:bfe1ab19e0cbe2cf",
+        "z": "112a2e5b60c3f3a8",
+        "name": "",
+        "x": 470,
+        "y": 180,
+        "wires": [
+            [
+                "434436c270b7f283"
+            ]
+        ]
+    },
+    {
+        "id": "2beed344b225e7f3",
+        "type": "function",
+        "z": "236c2e1a5554a6f0",
+        "name": "Valid Zero",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx]\nlet cache = global.get(\"lookupCache\");\n\nlet valid_zero_file = cache.data.find(\n    item =>\n        item.module === \"valid_zero\" &&\n        item.param === 'valid_zero' &&\n        item.program === \"aies\" &&\n        item.unit_type === \"all\"\n)?.json_values;\n\nfunction isZero(column, type) {\n    if (valid_zero_file.VALID_ZERO.some(element =>\n        (element.LEVEL) === type &&\n        (element.ITEM) === column)) {\n \n        let column_f = column + '_F'\n        if (record[column_f] && record[column_f].length >= 3) {\n            record[column_f] = record[column_f].substring(0, 2) + 'G' + record[column_f].substring(3);\n        } else if (record[column_f] && record[column_f].length >= 2) {\n            record[column_f] = record[column_f].substring(0, 2) + 'G';\n        } else if (record[column_f] && record[column_f].length >= 1) {\n            record[column_f] = record[column_f].substring(0, 1) + ' G';\n        } else {\n            record[column_f] = '  G';\n        }\n    }\n}\n\nlet type = ''\nif (['MU','SU'].includes(record['REPORTING_ID_TYP_TXT'])) {\n    type = 'ESTAB'\n} else if (['KAU'].includes(record['REPORTING_ID_TYP_TXT'])) {\n    type = 'KAU'\n}\n\nfor (var key in record) {\n    if (parseFloat(record[key]) == 0) {\n        isZero(key,type)\n    }\n}\n\nrecord['ACTION'] = 'Go to Main Routing'\n// global.set('action','Go to Main Routing')\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "108f9747956b439a",
+        "type": "link out",
+        "z": "236c2e1a5554a6f0",
+        "name": "link out 61",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9"
+        ],
+        "x": 655,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "c8919561eea2a059",
+        "type": "link in",
+        "z": "236c2e1a5554a6f0",
+        "name": "Valid Zero Link",
+        "links": [
+            "45b768d58693d73d"
+        ],
+        "x": 435,
+        "y": 280,
+        "wires": [
+            [
+                "f6d4e4102317abc6"
+            ]
+        ]
+    },
+    {
+        "id": "1abaa7a06c805651",
+        "type": "subflow:0be109393cb5f28a",
+        "z": "236c2e1a5554a6f0",
+        "name": "",
+        "x": 650,
+        "y": 360,
+        "wires": [
+            [
+                "2beed344b225e7f3"
+            ]
+        ]
+    },
+    {
+        "id": "2036f19505748b0f",
+        "type": "change",
+        "z": "236c2e1a5554a6f0",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.lookup",
+                "pt": "msg",
+                "to": "{\"moduleName\":\"valid_zero\",\"program\":\"aies\",\"unit_type\":\"all\",\"params\":\"valid_zero\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 410,
+        "y": 360,
+        "wires": [
+            [
+                "1abaa7a06c805651"
+            ]
+        ]
+    },
+    {
+        "id": "f6d4e4102317abc6",
+        "type": "subflow:998aa04bd1bb677d",
+        "z": "236c2e1a5554a6f0",
+        "name": "",
+        "x": 540,
+        "y": 280,
+        "wires": [
+            [
+                "108f9747956b439a"
+            ]
+        ]
+    },
+    {
+        "id": "ceac326c4b9a08f5",
+        "type": "function",
+        "z": "067b1d1ff9443ad3",
+        "name": "Valid Negative Link",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx]\nlet cache = global.get(\"lookupCache\");\n\nlet valid_negative_file = cache.data.find(\n    item =>\n        item.module === \"valid_negative\" &&\n        item.param === 'valid_negative_value' &&\n        item.program === \"aies\" &&\n        item.unit_type === \"all\"\n)?.json_values;\n\nfunction isNegative(naics, column, type, tax) {\n    if (valid_negative_file.VALID_NEGATIVE.some(element =>\n    (element.LEVEL === type &&\n        [null, undefined, tax].includes(element.TAX_EXEMPT_STAT) &&\n        element.ITEM === column &&\n        [naics, parseInt(naics), 'ALL', 'all', 'All', '', null, undefined].includes(element.NAICS)))) {\n        if (['ESTAB', 'KAU'].includes(type)) {\n            record['EXIMP'] = 'E'\n        }\n    } else {\n        record[column] = 0\n        if (column == 'RCPT_TOT_VAL') {\n            let column_f = column + '_F'\n            if (record[column_f] && record[column_f].length >= 3) {\n                record[column_f] = record[column_f].substring(0, 2) + 'G' + record[column_f].substring(3);\n            } else if (record[column_f] && record[column_f].length >= 2) {\n                record[column_f] = record[column_f].substring(0, 2) + 'G';\n            } else if (record[column_f] && record[column_f].length >= 1) {\n                record[column_f] = record[column_f].substring(0, 1) + ' G';\n            } else {\n                record[column_f] = '  G';\n            }\n        } else {\n            let column_f = column + '_F'\n            if (record[column_f] && record[column_f].length >= 3) {\n                record[column_f] = record[column_f].substring(0, 2) + 'L' + record[column_f].substring(3);\n            } else if (record[column_f] && record[column_f].length >= 2) {\n                record[column_f] = record[column_f].substring(0, 2) + 'L';\n            } else if (record[column_f] && record[column_f].length >= 1) {\n                record[column_f] = record[column_f].substring(0, 1) + ' L';\n            } else {\n                record[column_f] = '  L';\n            }\n        }\n    }\n}\n\nlet type = ''\nif (['MU', 'SU'].includes(record['REPORTING_ID_TYP_TXT'])) {\n    type = 'ESTAB'\n} else if (['KAU'].includes(record['REPORTING_ID_TYP_TXT'])) {\n    type = 'KAU'\n} else if (['ENT'].includes(record['REPORTING_ID_TYP_TXT'])) {\n    type = 'COMPANY'\n}\n\nlet naics = '' + record['NAICS_NUM']\nlet tax = record['TAXSTAT']\n\nif ([null, undefined, 'null', 'undefined', ''].includes(tax)) {\n    tax = null\n}\n\nfor (var key in record) {\n    if (parseFloat(record[key]) < 0) {\n        isNegative(naics, key, type, tax)\n    }\n}\n\nrecord['ACTION'] = 'Go to Main Routing'\n// global.set('action','Go to Main Routing')\nreturn msg;\n\n\n\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "25627bf820122fe8",
+        "type": "link out",
+        "z": "067b1d1ff9443ad3",
+        "name": "link out 62",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9"
+        ],
+        "x": 795,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "8671a6e9c3be6ad6",
+        "type": "link in",
+        "z": "067b1d1ff9443ad3",
+        "name": "Valid Negative Value Link",
+        "links": [
+            "854cd7a417cbbc6e"
+        ],
+        "x": 585,
+        "y": 220,
+        "wires": [
+            [
+                "6094d4bb7aa33b22"
+            ]
+        ]
+    },
+    {
+        "id": "14e26396d5b6cc82",
+        "type": "change",
+        "z": "067b1d1ff9443ad3",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.lookup",
+                "pt": "msg",
+                "to": "{\"moduleName\":\"valid_negative\",\"program\":\"aies\",\"unit_type\":\"all\",\"params\":\"valid_negative_value\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 530,
+        "y": 520,
+        "wires": [
+            [
+                "c453930e4460cef9"
+            ]
+        ]
+    },
+    {
+        "id": "c453930e4460cef9",
+        "type": "subflow:0be109393cb5f28a",
+        "z": "067b1d1ff9443ad3",
+        "name": "",
+        "x": 790,
+        "y": 520,
+        "wires": [
+            [
+                "ceac326c4b9a08f5"
+            ]
+        ]
+    },
+    {
+        "id": "6094d4bb7aa33b22",
+        "type": "subflow:c79b244779411ead",
+        "z": "067b1d1ff9443ad3",
+        "name": "",
+        "x": 690,
+        "y": 220,
+        "wires": [
+            [
+                "25627bf820122fe8"
+            ]
+        ]
     }
 ]
