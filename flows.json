@@ -3116,9 +3116,7 @@
             "070b2c6eb42b2ee1"
         ],
         "x": 14,
-        "y": 699,
-        "w": 2252,
-        "h": 2882
+        "y": 699
     },
     {
         "id": "302cb8040ecade52",
@@ -3134,9 +3132,7 @@
             "a47c991027033263"
         ],
         "x": 1194,
-        "y": 859,
-        "w": 432,
-        "h": 82
+        "y": 859
     },
     {
         "id": "d1e0f39ddacfeb20",
@@ -25383,7 +25379,8 @@
         "y": 820,
         "wires": [
             [
-                "121f33ae272cb49a"
+                "121f33ae272cb49a",
+                "e6087333eb3ae6c9"
             ]
         ]
     },
@@ -25396,7 +25393,8 @@
         "y": 860,
         "wires": [
             [
-                "df590f50a626fa0c"
+                "df590f50a626fa0c",
+                "773badd332d18030"
             ]
         ]
     },
@@ -25513,7 +25511,7 @@
         "links": [
             "8ad2ab7c27d8d248"
         ],
-        "x": 1805,
+        "x": 1755,
         "y": 860,
         "wires": []
     },
@@ -25526,8 +25524,8 @@
             "8eb6f6b4ca5cb88d",
             "35871e68a9f50691"
         ],
-        "x": 235,
-        "y": 600,
+        "x": 165,
+        "y": 660,
         "wires": [
             []
         ]
@@ -25599,7 +25597,7 @@
         "type": "function",
         "z": "8790b12c7efb6fa0",
         "name": "cache result",
-        "func": "let cache = global.get(\"lookupCache\");\ncache = Array.isArray(cache?.data) ? cache : {\"data\":[]}\nif (msg.payload.status === \"success\") {\n    cache.data = msg.payload.data\n}\nglobal.set(\"lookupCache\", cache)\nreturn msg;",
+        "func": "let cache = global.get(\"lookupCache\");\ncache = Array.isArray(cache?.data) ? cache : {\"data\":[]}\nif (msg.payload.status === \"success\") {\n    cache.data = msg.payload.data\n    msg.payload.dataArr = cache.data\n}\nglobal.set(\"lookupCache\", cache)\n\nreturn msg;",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -25610,6 +25608,7 @@
         "y": 740,
         "wires": [
             [
+                "f06ef826f5d9d778",
                 "b29f65e4584b8767"
             ]
         ]
@@ -25696,8 +25695,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 830,
-        "y": 860,
+        "x": 870,
+        "y": 840,
         "wires": [
             [
                 "66fdc22c898d5af9"
@@ -25755,6 +25754,57 @@
         ],
         "x": 1845,
         "y": 740,
+        "wires": []
+    },
+    {
+        "id": "e6087333eb3ae6c9",
+        "type": "debug",
+        "z": "8790b12c7efb6fa0",
+        "name": "BR",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 350,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "773badd332d18030",
+        "type": "debug",
+        "z": "8790b12c7efb6fa0",
+        "name": "Critical Error",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 490,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "f06ef826f5d9d778",
+        "type": "debug",
+        "z": "8790b12c7efb6fa0",
+        "name": "Big Lookup",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1010,
+        "y": 660,
         "wires": []
     }
 ]
