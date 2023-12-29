@@ -6878,7 +6878,7 @@
         "type": "function",
         "z": "20d530cc0b193752",
         "name": "BR Stat ",
-        "func": "// let record_idx = global.get(\"ptrModuleFacts\");\n// let record = msg.payload.csv[record_idx];\n\n// function A(msg) {\n//     msg.payload.csv[record_idx].TABSTAT = \"N\";\n//     msg.payload.csv[record_idx].NONTABFL = \"D\";\n//     msg.payload.csv[record_idx].ACTION = \"Exit Edit\";\n//     return msg;\n// }\n\n// if ([\"10\", \"20\", \"30\", \"90\"].includes(String(record.RECORD_TYP_TXT))) {\n//     msg.payload.DEBUG_STATUS = \"RECORD_TYP_TXT-10-20-30-90-true\"\n//     msg.payload.csv[record_idx].TABSTAT = \"Y\";\n//     msg.payload.csv[record_idx].NONTABFL = null;\n\n//     if ([\"10\", \"20\", \"90\"].includes(String(record.RECORD_TYP_TXT))) {\n//         if (record.BR_STAT === \"N\") {\n//             A(msg);\n//         } else { // BR_STAT not equal to \"N\"\n//             if ([\"20\", \"90\"].includes(String(record.RECORD_TYP_TXT))) {\n//                 msg.payload.csv[record_idx].ACTION = \"Go to main Routing\";\n//                 return msg;\n\n//             } else { // RECORD_TYP_TXT not \"20\" or \"90\"\n//                 msg.payload.csv[record_idx].ACTION = \"Go to main Routing\";\n//                 return msg;\n//             }\n//         }\n\n//     } else { // RECORD_TYP_TXT not in ('10','20','3O','90')\n//         if (record.KAU_STAT === \"N\") {\n//             A(msg); // Go to A\n//         } else {\n//             msg.payload.csv[record_idx].ACTION = \"Go to main Routing\";\n//             return msg;\n//         }\n//     }\n\n// } else {  // RECORD_TYP_TXT not in ('10','20','3O','90')\n//     msg.payload.record_idx = record_idx\n//     msg.payload.DEBUG_STATUS = \"RECORD_TYP_TXT-10-20-30-90-false\"\n//     msg.payload.csv[record_idx].ACTION = \"ERROR\";\n// }\n\n// return msg;\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\nfunction A(msg) {\n    msg.payload.csv[record_idx].TABSTAT = \"N\";\n    msg.payload.csv[record_idx].NONTABFL = \"D\";\n    msg.payload.csv[record_idx].ACTION = \"Exit Edit\";\n    global.set('action', 'Exit Edit')\n}\n\n// Is RECORD_TYP_TXT in ('10','20','3O','90')\nif ([\"10\", \"20\", \"30\", \"90\"].includes(String(record.RECORD_TYP_TXT))) {\n    msg.payload.DEBUG_STATUS = \"RECORD_TYP_TXT-10-20-30-90-true\"\n    // Set TABSTAT and NONTABFL variables\n    msg.payload.csv[record_idx].TABSTAT = \"Y\";\n    msg.payload.csv[record_idx].NONTABFL = null;\n\n    // Is RECORD_TYP_TXT in ('10','20','90')\n    if ([\"10\", \"20\", \"90\"].includes(String(record.RECORD_TYP_TXT))) {\n        // Is BR_STAT equal to \"N\"\n        if (record.BR_STAT === \"N\") {\n            A(msg); // Go to A\n        } else { // BR_STAT not equal to \"N\"\n            // Is RECORD_TYP_TXT \"20\" or \"90\"\n            if ([\"20\", \"90\"].includes(String(record.RECORD_TYP_TXT))) {\n                msg.payload.csv[record_idx].ACTION = \"Go to main Routing\";\n                return msg;\n\n            } else { // RECORD_TYP_TXT not \"20\" or \"90\"\n                msg.payload.csv[record_idx].ACTION = \"Go to main Routing\";\n                return msg;\n            }\n        }\n\n    } else { // RECORD_TYP_TXT not in ('10','20','3O','90')\n        if (record.KAU_STAT === \"N\") {\n            A(msg); // Go to A\n        } else {\n            msg.payload.csv[record_idx].ACTION = \"Go to main Routing\";\n            global.set('action', 'Go to main Routing')\n            return msg;\n        }\n    }\n\n} else {  // RECORD_TYP_TXT not in ('10','20','3O','90')\n    msg.payload.record_idx = record_idx\n    msg.payload.DEBUG_STATUS = \"RECORD_TYP_TXT-10-20-30-90-false\"\n    msg.payload.csv[record_idx].ACTION = \"ERROR\";\n    global.set('action', 'ERROR')\n}\n\nreturn msg;",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\nfunction A(msg) {\n    msg.payload.csv[record_idx].TABSTAT = \"N\";\n    msg.payload.csv[record_idx].NONTABFL = \"D\";\n    msg.payload.csv[record_idx].ACTION = \"Exit Edit\";\n    global.set('action', 'Exit Edit')\n}\n\n// Is RECORD_TYP_TXT in ('10','20','3O','90')\nif ([\"10\", \"20\", \"30\", \"90\"].includes(String(record.RECORD_TYP_TXT))) {\n    msg.payload.DEBUG_STATUS = \"RECORD_TYP_TXT-10-20-30-90-true\"\n    // Set TABSTAT and NONTABFL variables\n    msg.payload.csv[record_idx].TABSTAT = \"Y\";\n    msg.payload.csv[record_idx].NONTABFL = null;\n\n    // Is RECORD_TYP_TXT in ('10','20','90')\n    if ([\"10\", \"20\", \"90\"].includes(String(record.RECORD_TYP_TXT))) {\n        // Is BR_STAT equal to \"N\"\n        if (record.BR_STAT === \"N\") {\n            A(msg); // Go to A\n        } else { // BR_STAT not equal to \"N\"\n            // Is RECORD_TYP_TXT \"20\" or \"90\"\n            if ([\"20\", \"90\"].includes(String(record.RECORD_TYP_TXT))) {\n                msg.payload.csv[record_idx].ACTION = \"Go to main Routing\";\n                return msg;\n\n            } else { // RECORD_TYP_TXT not \"20\" or \"90\"\n                msg.payload.csv[record_idx].ACTION = \"Go to main Routing\";\n                return msg;\n            }\n        }\n\n    } else { // RECORD_TYP_TXT not in ('10','20','3O','90')\n        if (record.KAU_STAT === \"N\") {\n            A(msg); // Go to A\n        } else {\n            msg.payload.csv[record_idx].ACTION = \"Go to main Routing\";\n            global.set('action', 'Go to main Routing')\n            return msg;\n        }\n    }\n\n} else {  // RECORD_TYP_TXT not in ('10','20','3O','90')\n    msg.payload.record_idx = record_idx\n    msg.payload.DEBUG_STATUS = \"RECORD_TYP_TXT-10-20-30-90-false\"\n    msg.payload.csv[record_idx].ACTION = \"ERROR\";\n    global.set('action', 'ERROR')\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -25407,7 +25407,8 @@
         "y": 1020,
         "wires": [
             [
-                "bd80eaa4d3e0b069"
+                "bd80eaa4d3e0b069",
+                "3d656d4e7d16c90d"
             ]
         ]
     },
@@ -25420,7 +25421,8 @@
         "y": 1140,
         "wires": [
             [
-                "1b67e6657388118d"
+                "1b67e6657388118d",
+                "9c4c1524319ca134"
             ]
         ]
     },
@@ -25433,7 +25435,8 @@
         "y": 1140,
         "wires": [
             [
-                "2a42027c1028f409"
+                "2a42027c1028f409",
+                "18a3898311a7fbd5"
             ]
         ]
     },
@@ -25446,7 +25449,8 @@
         "y": 1140,
         "wires": [
             [
-                "77dcf5b1e0afb3a9"
+                "77dcf5b1e0afb3a9",
+                "a349c47148ce6a49"
             ]
         ]
     },
@@ -25459,7 +25463,8 @@
         "y": 1140,
         "wires": [
             [
-                "66fdc22c898d5af9"
+                "66fdc22c898d5af9",
+                "ae1d3542805a6ef1"
             ]
         ]
     },
@@ -25472,7 +25477,8 @@
         "y": 900,
         "wires": [
             [
-                "e1dd758b59c31f88"
+                "e1dd758b59c31f88",
+                "fa6a99c77e9fa7b4"
             ]
         ]
     },
@@ -25485,7 +25491,8 @@
         "y": 1020,
         "wires": [
             [
-                "afd7588524439212"
+                "afd7588524439212",
+                "c13d640ebfcaddf2"
             ]
         ]
     },
@@ -25498,7 +25505,8 @@
         "y": 1020,
         "wires": [
             [
-                "03236197db128bd1"
+                "03236197db128bd1",
+                "72a8dd9ff04542e7"
             ]
         ]
     },
@@ -25553,14 +25561,14 @@
         "type": "function",
         "z": "8790b12c7efb6fa0",
         "name": "Fetch all params",
-        "func": "msg.url = 'http://a301cb45559c445acaec11ab01bbbee1-2115632777.us-gov-east-1.elb.amazonaws.com/api/params/params'\nreturn msg;",
+        "func": "msg.url = 'http://a301cb45559c445acaec11ab01bbbee1-2115632777.us-gov-east-1.elb.amazonaws.com/api/params/params'\nmsg.backup = msg.payload\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 310,
+        "x": 330,
         "y": 740,
         "wires": [
             [
@@ -25588,7 +25596,8 @@
         "y": 740,
         "wires": [
             [
-                "ce824046503d2403"
+                "ce824046503d2403",
+                "e24db88ec174db45"
             ]
         ]
     },
@@ -25597,7 +25606,7 @@
         "type": "function",
         "z": "8790b12c7efb6fa0",
         "name": "cache result",
-        "func": "let cache = global.get(\"lookupCache\");\ncache = Array.isArray(cache?.data) ? cache : {\"data\":[]}\nif (msg.payload.status === \"success\") {\n    cache.data = msg.payload.data\n    msg.payload.dataArr = cache.data\n}\nglobal.set(\"lookupCache\", cache)\n\nreturn msg;",
+        "func": "let cache = global.get(\"lookupCache\");\ncache = Array.isArray(cache?.data) ? cache : {\"data\":[]}\nif (msg.payload.status === \"success\") {\n    cache.data = msg.payload.data\n    msg.payload.dataArr = cache.data\n}\nglobal.set(\"lookupCache\", cache)\nmsg.payload = {\n    ...msg.payload,\n    ...msg.backup\n}\nreturn msg;",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -25714,11 +25723,12 @@
         "links": [
             "6c8827ce7a4c83d8"
         ],
-        "x": 165,
+        "x": 115,
         "y": 740,
         "wires": [
             [
-                "d8671e4aec2afb9f"
+                "d8671e4aec2afb9f",
+                "77e25f62eb9b8d59"
             ]
         ]
     },
@@ -25769,8 +25779,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 350,
-        "y": 960,
+        "x": 410,
+        "y": 900,
         "wires": []
     },
     {
@@ -25786,8 +25796,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 490,
-        "y": 1060,
+        "x": 750,
+        "y": 940,
         "wires": []
     },
     {
@@ -25805,6 +25815,216 @@
         "statusType": "auto",
         "x": 1010,
         "y": 660,
+        "wires": []
+    },
+    {
+        "id": "fa6a99c77e9fa7b4",
+        "type": "debug",
+        "z": "8790b12c7efb6fa0",
+        "name": "NonNORM Init Set ACTVMIO & OPSTATS",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1260,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "c13d640ebfcaddf2",
+        "type": "debug",
+        "z": "8790b12c7efb6fa0",
+        "name": "NONNORM Router",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1350,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "72a8dd9ff04542e7",
+        "type": "debug",
+        "z": "8790b12c7efb6fa0",
+        "name": "Classification",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1470,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "3d656d4e7d16c90d",
+        "type": "debug",
+        "z": "8790b12c7efb6fa0",
+        "name": "Geography",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1650,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "9c4c1524319ca134",
+        "type": "debug",
+        "z": "8790b12c7efb6fa0",
+        "name": "Best admin receipts",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1100,
+        "y": 1300,
+        "wires": []
+    },
+    {
+        "id": "a349c47148ce6a49",
+        "type": "debug",
+        "z": "8790b12c7efb6fa0",
+        "name": "Valid negative",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1380,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "18a3898311a7fbd5",
+        "type": "debug",
+        "z": "8790b12c7efb6fa0",
+        "name": "Valid Zero",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1600,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "ae1d3542805a6ef1",
+        "type": "debug",
+        "z": "8790b12c7efb6fa0",
+        "name": "Completeness",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1780,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "77e25f62eb9b8d59",
+        "type": "change",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.lookup",
+                "pt": "msg",
+                "to": "{\"moduleName\":\"balance\",\"program\":\"aies\",\"unit_type\":\"estab\",\"params\":\"unit_balance\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 640,
+        "wires": [
+            [
+                "4dfc8c94a734290e"
+            ]
+        ]
+    },
+    {
+        "id": "4dfc8c94a734290e",
+        "type": "subflow:0be109393cb5f28a",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "x": 710,
+        "y": 640,
+        "wires": [
+            [
+                "8f42ed3959d02599"
+            ]
+        ]
+    },
+    {
+        "id": "8f42ed3959d02599",
+        "type": "debug",
+        "z": "8790b12c7efb6fa0",
+        "name": "Lookup",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "e24db88ec174db45",
+        "type": "debug",
+        "z": "8790b12c7efb6fa0",
+        "name": "Initial Payload",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 680,
         "wires": []
     }
 ]
