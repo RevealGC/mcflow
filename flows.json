@@ -285,14 +285,6 @@
         "env": []
     },
     {
-        "id": "112a2e5b60c3f3a8",
-        "type": "tab",
-        "label": "Classification",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
         "id": "3248e82e44cba772",
         "type": "tab",
         "label": "Completeness",
@@ -432,14 +424,6 @@
         "id": "c2d60c8918a1622a",
         "type": "tab",
         "label": "mfg_empq1",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
-        "id": "8790b12c7efb6fa0",
-        "type": "tab",
-        "label": "Interactive Mode",
         "disabled": false,
         "info": "",
         "env": []
@@ -648,6 +632,22 @@
         "id": "1c6c32346fee9416",
         "type": "tab",
         "label": "Electric Impute Module",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "112a2e5b60c3f3a8",
+        "type": "tab",
+        "label": "Classification",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "8790b12c7efb6fa0",
+        "type": "tab",
+        "label": "Interactive Mode",
         "disabled": false,
         "info": "",
         "env": []
@@ -1329,19 +1329,19 @@
         "category": "",
         "in": [
             {
-                "x": 390,
-                "y": 160,
+                "x": 640,
+                "y": 60,
                 "wires": [
                     {
-                        "id": "f924038bf9ba3790"
+                        "id": "0a9f67e1bc33b824"
                     }
                 ]
             }
         ],
         "out": [
             {
-                "x": 1250,
-                "y": 160,
+                "x": 970,
+                "y": 60,
                 "wires": [
                     {
                         "id": "0a9f67e1bc33b824",
@@ -3135,7 +3135,7 @@
         ],
         "x": 1194,
         "y": 859,
-        "w": 432,
+        "w": 422,
         "h": 82
     },
     {
@@ -6590,46 +6590,6 @@
         ]
     },
     {
-        "id": "f924038bf9ba3790",
-        "type": "change",
-        "z": "bfe1ab19e0cbe2cf",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload.lookup",
-                "pt": "msg",
-                "to": "{\"moduleName\":\"classification\",\"program\":\"aies\",\"unit_type\":\"estab\",\"params\":\"naics_alt,naics_validation\"}",
-                "tot": "json"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 570,
-        "y": 160,
-        "wires": [
-            [
-                "9d7b5173ac8dfe70"
-            ]
-        ]
-    },
-    {
-        "id": "9d7b5173ac8dfe70",
-        "type": "subflow:0be109393cb5f28a",
-        "z": "bfe1ab19e0cbe2cf",
-        "name": "",
-        "x": 830,
-        "y": 160,
-        "wires": [
-            [
-                "0a9f67e1bc33b824"
-            ]
-        ]
-    },
-    {
         "id": "0a9f67e1bc33b824",
         "type": "function",
         "z": "bfe1ab19e0cbe2cf",
@@ -6641,8 +6601,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1080,
-        "y": 160,
+        "x": 800,
+        "y": 60,
         "wires": [
             []
         ]
@@ -6672,7 +6632,7 @@
         "type": "function",
         "z": "0be109393cb5f28a",
         "name": "prepare API Request",
-        "func": "const { moduleName, program, unit_type, missingParams } = msg.payload.lookup;\nconst params = (missingParams.length && missingParams.join(\",\")) || \"\";\nconst apiurl = `${(env.get('CENSUS_API') || 'https://mc.edl-7529180-ite.ite.edl.census.gov/api/').trim()}params?module=${moduleName}&params=${params}&program=${program}&unit_type=${unit_type}`;\nmsg.url = apiurl;\nmsg.payloadBackup = msg.payload;\nreturn msg;\n",
+        "func": "const { moduleName, program, unit_type, missingParams } = msg.payload.lookup;\nconst params = (missingParams.length && missingParams.join(\",\")) || \"\";\n// const apiurl = `${(env.get('CENSUS_API') || 'https://mc.edl-7529180-ite.ite.edl.census.gov/api/').trim()}params?module=${moduleName}&params=${params}&program=${program}&unit_type=${unit_type}`;\nconst apiurl = `${('a301cb45559c445acaec11ab01bbbee1-2115632777.us-gov-east-1.elb.amazonaws.com/api/').trim()}params?module=${moduleName}&params=${params}&program=${program}&unit_type=${unit_type}`;\nmsg.url = apiurl;\nmsg.payloadBackup = msg.payload;\nreturn msg;\n",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -6922,7 +6882,7 @@
         "type": "function",
         "z": "20d530cc0b193752",
         "name": "BR Stat ",
-        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nfunction A(msg) {\n    msg.payload.csv[record_idx].TABSTAT = \"N\";\n    msg.payload.csv[record_idx].NONTABFL = \"D\";\n    msg.payload.csv[record_idx].ACTION = \"Exit Edit\";\n    return msg;\n}\n\nif ([\"10\", \"20\", \"30\", \"90\"].includes(String(record.RECORD_TYP_TXT))) {\n    msg.payload.DEBUG_STATUS = \"RECORD_TYP_TXT-10-20-30-90-true\"\n    msg.payload.csv[record_idx].TABSTAT = \"Y\";\n    msg.payload.csv[record_idx].NONTABFL = null;\n\n    if ([\"10\", \"20\", \"90\"].includes(String(record.RECORD_TYP_TXT))) {\n        if (record.BR_STAT === \"N\") {\n            A(msg);\n        } else { // BR_STAT not equal to \"N\"\n            if ([\"20\", \"90\"].includes(String(record.RECORD_TYP_TXT))) {\n                msg.payload.csv[record_idx].ACTION = \"Go to main Routing\";\n                return msg;\n\n            } else { // RECORD_TYP_TXT not \"20\" or \"90\"\n                msg.payload.csv[record_idx].ACTION = \"Go to main Routing\";\n                return msg;\n            }\n        }\n\n    } else { // RECORD_TYP_TXT not in ('10','20','3O','90')\n        if (record.KAU_STAT === \"N\") {\n            A(msg); // Go to A\n        } else {\n            msg.payload.csv[record_idx].ACTION = \"Go to main Routing\";\n            return msg;\n        }\n    }\n\n} else {  // RECORD_TYP_TXT not in ('10','20','3O','90')\n    msg.payload.record_idx = record_idx\n    msg.payload.DEBUG_STATUS = \"RECORD_TYP_TXT-10-20-30-90-false\"\n    msg.payload.csv[record_idx].ACTION = \"ERROR\";\n}\n\nreturn msg;",
+        "func": "// let record_idx = global.get(\"ptrModuleFacts\");\n// let record = msg.payload.csv[record_idx];\n\n// function A(msg) {\n//     msg.payload.csv[record_idx].TABSTAT = \"N\";\n//     msg.payload.csv[record_idx].NONTABFL = \"D\";\n//     msg.payload.csv[record_idx].ACTION = \"Exit Edit\";\n//     return msg;\n// }\n\n// if ([\"10\", \"20\", \"30\", \"90\"].includes(String(record.RECORD_TYP_TXT))) {\n//     msg.payload.DEBUG_STATUS = \"RECORD_TYP_TXT-10-20-30-90-true\"\n//     msg.payload.csv[record_idx].TABSTAT = \"Y\";\n//     msg.payload.csv[record_idx].NONTABFL = null;\n\n//     if ([\"10\", \"20\", \"90\"].includes(String(record.RECORD_TYP_TXT))) {\n//         if (record.BR_STAT === \"N\") {\n//             A(msg);\n//         } else { // BR_STAT not equal to \"N\"\n//             if ([\"20\", \"90\"].includes(String(record.RECORD_TYP_TXT))) {\n//                 msg.payload.csv[record_idx].ACTION = \"Go to main Routing\";\n//                 return msg;\n\n//             } else { // RECORD_TYP_TXT not \"20\" or \"90\"\n//                 msg.payload.csv[record_idx].ACTION = \"Go to main Routing\";\n//                 return msg;\n//             }\n//         }\n\n//     } else { // RECORD_TYP_TXT not in ('10','20','3O','90')\n//         if (record.KAU_STAT === \"N\") {\n//             A(msg); // Go to A\n//         } else {\n//             msg.payload.csv[record_idx].ACTION = \"Go to main Routing\";\n//             return msg;\n//         }\n//     }\n\n// } else {  // RECORD_TYP_TXT not in ('10','20','3O','90')\n//     msg.payload.record_idx = record_idx\n//     msg.payload.DEBUG_STATUS = \"RECORD_TYP_TXT-10-20-30-90-false\"\n//     msg.payload.csv[record_idx].ACTION = \"ERROR\";\n// }\n\n// return msg;\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\nfunction A(msg) {\n    msg.payload.csv[record_idx].TABSTAT = \"N\";\n    msg.payload.csv[record_idx].NONTABFL = \"D\";\n    msg.payload.csv[record_idx].ACTION = \"Exit Edit\";\n    global.set('action', 'Exit Edit')\n}\n\n// Is RECORD_TYP_TXT in ('10','20','3O','90')\nif ([\"10\", \"20\", \"30\", \"90\"].includes(String(record.RECORD_TYP_TXT))) {\n    msg.payload.DEBUG_STATUS = \"RECORD_TYP_TXT-10-20-30-90-true\"\n    // Set TABSTAT and NONTABFL variables\n    msg.payload.csv[record_idx].TABSTAT = \"Y\";\n    msg.payload.csv[record_idx].NONTABFL = null;\n\n    // Is RECORD_TYP_TXT in ('10','20','90')\n    if ([\"10\", \"20\", \"90\"].includes(String(record.RECORD_TYP_TXT))) {\n        // Is BR_STAT equal to \"N\"\n        if (record.BR_STAT === \"N\") {\n            A(msg); // Go to A\n        } else { // BR_STAT not equal to \"N\"\n            // Is RECORD_TYP_TXT \"20\" or \"90\"\n            if ([\"20\", \"90\"].includes(String(record.RECORD_TYP_TXT))) {\n                msg.payload.csv[record_idx].ACTION = \"Go to main Routing\";\n                return msg;\n\n            } else { // RECORD_TYP_TXT not \"20\" or \"90\"\n                msg.payload.csv[record_idx].ACTION = \"Go to main Routing\";\n                return msg;\n            }\n        }\n\n    } else { // RECORD_TYP_TXT not in ('10','20','3O','90')\n        if (record.KAU_STAT === \"N\") {\n            A(msg); // Go to A\n        } else {\n            msg.payload.csv[record_idx].ACTION = \"Go to main Routing\";\n            global.set('action', 'Go to main Routing')\n            return msg;\n        }\n    }\n\n} else {  // RECORD_TYP_TXT not in ('10','20','3O','90')\n    msg.payload.record_idx = record_idx\n    msg.payload.DEBUG_STATUS = \"RECORD_TYP_TXT-10-20-30-90-false\"\n    msg.payload.csv[record_idx].ACTION = \"ERROR\";\n    global.set('action', 'ERROR')\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -6994,7 +6954,7 @@
         "type": "function",
         "z": "42be4655fd3a8c84",
         "name": "critical error",
-        "func": "let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\nfunction setResult() {\n    record['TABSTAT'] = \"N\";\n    record['NONTABFL'] = \"D\";\n    record['ACTION'] = \"Exit Edit\";\n}\n\n// function parseToNum(val) {\n//     return isNaN(val) ? 0 : parseInt(val, 10);\n// }\nfunction naicsSectorCheck() {\n    let result =\n        parseFloat(record['PAY_ANN_VAL']) +\n        parseFloat(record['EMP_MAR12_NUM']) +\n        parseFloat(record['PAY_QTR1_VAL']) +\n        parseFloat(record['ECPAYANN']) +\n        parseFloat(record['ECPAYQ1']) +\n        parseFloat(record['ECEMPQ1']) +\n        parseFloat(record['ECPAYANL']);\n\n    if (parseFloat(record['NAICS_SECTOR_OLD_NUM']) === 31) {\n        result = parseFloat(result) + parseFloat(record['EXPS_TEMPSTAF_VAL']);\n    }\n    return result\n}\nlet data = naicsSectorCheck();\nrecord['DATA'] = data\n\nif (\n    [\"111\", \"131\", \"791\"].includes(record['COV_CHG_CODE']?.toString()) &&\n    new Date(record['COV_CHG_DATE']) <=\n    new Date(\"01-01-\" + record.REF_PER.substring(0, 4)) &&\n    data == 0\n) {\n    setResult();\n    return msg;\n\n} else if ([\"181\", \"201\", \"801\", \"091\", \"121\", \"171\"].includes(record['COV_CHG_CODE'].toString())) {\n    setResult();\n    return msg;\n} else {\n    record['ACTION'] = \"Go To Main Routing\";\n    return msg;\n}",
+        "func": "// let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\n// function setResult() {\n//     record['TABSTAT'] = \"N\";\n//     record['NONTABFL'] = \"D\";\n//     record['ACTION'] = \"Exit Edit\";\n// }\n\n// // function parseToNum(val) {\n// //     return isNaN(val) ? 0 : parseInt(val, 10);\n// // }\n// function naicsSectorCheck() {\n//     let result =\n//         parseFloat(record['PAY_ANN_VAL']) +\n//         parseFloat(record['EMP_MAR12_NUM']) +\n//         parseFloat(record['PAY_QTR1_VAL']) +\n//         parseFloat(record['ECPAYANN']) +\n//         parseFloat(record['ECPAYQ1']) +\n//         parseFloat(record['ECEMPQ1']) +\n//         parseFloat(record['ECPAYANL']);\n\n//     if (parseFloat(record['NAICS_SECTOR_OLD_NUM']) === 31) {\n//         result = parseFloat(result) + parseFloat(record['EXPS_TEMPSTAF_VAL']);\n//     }\n//     return result\n// }\n// let data = naicsSectorCheck();\n// record['DATA'] = data\n\n// if (\n//     [\"111\", \"131\", \"791\"].includes(record['COV_CHG_CODE']?.toString()) &&\n//     new Date(record['COV_CHG_DATE']) <=\n//     new Date(\"01-01-\" + record.REF_PER.substring(0, 4)) &&\n//     data == 0\n// ) {\n//     setResult();\n//     return msg;\n\n// } else if ([\"181\", \"201\", \"801\", \"091\", \"121\", \"171\"].includes(record['COV_CHG_CODE'].toString())) {\n//     setResult();\n//     return msg;\n// } else {\n//     record['ACTION'] = \"Go To Main Routing\";\n//     return msg;\n// }\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nfunction setResult() {\n    record['TABSTAT'] = \"N\";\n    record['NONTABFL'] = \"D\";\n    record['ACTION'] = \"Exit Edit\";\n    global.set('action', 'Exit Edit')\n}\n\n// function parseToNum(val) {\n//     return isNaN(val) ? 0 : parseInt(val, 10);\n// }\nfunction naicsSectorCheck() {\n    let result =\n        parseFloat(record['PAY_ANN_VAL']) +\n        parseFloat(record['EMP_MAR12_NUM']) +\n        parseFloat(record['PAY_QTR1_VAL']) +\n        parseFloat(record['ECPAYANN']) +\n        parseFloat(record['ECPAYQ1']) +\n        parseFloat(record['ECEMPQ1']) +\n        parseFloat(record['ECPAYANL']);\n\n    if (parseFloat(record['NAICS_SECTOR_OLD_NUM']) === 31) {\n        result = parseFloat(result) + parseFloat(record['EXPS_TEMPSTAF_VAL']);\n    }\n    return result\n}\nlet data = naicsSectorCheck();\nrecord['DATA'] = data\n\nif (record.hasOwnProperty('COV_CHG_CODE') &&\n    [\"111\", \"131\", \"791\"].includes(record['COV_CHG_CODE']?.toString()) &&\n    new Date(record['COV_CHG_DATE']) <=\n    new Date(\"01-01-\" + record.REF_PER.substring(0, 4)) &&\n    data == 0\n) {\n    setResult();\n    return msg;\n\n} else if (record.hasOwnProperty('COV_CHG_CODE') && [\"181\", \"201\", \"801\", \"091\", \"121\", \"171\"].includes(record['COV_CHG_CODE']?.toString())) {\n    setResult();\n    return msg;\n} else {\n    record['ACTION'] = \"Go To Main Routing\";\n    global.set('action', 'Go To Main Routing')\n    return msg;\n}",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -18512,7 +18472,8 @@
             "084da167bd2adffa",
             "7cdbce6d4b28412b",
             "9aee892d0909f5a2",
-            "c481f6b945425e82"
+            "c481f6b945425e82",
+            "6c2616b9f8b16717"
         ],
         "x": 495,
         "y": 740,
@@ -18908,7 +18869,8 @@
         "name": "Go To InteractiveMode",
         "mode": "link",
         "links": [
-            "f5168b892485e327"
+            "f5168b892485e327",
+            "746909370ced9c62"
         ],
         "x": 1505,
         "y": 980,
@@ -22423,50 +22385,6 @@
         ]
     },
     {
-        "id": "d9650115f85479a9",
-        "type": "link in",
-        "z": "112a2e5b60c3f3a8",
-        "name": "link in 18",
-        "links": [
-            "f14b49f36a5b83fc",
-            "ae36b936ef8f7cc6"
-        ],
-        "x": 365,
-        "y": 180,
-        "wires": [
-            [
-                "bd4aeaec47bb4136"
-            ]
-        ]
-    },
-    {
-        "id": "434436c270b7f283",
-        "type": "link out",
-        "z": "112a2e5b60c3f3a8",
-        "name": "link out classification",
-        "mode": "link",
-        "links": [
-            "7d91540d69ac16c1",
-            "688a39b3e0070fe9"
-        ],
-        "x": 585,
-        "y": 180,
-        "wires": []
-    },
-    {
-        "id": "bd4aeaec47bb4136",
-        "type": "subflow:bfe1ab19e0cbe2cf",
-        "z": "112a2e5b60c3f3a8",
-        "name": "",
-        "x": 470,
-        "y": 180,
-        "wires": [
-            [
-                "434436c270b7f283"
-            ]
-        ]
-    },
-    {
         "id": "1c611eb0c30a9863",
         "type": "link in",
         "z": "3248e82e44cba772",
@@ -23290,430 +23208,6 @@
         "wires": [
             [
                 "93b50ff4956eb444"
-            ]
-        ]
-    },
-    {
-        "id": "ade7fc1412e3e6ed",
-        "type": "function",
-        "z": "8790b12c7efb6fa0",
-        "name": "BR Stat",
-        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\nfunction A(msg) {\n    msg.payload.csv[record_idx].TABSTAT = \"N\";\n    msg.payload.csv[record_idx].NONTABFL = \"D\";\n    msg.payload.csv[record_idx].ACTION = \"Exit Edit\";\n    global.set('action', 'Exit Edit')\n}\n\n// Is RECORD_TYP_TXT in ('10','20','3O','90')\nif ([\"10\", \"20\", \"30\", \"90\"].includes(String(record.RECORD_TYP_TXT))) {\n    msg.payload.DEBUG_STATUS = \"RECORD_TYP_TXT-10-20-30-90-true\"\n    // Set TABSTAT and NONTABFL variables\n    msg.payload.csv[record_idx].TABSTAT = \"Y\";\n    msg.payload.csv[record_idx].NONTABFL = null;\n\n    // Is RECORD_TYP_TXT in ('10','20','90')\n    if ([\"10\", \"20\", \"90\"].includes(String(record.RECORD_TYP_TXT))) {\n        // Is BR_STAT equal to \"N\"\n        if (record.BR_STAT === \"N\") {\n            A(msg); // Go to A\n        } else { // BR_STAT not equal to \"N\"\n            // Is RECORD_TYP_TXT \"20\" or \"90\"\n            if ([\"20\", \"90\"].includes(String(record.RECORD_TYP_TXT))) {\n                msg.payload.csv[record_idx].ACTION = \"Go to main Routing\";\n                return msg;\n\n            } else { // RECORD_TYP_TXT not \"20\" or \"90\"\n                msg.payload.csv[record_idx].ACTION = \"Go to main Routing\";\n                return msg;\n            }\n        }\n\n    } else { // RECORD_TYP_TXT not in ('10','20','3O','90')\n        if (record.KAU_STAT === \"N\") {\n            A(msg); // Go to A\n        } else {\n            msg.payload.csv[record_idx].ACTION = \"Go to main Routing\";\n            global.set('action', 'Go to main Routing')\n            return msg;\n        }\n    }\n\n} else {  // RECORD_TYP_TXT not in ('10','20','3O','90')\n    msg.payload.record_idx = record_idx\n    msg.payload.DEBUG_STATUS = \"RECORD_TYP_TXT-10-20-30-90-false\"\n    msg.payload.csv[record_idx].ACTION = \"ERROR\";\n    global.set('action', 'ERROR')\n}\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 540,
-        "y": 280,
-        "wires": [
-            [
-                "703c3a33c4d3fb46"
-            ]
-        ]
-    },
-    {
-        "id": "cb91d01113e85c8f",
-        "type": "function",
-        "z": "8790b12c7efb6fa0",
-        "name": "critical error",
-        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nfunction setResult() {\n    record['TABSTAT'] = \"N\";\n    record['NONTABFL'] = \"D\";\n    record['ACTION'] = \"Exit Edit\";\n    global.set('action', 'Exit Edit')\n}\n\n// function parseToNum(val) {\n//     return isNaN(val) ? 0 : parseInt(val, 10);\n// }\nfunction naicsSectorCheck() {\n    let result =\n        parseFloat(record['PAY_ANN_VAL']) +\n        parseFloat(record['EMP_MAR12_NUM']) +\n        parseFloat(record['PAY_QTR1_VAL']) +\n        parseFloat(record['ECPAYANN']) +\n        parseFloat(record['ECPAYQ1']) +\n        parseFloat(record['ECEMPQ1']) +\n        parseFloat(record['ECPAYANL']);\n\n    if (parseFloat(record['NAICS_SECTOR_OLD_NUM']) === 31) {\n        result = parseFloat(result) + parseFloat(record['EXPS_TEMPSTAF_VAL']);\n    }\n    return result\n}\nlet data = naicsSectorCheck();\nrecord['DATA'] = data\n\nif (record.hasOwnProperty('COV_CHG_CODE') &&\n    [\"111\", \"131\", \"791\"].includes(record['COV_CHG_CODE']?.toString()) &&\n    new Date(record['COV_CHG_DATE']) <=\n    new Date(\"01-01-\" + record.REF_PER.substring(0, 4)) &&\n    data == 0\n) {\n    setResult();\n    return msg;\n\n} else if (record.hasOwnProperty('COV_CHG_CODE') && [\"181\", \"201\", \"801\", \"091\", \"121\", \"171\"].includes(record['COV_CHG_CODE']?.toString())) {\n    setResult();\n    return msg;\n} else {\n    record['ACTION'] = \"Go To Main Routing\";\n    global.set('action', 'Go To Main Routing')\n    return msg;\n}",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 990,
-        "y": 280,
-        "wires": [
-            [
-                "8c4f5376a2841311"
-            ]
-        ]
-    },
-    {
-        "id": "f5168b892485e327",
-        "type": "link in",
-        "z": "8790b12c7efb6fa0",
-        "name": "link in gotQBES",
-        "links": [
-            "8eb6f6b4ca5cb88d",
-            "35871e68a9f50691"
-        ],
-        "x": 355,
-        "y": 200,
-        "wires": [
-            [
-                "b27f71ea12bf5696"
-            ]
-        ]
-    },
-    {
-        "id": "83f06f426c2b3701",
-        "type": "function",
-        "z": "8790b12c7efb6fa0",
-        "name": "Unit Balance Function",
-        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nmsg.cache = global.get(\"lookupCache\").data.find(\n    item =>\n        item.module === \"balance\" &&\n        item.param === \"unit_balance\" &&\n        item.program === \"aies\" &&\n        item.unit_type === \"estab\"\n)?.json_values;\n\nfunction checkNaics(data, naics, rec_typ, rec_typop, rec_tax) {\n    let list = data['NAICS']\n    let unit = data['UNIT TYPE']\n    let typop = data['TYPOP']\n    let tax = data['TAXSTAT']\n    let rectyp = rec_typ\n    if (['20', '90', 20, 90].includes(rectyp)) {\n        rec_typ = 'ESTAB'\n    } else if (['30', 30].includes(rectyp)) {\n        rec_typ = 'KAU'\n    } else if ([10, '10'].includes(rectyp)) {\n        rec_typ = 'ENT'\n    }\n    if ([null, undefined, 'null', 'undefined'].includes(typop)) {\n        rec_typop = typop\n    }\n    if ([null, undefined, 'null', 'undefined'].includes(tax)) {\n        rec_tax = tax\n    }\n    // console.log(rec_tax, tax, rec_typop, typop)\n    if (rec_typ === unit && rec_tax === tax && rec_typop === typop) {\n        if ([\"ALL\", \"All\"].includes(list)) {\n            return (true);\n        } else {\n            list = list.replace(/ /g, \"\");\n            list = list.replace(/'/g, \"\");\n            var array = list.split(',')\n\n            if (array.find(r => naics.startsWith(r))) {\n                return (true);\n            } else {\n                return (false)\n            }\n        }\n    }\n}\n\nfunction sumRow(data) {\n    let sum = 0;\n    var keys = [];\n    for (var key in data) {\n        if (key.startsWith('DETAIL') && data[key] != null) {\n            let variable = data[key]\n            // console.log(variable)\n            if (!Number.isNaN(parseFloat(record[variable]))) {\n                sum = parseFloat(sum) + parseFloat(record[variable])\n            }\n            // else {\n            //     record[variable] = 0\n            // }\n            keys.push(variable)\n        }\n    }\n    return [sum, keys];\n}\n\nfunction raking(rectot, sum, keys, tol) {\n    if ((Math.abs(rectot - sum) / rectot) <= tol) {\n        keys.sort((a, b) => record[b] - record[a]);\n        let remainder = 0\n        for (let i = 0; i < keys.length; i++) {\n            let num1 = (rectot / sum) * parseFloat(record[keys[i]]) + remainder\n            let num2 = Math.round(num1)\n            remainder = num1 - num2\n            record[keys[i]] = num2\n        }\n    }\n}\n\nlet naics = record['NAICS_NUM']\nnaics = '' + naics\n\nconst RECORD_TYP_TXT = record['RECORD_TYP_TXT']\nlet TYPOP = record['TYPOP_WHSL_OLD_NUM']\nlet TAXSTAT = record['TAXSTAT']\n\nfor (let i in msg.cache['UNIT_BALANCE']) {\n    let unitBalance = msg.cache['UNIT_BALANCE'][i]\n    if (checkNaics(unitBalance, naics, RECORD_TYP_TXT, TYPOP, TAXSTAT)) {\n        let tot = unitBalance['TOTAL']\n        let rectot = 0\n        if ([100, '100'].includes(tot)) {\n            rectot = 100\n        } else {\n            if (!Number.isNaN(parseFloat(record[tot]))) {\n                rectot = parseFloat(record[tot])\n            }\n            // else {\n            //     record[tot] = 0\n            // }\n        }\n        let name_f = tot + '_F'\n        let [sum, keys] = sumRow(unitBalance)\n        sum = parseFloat(sum)\n        // let name = 'DET_' + tot\n        // record[name] = sum\n\n        // begin fail logic\n        if (rectot === sum && sum != 0) {\n            record['ACTION'] = 'Go To: Main Routing'\n            global.set('action', 'Go To: Main Routing')\n        } else {\n            const tolerance = parseFloat(unitBalance['Tolerance'])\n            if (sum > 0 && rectot <= 0) {\n                record[tot] = sum\n                if (record[name_f] && record[name_f].length >= 3) {\n                    record[name_f] = record[name_f].substring(0, 2) + 'L' + record[name_f].substring(3);\n                } else if (record[name_f] && record[name_f].length >= 2) {\n                    record[name_f] = record[name_f].substring(0, 2) + 'L';\n                } else if (record[name_f] && record[name_f].length >= 1) {\n                    record[name_f] = record[name_f].substring(0, 1) + ' L';\n                } else {\n                    record[name_f] = '  L';\n                }\n            } else if (sum == 0 && rectot > 0) {\n                // raking(rectot, sum, keys, tolerance)\n                for (let i = 0; i < keys.length; i++) {\n                    let det_f = keys[i] + '_F'\n                    if (record[det_f] && record[det_f].length >= 3) {\n                        record[det_f] = record[det_f].substring(0, 2) + 'X' + record[det_f].substring(3);\n                    } else if (record[det_f] && record[det_f].length >= 2) {\n                        record[det_f] = record[det_f].substring(0, 2) + 'X';\n                    } else if (record[det_f] && record[det_f].length >= 1) {\n                        record[det_f] = record[det_f].substring(0, 1) + ' X';\n                    } else {\n                        record[det_f] = '  X';\n                    }\n                }\n            } else if (sum > 0 && rectot > 0) {\n                // check range\n                if ((Math.abs(rectot - sum) / rectot) <= tolerance) {\n                    let flag_check1 = ''\n                    try {\n                        if (['P', 'C', 'A', 'S', 'O', 'E', 'F'].includes(record[name_f].substring(1, 2))) {\n                            flag_check1 = 'Yes'\n                        }\n                    } catch {\n                        console.log('flag column does not exist: ' + name_f)\n                    }\n                    let flag_check2 = ''\n                    for (let i = 0; i < keys.length; i++) {\n                        let det_f = keys[i] + '_F'\n                        try {\n                            if (['P', 'C', 'A', 'S', 'O', 'E', 'F'].includes(record[det_f].substring(1, 2))) {\n                                flag_check2 = 'Yes'\n                            }\n                        } catch {\n                            console.log('flag column does not exist: ' + det_f)\n                        }\n                    }\n                    if (flag_check2 == 'Yes') {\n                        record[tot] = sum\n                        if (record[name_f] && record[name_f].length >= 3) {\n                            record[name_f] = record[name_f].substring(0, 2) + 'L' + record[name_f].substring(3);\n                        } else if (record[name_f] && record[name_f].length >= 2) {\n                            record[name_f] = record[name_f].substring(0, 2) + 'L';\n                        } else if (record[name_f] && record[name_f].length >= 1) {\n                            record[name_f] = record[name_f].substring(0, 1) + ' L';\n                        } else {\n                            record[name_f] = '  L';\n                        }\n                    } else {\n                        raking(rectot, sum, keys, tolerance)\n                        for (let i = 0; i < keys.length; i++) {\n                            let det_f = keys[i] + '_F'\n                            if (record[det_f] && record[det_f].length >= 3) {\n                                record[det_f] = record[det_f].substring(0, 2) + 'K' + record[det_f].substring(3);\n                            } else if (record[det_f] && record[det_f].length >= 2) {\n                                record[det_f] = record[det_f].substring(0, 2) + 'K';\n                            } else if (record[det_f] && record[det_f].length >= 1) {\n                                record[det_f] = record[det_f].substring(0, 1) + ' K';\n                            } else {\n                                record[det_f] = '  K';\n                            }\n                        }\n                    }\n                } else {\n                    // raking(rectot, sum, keys, tolerance)\n                    for (let i = 0; i < keys.length; i++) {\n                        let variable = keys[i]\n                        if (Number.isNaN(parseFloat(record[variable]))) {\n                            continue;\n                        }\n                        let det_f = keys[i] + '_F'\n                        if (record[det_f] && record[det_f].length >= 3) {\n                            record[det_f] = record[det_f].substring(0, 2) + 'X' + record[det_f].substring(3);\n                        } else if (record[det_f] && record[det_f].length >= 2) {\n                            record[det_f] = record[det_f].substring(0, 2) + 'X';\n                        } else if (record[det_f] && record[det_f].length >= 1) {\n                            record[det_f] = record[det_f].substring(0, 1) + ' X';\n                        } else {\n                            record[det_f] = '  X';\n                        }\n                    }\n                }\n            } else if (sum == 0 && rectot <= 0) {\n                if (record[name_f] && record[name_f].length >= 3) {\n                    record[name_f] = record[name_f].substring(0, 2) + 'X' + record[name_f].substring(3);\n                } else if (record[name_f] && record[name_f].length >= 2) {\n                    record[name_f] = record[name_f].substring(0, 2) + 'X';\n                } else if (record[name_f] && record[name_f].length >= 1) {\n                    record[name_f] = record[name_f].substring(0, 1) + ' X';\n                } else {\n                    record[name_f] = '  X';\n                }\n\n                for (let i = 0; i < keys.length; i++) {\n                    let det_f = keys[i] + '_F'\n                    if (record[det_f] && record[det_f].length >= 3) {\n                        record[det_f] = record[det_f].substring(0, 2) + 'X' + record[det_f].substring(3);\n                    } else if (record[det_f] && record[det_f].length >= 2) {\n                        record[det_f] = record[det_f].substring(0, 2) + 'X';\n                    } else if (record[det_f] && record[det_f].length >= 1) {\n                        record[det_f] = record[det_f].substring(0, 1) + ' X';\n                    } else {\n                        record[det_f] = '  X';\n                    }\n                }\n            } else {\n            }\n        }\n    }\n}\n\nrecord['ACTION'] = 'Go To: Main Routing'\nglobal.set('action', 'Go To: Main Routing')\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1340,
-        "y": 380,
-        "wires": [
-            [
-                "9270ac3c64d975ee"
-            ]
-        ]
-    },
-    {
-        "id": "62273bcb1ddd95ea",
-        "type": "subflow:0be109393cb5f28a",
-        "z": "8790b12c7efb6fa0",
-        "name": "",
-        "x": 830,
-        "y": 200,
-        "wires": [
-            [
-                "fe93ebc839bd5227"
-            ]
-        ]
-    },
-    {
-        "id": "b27f71ea12bf5696",
-        "type": "change",
-        "z": "8790b12c7efb6fa0",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload.lookup",
-                "pt": "msg",
-                "to": "{\"moduleName\":\"balance\",\"program\":\"aies\",\"unit_type\":\"estab\",\"params\":\"unit_balance\"}",
-                "tot": "json"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 550,
-        "y": 200,
-        "wires": [
-            [
-                "62273bcb1ddd95ea"
-            ]
-        ]
-    },
-    {
-        "id": "4d991871cc121830",
-        "type": "debug",
-        "z": "8790b12c7efb6fa0",
-        "name": "Results",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1360,
-        "y": 660,
-        "wires": []
-    },
-    {
-        "id": "9270ac3c64d975ee",
-        "type": "function",
-        "z": "8790b12c7efb6fa0",
-        "name": "Check and udpate Recipe",
-        "func": "// msg.payload.recipe.currentStepIndex = msg.payload.recipe.currentStepIndex + 1\nmsg.payload.facts =  msg.payload.csv\n// msg.payload.fact = msg.payload.csv[global.get(\"ptrModuleFacts\")] \n\n// msg.payload.results.fact = msg.payload.csv[global.get(\"ptrModuleFacts\")]\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1570,
-        "y": 280,
-        "wires": [
-            [
-                "4d991871cc121830",
-                "c481f6b945425e82",
-                "70c4debe9a1adfae"
-            ]
-        ]
-    },
-    {
-        "id": "c481f6b945425e82",
-        "type": "link out",
-        "z": "8790b12c7efb6fa0",
-        "name": "Output of Interactive mode",
-        "mode": "link",
-        "links": [
-            "8ad2ab7c27d8d248"
-        ],
-        "x": 1355,
-        "y": 580,
-        "wires": []
-    },
-    {
-        "id": "d389bc5bbb58e3cb",
-        "type": "link in",
-        "z": "8790b12c7efb6fa0",
-        "name": "Interactive Mode Test UI Input",
-        "links": [
-            "6c8827ce7a4c83d8"
-        ],
-        "x": 355,
-        "y": 300,
-        "wires": [
-            [
-                "b27f71ea12bf5696"
-            ]
-        ]
-    },
-    {
-        "id": "70c4debe9a1adfae",
-        "type": "link out",
-        "z": "8790b12c7efb6fa0",
-        "name": "link out 63",
-        "mode": "link",
-        "links": [
-            "7d91540d69ac16c1",
-            "688a39b3e0070fe9"
-        ],
-        "x": 1345,
-        "y": 520,
-        "wires": []
-    },
-    {
-        "id": "703c3a33c4d3fb46",
-        "type": "switch",
-        "z": "8790b12c7efb6fa0",
-        "name": "Exit Check",
-        "property": "action",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "Exit Edit",
-                "vt": "str"
-            },
-            {
-                "t": "neq",
-                "v": "Exit Edit",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 730,
-        "y": 280,
-        "wires": [
-            [
-                "70c4debe9a1adfae",
-                "c481f6b945425e82",
-                "4d991871cc121830"
-            ],
-            [
-                "cb91d01113e85c8f"
-            ]
-        ]
-    },
-    {
-        "id": "8c4f5376a2841311",
-        "type": "switch",
-        "z": "8790b12c7efb6fa0",
-        "name": "Exit Check",
-        "property": "action",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "Exit Edit",
-                "vt": "str"
-            },
-            {
-                "t": "neq",
-                "v": "Exit Edit",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 730,
-        "y": 380,
-        "wires": [
-            [
-                "70c4debe9a1adfae",
-                "c481f6b945425e82",
-                "4d991871cc121830"
-            ],
-            [
-                "83f06f426c2b3701"
-            ]
-        ]
-    },
-    {
-        "id": "fe93ebc839bd5227",
-        "type": "change",
-        "z": "8790b12c7efb6fa0",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "action",
-                "pt": "global",
-                "to": "\"\"",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1100,
-        "y": 200,
-        "wires": [
-            [
-                "ade7fc1412e3e6ed"
-            ]
-        ]
-    },
-    {
-        "id": "dc4798b8a9034e10",
-        "type": "subflow:20d530cc0b193752",
-        "z": "8790b12c7efb6fa0",
-        "name": "",
-        "x": 480,
-        "y": 1460,
-        "wires": [
-            [
-                "35b9c800d42ff73a"
-            ]
-        ]
-    },
-    {
-        "id": "35b9c800d42ff73a",
-        "type": "subflow:42be4655fd3a8c84",
-        "z": "8790b12c7efb6fa0",
-        "name": "",
-        "x": 710,
-        "y": 1460,
-        "wires": [
-            [
-                "a3ef7d2c9f62b38b"
-            ]
-        ]
-    },
-    {
-        "id": "03236197db128bd1",
-        "type": "subflow:b22812dba408ab8f",
-        "z": "8790b12c7efb6fa0",
-        "name": "",
-        "x": 1710,
-        "y": 1460,
-        "wires": [
-            [
-                "bd80eaa4d3e0b069"
-            ]
-        ]
-    },
-    {
-        "id": "bd80eaa4d3e0b069",
-        "type": "subflow:aadaa91727c0d579",
-        "z": "8790b12c7efb6fa0",
-        "name": "",
-        "x": 480,
-        "y": 1560,
-        "wires": [
-            [
-                "1b67e6657388118d"
-            ]
-        ]
-    },
-    {
-        "id": "77dcf5b1e0afb3a9",
-        "type": "subflow:998aa04bd1bb677d",
-        "z": "8790b12c7efb6fa0",
-        "name": "",
-        "x": 900,
-        "y": 1560,
-        "wires": [
-            [
-                "2a42027c1028f409"
-            ]
-        ]
-    },
-    {
-        "id": "1b67e6657388118d",
-        "type": "subflow:c79b244779411ead",
-        "z": "8790b12c7efb6fa0",
-        "name": "",
-        "x": 720,
-        "y": 1560,
-        "wires": [
-            [
-                "77dcf5b1e0afb3a9"
-            ]
-        ]
-    },
-    {
-        "id": "2a42027c1028f409",
-        "type": "subflow:89f071f1deb9a1b1",
-        "z": "8790b12c7efb6fa0",
-        "name": "",
-        "x": 1100,
-        "y": 1560,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "a3ef7d2c9f62b38b",
-        "type": "subflow:f9a2a2262f95bae3",
-        "z": "8790b12c7efb6fa0",
-        "name": "",
-        "x": 980,
-        "y": 1460,
-        "wires": [
-            [
-                "e1dd758b59c31f88"
-            ]
-        ]
-    },
-    {
-        "id": "e1dd758b59c31f88",
-        "type": "subflow:b93bf22bc3258992",
-        "z": "8790b12c7efb6fa0",
-        "name": "",
-        "x": 1290,
-        "y": 1460,
-        "wires": [
-            [
-                "afd7588524439212"
-            ]
-        ]
-    },
-    {
-        "id": "afd7588524439212",
-        "type": "subflow:bfe1ab19e0cbe2cf",
-        "z": "8790b12c7efb6fa0",
-        "name": "",
-        "x": 1510,
-        "y": 1460,
-        "wires": [
-            [
-                "03236197db128bd1"
             ]
         ]
     },
@@ -25461,6 +24955,757 @@
         "wires": [
             [
                 "bf94fdbc220bc178"
+            ]
+        ]
+    },
+    {
+        "id": "d9650115f85479a9",
+        "type": "link in",
+        "z": "112a2e5b60c3f3a8",
+        "name": "link in 18",
+        "links": [
+            "f14b49f36a5b83fc",
+            "ae36b936ef8f7cc6"
+        ],
+        "x": 365,
+        "y": 180,
+        "wires": [
+            [
+                "f924038bf9ba3790"
+            ]
+        ]
+    },
+    {
+        "id": "434436c270b7f283",
+        "type": "link out",
+        "z": "112a2e5b60c3f3a8",
+        "name": "link out classification",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9"
+        ],
+        "x": 1105,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "bd4aeaec47bb4136",
+        "type": "subflow:bfe1ab19e0cbe2cf",
+        "z": "112a2e5b60c3f3a8",
+        "name": "",
+        "x": 990,
+        "y": 180,
+        "wires": [
+            [
+                "434436c270b7f283"
+            ]
+        ]
+    },
+    {
+        "id": "f924038bf9ba3790",
+        "type": "change",
+        "z": "112a2e5b60c3f3a8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.lookup",
+                "pt": "msg",
+                "to": "{\"moduleName\":\"classification\",\"program\":\"aies\",\"unit_type\":\"estab\",\"params\":\"naics_alt,naics_validation\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 530,
+        "y": 180,
+        "wires": [
+            [
+                "9d7b5173ac8dfe70"
+            ]
+        ]
+    },
+    {
+        "id": "9d7b5173ac8dfe70",
+        "type": "subflow:0be109393cb5f28a",
+        "z": "112a2e5b60c3f3a8",
+        "name": "",
+        "x": 790,
+        "y": 180,
+        "wires": [
+            [
+                "bd4aeaec47bb4136",
+                "c42eeec0262ea39a"
+            ]
+        ]
+    },
+    {
+        "id": "172d7af636acdeb4",
+        "type": "debug",
+        "z": "112a2e5b60c3f3a8",
+        "name": "debug 119",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.cache",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1310,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "c42eeec0262ea39a",
+        "type": "function",
+        "z": "112a2e5b60c3f3a8",
+        "name": "function 40",
+        "func": "msg.payload.cache = global.get(\"lookupCache\");\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1050,
+        "y": 100,
+        "wires": [
+            [
+                "172d7af636acdeb4"
+            ]
+        ]
+    },
+    {
+        "id": "ade7fc1412e3e6ed",
+        "type": "function",
+        "z": "8790b12c7efb6fa0",
+        "name": "BR Stat",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\nfunction A(msg) {\n    msg.payload.csv[record_idx].TABSTAT = \"N\";\n    msg.payload.csv[record_idx].NONTABFL = \"D\";\n    msg.payload.csv[record_idx].ACTION = \"Exit Edit\";\n    global.set('action', 'Exit Edit')\n}\n\n// Is RECORD_TYP_TXT in ('10','20','3O','90')\nif ([\"10\", \"20\", \"30\", \"90\"].includes(String(record.RECORD_TYP_TXT))) {\n    msg.payload.DEBUG_STATUS = \"RECORD_TYP_TXT-10-20-30-90-true\"\n    // Set TABSTAT and NONTABFL variables\n    msg.payload.csv[record_idx].TABSTAT = \"Y\";\n    msg.payload.csv[record_idx].NONTABFL = null;\n\n    // Is RECORD_TYP_TXT in ('10','20','90')\n    if ([\"10\", \"20\", \"90\"].includes(String(record.RECORD_TYP_TXT))) {\n        // Is BR_STAT equal to \"N\"\n        if (record.BR_STAT === \"N\") {\n            A(msg); // Go to A\n        } else { // BR_STAT not equal to \"N\"\n            // Is RECORD_TYP_TXT \"20\" or \"90\"\n            if ([\"20\", \"90\"].includes(String(record.RECORD_TYP_TXT))) {\n                msg.payload.csv[record_idx].ACTION = \"Go to main Routing\";\n                return msg;\n\n            } else { // RECORD_TYP_TXT not \"20\" or \"90\"\n                msg.payload.csv[record_idx].ACTION = \"Go to main Routing\";\n                return msg;\n            }\n        }\n\n    } else { // RECORD_TYP_TXT not in ('10','20','3O','90')\n        if (record.KAU_STAT === \"N\") {\n            A(msg); // Go to A\n        } else {\n            msg.payload.csv[record_idx].ACTION = \"Go to main Routing\";\n            global.set('action', 'Go to main Routing')\n            return msg;\n        }\n    }\n\n} else {  // RECORD_TYP_TXT not in ('10','20','3O','90')\n    msg.payload.record_idx = record_idx\n    msg.payload.DEBUG_STATUS = \"RECORD_TYP_TXT-10-20-30-90-false\"\n    msg.payload.csv[record_idx].ACTION = \"ERROR\";\n    global.set('action', 'ERROR')\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 280,
+        "wires": [
+            [
+                "703c3a33c4d3fb46"
+            ]
+        ]
+    },
+    {
+        "id": "cb91d01113e85c8f",
+        "type": "function",
+        "z": "8790b12c7efb6fa0",
+        "name": "critical error",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nfunction setResult() {\n    record['TABSTAT'] = \"N\";\n    record['NONTABFL'] = \"D\";\n    record['ACTION'] = \"Exit Edit\";\n    global.set('action', 'Exit Edit')\n}\n\n// function parseToNum(val) {\n//     return isNaN(val) ? 0 : parseInt(val, 10);\n// }\nfunction naicsSectorCheck() {\n    let result =\n        parseFloat(record['PAY_ANN_VAL']) +\n        parseFloat(record['EMP_MAR12_NUM']) +\n        parseFloat(record['PAY_QTR1_VAL']) +\n        parseFloat(record['ECPAYANN']) +\n        parseFloat(record['ECPAYQ1']) +\n        parseFloat(record['ECEMPQ1']) +\n        parseFloat(record['ECPAYANL']);\n\n    if (parseFloat(record['NAICS_SECTOR_OLD_NUM']) === 31) {\n        result = parseFloat(result) + parseFloat(record['EXPS_TEMPSTAF_VAL']);\n    }\n    return result\n}\nlet data = naicsSectorCheck();\nrecord['DATA'] = data\n\nif (record.hasOwnProperty('COV_CHG_CODE') &&\n    [\"111\", \"131\", \"791\"].includes(record['COV_CHG_CODE']?.toString()) &&\n    new Date(record['COV_CHG_DATE']) <=\n    new Date(\"01-01-\" + record.REF_PER.substring(0, 4)) &&\n    data == 0\n) {\n    setResult();\n    return msg;\n\n} else if (record.hasOwnProperty('COV_CHG_CODE') && [\"181\", \"201\", \"801\", \"091\", \"121\", \"171\"].includes(record['COV_CHG_CODE']?.toString())) {\n    setResult();\n    return msg;\n} else {\n    record['ACTION'] = \"Go To Main Routing\";\n    global.set('action', 'Go To Main Routing')\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 990,
+        "y": 280,
+        "wires": [
+            [
+                "8c4f5376a2841311"
+            ]
+        ]
+    },
+    {
+        "id": "f5168b892485e327",
+        "type": "link in",
+        "z": "8790b12c7efb6fa0",
+        "name": "link in gotQBES",
+        "links": [
+            "8eb6f6b4ca5cb88d",
+            "35871e68a9f50691"
+        ],
+        "x": 355,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "83f06f426c2b3701",
+        "type": "function",
+        "z": "8790b12c7efb6fa0",
+        "name": "Unit Balance Function",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nmsg.cache = global.get(\"lookupCache\").data.find(\n    item =>\n        item.module === \"balance\" &&\n        item.param === \"unit_balance\" &&\n        item.program === \"aies\" &&\n        item.unit_type === \"estab\"\n)?.json_values;\n\nfunction checkNaics(data, naics, rec_typ, rec_typop, rec_tax) {\n    let list = data['NAICS']\n    let unit = data['UNIT TYPE']\n    let typop = data['TYPOP']\n    let tax = data['TAXSTAT']\n    let rectyp = rec_typ\n    if (['20', '90', 20, 90].includes(rectyp)) {\n        rec_typ = 'ESTAB'\n    } else if (['30', 30].includes(rectyp)) {\n        rec_typ = 'KAU'\n    } else if ([10, '10'].includes(rectyp)) {\n        rec_typ = 'ENT'\n    }\n    if ([null, undefined, 'null', 'undefined'].includes(typop)) {\n        rec_typop = typop\n    }\n    if ([null, undefined, 'null', 'undefined'].includes(tax)) {\n        rec_tax = tax\n    }\n    // console.log(rec_tax, tax, rec_typop, typop)\n    if (rec_typ === unit && rec_tax === tax && rec_typop === typop) {\n        if ([\"ALL\", \"All\"].includes(list)) {\n            return (true);\n        } else {\n            list = list.replace(/ /g, \"\");\n            list = list.replace(/'/g, \"\");\n            var array = list.split(',')\n\n            if (array.find(r => naics.startsWith(r))) {\n                return (true);\n            } else {\n                return (false)\n            }\n        }\n    }\n}\n\nfunction sumRow(data) {\n    let sum = 0;\n    var keys = [];\n    for (var key in data) {\n        if (key.startsWith('DETAIL') && data[key] != null) {\n            let variable = data[key]\n            // console.log(variable)\n            if (!Number.isNaN(parseFloat(record[variable]))) {\n                sum = parseFloat(sum) + parseFloat(record[variable])\n            }\n            // else {\n            //     record[variable] = 0\n            // }\n            keys.push(variable)\n        }\n    }\n    return [sum, keys];\n}\n\nfunction raking(rectot, sum, keys, tol) {\n    if ((Math.abs(rectot - sum) / rectot) <= tol) {\n        keys.sort((a, b) => record[b] - record[a]);\n        let remainder = 0\n        for (let i = 0; i < keys.length; i++) {\n            let num1 = (rectot / sum) * parseFloat(record[keys[i]]) + remainder\n            let num2 = Math.round(num1)\n            remainder = num1 - num2\n            record[keys[i]] = num2\n        }\n    }\n}\n\nlet naics = record['NAICS_NUM']\nnaics = '' + naics\n\nconst RECORD_TYP_TXT = record['RECORD_TYP_TXT']\nlet TYPOP = record['TYPOP_WHSL_OLD_NUM']\nlet TAXSTAT = record['TAXSTAT']\n\nfor (let i in msg.cache['UNIT_BALANCE']) {\n    let unitBalance = msg.cache['UNIT_BALANCE'][i]\n    if (checkNaics(unitBalance, naics, RECORD_TYP_TXT, TYPOP, TAXSTAT)) {\n        let tot = unitBalance['TOTAL']\n        let rectot = 0\n        if ([100, '100'].includes(tot)) {\n            rectot = 100\n        } else {\n            if (!Number.isNaN(parseFloat(record[tot]))) {\n                rectot = parseFloat(record[tot])\n            }\n            // else {\n            //     record[tot] = 0\n            // }\n        }\n        let name_f = tot + '_F'\n        let [sum, keys] = sumRow(unitBalance)\n        sum = parseFloat(sum)\n        // let name = 'DET_' + tot\n        // record[name] = sum\n\n        // begin fail logic\n        if (rectot === sum && sum != 0) {\n            record['ACTION'] = 'Go To: Main Routing'\n            global.set('action', 'Go To: Main Routing')\n        } else {\n            const tolerance = parseFloat(unitBalance['Tolerance'])\n            if (sum > 0 && rectot <= 0) {\n                record[tot] = sum\n                if (record[name_f] && record[name_f].length >= 3) {\n                    record[name_f] = record[name_f].substring(0, 2) + 'L' + record[name_f].substring(3);\n                } else if (record[name_f] && record[name_f].length >= 2) {\n                    record[name_f] = record[name_f].substring(0, 2) + 'L';\n                } else if (record[name_f] && record[name_f].length >= 1) {\n                    record[name_f] = record[name_f].substring(0, 1) + ' L';\n                } else {\n                    record[name_f] = '  L';\n                }\n            } else if (sum == 0 && rectot > 0) {\n                // raking(rectot, sum, keys, tolerance)\n                for (let i = 0; i < keys.length; i++) {\n                    let det_f = keys[i] + '_F'\n                    if (record[det_f] && record[det_f].length >= 3) {\n                        record[det_f] = record[det_f].substring(0, 2) + 'X' + record[det_f].substring(3);\n                    } else if (record[det_f] && record[det_f].length >= 2) {\n                        record[det_f] = record[det_f].substring(0, 2) + 'X';\n                    } else if (record[det_f] && record[det_f].length >= 1) {\n                        record[det_f] = record[det_f].substring(0, 1) + ' X';\n                    } else {\n                        record[det_f] = '  X';\n                    }\n                }\n            } else if (sum > 0 && rectot > 0) {\n                // check range\n                if ((Math.abs(rectot - sum) / rectot) <= tolerance) {\n                    let flag_check1 = ''\n                    try {\n                        if (['P', 'C', 'A', 'S', 'O', 'E', 'F'].includes(record[name_f].substring(1, 2))) {\n                            flag_check1 = 'Yes'\n                        }\n                    } catch {\n                        console.log('flag column does not exist: ' + name_f)\n                    }\n                    let flag_check2 = ''\n                    for (let i = 0; i < keys.length; i++) {\n                        let det_f = keys[i] + '_F'\n                        try {\n                            if (['P', 'C', 'A', 'S', 'O', 'E', 'F'].includes(record[det_f].substring(1, 2))) {\n                                flag_check2 = 'Yes'\n                            }\n                        } catch {\n                            console.log('flag column does not exist: ' + det_f)\n                        }\n                    }\n                    if (flag_check2 == 'Yes') {\n                        record[tot] = sum\n                        if (record[name_f] && record[name_f].length >= 3) {\n                            record[name_f] = record[name_f].substring(0, 2) + 'L' + record[name_f].substring(3);\n                        } else if (record[name_f] && record[name_f].length >= 2) {\n                            record[name_f] = record[name_f].substring(0, 2) + 'L';\n                        } else if (record[name_f] && record[name_f].length >= 1) {\n                            record[name_f] = record[name_f].substring(0, 1) + ' L';\n                        } else {\n                            record[name_f] = '  L';\n                        }\n                    } else {\n                        raking(rectot, sum, keys, tolerance)\n                        for (let i = 0; i < keys.length; i++) {\n                            let det_f = keys[i] + '_F'\n                            if (record[det_f] && record[det_f].length >= 3) {\n                                record[det_f] = record[det_f].substring(0, 2) + 'K' + record[det_f].substring(3);\n                            } else if (record[det_f] && record[det_f].length >= 2) {\n                                record[det_f] = record[det_f].substring(0, 2) + 'K';\n                            } else if (record[det_f] && record[det_f].length >= 1) {\n                                record[det_f] = record[det_f].substring(0, 1) + ' K';\n                            } else {\n                                record[det_f] = '  K';\n                            }\n                        }\n                    }\n                } else {\n                    // raking(rectot, sum, keys, tolerance)\n                    for (let i = 0; i < keys.length; i++) {\n                        let variable = keys[i]\n                        if (Number.isNaN(parseFloat(record[variable]))) {\n                            continue;\n                        }\n                        let det_f = keys[i] + '_F'\n                        if (record[det_f] && record[det_f].length >= 3) {\n                            record[det_f] = record[det_f].substring(0, 2) + 'X' + record[det_f].substring(3);\n                        } else if (record[det_f] && record[det_f].length >= 2) {\n                            record[det_f] = record[det_f].substring(0, 2) + 'X';\n                        } else if (record[det_f] && record[det_f].length >= 1) {\n                            record[det_f] = record[det_f].substring(0, 1) + ' X';\n                        } else {\n                            record[det_f] = '  X';\n                        }\n                    }\n                }\n            } else if (sum == 0 && rectot <= 0) {\n                if (record[name_f] && record[name_f].length >= 3) {\n                    record[name_f] = record[name_f].substring(0, 2) + 'X' + record[name_f].substring(3);\n                } else if (record[name_f] && record[name_f].length >= 2) {\n                    record[name_f] = record[name_f].substring(0, 2) + 'X';\n                } else if (record[name_f] && record[name_f].length >= 1) {\n                    record[name_f] = record[name_f].substring(0, 1) + ' X';\n                } else {\n                    record[name_f] = '  X';\n                }\n\n                for (let i = 0; i < keys.length; i++) {\n                    let det_f = keys[i] + '_F'\n                    if (record[det_f] && record[det_f].length >= 3) {\n                        record[det_f] = record[det_f].substring(0, 2) + 'X' + record[det_f].substring(3);\n                    } else if (record[det_f] && record[det_f].length >= 2) {\n                        record[det_f] = record[det_f].substring(0, 2) + 'X';\n                    } else if (record[det_f] && record[det_f].length >= 1) {\n                        record[det_f] = record[det_f].substring(0, 1) + ' X';\n                    } else {\n                        record[det_f] = '  X';\n                    }\n                }\n            } else {\n            }\n        }\n    }\n}\n\nrecord['ACTION'] = 'Go To: Main Routing'\nglobal.set('action', 'Go To: Main Routing')\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1340,
+        "y": 380,
+        "wires": [
+            [
+                "9270ac3c64d975ee"
+            ]
+        ]
+    },
+    {
+        "id": "62273bcb1ddd95ea",
+        "type": "subflow:0be109393cb5f28a",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "x": 830,
+        "y": 200,
+        "wires": [
+            [
+                "fe93ebc839bd5227"
+            ]
+        ]
+    },
+    {
+        "id": "b27f71ea12bf5696",
+        "type": "change",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.lookup",
+                "pt": "msg",
+                "to": "{\"moduleName\":\"balance\",\"program\":\"aies\",\"unit_type\":\"estab\",\"params\":\"unit_balance\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 550,
+        "y": 200,
+        "wires": [
+            [
+                "62273bcb1ddd95ea"
+            ]
+        ]
+    },
+    {
+        "id": "4d991871cc121830",
+        "type": "debug",
+        "z": "8790b12c7efb6fa0",
+        "name": "Results",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1360,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "9270ac3c64d975ee",
+        "type": "function",
+        "z": "8790b12c7efb6fa0",
+        "name": "Check and udpate Recipe",
+        "func": "// msg.payload.recipe.currentStepIndex = msg.payload.recipe.currentStepIndex + 1\nmsg.payload.facts =  msg.payload.csv\n// msg.payload.fact = msg.payload.csv[global.get(\"ptrModuleFacts\")] \n\n// msg.payload.results.fact = msg.payload.csv[global.get(\"ptrModuleFacts\")]\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1570,
+        "y": 280,
+        "wires": [
+            [
+                "4d991871cc121830",
+                "70c4debe9a1adfae",
+                "087ba90edcad68a5"
+            ]
+        ]
+    },
+    {
+        "id": "c481f6b945425e82",
+        "type": "link out",
+        "z": "8790b12c7efb6fa0",
+        "name": "Output of Interactive mode",
+        "mode": "link",
+        "links": [
+            "8ad2ab7c27d8d248"
+        ],
+        "x": 1805,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "d389bc5bbb58e3cb",
+        "type": "link in",
+        "z": "8790b12c7efb6fa0",
+        "name": "Interactive Mode Test UI Input",
+        "links": [
+            "6c8827ce7a4c83d8"
+        ],
+        "x": 355,
+        "y": 300,
+        "wires": [
+            [
+                "b27f71ea12bf5696"
+            ]
+        ]
+    },
+    {
+        "id": "70c4debe9a1adfae",
+        "type": "link out",
+        "z": "8790b12c7efb6fa0",
+        "name": "link out 63",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9"
+        ],
+        "x": 1345,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "703c3a33c4d3fb46",
+        "type": "switch",
+        "z": "8790b12c7efb6fa0",
+        "name": "Exit Check",
+        "property": "action",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 730,
+        "y": 280,
+        "wires": [
+            [
+                "70c4debe9a1adfae",
+                "4d991871cc121830",
+                "087ba90edcad68a5"
+            ],
+            [
+                "cb91d01113e85c8f"
+            ]
+        ]
+    },
+    {
+        "id": "8c4f5376a2841311",
+        "type": "switch",
+        "z": "8790b12c7efb6fa0",
+        "name": "Exit Check",
+        "property": "action",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 730,
+        "y": 380,
+        "wires": [
+            [
+                "70c4debe9a1adfae",
+                "4d991871cc121830",
+                "087ba90edcad68a5"
+            ],
+            [
+                "83f06f426c2b3701"
+            ]
+        ]
+    },
+    {
+        "id": "fe93ebc839bd5227",
+        "type": "change",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "action",
+                "pt": "global",
+                "to": "\"\"",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1100,
+        "y": 200,
+        "wires": [
+            [
+                "ade7fc1412e3e6ed"
+            ]
+        ]
+    },
+    {
+        "id": "dc4798b8a9034e10",
+        "type": "subflow:20d530cc0b193752",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "x": 680,
+        "y": 840,
+        "wires": [
+            [
+                "121f33ae272cb49a"
+            ]
+        ]
+    },
+    {
+        "id": "35b9c800d42ff73a",
+        "type": "subflow:42be4655fd3a8c84",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "x": 1050,
+        "y": 880,
+        "wires": [
+            [
+                "df590f50a626fa0c"
+            ]
+        ]
+    },
+    {
+        "id": "03236197db128bd1",
+        "type": "subflow:b22812dba408ab8f",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "x": 1870,
+        "y": 1040,
+        "wires": [
+            [
+                "bd80eaa4d3e0b069"
+            ]
+        ]
+    },
+    {
+        "id": "bd80eaa4d3e0b069",
+        "type": "subflow:aadaa91727c0d579",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "x": 1340,
+        "y": 1160,
+        "wires": [
+            [
+                "1b67e6657388118d"
+            ]
+        ]
+    },
+    {
+        "id": "77dcf5b1e0afb3a9",
+        "type": "subflow:998aa04bd1bb677d",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "x": 1760,
+        "y": 1160,
+        "wires": [
+            [
+                "2a42027c1028f409"
+            ]
+        ]
+    },
+    {
+        "id": "1b67e6657388118d",
+        "type": "subflow:c79b244779411ead",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "x": 1580,
+        "y": 1160,
+        "wires": [
+            [
+                "77dcf5b1e0afb3a9"
+            ]
+        ]
+    },
+    {
+        "id": "2a42027c1028f409",
+        "type": "subflow:89f071f1deb9a1b1",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "x": 1960,
+        "y": 1160,
+        "wires": [
+            [
+                "6c2616b9f8b16717"
+            ]
+        ]
+    },
+    {
+        "id": "a3ef7d2c9f62b38b",
+        "type": "subflow:f9a2a2262f95bae3",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "x": 1500,
+        "y": 920,
+        "wires": [
+            [
+                "e1dd758b59c31f88"
+            ]
+        ]
+    },
+    {
+        "id": "e1dd758b59c31f88",
+        "type": "subflow:b93bf22bc3258992",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "x": 1450,
+        "y": 1040,
+        "wires": [
+            [
+                "afd7588524439212"
+            ]
+        ]
+    },
+    {
+        "id": "afd7588524439212",
+        "type": "subflow:bfe1ab19e0cbe2cf",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "x": 1670,
+        "y": 1040,
+        "wires": [
+            [
+                "03236197db128bd1"
+            ]
+        ]
+    },
+    {
+        "id": "6c2616b9f8b16717",
+        "type": "link out",
+        "z": "8790b12c7efb6fa0",
+        "name": "Output of Interactive mode",
+        "mode": "link",
+        "links": [
+            "8ad2ab7c27d8d248"
+        ],
+        "x": 2095,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "746909370ced9c62",
+        "type": "link in",
+        "z": "8790b12c7efb6fa0",
+        "name": "link in gotQBES",
+        "links": [
+            "8eb6f6b4ca5cb88d",
+            "35871e68a9f50691"
+        ],
+        "x": 545,
+        "y": 760,
+        "wires": [
+            [
+                "d8671e4aec2afb9f"
+            ]
+        ]
+    },
+    {
+        "id": "087ba90edcad68a5",
+        "type": "function",
+        "z": "8790b12c7efb6fa0",
+        "name": "function 38",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1670,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d8671e4aec2afb9f",
+        "type": "function",
+        "z": "8790b12c7efb6fa0",
+        "name": "Fetch all params",
+        "func": "msg.url = 'http://a301cb45559c445acaec11ab01bbbee1-2115632777.us-gov-east-1.elb.amazonaws.com/api/params/params'\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 760,
+        "wires": [
+            [
+                "22b88348e6fa15f7"
+            ]
+        ]
+    },
+    {
+        "id": "22b88348e6fa15f7",
+        "type": "http request",
+        "z": "8790b12c7efb6fa0",
+        "name": "Lookup data API",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "basic",
+        "senderr": false,
+        "headers": [],
+        "x": 950,
+        "y": 760,
+        "wires": [
+            [
+                "ce824046503d2403"
+            ]
+        ]
+    },
+    {
+        "id": "ce824046503d2403",
+        "type": "function",
+        "z": "8790b12c7efb6fa0",
+        "name": "cache result",
+        "func": "let cache = global.get(\"lookupCache\");\ncache = Array.isArray(cache?.data) ? cache : {\"data\":[]}\nif (msg.payload.status === \"success\") {\n    cache.data = msg.payload.data\n}\nglobal.set(\"lookupCache\", cache)\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1150,
+        "y": 760,
+        "wires": [
+            [
+                "b29f65e4584b8767"
+            ]
+        ]
+    },
+    {
+        "id": "b29f65e4584b8767",
+        "type": "change",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "action",
+                "pt": "global",
+                "to": "\"\"",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1360,
+        "y": 760,
+        "wires": [
+            [
+                "dc4798b8a9034e10"
+            ]
+        ]
+    },
+    {
+        "id": "121f33ae272cb49a",
+        "type": "switch",
+        "z": "8790b12c7efb6fa0",
+        "name": "Exit Check",
+        "property": "action",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 870,
+        "y": 840,
+        "wires": [
+            [
+                "6c2616b9f8b16717"
+            ],
+            [
+                "35b9c800d42ff73a"
+            ]
+        ]
+    },
+    {
+        "id": "df590f50a626fa0c",
+        "type": "switch",
+        "z": "8790b12c7efb6fa0",
+        "name": "Exit Check",
+        "property": "action",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1230,
+        "y": 880,
+        "wires": [
+            [
+                "6c2616b9f8b16717"
+            ],
+            [
+                "a3ef7d2c9f62b38b"
             ]
         ]
     }
