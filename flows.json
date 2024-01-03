@@ -6780,7 +6780,7 @@
         "type": "http request",
         "z": "e28cd8ccfbe21b33",
         "name": "",
-        "method": "GET",
+        "method": "POST",
         "ret": "obj",
         "paytoqs": "ignore",
         "url": "",
