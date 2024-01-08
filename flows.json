@@ -3009,9 +3009,7 @@
             "d394b61bcc4755e6"
         ],
         "x": 14,
-        "y": 939,
-        "w": 1532,
-        "h": 82
+        "y": 939
     },
     {
         "id": "ef50b77b253a7883",
@@ -3031,9 +3029,7 @@
             "d587f5de3f4014c8"
         ],
         "x": 14,
-        "y": 239,
-        "w": 1792,
-        "h": 182
+        "y": 239
     },
     {
         "id": "62708d0bbe922798",
@@ -3057,9 +3053,7 @@
             "58df41cd8e54a653"
         ],
         "x": 14,
-        "y": 519,
-        "w": 1432,
-        "h": 322
+        "y": 519
     },
     {
         "id": "19463268a6c67561",
@@ -3077,8 +3071,6 @@
         ],
         "x": 14,
         "y": 99,
-        "w": 1432,
-        "h": 82,
         "info": "# Rules from Parameter Files"
     },
     {
@@ -7558,8 +7550,9 @@
         "type": "function",
         "z": "fbb1e70dfe5fe82f",
         "name": "NAPCS BL ROUNDING",
-        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nfunction setCharAt(str, index, chr) {\n    if ([null, undefined].includes(str)) {\n        let newstr = ''\n        for (let i = 0; i < index; i++) {\n            newstr = newstr + ' ';\n        }\n        newstr = newstr + chr\n        return newstr;\n    } else {\n        if (index > str.length - 1) {\n            let addstr = index - str.length\n            let newstr = str\n            for (let i = 0; i < addstr; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            return str.substring(0, index) + chr + str.substring(index + 1);\n        }\n    }\n}\nfunction NAPCSBLRounding() {\n    // Create Table \n    record?.PROD_CODE \n    record?.RCPT_TOT_VAL\n    record?.PROD_CODE_MF\n    \n    record.ACTION = 'Return to Evaluate Details Valuation Methods'\n}\n\nNAPCSBLRounding()\nreturn msg\n",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nlet id = record.REPORTING_ID\nlet allData = msg.payload.csv;\nlet newarr = []\nlet newarr2 = []\nlet j = 0\nlet k = 0\nfor (let i in allData) {\n    let row = allData[i]\n    if (row.REPORTING_ID == id) {\n        if (row.PROD_CODE) {\n            if (row.NAPCSCODE_MF == 'Y') {\n                newarr[j] = row\n                j = j + 1\n            } else {\n                newarr2[k] = row\n                k = k + 1\n            }\n        }\n    }\n}\nnewarr.sort((a, b) => a.PROD_CODE_VAL - b.PROD_CODE_VAL);\nnewarr2.sort((a, b) => b.PROD_CODE_VAL - a.PROD_CODE_VAL);\nnewarr = newarr.concat(newarr2)\n\nlet remainder = 0\nfor (let i in newarr) {\n    let row = newarr[i]\n    let adjusted = parseFloat(row?.PROD_CODE_VAL) + remainder\n    let rounded = Math.round(adjusted)\n    if (row?.NAPCSCODE_MF == 'Y' && rounded == 0) {\n        rounded = 1\n    } else if (rounded < 0) {\n        rounded = 0\n    }\n    remainder = adjusted - rounded\n    // row.EXACT, row.ADJUSTED, row.ROUNDED, row.FRACTIONAL are for testing purposes only\n    row.EXACT = row?.PROD_CODE_VAL\n    row.ADJUSTED = adjusted\n    row.ROUNDED = rounded\n    row.FRACTIONAL = remainder\n    row.PROD_CODE_VAL = rounded\n    newarr[i] = row\n}\n\nreturn msg\n",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
