@@ -3129,7 +3129,9 @@
             "5bf7f51448d5e055"
         ],
         "x": 14,
-        "y": 599
+        "y": 599,
+        "w": 2232,
+        "h": 1882
     },
     {
         "id": "302cb8040ecade52",
@@ -3145,7 +3147,9 @@
             "a47c991027033263"
         ],
         "x": 714,
-        "y": 719
+        "y": 719,
+        "w": 372,
+        "h": 82
     },
     {
         "id": "d1e0f39ddacfeb20",
@@ -7452,7 +7456,7 @@
         "type": "function",
         "z": "d32a58c0544f501c",
         "name": "NAPCS Balance",
-        "func": "// try{\n//     let record_idx = global.get(\"ptrModuleFacts\");\n//     let record = msg.payload.csv[record_idx];\n\n//     const setCharAt = (str, index, char) => {\n//         if (index > str.length - 1) return str.padEnd(index, ' ') + char;\n//         return str.substr(0, index) + char + str.substr(index + char.length);\n//     };\n\n//     msg.cache = global.get(\"lookupCache\")\n//         .data.find(\n//             item =>\n//                 item.module === \"napcs\" &&\n//                 item.param === 'napcs_balance' &&\n//                 item.program === \"aies\" &&\n//                 item.unit_type === \"all\"\n//         )?.json_values;\n\n//     var jsonData = msg.cache\n\n//     function NAPCSBalancing() {\n//         try {\n//             if (record.NAICS_SECTOR === '31' && record.SUBSAMP_IND_TXT !== 'MC') {\n//                 if (record.NAPCS_IND === undefined || record.NAPCS_IND === null) {\n//                     if (record.HISTSTAT === 'Y' &&\n//                         record.EC_NAPCS_IND === 'U' &&\n//                         (parseInt(record.EC_NAPCS_BLTOT) > 0) &&\n//                         (parseInt(record.EC_RCPT_TOT_VAL) > 0) &&\n//                         (parseInt(record.RCPT_TOT_VAL) > 0) &&\n//                         record.NAPCSIMP === 'Y') {\n//                         if (record.EC_REPORTING_ID === record.REPORTING_ID &&\n//                             record.EC_REF_PER === '2022U1' &&\n//                             (record.EC_NAPCS_USABLE !== 'I' || record.EC_NAPCS_USABLE !== 'D' || record.EC_NAPCS_USABLE !== 'X') &&\n//                             (parseInt(record.EC_NAPCS_PROD_CODE_VAL) > 0) &&\n//                             record['EC_NAPCS_PROD_CODE'].substring(0, 7) !== '9000000') {\n//                             record.NAPCSIND = 'U'\n//                             record.NAPCSIMP = 'Y'\n//                             record.PROD_CODE = record.EC_NAPCS_PROD_CODE\n//                             record.USABLE = 'U'\n//                             record.PROD_CODE_VAL = (parseFloat(record.EC_NAPCS_PROD_CODE_VAL) * (\n//                                 parseFloat(record.RCPT_TOT_VAL)) /\n//                                 parseFloat(record.EC_RCPT_TOT_VAL))\n//                             record.REPORTING_ID = record.REPORTING_ID\n//                             record.REF_PER = record.REF_PER\n//                             record.PROD_CODE_F = setCharAt(record.PROD_CODE_F.toString(), 2, 'H');\n//                         }\n//                         if ((parseInt(record.EC_NAPCS_PROD_CODE_VAL) > 0) &&\n//                             record['EC_NAPCS_PROD_CODE'].substring(0, 7) === '9000000') {\n//                             record.NAPCS_IND = 'U'\n//                             record.NAPCS_IMP = 'Y'\n//                             record.PROD_CODE = record.EC_NAPCS_PROD_CODE\n//                             record.USABLE = 'J'\n//                             record.PROD_CODE_VAL = (parseFloat(record.EC_NAPCS_PROD_CODE_VAL) *\n//                                 (parseFloat(record.RCPT_TOT_VAL)) / parseFloat(record.EC_RCPT_TOT_VAL))\n//                             record.REPORTING_ID = record.REPORTING_ID\n//                             record.REF_PER = record.REF_PER\n//                             record.PROD_CODE_F = setCharAt(record.PROD_CODE_F.toString(), 2, 'H');\n//                         }\n//                         NapcsSum()\n//                     }\n//                     else {\n//                         NAPCSBalancepathB()\n//                     }\n//                 }\n//                 else {\n//                     NAPCSBalancepathA()\n//                 }\n//             }\n//             else {\n//                 record['ACTION'] = 'Go To main Routing'\n//             }\n//         }\n//         catch (e) {\n//             if (!(e instanceof Error)) {\n//                 e = new Error(e)\n//             }\n//             console.error(e.message)\n//         }\n//     }\n\n//     function NapcsSum() {\n//         for (let index = 0; index < jsonData.NAPCS_BALANCE.length; index++) {\n//             if (jsonData.NAPCS_BALANCE[index].PROD_CODE.substr(7, 3) === '000') {\n//                 record.NAPCS_BLTOT = parseInt(record.NAPCS_BLTOT) + parseInt(jsonData.NAPCS_BALANCE[index].PROD_CODE_VAL)\n//             }\n//             else {\n//                 break;\n//             }\n//         }\n//         NAPCSBalancepathA()\n//     }\n\n//     function NAPCSBalancepathA() {\n//         // call Balancing Module\n//         if (record.NAPCS_IND === 'U') {\n//             // call BL Rounding Module\n//         }\n//         // for Each Prod_code on record\n//         if (parseInt(record.PROD_CODE_VAL) === 0) {\n//             record.USABLE = 'D'\n//         }\n//         // Recalculate NAPCS Field Module\n//         if (parseInt(record.NAPCS_BAL) !== 0 || record.NAPCS_IND === 'U') {\n//             record.NAPCS_IND = 'N'\n//         }\n//         record['ACTION'] = 'This is path A'\n//         NAPCSBalancepathB()\n//     }\n//     function NAPCSBalancepathB() {\n//         // call NO DONOR\n//         // call HDICAT\n//         // END\n//         record['ACTION'] = 'This is path B'\n\n//     }\n\n//     NAPCSBalancing()\n//     msg.payload.csv[record_idx] = record\n//     return msg;\n// }catch(e){\n//     return msg;\n// }\ntry {\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    let id = record['REPORTING_ID']\n\n    let allData = msg.payload.csv;\n\n    let NAPCS_BLTOT = 0\n    let NAPCS_PRM = 0\n\n    const setCharAt = (str, index, char) => {\n        if (index > str.length - 1) return str.padEnd(index, ' ') + char;\n        return str.substr(0, index) + char + str.substr(index + char.length);\n    };\n\n    if (record?.NAICS_SECTOR === '31' && record?.SUBSAMP_IND_TXT !== 'MC') {\n        if (record?.NAPCS_IND === undefined || record?.NAPCS_IND === null) {\n            if (record?.HISTSTAT === 'Y' &&\n                record?.EC_NAPCS_IND === 'U' &&\n                (parseInt(record?.EC_NAPCS_BLTOT) > 0) &&\n                (parseInt(record?.EC_RCPT_TOT_VAL) > 0) &&\n                (parseInt(record?.RCPT_TOT_VAL) > 0) &&\n                record?.NAPCS_IMP === 'Y') {\n                for (let index in allData) {\n                    let row = allData[index]\n                    if (row.EC_REPORTING_ID === id &&\n                        row.EC_REF_PER === '2022U1' &&\n                        (row.EC_NAPCS_USABLE !== 'I' || row.EC_NAPCS_USABLE !== 'D' || row.EC_NAPCS_USABLE !== 'X') &&\n                        (parseInt(row.EC_NAPCS_PROD_CODE_VAL) > 0) &&\n                        row.EC_NAPCS_PROD_CODE.substring(0, 7) !== '9000000') {\n                        row.NAPCS_IND = 'U'\n                        row.NAPCS_IMP = 'Y'\n                        row.PROD_CODE = record.EC_NAPCS_PROD_CODE\n                        row.USABLE = 'U'\n                        record.PROD_CODE_VAL = (parseFloat(record.EC_NAPCS_PROD_CODE_VAL) * (\n                            parseFloat(record.RCPT_TOT_VAL)) /\n                            parseFloat(record.EC_RCPT_TOT_VAL))\n                        record.REPORTING_ID = record.REPORTING_ID\n                        record.REF_PER = record.REF_PER\n                        record.PROD_CODE_F = setCharAt(record.PROD_CODE_F.toString(), 2, 'H');\n                    }\n                    if ((parseInt(row.EC_NAPCS_PROD_CODE_VAL) > 0) &&\n                        row.EC_NAPCS_PROD_CODE.substring(0, 7) === '9000000') {\n                        row.NAPCS_IND = 'U'\n                        row.NAPCS_IMP = 'Y'\n                        row.PROD_CODE = record.EC_NAPCS_PROD_CODE\n                        row.USABLE = 'J'\n                        record.PROD_CODE_VAL = (parseFloat(record.EC_NAPCS_PROD_CODE_VAL) *\n                            (parseFloat(record.RCPT_TOT_VAL)) / parseFloat(record.EC_RCPT_TOT_VAL))\n                        record.REPORTING_ID = record.REPORTING_ID\n                        record.REF_PER = record.REF_PER\n                        record.PROD_CODE_F = setCharAt(record.PROD_CODE_F.toString(), 2, 'H');\n                    }\n                    if (row.PROD_CODE.substr(7, 3) === '000') {\n                        record.NAPCS_BLTOT = parseInt(record.NAPCS_BLTOT) + parseInt(record.PROD_CODE_VAL)\n                    }\n\n\n                }\n            }\n        }\n    }\n\n    function NAPCSBalancepathA() {\n        // call Balancing Module\n        if (record.NAPCS_IND === 'U') {\n            // call BL Rounding Module\n        }\n        // for Each Prod_code on record\n        if (parseInt(record.PROD_CODE_VAL) === 0) {\n            record.USABLE = 'D'\n        }\n        // Recalculate NAPCS Field Module\n        if (parseInt(record.NAPCS_BAL) !== 0 || record.NAPCS_IND === 'U') {\n            record.NAPCS_IND = 'N'\n        }\n        record['ACTION'] = 'This is path A'\n        NAPCSBalancepathB()\n    }\n\n    function NAPCSBalancepathB() {\n        //call NO DONOR\n        //call HDICAT\n        //END\n        record['ACTION'] = 'This is path B'\n    }\n\n    msg.payload.csv[record_idx] = record\n    return msg;\n} catch (e) {\n    return msg;\n}",
+        "func": "try {\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n    let id = record['REPORTING_ID']\n\n    let allData = msg.payload.csv;\n    let NAPCS_BLTOT = 0\n    let NAPCS_PRM = 0\n    const setCharAt = (str, index, char) => {\n        if (index > str.length - 1) return str.padEnd(index, ' ') + char;\n        return str.substr(0, index) + char + str.substr(index + char.length);\n    };\n\n    if (record?.NAICS_SECTOR === '31' && record?.SUBSAMP_IND_TXT !== 'MC') {\n        if (record?.NAPCS_IND === undefined || record?.NAPCS_IND === null) {\n            if (record?.HISTSTAT === 'Y' &&\n                record?.EC_NAPCS_IND === 'U' &&\n                (parseInt(record?.EC_NAPCS_BLTOT) > 0) &&\n                (parseInt(record?.EC_RCPT_TOT_VAL) > 0) &&\n                (parseInt(record?.RCPT_TOT_VAL) > 0) &&\n                record?.NAPCS_IMP === 'Y') {\n                for (let index in allData) {\n                    let row = allData[index]\n                    if (row.EC_REPORTING_ID === id &&\n                        row.EC_REF_PER === '2022U1' &&\n                        (row.EC_NAPCS_USABLE !== 'I' || row.EC_NAPCS_USABLE !== 'D' || row.EC_NAPCS_USABLE !== 'X') &&\n                        (parseInt(row.EC_NAPCS_PROD_CODE_VAL) > 0) &&\n                        row.EC_NAPCS_PROD_CODE.substring(0, 7) !== '9000000') {\n                        row.NAPCS_IND = 'U'\n                        row.NAPCS_IMP = 'Y'\n                        row.PROD_CODE = record.EC_NAPCS_PROD_CODE\n                        row.USABLE = 'U'\n                        record.PROD_CODE_VAL = (parseFloat(record.EC_NAPCS_PROD_CODE_VAL) * (\n                            parseFloat(record.RCPT_TOT_VAL)) /\n                            parseFloat(record.EC_RCPT_TOT_VAL))\n                        record.REPORTING_ID = record.REPORTING_ID\n                        record.REF_PER = record.REF_PER\n                        record.PROD_CODE_F = setCharAt(record.PROD_CODE_F.toString(), 2, 'H');\n                    }\n                    if ((parseInt(row.EC_NAPCS_PROD_CODE_VAL) > 0) &&\n                        row.EC_NAPCS_PROD_CODE.substring(0, 7) === '9000000') {\n                        row.NAPCS_IND = 'U'\n                        row.NAPCS_IMP = 'Y'\n                        row.PROD_CODE = record.EC_NAPCS_PROD_CODE\n                        row.USABLE = 'J'\n                        record.PROD_CODE_VAL = (parseFloat(record.EC_NAPCS_PROD_CODE_VAL) *\n                            (parseFloat(record.RCPT_TOT_VAL)) / parseFloat(record.EC_RCPT_TOT_VAL))\n                        record.REPORTING_ID = record.REPORTING_ID\n                        record.REF_PER = record.REF_PER\n                        record.PROD_CODE_F = setCharAt(record.PROD_CODE_F.toString(), 2, 'H');\n                    }\n                    if (row.PROD_CODE.substr(7, 3) === '000') {\n                        record.NAPCS_BLTOT = parseInt(record.NAPCS_BLTOT) + parseInt(record.PROD_CODE_VAL)\n                    }\n\n                }\n\n            }\n\n        }\n\n    }\n\n    function NAPCSBalancepathA() {\n        // call Balancing Module\n        if (record.NAPCS_IND === 'U') {\n            // call BL Rounding Module\n        }\n\n        // for Each Prod_code on record\n        if (parseInt(record.PROD_CODE_VAL) === 0) {\n            record.USABLE = 'D'\n        }\n\n        // Recalculate NAPCS Field Module\n        if (parseInt(record.NAPCS_BAL) !== 0 || record.NAPCS_IND === 'U') {\n            record.NAPCS_IND = 'N'\n        }\n        record['ACTION'] = 'This is path A'\n        NAPCSBalancepathB()\n    }\n\n    function NAPCSBalancepathB() {\n        //call NO DONOR\n        //call HDICAT\n        //END\n        record['ACTION'] = 'This is path B'\n    }\n    msg.payload.csv[record_idx] = record\n    return msg;\n} catch (e) {\n    return msg;\n}\n\n",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -20219,46 +20223,6 @@
         ]
     },
     {
-        "id": "c4f38f25a401fb78",
-        "type": "subflow:0be109393cb5f28a",
-        "z": "184cce6ee0df3c6f",
-        "name": "",
-        "x": 870,
-        "y": 200,
-        "wires": [
-            [
-                "b4d2112570c75329"
-            ]
-        ]
-    },
-    {
-        "id": "74648299b2662bf4",
-        "type": "change",
-        "z": "184cce6ee0df3c6f",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload.lookup",
-                "pt": "msg",
-                "to": "{\"moduleName\":\"inv_reserve\",\"program\":\"aies\",\"unit_type\":\"estab\",\"params\":\"inv_reserve\"}",
-                "tot": "json"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 590,
-        "y": 200,
-        "wires": [
-            [
-                "c4f38f25a401fb78"
-            ]
-        ]
-    },
-    {
         "id": "2e8dc577c6d85be5",
         "type": "link in",
         "z": "184cce6ee0df3c6f",
@@ -20266,11 +20230,11 @@
         "links": [
             "f2d1653b5ba3e5d2"
         ],
-        "x": 425,
+        "x": 975,
         "y": 200,
         "wires": [
             [
-                "74648299b2662bf4"
+                "b4d2112570c75329"
             ]
         ]
     },
