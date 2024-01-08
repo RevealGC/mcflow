@@ -3173,7 +3173,7 @@
         "x": 14,
         "y": 599,
         "w": 2232,
-        "h": 1922
+        "h": 1902
     },
     {
         "id": "302cb8040ecade52",
@@ -7760,7 +7760,7 @@
         "type": "function",
         "z": "7e80c62ce8c753dc",
         "name": "derive_mfg_naics",
-        "func": "try {\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    let cache = global.get(\"lookupCache\");\n    let naics_napcs = cache.data.find(\n        item =>\n            item.module === \"mfg_napcs\" &&\n            item.param === 'mfg_napcs' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"all\"\n    )?.json_values;\n\n    function sumRow(newobj) {\n        var naicsNapcs = naics_napcs['MN_NAPCS_BL_GROUPS']\n        var keys = [];\n        for (let i in naicsNapcs) {\n            let data = naicsNapcs[i]\n            let sum = null;\n            let naics = data['NAICS']\n            for (var key in data) {\n                if (key.startsWith('NAPCS_BL_') && data[key] != null) {\n                    let variable = data[key]\n                    if (newobj?.[variable]) {\n                        if (!Number.isNaN(parseFloat(newobj[variable]))) {\n                            if (sum == null) {\n                                sum = parseFloat(newobj[variable])\n                            } else {\n                                sum = parseFloat(sum) + parseFloat(newobj[variable])\n                            }\n                        }\n                    }\n                }\n            }\n            if (sum != null) {\n                keys.push({ naics, sum })\n            }\n        }\n        return keys;\n    }\n\n    function finalCheckMFGNAICS() {\n        if (record.NAICS_CODE == record.NAICS_DERIVED) {\n        } else {\n            record.REFERRAL_FLAG = 'NAICS_DERIVED_DIFF'\n            record.NAPCS_IND = 'N'\n        }\n    }\n\n    let id = record?.REPORTING_ID\n    let allData = msg.payload.csv;\n    let newobj = {}\n    for (let i in allData) {\n        let row = allData[i]\n        if (row.REPORTING_ID == id) {\n            if (row?.PROD_CODE) {\n                if (!['I', 'D', 'X'].includes(row?.USABLE)) {\n                    let name = row?.PROD_CODE\n                    newobj[name] = row?.PROD_CODE_VAL\n                }\n            }\n        }\n    }\n    console.log(newobj)\n\n    let dataArr = sumRow(newobj)\n    const max = Math.max(...dataArr.map(o => o.sum), 0);\n    let maxArr = dataArr.filter((d) => { return d.sum == max; });\n\n    if (maxArr.length == 1) {\n        record.NAICS_DERIVED = maxArr[0].naics\n        finalCheckMFGNAICS()\n    } else if (maxArr.length > 1) {\n        let isNaics = maxArr.some(element =>\n            element.naics == record?.NAICS_CODE);\n        if (isNaics) {\n            record.NAICS_DERIVED = record.NAICS_CODE\n        } else {\n            record.NAICS_DERIVED = maxArr[0].naics\n        }\n        finalCheckMFGNAICS()\n    } else {\n        record.NAICS_DERIVED = ' '\n        record.NAPCS_IND = 'N'\n    }\n\n    record.ACTION = 'Return to Derive NAICS Code'\n    return msg;\n} catch (e) {\n    return msg;\n}\n\n",
+        "func": "try {\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    let cache = global.get(\"lookupCache\");\n    let naics_napcs = cache.data.find(\n        item =>\n            item.module === \"mfg_napcs\" &&\n            item.param === 'mfg_napcs' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"all\"\n    )?.json_values;\n\n    function sumRow(newobj) {\n        var naicsNapcs = naics_napcs['MN_NAPCS_BL_GROUPS']\n        var keys = [];\n        for (let i in naicsNapcs) {\n            let data = naicsNapcs[i]\n            let sum = null;\n            let naics = data['NAICS']\n            for (var key in data) {\n                if (key.startsWith('NAPCS_BL_') && data[key] != null) {\n                    let variable = data[key]\n                    if (newobj?.[variable]) {\n                        if (!Number.isNaN(parseFloat(newobj[variable]))) {\n                            if (sum == null) {\n                                sum = parseFloat(newobj[variable])\n                            } else {\n                                sum = parseFloat(sum) + parseFloat(newobj[variable])\n                            }\n                        }\n                    }\n                }\n            }\n            if (sum != null) {\n                keys.push({ naics, sum })\n            }\n        }\n        return keys;\n    }\n\n    function finalCheckMFGNAICS() {\n        if (record.NAICS_CODE == record.NAICS_DERIVED) {\n        } else {\n            record.REFERRAL_FLAG = 'NAICS_DERIVED_DIFF'\n            record.NAPCS_IND = 'N'\n        }\n    }\n\n    let id = record?.REPORTING_ID\n    let allData = msg.payload.csv;\n    let newobj = {}\n    for (let i in allData) {\n        let row = allData[i]\n        if (row.REPORTING_ID == id) {\n            if (row?.PROD_CODE) {\n                if (!['I', 'D', 'X'].includes(row?.USABLE)) {\n                    let name = row?.PROD_CODE\n                    newobj[name] = row?.PROD_CODE_VAL\n                }\n            }\n        }\n    }\n    let dataArr = sumRow(newobj)\n    const max = Math.max(...dataArr.map(o => o.sum), 0);\n    let maxArr = dataArr.filter((d) => { return d.sum == max; });\n\n    if (maxArr.length == 1) {\n        record.NAICS_DERIVED = maxArr[0].naics\n        finalCheckMFGNAICS()\n    } else if (maxArr.length > 1) {\n        let isNaics = maxArr.some(element =>\n            element.naics == record?.NAICS_CODE);\n        if (isNaics) {\n            record.NAICS_DERIVED = record.NAICS_CODE\n        } else {\n            record.NAICS_DERIVED = maxArr[0].naics\n        }\n        finalCheckMFGNAICS()\n    } else {\n        record.NAICS_DERIVED = ' '\n        record.NAPCS_IND = 'N'\n    }\n\n    record.ACTION = 'Return to Derive NAICS Code'\n    return msg;\n} catch (e) {\n    return msg;\n}\n\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -24924,8 +24924,8 @@
         "links": [
             "49960e045e84befd"
         ],
-        "x": 705,
-        "y": 2480,
+        "x": 665,
+        "y": 2460,
         "wires": []
     },
     {
@@ -25785,7 +25785,7 @@
             "7d91540d69ac16c1",
             "688a39b3e0070fe9"
         ],
-        "x": 1215,
+        "x": 1265,
         "y": 100,
         "wires": []
     },
@@ -25800,7 +25800,9 @@
         "x": 425,
         "y": 100,
         "wires": [
-            []
+            [
+                "988326d7ffcdae39"
+            ]
         ]
     }
 ]
