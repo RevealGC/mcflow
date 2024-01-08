@@ -1023,28 +1023,6 @@
         "color": "#DDAA99"
     },
     {
-        "id": "56c26ff961720232",
-        "type": "subflow",
-        "name": "Derive NAICS Subflow",
-        "info": "",
-        "category": "",
-        "in": [
-            {
-                "x": 40,
-                "y": 80,
-                "wires": [
-                    {
-                        "id": "bf3c163ded6ea7ce"
-                    }
-                ]
-            }
-        ],
-        "out": [],
-        "env": [],
-        "meta": {},
-        "color": "#DDAA99"
-    },
-    {
         "id": "03552ca229e3a7a0",
         "type": "subflow",
         "name": "Subflow 10",
@@ -1133,49 +1111,6 @@
             "wires": [
                 {
                     "id": "4c82868047e24054",
-                    "port": 0
-                }
-            ]
-        }
-    },
-    {
-        "id": "ae0faa518ff234d5",
-        "type": "subflow",
-        "name": "Derived Items Subflow",
-        "info": "",
-        "category": "",
-        "in": [
-            {
-                "x": 60,
-                "y": 160,
-                "wires": [
-                    {
-                        "id": "a213ffa0737c4159"
-                    }
-                ]
-            }
-        ],
-        "out": [
-            {
-                "x": 360,
-                "y": 160,
-                "wires": [
-                    {
-                        "id": "a213ffa0737c4159",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
-        "env": [],
-        "meta": {},
-        "color": "#DDAA99",
-        "status": {
-            "x": 180,
-            "y": 40,
-            "wires": [
-                {
-                    "id": "65577406809b25a9",
                     "port": 0
                 }
             ]
@@ -1642,39 +1577,6 @@
                 "wires": [
                     {
                         "id": "31739108a9b57e14",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
-        "env": [],
-        "meta": {},
-        "color": "#DDAA99"
-    },
-    {
-        "id": "c54bc77310ce263a",
-        "type": "subflow",
-        "name": "Derive NAICS Code",
-        "info": "",
-        "category": "",
-        "in": [
-            {
-                "x": 240,
-                "y": 120,
-                "wires": [
-                    {
-                        "id": "1de39caabc61c808"
-                    }
-                ]
-            }
-        ],
-        "out": [
-            {
-                "x": 540,
-                "y": 120,
-                "wires": [
-                    {
-                        "id": "1de39caabc61c808",
                         "port": 0
                     }
                 ]
@@ -2943,6 +2845,49 @@
         "color": "#DDAA99"
     },
     {
+        "id": "ae0faa518ff234d5",
+        "type": "subflow",
+        "name": "Derived Items Subflow",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 160,
+                "wires": [
+                    {
+                        "id": "a213ffa0737c4159"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 360,
+                "y": 160,
+                "wires": [
+                    {
+                        "id": "a213ffa0737c4159",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99",
+        "status": {
+            "x": 180,
+            "y": 40,
+            "wires": [
+                {
+                    "id": "65577406809b25a9",
+                    "port": 0
+                }
+            ]
+        }
+    },
+    {
         "id": "7dc18555ca029842",
         "type": "group",
         "z": "d103860e993c1512",
@@ -3184,7 +3129,9 @@
             "5bf7f51448d5e055"
         ],
         "x": 14,
-        "y": 599
+        "y": 599,
+        "w": 2232,
+        "h": 1882
     },
     {
         "id": "302cb8040ecade52",
@@ -3200,7 +3147,9 @@
             "a47c991027033263"
         ],
         "x": 714,
-        "y": 719
+        "y": 719,
+        "w": 372,
+        "h": 82
     },
     {
         "id": "d1e0f39ddacfeb20",
@@ -5851,42 +5800,6 @@
         ]
     },
     {
-        "id": "bf3c163ded6ea7ce",
-        "type": "function",
-        "z": "56c26ff961720232",
-        "name": "function 13",
-        "func": "if (msg.payload.csv[0].RECORD_TYP === \"20\" || msg.payload.csv[0].RECORD_TYP === \"90\") {\n    if(msg.payload.csv[0].PROCESS_DIV_CODE = \"1\") {\n        msg.payload.csv[0].action = \"Go to: Derive MFG NAICS from NAPCS\"\n    } else {\n        msg.payload.csv[0].action = \"Go to: Classification\"\n    }\n} else {\n    msg.payload.csv[0].action = \"Go to: Classification\"\n}\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 190,
-        "y": 80,
-        "wires": [
-            [
-                "5012f87f52410a9d"
-            ]
-        ]
-    },
-    {
-        "id": "5012f87f52410a9d",
-        "type": "debug",
-        "z": "56c26ff961720232",
-        "name": "Derive NAICS output",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 480,
-        "y": 80,
-        "wires": []
-    },
-    {
         "id": "fc793926435fab57",
         "type": "function",
         "z": "03552ca229e3a7a0",
@@ -5955,35 +5868,6 @@
         "id": "4c82868047e24054",
         "type": "status",
         "z": "acd9862f30af144d",
-        "name": "",
-        "scope": null,
-        "x": 80,
-        "y": 40,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "a213ffa0737c4159",
-        "type": "function",
-        "z": "ae0faa518ff234d5",
-        "name": "Derived Items function",
-        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\nmsg.payload.csv[record_idx].TOPIC = 'Derived Items';\nif (\n    (String(record.RECORD_TYP_TXT) === \"20\" || String(record.RECORD_TYP_TXT) === \"90\")\n    &&\n    (String(record.REPORTING_TYP_ID) === \"SU\" || String(record.REPORTING_TYP_ID) === \"MU\")\n) {\n    if (String(record.NAICS_SECTOR_OLD_NUM) === \"31\") {\n        record.action = \"Go to: Derive MFG NAICS from NAPCS\"\n    } else {\n        record.action = \"Go to: Classification\"\n    }\n    return msg;\n}\nelse {\n    record.action = \"Go to: Classification\"\n    return msg;\n}",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 200,
-        "y": 160,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "65577406809b25a9",
-        "type": "status",
-        "z": "ae0faa518ff234d5",
         "name": "",
         "scope": null,
         "x": 80,
@@ -6653,8 +6537,9 @@
         "type": "function",
         "z": "bfe1ab19e0cbe2cf",
         "name": "classification function",
-        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n    let cache = global.get(\"lookupCache\");\n    const record_type = record['RECORD_TYP_TXT'];\n\n    function setFlagAndExit(referralFlagValue) {\n        msg.payload.csv[record_idx].TABSTAT = \"N\";\n        msg.payload.csv[record_idx].NONTABFL = \"R\";\n        msg.payload.csv[record_idx].ACTION = \"Exit Edit\";\n        msg.payload.csv[record_idx].REFERRAL_FLAG = referralFlagValue;\n    }\n    function recTypeMatch(recArr) {\n        console.log((\n            (record.RECORD_TYP_TXT ? recArr.includes(record.RECORD_TYP_TXT) : false)\n        ))\n        return (\n            (record.RECORD_TYP_TXT ? recArr.includes(record.RECORD_TYP_TXT) : false)\n        );\n    }\n\n    function checkNaicsValidation(columnIndex, recordtyp) {\n        const naicsValidationData = cache.data.find(\n            item =>\n                item.module === \"classification\" &&\n                item.param === 'naics_validation' &&\n                item.program === \"aies\" &&\n                item.unit_type === \"estab\"\n        )?.json_values;\n        let columnKey = ''\n        if (columnIndex === 4) {\n            columnKey = 'col_0';\n        } else if (columnIndex === 7) {\n            columnKey = 'col_1';\n        } else {\n            columnKey = \"col_2\";\n        }\n\n        let partialNum = ''\n        if (['20', '90', 20, 90].includes(recordtyp)) {\n            partialNum = record.NAICS_NUM.substring(0, columnIndex);\n        } else if ([30, '30'].includes(recordtyp)) {\n            partialNum = record.KAU_NAICS.substring(0, columnIndex);\n        }\n\n        return (\n            naicsValidationData[columnKey].find(row => parseInt(row) == parseInt(partialNum))\n            //     naicsValidationData &&\n            //     naicsValidationData[columnKey] &&\n            //     naicsValidationData[columnKey].includes(partialNum)\n        );\n    }\n\n    if (recTypeMatch([\"20\", \"90\"]) && record['AIES_SCOPE'] == 'Y' && record['BR_STAT'] == 'Y') {\n        if (checkNaicsValidation(4, record_type)) {\n            msg.payload.csv[record_idx].ACTION = \"Go to: Derive NAICS Code Module\";\n        } else if (checkNaicsValidation(7, record_type)) {\n            msg.payload.csv[record_idx].ACTION = \"Go to: Derive NAICS Code Module\";\n        } else if (checkNaicsValidation(6, record_type)) {\n            msg.payload.csv[record_idx].ACTION = \"Go to: Derive NAICS Code Module\";\n        } else {\n            setFlagAndExit(\"INVALID_NAICS_ESTAB\");\n        }\n        return msg;\n    } else if (recTypeMatch([\"30\"]) && record['AIES_SCOPE'] == 'Y' && record['BR_STAT'] == 'Y') {\n        if (checkNaicsValidation(4, record_type)) {\n            msg.payload.csv[record_idx].ACTION = \"Go to Main Routing\";\n        } else if (checkNaicsValidation(7, record_type)) {\n            msg.payload.csv[record_idx].ACTION = \"Go to Main Routing\";\n        } else if (checkNaicsValidation(6, record_type)) {\n            msg.payload.csv[record_idx].ACTION = \"Go to Main Routing\";\n        } else {\n            setFlagAndExit(\"INVALID_NAICS_KAU\");\n        }\n        return msg;\n    } else {\n        msg.payload.csv[record_idx].ACTION = \"Error - Record should not have entered this module\";\n        return msg;\n    }\n}catch(e){\n    return msg;\n}\n",
+        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n    let cache = global.get(\"lookupCache\");\n    const record_type = record['RECORD_TYP_TXT'];\n\n    function setFlagAndExit(referralFlagValue) {\n        msg.payload.csv[record_idx].TABSTAT = \"N\";\n        msg.payload.csv[record_idx].NONTABFL = \"R\";\n        msg.payload.csv[record_idx].ACTION = \"Exit Edit\";\n        global.set('action', \"Exit Edit\")\n        msg.payload.csv[record_idx].REFERRAL_FLAG = referralFlagValue;\n    }\n    function recTypeMatch(recArr) {\n        console.log((\n            (record.RECORD_TYP_TXT ? recArr.includes(record.RECORD_TYP_TXT) : false)\n        ))\n        return (\n            (record.RECORD_TYP_TXT ? recArr.includes(record.RECORD_TYP_TXT) : false)\n        );\n    }\n\n    function checkNaicsValidation(columnIndex, recordtyp) {\n        const naicsValidationData = cache.data.find(\n            item =>\n                item.module === \"classification\" &&\n                item.param === 'naics_validation' &&\n                item.program === \"aies\" &&\n                item.unit_type === \"estab\"\n        )?.json_values;\n        let columnKey = ''\n        if (columnIndex === 4) {\n            columnKey = 'col_0';\n        } else if (columnIndex === 7) {\n            columnKey = 'col_1';\n        } else {\n            columnKey = \"col_2\";\n        }\n\n        let partialNum = ''\n        if (['20', '90', 20, 90].includes(recordtyp)) {\n            partialNum = record.NAICS_NUM.substring(0, columnIndex);\n        } else if ([30, '30'].includes(recordtyp)) {\n            partialNum = record.KAU_NAICS.substring(0, columnIndex);\n        }\n\n        return (\n            naicsValidationData[columnKey].find(row => parseInt(row) == parseInt(partialNum))\n            //     naicsValidationData &&\n            //     naicsValidationData[columnKey] &&\n            //     naicsValidationData[columnKey].includes(partialNum)\n        );\n    }\n\n    if (recTypeMatch([\"20\", \"90\"]) && record['AIES_SCOPE'] == 'Y' && record['BR_STAT'] == 'Y') {\n        if (checkNaicsValidation(4, record_type)) {\n            msg.payload.csv[record_idx].ACTION = \"Go to: Derive NAICS Code Module\";\n            global.set('action', \"Go to: Derive NAICS Code Module\")\n        } else if (checkNaicsValidation(7, record_type)) {\n            msg.payload.csv[record_idx].ACTION = \"Go to: Derive NAICS Code Module\";\n            global.set('action', \"Go to: Derive NAICS Code Module\")\n        } else if (checkNaicsValidation(6, record_type)) {\n            msg.payload.csv[record_idx].ACTION = \"Go to: Derive NAICS Code Module\";\n            global.set('action', \"Go to: Derive NAICS Code Module\")\n        } else {\n            setFlagAndExit(\"INVALID_NAICS_ESTAB\");\n        }\n        return msg;\n    } else if (recTypeMatch([\"30\"]) && record['AIES_SCOPE'] == 'Y' && record['BR_STAT'] == 'Y') {\n        if (checkNaicsValidation(4, record_type)) {\n            msg.payload.csv[record_idx].ACTION = \"Go to Main Routing\";\n            global.set('action', \"Go to Main Routing\")\n        } else if (checkNaicsValidation(7, record_type)) {\n            msg.payload.csv[record_idx].ACTION = \"Go to Main Routing\";\n            global.set('action', \"Go to Main Routing\")\n        } else if (checkNaicsValidation(6, record_type)) {\n            msg.payload.csv[record_idx].ACTION = \"Go to Main Routing\";\n            global.set('action', \"Go to Main Routing\")\n        } else {\n            setFlagAndExit(\"INVALID_NAICS_KAU\");\n        }\n        return msg;\n    } else {\n        msg.payload.csv[record_idx].ACTION = \"Error - Record should not have entered this module\";\n        return msg;\n    }\n}catch(e){\n    return msg;\n}",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -6925,29 +6810,13 @@
         ]
     },
     {
-        "id": "1de39caabc61c808",
-        "type": "function",
-        "z": "c54bc77310ce263a",
-        "name": "Derive NAICS Code",
-        "func": "\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nif ((String(record.RECORD_TYP_TXT) === \"20\" || String(record.RECORD_TYP_TXT) === \"90\")) \n{\n    if (String(record.NAICS_SECTOR_OLD_NUM) === \"31\") {\n        record.action = \"Go to: Derive MFG NAICS from NAPCS\"\n    } else {\n        record.action = \"Go to: Classification\"\n    }\n    return msg;\n} \nelse {\n    record.action = \"Go to: Classification\"\n    return msg;\n}",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 390,
-        "y": 120,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "310c654aa32dd481",
         "type": "function",
         "z": "b22812dba408ab8f",
         "name": "geography function",
-        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    const record = msg.payload.csv[record_idx];\n    const cache = global.get(\"lookupCache\");\n    const validationChartData = cache.data.find(\n        item =>\n            item.module === \"geography\" &&\n            item.param === \"geography\" &&\n            item.program === \"aies\" &&\n            item.unit_type === \"estab\"\n    )?.json_values;\n\n    let validation = validationChartData.GEO.some(element =>\n    (parseInt(element.STFIPS) === parseInt(record?.GEO_STATE_FIPS) &&\n        parseInt(element.GEOREG) === parseInt(record?.GEO_REGION))\n    );\n\n    if (validation) {\n        record['ACTION'] = \"Go to Main Routing\";\n        // global.set('action','Go to Main Routing')\n    } else if (record?.GEO_STATE_FIPS === \"97\") {\n        if (record?.NAICS_SECTOR_OLD_NUM === \"21\" && [\"PC\", \"NG\", \"AT\"].includes(record?.PHYSLOC_ADDR_ST_TXT)) {\n            record['ACTION'] = \"Go to Main Routing\";\n            // global.set('action','Go to Main Routing')\n        } else {\n            record['TABSTAT'] = \"N\";\n            record['NONTABFL'] = \"Y\";\n            record['ACTION'] = \"Exit Edit\";\n            // global.set('action','Exit Edit')\n        }\n    } else {\n        record['TABSTAT'] = \"N\";\n        record['NONTABFL'] = \"Y\";\n        record['ACTION'] = \"Exit Edit\";\n        // record['FLAG'] = \"GEO_Invalid\";\n        // global.set('action','Exit Edit')\n    }\n\n    // record.module = \"Geography\";\n    return msg;\n}catch(e){\n    return msg;\n}",
+        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    const record = msg.payload.csv[record_idx];\n    const cache = global.get(\"lookupCache\");\n    const validationChartData = cache.data.find(\n        item =>\n            item.module === \"geography\" &&\n            item.param === \"geography\" &&\n            item.program === \"aies\" &&\n            item.unit_type === \"estab\"\n    )?.json_values;\n\n    let validation = validationChartData.GEO.some(element =>\n    (parseInt(element.STFIPS) === parseInt(record?.GEO_STATE_FIPS) &&\n        parseInt(element.GEOREG) === parseInt(record?.GEO_REGION))\n    );\n\n    if (validation) {\n        record['ACTION'] = \"Go to Main Routing\";\n        global.set('action','Go to Main Routing')\n    } else if (record?.GEO_STATE_FIPS === \"97\") {\n        if (record?.NAICS_SECTOR_OLD_NUM === \"21\" && [\"PC\", \"NG\", \"AT\"].includes(record?.PHYSLOC_ADDR_ST_TXT)) {\n            record['ACTION'] = \"Go to Main Routing\";\n            global.set('action','Go to Main Routing')\n        } else {\n            record['TABSTAT'] = \"N\";\n            record['NONTABFL'] = \"Y\";\n            record['ACTION'] = \"Exit Edit\";\n            global.set('action','Exit Edit')\n        }\n    } else {\n        record['TABSTAT'] = \"N\";\n        record['NONTABFL'] = \"Y\";\n        record['ACTION'] = \"Exit Edit\";\n        // record['FLAG'] = \"GEO_Invalid\";\n        global.set('action','Exit Edit')\n    }\n\n    // record.module = \"Geography\";\n    return msg;\n}catch(e){\n    return msg;\n}",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -7116,8 +6985,9 @@
         "type": "function",
         "z": "f07c9ae4084738fc",
         "name": "Derived Naics ",
-        "func": "let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\nif (['20', '90', 20, 90].includes(record['RECORD_TYP_TXT'])) {\n\n    if (parseInt(record['NAICS_SECTOR_CODE_NUM']) === 31) {\n        record['ACTION'] = 'Go to: Derive MFG NAICS from NAPCS';\n        return msg;\n    } else {\n        record['ACTION'] = 'The only NAICS choice comes from the BR';\n        return msg;\n    }\n\n} else {\n    record['ACTION'] = 'Go to: Classification';\n    return msg;\n}\n\n",
+        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    if (record?.RECORD_TYP_TXT === \"20\" || record?.RECORD_TYP_TXT === \"90\") {\n        if (record?.NAICS_SECTOR == \"31\") {\n            record.ACTION = \"Go to: Derive MFG NAICS from NAPCS\"\n            global.set('action', 'Go to: Derive MFG NAICS from NAPCS')\n        } else {\n            record.ACTION = \"Go to: Classification\"\n        }\n    } else {\n        record.ACITON = \"Go to: Classification\"\n    }\n    return msg;\n}catch(e){\n    return msg;\n}\n",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -7810,6 +7680,35 @@
         "libs": [],
         "x": 740,
         "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a213ffa0737c4159",
+        "type": "function",
+        "z": "ae0faa518ff234d5",
+        "name": "Derived Items function",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\nmsg.payload.csv[record_idx].TOPIC = 'Derived Items';\nif (\n    (String(record.RECORD_TYP_TXT) === \"20\" || String(record.RECORD_TYP_TXT) === \"90\")\n    &&\n    (String(record.REPORTING_TYP_ID) === \"SU\" || String(record.REPORTING_TYP_ID) === \"MU\")\n) {\n    if (String(record.NAICS_SECTOR_OLD_NUM) === \"31\") {\n        record.action = \"Go to: Derive MFG NAICS from NAPCS\"\n    } else {\n        record.action = \"Go to: Classification\"\n    }\n    return msg;\n}\nelse {\n    record.action = \"Go to: Classification\"\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 200,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "65577406809b25a9",
+        "type": "status",
+        "z": "ae0faa518ff234d5",
+        "name": "",
+        "scope": null,
+        "x": 80,
+        "y": 40,
         "wires": [
             []
         ]
@@ -17426,90 +17325,6 @@
         ]
     },
     {
-        "id": "611bd7ef087d0ee4",
-        "type": "subflow:ae0faa518ff234d5",
-        "z": "6e9fd4ed1a3126bb",
-        "name": "Derived Items",
-        "x": 1610,
-        "y": 200,
-        "wires": [
-            [
-                "c261422973f8441f",
-                "eab9d1159d0ab151"
-            ]
-        ]
-    },
-    {
-        "id": "6247de9ac9e28642",
-        "type": "subflow:ae0faa518ff234d5",
-        "z": "6e9fd4ed1a3126bb",
-        "name": "Derived Items",
-        "x": 810,
-        "y": 300,
-        "wires": [
-            [
-                "97538a9f125810a7",
-                "fa428e05926d3d8a"
-            ]
-        ]
-    },
-    {
-        "id": "7ace8ac968735bb7",
-        "type": "subflow:ae0faa518ff234d5",
-        "z": "6e9fd4ed1a3126bb",
-        "name": "Derived Items",
-        "x": 930,
-        "y": 420,
-        "wires": [
-            [
-                "d8f39773080a0179",
-                "43300b21ac0a44a9"
-            ]
-        ]
-    },
-    {
-        "id": "bf0ad18b66b393bb",
-        "type": "subflow:ae0faa518ff234d5",
-        "z": "6e9fd4ed1a3126bb",
-        "name": "Derived Items",
-        "x": 1550,
-        "y": 420,
-        "wires": [
-            [
-                "eebe4f43ea98127d",
-                "a813b3bcc9032af7"
-            ]
-        ]
-    },
-    {
-        "id": "79ec7e7740105338",
-        "type": "subflow:ae0faa518ff234d5",
-        "z": "6e9fd4ed1a3126bb",
-        "name": "Derived Items",
-        "x": 370,
-        "y": 680,
-        "wires": [
-            [
-                "875ce7d3fc33f058",
-                "c63ae1c91226875b"
-            ]
-        ]
-    },
-    {
-        "id": "9458a5a943e34e9a",
-        "type": "subflow:ae0faa518ff234d5",
-        "z": "6e9fd4ed1a3126bb",
-        "name": "Derived Items",
-        "x": 990,
-        "y": 680,
-        "wires": [
-            [
-                "29f9126c35b5deb6",
-                "054a7fbcddde2975"
-            ]
-        ]
-    },
-    {
         "id": "eab9d1159d0ab151",
         "type": "subflow:473d6735cc46fccd",
         "z": "6e9fd4ed1a3126bb",
@@ -17826,6 +17641,90 @@
         "wires": []
     },
     {
+        "id": "611bd7ef087d0ee4",
+        "type": "subflow:ae0faa518ff234d5",
+        "z": "6e9fd4ed1a3126bb",
+        "name": "Derived Items",
+        "x": 1610,
+        "y": 200,
+        "wires": [
+            [
+                "c261422973f8441f",
+                "eab9d1159d0ab151"
+            ]
+        ]
+    },
+    {
+        "id": "6247de9ac9e28642",
+        "type": "subflow:ae0faa518ff234d5",
+        "z": "6e9fd4ed1a3126bb",
+        "name": "Derived Items",
+        "x": 810,
+        "y": 300,
+        "wires": [
+            [
+                "97538a9f125810a7",
+                "fa428e05926d3d8a"
+            ]
+        ]
+    },
+    {
+        "id": "7ace8ac968735bb7",
+        "type": "subflow:ae0faa518ff234d5",
+        "z": "6e9fd4ed1a3126bb",
+        "name": "Derived Items",
+        "x": 930,
+        "y": 420,
+        "wires": [
+            [
+                "d8f39773080a0179",
+                "43300b21ac0a44a9"
+            ]
+        ]
+    },
+    {
+        "id": "bf0ad18b66b393bb",
+        "type": "subflow:ae0faa518ff234d5",
+        "z": "6e9fd4ed1a3126bb",
+        "name": "Derived Items",
+        "x": 1550,
+        "y": 420,
+        "wires": [
+            [
+                "eebe4f43ea98127d",
+                "a813b3bcc9032af7"
+            ]
+        ]
+    },
+    {
+        "id": "79ec7e7740105338",
+        "type": "subflow:ae0faa518ff234d5",
+        "z": "6e9fd4ed1a3126bb",
+        "name": "Derived Items",
+        "x": 370,
+        "y": 680,
+        "wires": [
+            [
+                "875ce7d3fc33f058",
+                "c63ae1c91226875b"
+            ]
+        ]
+    },
+    {
+        "id": "9458a5a943e34e9a",
+        "type": "subflow:ae0faa518ff234d5",
+        "z": "6e9fd4ed1a3126bb",
+        "name": "Derived Items",
+        "x": 990,
+        "y": 680,
+        "wires": [
+            [
+                "29f9126c35b5deb6",
+                "054a7fbcddde2975"
+            ]
+        ]
+    },
+    {
         "id": "0c4def347547a284",
         "type": "function",
         "z": "0952db06f674f8bc",
@@ -17952,19 +17851,6 @@
         "wires": []
     },
     {
-        "id": "565f051f79fb97bc",
-        "type": "subflow:ae0faa518ff234d5",
-        "z": "b2e59c2394f7c26c",
-        "name": "Derived Items",
-        "x": 460,
-        "y": 760,
-        "wires": [
-            [
-                "bb33a353a8cc1cbd"
-            ]
-        ]
-    },
-    {
         "id": "ed77e55538e24a1f",
         "type": "link out",
         "z": "b2e59c2394f7c26c",
@@ -17989,17 +17875,6 @@
             [
                 "ed77e55538e24a1f"
             ]
-        ]
-    },
-    {
-        "id": "55fbb4297e588b4b",
-        "type": "subflow:ae0faa518ff234d5",
-        "z": "b2e59c2394f7c26c",
-        "name": "Derived Items",
-        "x": 460,
-        "y": 860,
-        "wires": [
-            []
         ]
     },
     {
@@ -18087,6 +17962,30 @@
         "x": 685,
         "y": 1140,
         "wires": []
+    },
+    {
+        "id": "565f051f79fb97bc",
+        "type": "subflow:ae0faa518ff234d5",
+        "z": "b2e59c2394f7c26c",
+        "name": "Derived Items",
+        "x": 460,
+        "y": 760,
+        "wires": [
+            [
+                "bb33a353a8cc1cbd"
+            ]
+        ]
+    },
+    {
+        "id": "55fbb4297e588b4b",
+        "type": "subflow:ae0faa518ff234d5",
+        "z": "b2e59c2394f7c26c",
+        "name": "Derived Items",
+        "x": 460,
+        "y": 860,
+        "wires": [
+            []
+        ]
     },
     {
         "id": "c903163629df82af",
@@ -19402,9 +19301,7 @@
         "x": 355,
         "y": 120,
         "wires": [
-            [
-                "1bda409d2c3f25ba"
-            ]
+            []
         ]
     },
     {
@@ -19420,19 +19317,6 @@
         "x": 685,
         "y": 120,
         "wires": []
-    },
-    {
-        "id": "1bda409d2c3f25ba",
-        "type": "subflow:c54bc77310ce263a",
-        "z": "5e1a962405c84d2b",
-        "name": "",
-        "x": 510,
-        "y": 120,
-        "wires": [
-            [
-                "02482c164222726b"
-            ]
-        ]
     },
     {
         "id": "2eee0041d9d93424",
@@ -25084,12 +24968,11 @@
         "type": "subflow:20d530cc0b193752",
         "z": "8790b12c7efb6fa0",
         "name": "",
-        "x": 420,
-        "y": 760,
+        "x": 920,
+        "y": 420,
         "wires": [
             [
-                "121f33ae272cb49a",
-                "e6087333eb3ae6c9"
+                "121f33ae272cb49a"
             ]
         ]
     },
@@ -25098,12 +24981,11 @@
         "type": "subflow:42be4655fd3a8c84",
         "z": "8790b12c7efb6fa0",
         "name": "",
-        "x": 650,
-        "y": 880,
+        "x": 890,
+        "y": 480,
         "wires": [
             [
-                "df590f50a626fa0c",
-                "773badd332d18030"
+                "df590f50a626fa0c"
             ]
         ]
     },
@@ -25112,12 +24994,11 @@
         "type": "subflow:b22812dba408ab8f",
         "z": "8790b12c7efb6fa0",
         "name": "",
-        "x": 1470,
-        "y": 1040,
+        "x": 850,
+        "y": 940,
         "wires": [
             [
-                "bd80eaa4d3e0b069",
-                "3d656d4e7d16c90d"
+                "ae31da9fdc489294"
             ]
         ]
     },
@@ -25126,12 +25007,11 @@
         "type": "subflow:aadaa91727c0d579",
         "z": "8790b12c7efb6fa0",
         "name": "",
-        "x": 940,
-        "y": 1160,
+        "x": 880,
+        "y": 1040,
         "wires": [
             [
-                "1b67e6657388118d",
-                "9c4c1524319ca134"
+                "1b67e6657388118d"
             ]
         ]
     },
@@ -25140,12 +25020,11 @@
         "type": "subflow:998aa04bd1bb677d",
         "z": "8790b12c7efb6fa0",
         "name": "",
-        "x": 1360,
-        "y": 1160,
+        "x": 860,
+        "y": 1200,
         "wires": [
             [
-                "2a42027c1028f409",
-                "18a3898311a7fbd5"
+                "2a42027c1028f409"
             ]
         ]
     },
@@ -25154,12 +25033,11 @@
         "type": "subflow:c79b244779411ead",
         "z": "8790b12c7efb6fa0",
         "name": "",
-        "x": 1180,
-        "y": 1160,
+        "x": 880,
+        "y": 1120,
         "wires": [
             [
-                "77dcf5b1e0afb3a9",
-                "a349c47148ce6a49"
+                "77dcf5b1e0afb3a9"
             ]
         ]
     },
@@ -25168,12 +25046,11 @@
         "type": "subflow:89f071f1deb9a1b1",
         "z": "8790b12c7efb6fa0",
         "name": "",
-        "x": 1560,
-        "y": 1160,
+        "x": 880,
+        "y": 1280,
         "wires": [
             [
-                "66fdc22c898d5af9",
-                "ae1d3542805a6ef1"
+                "66fdc22c898d5af9"
             ]
         ]
     },
@@ -25182,12 +25059,11 @@
         "type": "subflow:f9a2a2262f95bae3",
         "z": "8790b12c7efb6fa0",
         "name": "",
-        "x": 1100,
-        "y": 920,
+        "x": 980,
+        "y": 540,
         "wires": [
             [
-                "e1dd758b59c31f88",
-                "fa6a99c77e9fa7b4"
+                "e1dd758b59c31f88"
             ]
         ]
     },
@@ -25196,12 +25072,11 @@
         "type": "subflow:b93bf22bc3258992",
         "z": "8790b12c7efb6fa0",
         "name": "",
-        "x": 1050,
-        "y": 1040,
+        "x": 910,
+        "y": 600,
         "wires": [
             [
-                "afd7588524439212",
-                "c13d640ebfcaddf2"
+                "afd7588524439212"
             ]
         ]
     },
@@ -25210,12 +25085,11 @@
         "type": "subflow:bfe1ab19e0cbe2cf",
         "z": "8790b12c7efb6fa0",
         "name": "",
-        "x": 1270,
-        "y": 1040,
+        "x": 890,
+        "y": 660,
         "wires": [
             [
-                "03236197db128bd1",
-                "72a8dd9ff04542e7"
+                "3e92f402ebdbe498"
             ]
         ]
     },
@@ -25298,8 +25172,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 510,
-        "y": 840,
+        "x": 1170,
+        "y": 420,
         "wires": [
             [
                 "66fdc22c898d5af9"
@@ -25331,8 +25205,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 870,
-        "y": 860,
+        "x": 1170,
+        "y": 480,
         "wires": [
             [
                 "66fdc22c898d5af9"
@@ -25369,8 +25243,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2090,
-        "y": 740,
+        "x": 2150,
+        "y": 640,
         "wires": [
             [
                 "6c2616b9f8b16717",
@@ -25390,176 +25264,6 @@
         ],
         "x": 2285,
         "y": 540,
-        "wires": []
-    },
-    {
-        "id": "e6087333eb3ae6c9",
-        "type": "debug",
-        "z": "8790b12c7efb6fa0",
-        "name": "BR",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 410,
-        "y": 920,
-        "wires": []
-    },
-    {
-        "id": "773badd332d18030",
-        "type": "debug",
-        "z": "8790b12c7efb6fa0",
-        "name": "Critical Error",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 750,
-        "y": 960,
-        "wires": []
-    },
-    {
-        "id": "fa6a99c77e9fa7b4",
-        "type": "debug",
-        "z": "8790b12c7efb6fa0",
-        "name": "NonNORM Init Set ACTVMIO & OPSTATS",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1260,
-        "y": 860,
-        "wires": []
-    },
-    {
-        "id": "c13d640ebfcaddf2",
-        "type": "debug",
-        "z": "8790b12c7efb6fa0",
-        "name": "NONNORM Router",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1350,
-        "y": 980,
-        "wires": []
-    },
-    {
-        "id": "72a8dd9ff04542e7",
-        "type": "debug",
-        "z": "8790b12c7efb6fa0",
-        "name": "Classification",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1470,
-        "y": 920,
-        "wires": []
-    },
-    {
-        "id": "3d656d4e7d16c90d",
-        "type": "debug",
-        "z": "8790b12c7efb6fa0",
-        "name": "Geography",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1650,
-        "y": 1000,
-        "wires": []
-    },
-    {
-        "id": "9c4c1524319ca134",
-        "type": "debug",
-        "z": "8790b12c7efb6fa0",
-        "name": "Best admin receipts",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1100,
-        "y": 1320,
-        "wires": []
-    },
-    {
-        "id": "a349c47148ce6a49",
-        "type": "debug",
-        "z": "8790b12c7efb6fa0",
-        "name": "Valid negative",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1380,
-        "y": 1300,
-        "wires": []
-    },
-    {
-        "id": "18a3898311a7fbd5",
-        "type": "debug",
-        "z": "8790b12c7efb6fa0",
-        "name": "Valid Zero",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1600,
-        "y": 1300,
-        "wires": []
-    },
-    {
-        "id": "ae1d3542805a6ef1",
-        "type": "debug",
-        "z": "8790b12c7efb6fa0",
-        "name": "Completeness",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1780,
-        "y": 1200,
         "wires": []
     },
     {
@@ -25643,8 +25347,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 5,
-        "x": 180,
-        "y": 780,
+        "x": 220,
+        "y": 940,
         "wires": [
             [
                 "dc4798b8a9034e10"
@@ -25772,8 +25476,8 @@
         "initialize": "// Code added here will be run once\n// whenever the node is started.\nlet msg = {}\nmsg.url = 'http://a301cb45559c445acaec11ab01bbbee1-2115632777.us-gov-east-1.elb.amazonaws.com/api/params/params'\n// msg.url = 'https://mc.edl-7529180-ite.ite.edl.census.gov/api/'\nmsg.backup = msg.payload\n// msg.payload.startTime = global.set(\"currentTime\", new Date())\n\nreturn msg;",
         "finalize": "",
         "libs": [],
-        "x": 730,
-        "y": 620,
+        "x": 870,
+        "y": 140,
         "wires": [
             [
                 "e75551794bd4e9c1"
@@ -25796,8 +25500,8 @@
         "authType": "basic",
         "senderr": false,
         "headers": [],
-        "x": 930,
-        "y": 620,
+        "x": 1070,
+        "y": 140,
         "wires": [
             [
                 "db960fa2db841295"
@@ -25815,8 +25519,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1130,
-        "y": 620,
+        "x": 1270,
+        "y": 140,
         "wires": [
             []
         ]
@@ -25842,11 +25546,129 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 530,
-        "y": 620,
+        "x": 670,
+        "y": 140,
         "wires": [
             [
                 "a48bbfee066abb7a"
+            ]
+        ]
+    },
+    {
+        "id": "3e92f402ebdbe498",
+        "type": "switch",
+        "z": "8790b12c7efb6fa0",
+        "name": "Exit Check",
+        "property": "action",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Go to: Derive NAICS Code Module",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Go to Main Routing",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 1090,
+        "y": 660,
+        "wires": [
+            [
+                "66fdc22c898d5af9"
+            ],
+            [
+                "37ed27de2345edf7"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "37ed27de2345edf7",
+        "type": "subflow:f07c9ae4084738fc",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "x": 1300,
+        "y": 680,
+        "wires": [
+            [
+                "b14a6808eea03364"
+            ]
+        ]
+    },
+    {
+        "id": "b14a6808eea03364",
+        "type": "switch",
+        "z": "8790b12c7efb6fa0",
+        "name": "Exit Check",
+        "property": "action",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Go to: Derive MFG NAICS from NAPCS",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Go to: Derive MFG NAICS from NAPCS",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1530,
+        "y": 680,
+        "wires": [
+            [
+                "03236197db128bd1"
+            ],
+            [
+                "03236197db128bd1"
+            ]
+        ]
+    },
+    {
+        "id": "ae31da9fdc489294",
+        "type": "switch",
+        "z": "8790b12c7efb6fa0",
+        "name": "Exit Check",
+        "property": "action",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1110,
+        "y": 940,
+        "wires": [
+            [
+                "66fdc22c898d5af9"
+            ],
+            [
+                "bd80eaa4d3e0b069"
             ]
         ]
     }
