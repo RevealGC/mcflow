@@ -2948,9 +2948,7 @@
             "d394b61bcc4755e6"
         ],
         "x": 14,
-        "y": 939,
-        "w": 1532,
-        "h": 82
+        "y": 939
     },
     {
         "id": "ef50b77b253a7883",
@@ -2970,9 +2968,7 @@
             "d587f5de3f4014c8"
         ],
         "x": 14,
-        "y": 239,
-        "w": 1792,
-        "h": 182
+        "y": 239
     },
     {
         "id": "62708d0bbe922798",
@@ -2996,9 +2992,7 @@
             "58df41cd8e54a653"
         ],
         "x": 14,
-        "y": 519,
-        "w": 1432,
-        "h": 322
+        "y": 519
     },
     {
         "id": "19463268a6c67561",
@@ -3016,8 +3010,6 @@
         ],
         "x": 14,
         "y": 99,
-        "w": 1432,
-        "h": 82,
         "info": "# Rules from Parameter Files"
     },
     {
@@ -3132,9 +3124,7 @@
             "2c7eaaca104f6a2c"
         ],
         "x": 14,
-        "y": 599,
-        "w": 2232,
-        "h": 1942
+        "y": 599
     },
     {
         "id": "302cb8040ecade52",
@@ -3150,9 +3140,7 @@
             "a47c991027033263"
         ],
         "x": 714,
-        "y": 719,
-        "w": 372,
-        "h": 82
+        "y": 719
     },
     {
         "id": "d1e0f39ddacfeb20",
@@ -6208,7 +6196,7 @@
         "type": "function",
         "z": "bfe1ab19e0cbe2cf",
         "name": "classification function",
-        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n    let cache = global.get(\"lookupCache\");\n    const record_type = record['RECORD_TYP_TXT'];\n\n    function setFlagAndExit(referralFlagValue) {\n        msg.payload.csv[record_idx].TABSTAT = \"N\";\n        msg.payload.csv[record_idx].NONTABFL = \"R\";\n        msg.payload.csv[record_idx].ACTION = \"Exit Edit\";\n        global.set('action', \"Exit Edit\")\n        msg.payload.csv[record_idx].REFERRAL_FLAG = referralFlagValue;\n    }\n    function recTypeMatch(recArr) {\n        console.log((\n            (record.RECORD_TYP_TXT ? recArr.includes(record.RECORD_TYP_TXT) : false)\n        ))\n        return (\n            (record.RECORD_TYP_TXT ? recArr.includes(record.RECORD_TYP_TXT) : false)\n        );\n    }\n\n    function checkNaicsValidation(columnIndex, recordtyp) {\n        const naicsValidationData = cache.data.find(\n            item =>\n                item.module === \"classification\" &&\n                item.param === 'naics_validation' &&\n                item.program === \"aies\" &&\n                item.unit_type === \"estab\"\n        )?.json_values;\n        let columnKey = ''\n        if (columnIndex === 4) {\n            columnKey = 'col_0';\n        } else if (columnIndex === 7) {\n            columnKey = 'col_1';\n        } else {\n            columnKey = \"col_2\";\n        }\n\n        let partialNum = ''\n        if (['20', '90', 20, 90].includes(recordtyp)) {\n            partialNum = record.NAICS_NUM.substring(0, columnIndex);\n        } else if ([30, '30'].includes(recordtyp)) {\n            partialNum = record.KAU_NAICS.substring(0, columnIndex);\n        }\n\n        return (\n            naicsValidationData[columnKey].find(row => parseInt(row) == parseInt(partialNum))\n            //     naicsValidationData &&\n            //     naicsValidationData[columnKey] &&\n            //     naicsValidationData[columnKey].includes(partialNum)\n        );\n    }\n\n    if (recTypeMatch([\"20\", \"90\"]) && record['AIES_SCOPE'] == 'Y' && record['BR_STAT'] == 'Y') {\n        if (checkNaicsValidation(4, record_type)) {\n            msg.payload.csv[record_idx].ACTION = \"Go to: Derive NAICS Code Module\";\n            global.set('action', \"Go to: Derive NAICS Code Module\")\n        } else if (checkNaicsValidation(7, record_type)) {\n            msg.payload.csv[record_idx].ACTION = \"Go to: Derive NAICS Code Module\";\n            global.set('action', \"Go to: Derive NAICS Code Module\")\n        } else if (checkNaicsValidation(6, record_type)) {\n            msg.payload.csv[record_idx].ACTION = \"Go to: Derive NAICS Code Module\";\n            global.set('action', \"Go to: Derive NAICS Code Module\")\n        } else {\n            setFlagAndExit(\"INVALID_NAICS_ESTAB\");\n        }\n        return msg;\n    } else if (recTypeMatch([\"30\"]) && record['AIES_SCOPE'] == 'Y' && record['BR_STAT'] == 'Y') {\n        if (checkNaicsValidation(4, record_type)) {\n            msg.payload.csv[record_idx].ACTION = \"Go to Main Routing\";\n            global.set('action', \"Go to Main Routing\")\n        } else if (checkNaicsValidation(7, record_type)) {\n            msg.payload.csv[record_idx].ACTION = \"Go to Main Routing\";\n            global.set('action', \"Go to Main Routing\")\n        } else if (checkNaicsValidation(6, record_type)) {\n            msg.payload.csv[record_idx].ACTION = \"Go to Main Routing\";\n            global.set('action', \"Go to Main Routing\")\n        } else {\n            setFlagAndExit(\"INVALID_NAICS_KAU\");\n        }\n        return msg;\n    } else {\n        msg.payload.csv[record_idx].ACTION = \"Error - Record should not have entered this module\";\n        global.set('action', \"Error - Record should not have entered this module\")\n        return msg;\n    }\n}catch(e){\n    global.set('err', 'Exit Edit')\n    return msg;\n}",
+        "func": "try {\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n    let cache = global.get(\"lookupCache\");\n\n    function setFlagAndExit(referralFlagValue) {\n        record.TABSTAT = \"N\";\n        record.NONTABFL = \"R\";\n        record.ACTION = \"Exit Edit\";\n        global.set('action', \"Exit Edit\")\n        record.REFERRAL_FLAG = referralFlagValue;\n    }\n\n    function checkNaicsValidation(naics) {\n        const naicsValidationData = cache.data.find(\n            item =>\n                item.module === \"classification\" &&\n                item.param === 'naics_validation' &&\n                item.program === \"aies\" &&\n                item.unit_type === \"estab\"\n        )?.json_values;\n\n        let Found = 'N'\n        if (naicsValidationData['col_0'].find(r => naics.startsWith(r))) {\n            Found = 'Y'\n        } else if (naicsValidationData['col_1'].find(r => naics.startsWith(r))) {\n            Found = 'Y'\n        } else if (naicsValidationData['col_2'].find(r => naics.startsWith(r))) {\n            Found = 'Y'\n        } else if (naicsValidationData['col_3'].find(r => naics.startsWith(r))) {\n            Found = 'Y'\n        }\n        return (Found);\n    }\n\n    function typcheck(typ) {\n        if ([\"MU\", \"SU\"].includes(typ)) {\n            setFlagAndExit(\"Invalid_NAICS_ESTAB\")\n        } else {\n            setFlagAndExit(\"Invalid_NAICS_KAU\")\n        }\n    }\n\n    if ([\"MU\", \"SU\", \"KAU\"].includes(record?.REPORTING_ID_TYP_TXT)) {\n        if (record.NAICS_CODE && record.NAICS_CODE.length == 8) {\n            if (checkNaicsValidation(record?.NAICS_CODE) == 'Y') {\n                record.ACTION = \"Go to Derive NAICS Code Module\"\n            } else {\n                typcheck(record?.REPORTING_ID_TYP_TXT)\n            }\n        } else {\n            typcheck()\n        }\n    } else {\n        record.ACTION = \"Error - Record should not have entered this module\";\n        global.set('action', \"Error - Record should not have entered this module\")\n    }\n    return msg;\n} catch (e) {\n    global.set('err', 'Exit Edit')\n    return msg;\n}",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -6471,7 +6459,7 @@
         "type": "function",
         "z": "20d530cc0b193752",
         "name": "BR Stat ",
-        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n    function A(msg) {\n        msg.payload.csv[record_idx].TABSTAT = \"N\";\n        msg.payload.csv[record_idx].NONTABFL = \"D\";\n        msg.payload.csv[record_idx].ACTION = \"Exit Edit\";\n        global.set('action', 'Exit Edit')\n    }\n\n    // Is RECORD_TYP_TXT in ('10','20','3O','90')\n    if ([\"10\", \"20\", \"30\", \"90\"].includes(String(record.RECORD_TYP_TXT))) {\n        msg.payload.DEBUG_STATUS = \"RECORD_TYP_TXT-10-20-30-90-true\"\n        // Set TABSTAT and NONTABFL variables\n        msg.payload.csv[record_idx].TABSTAT = \"Y\";\n        msg.payload.csv[record_idx].NONTABFL = null;\n\n        // Is RECORD_TYP_TXT in ('10','20','90')\n        if ([\"10\", \"20\", \"90\"].includes(String(record.RECORD_TYP_TXT))) {\n            // Is BR_STAT equal to \"N\"\n            if (record.BR_STAT === \"N\") {\n                A(msg); // Go to A\n            } else { // BR_STAT not equal to \"N\"\n                // Is RECORD_TYP_TXT \"20\" or \"90\"\n                if ([\"20\", \"90\"].includes(String(record.RECORD_TYP_TXT))) {\n                    msg.payload.csv[record_idx].ACTION = \"Go to main Routing\";\n                    return msg;\n\n                } else { // RECORD_TYP_TXT not \"20\" or \"90\"\n                    msg.payload.csv[record_idx].ACTION = \"Go to main Routing\";\n                    return msg;\n                }\n            }\n\n        } else { // RECORD_TYP_TXT not in ('10','20','3O','90')\n            if (record.KAU_STAT === \"N\") {\n                A(msg); // Go to A\n            } else {\n                msg.payload.csv[record_idx].ACTION = \"Go to main Routing\";\n                global.set('action', 'Go to main Routing')\n                return msg;\n            }\n        }\n\n    } else {  // RECORD_TYP_TXT not in ('10','20','3O','90')\n        msg.payload.record_idx = record_idx\n        msg.payload.DEBUG_STATUS = \"RECORD_TYP_TXT-10-20-30-90-false\"\n        msg.payload.csv[record_idx].ACTION = \"ERROR\";\n        global.set('action', 'ERROR')\n    }\n\n    return msg;\n}catch(e){\n    global.set('err', 'Exit Edit')\n    return msg;\n}",
+        "func": "try {\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    function A() {\n        record.TABSTAT = \"N\";\n        record.NONTABFL = \"D\";\n        record.ACTION = \"Exit Edit\";\n        global.set('action', 'Exit Edit')\n    }\n\n    if ([\"SU\", \"MU\", \"KAU\", \"ENT\"].includes(String(record?.REPORTING_ID_TYP_TXT))) {\n        record.TABSTAT = \"Y\";\n        record.NONTABFL = ' ';\n        if ([\"MU\", \"SU\", \"ENT\"].includes(String(record?.REPORTING_ID_TYP_TXT))) {\n            if (record?.BR_STAT === \"N\") {\n                A();\n            } else {\n                record.ACTION = \"Go to main Routing\";\n            }\n\n        } else {\n            if (record?.KAU_STAT === \"N\") {\n                A();\n            } else {\n                record.ACTION = \"Go to main Routing\";\n            }\n        }\n    } else {\n        record.ACTION = \"ERROR\";\n        global.set('action', 'ERROR')\n    }\n\n    return msg;\n} catch (e) {\n    global.set('err', 'Exit Edit')\n    return msg;\n}",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -6489,7 +6477,7 @@
         "type": "function",
         "z": "b22812dba408ab8f",
         "name": "geography function",
-        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    const record = msg.payload.csv[record_idx];\n    const cache = global.get(\"lookupCache\");\n    const validationChartData = cache.data.find(\n        item =>\n            item.module === \"geography\" &&\n            item.param === \"geography\" &&\n            item.program === \"aies\" &&\n            item.unit_type === \"estab\"\n    )?.json_values;\n\n    let validation = validationChartData.GEO.some(element =>\n    (parseInt(element.STFIPS) === parseInt(record?.GEO_STATE_FIPS) &&\n        parseInt(element.GEOREG) === parseInt(record?.GEO_REGION))\n    );\n\n    if (validation) {\n        record['ACTION'] = \"Go to Main Routing\";\n        global.set('action','Go to Main Routing')\n    } else if (record?.GEO_STATE_FIPS === \"97\") {\n        if (record?.NAICS_SECTOR_OLD_NUM === \"21\" && [\"PC\", \"NG\", \"AT\"].includes(record?.PHYSLOC_ADDR_ST_TXT)) {\n            record['ACTION'] = \"Go to Main Routing\";\n            global.set('action','Go to Main Routing')\n        } else {\n            record['TABSTAT'] = \"N\";\n            record['NONTABFL'] = \"Y\";\n            record['ACTION'] = \"Exit Edit\";\n            global.set('action','Exit Edit')\n        }\n    } else {\n        record['TABSTAT'] = \"N\";\n        record['NONTABFL'] = \"Y\";\n        record['ACTION'] = \"Exit Edit\";\n        // record['FLAG'] = \"GEO_Invalid\";\n        global.set('action','Exit Edit')\n    }\n\n    // record.module = \"Geography\";\n    return msg;\n}catch(e){\n    global.set('err', 'Exit Edit')\n    return msg;\n}",
+        "func": "try {\n    let record_idx = global.get(\"ptrModuleFacts\");\n    const record = msg.payload.csv[record_idx];\n    const cache = global.get(\"lookupCache\");\n    const validationChartData = cache.data.find(\n        item =>\n            item.module === \"geography\" &&\n            item.param === \"geography\" &&\n            item.program === \"aies\" &&\n            item.unit_type === \"estab\"\n    )?.json_values;\n\n    let validation = validationChartData.GEO.some(element =>\n    (parseInt(element.STFIPS) === parseInt(record?.GEO_STATE_FIPS) &&\n        parseInt(element.GEOREG) === parseInt(record?.GEO_REGION))\n    );\n\n    if (validation) {\n        record['ACTION'] = \"Go to Main Routing\";\n        global.set('action', 'Go to Main Routing')\n    } else if (record?.GEO_STATE_FIPS === \"97\") {\n        if (record?.NAICS_SECTOR === \"21\" && [\"PC\", \"NG\", \"AT\"].includes(record?.PHYSLOC_ADDR_ST_TXT)) {\n            record['ACTION'] = \"Go to Main Routing\";\n            global.set('action', 'Go to Main Routing')\n        } else {\n            record['TABSTAT'] = \"N\";\n            record['NONTABFL'] = \"Y\";\n            record['ACTION'] = \"Exit Edit\";\n            global.set('action', 'Exit Edit')\n        }\n    } else {\n        record['TABSTAT'] = \"N\";\n        record['NONTABFL'] = \"Y\";\n        record['ACTION'] = \"Exit Edit\";\n        // record['FLAG'] = \"GEO_Invalid\";\n        global.set('action', 'Exit Edit')\n    }\n\n    // record.module = \"Geography\";\n    return msg;\n} catch (e) {\n    global.set('err', 'Exit Edit')\n    return msg;\n}",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -6525,7 +6513,7 @@
         "type": "function",
         "z": "42be4655fd3a8c84",
         "name": "critical error",
-        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    function setResult() {\n        record['TABSTAT'] = \"N\";\n        record['NONTABFL'] = \"D\";\n        record['ACTION'] = \"Exit Edit\";\n        global.set('action', 'Exit Edit')\n    }\n\n    // function parseToNum(val) {\n    //     return isNaN(val) ? 0 : parseInt(val, 10);\n    // }\n    function naicsSectorCheck() {\n        let result =\n            parseFloat(record['PAY_ANN_VAL']) +\n            parseFloat(record['EMP_MAR12_NUM']) +\n            parseFloat(record['PAY_QTR1_VAL']) +\n            parseFloat(record['ECPAYANN']) +\n            parseFloat(record['ECPAYQ1']) +\n            parseFloat(record['ECEMPQ1']) +\n            parseFloat(record['ECPAYANL']);\n\n        if (parseFloat(record['NAICS_SECTOR_OLD_NUM']) === 31) {\n            result = parseFloat(result) + parseFloat(record['EXPS_TEMPSTAF_VAL']);\n        }\n        return result\n    }\n    let data = naicsSectorCheck();\n    record['DATA'] = data\n\n    if (record.hasOwnProperty('COV_CHG_CODE') &&\n        [\"111\", \"131\", \"791\"].includes(record['COV_CHG_CODE']?.toString()) &&\n        new Date(record['COV_CHG_DATE']) <=\n        new Date(\"01-01-\" + record.REF_PER.substring(0, 4)) &&\n        data == 0\n    ) {\n        setResult();\n        return msg;\n\n    } else if (record.hasOwnProperty('COV_CHG_CODE') && [\"181\", \"201\", \"801\", \"091\", \"121\", \"171\"].includes(record['COV_CHG_CODE']?.toString())) {\n        setResult();\n        return msg;\n    } else {\n        record['ACTION'] = \"Go To Main Routing\";\n        global.set('action', 'Go To Main Routing')\n        return msg;\n    }\n}catch(e){\n    global.set('err', 'Exit Edit')\n    return msg;\n}",
+        "func": "try {\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    function setResult() {\n        record['TABSTAT'] = \"N\";\n        record['NONTABFL'] = \"D\";\n        record['ACTION'] = \"Exit Edit\";\n        global.set('action', 'Exit Edit')\n    }\n\n    // function parseToNum(val) {\n    //     return isNaN(val) ? 0 : parseInt(val, 10);\n    // }\n    function naicsSectorCheck() {\n        let result =\n            parseFloat(record['PAY_ANN_VAL']) +\n            parseFloat(record['EMP_MAR12_NUM']) +\n            parseFloat(record['PAY_QTR1_VAL']) +\n            parseFloat(record['RCPT_TOT_VAL']) +\n            parseFloat(record['IRS_PAY_ANN_VAL']) +\n            parseFloat(record['IRS_EMP_MAR12_NUM']) +\n            parseFloat(record['IRS_PAY_QTR1_VAL']);\n\n        if (parseFloat(record['NAICS_SECTOR']) === 31) {\n            result = parseFloat(result) + parseFloat(record['EXPS_TEMPSTAF_VAL']);\n        }\n        return result\n    }\n    let data = naicsSectorCheck();\n    // record['DATA'] = data\n\n    if (record?.COV_CHG_CODE &&\n        [\"111\", \"131\", \"791\"].includes(record['COV_CHG_CODE']?.toString()) &&\n        new Date(record['COV_CHG_DATE']) <=\n        new Date(\"01-01-\" + record.REF_PER.substring(0, 4)) &&\n        data == 0\n    ) {\n        setResult();\n\n    } else if (record?.COV_CHG_CODE && [\"181\", \"201\", \"801\", \"091\", \"121\", \"171\"].includes(record['COV_CHG_CODE']?.toString())) {\n        setResult();\n    } else {\n        record['ACTION'] = \"Go To Main Routing\";\n        global.set('action', 'Go To Main Routing')\n    }\n    return msg;\n} catch (e) {\n    global.set('err', 'Exit Edit')\n    return msg;\n}",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -6662,7 +6650,7 @@
         "type": "function",
         "z": "f07c9ae4084738fc",
         "name": "Derived Naics ",
-        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    if (record?.RECORD_TYP_TXT === \"20\" || record?.RECORD_TYP_TXT === \"90\") {\n        if (record?.NAICS_SECTOR == \"31\") {\n            record.ACTION = \"Go to: Derive MFG NAICS from NAPCS\"\n            global.set('action', 'Go to: Derive MFG NAICS from NAPCS')\n        } else {\n            record.ACTION = \"Go to: Classification\"\n        }\n    } else {\n        record.ACITON = \"Go to: Classification\"\n    }\n    return msg;\n}catch(e){\n    global.set('err', 'Exit Edit')\n    return msg;\n}\n",
+        "func": "try {\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    if (record?.REPORTING_ID_TYP_TXT === \"SU\" || record?.REPORTING_ID_TYP_TXT === \"MU\") {\n        if (record?.NAICS_SECTOR == \"31\") {\n            record.ACTION = \"Go to: Derive MFG NAICS from NAPCS\"\n            global.set('action', 'Go to: Derive MFG NAICS from NAPCS')\n        } else {\n            record.ACTION = \"Go to: Classification\"\n        }\n    } else {\n        record.ACITON = \"Go to: Classification\"\n    }\n    return msg;\n} catch (e) {\n    global.set('err', 'Exit Edit')\n    return msg;\n}",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -20875,7 +20863,7 @@
         "y": 580,
         "wires": [
             [
-                "66fdc22c898d5af9"
+                "14ec46780dada75b"
             ]
         ]
     },
@@ -21021,8 +21009,8 @@
         "links": [
             "6c8827ce7a4c83d8"
         ],
-        "x": 115,
-        "y": 580,
+        "x": 225,
+        "y": 560,
         "wires": [
             [
                 "b29f65e4584b8767"
@@ -21058,8 +21046,8 @@
             "7d91540d69ac16c1",
             "688a39b3e0070fe9"
         ],
-        "x": 2515,
-        "y": 640,
+        "x": 2275,
+        "y": 460,
         "wires": []
     },
     {
@@ -21266,8 +21254,9 @@
         "type": "function",
         "z": "8790b12c7efb6fa0",
         "name": "Fetch all params",
-        "func": "msg.url = 'https://mc.edl-7529180-ite.ite.edl.census.gov/api/params/params'\n// msg.url = 'https://mc.edl-7529180-ite.ite.edl.census.gov/api/'\nmsg.backup = msg.payload\nreturn msg;",
+        "func": "msg.url = 'http://a301cb45559c445acaec11ab01bbbee1-2115632777.us-gov-east-1.elb.amazonaws.com/api/params/params'\nmsg.backup = msg.payload\nreturn msg;",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "// Code added here will be run once\n// whenever the node is started.\nlet msg = {}\nmsg.url = 'https://mc.edl-7529180-ite.ite.edl.census.gov/api/params/params'\n// msg.url = 'https://mc.edl-7529180-ite.ite.edl.census.gov/api/'\nmsg.backup = msg.payload\n// msg.payload.startTime = global.set(\"currentTime\", new Date())\n\nreturn msg;",
         "finalize": "",
@@ -21624,14 +21613,14 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1320,
-        "y": 620,
+        "x": 1300,
+        "y": 580,
         "wires": [
             [
                 "66fdc22c898d5af9"
             ],
             [
-                "afd7588524439212"
+                "dafd1e4182212af8"
             ]
         ]
     },
@@ -21995,6 +21984,19 @@
             ],
             [
                 "c0ae812afe3b8630"
+            ]
+        ]
+    },
+    {
+        "id": "dafd1e4182212af8",
+        "type": "subflow:e7b7501b29427db9",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "x": 1540,
+        "y": 620,
+        "wires": [
+            [
+                "66fdc22c898d5af9"
             ]
         ]
     },
