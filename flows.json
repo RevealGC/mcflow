@@ -597,14 +597,6 @@
         "env": []
     },
     {
-        "id": "8790b12c7efb6fa0",
-        "type": "tab",
-        "label": "Interactive Mode",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
         "id": "8d66eac23e096d21",
         "type": "tab",
         "label": "derive_mfg_naics",
@@ -629,14 +621,6 @@
         "env": []
     },
     {
-        "id": "d7d109e0d89be1c6",
-        "type": "tab",
-        "label": "Kafka MS",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
         "id": "0952db06f674f8bc",
         "type": "tab",
         "label": "Logical Edits",
@@ -656,6 +640,22 @@
         "id": "c3ae207e8a0fdafa",
         "type": "tab",
         "label": "estab_to_kau",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "8790b12c7efb6fa0",
+        "type": "tab",
+        "label": "Interactive Mode",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "d7d109e0d89be1c6",
+        "type": "tab",
+        "label": "Kafka MS",
         "disabled": false,
         "info": "",
         "env": []
@@ -2735,7 +2735,7 @@
         ],
         "out": [
             {
-                "x": 900,
+                "x": 1360,
                 "y": 300,
                 "wires": [
                     {
@@ -2856,7 +2856,7 @@
         "category": "",
         "in": [
             {
-                "x": 660,
+                "x": 340,
                 "y": 60,
                 "wires": [
                     {
@@ -2867,8 +2867,8 @@
         ],
         "out": [
             {
-                "x": 960,
-                "y": 60,
+                "x": 1480,
+                "y": 80,
                 "wires": [
                     {
                         "id": "87790c3eda62986b",
@@ -2948,7 +2948,9 @@
             "d394b61bcc4755e6"
         ],
         "x": 14,
-        "y": 939
+        "y": 939,
+        "w": 1532,
+        "h": 82
     },
     {
         "id": "ef50b77b253a7883",
@@ -2968,7 +2970,9 @@
             "d587f5de3f4014c8"
         ],
         "x": 14,
-        "y": 239
+        "y": 239,
+        "w": 1792,
+        "h": 182
     },
     {
         "id": "62708d0bbe922798",
@@ -2992,7 +2996,9 @@
             "58df41cd8e54a653"
         ],
         "x": 14,
-        "y": 519
+        "y": 519,
+        "w": 1432,
+        "h": 322
     },
     {
         "id": "19463268a6c67561",
@@ -3010,6 +3016,8 @@
         ],
         "x": 14,
         "y": 99,
+        "w": 1432,
+        "h": 82,
         "info": "# Rules from Parameter Files"
     },
     {
@@ -4372,7 +4380,7 @@
         "applicationNameType": "str",
         "max": "10",
         "maxFieldType": "num",
-        "idle": "1000",
+        "idle": "10000",
         "idleFieldType": "num",
         "connectionTimeout": "10000",
         "connectionTimeoutFieldType": "num",
@@ -7349,8 +7357,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 740,
-        "y": 300,
+        "x": 1020,
+        "y": 500,
         "wires": [
             []
         ]
@@ -7423,6 +7431,42 @@
         "libs": [],
         "x": 820,
         "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "747e1f273757653b",
+        "type": "function",
+        "z": "6e56f7f07e320f38",
+        "name": "insert_query",
+        "func": "\n// msg.query = 'select * from estab wheren kau'\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1050,
+        "y": 160,
+        "wires": [
+            [
+                "3b10c56247b7d00f"
+            ]
+        ]
+    },
+    {
+        "id": "3b10c56247b7d00f",
+        "type": "postgresql",
+        "z": "6e56f7f07e320f38",
+        "name": "Insert Estabs from KAU",
+        "query": "",
+        "postgreSQLConfig": "481a641c4005d1c8",
+        "split": false,
+        "rowsPerMsg": "1",
+        "outputs": 1,
+        "x": 1270,
+        "y": 160,
         "wires": [
             []
         ]
@@ -20755,1256 +20799,6 @@
         ]
     },
     {
-        "id": "dc4798b8a9034e10",
-        "type": "subflow:20d530cc0b193752",
-        "z": "8790b12c7efb6fa0",
-        "name": "",
-        "x": 940,
-        "y": 300,
-        "wires": [
-            [
-                "b58236733aae762d"
-            ]
-        ]
-    },
-    {
-        "id": "35b9c800d42ff73a",
-        "type": "subflow:42be4655fd3a8c84",
-        "z": "8790b12c7efb6fa0",
-        "name": "",
-        "x": 890,
-        "y": 400,
-        "wires": [
-            [
-                "320a8a9ff7a45d24"
-            ]
-        ]
-    },
-    {
-        "id": "03236197db128bd1",
-        "type": "subflow:b22812dba408ab8f",
-        "z": "8790b12c7efb6fa0",
-        "name": "",
-        "x": 870,
-        "y": 1020,
-        "wires": [
-            [
-                "f3b1a6532404a782"
-            ]
-        ]
-    },
-    {
-        "id": "bd80eaa4d3e0b069",
-        "type": "subflow:aadaa91727c0d579",
-        "z": "8790b12c7efb6fa0",
-        "name": "",
-        "x": 860,
-        "y": 1100,
-        "wires": [
-            [
-                "2ea97ef9be40b936"
-            ]
-        ]
-    },
-    {
-        "id": "77dcf5b1e0afb3a9",
-        "type": "subflow:998aa04bd1bb677d",
-        "z": "8790b12c7efb6fa0",
-        "name": "",
-        "x": 840,
-        "y": 1260,
-        "wires": [
-            [
-                "d4fcb395b8eab6fd"
-            ]
-        ]
-    },
-    {
-        "id": "1b67e6657388118d",
-        "type": "subflow:c79b244779411ead",
-        "z": "8790b12c7efb6fa0",
-        "name": "",
-        "x": 860,
-        "y": 1180,
-        "wires": [
-            [
-                "35dc57de52a34904"
-            ]
-        ]
-    },
-    {
-        "id": "2a42027c1028f409",
-        "type": "subflow:89f071f1deb9a1b1",
-        "z": "8790b12c7efb6fa0",
-        "name": "",
-        "x": 1260,
-        "y": 1280,
-        "wires": [
-            [
-                "66fdc22c898d5af9"
-            ]
-        ]
-    },
-    {
-        "id": "a3ef7d2c9f62b38b",
-        "type": "subflow:f9a2a2262f95bae3",
-        "z": "8790b12c7efb6fa0",
-        "name": "",
-        "x": 980,
-        "y": 480,
-        "wires": [
-            [
-                "e710fe5ce1dcb7b1"
-            ]
-        ]
-    },
-    {
-        "id": "e1dd758b59c31f88",
-        "type": "subflow:b93bf22bc3258992",
-        "z": "8790b12c7efb6fa0",
-        "name": "",
-        "x": 930,
-        "y": 580,
-        "wires": [
-            [
-                "14ec46780dada75b"
-            ]
-        ]
-    },
-    {
-        "id": "afd7588524439212",
-        "type": "subflow:bfe1ab19e0cbe2cf",
-        "z": "8790b12c7efb6fa0",
-        "name": "",
-        "x": 750,
-        "y": 660,
-        "wires": [
-            [
-                "fcd151b21980a714"
-            ]
-        ]
-    },
-    {
-        "id": "6c2616b9f8b16717",
-        "type": "link out",
-        "z": "8790b12c7efb6fa0",
-        "name": "Output of Interactive mode",
-        "mode": "link",
-        "links": [
-            "8ad2ab7c27d8d248"
-        ],
-        "x": 2565,
-        "y": 780,
-        "wires": []
-    },
-    {
-        "id": "746909370ced9c62",
-        "type": "link in",
-        "z": "8790b12c7efb6fa0",
-        "name": "link in gotQBES",
-        "links": [
-            "8eb6f6b4ca5cb88d",
-            "35871e68a9f50691"
-        ],
-        "x": 95,
-        "y": 500,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "b29f65e4584b8767",
-        "type": "change",
-        "z": "8790b12c7efb6fa0",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "action",
-                "pt": "global",
-                "to": "\"\"",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 200,
-        "y": 680,
-        "wires": [
-            [
-                "e97ff6b724a4e2b5"
-            ]
-        ]
-    },
-    {
-        "id": "121f33ae272cb49a",
-        "type": "switch",
-        "z": "8790b12c7efb6fa0",
-        "name": "Exit Check",
-        "property": "action",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "Exit Edit",
-                "vt": "str"
-            },
-            {
-                "t": "neq",
-                "v": "Exit Edit",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 1630,
-        "y": 320,
-        "wires": [
-            [
-                "66fdc22c898d5af9"
-            ],
-            [
-                "35b9c800d42ff73a"
-            ]
-        ]
-    },
-    {
-        "id": "df590f50a626fa0c",
-        "type": "switch",
-        "z": "8790b12c7efb6fa0",
-        "name": "Exit Check",
-        "property": "action",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "Exit Edit",
-                "vt": "str"
-            },
-            {
-                "t": "neq",
-                "v": "Exit Edit",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 1330,
-        "y": 420,
-        "wires": [
-            [
-                "66fdc22c898d5af9"
-            ],
-            [
-                "a3ef7d2c9f62b38b"
-            ]
-        ]
-    },
-    {
-        "id": "4a7b9cb4a8c69f57",
-        "type": "link in",
-        "z": "8790b12c7efb6fa0",
-        "name": "Interactive Mode Test UI Input",
-        "links": [
-            "6c8827ce7a4c83d8"
-        ],
-        "x": 225,
-        "y": 560,
-        "wires": [
-            [
-                "b29f65e4584b8767"
-            ]
-        ]
-    },
-    {
-        "id": "66fdc22c898d5af9",
-        "type": "function",
-        "z": "8790b12c7efb6fa0",
-        "name": "Merge calls",
-        "func": "return msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 2350,
-        "y": 640,
-        "wires": [
-            [
-                "0422aeccc8321ad8"
-            ]
-        ]
-    },
-    {
-        "id": "0422aeccc8321ad8",
-        "type": "link out",
-        "z": "8790b12c7efb6fa0",
-        "name": "link out classification",
-        "mode": "link",
-        "links": [
-            "7d91540d69ac16c1",
-            "688a39b3e0070fe9"
-        ],
-        "x": 2275,
-        "y": 460,
-        "wires": []
-    },
-    {
-        "id": "dbaacd53577bf3a4",
-        "type": "subflow:20d530cc0b193752",
-        "z": "8790b12c7efb6fa0",
-        "name": "",
-        "x": 640,
-        "y": 1340,
-        "wires": [
-            [
-                "9e9b4cee68be6e9c"
-            ]
-        ]
-    },
-    {
-        "id": "3f056fce77befeb6",
-        "type": "switch",
-        "z": "8790b12c7efb6fa0",
-        "name": "Exit Check",
-        "property": "action",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "Exit Edit",
-                "vt": "str"
-            },
-            {
-                "t": "neq",
-                "v": "Exit Edit",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 1770,
-        "y": 1340,
-        "wires": [
-            [
-                "66fdc22c898d5af9"
-            ],
-            [
-                "fd89669a0908b072"
-            ]
-        ]
-    },
-    {
-        "id": "56807c0e8b3a451e",
-        "type": "switch",
-        "z": "8790b12c7efb6fa0",
-        "name": "reporting_id_typ_txt",
-        "property": "payload.csv[0].REPORTING_ID_TYP_TXT",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "SU",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "MU",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "KAU",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "ENT",
-                "vt": "str"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 5,
-        "x": 220,
-        "y": 940,
-        "wires": [
-            [
-                "dc4798b8a9034e10"
-            ],
-            [
-                "dc4798b8a9034e10"
-            ],
-            [
-                "dbaacd53577bf3a4"
-            ],
-            [
-                "b59063ee603e4b43"
-            ],
-            [
-                "66fdc22c898d5af9"
-            ]
-        ]
-    },
-    {
-        "id": "fd89669a0908b072",
-        "type": "subflow:bfe1ab19e0cbe2cf",
-        "z": "8790b12c7efb6fa0",
-        "name": "",
-        "x": 1050,
-        "y": 1420,
-        "wires": [
-            [
-                "e4f66c7916ddf51b"
-            ]
-        ]
-    },
-    {
-        "id": "c89db042ff61a895",
-        "type": "subflow:c79b244779411ead",
-        "z": "8790b12c7efb6fa0",
-        "name": "",
-        "x": 940,
-        "y": 1500,
-        "wires": [
-            [
-                "52b0141e97338396"
-            ]
-        ]
-    },
-    {
-        "id": "bbd77d5e5517779e",
-        "type": "subflow:998aa04bd1bb677d",
-        "z": "8790b12c7efb6fa0",
-        "name": "",
-        "x": 940,
-        "y": 1580,
-        "wires": [
-            [
-                "4d5edc2ef2a2765f"
-            ]
-        ]
-    },
-    {
-        "id": "1b840bc520e7c89c",
-        "type": "subflow:89f071f1deb9a1b1",
-        "z": "8790b12c7efb6fa0",
-        "name": "",
-        "x": 2080,
-        "y": 1480,
-        "wires": [
-            [
-                "66fdc22c898d5af9"
-            ]
-        ]
-    },
-    {
-        "id": "b59063ee603e4b43",
-        "type": "subflow:20d530cc0b193752",
-        "z": "8790b12c7efb6fa0",
-        "name": "",
-        "x": 620,
-        "y": 1640,
-        "wires": [
-            [
-                "33f528d747418689"
-            ]
-        ]
-    },
-    {
-        "id": "c0ae812afe3b8630",
-        "type": "switch",
-        "z": "8790b12c7efb6fa0",
-        "name": "Exit Check",
-        "property": "action",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "Exit Edit",
-                "vt": "str"
-            },
-            {
-                "t": "neq",
-                "v": "Exit Edit",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 2230,
-        "y": 1620,
-        "wires": [
-            [
-                "66fdc22c898d5af9"
-            ],
-            [
-                "66fdc22c898d5af9"
-            ]
-        ]
-    },
-    {
-        "id": "a48bbfee066abb7a",
-        "type": "function",
-        "z": "8790b12c7efb6fa0",
-        "name": "Fetch all params",
-        "func": "msg.url = 'http://a301cb45559c445acaec11ab01bbbee1-2115632777.us-gov-east-1.elb.amazonaws.com/api/params/params'\nmsg.backup = msg.payload\nreturn msg;",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "// Code added here will be run once\n// whenever the node is started.\nlet msg = {}\nmsg.url = 'https://mc.edl-7529180-ite.ite.edl.census.gov/api/params/params'\n// msg.url = 'https://mc.edl-7529180-ite.ite.edl.census.gov/api/'\nmsg.backup = msg.payload\n// msg.payload.startTime = global.set(\"currentTime\", new Date())\n\nreturn msg;",
-        "finalize": "",
-        "libs": [],
-        "x": 1170,
-        "y": 140,
-        "wires": [
-            [
-                "e75551794bd4e9c1"
-            ]
-        ]
-    },
-    {
-        "id": "e75551794bd4e9c1",
-        "type": "http request",
-        "z": "8790b12c7efb6fa0",
-        "name": "Lookup data API",
-        "method": "GET",
-        "ret": "obj",
-        "paytoqs": "ignore",
-        "url": "",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "basic",
-        "senderr": false,
-        "headers": [],
-        "x": 1370,
-        "y": 140,
-        "wires": [
-            [
-                "db960fa2db841295"
-            ]
-        ]
-    },
-    {
-        "id": "db960fa2db841295",
-        "type": "function",
-        "z": "8790b12c7efb6fa0",
-        "name": "cache result",
-        "func": "let cache = global.get(\"lookupCache\");\ncache = Array.isArray(cache?.data) ? cache : { \"data\": [] }\nif (msg.payload.status === \"success\") {\n    cache.data = msg.payload.data\n    msg.payload.dataArr = cache.data\n}\nglobal.set(\"lookupCache\", cache)\n// msg.payload = {\n//     ...msg.payload,\n//     ...msg.backup\n// }\n// return msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1570,
-        "y": 140,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "bc058c7d26276884",
-        "type": "inject",
-        "z": "8790b12c7efb6fa0",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 970,
-        "y": 140,
-        "wires": [
-            [
-                "a48bbfee066abb7a"
-            ]
-        ]
-    },
-    {
-        "id": "3e92f402ebdbe498",
-        "type": "switch",
-        "z": "8790b12c7efb6fa0",
-        "name": "Exit Check",
-        "property": "action",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "Exit Edit",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "Go to: Derive NAICS Code Module",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "Go to Main Routing",
-                "vt": "str"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 4,
-        "x": 1130,
-        "y": 700,
-        "wires": [
-            [
-                "66fdc22c898d5af9"
-            ],
-            [
-                "37ed27de2345edf7"
-            ],
-            [
-                "03236197db128bd1"
-            ],
-            [
-                "66fdc22c898d5af9"
-            ]
-        ]
-    },
-    {
-        "id": "37ed27de2345edf7",
-        "type": "subflow:f07c9ae4084738fc",
-        "z": "8790b12c7efb6fa0",
-        "name": "",
-        "x": 740,
-        "y": 780,
-        "wires": [
-            [
-                "8aaf39ddb94741aa"
-            ]
-        ]
-    },
-    {
-        "id": "b14a6808eea03364",
-        "type": "switch",
-        "z": "8790b12c7efb6fa0",
-        "name": "Exit Check",
-        "property": "action",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "Go to: Derive MFG NAICS from NAPCS",
-                "vt": "str"
-            },
-            {
-                "t": "neq",
-                "v": "Go to: Derive MFG NAICS from NAPCS",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 630,
-        "y": 1020,
-        "wires": [
-            [
-                "03236197db128bd1"
-            ],
-            [
-                "03236197db128bd1"
-            ]
-        ]
-    },
-    {
-        "id": "ae31da9fdc489294",
-        "type": "switch",
-        "z": "8790b12c7efb6fa0",
-        "name": "Exit Check",
-        "property": "action",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "Exit Edit",
-                "vt": "str"
-            },
-            {
-                "t": "neq",
-                "v": "Exit Edit",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 1110,
-        "y": 1020,
-        "wires": [
-            [
-                "66fdc22c898d5af9"
-            ],
-            [
-                "bd80eaa4d3e0b069"
-            ]
-        ]
-    },
-    {
-        "id": "e97ff6b724a4e2b5",
-        "type": "change",
-        "z": "8790b12c7efb6fa0",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "err",
-                "pt": "global",
-                "to": "\"\"",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 170,
-        "y": 800,
-        "wires": [
-            [
-                "56807c0e8b3a451e"
-            ]
-        ]
-    },
-    {
-        "id": "b58236733aae762d",
-        "type": "switch",
-        "z": "8790b12c7efb6fa0",
-        "name": "Error Exit Check",
-        "property": "err",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "Exit Edit",
-                "vt": "str"
-            },
-            {
-                "t": "neq",
-                "v": "Exit Edit",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 1180,
-        "y": 300,
-        "wires": [
-            [
-                "66fdc22c898d5af9"
-            ],
-            [
-                "121f33ae272cb49a"
-            ]
-        ]
-    },
-    {
-        "id": "320a8a9ff7a45d24",
-        "type": "switch",
-        "z": "8790b12c7efb6fa0",
-        "name": "Error Exit Check",
-        "property": "err",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "Exit Edit",
-                "vt": "str"
-            },
-            {
-                "t": "neq",
-                "v": "Exit Edit",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 1140,
-        "y": 400,
-        "wires": [
-            [
-                "66fdc22c898d5af9"
-            ],
-            [
-                "df590f50a626fa0c"
-            ]
-        ]
-    },
-    {
-        "id": "e710fe5ce1dcb7b1",
-        "type": "switch",
-        "z": "8790b12c7efb6fa0",
-        "name": "Error Exit Check",
-        "property": "err",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "Exit Edit",
-                "vt": "str"
-            },
-            {
-                "t": "neq",
-                "v": "Exit Edit",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 1360,
-        "y": 520,
-        "wires": [
-            [
-                "66fdc22c898d5af9"
-            ],
-            [
-                "e1dd758b59c31f88"
-            ]
-        ]
-    },
-    {
-        "id": "14ec46780dada75b",
-        "type": "switch",
-        "z": "8790b12c7efb6fa0",
-        "name": "Error Exit Check",
-        "property": "err",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "Exit Edit",
-                "vt": "str"
-            },
-            {
-                "t": "neq",
-                "v": "Exit Edit",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 1300,
-        "y": 580,
-        "wires": [
-            [
-                "66fdc22c898d5af9"
-            ],
-            [
-                "dafd1e4182212af8"
-            ]
-        ]
-    },
-    {
-        "id": "fcd151b21980a714",
-        "type": "switch",
-        "z": "8790b12c7efb6fa0",
-        "name": "Error Exit Check",
-        "property": "err",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "Exit Edit",
-                "vt": "str"
-            },
-            {
-                "t": "neq",
-                "v": "Exit Edit",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 920,
-        "y": 660,
-        "wires": [
-            [
-                "66fdc22c898d5af9"
-            ],
-            [
-                "3e92f402ebdbe498"
-            ]
-        ]
-    },
-    {
-        "id": "8aaf39ddb94741aa",
-        "type": "switch",
-        "z": "8790b12c7efb6fa0",
-        "name": "Error Exit Check",
-        "property": "err",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "Exit Edit",
-                "vt": "str"
-            },
-            {
-                "t": "neq",
-                "v": "Exit Edit",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 940,
-        "y": 780,
-        "wires": [
-            [
-                "66fdc22c898d5af9"
-            ],
-            [
-                "b14a6808eea03364"
-            ]
-        ]
-    },
-    {
-        "id": "f3b1a6532404a782",
-        "type": "switch",
-        "z": "8790b12c7efb6fa0",
-        "name": "Error Exit Check",
-        "property": "err",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "Exit Edit",
-                "vt": "str"
-            },
-            {
-                "t": "neq",
-                "v": "Exit Edit",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 1120,
-        "y": 940,
-        "wires": [
-            [
-                "66fdc22c898d5af9"
-            ],
-            [
-                "ae31da9fdc489294"
-            ]
-        ]
-    },
-    {
-        "id": "2ea97ef9be40b936",
-        "type": "switch",
-        "z": "8790b12c7efb6fa0",
-        "name": "Error Exit Check",
-        "property": "err",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "Exit Edit",
-                "vt": "str"
-            },
-            {
-                "t": "neq",
-                "v": "Exit Edit",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 1100,
-        "y": 1100,
-        "wires": [
-            [
-                "66fdc22c898d5af9"
-            ],
-            [
-                "1b67e6657388118d"
-            ]
-        ]
-    },
-    {
-        "id": "35dc57de52a34904",
-        "type": "switch",
-        "z": "8790b12c7efb6fa0",
-        "name": "Error Exit Check",
-        "property": "err",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "Exit Edit",
-                "vt": "str"
-            },
-            {
-                "t": "neq",
-                "v": "Exit Edit",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 1080,
-        "y": 1180,
-        "wires": [
-            [
-                "66fdc22c898d5af9"
-            ],
-            [
-                "77dcf5b1e0afb3a9"
-            ]
-        ]
-    },
-    {
-        "id": "d4fcb395b8eab6fd",
-        "type": "switch",
-        "z": "8790b12c7efb6fa0",
-        "name": "Error Exit Check",
-        "property": "err",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "Exit Edit",
-                "vt": "str"
-            },
-            {
-                "t": "neq",
-                "v": "Exit Edit",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 1060,
-        "y": 1260,
-        "wires": [
-            [
-                "66fdc22c898d5af9"
-            ],
-            [
-                "2a42027c1028f409"
-            ]
-        ]
-    },
-    {
-        "id": "9e9b4cee68be6e9c",
-        "type": "switch",
-        "z": "8790b12c7efb6fa0",
-        "name": "Error Exit Check",
-        "property": "err",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "Exit Edit",
-                "vt": "str"
-            },
-            {
-                "t": "neq",
-                "v": "Exit Edit",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 1260,
-        "y": 1340,
-        "wires": [
-            [
-                "66fdc22c898d5af9"
-            ],
-            [
-                "3f056fce77befeb6"
-            ]
-        ]
-    },
-    {
-        "id": "e4f66c7916ddf51b",
-        "type": "switch",
-        "z": "8790b12c7efb6fa0",
-        "name": "Error Exit Check",
-        "property": "err",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "Exit Edit",
-                "vt": "str"
-            },
-            {
-                "t": "neq",
-                "v": "Exit Edit",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 1260,
-        "y": 1420,
-        "wires": [
-            [
-                "66fdc22c898d5af9"
-            ],
-            [
-                "c89db042ff61a895"
-            ]
-        ]
-    },
-    {
-        "id": "52b0141e97338396",
-        "type": "switch",
-        "z": "8790b12c7efb6fa0",
-        "name": "Error Exit Check",
-        "property": "err",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "Exit Edit",
-                "vt": "str"
-            },
-            {
-                "t": "neq",
-                "v": "Exit Edit",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 1280,
-        "y": 1500,
-        "wires": [
-            [
-                "66fdc22c898d5af9"
-            ],
-            [
-                "bbd77d5e5517779e"
-            ]
-        ]
-    },
-    {
-        "id": "4d5edc2ef2a2765f",
-        "type": "switch",
-        "z": "8790b12c7efb6fa0",
-        "name": "Error Exit Check",
-        "property": "err",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "Exit Edit",
-                "vt": "str"
-            },
-            {
-                "t": "neq",
-                "v": "Exit Edit",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 1280,
-        "y": 1580,
-        "wires": [
-            [
-                "66fdc22c898d5af9"
-            ],
-            [
-                "1b840bc520e7c89c"
-            ]
-        ]
-    },
-    {
-        "id": "33f528d747418689",
-        "type": "switch",
-        "z": "8790b12c7efb6fa0",
-        "name": "Error Exit Check",
-        "property": "err",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "Exit Edit",
-                "vt": "str"
-            },
-            {
-                "t": "neq",
-                "v": "Exit Edit",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 1780,
-        "y": 1620,
-        "wires": [
-            [
-                "66fdc22c898d5af9"
-            ],
-            [
-                "c0ae812afe3b8630"
-            ]
-        ]
-    },
-    {
-        "id": "dafd1e4182212af8",
-        "type": "subflow:e7b7501b29427db9",
-        "z": "8790b12c7efb6fa0",
-        "name": "",
-        "x": 1540,
-        "y": 620,
-        "wires": [
-            [
-                "66fdc22c898d5af9"
-            ]
-        ]
-    },
-    {
         "id": "9f524f80692dc3ae",
         "type": "subflow:7e80c62ce8c753dc",
         "z": "8d66eac23e096d21",
@@ -22254,444 +21048,6 @@
                 "8f2445107331a868"
             ]
         ]
-    },
-    {
-        "id": "bed4b9a48e50c41c",
-        "type": "debug",
-        "z": "d7d109e0d89be1c6",
-        "name": "kafka consumer: gotQBES",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 620,
-        "y": 400,
-        "wires": []
-    },
-    {
-        "id": "3ec01d49fbdfba54",
-        "type": "link out",
-        "z": "d7d109e0d89be1c6",
-        "name": "link out gotQBES",
-        "mode": "link",
-        "links": [
-            "4480a2673228edf6",
-            "f765d14d056bec8a",
-            "e0d75497828e672b"
-        ],
-        "x": 555,
-        "y": 340,
-        "wires": []
-    },
-    {
-        "id": "8ad2ab7c27d8d248",
-        "type": "link in",
-        "z": "d7d109e0d89be1c6",
-        "name": "link in gotFLOW",
-        "links": [
-            "36ac45a273e5509f",
-            "084da167bd2adffa",
-            "7cdbce6d4b28412b",
-            "9aee892d0909f5a2",
-            "c481f6b945425e82",
-            "6c2616b9f8b16717"
-        ],
-        "x": 495,
-        "y": 740,
-        "wires": [
-            [
-                "60346d8f3d1bcd94",
-                "e894cadacc02eb73"
-            ]
-        ]
-    },
-    {
-        "id": "f9b02de75682c807",
-        "type": "function",
-        "z": "d7d109e0d89be1c6",
-        "name": "function 25",
-        "func": "msg.payload = JSON.parse(msg.payload.value)\n\nconst currentStepIndex = msg.payload.recipe.currentStepIndex;\nconst startTime = new Date().getTime();\n\nmsg.payload.recipe.steps[currentStepIndex].tsStart = startTime;\n\nmsg.payload.facts = [msg.payload.fact]\nmsg.payload.qflowInputFacts = JSON.parse(JSON.stringify(msg.payload.facts))\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 290,
-        "y": 400,
-        "wires": [
-            [
-                "bed4b9a48e50c41c",
-                "3ec01d49fbdfba54"
-            ]
-        ]
-    },
-    {
-        "id": "60346d8f3d1bcd94",
-        "type": "debug",
-        "z": "d7d109e0d89be1c6",
-        "name": "gotFlow",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 660,
-        "y": 780,
-        "wires": []
-    },
-    {
-        "id": "e894cadacc02eb73",
-        "type": "function",
-        "z": "d7d109e0d89be1c6",
-        "name": "updateResultToPayload",
-        "func": "\nconst findChangedKeyValuePairs = (oldObj, newObj) => {\n    const changedKeyValuePairs = [];\n\n    for (const key in newObj) {\n        if (oldObj[key] !== newObj[key]) {\n            changedKeyValuePairs.push({\n                key,\n                oldValue: oldObj[key],\n                newValue: newObj[key],\n                service: {\n                    name: 'qflow',\n                    timestamp: new Date()\n                }\n            });\n        }\n    }\n\n    return changedKeyValuePairs;\n}\n\nconst qFlowdelta = findChangedKeyValuePairs(msg.payload.qflowInputFacts[0], msg.payload.facts[0]);\n\nmsg.payload.delta.push(...qFlowdelta);\nmsg.payload.fact = msg.payload.facts[0];\ndelete msg.payload.facts;\ndelete msg.payload.qflowInputFacts;\n\nvar currentStepIndex = msg.payload.recipe.currentStepIndex;\nconst startTime = msg.payload.recipe.steps[currentStepIndex].tsStart;\n\nconst endTime = new Date().getTime();\n\nmsg.payload.recipe.steps[currentStepIndex].tsEnd = endTime;\nmsg.payload.recipe.steps[currentStepIndex].processedTime = endTime - startTime;\n\nmsg.payload.recipe.steps[currentStepIndex].delta = qFlowdelta;\nmsg.payload.recipe.currentStepIndex = currentStepIndex + 1\nmsg.topicName = msg.payload.recipe.steps[currentStepIndex+1].msName;\n\nmsg.payload = JSON.stringify(msg.payload)\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 720,
-        "y": 720,
-        "wires": [
-            [
-                "65ddc89844c5a58f",
-                "3fec20bb8aaae008"
-            ]
-        ]
-    },
-    {
-        "id": "65ddc89844c5a58f",
-        "type": "debug",
-        "z": "d7d109e0d89be1c6",
-        "name": "Got updateResultToPayload",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1020,
-        "y": 620,
-        "wires": []
-    },
-    {
-        "id": "3fec20bb8aaae008",
-        "type": "switch",
-        "z": "d7d109e0d89be1c6",
-        "name": "Switch the topic push",
-        "property": "topicName",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "qbes",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "qflow",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "jobOutput",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 3,
-        "x": 1010,
-        "y": 740,
-        "wires": [
-            [
-                "8b0e07553bb5ee94"
-            ],
-            [
-                "5006976f1193b7e2"
-            ],
-            [
-                "d0b38c1e210e2c2b"
-            ]
-        ]
-    },
-    {
-        "id": "8b0e07553bb5ee94",
-        "type": "debug",
-        "z": "d7d109e0d89be1c6",
-        "name": "Producer Qubes",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1280,
-        "y": 640,
-        "wires": []
-    },
-    {
-        "id": "5006976f1193b7e2",
-        "type": "debug",
-        "z": "d7d109e0d89be1c6",
-        "name": "Producer QFlow",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1280,
-        "y": 740,
-        "wires": []
-    },
-    {
-        "id": "d0b38c1e210e2c2b",
-        "type": "debug",
-        "z": "d7d109e0d89be1c6",
-        "name": "Producer JobOutput",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1300,
-        "y": 840,
-        "wires": []
-    },
-    {
-        "id": "38b1aa58eaaa6a28",
-        "type": "function",
-        "z": "d7d109e0d89be1c6",
-        "name": "Getting Data and Makeing Index",
-        "func": "msg.payload = JSON.parse(msg.payload.value)\n\nconst currentStepIndex = msg.payload.recipe.currentStepIndex;\nconst startTime = new Date().getTime();\n\nmsg.payload.recipe.steps[currentStepIndex].tsStart = startTime;\n\nmsg.payload.facts = [msg.payload.fact]\n\n\nmsg.payload.qflowInputFacts = JSON.parse(JSON.stringify(msg.payload.facts))\n\nmsg.payload.csv = JSON.parse(JSON.stringify(msg.payload.facts))\n\nglobal.set(\"ptrModuleFacts\", 0);\n\nmsg.modeName = msg.payload.recipe.steps[currentStepIndex].hasOwnProperty('testModule') ? msg.payload.recipe.steps[currentStepIndex].testModule : 'interactive_mode';\n\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1030,
-        "y": 1020,
-        "wires": [
-            [
-                "dd4e4b47f3bb384d",
-                "8549c72d66cffc9d"
-            ]
-        ]
-    },
-    {
-        "id": "dd4e4b47f3bb384d",
-        "type": "debug",
-        "z": "d7d109e0d89be1c6",
-        "name": "Got Kafka Connection",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1320,
-        "y": 1080,
-        "wires": []
-    },
-    {
-        "id": "bc67b88faaeac7a5",
-        "type": "inject",
-        "z": "d7d109e0d89be1c6",
-        "name": "Test Input for Qflow",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 370,
-        "y": 1020,
-        "wires": [
-            [
-                "79a0b1bc0114c75c"
-            ]
-        ]
-    },
-    {
-        "id": "79a0b1bc0114c75c",
-        "type": "function",
-        "z": "d7d109e0d89be1c6",
-        "name": "Raw data",
-        "func": "msg.payload.csv = [\n    {\n    \"job\": {\n        \"history\": [],\n        \"jobName\": \"mark1\",\n        \"recipeID\": 1,\n        \"initiatedTs\": \"2023-09-11T17:51:55.574Z\"\n    },\n    \"fact\": {\n        \"ID\": 33133,\n        \"ENT_ID\": \"2099021295\",\n        \"KAU_ID\": \"3000003933\",\n        \"NR_ADJ\": \"1\",\n        \"NR_WGT\": \"1\",\n        \"PS_ADJ\": \"1\",\n        \"PS_WGT\": \"1\",\n        \"SMPCDE\": \"6\",\n        \"SMPWGT\": \"1\",\n        \"WSWTCH\": \"C\",\n        \"DUPFACT\": \"1\",\n        \"EIN_NUM\": \"730584841SUCCESS\",\n        \"OUTLIER\": \"1\",\n        \"SMPOWGT\": \"1\",\n        \"SUBSAMP\": \"1\",\n        \"TABSTAT\": \"Y\",\n        \"UNB_WGT\": \"1\",\n        \"VERSION\": \"PO\",\n        \"EXP_DPCT\": null,\n        \"INV_STAT\": null,\n        \"NONTABFL\": \"ABC\",\n        \"ZERO_VAL\": \"0\",\n        \"BIRTH_ADJ\": \"1\",\n        \"NAICS_NUM\": 51212000,\n        \"OPSTAT_STAT\": \"Y    \",\n        \"PAY_ANN_VAL\": 62229,\n        \"ACTV_MIO_NUM\": 2,\n        \"EXPS_TAX_VAL\": null,\n        \"EXPS_TOT_VAL\": null,\n        \"ITEM_OUTLIER\": \"1\",\n        \"NAICS_SECTOR\": \"51\",\n        \"PAY_QTR1_VAL\": 15525,\n        \"RATIO_FACTOR\": \"1\",\n        \"RCPT_TOT_VAL\": 52698,\n        \"RCPT_UFO_VAL\": null,\n        \"REPORTING_ID\": 2099024640,\n        \"ADD_OPEN_DATE\": \"2018-12-04T00:00:00\",\n        \"EMP_MAR12_NUM\": 115,\n        \"EXPS_ELEC_VAL\": null,\n        \"EXPS_FUEL_VAL\": null,\n        \"GROUP_KEY_TXT\": \"5121200000Y\",\n        \"INV_B_AVG_VAL\": null,\n        \"INV_B_FIN_VAL\": null,\n        \"INV_B_MAT_VAL\": null,\n        \"INV_B_STD_VAL\": null,\n        \"INV_B_TOT_VAL\": null,\n        \"INV_B_WIP_VAL\": null,\n        \"INV_E_AVG_VAL\": null,\n        \"INV_E_FIN_VAL\": null,\n        \"INV_E_MAT_VAL\": null,\n        \"INV_E_STD_VAL\": null,\n        \"INV_E_TOT_VAL\": null,\n        \"INV_E_WIP_VAL\": null,\n        \"NONPROFT_STAT\": \"N    \",\n        \"PAY_ANN_VAL_F\": \"t\",\n        \"RCPT_UFO_STAT\": null,\n        \"REPORTING_ID2\": \"2099024640\",\n        \"CAPEX_AUTO_VAL\": null,\n        \"CAPEX_TOT_DVAL\": null,\n        \"EXPS_OTHER_VAL\": null,\n        \"EXPS_SLVR_DVAL\": 0,\n        \"EXPS_TAX_VAL_F\": \"t\",\n        \"EXPS_TOT_VAL_F\": \"r\",\n        \"INV_B_FIFO_VAL\": null,\n        \"INV_B_LIFO_VAL\": null,\n        \"INV_E_FIFO_VAL\": null,\n        \"INV_E_LIFO_VAL\": null,\n        \"OPSTAT_SY_STAT\": \"4    \",\n        \"PAYANN_EMP_RAT\": \"541.0347826086957\",\n        \"PAY_QTR1_VAL_F\": \"k\",\n        \"RCPT_ESHIP_PCT\": null,\n        \"RCPT_TOT_VAL_F\": \"k\",\n        \"RCPT_UFO_VAL_F\": \"k\",\n        \"RECORD_TYP_TXT\": \"20\",\n        \"EMP_MAR12_NUM_F\": \"r\",\n        \"EXPS_ADVERT_VAL\": null,\n        \"EXPS_ELEC_VAL_F\": \"k\",\n        \"EXPS_EXSOFT_VAL\": null,\n        \"EXPS_FUEL_VAL_F\": \"k\",\n        \"EXPS_MAT_V1_VAL\": null,\n        \"EXPS_PCHTT_DVAL\": null,\n        \"EXPS_REFUSE_VAL\": null,\n        \"EXPS_RESALE_VAL\": null,\n        \"EXPS_RPTOT_DVAL\": null,\n        \"INV_B_AVG_VAL_F\": \"t\",\n        \"INV_B_FIN_VAL_F\": \"t\",\n        \"INV_B_MAT_VAL_F\": \"t\",\n        \"INV_B_OTHNL_VAL\": null,\n        \"INV_B_STD_VAL_F\": \"r\",\n        \"INV_B_TOT_VAL_F\": \"r\",\n        \"INV_B_WIP_VAL_F\": \"t\",\n        \"INV_E_AVG_VAL_F\": \"t\",\n        \"INV_E_FIN_VAL_F\": \"t\",\n        \"INV_E_MAT_VAL_F\": \"r\",\n        \"INV_E_OTHNL_VAL\": null,\n        \"INV_E_STD_VAL_F\": \"r\",\n        \"INV_E_TOT_VAL_F\": \"k\",\n        \"INV_E_WIP_VAL_F\": \"t\",\n        \"NAICS_WRTIN_TXT\": \"lorem ipsum\",\n        \"PAY_ANN_OM_DVAL\": null,\n        \"RCPT_TOT_PY_VAL\": 42721,\n        \"ROBOT_INDST_VAL\": null,\n        \"ROBOT_WRTIN_TXT\": null,\n        \"TAX_EXEMPT_STAT\": \"N    \",\n        \"TYPOP_CODE_STAT\": null,\n        \"CAPEX_AUTO_VAL_F\": \"t\",\n        \"CAPEX_COMPTR_VAL\": null,\n        \"ELEC_GEN_KWH_NUM\": null,\n        \"EXPS_COMMSVC_VAL\": null,\n        \"EXPS_OTHER_VAL_F\": \"k\",\n        \"HOURS_PRDWRK_NUM\": null,\n        \"INV_B_FIFO_VAL_F\": \"k\",\n        \"INV_B_LIFO_VAL_F\": \"r\",\n        \"INV_E_FIFO_VAL_F\": \"k\",\n        \"INV_E_LIFO_VAL_F\": \"k\",\n        \"INV_FIN_DIF_DVAL\": null,\n        \"INV_WIP_DIF_DVAL\": null,\n        \"RCPT_ESHIP_PCT_F\": \"t\",\n        \"REPORTING_TYP_ID\": \"MU\",\n        \"VALUE_ADDED_DVAL\": null,\n        \"CAPEX_OTHMACH_VAL\": null,\n        \"CAPEX_OTH_NEW_VAL\": null,\n        \"ELEC_PRCH_KWH_NUM\": null,\n        \"ELEC_SOLD_KWH_NUM\": null,\n        \"EMP_MAR12_OM_DNUM\": null,\n        \"EXPS_ADVERT_VAL_F\": \"t\",\n        \"EXPS_CONTRACT_VAL\": null,\n        \"EXPS_CSTMTOT_DVAL\": null,\n        \"EXPS_DATAPROC_VAL\": null,\n        \"EXPS_EXSOFT_VAL_F\": \"t\",\n        \"EXPS_MACH_REP_VAL\": null,\n        \"EXPS_MAT_V1_VAL_F\": \"k\",\n        \"EXPS_PROFTECH_VAL\": null,\n        \"EXPS_REFUSE_VAL_F\": \"t\",\n        \"EXPS_RESALE_VAL_F\": \"t\",\n        \"EXPS_TEMPSTAF_VAL\": null,\n        \"INV_B_NL_TOT_DVAL\": null,\n        \"INV_B_OTHNL_VAL_F\": \"t\",\n        \"INV_E_NL_TOT_DVAL\": null,\n        \"INV_E_OTHNL_VAL_F\": \"t\",\n        \"PAY_ANN_SLVR_DVAL\": 46694,\n        \"RCPT_TOT_PY_VAL_F\": \"k\",\n        \"ROBOT_INDST_VAL_F\": \"t\",\n        \"CAPEX_COMPTR_VAL_F\": \"t\",\n        \"CAPEX_NEW_TOT_DVAL\": null,\n        \"CAPEX_OTH_TOT_DVAL\": null,\n        \"CAPEX_OTH_USED_VAL\": null,\n        \"ELEC_GEN_KWH_NUM_F\": \"r\",\n        \"EXPS_BUILD_REP_VAL\": null,\n        \"EXPS_COMMSVC_VAL_F\": \"k\",\n        \"EXPS_RENT_MACH_VAL\": null,\n        \"HOURS_PRDWRK_NUM_F\": \"k\",\n        \"INV_B_LIFO_RSV_VAL\": null,\n        \"INV_E_LIFO_RSV_VAL\": null,\n        \"NEG_INV_B_TOT_DVAL\": null,\n        \"PAY_ANN_PRDWRK_VAL\": null,\n        \"CAPEX_BUILD_NEW_VAL\": null,\n        \"CAPEX_MACH_TOT_DVAL\": null,\n        \"CAPEX_MACH_USED_VAL\": null,\n        \"CAPEX_OTHMACH_VAL_F\": \"r\",\n        \"CAPEX_OTH_NEW_VAL_F\": \"t\",\n        \"CAPEX_USED_TOT_DVAL\": null,\n        \"ELEC_PRCH_KWH_NUM_F\": \"r\",\n        \"ELEC_SOLD_KWH_NUM_F\": \"k\",\n        \"EXPS_CONTRACT_VAL_F\": \"r\",\n        \"EXPS_DATAPROC_VAL_F\": \"k\",\n        \"EXPS_MACH_REP_VAL_F\": \"k\",\n        \"EXPS_PROFTECH_VAL_F\": \"t\",\n        \"EXPS_RENT_BUILD_VAL\": null,\n        \"EXPS_TEMPSTAF_VAL_F\": \"t\",\n        \"INV_B_IVAL_TOT_DVAL\": null,\n        \"INV_B_NL_TOT_DVAL_F\": \"r\",\n        \"INV_E_IVAL_TOT_DVAL\": null,\n        \"INV_E_LIFO_NET_DVAL\": null,\n        \"INV_E_NL_TOT_DVAL_F\": \"r\",\n        \"MAJOR_ACT_CODE_STAT\": \"18\",\n        \"PAY_QTR1_PRDWRK_VAL\": null,\n        \"PHYSLOC_ADDR_ST_TXT\": \"KS\",\n        \"TYPOP_OTH_WRTIN_TXT\": null,\n        \"CAPEX_BUILD_TOT_DVAL\": null,\n        \"CAPEX_BUILD_USED_VAL\": null,\n        \"CAPEX_OTH_TOT_DVAL_F\": \"r\",\n        \"CAPEX_OTH_USED_VAL_F\": \"r\",\n        \"EMP_MAR12_PRDWRK_NUM\": null,\n        \"EXPS_BUILD_REP_VAL_F\": \"k\",\n        \"EXPS_OTHER_WRTIN_TXT\": null,\n        \"EXPS_RENT_MACH_VAL_F\": \"r\",\n        \"INV_B_LIFO_RSV_VAL_F\": \"k\",\n        \"INV_E_LIFO_RSV_VAL_F\": \"t\",\n        \"PAY_ANN_PRDWRK_VAL_F\": \"r\",\n        \"ROBOT_INDST_INOP_NUM\": null,\n        \"ROBOT_INDST_PRCH_NUM\": null,\n        \"CAPEX_BUILD_NEW_VAL_F\": \"k\",\n        \"CAPEX_MACH_USED_VAL_F\": \"k\",\n        \"EXPS_COMPTR_OTHEQ_VAL\": null,\n        \"EXPS_FRNG_BENEFIT_VAL\": null,\n        \"EXPS_RENT_BUILD_VAL_F\": \"t\",\n        \"INV_B_IVAL_TOT_DVAL_F\": \"k\",\n        \"INV_E_IVAL_TOT_DVAL_F\": \"r\",\n        \"NEG_EXPS_CSTMTOT_DVAL\": null,\n        \"PAY_ANN_NONPRDWRK_VAL\": null,\n        \"PAY_QTR1_PRDWRK_VAL_F\": \"r\",\n        \"CAPEX_BUILD_USED_VAL_F\": \"t\",\n        \"EMP_MAR12_PRDWRK_NUM_F\": \"r\",\n        \"PAY_QTR1_NONPRDWRK_VAL\": null,\n        \"ROBOT_INDST_INOP_NUM_F\": \"r\",\n        \"ROBOT_INDST_PRCH_NUM_F\": \"k\",\n        \"CAPEX_OTH_NEW_WRTIN_TXT\": null,\n        \"EMP_MAR12_NONPRDWRK_NUM\": null,\n        \"EXPS_COMPTR_OTHEQ_VAL_F\": \"t\",\n        \"EXPS_FRNG_BENEFIT_VAL_F\": \"r\",\n        \"PAY_ANN_NONPRDWRK_VAL_F\": \"r\",\n        \"CAPEX_OTH_USED_WRTIN_TXT\": null,\n        \"MAJOR_ACT_CODE_WRTIN_TXT\": \"lorem ipsum\",\n        \"PAY_QTR1_NONPRDWRK_VAL_F\": \"r\",\n        \"EMP_MAR12_NONPRDWRK_NUM_F\": \"k\",\n        \"ROBOT_INDST_INOP_WRTIN_TXT\": null,\n        \"ROBOT_INDST_PRCH_WRTIN_TXT\": null\n    },\n    \"meta\": {\n        \"id\": 758671,\n        \"type\": \"ESTAB\",\n        \"ent_id\": \"2099021295\",\n        \"kau_id\": \"3000003933\",\n        \"version\": null,\n        \"estab_id\": \"33133\"\n    },\n    \"delta\": [\n        {\n            \"key\": \"EIN_NUM\",\n            \"service\": {\n                \"name\": \"qbes\",\n                \"timestamp\": \"2023-09-11T17:52:03.848Z\"\n            },\n            \"newValue\": \"730584841SUCCESS\",\n            \"oldValue\": 730584841\n        },\n        {\n            \"key\": \"PAY_ANN_VAL\",\n            \"service\": {\n                \"name\": \"qbes\",\n                \"timestamp\": \"2023-09-11T17:52:03.848Z\"\n            },\n            \"newValue\": 62229,\n            \"oldValue\": 62219\n        }\n    ],\n    \"rules\": [\n        {\n            \"event\": {\n                \"name\": \"Set review flag for estab\",\n                \"type\": 238,\n                \"active\": true,\n                \"params\": {\n                    \"action\": [\n                        {\n                            \"Action\": \"\\\"Set Review for Flag\\\"\"\n                        }\n                    ],\n                    \"message\": \"Setting the review flag for ESTAB.\",\n                    \"rvsJSON\": [\n                        \"TYPOP_CODE_STAT\"\n                    ],\n                    \"apiSource\": {},\n                    \"actionType\": \"impute\",\n                    \"apiChecked\": false\n                },\n                \"ruleId\": 238,\n                \"actionType\": \"impute\",\n                \"rulePriority\": \"5\",\n                \"validationType\": \"estab\"\n            },\n            \"index\": -1,\n            \"priority\": 5,\n            \"conditions\": {\n                \"all\": [\n                    {\n                        \"fact\": \"checkCondition\",\n                        \"path\": \"$.value\",\n                        \"value\": true,\n                        \"params\": {\n                            \"conditionstring\": \"VERSION == \\\"ADJ\\\"\"\n                        },\n                        \"operator\": \"equal\"\n                    }\n                ]\n            }\n        },\n        {\n            \"event\": {\n                \"name\": \"Append Success to EIN NUMBER\",\n                \"type\": 239,\n                \"active\": true,\n                \"params\": {\n                    \"action\": [\n                        {\n                            \"EIN_NUM\": \"concat(EIN_NUM, \\\"SUCCESS\\\")\"\n                        }\n                    ],\n                    \"message\": \"Setting the review flag for ESTAB.\",\n                    \"rvsJSON\": [\n                        \"TYPOP_CODE_STAT\"\n                    ],\n                    \"apiSource\": {},\n                    \"actionType\": \"impute\",\n                    \"apiChecked\": false\n                },\n                \"ruleId\": 238,\n                \"actionType\": \"impute\",\n                \"rulePriority\": \"5\",\n                \"validationType\": \"estab\"\n            },\n            \"index\": -1,\n            \"priority\": 5,\n            \"conditions\": {\n                \"all\": [\n                    {\n                        \"fact\": \"checkCondition\",\n                        \"path\": \"$.value\",\n                        \"value\": true,\n                        \"params\": {\n                            \"conditionstring\": \"EIN_NUM != \\\"\\\"\"\n                        },\n                        \"operator\": \"equal\"\n                    }\n                ]\n            }\n        },\n        {\n            \"event\": {\n                \"name\": \"PAY_ANN_VAL test 1\",\n                \"type\": \"new_1\",\n                \"active\": true,\n                \"params\": {\n                    \"rvs\": [],\n                    \"action\": [\n                        {\n                            \"PAY_ANN_VAL\": \"PAY_ANN_VAL + 1\"\n                        }\n                    ],\n                    \"message\": \"PAY_ANN_VAL TEST\",\n                    \"rvsJSON\": []\n                },\n                \"actionType\": \"impute\",\n                \"validationType\": \"new_1\"\n            },\n            \"index\": -1,\n            \"priority\": null,\n            \"conditions\": {\n                \"all\": [\n                    {\n                        \"fact\": \"checkCondition\",\n                        \"path\": \"$.value\",\n                        \"value\": true,\n                        \"params\": {\n                            \"conditionString\": \"1 == 1\"\n                        },\n                        \"operator\": \"equal\"\n                    }\n                ]\n            }\n        },\n        {\n            \"event\": {\n                \"name\": \"PAY_ANN RULE\",\n                \"type\": \"new_1\",\n                \"active\": true,\n                \"params\": {\n                    \"rvs\": [\n                        \"PAY_ANN_VAL\"\n                    ],\n                    \"action\": [\n                        {\n                            \"PAY_ANN_VAL\": \"PAY_ANN_VAL + 10\"\n                        }\n                    ],\n                    \"message\": \"PAY_ANN_VAL_1\",\n                    \"rvsJSON\": [\n                        \"PAY_ANN_VAL\"\n                    ]\n                },\n                \"actionType\": \"impute\",\n                \"rulePriority\": \"4\",\n                \"validationType\": \"new_1\"\n            },\n            \"index\": -1,\n            \"priority\": 4,\n            \"conditions\": {\n                \"all\": [\n                    {\n                        \"fact\": \"checkCondition\",\n                        \"path\": \"$.value\",\n                        \"value\": true,\n                        \"params\": {\n                            \"conditionstring\": \"PAY_ANN_VAL != \\\"\\\"\"\n                        },\n                        \"operator\": \"equal\"\n                    }\n                ]\n            }\n        }\n    ],\n    \"recipe\": {\n        \"steps\": [\n            {\n                \"delta\": [\n                    {\n                        \"key\": \"EIN_NUM\",\n                        \"service\": {\n                            \"name\": \"qbes\",\n                            \"timestamp\": \"2023-09-11T17:52:03.848Z\"\n                        },\n                        \"newValue\": \"730584841SUCCESS\",\n                        \"oldValue\": 730584841\n                    },\n                    {\n                        \"key\": \"PAY_ANN_VAL\",\n                        \"service\": {\n                            \"name\": \"qbes\",\n                            \"timestamp\": \"2023-09-11T17:52:03.848Z\"\n                        },\n                        \"newValue\": 62229,\n                        \"oldValue\": 62219\n                    }\n                ],\n                \"tsEnd\": 1694454723848,\n                \"msName\": \"qbes\",\n                \"tsStart\": 1694454723842,\n                \"validRules\": [\n                    {\n                        \"id\": 239,\n                        \"rvs\": [],\n                        \"action\": [\n                            {\n                                \"EIN_NUM\": \"concat(EIN_NUM, \\\"SUCCESS\\\")\"\n                            }\n                        ],\n                        \"message\": \"Setting the review flag for ESTAB.\",\n                        \"computedRVS\": {\n                            \"EIN_NUM\": \"730584841SUCCESS\"\n                        }\n                    },\n                    {\n                        \"id\": \"new_1\",\n                        \"rvs\": [],\n                        \"action\": [\n                            {\n                                \"PAY_ANN_VAL\": \"PAY_ANN_VAL + 10\"\n                            }\n                        ],\n                        \"message\": \"PAY_ANN_VAL_1\",\n                        \"computedRVS\": {\n                            \"EIN_NUM\": \"730584841SUCCESS\",\n                            \"PAY_ANN_VAL\": 62229\n                        }\n                    }\n                ],\n                \"invalidRules\": [\n                    {\n                        \"id\": 238,\n                        \"rvs\": [],\n                        \"action\": [\n                            {\n                                \"Action\": \"\\\"Set Review for Flag\\\"\"\n                            }\n                        ],\n                        \"message\": \"Setting the review flag for ESTAB.\"\n                    },\n                    {\n                        \"id\": \"new_1\",\n                        \"rvs\": [],\n                        \"action\": [\n                            {\n                                \"PAY_ANN_VAL\": \"PAY_ANN_VAL + 1\"\n                            }\n                        ],\n                        \"message\": \"PAY_ANN_VAL TEST\"\n                    }\n                ],\n                \"processedTime\": 6\n            },\n            {\n                \"tsEnd\": 0,\n                \"msName\": \"jobOutput\",\n                \"jobType\": \"spadJob\",\n                \"tsStart\": 0,\n                \"destinationTable\": \"product_aies.spad_2\"\n            }\n        ],\n        \"currentStepIndex\": 1\n    },\n    \"upsert\": true\n}]\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 580,
-        "y": 1020,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "8549c72d66cffc9d",
-        "type": "switch",
-        "z": "d7d109e0d89be1c6",
-        "name": "Switch for Mode",
-        "property": "modeName",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "interactive_mode",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "batch_mode_1",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "batch_mode_2",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 3,
-        "x": 1340,
-        "y": 1020,
-        "wires": [
-            [
-                "35871e68a9f50691",
-                "4cde7fe113a4df66"
-            ],
-            [
-                "54cb70dfe4b43956",
-                "a46cb4be6617824c"
-            ],
-            [
-                "d6116234e9829874",
-                "eda398efc16a87d5"
-            ]
-        ]
-    },
-    {
-        "id": "35871e68a9f50691",
-        "type": "link out",
-        "z": "d7d109e0d89be1c6",
-        "name": "Go To InteractiveMode",
-        "mode": "link",
-        "links": [
-            "f5168b892485e327",
-            "746909370ced9c62"
-        ],
-        "x": 1505,
-        "y": 980,
-        "wires": []
-    },
-    {
-        "id": "54cb70dfe4b43956",
-        "type": "link out",
-        "z": "d7d109e0d89be1c6",
-        "name": "Go To BatchMode1",
-        "mode": "link",
-        "links": [
-            "513713eac5d2b9ba"
-        ],
-        "x": 1505,
-        "y": 1040,
-        "wires": []
-    },
-    {
-        "id": "d6116234e9829874",
-        "type": "link out",
-        "z": "d7d109e0d89be1c6",
-        "name": "Go To BatchMode2",
-        "mode": "link",
-        "links": [
-            "7524317b716e4316"
-        ],
-        "x": 1505,
-        "y": 1120,
-        "wires": []
-    },
-    {
-        "id": "4cde7fe113a4df66",
-        "type": "debug",
-        "z": "d7d109e0d89be1c6",
-        "name": "InteractiveMode",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1580,
-        "y": 940,
-        "wires": []
-    },
-    {
-        "id": "a46cb4be6617824c",
-        "type": "debug",
-        "z": "d7d109e0d89be1c6",
-        "name": "batchMode1",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1630,
-        "y": 1020,
-        "wires": []
-    },
-    {
-        "id": "eda398efc16a87d5",
-        "type": "debug",
-        "z": "d7d109e0d89be1c6",
-        "name": "batchMode2",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1610,
-        "y": 1080,
-        "wires": []
     },
     {
         "id": "6a660fccf443bde2",
@@ -25826,5 +24182,2025 @@
                 "11fe39a5537b93ed"
             ]
         ]
+    },
+    {
+        "id": "dc4798b8a9034e10",
+        "type": "subflow:20d530cc0b193752",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "x": 940,
+        "y": 300,
+        "wires": [
+            [
+                "b58236733aae762d"
+            ]
+        ]
+    },
+    {
+        "id": "35b9c800d42ff73a",
+        "type": "subflow:42be4655fd3a8c84",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "x": 890,
+        "y": 400,
+        "wires": [
+            [
+                "320a8a9ff7a45d24"
+            ]
+        ]
+    },
+    {
+        "id": "03236197db128bd1",
+        "type": "subflow:b22812dba408ab8f",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "x": 870,
+        "y": 1020,
+        "wires": [
+            [
+                "f3b1a6532404a782"
+            ]
+        ]
+    },
+    {
+        "id": "bd80eaa4d3e0b069",
+        "type": "subflow:aadaa91727c0d579",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "x": 860,
+        "y": 1100,
+        "wires": [
+            [
+                "2ea97ef9be40b936"
+            ]
+        ]
+    },
+    {
+        "id": "77dcf5b1e0afb3a9",
+        "type": "subflow:998aa04bd1bb677d",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "x": 840,
+        "y": 1260,
+        "wires": [
+            [
+                "d4fcb395b8eab6fd"
+            ]
+        ]
+    },
+    {
+        "id": "1b67e6657388118d",
+        "type": "subflow:c79b244779411ead",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "x": 860,
+        "y": 1180,
+        "wires": [
+            [
+                "35dc57de52a34904"
+            ]
+        ]
+    },
+    {
+        "id": "2a42027c1028f409",
+        "type": "subflow:89f071f1deb9a1b1",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "x": 1260,
+        "y": 1280,
+        "wires": [
+            [
+                "66fdc22c898d5af9"
+            ]
+        ]
+    },
+    {
+        "id": "a3ef7d2c9f62b38b",
+        "type": "subflow:f9a2a2262f95bae3",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "x": 980,
+        "y": 480,
+        "wires": [
+            [
+                "e710fe5ce1dcb7b1"
+            ]
+        ]
+    },
+    {
+        "id": "e1dd758b59c31f88",
+        "type": "subflow:b93bf22bc3258992",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "x": 930,
+        "y": 580,
+        "wires": [
+            [
+                "14ec46780dada75b"
+            ]
+        ]
+    },
+    {
+        "id": "afd7588524439212",
+        "type": "subflow:bfe1ab19e0cbe2cf",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "x": 750,
+        "y": 660,
+        "wires": [
+            [
+                "fcd151b21980a714"
+            ]
+        ]
+    },
+    {
+        "id": "6c2616b9f8b16717",
+        "type": "link out",
+        "z": "8790b12c7efb6fa0",
+        "name": "Output of Interactive mode",
+        "mode": "link",
+        "links": [
+            "8ad2ab7c27d8d248"
+        ],
+        "x": 2415,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "746909370ced9c62",
+        "type": "link in",
+        "z": "8790b12c7efb6fa0",
+        "name": "link in gotQBES",
+        "links": [
+            "8eb6f6b4ca5cb88d",
+            "35871e68a9f50691"
+        ],
+        "x": 335,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b29f65e4584b8767",
+        "type": "change",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "action",
+                "pt": "global",
+                "to": "\"\"",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 200,
+        "y": 680,
+        "wires": [
+            [
+                "e97ff6b724a4e2b5"
+            ]
+        ]
+    },
+    {
+        "id": "121f33ae272cb49a",
+        "type": "switch",
+        "z": "8790b12c7efb6fa0",
+        "name": "Exit Check",
+        "property": "action",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1630,
+        "y": 320,
+        "wires": [
+            [
+                "66fdc22c898d5af9"
+            ],
+            [
+                "35b9c800d42ff73a"
+            ]
+        ]
+    },
+    {
+        "id": "df590f50a626fa0c",
+        "type": "switch",
+        "z": "8790b12c7efb6fa0",
+        "name": "Exit Check",
+        "property": "action",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1330,
+        "y": 420,
+        "wires": [
+            [
+                "66fdc22c898d5af9"
+            ],
+            [
+                "a3ef7d2c9f62b38b"
+            ]
+        ]
+    },
+    {
+        "id": "4a7b9cb4a8c69f57",
+        "type": "link in",
+        "z": "8790b12c7efb6fa0",
+        "name": "Interactive Mode Test UI Input",
+        "links": [
+            "6c8827ce7a4c83d8"
+        ],
+        "x": 315,
+        "y": 560,
+        "wires": [
+            [
+                "b29f65e4584b8767"
+            ]
+        ]
+    },
+    {
+        "id": "66fdc22c898d5af9",
+        "type": "function",
+        "z": "8790b12c7efb6fa0",
+        "name": "Merge calls",
+        "func": "let backup_origin = global.get(\"backup_origin\")\nmsg.payload.backup_origin = backup_origin != undefined && backup_origin\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2350,
+        "y": 640,
+        "wires": [
+            [
+                "0422aeccc8321ad8"
+            ]
+        ]
+    },
+    {
+        "id": "0422aeccc8321ad8",
+        "type": "link out",
+        "z": "8790b12c7efb6fa0",
+        "name": "link out classification",
+        "mode": "link",
+        "links": [
+            "7d91540d69ac16c1",
+            "688a39b3e0070fe9"
+        ],
+        "x": 2495,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "dbaacd53577bf3a4",
+        "type": "subflow:20d530cc0b193752",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "x": 640,
+        "y": 1340,
+        "wires": [
+            [
+                "9e9b4cee68be6e9c"
+            ]
+        ]
+    },
+    {
+        "id": "3f056fce77befeb6",
+        "type": "switch",
+        "z": "8790b12c7efb6fa0",
+        "name": "Exit Check",
+        "property": "action",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1770,
+        "y": 1340,
+        "wires": [
+            [
+                "66fdc22c898d5af9"
+            ],
+            [
+                "fd89669a0908b072"
+            ]
+        ]
+    },
+    {
+        "id": "56807c0e8b3a451e",
+        "type": "switch",
+        "z": "8790b12c7efb6fa0",
+        "name": "reporting_id_typ_txt",
+        "property": "payload.csv[0].REPORTING_ID_TYP_TXT",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "SU",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "MU",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "KAU",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ENT",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 5,
+        "x": 220,
+        "y": 940,
+        "wires": [
+            [
+                "dc4798b8a9034e10"
+            ],
+            [
+                "dc4798b8a9034e10"
+            ],
+            [
+                "dbaacd53577bf3a4"
+            ],
+            [
+                "b59063ee603e4b43"
+            ],
+            [
+                "66fdc22c898d5af9"
+            ]
+        ]
+    },
+    {
+        "id": "fd89669a0908b072",
+        "type": "subflow:bfe1ab19e0cbe2cf",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "x": 1050,
+        "y": 1420,
+        "wires": [
+            [
+                "e4f66c7916ddf51b"
+            ]
+        ]
+    },
+    {
+        "id": "c89db042ff61a895",
+        "type": "subflow:c79b244779411ead",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "x": 940,
+        "y": 1500,
+        "wires": [
+            [
+                "52b0141e97338396"
+            ]
+        ]
+    },
+    {
+        "id": "bbd77d5e5517779e",
+        "type": "subflow:998aa04bd1bb677d",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "x": 940,
+        "y": 1580,
+        "wires": [
+            [
+                "4d5edc2ef2a2765f"
+            ]
+        ]
+    },
+    {
+        "id": "1b840bc520e7c89c",
+        "type": "subflow:89f071f1deb9a1b1",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "x": 2080,
+        "y": 1480,
+        "wires": [
+            [
+                "66fdc22c898d5af9"
+            ]
+        ]
+    },
+    {
+        "id": "b59063ee603e4b43",
+        "type": "subflow:20d530cc0b193752",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "x": 620,
+        "y": 1640,
+        "wires": [
+            [
+                "33f528d747418689"
+            ]
+        ]
+    },
+    {
+        "id": "c0ae812afe3b8630",
+        "type": "switch",
+        "z": "8790b12c7efb6fa0",
+        "name": "Exit Check",
+        "property": "action",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 2230,
+        "y": 1620,
+        "wires": [
+            [
+                "66fdc22c898d5af9"
+            ],
+            [
+                "66fdc22c898d5af9"
+            ]
+        ]
+    },
+    {
+        "id": "a48bbfee066abb7a",
+        "type": "function",
+        "z": "8790b12c7efb6fa0",
+        "name": "Fetch all params",
+        "func": "msg.url = 'http://a301cb45559c445acaec11ab01bbbee1-2115632777.us-gov-east-1.elb.amazonaws.com/api/params/params'\nmsg.backup = msg.payload\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\nlet msg = {}\nmsg.url = 'https://mc.edl-7529180-ite.ite.edl.census.gov/api/params/params'\n// msg.url = 'https://mc.edl-7529180-ite.ite.edl.census.gov/api/'\nmsg.backup = msg.payload\n// msg.payload.startTime = global.set(\"currentTime\", new Date())\n\nreturn msg;",
+        "finalize": "",
+        "libs": [],
+        "x": 1170,
+        "y": 140,
+        "wires": [
+            [
+                "e75551794bd4e9c1"
+            ]
+        ]
+    },
+    {
+        "id": "e75551794bd4e9c1",
+        "type": "http request",
+        "z": "8790b12c7efb6fa0",
+        "name": "Lookup data API",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "basic",
+        "senderr": false,
+        "headers": [],
+        "x": 1370,
+        "y": 140,
+        "wires": [
+            [
+                "db960fa2db841295"
+            ]
+        ]
+    },
+    {
+        "id": "db960fa2db841295",
+        "type": "function",
+        "z": "8790b12c7efb6fa0",
+        "name": "cache result",
+        "func": "let cache = global.get(\"lookupCache\");\ncache = Array.isArray(cache?.data) ? cache : { \"data\": [] }\nif (msg.payload.status === \"success\") {\n    cache.data = msg.payload.data\n    msg.payload.dataArr = cache.data\n}\nglobal.set(\"lookupCache\", cache)\n// msg.payload = {\n//     ...msg.payload,\n//     ...msg.backup\n// }\n// return msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1570,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bc058c7d26276884",
+        "type": "inject",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 970,
+        "y": 140,
+        "wires": [
+            [
+                "a48bbfee066abb7a"
+            ]
+        ]
+    },
+    {
+        "id": "3e92f402ebdbe498",
+        "type": "switch",
+        "z": "8790b12c7efb6fa0",
+        "name": "Exit Check",
+        "property": "action",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Go to: Derive NAICS Code Module",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Go to Main Routing",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 1150,
+        "y": 680,
+        "wires": [
+            [
+                "66fdc22c898d5af9"
+            ],
+            [
+                "37ed27de2345edf7"
+            ],
+            [
+                "66fdc22c898d5af9"
+            ],
+            [
+                "66fdc22c898d5af9"
+            ]
+        ]
+    },
+    {
+        "id": "37ed27de2345edf7",
+        "type": "subflow:f07c9ae4084738fc",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "x": 1380,
+        "y": 720,
+        "wires": [
+            [
+                "8aaf39ddb94741aa"
+            ]
+        ]
+    },
+    {
+        "id": "b14a6808eea03364",
+        "type": "switch",
+        "z": "8790b12c7efb6fa0",
+        "name": "Exit Check",
+        "property": "action",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Go to: Derive MFG NAICS from NAPCS",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Go to: Derive MFG NAICS from NAPCS",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 630,
+        "y": 1020,
+        "wires": [
+            [
+                "03236197db128bd1"
+            ],
+            [
+                "03236197db128bd1"
+            ]
+        ]
+    },
+    {
+        "id": "ae31da9fdc489294",
+        "type": "switch",
+        "z": "8790b12c7efb6fa0",
+        "name": "Exit Check",
+        "property": "action",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1110,
+        "y": 1020,
+        "wires": [
+            [
+                "66fdc22c898d5af9"
+            ],
+            [
+                "bd80eaa4d3e0b069"
+            ]
+        ]
+    },
+    {
+        "id": "e97ff6b724a4e2b5",
+        "type": "change",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "err",
+                "pt": "global",
+                "to": "\"\"",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 170,
+        "y": 800,
+        "wires": [
+            [
+                "56807c0e8b3a451e"
+            ]
+        ]
+    },
+    {
+        "id": "b58236733aae762d",
+        "type": "switch",
+        "z": "8790b12c7efb6fa0",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1180,
+        "y": 300,
+        "wires": [
+            [
+                "66fdc22c898d5af9"
+            ],
+            [
+                "121f33ae272cb49a"
+            ]
+        ]
+    },
+    {
+        "id": "320a8a9ff7a45d24",
+        "type": "switch",
+        "z": "8790b12c7efb6fa0",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1140,
+        "y": 400,
+        "wires": [
+            [
+                "66fdc22c898d5af9"
+            ],
+            [
+                "df590f50a626fa0c"
+            ]
+        ]
+    },
+    {
+        "id": "e710fe5ce1dcb7b1",
+        "type": "switch",
+        "z": "8790b12c7efb6fa0",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1360,
+        "y": 520,
+        "wires": [
+            [
+                "66fdc22c898d5af9"
+            ],
+            [
+                "e1dd758b59c31f88"
+            ]
+        ]
+    },
+    {
+        "id": "14ec46780dada75b",
+        "type": "switch",
+        "z": "8790b12c7efb6fa0",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1300,
+        "y": 580,
+        "wires": [
+            [
+                "66fdc22c898d5af9"
+            ],
+            [
+                "dafd1e4182212af8"
+            ]
+        ]
+    },
+    {
+        "id": "fcd151b21980a714",
+        "type": "switch",
+        "z": "8790b12c7efb6fa0",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 920,
+        "y": 660,
+        "wires": [
+            [
+                "66fdc22c898d5af9"
+            ],
+            [
+                "3e92f402ebdbe498"
+            ]
+        ]
+    },
+    {
+        "id": "8aaf39ddb94741aa",
+        "type": "switch",
+        "z": "8790b12c7efb6fa0",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 620,
+        "y": 820,
+        "wires": [
+            [
+                "66fdc22c898d5af9"
+            ],
+            [
+                "073d931c6c0624a8"
+            ]
+        ]
+    },
+    {
+        "id": "f3b1a6532404a782",
+        "type": "switch",
+        "z": "8790b12c7efb6fa0",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1120,
+        "y": 940,
+        "wires": [
+            [
+                "66fdc22c898d5af9"
+            ],
+            [
+                "ae31da9fdc489294"
+            ]
+        ]
+    },
+    {
+        "id": "2ea97ef9be40b936",
+        "type": "switch",
+        "z": "8790b12c7efb6fa0",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1100,
+        "y": 1100,
+        "wires": [
+            [
+                "66fdc22c898d5af9"
+            ],
+            [
+                "1b67e6657388118d"
+            ]
+        ]
+    },
+    {
+        "id": "35dc57de52a34904",
+        "type": "switch",
+        "z": "8790b12c7efb6fa0",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1080,
+        "y": 1180,
+        "wires": [
+            [
+                "66fdc22c898d5af9"
+            ],
+            [
+                "77dcf5b1e0afb3a9"
+            ]
+        ]
+    },
+    {
+        "id": "d4fcb395b8eab6fd",
+        "type": "switch",
+        "z": "8790b12c7efb6fa0",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1060,
+        "y": 1260,
+        "wires": [
+            [
+                "66fdc22c898d5af9"
+            ],
+            [
+                "2a42027c1028f409"
+            ]
+        ]
+    },
+    {
+        "id": "9e9b4cee68be6e9c",
+        "type": "switch",
+        "z": "8790b12c7efb6fa0",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1260,
+        "y": 1340,
+        "wires": [
+            [
+                "66fdc22c898d5af9"
+            ],
+            [
+                "3f056fce77befeb6"
+            ]
+        ]
+    },
+    {
+        "id": "e4f66c7916ddf51b",
+        "type": "switch",
+        "z": "8790b12c7efb6fa0",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1260,
+        "y": 1420,
+        "wires": [
+            [
+                "66fdc22c898d5af9"
+            ],
+            [
+                "c89db042ff61a895"
+            ]
+        ]
+    },
+    {
+        "id": "52b0141e97338396",
+        "type": "switch",
+        "z": "8790b12c7efb6fa0",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1280,
+        "y": 1500,
+        "wires": [
+            [
+                "66fdc22c898d5af9"
+            ],
+            [
+                "bbd77d5e5517779e"
+            ]
+        ]
+    },
+    {
+        "id": "4d5edc2ef2a2765f",
+        "type": "switch",
+        "z": "8790b12c7efb6fa0",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1280,
+        "y": 1580,
+        "wires": [
+            [
+                "66fdc22c898d5af9"
+            ],
+            [
+                "1b840bc520e7c89c"
+            ]
+        ]
+    },
+    {
+        "id": "33f528d747418689",
+        "type": "switch",
+        "z": "8790b12c7efb6fa0",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1780,
+        "y": 1620,
+        "wires": [
+            [
+                "66fdc22c898d5af9"
+            ],
+            [
+                "c0ae812afe3b8630"
+            ]
+        ]
+    },
+    {
+        "id": "dafd1e4182212af8",
+        "type": "subflow:e7b7501b29427db9",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "x": 1540,
+        "y": 620,
+        "wires": [
+            [
+                "afd7588524439212"
+            ]
+        ]
+    },
+    {
+        "id": "2fbcd7d2b885f044",
+        "type": "postgresql",
+        "z": "8790b12c7efb6fa0",
+        "d": true,
+        "name": "SELECT",
+        "query": "SELECT * FROM product_aies.spad_2 ORDER BY created_at DESC LIMIT 1",
+        "postgreSQLConfig": "481a641c4005d1c8",
+        "split": false,
+        "rowsPerMsg": "1",
+        "outputs": 1,
+        "x": 2280,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "073d931c6c0624a8",
+        "type": "subflow:7e80c62ce8c753dc",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "x": 580,
+        "y": 880,
+        "wires": [
+            [
+                "66fdc22c898d5af9"
+            ]
+        ]
+    },
+    {
+        "id": "7d80698b1653d7b9",
+        "type": "function",
+        "z": "8790b12c7efb6fa0",
+        "name": "insert_query",
+        "func": "\nmsg.query = '  SELECT * FROM product_aies.item_estabs_2023a1 LIMIT 10;'\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 1900,
+        "wires": [
+            [
+                "fc1a115f1c08e0c4"
+            ]
+        ]
+    },
+    {
+        "id": "fc1a115f1c08e0c4",
+        "type": "postgresql",
+        "z": "8790b12c7efb6fa0",
+        "name": "Select",
+        "query": "",
+        "postgreSQLConfig": "481a641c4005d1c8",
+        "split": false,
+        "rowsPerMsg": "1",
+        "outputs": 1,
+        "x": 530,
+        "y": 1900,
+        "wires": [
+            [
+                "2831a221ab30e822"
+            ]
+        ]
+    },
+    {
+        "id": "8a2090d1fdcaf805",
+        "type": "inject",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 200,
+        "y": 1900,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2831a221ab30e822",
+        "type": "debug",
+        "z": "8790b12c7efb6fa0",
+        "name": "debug 108",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 710,
+        "y": 1900,
+        "wires": []
+    },
+    {
+        "id": "cdf7933db08b27f1",
+        "type": "function",
+        "z": "8790b12c7efb6fa0",
+        "name": "insert_query",
+        "func": "\n// msg.query = `update space_product_aies.napcs set\n// refper_unit_id = refper_unit_id,\n//     estab_id = estab_id,\n//     record_typ = record_typ,\n//     reporting_typ = reporting_typ,\n//     prod_code = prod_code,\n//     prod_code_val_rp = prod_code_val_rp,\n//     prod_code_rp_f = prod_code_rp_f,\n//     prod_code_val_pi = prod_code_val_pi,\n//     prod_code_pi_f = prod_code_pi_f,\n//     prod_code_val_po = prod_code_val_po,\n//     prod_code_po_f = prod_code_po_f,\n//     prod_code_val_wg = prod_code_val_wg,\n//     prod_code_wg_f = prod_code_wg_f,\n//     usable = usable,\n//     created_at = created_at,\n//     updated_at = updated_at\n// where\n// id = ${msg.}; `\n// return msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 2020,
+        "wires": [
+            [
+                "7fd58a095d3a0124"
+            ]
+        ]
+    },
+    {
+        "id": "7fd58a095d3a0124",
+        "type": "postgresql",
+        "z": "8790b12c7efb6fa0",
+        "name": "Update",
+        "query": "",
+        "postgreSQLConfig": "481a641c4005d1c8",
+        "split": false,
+        "rowsPerMsg": "1",
+        "outputs": 1,
+        "x": 540,
+        "y": 2020,
+        "wires": [
+            [
+                "66a253510cb2d3d8"
+            ]
+        ]
+    },
+    {
+        "id": "6f8a6083bada6739",
+        "type": "inject",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 200,
+        "y": 2020,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "66a253510cb2d3d8",
+        "type": "debug",
+        "z": "8790b12c7efb6fa0",
+        "name": "debug 109",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 710,
+        "y": 2020,
+        "wires": []
+    },
+    {
+        "id": "e3717df93ea2ccfd",
+        "type": "function",
+        "z": "8790b12c7efb6fa0",
+        "name": "insert_query",
+        "func": "\n// msg.query = `create table `\n// return msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 2120,
+        "wires": [
+            [
+                "ea0a2707e3eefb80"
+            ]
+        ]
+    },
+    {
+        "id": "ea0a2707e3eefb80",
+        "type": "postgresql",
+        "z": "8790b12c7efb6fa0",
+        "name": "Update",
+        "query": "",
+        "postgreSQLConfig": "481a641c4005d1c8",
+        "split": false,
+        "rowsPerMsg": "1",
+        "outputs": 1,
+        "x": 540,
+        "y": 2120,
+        "wires": [
+            [
+                "b929e646c399ee9c"
+            ]
+        ]
+    },
+    {
+        "id": "4fd0170407ba1a60",
+        "type": "inject",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 200,
+        "y": 2120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b929e646c399ee9c",
+        "type": "debug",
+        "z": "8790b12c7efb6fa0",
+        "name": "debug 110",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 710,
+        "y": 2120,
+        "wires": []
+    },
+    {
+        "id": "bed4b9a48e50c41c",
+        "type": "debug",
+        "z": "d7d109e0d89be1c6",
+        "name": "kafka consumer: gotQBES",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "3ec01d49fbdfba54",
+        "type": "link out",
+        "z": "d7d109e0d89be1c6",
+        "name": "link out gotQBES",
+        "mode": "link",
+        "links": [
+            "4480a2673228edf6",
+            "f765d14d056bec8a",
+            "e0d75497828e672b"
+        ],
+        "x": 555,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "8ad2ab7c27d8d248",
+        "type": "link in",
+        "z": "d7d109e0d89be1c6",
+        "name": "link in gotFLOW",
+        "links": [
+            "36ac45a273e5509f",
+            "084da167bd2adffa",
+            "7cdbce6d4b28412b",
+            "9aee892d0909f5a2",
+            "c481f6b945425e82",
+            "6c2616b9f8b16717"
+        ],
+        "x": 495,
+        "y": 740,
+        "wires": [
+            [
+                "60346d8f3d1bcd94",
+                "e894cadacc02eb73"
+            ]
+        ]
+    },
+    {
+        "id": "f9b02de75682c807",
+        "type": "function",
+        "z": "d7d109e0d89be1c6",
+        "name": "function 25",
+        "func": "msg.payload = JSON.parse(msg.payload.value)\n\nconst currentStepIndex = msg.payload.recipe.currentStepIndex;\nconst startTime = new Date().getTime();\n\nmsg.payload.recipe.steps[currentStepIndex].tsStart = startTime;\n\nmsg.payload.facts = [msg.payload.fact]\nmsg.payload.qflowInputFacts = JSON.parse(JSON.stringify(msg.payload.facts))\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 400,
+        "wires": [
+            [
+                "bed4b9a48e50c41c",
+                "3ec01d49fbdfba54"
+            ]
+        ]
+    },
+    {
+        "id": "60346d8f3d1bcd94",
+        "type": "debug",
+        "z": "d7d109e0d89be1c6",
+        "name": "gotFlow",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 660,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "e894cadacc02eb73",
+        "type": "function",
+        "z": "d7d109e0d89be1c6",
+        "name": "updateResultToPayload",
+        "func": "\nconst findChangedKeyValuePairs = (oldObj, newObj) => {\n    const changedKeyValuePairs = [];\n\n    for (const key in newObj) {\n        if (oldObj[key] !== newObj[key]) {\n            changedKeyValuePairs.push({\n                key,\n                oldValue: oldObj[key],\n                newValue: newObj[key],\n                service: {\n                    name: 'qflow',\n                    timestamp: new Date()\n                }\n            });\n        }\n    }\n\n    return changedKeyValuePairs;\n}\n\nconst qFlowdelta = findChangedKeyValuePairs(msg.payload.qflowInputFacts[0], msg.payload.facts[0]);\n\nmsg.payload.delta.push(...qFlowdelta);\nmsg.payload.fact = msg.payload.facts[0];\n// delete msg.payload.facts;\n// delete msg.payload.qflowInputFacts;\n\nvar currentStepIndex = msg.payload.recipe.currentStepIndex;\nconst startTime = msg.payload.recipe.steps[currentStepIndex].tsStart;\n\nconst endTime = new Date().getTime();\n\nmsg.payload.recipe.steps[currentStepIndex].tsEnd = endTime;\nmsg.payload.recipe.steps[currentStepIndex].processedTime = endTime - startTime;\n\nmsg.payload.recipe.steps[currentStepIndex].delta = qFlowdelta;\nmsg.payload.recipe.currentStepIndex = currentStepIndex + 1\nmsg.topicName = msg.payload.recipe.steps[currentStepIndex+1].msName;\n\nmsg.payload = JSON.stringify(msg.payload)\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 720,
+        "wires": [
+            [
+                "65ddc89844c5a58f",
+                "3fec20bb8aaae008",
+                "2cddb7a50f4f69d9"
+            ]
+        ]
+    },
+    {
+        "id": "65ddc89844c5a58f",
+        "type": "debug",
+        "z": "d7d109e0d89be1c6",
+        "name": "Got updateResultToPayload",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1020,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "3fec20bb8aaae008",
+        "type": "switch",
+        "z": "d7d109e0d89be1c6",
+        "name": "Switch the topic push",
+        "property": "topicName",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "qbes",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "qflow",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "jobOutput",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 1010,
+        "y": 740,
+        "wires": [
+            [
+                "8b0e07553bb5ee94"
+            ],
+            [
+                "5006976f1193b7e2"
+            ],
+            [
+                "d0b38c1e210e2c2b"
+            ]
+        ]
+    },
+    {
+        "id": "8b0e07553bb5ee94",
+        "type": "debug",
+        "z": "d7d109e0d89be1c6",
+        "name": "Producer Qubes",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1280,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "5006976f1193b7e2",
+        "type": "debug",
+        "z": "d7d109e0d89be1c6",
+        "name": "Producer QFlow",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1280,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "d0b38c1e210e2c2b",
+        "type": "debug",
+        "z": "d7d109e0d89be1c6",
+        "name": "Producer JobOutput",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1300,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "38b1aa58eaaa6a28",
+        "type": "function",
+        "z": "d7d109e0d89be1c6",
+        "name": "Getting Data and Makeing Index",
+        "func": "msg.payload = JSON.parse(msg.payload.value)\n\nconst currentStepIndex = msg.payload.recipe.currentStepIndex;\nconst startTime = new Date().getTime();\n\nmsg.payload.recipe.steps[currentStepIndex].tsStart = startTime;\n\nmsg.payload.facts = [msg.payload.fact]\n\n\nmsg.payload.qflowInputFacts = JSON.parse(JSON.stringify(msg.payload.facts))\n\nmsg.payload.csv = JSON.parse(JSON.stringify(msg.payload.facts))\n\nglobal.set(\"ptrModuleFacts\", 0);\n\nmsg.modeName = msg.payload.recipe.steps[currentStepIndex].hasOwnProperty('testModule') ? msg.payload.recipe.steps[currentStepIndex].testModule : 'interactive_mode';\n\nglobal.set(\"backup_origin\", JSON.stringify(msg.payload));\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1030,
+        "y": 1020,
+        "wires": [
+            [
+                "dd4e4b47f3bb384d",
+                "8549c72d66cffc9d"
+            ]
+        ]
+    },
+    {
+        "id": "dd4e4b47f3bb384d",
+        "type": "debug",
+        "z": "d7d109e0d89be1c6",
+        "name": "Got Kafka Connection",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1320,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "bc67b88faaeac7a5",
+        "type": "inject",
+        "z": "d7d109e0d89be1c6",
+        "name": "Test Input for Qflow",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 370,
+        "y": 1020,
+        "wires": [
+            [
+                "79a0b1bc0114c75c"
+            ]
+        ]
+    },
+    {
+        "id": "79a0b1bc0114c75c",
+        "type": "function",
+        "z": "d7d109e0d89be1c6",
+        "name": "Raw data",
+        "func": "msg.payload.csv = [\n    {\n    \"job\": {\n        \"history\": [],\n        \"jobName\": \"mark1\",\n        \"recipeID\": 1,\n        \"initiatedTs\": \"2023-09-11T17:51:55.574Z\"\n    },\n    \"fact\": {\n        \"ID\": 33133,\n        \"ENT_ID\": \"2099021295\",\n        \"KAU_ID\": \"3000003933\",\n        \"NR_ADJ\": \"1\",\n        \"NR_WGT\": \"1\",\n        \"PS_ADJ\": \"1\",\n        \"PS_WGT\": \"1\",\n        \"SMPCDE\": \"6\",\n        \"SMPWGT\": \"1\",\n        \"WSWTCH\": \"C\",\n        \"DUPFACT\": \"1\",\n        \"EIN_NUM\": \"730584841SUCCESS\",\n        \"OUTLIER\": \"1\",\n        \"SMPOWGT\": \"1\",\n        \"SUBSAMP\": \"1\",\n        \"TABSTAT\": \"Y\",\n        \"UNB_WGT\": \"1\",\n        \"VERSION\": \"PO\",\n        \"EXP_DPCT\": null,\n        \"INV_STAT\": null,\n        \"NONTABFL\": \"ABC\",\n        \"ZERO_VAL\": \"0\",\n        \"BIRTH_ADJ\": \"1\",\n        \"NAICS_NUM\": 51212000,\n        \"OPSTAT_STAT\": \"Y    \",\n        \"PAY_ANN_VAL\": 62229,\n        \"ACTV_MIO_NUM\": 2,\n        \"EXPS_TAX_VAL\": null,\n        \"EXPS_TOT_VAL\": null,\n        \"ITEM_OUTLIER\": \"1\",\n        \"NAICS_SECTOR\": \"51\",\n        \"PAY_QTR1_VAL\": 15525,\n        \"RATIO_FACTOR\": \"1\",\n        \"RCPT_TOT_VAL\": 52698,\n        \"RCPT_UFO_VAL\": null,\n        \"REPORTING_ID\": 2099024640,\n        \"ADD_OPEN_DATE\": \"2018-12-04T00:00:00\",\n        \"EMP_MAR12_NUM\": 115,\n        \"EXPS_ELEC_VAL\": null,\n        \"EXPS_FUEL_VAL\": null,\n        \"GROUP_KEY_TXT\": \"5121200000Y\",\n        \"INV_B_AVG_VAL\": null,\n        \"INV_B_FIN_VAL\": null,\n        \"INV_B_MAT_VAL\": null,\n        \"INV_B_STD_VAL\": null,\n        \"INV_B_TOT_VAL\": null,\n        \"INV_B_WIP_VAL\": null,\n        \"INV_E_AVG_VAL\": null,\n        \"INV_E_FIN_VAL\": null,\n        \"INV_E_MAT_VAL\": null,\n        \"INV_E_STD_VAL\": null,\n        \"INV_E_TOT_VAL\": null,\n        \"INV_E_WIP_VAL\": null,\n        \"NONPROFT_STAT\": \"N    \",\n        \"PAY_ANN_VAL_F\": \"t\",\n        \"RCPT_UFO_STAT\": null,\n        \"REPORTING_ID2\": \"2099024640\",\n        \"CAPEX_AUTO_VAL\": null,\n        \"CAPEX_TOT_DVAL\": null,\n        \"EXPS_OTHER_VAL\": null,\n        \"EXPS_SLVR_DVAL\": 0,\n        \"EXPS_TAX_VAL_F\": \"t\",\n        \"EXPS_TOT_VAL_F\": \"r\",\n        \"INV_B_FIFO_VAL\": null,\n        \"INV_B_LIFO_VAL\": null,\n        \"INV_E_FIFO_VAL\": null,\n        \"INV_E_LIFO_VAL\": null,\n        \"OPSTAT_SY_STAT\": \"4    \",\n        \"PAYANN_EMP_RAT\": \"541.0347826086957\",\n        \"PAY_QTR1_VAL_F\": \"k\",\n        \"RCPT_ESHIP_PCT\": null,\n        \"RCPT_TOT_VAL_F\": \"k\",\n        \"RCPT_UFO_VAL_F\": \"k\",\n        \"RECORD_TYP_TXT\": \"20\",\n        \"EMP_MAR12_NUM_F\": \"r\",\n        \"EXPS_ADVERT_VAL\": null,\n        \"EXPS_ELEC_VAL_F\": \"k\",\n        \"EXPS_EXSOFT_VAL\": null,\n        \"EXPS_FUEL_VAL_F\": \"k\",\n        \"EXPS_MAT_V1_VAL\": null,\n        \"EXPS_PCHTT_DVAL\": null,\n        \"EXPS_REFUSE_VAL\": null,\n        \"EXPS_RESALE_VAL\": null,\n        \"EXPS_RPTOT_DVAL\": null,\n        \"INV_B_AVG_VAL_F\": \"t\",\n        \"INV_B_FIN_VAL_F\": \"t\",\n        \"INV_B_MAT_VAL_F\": \"t\",\n        \"INV_B_OTHNL_VAL\": null,\n        \"INV_B_STD_VAL_F\": \"r\",\n        \"INV_B_TOT_VAL_F\": \"r\",\n        \"INV_B_WIP_VAL_F\": \"t\",\n        \"INV_E_AVG_VAL_F\": \"t\",\n        \"INV_E_FIN_VAL_F\": \"t\",\n        \"INV_E_MAT_VAL_F\": \"r\",\n        \"INV_E_OTHNL_VAL\": null,\n        \"INV_E_STD_VAL_F\": \"r\",\n        \"INV_E_TOT_VAL_F\": \"k\",\n        \"INV_E_WIP_VAL_F\": \"t\",\n        \"NAICS_WRTIN_TXT\": \"lorem ipsum\",\n        \"PAY_ANN_OM_DVAL\": null,\n        \"RCPT_TOT_PY_VAL\": 42721,\n        \"ROBOT_INDST_VAL\": null,\n        \"ROBOT_WRTIN_TXT\": null,\n        \"TAX_EXEMPT_STAT\": \"N    \",\n        \"TYPOP_CODE_STAT\": null,\n        \"CAPEX_AUTO_VAL_F\": \"t\",\n        \"CAPEX_COMPTR_VAL\": null,\n        \"ELEC_GEN_KWH_NUM\": null,\n        \"EXPS_COMMSVC_VAL\": null,\n        \"EXPS_OTHER_VAL_F\": \"k\",\n        \"HOURS_PRDWRK_NUM\": null,\n        \"INV_B_FIFO_VAL_F\": \"k\",\n        \"INV_B_LIFO_VAL_F\": \"r\",\n        \"INV_E_FIFO_VAL_F\": \"k\",\n        \"INV_E_LIFO_VAL_F\": \"k\",\n        \"INV_FIN_DIF_DVAL\": null,\n        \"INV_WIP_DIF_DVAL\": null,\n        \"RCPT_ESHIP_PCT_F\": \"t\",\n        \"REPORTING_TYP_ID\": \"MU\",\n        \"VALUE_ADDED_DVAL\": null,\n        \"CAPEX_OTHMACH_VAL\": null,\n        \"CAPEX_OTH_NEW_VAL\": null,\n        \"ELEC_PRCH_KWH_NUM\": null,\n        \"ELEC_SOLD_KWH_NUM\": null,\n        \"EMP_MAR12_OM_DNUM\": null,\n        \"EXPS_ADVERT_VAL_F\": \"t\",\n        \"EXPS_CONTRACT_VAL\": null,\n        \"EXPS_CSTMTOT_DVAL\": null,\n        \"EXPS_DATAPROC_VAL\": null,\n        \"EXPS_EXSOFT_VAL_F\": \"t\",\n        \"EXPS_MACH_REP_VAL\": null,\n        \"EXPS_MAT_V1_VAL_F\": \"k\",\n        \"EXPS_PROFTECH_VAL\": null,\n        \"EXPS_REFUSE_VAL_F\": \"t\",\n        \"EXPS_RESALE_VAL_F\": \"t\",\n        \"EXPS_TEMPSTAF_VAL\": null,\n        \"INV_B_NL_TOT_DVAL\": null,\n        \"INV_B_OTHNL_VAL_F\": \"t\",\n        \"INV_E_NL_TOT_DVAL\": null,\n        \"INV_E_OTHNL_VAL_F\": \"t\",\n        \"PAY_ANN_SLVR_DVAL\": 46694,\n        \"RCPT_TOT_PY_VAL_F\": \"k\",\n        \"ROBOT_INDST_VAL_F\": \"t\",\n        \"CAPEX_COMPTR_VAL_F\": \"t\",\n        \"CAPEX_NEW_TOT_DVAL\": null,\n        \"CAPEX_OTH_TOT_DVAL\": null,\n        \"CAPEX_OTH_USED_VAL\": null,\n        \"ELEC_GEN_KWH_NUM_F\": \"r\",\n        \"EXPS_BUILD_REP_VAL\": null,\n        \"EXPS_COMMSVC_VAL_F\": \"k\",\n        \"EXPS_RENT_MACH_VAL\": null,\n        \"HOURS_PRDWRK_NUM_F\": \"k\",\n        \"INV_B_LIFO_RSV_VAL\": null,\n        \"INV_E_LIFO_RSV_VAL\": null,\n        \"NEG_INV_B_TOT_DVAL\": null,\n        \"PAY_ANN_PRDWRK_VAL\": null,\n        \"CAPEX_BUILD_NEW_VAL\": null,\n        \"CAPEX_MACH_TOT_DVAL\": null,\n        \"CAPEX_MACH_USED_VAL\": null,\n        \"CAPEX_OTHMACH_VAL_F\": \"r\",\n        \"CAPEX_OTH_NEW_VAL_F\": \"t\",\n        \"CAPEX_USED_TOT_DVAL\": null,\n        \"ELEC_PRCH_KWH_NUM_F\": \"r\",\n        \"ELEC_SOLD_KWH_NUM_F\": \"k\",\n        \"EXPS_CONTRACT_VAL_F\": \"r\",\n        \"EXPS_DATAPROC_VAL_F\": \"k\",\n        \"EXPS_MACH_REP_VAL_F\": \"k\",\n        \"EXPS_PROFTECH_VAL_F\": \"t\",\n        \"EXPS_RENT_BUILD_VAL\": null,\n        \"EXPS_TEMPSTAF_VAL_F\": \"t\",\n        \"INV_B_IVAL_TOT_DVAL\": null,\n        \"INV_B_NL_TOT_DVAL_F\": \"r\",\n        \"INV_E_IVAL_TOT_DVAL\": null,\n        \"INV_E_LIFO_NET_DVAL\": null,\n        \"INV_E_NL_TOT_DVAL_F\": \"r\",\n        \"MAJOR_ACT_CODE_STAT\": \"18\",\n        \"PAY_QTR1_PRDWRK_VAL\": null,\n        \"PHYSLOC_ADDR_ST_TXT\": \"KS\",\n        \"TYPOP_OTH_WRTIN_TXT\": null,\n        \"CAPEX_BUILD_TOT_DVAL\": null,\n        \"CAPEX_BUILD_USED_VAL\": null,\n        \"CAPEX_OTH_TOT_DVAL_F\": \"r\",\n        \"CAPEX_OTH_USED_VAL_F\": \"r\",\n        \"EMP_MAR12_PRDWRK_NUM\": null,\n        \"EXPS_BUILD_REP_VAL_F\": \"k\",\n        \"EXPS_OTHER_WRTIN_TXT\": null,\n        \"EXPS_RENT_MACH_VAL_F\": \"r\",\n        \"INV_B_LIFO_RSV_VAL_F\": \"k\",\n        \"INV_E_LIFO_RSV_VAL_F\": \"t\",\n        \"PAY_ANN_PRDWRK_VAL_F\": \"r\",\n        \"ROBOT_INDST_INOP_NUM\": null,\n        \"ROBOT_INDST_PRCH_NUM\": null,\n        \"CAPEX_BUILD_NEW_VAL_F\": \"k\",\n        \"CAPEX_MACH_USED_VAL_F\": \"k\",\n        \"EXPS_COMPTR_OTHEQ_VAL\": null,\n        \"EXPS_FRNG_BENEFIT_VAL\": null,\n        \"EXPS_RENT_BUILD_VAL_F\": \"t\",\n        \"INV_B_IVAL_TOT_DVAL_F\": \"k\",\n        \"INV_E_IVAL_TOT_DVAL_F\": \"r\",\n        \"NEG_EXPS_CSTMTOT_DVAL\": null,\n        \"PAY_ANN_NONPRDWRK_VAL\": null,\n        \"PAY_QTR1_PRDWRK_VAL_F\": \"r\",\n        \"CAPEX_BUILD_USED_VAL_F\": \"t\",\n        \"EMP_MAR12_PRDWRK_NUM_F\": \"r\",\n        \"PAY_QTR1_NONPRDWRK_VAL\": null,\n        \"ROBOT_INDST_INOP_NUM_F\": \"r\",\n        \"ROBOT_INDST_PRCH_NUM_F\": \"k\",\n        \"CAPEX_OTH_NEW_WRTIN_TXT\": null,\n        \"EMP_MAR12_NONPRDWRK_NUM\": null,\n        \"EXPS_COMPTR_OTHEQ_VAL_F\": \"t\",\n        \"EXPS_FRNG_BENEFIT_VAL_F\": \"r\",\n        \"PAY_ANN_NONPRDWRK_VAL_F\": \"r\",\n        \"CAPEX_OTH_USED_WRTIN_TXT\": null,\n        \"MAJOR_ACT_CODE_WRTIN_TXT\": \"lorem ipsum\",\n        \"PAY_QTR1_NONPRDWRK_VAL_F\": \"r\",\n        \"EMP_MAR12_NONPRDWRK_NUM_F\": \"k\",\n        \"ROBOT_INDST_INOP_WRTIN_TXT\": null,\n        \"ROBOT_INDST_PRCH_WRTIN_TXT\": null\n    },\n    \"meta\": {\n        \"id\": 758671,\n        \"type\": \"ESTAB\",\n        \"ent_id\": \"2099021295\",\n        \"kau_id\": \"3000003933\",\n        \"version\": null,\n        \"estab_id\": \"33133\"\n    },\n    \"delta\": [\n        {\n            \"key\": \"EIN_NUM\",\n            \"service\": {\n                \"name\": \"qbes\",\n                \"timestamp\": \"2023-09-11T17:52:03.848Z\"\n            },\n            \"newValue\": \"730584841SUCCESS\",\n            \"oldValue\": 730584841\n        },\n        {\n            \"key\": \"PAY_ANN_VAL\",\n            \"service\": {\n                \"name\": \"qbes\",\n                \"timestamp\": \"2023-09-11T17:52:03.848Z\"\n            },\n            \"newValue\": 62229,\n            \"oldValue\": 62219\n        }\n    ],\n    \"rules\": [\n        {\n            \"event\": {\n                \"name\": \"Set review flag for estab\",\n                \"type\": 238,\n                \"active\": true,\n                \"params\": {\n                    \"action\": [\n                        {\n                            \"Action\": \"\\\"Set Review for Flag\\\"\"\n                        }\n                    ],\n                    \"message\": \"Setting the review flag for ESTAB.\",\n                    \"rvsJSON\": [\n                        \"TYPOP_CODE_STAT\"\n                    ],\n                    \"apiSource\": {},\n                    \"actionType\": \"impute\",\n                    \"apiChecked\": false\n                },\n                \"ruleId\": 238,\n                \"actionType\": \"impute\",\n                \"rulePriority\": \"5\",\n                \"validationType\": \"estab\"\n            },\n            \"index\": -1,\n            \"priority\": 5,\n            \"conditions\": {\n                \"all\": [\n                    {\n                        \"fact\": \"checkCondition\",\n                        \"path\": \"$.value\",\n                        \"value\": true,\n                        \"params\": {\n                            \"conditionstring\": \"VERSION == \\\"ADJ\\\"\"\n                        },\n                        \"operator\": \"equal\"\n                    }\n                ]\n            }\n        },\n        {\n            \"event\": {\n                \"name\": \"Append Success to EIN NUMBER\",\n                \"type\": 239,\n                \"active\": true,\n                \"params\": {\n                    \"action\": [\n                        {\n                            \"EIN_NUM\": \"concat(EIN_NUM, \\\"SUCCESS\\\")\"\n                        }\n                    ],\n                    \"message\": \"Setting the review flag for ESTAB.\",\n                    \"rvsJSON\": [\n                        \"TYPOP_CODE_STAT\"\n                    ],\n                    \"apiSource\": {},\n                    \"actionType\": \"impute\",\n                    \"apiChecked\": false\n                },\n                \"ruleId\": 238,\n                \"actionType\": \"impute\",\n                \"rulePriority\": \"5\",\n                \"validationType\": \"estab\"\n            },\n            \"index\": -1,\n            \"priority\": 5,\n            \"conditions\": {\n                \"all\": [\n                    {\n                        \"fact\": \"checkCondition\",\n                        \"path\": \"$.value\",\n                        \"value\": true,\n                        \"params\": {\n                            \"conditionstring\": \"EIN_NUM != \\\"\\\"\"\n                        },\n                        \"operator\": \"equal\"\n                    }\n                ]\n            }\n        },\n        {\n            \"event\": {\n                \"name\": \"PAY_ANN_VAL test 1\",\n                \"type\": \"new_1\",\n                \"active\": true,\n                \"params\": {\n                    \"rvs\": [],\n                    \"action\": [\n                        {\n                            \"PAY_ANN_VAL\": \"PAY_ANN_VAL + 1\"\n                        }\n                    ],\n                    \"message\": \"PAY_ANN_VAL TEST\",\n                    \"rvsJSON\": []\n                },\n                \"actionType\": \"impute\",\n                \"validationType\": \"new_1\"\n            },\n            \"index\": -1,\n            \"priority\": null,\n            \"conditions\": {\n                \"all\": [\n                    {\n                        \"fact\": \"checkCondition\",\n                        \"path\": \"$.value\",\n                        \"value\": true,\n                        \"params\": {\n                            \"conditionString\": \"1 == 1\"\n                        },\n                        \"operator\": \"equal\"\n                    }\n                ]\n            }\n        },\n        {\n            \"event\": {\n                \"name\": \"PAY_ANN RULE\",\n                \"type\": \"new_1\",\n                \"active\": true,\n                \"params\": {\n                    \"rvs\": [\n                        \"PAY_ANN_VAL\"\n                    ],\n                    \"action\": [\n                        {\n                            \"PAY_ANN_VAL\": \"PAY_ANN_VAL + 10\"\n                        }\n                    ],\n                    \"message\": \"PAY_ANN_VAL_1\",\n                    \"rvsJSON\": [\n                        \"PAY_ANN_VAL\"\n                    ]\n                },\n                \"actionType\": \"impute\",\n                \"rulePriority\": \"4\",\n                \"validationType\": \"new_1\"\n            },\n            \"index\": -1,\n            \"priority\": 4,\n            \"conditions\": {\n                \"all\": [\n                    {\n                        \"fact\": \"checkCondition\",\n                        \"path\": \"$.value\",\n                        \"value\": true,\n                        \"params\": {\n                            \"conditionstring\": \"PAY_ANN_VAL != \\\"\\\"\"\n                        },\n                        \"operator\": \"equal\"\n                    }\n                ]\n            }\n        }\n    ],\n    \"recipe\": {\n        \"steps\": [\n            {\n                \"delta\": [\n                    {\n                        \"key\": \"EIN_NUM\",\n                        \"service\": {\n                            \"name\": \"qbes\",\n                            \"timestamp\": \"2023-09-11T17:52:03.848Z\"\n                        },\n                        \"newValue\": \"730584841SUCCESS\",\n                        \"oldValue\": 730584841\n                    },\n                    {\n                        \"key\": \"PAY_ANN_VAL\",\n                        \"service\": {\n                            \"name\": \"qbes\",\n                            \"timestamp\": \"2023-09-11T17:52:03.848Z\"\n                        },\n                        \"newValue\": 62229,\n                        \"oldValue\": 62219\n                    }\n                ],\n                \"tsEnd\": 1694454723848,\n                \"msName\": \"qbes\",\n                \"tsStart\": 1694454723842,\n                \"validRules\": [\n                    {\n                        \"id\": 239,\n                        \"rvs\": [],\n                        \"action\": [\n                            {\n                                \"EIN_NUM\": \"concat(EIN_NUM, \\\"SUCCESS\\\")\"\n                            }\n                        ],\n                        \"message\": \"Setting the review flag for ESTAB.\",\n                        \"computedRVS\": {\n                            \"EIN_NUM\": \"730584841SUCCESS\"\n                        }\n                    },\n                    {\n                        \"id\": \"new_1\",\n                        \"rvs\": [],\n                        \"action\": [\n                            {\n                                \"PAY_ANN_VAL\": \"PAY_ANN_VAL + 10\"\n                            }\n                        ],\n                        \"message\": \"PAY_ANN_VAL_1\",\n                        \"computedRVS\": {\n                            \"EIN_NUM\": \"730584841SUCCESS\",\n                            \"PAY_ANN_VAL\": 62229\n                        }\n                    }\n                ],\n                \"invalidRules\": [\n                    {\n                        \"id\": 238,\n                        \"rvs\": [],\n                        \"action\": [\n                            {\n                                \"Action\": \"\\\"Set Review for Flag\\\"\"\n                            }\n                        ],\n                        \"message\": \"Setting the review flag for ESTAB.\"\n                    },\n                    {\n                        \"id\": \"new_1\",\n                        \"rvs\": [],\n                        \"action\": [\n                            {\n                                \"PAY_ANN_VAL\": \"PAY_ANN_VAL + 1\"\n                            }\n                        ],\n                        \"message\": \"PAY_ANN_VAL TEST\"\n                    }\n                ],\n                \"processedTime\": 6\n            },\n            {\n                \"tsEnd\": 0,\n                \"msName\": \"jobOutput\",\n                \"jobType\": \"spadJob\",\n                \"tsStart\": 0,\n                \"destinationTable\": \"product_aies.spad_2\"\n            }\n        ],\n        \"currentStepIndex\": 1\n    },\n    \"upsert\": true\n}]\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 1020,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8549c72d66cffc9d",
+        "type": "switch",
+        "z": "d7d109e0d89be1c6",
+        "name": "Switch for Mode",
+        "property": "modeName",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "interactive_mode",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "batch_mode_1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "batch_mode_2",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 1340,
+        "y": 1020,
+        "wires": [
+            [
+                "35871e68a9f50691",
+                "4cde7fe113a4df66"
+            ],
+            [
+                "54cb70dfe4b43956",
+                "a46cb4be6617824c"
+            ],
+            [
+                "d6116234e9829874",
+                "eda398efc16a87d5"
+            ]
+        ]
+    },
+    {
+        "id": "35871e68a9f50691",
+        "type": "link out",
+        "z": "d7d109e0d89be1c6",
+        "name": "Go To InteractiveMode",
+        "mode": "link",
+        "links": [
+            "f5168b892485e327",
+            "746909370ced9c62"
+        ],
+        "x": 1505,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "54cb70dfe4b43956",
+        "type": "link out",
+        "z": "d7d109e0d89be1c6",
+        "name": "Go To BatchMode1",
+        "mode": "link",
+        "links": [
+            "513713eac5d2b9ba"
+        ],
+        "x": 1505,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "d6116234e9829874",
+        "type": "link out",
+        "z": "d7d109e0d89be1c6",
+        "name": "Go To BatchMode2",
+        "mode": "link",
+        "links": [
+            "7524317b716e4316"
+        ],
+        "x": 1505,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "4cde7fe113a4df66",
+        "type": "debug",
+        "z": "d7d109e0d89be1c6",
+        "name": "InteractiveMode",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1580,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "a46cb4be6617824c",
+        "type": "debug",
+        "z": "d7d109e0d89be1c6",
+        "name": "batchMode1",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1630,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "eda398efc16a87d5",
+        "type": "debug",
+        "z": "d7d109e0d89be1c6",
+        "name": "batchMode2",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1610,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "5ff02ea5b7b5458d",
+        "type": "postgresql",
+        "z": "d7d109e0d89be1c6",
+        "name": "Update FACTS",
+        "query": "",
+        "postgreSQLConfig": "481a641c4005d1c8",
+        "split": false,
+        "rowsPerMsg": "1",
+        "outputs": 1,
+        "x": 980,
+        "y": 920,
+        "wires": [
+            [
+                "65bbab8d594f837a"
+            ]
+        ]
+    },
+    {
+        "id": "2cddb7a50f4f69d9",
+        "type": "function",
+        "z": "d7d109e0d89be1c6",
+        "name": "insert_query",
+        "func": "\n\n\nconst findChangedKeyValuePairs = (oldObj, newObj) => {\n  const changedKeyValuePairs = [];\n\n  for (const key in newObj) {\n    if (oldObj[key] !== newObj[key]) {\n      changedKeyValuePairs.push({\n        key,\n        oldValue: oldObj[key],\n        newValue: newObj[key],\n        service: {\n          name: 'qflow',\n          timestamp: new Date()\n        }\n      });\n    }\n  }\n  return changedKeyValuePairs;\n}\n\nconst qFlowdelta = findChangedKeyValuePairs(msg.payload.qflowInputFacts[0], msg.payload.facts[0]);\n\nvar currentStepIndex = msg.payload.recipe.currentStepIndex;\n\nmsg.payload.recipe.steps[currentStepIndex].delta = qFlowdelta;\n\nconst jsonData = msg.payload.recipe.steps[currentStepIndex]\n\nconst formatUpdateQueryFromMessage = (messageObject) => {\n  const { destinationTable } = getCurrentStepData(messageObject);\n  let query = `UPDATE ${destinationTable} SET `;\n  query += `results = '${escapeForSQL(JSON.stringify(messageObject))}'::jsonb, `;\n  query += `facts = '${escapeForSQL(JSON.stringify(messageObject.fact))}'::jsonb, `;\n  query += `delta = '${escapeForSQL(JSON.stringify(messageObject.delta))}'::jsonb `;\n  query += `WHERE id = '${messageObject.meta.id}';`;\n  return query;\n};\nconst getCurrentStepData = (formattedJSON) => {\n  const currentStepIndex = formattedJSON.recipe.currentStepIndex;\n  return formattedJSON.recipe.steps[currentStepIndex];\n};\nconst escapeForSQL = (jsonString) => {\n  return jsonString.replaceAll(\"'\", \"''\");\n};\n\nconsole.log(formatUpdateQueryFromMessage(jsonData))\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 790,
+        "y": 920,
+        "wires": [
+            [
+                "5ff02ea5b7b5458d"
+            ]
+        ]
+    },
+    {
+        "id": "65bbab8d594f837a",
+        "type": "debug",
+        "z": "d7d109e0d89be1c6",
+        "name": "INSERT Result",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1200,
+        "y": 920,
+        "wires": []
     }
 ]
