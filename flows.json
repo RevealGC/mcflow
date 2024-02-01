@@ -2724,8 +2724,8 @@
         "category": "",
         "in": [
             {
-                "x": 580,
-                "y": 300,
+                "x": 640,
+                "y": 420,
                 "wires": [
                     {
                         "id": "d831e0513adcc48e"
@@ -2735,8 +2735,8 @@
         ],
         "out": [
             {
-                "x": 1360,
-                "y": 300,
+                "x": 1000,
+                "y": 420,
                 "wires": [
                     {
                         "id": "d831e0513adcc48e",
@@ -2948,7 +2948,9 @@
             "d394b61bcc4755e6"
         ],
         "x": 14,
-        "y": 939
+        "y": 939,
+        "w": 1532,
+        "h": 82
     },
     {
         "id": "ef50b77b253a7883",
@@ -2968,7 +2970,9 @@
             "d587f5de3f4014c8"
         ],
         "x": 14,
-        "y": 239
+        "y": 239,
+        "w": 1792,
+        "h": 182
     },
     {
         "id": "62708d0bbe922798",
@@ -2992,7 +2996,9 @@
             "58df41cd8e54a653"
         ],
         "x": 14,
-        "y": 519
+        "y": 519,
+        "w": 1432,
+        "h": 322
     },
     {
         "id": "19463268a6c67561",
@@ -3010,6 +3016,8 @@
         ],
         "x": 14,
         "y": 99,
+        "w": 1432,
+        "h": 82,
         "info": "# Rules from Parameter Files"
     },
     {
@@ -7345,8 +7353,122 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1020,
-        "y": 500,
+        "x": 820,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a5e633f6f5f77e98",
+        "type": "function",
+        "z": "e7b7501b29427db9",
+        "name": "napcs_prep function_db",
+        "func": "try {\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    let cache = global.get(\"lookupCache\");\n    let naics_napcs = cache.data.find(\n        item =>\n            item.module === \"napcs\" &&\n            item.param === 'napcs_prep' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"all\"\n    )?.json_values;\n\n    function resetNAPCS(row) {\n        if (row?.PROD_CODE) {\n            if (parseFloat(row?.PROD_CODE_VAL_PO) == 0) {\n                row.USABLE = 'D'\n            } else if (parseFloat(row?.PROD_CODE_VAL_PO) < 0) {\n                row.USABLE = 'I'\n            } else {\n                record.NAPCS_IND = 'U'\n                if (parseFloat(row?.PROD_CODE_VAL_PO) > 0) {\n                    if (row?.PROD_CODE.substring(0, 7) == '9000000') {\n                        row.USABLE = 'J'\n                    } else {\n                        row.USABLE = 'U'\n                    }\n                }\n            }\n        }\n    }\n\n    function imputeHist() {\n        if (record?.NAPCS_IMP == 'Y') {\n            for (let i in allData) {\n                let row = allData[i]\n                if (row?.PROD_CODE_VAL_F_PI && row?.PROD_CODE_VAL_F_PI.charAt(1) != ' ') {\n                    record.NAPCS_IMP = ' '\n                } else if (row?.PROD_CODE && (!(row?.PROD_CODE_VAL_F_PI))) {\n                    record.NAPCS_IMP = ' '\n                }\n            }\n        } else if (record?.NAPCS_IND == ' ') {\n            if (record?.HISTSTAT == 'Y' && record?.EC_NAPCS_IND == 'U' && record?.EC_NAPCS_BLTOT > 0 && record?.EC_RCPT_TOT_VAL > 0) {\n                for (let i in allData) {\n                    let row = allData[i]\n                    if (parseFloat(row?.EC_NAPCS_PROD_CODE_VAL) > 0) {\n                        if (['I', 'D', 'X'].includes(row?.EC_NAPCS_USABLE)) {\n                        } else {\n                            record.NAPCS_IMP = 'Y'\n                        }\n                    }\n                }\n            }\n        }\n    }\n\n    let allData = msg.napcs;\n    // console.log(msg.payload.napcs)\n    // console.log(msg.payload.csv)\n    let NAPCS_BLTOT = 0\n    let NAPCS_PRM = 0\n    let NAPCS_OTH = 0\n    let ProdFound = 'N'\n\n    if (record?.NAICS_SECTOR == '31' && record?.SUBSAMP_IND_TXT != 'MC') {\n        for (let i in allData) {\n            let row = allData[i]\n            resetNAPCS(row)\n            if (row?.PROD_CODE) {\n                ProdFound = 'Y'\n            }\n        }\n        if (ProdFound == 'N') {\n            record['NAPCS_IND'] = ' '\n        }\n\n        imputeHist()\n\n        let val_9000 = ''\n        for (let i in allData) {\n            let row = allData[i]\n            if (row?.PROD_CODE) {\n                if (['I', 'D', 'X'].includes(row?.USABLE)) {\n                } else {\n                    if (row?.PROD_CODE.substring(7, 10) == '000') {\n                        NAPCS_BLTOT = NAPCS_BLTOT + parseFloat(row?.PROD_CODE_VAL_PO)\n                    }\n                    if (row?.PROD_CODE.substring(0, 1) == '2') {\n                        NAPCS_PRM = NAPCS_PRM + parseFloat(row?.PROD_CODE_VAL_PO)\n                    }\n                    if (row?.PROD_CODE.substring(0, 1) != '2') {\n                        if (row.PROD_CODE.substring(0, 7) == '9000000') {\n                        } else {\n                            NAPCS_OTH = NAPCS_OTH + parseFloat(row?.PROD_CODE_VAL_PO)\n                        }\n                    }\n                    let napcs = naics_napcs.NAPCS_PREP.some(element => (parseInt(element.NAPCS) === parseInt(row?.PROD_CODE)));\n                    if (napcs) {\n                    } else {\n                        row.USABLE = 'I'\n                    }\n                }\n                if (row?.PROD_CODE == '9000000000') {\n                    val_9000 = row?.PROD_CODE_VAL_PO\n                }\n            }\n        }\n\n        record['NAPCS_BLTOT'] = NAPCS_BLTOT\n        record['NAPCS_BAL'] = parseFloat(record?.RCPT_TOT_VAL) - NAPCS_BLTOT\n        record['NAPCS_PRM'] = NAPCS_PRM\n        record['NAPCS_OTH'] = NAPCS_OTH\n\n        // if (val_9000 != '') {\n        //     if (parseFloat(val_9000) > (parseFloat(NAPCS_BLTOT) - parseFloat(val_9000))) {\n        //         record['FLAG'] = 'WRITEIN_IND_DETER'\n        //     }\n        // }\n\n        record.ACTION = 'END'\n    } else {\n        record.ACTION = 'Go to Main Routing'\n    }\n\n    msg.backup_payload = msg.payload\n    // console.log(msg.napcs)\n    // msg.payload = msg.napcs\n    // msg.query = `update product_aies.napcs n2 set n2.usable = n1.USABLE from ${ (JSON.stringify(msg.napcs)) } n1 where n1.ID = n2.ID;`\n    // console.log(msg.napcs)\n    // let string = \"\"\n    // for (let i in msg.napcs) {\n    //     string = string + \"update product_aies.napcs set usable = '\" + msg.napcs[i].USABLE + \"'where id = '\" + msg.napcs[i].ID + \"';\"\n    // }\n    // console.log(string)\n\n    let arr = msg.napcs;\n    // Start the UPDATE statement\n    let query = \"UPDATE product_aies.napcs SET USABLE = CASE ID \";\n    // Add CASE conditions for each ID\n    arr.forEach(item => {\n        query += `WHEN ${item.ID} THEN '${item.USABLE}' `;\n    });\n    // Close the CASE statement and specify which IDs should be updated\n    let ids = arr.map(item => item.ID);\n    query += `END WHERE ID IN (${ids.join(', ')});`;\n    // Display the generated query\n    console.log(query);\n\n    msg.query = query\n    return msg;\n} catch (e) {\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 970,
+        "y": 300,
+        "wires": [
+            [
+                "8320cf2c839793c1"
+            ]
+        ]
+    },
+    {
+        "id": "8d0538d9b860746e",
+        "type": "function",
+        "z": "e7b7501b29427db9",
+        "name": "insert_query",
+        "func": "msg.records = msg.payload\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.records.csv[record_idx];\nlet id = record.REPORTING_ID\nmsg.query = \"  SELECT * FROM product_aies.napcs where estab_id = '\" + id + \"';\"\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 300,
+        "wires": [
+            [
+                "b2202e678ff5f50d"
+            ]
+        ]
+    },
+    {
+        "id": "b2202e678ff5f50d",
+        "type": "postgresql",
+        "z": "e7b7501b29427db9",
+        "name": "Select",
+        "query": "",
+        "postgreSQLConfig": "481a641c4005d1c8",
+        "split": false,
+        "rowsPerMsg": "1",
+        "outputs": 1,
+        "x": 590,
+        "y": 300,
+        "wires": [
+            [
+                "2a6ccb37daa74f3b"
+            ]
+        ]
+    },
+    {
+        "id": "2a6ccb37daa74f3b",
+        "type": "function",
+        "z": "e7b7501b29427db9",
+        "name": "reset msg",
+        "func": "function keysToUpperCase(obj) {\n    const output = {};\n    for (let key in obj) {\n        if (Object.prototype.hasOwnProperty.call(obj, key)) {\n            if (typeof obj[key] === 'object' && obj[key] !== null) {\n                output[key.toUpperCase()] = keysToUpperCase(obj[key]);\n            } else {\n                output[key.toUpperCase()] = obj[key];\n            }\n        }\n    }\n    return output;\n}\n\nlet p = msg.payload.map(keysToUpperCase);\nmsg.payload = p\nmsg.napcs = msg.payload\n\nmsg.payload = msg.records\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 760,
+        "y": 300,
+        "wires": [
+            [
+                "a5e633f6f5f77e98"
+            ]
+        ]
+    },
+    {
+        "id": "8320cf2c839793c1",
+        "type": "postgresql",
+        "z": "e7b7501b29427db9",
+        "name": "update",
+        "query": "",
+        "postgreSQLConfig": "481a641c4005d1c8",
+        "split": false,
+        "rowsPerMsg": "1",
+        "outputs": 1,
+        "x": 1170,
+        "y": 300,
+        "wires": [
+            [
+                "02738d7a8497349c"
+            ]
+        ]
+    },
+    {
+        "id": "02738d7a8497349c",
+        "type": "function",
+        "z": "e7b7501b29427db9",
+        "name": "reset msg",
+        "func": "msg.payload = msg.backup_payload\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1320,
+        "y": 300,
         "wires": [
             []
         ]
@@ -18018,6 +18140,89 @@
         "wires": []
     },
     {
+        "id": "06a9cb383fa7e864",
+        "type": "function",
+        "z": "de517a9172230cbe",
+        "name": "Get NAPCS",
+        "func": "msg.query = 'SELECT * FROM product_aies.napcs LIMIT 100'\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 540,
+        "wires": [
+            [
+                "2f18c1e4a89c757f"
+            ]
+        ]
+    },
+    {
+        "id": "2f18c1e4a89c757f",
+        "type": "postgresql",
+        "z": "de517a9172230cbe",
+        "name": "Update FACTS",
+        "query": "",
+        "postgreSQLConfig": "481a641c4005d1c8",
+        "split": false,
+        "rowsPerMsg": "1",
+        "outputs": 1,
+        "x": 1060,
+        "y": 540,
+        "wires": [
+            [
+                "7bad4b8dee7f732a"
+            ]
+        ]
+    },
+    {
+        "id": "60d8b06caa63ccbd",
+        "type": "inject",
+        "z": "de517a9172230cbe",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 690,
+        "y": 540,
+        "wires": [
+            [
+                "06a9cb383fa7e864"
+            ]
+        ]
+    },
+    {
+        "id": "7bad4b8dee7f732a",
+        "type": "debug",
+        "z": "de517a9172230cbe",
+        "name": "debug 113",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1250,
+        "y": 540,
+        "wires": []
+    },
+    {
         "id": "1c611eb0c30a9863",
         "type": "link in",
         "z": "3248e82e44cba772",
@@ -24294,7 +24499,7 @@
         "z": "8790b12c7efb6fa0",
         "name": "",
         "x": 750,
-        "y": 660,
+        "y": 680,
         "wires": [
             [
                 "fcd151b21980a714"
@@ -25068,8 +25273,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 920,
-        "y": 660,
+        "x": 940,
+        "y": 680,
         "wires": [
             [
                 "66fdc22c898d5af9"
@@ -26114,7 +26319,7 @@
         "type": "function",
         "z": "d7d109e0d89be1c6",
         "name": "insert_query",
-        "func": "\n\n\nconst findChangedKeyValuePairs = (oldObj, newObj) => {\n  const changedKeyValuePairs = [];\n\n  for (const key in newObj) {\n    if (oldObj[key] !== newObj[key]) {\n      changedKeyValuePairs.push({\n        key,\n        oldValue: oldObj[key],\n        newValue: newObj[key],\n        service: {\n          name: 'qflow',\n          timestamp: new Date()\n        }\n      });\n    }\n  }\n  return changedKeyValuePairs;\n}\n\nconst qFlowdelta = findChangedKeyValuePairs(msg.payload.qflowInputFacts[0], msg.payload.facts[0]);\n\nvar currentStepIndex = msg.payload.recipe.currentStepIndex;\n\nmsg.payload.recipe.steps[currentStepIndex].delta = qFlowdelta;\n\nconst jsonData = msg.payload.recipe.steps[currentStepIndex]\n\nconst formatUpdateQueryFromMessage = (messageObject) => {\n  const { destinationTable } = getCurrentStepData(messageObject);\n  let query = `UPDATE ${destinationTable} SET `;\n  query += `results = '${escapeForSQL(JSON.stringify(messageObject))}'::jsonb, `;\n  query += `facts = '${escapeForSQL(JSON.stringify(messageObject.fact))}'::jsonb, `;\n  query += `delta = '${escapeForSQL(JSON.stringify(messageObject.delta))}'::jsonb `;\n  query += `WHERE id = '${messageObject.meta.id}';`;\n  return query;\n};\nconst getCurrentStepData = (formattedJSON) => {\n  const currentStepIndex = formattedJSON.recipe.currentStepIndex;\n  return formattedJSON.recipe.steps[currentStepIndex];\n};\nconst escapeForSQL = (jsonString) => {\n  return jsonString.replaceAll(\"'\", \"''\");\n};\n\nconsole.log(formatUpdateQueryFromMessage(jsonData))\n\nreturn msg;",
+        "func": "\n\n\nconst findChangedKeyValuePairs = (oldObj, newObj) => {\n  const changedKeyValuePairs = [];\n\n  for (const key in newObj) {\n    if (oldObj[key] !== newObj[key]) {\n      changedKeyValuePairs.push({\n        key,\n        oldValue: oldObj[key],\n        newValue: newObj[key],\n        service: {\n          name: 'qflow',\n          timestamp: new Date()\n        }\n      });\n    }\n  }\n  return changedKeyValuePairs;\n}\n\nconst qFlowdelta = findChangedKeyValuePairs(msg.payload.qflowInputFacts[0], msg.payload.facts[0]);\n\nvar currentStepIndex = msg.payload.recipe.currentStepIndex;\n\nmsg.payload.recipe.steps[currentStepIndex].delta = qFlowdelta;\n\nconst jsonData = msg.payload.recipe.steps[currentStepIndex]\n\nconst formatUpdateQueryFromMessage = (messageObject) => {\n  const { destinationTable } = getCurrentStepData(messageObject);\n  let query = `UPDATE ${destinationTable} SET `;\n  query += `results = '${escapeForSQL(JSON.stringify(messageObject))}'::jsonb, `;\n  query += `facts = '${escapeForSQL(JSON.stringify(messageObject.fact))}'::jsonb, `;\n  query += `delta = '${escapeForSQL(JSON.stringify(messageObject.delta))}'::jsonb `;\n  query += `WHERE id = '${messageObject.meta.id}';`;\n  return query;\n};\nconst getCurrentStepData = (formattedJSON) => {\n  const currentStepIndex = formattedJSON.recipe.currentStepIndex;\n  return formattedJSON.recipe.steps[currentStepIndex];\n};\nconst escapeForSQL = (jsonString) => {\n  return jsonString.replaceAll(\"'\", \"''\");\n};\n\nconst getChangeObjectFromDelta = (deltaList) =>\n  deltaList.reduce((acc, curr) => {\n    acc[curr.key] = curr.newValue;\n    return acc;\n  }, {});\n\nconst getDeltaFromMessage = (messageObject) => {\n  return messageObject.delta || [];\n};\nconst getOriginalFact = (formattedJSON) => {\n  return formattedJSON.origFact;\n};\nconst getKeyListOriginalFact = (origFact) => {\n  return Object.keys(origFact);\n};\nconst generateKeyValString = (changeObject) =>\n  Object.entries(changeObject).map(([key, value]) => {\n    let formattedValue;\n\n    if (typeof value === 'string') {\n      formattedValue = `'${value.replaceAll(\"'\", \"''\")}'`;\n    } else if (typeof value === 'number' || typeof value === 'boolean') {\n      formattedValue = value;\n    } else if (typeof value === 'object' && value !== null) {\n      formattedValue = `'${JSON.stringify(value).replaceAll(\"'\", \"''\")}'`;\n    } else {\n      formattedValue = value;\n    }\n\n    return `${key} = ${formattedValue}`;\n  });\n\nconst formatDBUpdateQueryFromMessage = (messageObject, tableName, updateMatch) => {\n  const changeObject = getChangeObjectFromDelta(getDeltaFromMessage(messageObject));\n  const whereClause = updateMatch\n  const origFact = getOriginalFact(messageObject);\n  const origFactKeyList = getKeyListOriginalFact(origFact);\n  for (const key in changeObject) {\n    // Check if key is in the original fact\n    if (!origFactKeyList.includes(key)) {\n      // // If not, add it to the original fact\n      // console.info(\n      //   `Job Output | Detected new key ${key} with value ${changeObject[key]} for job ${messageObject.job.jobName} where update query is ${whereClause}`\n      // );\n      delete changeObject[key];\n      continue;\n    }\n\n    // If original fact value is null, or\n    // If changeObject value is null, skip\n    // Because null cannot determine the type\n    if (origFact[key] == null || changeObject[key] == null) {\n      continue;\n    }\n\n    if (typeof changeObject[key] !== typeof origFact[key]) {\n      // console.info(\n      //   `Job Output | Detected invalid value type for ${key} with value ${changeObject[key]\n      //   } | ${typeof changeObject[key]} where original value was ${origFact[key]\n      //   } | ${typeof origFact[key]} for job ${messageObject.job.jobName\n      //   } where update query is ${whereClause}`\n      // );\n      delete changeObject[key];\n    }\n  }\n\n  if (Object.keys(changeObject).length === 0) {\n    return;\n  }\n\n  let query = `UPDATE ${tableName} SET `;\n  query += generateKeyValString(changeObject).join(', ');\n  query += ` WHERE ${whereClause};`;\n  return query;\n};\n\nmsg.query = formatDBUpdateQueryFromMessage(msg.payload.recipe.steps[currentStepIndex], msg.payload.recipe.steps[currentStepIndex].source.tableName, 'reporting_id = ' + msg.payload.csv[0].REPORTING_ID + 'and reporting_id_typ_txt = ' + msg.payload.csv[0].REPORTING_ID_TYP_TXT + 'and version = PO')\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -26125,7 +26330,8 @@
         "y": 920,
         "wires": [
             [
-                "5ff02ea5b7b5458d"
+                "5ff02ea5b7b5458d",
+                "0a7d3ce3f2f29738"
             ]
         ]
     },
@@ -26144,6 +26350,138 @@
         "statusType": "auto",
         "x": 1200,
         "y": 920,
+        "wires": []
+    },
+    {
+        "id": "08df2c7b7f0720f7",
+        "type": "inject",
+        "z": "d7d109e0d89be1c6",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 380,
+        "y": 920,
+        "wires": [
+            [
+                "1b620f15d59c7bf1"
+            ]
+        ]
+    },
+    {
+        "id": "1b620f15d59c7bf1",
+        "type": "function",
+        "z": "d7d109e0d89be1c6",
+        "name": "function 38",
+        "func": "msg.payload.recipe = {\n    \"csv\": [\n        {\n            \"ID\": \"10969\",\n            \"ENT_ID\": \"2099023193\",\n            \"RD_STAT\": \"N    \",\n            \"VERSION\": \"REP\",\n            \"DEPR_VAL\": 58193,\n            \"DEPR_VAL_F\": \"r\",\n            \"LSD_50_STAT\": \"1.0  \",\n            \"PAY_ANN_VAL\": 686038,\n            \"CAPEX_CL_VAL\": 67725,\n            \"CAPEX_CO_VAL\": 57741,\n            \"PAY_QTR1_VAL\": 171360,\n            \"RCPT_TOT_VAL\": 768370,\n            \"RD_EXPS_STAT\": \"1.0  \",\n            \"ASSET_BGN_VAL\": 28675,\n            \"CAPEX_TOT_SUM\": 640794,\n            \"EMP_MAR12_NUM\": 1380,\n            \"PAY_ANN_VAL_F\": \"t\",\n            \"ASSET_SOLD_VAL\": 56646,\n            \"CAPEX_CL_VAL_F\": \"k\",\n            \"CAPEX_CO_VAL_F\": \"t\",\n            \"CAPEX_TOT_DVAL\": 640794,\n            \"PAY_QTR1_VAL_F\": \"r\",\n            \"RCPT_TOT_VAL_F\": \"r\",\n            \"RECORD_TYP_TXT\": \"10\",\n            \"ASSET_BGN_VAL_F\": \"r\",\n            \"ASSET_CAPEX_VAL\": 70814,\n            \"EMP_MAR12_NUM_F\": \"k\",\n            \"PAY_ANN_VAL_SUM\": 686038,\n            \"RCPT_TOT_PY_VAL\": 49472,\n            \"ASSET_OTHACQ_VAL\": 58346,\n            \"ASSET_SOLD_VAL_F\": \"r\",\n            \"PAY_QTR1_VAL_SUM\": 171360,\n            \"RCPT_TOT_VAL_SUM\": 768370,\n            \"REPORTING_TYP_ID\": \"ENT\",\n            \"ASSET_CAPEX_VAL_F\": \"t\",\n            \"CAPEX_NEW_TOT_SUM\": 609210,\n            \"EMP_MAR12_NUM_SUM\": 1380,\n            \"PAY_ANN_SLVR_DVAL\": 514678,\n            \"RCPT_TOT_PY_VAL_F\": \"r\",\n            \"ASSET_END_TOT_DVAL\": 45029,\n            \"ASSET_OTHACQ_VAL_F\": \"t\",\n            \"CAPEX_CL_WRTIN_TXT\": \"lorem ipsum\",\n            \"CAPEX_MACH_TOT_SUM\": 514804,\n            \"CAPEX_NEW_TOT_DVAL\": 609210,\n            \"CAPEX_MACH_TOT_DVAL\": 514804,\n            \"ASSET_END_TOT_DVAL_F\": \"r\",\n            \"ASSET_OTHACQ_WRTIN_TXT\": \"lorem ipsum\",\n            \"CAPEX_SOFTWARE_TOT_DVAL\": 36178,\n            \"CAPEX_SOFTWARE_VEND_VAL\": 37422,\n            \"CAPEX_SOFTWARE_INTDEV_VAL\": 59043,\n            \"CAPEX_SOFTWARE_PREPKG_VAL\": 55149,\n            \"CAPEX_SOFTWARE_VEND_VAL_F\": \"t\",\n            \"CAPEX_SOFTWARE_INTDEV_VAL_F\": \"r\",\n            \"CAPEX_SOFTWARE_PREPKG_VAL_F\": \"t\"\n        }\n    ],\n    \"job\": {\n        \"history\": [],\n        \"jobName\": \"rohit_batch_test_262\",\n        \"recipeID\": 2,\n        \"initiatedTs\": \"2024-01-17T18:09:46.820Z\"\n    },\n    \"fact\": {\n        \"ID\": \"10969\",\n        \"ENT_ID\": \"2099023193\",\n        \"RD_STAT\": \"N    \",\n        \"VERSION\": \"REP\",\n        \"DEPR_VAL\": 58193,\n        \"DEPR_VAL_F\": \"r\",\n        \"LSD_50_STAT\": \"1.0  \",\n        \"PAY_ANN_VAL\": 686038,\n        \"CAPEX_CL_VAL\": 67725,\n        \"CAPEX_CO_VAL\": 57741,\n        \"PAY_QTR1_VAL\": 171360,\n        \"RCPT_TOT_VAL\": 768370,\n        \"RD_EXPS_STAT\": \"1.0  \",\n        \"ASSET_BGN_VAL\": 28675,\n        \"CAPEX_TOT_SUM\": 640794,\n        \"EMP_MAR12_NUM\": 1380,\n        \"PAY_ANN_VAL_F\": \"t\",\n        \"ASSET_SOLD_VAL\": 56646,\n        \"CAPEX_CL_VAL_F\": \"k\",\n        \"CAPEX_CO_VAL_F\": \"t\",\n        \"CAPEX_TOT_DVAL\": 640794,\n        \"PAY_QTR1_VAL_F\": \"r\",\n        \"RCPT_TOT_VAL_F\": \"r\",\n        \"RECORD_TYP_TXT\": \"10\",\n        \"ASSET_BGN_VAL_F\": \"r\",\n        \"ASSET_CAPEX_VAL\": 70814,\n        \"EMP_MAR12_NUM_F\": \"k\",\n        \"PAY_ANN_VAL_SUM\": 686038,\n        \"RCPT_TOT_PY_VAL\": 49472,\n        \"ASSET_OTHACQ_VAL\": 58346,\n        \"ASSET_SOLD_VAL_F\": \"r\",\n        \"PAY_QTR1_VAL_SUM\": 171360,\n        \"RCPT_TOT_VAL_SUM\": 768370,\n        \"REPORTING_TYP_ID\": \"ENT\",\n        \"ASSET_CAPEX_VAL_F\": \"t\",\n        \"CAPEX_NEW_TOT_SUM\": 609210,\n        \"EMP_MAR12_NUM_SUM\": 1380,\n        \"PAY_ANN_SLVR_DVAL\": 514678,\n        \"RCPT_TOT_PY_VAL_F\": \"r\",\n        \"ASSET_END_TOT_DVAL\": 45029,\n        \"ASSET_OTHACQ_VAL_F\": \"t\",\n        \"CAPEX_CL_WRTIN_TXT\": \"lorem ipsum\",\n        \"CAPEX_MACH_TOT_SUM\": 514804,\n        \"CAPEX_NEW_TOT_DVAL\": 609210,\n        \"CAPEX_MACH_TOT_DVAL\": 514804,\n        \"ASSET_END_TOT_DVAL_F\": \"r\",\n        \"ASSET_OTHACQ_WRTIN_TXT\": \"lorem ipsum\",\n        \"CAPEX_SOFTWARE_TOT_DVAL\": 36178,\n        \"CAPEX_SOFTWARE_VEND_VAL\": 37422,\n        \"CAPEX_SOFTWARE_INTDEV_VAL\": 59043,\n        \"CAPEX_SOFTWARE_PREPKG_VAL\": 55149,\n        \"CAPEX_SOFTWARE_VEND_VAL_F\": \"t\",\n        \"CAPEX_SOFTWARE_INTDEV_VAL_F\": \"r\",\n        \"CAPEX_SOFTWARE_PREPKG_VAL_F\": \"t\"\n    },\n    \"meta\": {\n        \"type\": \"ENT\",\n        \"ENT_ID\": \"2099023193\",\n        \"version\": \"REP\"\n    },\n    \"delta\": [\n        {\n            \"key\": \"rd_exps_stat\",\n            \"oldValue\": 30,\n            \"newValue\": 31,\n            \"service\": { \"name\": \"qflow\", \"timestamp\": \"2024-01-30T06:59:59.613Z\" }\n        },\n        {\n            \"key\": \"capex_tot_sum\",\n            \"oldValue\": \"New York\",\n            \"newValue\": \"Los Angeles\",\n            \"service\": { \"name\": \"qflow\", \"timestamp\": \"2024-01-30T06:59:59.613Z\" }\n        }\n    ],\n    \"rules\": [\n        {\n            \"event\": {\n                \"name\": \"add_pay_ann\",\n                \"type\": 0,\n                \"active\": true,\n                \"params\": {\n                    \"rvs\": \"[]\",\n                    \"action\": [\n                        {\n                            \"PAY_ANN_VAL\": \"PAY_ANN_VAL + 10\"\n                        }\n                    ],\n                    \"message\": \"Adding to revenue\",\n                    \"rvsJSON\": [],\n                    \"actionType\": \"impute\"\n                },\n                \"ruleId\": 0,\n                \"actionType\": \"impute\",\n                \"rulePriority\": \"\",\n                \"validationType\": \"new\"\n            },\n            \"index\": -1,\n            \"conditions\": {\n                \"all\": [\n                    {\n                        \"fact\": \"checkCondition\",\n                        \"path\": \"$.value\",\n                        \"value\": true,\n                        \"params\": {\n                            \"conditionstring\": \"1 == 1\"\n                        },\n                        \"operator\": \"equal\"\n                    }\n                ]\n            }\n        },\n        {\n            \"event\": {\n                \"name\": \"pay_qtr1_val\",\n                \"type\": 0,\n                \"active\": true,\n                \"params\": {\n                    \"rvs\": \"[]\",\n                    \"action\": [\n                        {\n                            \"PAY_QTR1_VAL\": \"PAY_QTR1_VAL + 30\"\n                        }\n                    ],\n                    \"message\": \"Add to PAY QTR total\",\n                    \"rvsJSON\": [],\n                    \"actionType\": \"impute\"\n                },\n                \"ruleId\": 0,\n                \"actionType\": \"impute\",\n                \"rulePriority\": \"\",\n                \"validationType\": \"new\"\n            },\n            \"index\": -1,\n            \"conditions\": {\n                \"all\": [\n                    {\n                        \"fact\": \"checkCondition\",\n                        \"path\": \"$.value\",\n                        \"value\": true,\n                        \"params\": {\n                            \"conditionstring\": \"1 == 1\"\n                        },\n                        \"operator\": \"equal\"\n                    }\n                ]\n            }\n        },\n        {\n            \"event\": {\n                \"name\": \"emp_mar12_num\",\n                \"type\": 0,\n                \"active\": true,\n                \"params\": {\n                    \"rvs\": \"[]\",\n                    \"action\": [\n                        {\n                            \"EMP_MAR12_NUM\": \"EMP_MAR12_NUM + 40\"\n                        }\n                    ],\n                    \"message\": \"Add to PAY QTR total\",\n                    \"rvsJSON\": [],\n                    \"actionType\": \"impute\"\n                },\n                \"ruleId\": 0,\n                \"actionType\": \"impute\",\n                \"rulePriority\": \"\",\n                \"validationType\": \"new\"\n            },\n            \"index\": -1,\n            \"conditions\": {\n                \"all\": [\n                    {\n                        \"fact\": \"checkCondition\",\n                        \"path\": \"$.value\",\n                        \"value\": true,\n                        \"params\": {\n                            \"conditionstring\": \"1 == 1\"\n                        },\n                        \"operator\": \"equal\"\n                    }\n                ]\n            }\n        },\n        {\n            \"event\": {\n                \"name\": \"rcpt_tot_val\",\n                \"type\": 0,\n                \"active\": true,\n                \"params\": {\n                    \"rvs\": \"[]\",\n                    \"action\": [\n                        {\n                            \"RCPT_TOT_VAL\": \"RCPT_TOT_VAL + 20\"\n                        }\n                    ],\n                    \"message\": \"Add to receipt total\",\n                    \"rvsJSON\": [],\n                    \"actionType\": \"impute\"\n                },\n                \"ruleId\": 0,\n                \"actionType\": \"impute\",\n                \"rulePriority\": 5,\n                \"validationType\": \"new\"\n            },\n            \"index\": -1,\n            \"conditions\": {\n                \"all\": [\n                    {\n                        \"fact\": \"checkCondition\",\n                        \"path\": \"$.value\",\n                        \"value\": true,\n                        \"params\": {\n                            \"conditionstring\": \"1 == 1\"\n                        },\n                        \"operator\": \"equal\"\n                    }\n                ]\n            }\n        },\n        {\n            \"event\": {\n                \"name\": \"Add an extra fiels\",\n                \"type\": 0,\n                \"active\": true,\n                \"params\": {\n                    \"rvs\": \"[]\",\n                    \"action\": [\n                        {\n                            \"hello\": \"\\\"123\\\"\"\n                        }\n                    ],\n                    \"message\": \"Adding extra field\",\n                    \"rvsJSON\": [],\n                    \"actionType\": \"impute\"\n                },\n                \"ruleId\": 0,\n                \"actionType\": \"impute\",\n                \"rulePriority\": \"\",\n                \"validationType\": \"new\"\n            },\n            \"index\": -1,\n            \"conditions\": {\n                \"all\": [\n                    {\n                        \"fact\": \"checkCondition\",\n                        \"path\": \"$.value\",\n                        \"value\": true,\n                        \"params\": {\n                            \"conditionstring\": \"1 == 1\"\n                        },\n                        \"operator\": \"equal\"\n                    }\n                ]\n            }\n        },\n        {\n            \"event\": {\n                \"name\": \"Add an extra fiels\",\n                \"type\": 0,\n                \"active\": true,\n                \"params\": {\n                    \"rvs\": \"[]\",\n                    \"action\": [\n                        {\n                            \"hello_x\": \"\\\"1234\\\"\"\n                        }\n                    ],\n                    \"message\": \"Adding extra field\",\n                    \"rvsJSON\": [],\n                    \"actionType\": \"impute\"\n                },\n                \"ruleId\": 0,\n                \"actionType\": \"impute\",\n                \"rulePriority\": \"\",\n                \"validationType\": \"new\"\n            },\n            \"index\": -1,\n            \"conditions\": {\n                \"all\": [\n                    {\n                        \"fact\": \"checkCondition\",\n                        \"path\": \"$.value\",\n                        \"value\": true,\n                        \"params\": {\n                            \"conditionstring\": \"1 == 1\"\n                        },\n                        \"operator\": \"equal\"\n                    }\n                ]\n            }\n        }\n    ],\n    \"recipe\": {\n        \"steps\": [\n            {\n                \"delta\": [\n                    {\n                        \"key\": \"rd_exps_stat\",\n                        \"oldValue\": 30,\n                        \"newValue\": 31,\n                        \"service\": { \"name\": \"qflow\", \"timestamp\": \"2024-01-30T06:59:59.613Z\" }\n                    },\n                    {\n                        \"key\": \"capex_tot_sum\",\n                        \"oldValue\": \"New York\",\n                        \"newValue\": \"Los Angeles\",\n                        \"service\": { \"name\": \"qflow\", \"timestamp\": \"2024-01-30T06:59:59.613Z\" }\n                    }\n                ],\n                \"tsEnd\": 1705514990542,\n                \"msName\": \"qflow\",\n                \"tsStart\": 1705514990501,\n                \"processedTime\": 41\n            },\n            {\n                \"tsEnd\": 0,\n                \"msName\": \"jobOutput\",\n                \"jobType\": \"spadJob\",\n                \"tsStart\": 0,\n                \"destinationTable\": \"product_aies.spad_2\"\n            }\n        ],\n        \"currentStepIndex\": 1\n    },\n    \"source\": {\n        \"tableName\": \"product_aies.item_ents_2023a1\"\n    },\n    \"origFact\": {\n        \"ID\": \"10969\",\n        \"ENT_ID\": \"2099023193\",\n        \"RD_STAT\": \"N    \",\n        \"VERSION\": \"REP\",\n        \"DEPR_VAL\": 58193,\n        \"DEPR_VAL_F\": \"r\",\n        \"LSD_50_STAT\": \"1.0  \",\n        \"PAY_ANN_VAL\": 686038,\n        \"CAPEX_CL_VAL\": 67725,\n        \"CAPEX_CO_VAL\": 57741,\n        \"PAY_QTR1_VAL\": 171360,\n        \"RCPT_TOT_VAL\": 768370,\n        \"RD_EXPS_STAT\": \"1.0  \",\n        \"ASSET_BGN_VAL\": 28675,\n        \"CAPEX_TOT_SUM\": 640794,\n        \"EMP_MAR12_NUM\": 1380,\n        \"PAY_ANN_VAL_F\": \"t\",\n        \"ASSET_SOLD_VAL\": 56646,\n        \"CAPEX_CL_VAL_F\": \"k\",\n        \"CAPEX_CO_VAL_F\": \"t\",\n        \"CAPEX_TOT_DVAL\": 640794,\n        \"PAY_QTR1_VAL_F\": \"r\",\n        \"RCPT_TOT_VAL_F\": \"r\",\n        \"RECORD_TYP_TXT\": \"10\",\n        \"ASSET_BGN_VAL_F\": \"r\",\n        \"ASSET_CAPEX_VAL\": 70814,\n        \"EMP_MAR12_NUM_F\": \"k\",\n        \"PAY_ANN_VAL_SUM\": 686038,\n        \"RCPT_TOT_PY_VAL\": 49472,\n        \"ASSET_OTHACQ_VAL\": 58346,\n        \"ASSET_SOLD_VAL_F\": \"r\",\n        \"PAY_QTR1_VAL_SUM\": 171360,\n        \"RCPT_TOT_VAL_SUM\": 768370,\n        \"REPORTING_TYP_ID\": \"ENT\",\n        \"ASSET_CAPEX_VAL_F\": \"t\",\n        \"CAPEX_NEW_TOT_SUM\": 609210,\n        \"EMP_MAR12_NUM_SUM\": 1380,\n        \"PAY_ANN_SLVR_DVAL\": 514678,\n        \"RCPT_TOT_PY_VAL_F\": \"r\",\n        \"ASSET_END_TOT_DVAL\": 45029,\n        \"ASSET_OTHACQ_VAL_F\": \"t\",\n        \"CAPEX_CL_WRTIN_TXT\": \"lorem ipsum\",\n        \"CAPEX_MACH_TOT_SUM\": 514804,\n        \"CAPEX_NEW_TOT_DVAL\": 609210,\n        \"CAPEX_MACH_TOT_DVAL\": 514804,\n        \"ASSET_END_TOT_DVAL_F\": \"r\",\n        \"ASSET_OTHACQ_WRTIN_TXT\": \"lorem ipsum\",\n        \"CAPEX_SOFTWARE_TOT_DVAL\": 36178,\n        \"CAPEX_SOFTWARE_VEND_VAL\": 37422,\n        \"CAPEX_SOFTWARE_INTDEV_VAL\": 59043,\n        \"CAPEX_SOFTWARE_PREPKG_VAL\": 55149,\n        \"CAPEX_SOFTWARE_VEND_VAL_F\": \"t\",\n        \"CAPEX_SOFTWARE_INTDEV_VAL_F\": \"r\",\n        \"CAPEX_SOFTWARE_PREPKG_VAL_F\": \"t\"\n    }\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 920,
+        "wires": [
+            [
+                "2cddb7a50f4f69d9"
+            ]
+        ]
+    },
+    {
+        "id": "0a7d3ce3f2f29738",
+        "type": "debug",
+        "z": "d7d109e0d89be1c6",
+        "name": "debug 111",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "query",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 990,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "1a1af744611d0eaa",
+        "type": "function",
+        "z": "d7d109e0d89be1c6",
+        "name": "function 39",
+        "func": "const { Pool } = global.get('pg');\n// Database connection configuration\nconst pool = new Pool({\n    user: 'postgres',\n    host: 'aies-cloud-aurora-pg-dev-instance-1.cjflqg3bd6i9.us-gov-east-1.rds.amazonaws.com',\n    database: 'space_ite',\n    password: 'RootNew123!!',\n    port: 5432,\n});\n// Query\nmsg.pool =  await pool.query('SELECT * FROM product_aies.item_estabs_2023a1 LIMIT 10');\nawait pool.end()\nmsg.pool = msg.pool.rows\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 1240,
+        "wires": [
+            [
+                "f18a422a542265b7"
+            ]
+        ]
+    },
+    {
+        "id": "587ce1e6af4bdba4",
+        "type": "inject",
+        "z": "d7d109e0d89be1c6",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 400,
+        "y": 1240,
+        "wires": [
+            [
+                "1a1af744611d0eaa"
+            ]
+        ]
+    },
+    {
+        "id": "f18a422a542265b7",
+        "type": "debug",
+        "z": "d7d109e0d89be1c6",
+        "name": "debug 112",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "pool",
+        "targetType": "msg",
+        "statusVal": "pool",
+        "statusType": "auto",
+        "x": 770,
+        "y": 1220,
         "wires": []
     }
 ]
