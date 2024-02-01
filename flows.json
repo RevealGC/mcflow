@@ -2948,9 +2948,7 @@
             "d394b61bcc4755e6"
         ],
         "x": 14,
-        "y": 939,
-        "w": 1532,
-        "h": 82
+        "y": 939
     },
     {
         "id": "ef50b77b253a7883",
@@ -2970,9 +2968,7 @@
             "d587f5de3f4014c8"
         ],
         "x": 14,
-        "y": 239,
-        "w": 1792,
-        "h": 182
+        "y": 239
     },
     {
         "id": "62708d0bbe922798",
@@ -2996,9 +2992,7 @@
             "58df41cd8e54a653"
         ],
         "x": 14,
-        "y": 519,
-        "w": 1432,
-        "h": 322
+        "y": 519
     },
     {
         "id": "19463268a6c67561",
@@ -3016,8 +3010,6 @@
         ],
         "x": 14,
         "y": 99,
-        "w": 1432,
-        "h": 82,
         "info": "# Rules from Parameter Files"
     },
     {
@@ -24407,11 +24399,11 @@
         "type": "subflow:b22812dba408ab8f",
         "z": "8790b12c7efb6fa0",
         "name": "",
-        "x": 870,
-        "y": 1020,
+        "x": 1070,
+        "y": 900,
         "wires": [
             [
-                "f3b1a6532404a782"
+                "66fdc22c898d5af9"
             ]
         ]
     },
@@ -25006,7 +24998,7 @@
                 "37ed27de2345edf7"
             ],
             [
-                "66fdc22c898d5af9"
+                "03236197db128bd1"
             ],
             [
                 "66fdc22c898d5af9"
@@ -25023,39 +25015,6 @@
         "wires": [
             [
                 "8aaf39ddb94741aa"
-            ]
-        ]
-    },
-    {
-        "id": "b14a6808eea03364",
-        "type": "switch",
-        "z": "8790b12c7efb6fa0",
-        "name": "Exit Check",
-        "property": "action",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "Go to: Derive MFG NAICS from NAPCS",
-                "vt": "str"
-            },
-            {
-                "t": "neq",
-                "v": "Go to: Derive MFG NAICS from NAPCS",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 630,
-        "y": 1020,
-        "wires": [
-            [
-                "03236197db128bd1"
-            ],
-            [
-                "03236197db128bd1"
             ]
         ]
     },
@@ -25339,8 +25298,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1120,
-        "y": 940,
+        "x": 1140,
+        "y": 960,
         "wires": [
             [
                 "66fdc22c898d5af9"
@@ -25628,23 +25587,6 @@
         ]
     },
     {
-        "id": "2fbcd7d2b885f044",
-        "type": "postgresql",
-        "z": "8790b12c7efb6fa0",
-        "d": true,
-        "name": "SELECT",
-        "query": "SELECT * FROM product_aies.spad_2 ORDER BY created_at DESC LIMIT 1",
-        "postgreSQLConfig": "481a641c4005d1c8",
-        "split": false,
-        "rowsPerMsg": "1",
-        "outputs": 1,
-        "x": 2280,
-        "y": 60,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "073d931c6c0624a8",
         "type": "subflow:7e80c62ce8c753dc",
         "z": "8790b12c7efb6fa0",
@@ -25653,7 +25595,7 @@
         "y": 940,
         "wires": [
             [
-                "66fdc22c898d5af9"
+                "938b0666e999c4db"
             ]
         ]
     },
@@ -25851,7 +25793,40 @@
                 "073d931c6c0624a8"
             ],
             [
+                "03236197db128bd1"
+            ]
+        ]
+    },
+    {
+        "id": "938b0666e999c4db",
+        "type": "switch",
+        "z": "8790b12c7efb6fa0",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 760,
+        "y": 1020,
+        "wires": [
+            [
                 "66fdc22c898d5af9"
+            ],
+            [
+                "03236197db128bd1"
             ]
         ]
     },
