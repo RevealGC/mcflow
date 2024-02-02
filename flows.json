@@ -7352,47 +7352,47 @@
         ]
     },
     {
-        "id": "a5e633f6f5f77e98",
+        "id": "60d59ac2a437fa8b",
         "type": "function",
         "z": "e7b7501b29427db9",
         "name": "napcs_prep function_db",
-        "func": "try {\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    let cache = global.get(\"lookupCache\");\n    let naics_napcs = cache.data.find(\n        item =>\n            item.module === \"napcs\" &&\n            item.param === 'napcs_prep' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"all\"\n    )?.json_values;\n\n    function resetNAPCS(row) {\n        if (row?.PROD_CODE) {\n            if (parseFloat(row?.PROD_CODE_VAL_PO) == 0) {\n                row.USABLE = 'D'\n            } else if (parseFloat(row?.PROD_CODE_VAL_PO) < 0) {\n                row.USABLE = 'I'\n            } else {\n                record.NAPCS_IND = 'U'\n                if (parseFloat(row?.PROD_CODE_VAL_PO) > 0) {\n                    if (row?.PROD_CODE.substring(0, 7) == '9000000') {\n                        row.USABLE = 'J'\n                    } else {\n                        row.USABLE = 'U'\n                    }\n                }\n            }\n        }\n    }\n\n    function imputeHist() {\n        if (record?.NAPCS_IMP == 'Y') {\n            for (let i in allData) {\n                let row = allData[i]\n                if (row?.PROD_CODE_VAL_F_PI && row?.PROD_CODE_VAL_F_PI.charAt(1) != ' ') {\n                    record.NAPCS_IMP = ' '\n                } else if (row?.PROD_CODE && (!(row?.PROD_CODE_VAL_F_PI))) {\n                    record.NAPCS_IMP = ' '\n                }\n            }\n        } else if (record?.NAPCS_IND == ' ') {\n            if (record?.HISTSTAT == 'Y' && record?.EC_NAPCS_IND == 'U' && record?.EC_NAPCS_BLTOT > 0 && record?.EC_RCPT_TOT_VAL > 0) {\n                for (let i in allData) {\n                    let row = allData[i]\n                    if (parseFloat(row?.EC_NAPCS_PROD_CODE_VAL) > 0) {\n                        if (['I', 'D', 'X'].includes(row?.EC_NAPCS_USABLE)) {\n                        } else {\n                            record.NAPCS_IMP = 'Y'\n                        }\n                    }\n                }\n            }\n        }\n    }\n\n    let allData = msg.napcs;\n    // console.log(msg.payload.napcs)\n    // console.log(msg.payload.csv)\n    let NAPCS_BLTOT = 0\n    let NAPCS_PRM = 0\n    let NAPCS_OTH = 0\n    let ProdFound = 'N'\n\n    if (record?.NAICS_SECTOR == '31' && record?.SUBSAMP_IND_TXT != 'MC') {\n        for (let i in allData) {\n            let row = allData[i]\n            resetNAPCS(row)\n            if (row?.PROD_CODE) {\n                ProdFound = 'Y'\n            }\n        }\n        if (ProdFound == 'N') {\n            record['NAPCS_IND'] = ' '\n        }\n\n        imputeHist()\n\n        let val_9000 = ''\n        for (let i in allData) {\n            let row = allData[i]\n            if (row?.PROD_CODE) {\n                if (['I', 'D', 'X'].includes(row?.USABLE)) {\n                } else {\n                    if (row?.PROD_CODE.substring(7, 10) == '000') {\n                        NAPCS_BLTOT = NAPCS_BLTOT + parseFloat(row?.PROD_CODE_VAL_PO)\n                    }\n                    if (row?.PROD_CODE.substring(0, 1) == '2') {\n                        NAPCS_PRM = NAPCS_PRM + parseFloat(row?.PROD_CODE_VAL_PO)\n                    }\n                    if (row?.PROD_CODE.substring(0, 1) != '2') {\n                        if (row.PROD_CODE.substring(0, 7) == '9000000') {\n                        } else {\n                            NAPCS_OTH = NAPCS_OTH + parseFloat(row?.PROD_CODE_VAL_PO)\n                        }\n                    }\n                    let napcs = naics_napcs.NAPCS_PREP.some(element => (parseInt(element.NAPCS) === parseInt(row?.PROD_CODE)));\n                    if (napcs) {\n                    } else {\n                        row.USABLE = 'I'\n                    }\n                }\n                if (row?.PROD_CODE == '9000000000') {\n                    val_9000 = row?.PROD_CODE_VAL_PO\n                }\n            }\n        }\n\n        record['NAPCS_BLTOT'] = NAPCS_BLTOT\n        record['NAPCS_BAL'] = parseFloat(record?.RCPT_TOT_VAL) - NAPCS_BLTOT\n        record['NAPCS_PRM'] = NAPCS_PRM\n        record['NAPCS_OTH'] = NAPCS_OTH\n\n        // if (val_9000 != '') {\n        //     if (parseFloat(val_9000) > (parseFloat(NAPCS_BLTOT) - parseFloat(val_9000))) {\n        //         record['FLAG'] = 'WRITEIN_IND_DETER'\n        //     }\n        // }\n\n        record.ACTION = 'END'\n    } else {\n        record.ACTION = 'Go to Main Routing'\n    }\n\n    msg.backup_payload = msg.payload\n    // console.log(msg.napcs)\n    // msg.payload = msg.napcs\n    // msg.query = `update product_aies.napcs n2 set n2.usable = n1.USABLE from ${ (JSON.stringify(msg.napcs)) } n1 where n1.ID = n2.ID;`\n    // console.log(msg.napcs)\n    // let string = \"\"\n    // for (let i in msg.napcs) {\n    //     string = string + \"update product_aies.napcs set usable = '\" + msg.napcs[i].USABLE + \"'where id = '\" + msg.napcs[i].ID + \"';\"\n    // }\n    // console.log(string)\n\n    let arr = msg.napcs;\n    // Start the UPDATE statement\n    let query = \"UPDATE product_aies.napcs SET USABLE = CASE ID \";\n    // Add CASE conditions for each ID\n    arr.forEach(item => {\n        query += `WHEN ${item.ID} THEN '${item.USABLE}' `;\n    });\n    // Close the CASE statement and specify which IDs should be updated\n    let ids = arr.map(item => item.ID);\n    query += `END WHERE ID IN (${ids.join(', ')});`;\n    // Display the generated query\n    console.log(query);\n\n    msg.query = query\n    return msg;\n} catch (e) {\n    return msg;\n}",
+        "func": "try {\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    let ec = msg.ec[0];\n    let ec_napcs = msg.ec_napcs;\n\n    let cache = global.get(\"lookupCache\");\n    let naics_napcs = cache.data.find(\n        item =>\n            item.module === \"napcs\" &&\n            item.param === 'napcs_prep' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"all\"\n    )?.json_values;\n\n    function resetNAPCS(row) {\n        if (row?.PROD_CODE) {\n            if (parseFloat(row?.PROD_CODE_VAL_PO) == 0) {\n                row.USABLE = 'D'\n            } else if (parseFloat(row?.PROD_CODE_VAL_PO) < 0) {\n                row.USABLE = 'I'\n            } else {\n                record.NAPCS_IND = 'U'\n                if (parseFloat(row?.PROD_CODE_VAL_PO) > 0) {\n                    if (row?.PROD_CODE.substring(0, 7) == '9000000') {\n                        row.USABLE = 'J'\n                    } else {\n                        row.USABLE = 'U'\n                    }\n                }\n            }\n        }\n    }\n\n    function imputeHist() {\n        if (record?.NAPCS_IMP == 'Y') {\n            for (let i in allData) {\n                let row = allData[i]\n                if (row?.PROD_CODE_VAL_F_PI && row?.PROD_CODE_VAL_F_PI.charAt(1) != ' ') {\n                    record.NAPCS_IMP = ' '\n                } else if (row?.PROD_CODE && (!(row?.PROD_CODE_VAL_F_PI))) {\n                    record.NAPCS_IMP = ' '\n                }\n            }\n        } else if (record?.NAPCS_IND == ' ') {\n            if (record?.HISTSTAT == 'Y' && ec.NAPCS_IND == 'U' && ec.NAPCS_BLTOT > 0 && ec.RCPT_TOT_VAL > 0) {\n                for (let i in ec_napcs) {\n                    let row = ec_napcs[i]\n                    if (parseFloat(row?.PROD_CODE_VAL_PO) > 0) {\n                        if (['I', 'D', 'X'].includes(row?.USABLE)) {\n                        } else {\n                            record.NAPCS_IMP = 'Y'\n                        }\n                    }\n                }\n            }\n        }\n    }\n\n    let allData = msg.napcs;\n\n    let NAPCS_BLTOT = 0\n    let NAPCS_PRM = 0\n    let NAPCS_OTH = 0\n    let ProdFound = 'N'\n\n    if (record?.NAICS_SECTOR == '31' && record?.SUBSAMP_IND_TXT != 'MC') {\n        for (let i in allData) {\n            let row = allData[i]\n            resetNAPCS(row)\n            if (row?.PROD_CODE) {\n                ProdFound = 'Y'\n            }\n        }\n        if (ProdFound == 'N') {\n            record['NAPCS_IND'] = ' '\n        }\n\n        imputeHist()\n\n        let val_9000 = ''\n        for (let i in allData) {\n            let row = allData[i]\n            if (row?.PROD_CODE) {\n                if (['I', 'D', 'X'].includes(row?.USABLE)) {\n                } else {\n                    if (row?.PROD_CODE.substring(7, 10) == '000') {\n                        NAPCS_BLTOT = NAPCS_BLTOT + parseFloat(row?.PROD_CODE_VAL_PO)\n                    }\n                    if (row?.PROD_CODE.substring(0, 1) == '2') {\n                        NAPCS_PRM = NAPCS_PRM + parseFloat(row?.PROD_CODE_VAL_PO)\n                    }\n                    if (row?.PROD_CODE.substring(0, 1) != '2') {\n                        if (row.PROD_CODE.substring(0, 7) == '9000000') {\n                        } else {\n                            NAPCS_OTH = NAPCS_OTH + parseFloat(row?.PROD_CODE_VAL_PO)\n                        }\n                    }\n                    let napcs = naics_napcs.NAPCS_PREP.some(element => (parseInt(element.NAPCS) === parseInt(row?.PROD_CODE)));\n                    if (napcs) {\n                    } else {\n                        row.USABLE = 'I'\n                    }\n                }\n                if (row?.PROD_CODE == '9000000000') {\n                    val_9000 = row?.PROD_CODE_VAL_PO\n                }\n            }\n        }\n\n        record['NAPCS_BLTOT'] = NAPCS_BLTOT\n        record['NAPCS_BAL'] = parseFloat(record?.RCPT_TOT_VAL) - NAPCS_BLTOT\n        record['NAPCS_PRM'] = NAPCS_PRM\n        record['NAPCS_OTH'] = NAPCS_OTH\n\n        // if (val_9000 != '') {\n        //     if (parseFloat(val_9000) > (parseFloat(NAPCS_BLTOT) - parseFloat(val_9000))) {\n        //         record['FLAG'] = 'WRITEIN_IND_DETER'\n        //     }\n        // }\n\n        record.ACTION = 'END'\n    } else {\n        record.ACTION = 'Go to Main Routing'\n    }\n\n    msg.backup_payload = msg.payload\n    // console.log(msg.napcs)\n    // let string = \"\"\n    // for (let i in msg.napcs) {\n    //     string = string + \"update product_aies.napcs set usable = '\" + msg.napcs[i].USABLE + \"'where id = '\" + msg.napcs[i].ID + \"';\"\n    // }\n    // console.log(string)\n\n    let arr = msg.napcs;\n    // Start the UPDATE statement\n    let query = \"UPDATE product_aies.napcs SET USABLE = CASE ID \";\n    // Add CASE conditions for each ID\n    arr.forEach(item => {\n        query += `WHEN ${item.ID} THEN '${item.USABLE}' `;\n    });\n    // Close the CASE statement and specify which IDs should be updated\n    let ids = arr.map(item => item.ID);\n    query += `END WHERE ID IN (${ids.join(', ')});`;\n    // Display the generated query\n    console.log(query);\n\n    msg.query = query\n    return msg;\n} catch (e) {\n    return msg;\n}",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 970,
-        "y": 300,
+        "x": 960,
+        "y": 280,
         "wires": [
             [
-                "8320cf2c839793c1"
+                "18128e5825d6e4f1"
             ]
         ]
     },
     {
-        "id": "8d0538d9b860746e",
+        "id": "f2e9a0414807cac1",
         "type": "function",
         "z": "e7b7501b29427db9",
-        "name": "insert_query",
-        "func": "msg.records = msg.payload\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.records.csv[record_idx];\nlet id = record.REPORTING_ID\nmsg.query = \"  SELECT * FROM product_aies.napcs where estab_id = '\" + id + \"';\"\n\nreturn msg;",
+        "name": "query_napcs",
+        "func": "msg.records = msg.payload\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.records.csv[record_idx];\nlet id = record.REPORTING_ID\nmsg.query = \"  SELECT * FROM product_aies.napcs where reporting_id = '\" + id + \"';\"\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 430,
-        "y": 300,
+        "x": 370,
+        "y": 160,
         "wires": [
             [
-                "b2202e678ff5f50d"
+                "d8460a35f196f217"
             ]
         ]
     },
     {
-        "id": "b2202e678ff5f50d",
+        "id": "d8460a35f196f217",
         "type": "postgresql",
         "z": "e7b7501b29427db9",
         "name": "Select",
@@ -7401,36 +7401,36 @@
         "split": false,
         "rowsPerMsg": "1",
         "outputs": 1,
-        "x": 590,
-        "y": 300,
+        "x": 530,
+        "y": 160,
         "wires": [
             [
-                "2a6ccb37daa74f3b"
+                "db689c3b382e3c7f"
             ]
         ]
     },
     {
-        "id": "2a6ccb37daa74f3b",
+        "id": "db689c3b382e3c7f",
         "type": "function",
         "z": "e7b7501b29427db9",
-        "name": "reset msg",
-        "func": "function keysToUpperCase(obj) {\n    const output = {};\n    for (let key in obj) {\n        if (Object.prototype.hasOwnProperty.call(obj, key)) {\n            if (typeof obj[key] === 'object' && obj[key] !== null) {\n                output[key.toUpperCase()] = keysToUpperCase(obj[key]);\n            } else {\n                output[key.toUpperCase()] = obj[key];\n            }\n        }\n    }\n    return output;\n}\n\nlet p = msg.payload.map(keysToUpperCase);\nmsg.payload = p\nmsg.napcs = msg.payload\n\nmsg.payload = msg.records\nreturn msg;",
+        "name": "reset_msg_and_query_ec",
+        "func": "function keysToUpperCase(obj) {\n    const output = {};\n    for (let key in obj) {\n        if (Object.prototype.hasOwnProperty.call(obj, key)) {\n            if (typeof obj[key] === 'object' && obj[key] !== null) {\n                output[key.toUpperCase()] = keysToUpperCase(obj[key]);\n            } else {\n                output[key.toUpperCase()] = obj[key];\n            }\n        }\n    }\n    return output;\n}\n\nlet p = msg.payload.map(keysToUpperCase);\nmsg.payload = p\nmsg.napcs = msg.payload\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.records.csv[record_idx];\nlet id = record.REPORTING_ID\nmsg.query = \"  SELECT * FROM product_aies.ec where reporting_id = '\" + id + \"' and version = 'PO';\"\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 760,
-        "y": 300,
+        "x": 330,
+        "y": 220,
         "wires": [
             [
-                "a5e633f6f5f77e98"
+                "bec7cdee89c03739"
             ]
         ]
     },
     {
-        "id": "8320cf2c839793c1",
+        "id": "18128e5825d6e4f1",
         "type": "postgresql",
         "z": "e7b7501b29427db9",
         "name": "update",
@@ -7439,16 +7439,16 @@
         "split": false,
         "rowsPerMsg": "1",
         "outputs": 1,
-        "x": 1170,
-        "y": 300,
+        "x": 1160,
+        "y": 280,
         "wires": [
             [
-                "02738d7a8497349c"
+                "b17e8713467b4714"
             ]
         ]
     },
     {
-        "id": "02738d7a8497349c",
+        "id": "b17e8713467b4714",
         "type": "function",
         "z": "e7b7501b29427db9",
         "name": "reset msg",
@@ -7459,10 +7459,86 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1320,
-        "y": 300,
+        "x": 1310,
+        "y": 280,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "bec7cdee89c03739",
+        "type": "postgresql",
+        "z": "e7b7501b29427db9",
+        "name": "Select",
+        "query": "",
+        "postgreSQLConfig": "481a641c4005d1c8",
+        "split": false,
+        "rowsPerMsg": "1",
+        "outputs": 1,
+        "x": 530,
+        "y": 220,
+        "wires": [
+            [
+                "a369fa8a7fd9eda3"
+            ]
+        ]
+    },
+    {
+        "id": "a369fa8a7fd9eda3",
+        "type": "function",
+        "z": "e7b7501b29427db9",
+        "name": "reset_msg_and_query_ec_napcs",
+        "func": "function keysToUpperCase(obj) {\n    const output = {};\n    for (let key in obj) {\n        if (Object.prototype.hasOwnProperty.call(obj, key)) {\n            if (typeof obj[key] === 'object' && obj[key] !== null) {\n                output[key.toUpperCase()] = keysToUpperCase(obj[key]);\n            } else {\n                output[key.toUpperCase()] = obj[key];\n            }\n        }\n    }\n    return output;\n}\n\nlet p = msg.payload.map(keysToUpperCase);\nmsg.payload = p\nmsg.ec = msg.payload\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.records.csv[record_idx];\nlet id = record.REPORTING_ID\nmsg.query = \"  SELECT * FROM product_aies.ec_napcs where reporting_id = '\" + id + \"';\"\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 280,
+        "wires": [
+            [
+                "57951ca654f6c390"
+            ]
+        ]
+    },
+    {
+        "id": "57951ca654f6c390",
+        "type": "postgresql",
+        "z": "e7b7501b29427db9",
+        "name": "Select",
+        "query": "",
+        "postgreSQLConfig": "481a641c4005d1c8",
+        "split": false,
+        "rowsPerMsg": "1",
+        "outputs": 1,
+        "x": 530,
+        "y": 280,
+        "wires": [
+            [
+                "316575777c4e6f1d"
+            ]
+        ]
+    },
+    {
+        "id": "316575777c4e6f1d",
+        "type": "function",
+        "z": "e7b7501b29427db9",
+        "name": "reset msg",
+        "func": "function keysToUpperCase(obj) {\n    const output = {};\n    for (let key in obj) {\n        if (Object.prototype.hasOwnProperty.call(obj, key)) {\n            if (typeof obj[key] === 'object' && obj[key] !== null) {\n                output[key.toUpperCase()] = keysToUpperCase(obj[key]);\n            } else {\n                output[key.toUpperCase()] = obj[key];\n            }\n        }\n    }\n    return output;\n}\n\nlet p = msg.payload.map(keysToUpperCase);\nmsg.payload = p\nmsg.ec_napcs = msg.payload\n\nmsg.payload = msg.records\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 280,
+        "wires": [
+            [
+                "60d59ac2a437fa8b"
+            ]
         ]
     },
     {
