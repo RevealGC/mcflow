@@ -6527,6 +6527,82 @@
         ]
     },
     {
+        "id": "f65a8a5b724a48dd",
+        "type": "function",
+        "z": "42be4655fd3a8c84",
+        "name": "query_irs",
+        "func": "msg.records = msg.payload\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.records.csv[record_idx];\nlet id = record.REPORTING_ID\nmsg.query = \"  SELECT * FROM product_aies.irs where reporting_id = '\" + id + \"' and version = 'PO';\"\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 140,
+        "wires": [
+            [
+                "67bd44fac6b8dfe4"
+            ]
+        ]
+    },
+    {
+        "id": "67bd44fac6b8dfe4",
+        "type": "postgresql",
+        "z": "42be4655fd3a8c84",
+        "name": "Select",
+        "query": "",
+        "postgreSQLConfig": "481a641c4005d1c8",
+        "split": false,
+        "rowsPerMsg": "1",
+        "outputs": 1,
+        "x": 610,
+        "y": 140,
+        "wires": [
+            [
+                "3c56c2f59126d2a0"
+            ]
+        ]
+    },
+    {
+        "id": "3c56c2f59126d2a0",
+        "type": "function",
+        "z": "42be4655fd3a8c84",
+        "name": "reset msg",
+        "func": "function keysToUpperCase(obj) {\n    const output = {};\n    for (let key in obj) {\n        if (Object.prototype.hasOwnProperty.call(obj, key)) {\n            if (typeof obj[key] === 'object' && obj[key] !== null) {\n                output[key.toUpperCase()] = keysToUpperCase(obj[key]);\n            } else {\n                output[key.toUpperCase()] = obj[key];\n            }\n        }\n    }\n    return output;\n}\n\nlet p = msg.payload.map(keysToUpperCase);\nmsg.payload = p\nmsg.irs = msg.payload\n\nmsg.payload = msg.records\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 780,
+        "y": 140,
+        "wires": [
+            [
+                "b877a5a4d1e56930"
+            ]
+        ]
+    },
+    {
+        "id": "b877a5a4d1e56930",
+        "type": "function",
+        "z": "42be4655fd3a8c84",
+        "name": "critical error",
+        "func": "try {\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    let irs = msg.irs[0]\n\n    function setResult() {\n        record['TABSTAT'] = \"N\";\n        record['NONTABFL'] = \"D\";\n        record['ACTION'] = \"Exit Edit\";\n        global.set('action', 'Exit Edit')\n    }\n\n    // function parseToNum(val) {\n    //     return isNaN(val) ? 0 : parseInt(val, 10);\n    // }\n    function naicsSectorCheck() {\n        let result =\n            parseFloat(record['PAY_ANN_VAL']) +\n            parseFloat(record['EMP_MAR12_NUM']) +\n            parseFloat(record['PAY_QTR1_VAL']) +\n            parseFloat(record['RCPT_TOT_VAL']) +\n            parseFloat(irs['PAY_ANN_VAL']) +\n            parseFloat(irs['EMP_MAR12_NUM']) +\n            parseFloat(irs['PAY_QTR1_VAL']);\n\n        if (parseFloat(record['NAICS_SECTOR']) === 31) {\n            result = parseFloat(result) + parseFloat(record['EXPS_TEMPSTAF_VAL']);\n        }\n        return result\n    }\n    let data = naicsSectorCheck();\n    // record['DATA'] = data\n\n    if (record?.COV_CHG_CODE &&\n        [\"111\", \"131\", \"791\"].includes(record['COV_CHG_CODE']?.toString()) &&\n        new Date(record['COV_CHG_DATE']) <=\n        new Date(\"01-01-\" + record.REF_PER.substring(0, 4)) &&\n        data == 0\n    ) {\n        setResult();\n\n    } else if (record?.COV_CHG_CODE && [\"181\", \"201\", \"801\", \"091\", \"121\", \"171\"].includes(record['COV_CHG_CODE']?.toString())) {\n        setResult();\n    } else {\n        record['ACTION'] = \"Go To Main Routing\";\n        global.set('action', 'Go To Main Routing')\n    }\n    return msg;\n} catch (e) {\n    global.set('err', 'Exit Edit')\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 970,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
         "id": "d97e7c0dec380b3d",
         "type": "function",
         "z": "5eae5184a8f175fd",
@@ -6682,6 +6758,82 @@
         ]
     },
     {
+        "id": "d6662d9e9cac44d0",
+        "type": "function",
+        "z": "f9a2a2262f95bae3",
+        "name": "query_irs",
+        "func": "msg.records = msg.payload\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.records.csv[record_idx];\nlet id = record.REPORTING_ID\nlet ref_per = record.REF_PER\nmsg.query = \"  SELECT * FROM product_aies.item_estabs_2023a1 where reporting_id = '\" + id + \"' and version = 'REP' and ref_per = '\" + ref_per + \"';\"\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 100,
+        "wires": [
+            [
+                "509851aba526c0df"
+            ]
+        ]
+    },
+    {
+        "id": "509851aba526c0df",
+        "type": "postgresql",
+        "z": "f9a2a2262f95bae3",
+        "name": "Select",
+        "query": "",
+        "postgreSQLConfig": "481a641c4005d1c8",
+        "split": false,
+        "rowsPerMsg": "1",
+        "outputs": 1,
+        "x": 650,
+        "y": 100,
+        "wires": [
+            [
+                "5c0021bb3b8c0358"
+            ]
+        ]
+    },
+    {
+        "id": "5c0021bb3b8c0358",
+        "type": "function",
+        "z": "f9a2a2262f95bae3",
+        "name": "reset msg",
+        "func": "function keysToUpperCase(obj) {\n    const output = {};\n    for (let key in obj) {\n        if (Object.prototype.hasOwnProperty.call(obj, key)) {\n            if (typeof obj[key] === 'object' && obj[key] !== null) {\n                output[key.toUpperCase()] = keysToUpperCase(obj[key]);\n            } else {\n                output[key.toUpperCase()] = obj[key];\n            }\n        }\n    }\n    return output;\n}\n\nlet p = msg.payload.map(keysToUpperCase);\nmsg.payload = p\nmsg.aies_rp = msg.payload\n\nmsg.payload = msg.records\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 100,
+        "wires": [
+            [
+                "1dbc0304b4f0add2"
+            ]
+        ]
+    },
+    {
+        "id": "1dbc0304b4f0add2",
+        "type": "function",
+        "z": "f9a2a2262f95bae3",
+        "name": "Init Set ACTVMIO & OPSTATS",
+        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    let aies_rp = msg.aies_rp[0]\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + ' ';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    const checkOPSTAT_STAT_F = (record) => {\n        const char = record?.OPSTAT_STAT_F ? record?.OPSTAT_STAT_F.charAt(0) : ' ';\n        return ['R', 'T', 'K'].includes(char);\n    };\n\n    function processACTV_MIO_NUM(record) {\n        let mioNum = parseInt(record?.ACTV_MIO_NUM) || 0;\n        if (mioNum === 0 || mioNum > 12) {\n            record.ACTV_MIO_NUM = '12';\n            record.ACTV_MIO_NUM_F = setCharAt(record['ACTV_MIO_NUM_F'], 2, 'J');\n        }\n    }\n\n    function determineFlow(record) {\n        if ((['111', '131'].includes(record?.COV_CHG_CODE) ||\n            (['791'].includes(record?.COV_CHG_CODE) && parseInt(aies_rp?.ACTV_MIO_NUM) < 12)) &&\n            new Date(record?.COV_CHG_DATE) < new Date('2024-01-01')) {\n            record.OPSTATS = 'N';\n        } else if (checkOPSTAT_STAT_F(record)) {\n            if (parseInt(record?.OPSTAT_STAT) === 4) {\n                record.OPSTATS = 'N';\n            } else if (parseInt(record?.OPSTAT_STAT) == 5) {\n                if (parseInt(aies_rp?.ACTV_MIO_NUM) == 12) {\n                    record.OPSTATS = 'Y'\n                } else {\n                    record.OPSTATS = 'N';\n                }\n            } else {\n                record.OPSTATS = 'Y';\n            }\n        } else {\n            record.OPSTATS = 'Y'\n        }\n        if (checkOPSTAT_STAT_F(record)) {\n            record.OPSTATS_F = setCharAt(record['OPSTATS_F'], 2, 'R');\n        } else {\n            record.OPSTATS_F = setCharAt(record['OPSTATS_F'], 2, 'J');\n        }\n        record.ACTION = 'Go to NONNORM Router';\n\n    }\n\n    function processRecord(record) {\n        processACTV_MIO_NUM(record);\n        if (record?.OPSTATS === ' ') {\n            determineFlow(record);\n        } else {\n            if (record?.OPSTATS_F?.charAt(2) != 'R' && record?.OPSTATS_F?.charAt(1) === ' ') {\n                determineFlow(record);\n            } else {\n                record.ACTION = 'Go to NONNORM Router';\n            }\n        }\n        msg.payload.csv[record_idx] = record\n    }\n\n    processRecord(record);\n    return msg;\n}catch(e){\n    global.set('err', 'Exit Edit')\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1070,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
         "id": "da9df6f3b05b96e6",
         "type": "function",
         "z": "b93bf22bc3258992",
@@ -6697,6 +6849,234 @@
         "y": 260,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "4e9cd3367668febd",
+        "type": "function",
+        "z": "b93bf22bc3258992",
+        "name": "query_irs",
+        "func": "msg.records = msg.payload\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.records.csv[record_idx];\nlet id = record.REPORTING_ID\nmsg.query = \"  SELECT * FROM product_aies.irs where reporting_id = '\" + id + \"' and version = 'PO';\"\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 480,
+        "wires": [
+            [
+                "32625e769a06d410"
+            ]
+        ]
+    },
+    {
+        "id": "32625e769a06d410",
+        "type": "postgresql",
+        "z": "b93bf22bc3258992",
+        "name": "Select",
+        "query": "",
+        "postgreSQLConfig": "481a641c4005d1c8",
+        "split": false,
+        "rowsPerMsg": "1",
+        "outputs": 1,
+        "x": 670,
+        "y": 480,
+        "wires": [
+            [
+                "4a06b86f5775a228"
+            ]
+        ]
+    },
+    {
+        "id": "4a06b86f5775a228",
+        "type": "function",
+        "z": "b93bf22bc3258992",
+        "name": "reset_msg_and_query_ec_2022",
+        "func": "function keysToUpperCase(obj) {\n    const output = {};\n    for (let key in obj) {\n        if (Object.prototype.hasOwnProperty.call(obj, key)) {\n            if (typeof obj[key] === 'object' && obj[key] !== null) {\n                output[key.toUpperCase()] = keysToUpperCase(obj[key]);\n            } else {\n                output[key.toUpperCase()] = obj[key];\n            }\n        }\n    }\n    return output;\n}\n\nlet p = msg.payload.map(keysToUpperCase);\nmsg.payload = p\nmsg.irs = msg.payload\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.records.csv[record_idx];\nlet id = record.REPORTING_ID\nmsg.query = \"  SELECT * FROM product_aies.ec where reporting_id = '\" + id + \"' and version = 'PO' and substring(ref_per,1,4) = '2022';\"\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 540,
+        "wires": [
+            [
+                "962d7c04a7c40a7f"
+            ]
+        ]
+    },
+    {
+        "id": "962d7c04a7c40a7f",
+        "type": "postgresql",
+        "z": "b93bf22bc3258992",
+        "name": "Select",
+        "query": "",
+        "postgreSQLConfig": "481a641c4005d1c8",
+        "split": false,
+        "rowsPerMsg": "1",
+        "outputs": 1,
+        "x": 670,
+        "y": 540,
+        "wires": [
+            [
+                "501959f93d87b9f9"
+            ]
+        ]
+    },
+    {
+        "id": "501959f93d87b9f9",
+        "type": "function",
+        "z": "b93bf22bc3258992",
+        "name": "reset_msg_and_query_br",
+        "func": "function keysToUpperCase(obj) {\n    const output = {};\n    for (let key in obj) {\n        if (Object.prototype.hasOwnProperty.call(obj, key)) {\n            if (typeof obj[key] === 'object' && obj[key] !== null) {\n                output[key.toUpperCase()] = keysToUpperCase(obj[key]);\n            } else {\n                output[key.toUpperCase()] = obj[key];\n            }\n        }\n    }\n    return output;\n}\n\nlet p = msg.payload.map(keysToUpperCase);\nmsg.payload = p\nmsg.ec_2022 = msg.payload\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.records.csv[record_idx];\nlet id = record.REPORTING_ID\nmsg.query = \"  SELECT * FROM product_aies.br where reporting_id = '\" + id + \"' and version = 'PO';\"\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 600,
+        "wires": [
+            [
+                "524f440a5d5d0448"
+            ]
+        ]
+    },
+    {
+        "id": "524f440a5d5d0448",
+        "type": "postgresql",
+        "z": "b93bf22bc3258992",
+        "name": "Select",
+        "query": "",
+        "postgreSQLConfig": "481a641c4005d1c8",
+        "split": false,
+        "rowsPerMsg": "1",
+        "outputs": 1,
+        "x": 670,
+        "y": 600,
+        "wires": [
+            [
+                "6af96bc8ba5914b9"
+            ]
+        ]
+    },
+    {
+        "id": "68fb12a28a7d603c",
+        "type": "function",
+        "z": "b93bf22bc3258992",
+        "name": "NONNORM: Router",
+        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    let irs = msg.irs[0]\n    let ec_2022 = msg.ec_2022[0]\n    let br = msg.br[0]\n    let aies_minus = msg.aies_minus[0]\n    let aies_rp = msg.aies_rp[0]\n    // console.log(irs, ec_2022, br, aies_minus, aies_rp)\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + ' ';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n    function setOpstatsActvmioPathC(TEMPMIO) {\n        record.OPSTATS = 'N'\n        record.OPSTATS_F = setCharAt(record['OPSTATS_F'], 2, 'L')\n        setOpstatsActvmioPathB(TEMPMIO)\n    }\n    function setOpstatsActvmioPathB(TEMPMIO) {\n        record.ACTV_MIO_NUM = TEMPMIO\n        record.ACTV_MIO_NUM_F = setCharAt(record['ACTV_MIO_NUM_F'], 2, 'L')\n    }\n    function setOPSTATSandACTV_MIO_NUM() {\n        if (record.RECORD_TYP_TXT == '90') {\n            let TEMPMIO = 0\n            if (parseFloat(record?.PAY_QTR1_VAL) + parseFloat(irs?.PAY_QTR1_VAL) > 0) {\n                TEMPMIO = TEMPMIO + 3\n            } else if (record?.REF_PER != '2022A1' || parseFloat(irs?.PAY_ANN_VAL) <= 0) {\n                record.NONNORM = 'B'\n                record.NONNORM_F = setCharAt(record['NONNORM_F'], 2, 'L')\n            }\n            if (parseFloat(irs?.PAY_QTR2_VAL) > 0) {\n                TEMPMIO = TEMPMIO + 3\n            }\n            if (parseFloat(irs?.PAY_QTR3_VAL) > 0) {\n                TEMPMIO = TEMPMIO + 3\n            }\n            if (parseFloat(irs?.PAY_QTR4_VAL) > 0 || irs?.PAY_QTR4_VAL_F == \" \") {\n                TEMPMIO = TEMPMIO + 3\n                if (['03', '51', '00'].includes(record?.BMF_FR941)) {\n                    setOpstatsActvmioPathC(TEMPMIO)\n                } else {\n                    setOpstatsActvmioPathB(TEMPMIO)\n                }\n            } else {\n                if (record?.OPSTATS_F?.charAt(2) == 'R') {\n                    setOpstatsActvmioPathB(TEMPMIO)\n                } else {\n                    setOpstatsActvmioPathC(TEMPMIO)\n                }\n            }\n\n        } else if (record?.OPSTATS_F?.charAt(2) == 'R' && ['R', 'T', 'K'].includes(record?.ACTV_MIO_NUM_F.charAt(0))) {\n        } else if (['211', '221', '241', '311', '321', '341', '401', '511', '741'].includes(record?.COV_CHG_CODE)) {\n            if (record?.COV_CHG_DATE) {\n                const formattedDate = record.COV_CHG_DATE.split(\"-\").reverse().join(\"-\");\n                const date = new Date(formattedDate);\n                if (date > new Date('2023-01-31') && date < new Date('2024-01-01')) {\n                    record.ACTV_MIO_NUM = 13 - (date.getMonth() + 1);\n                    record.ACTV_MIO_NUM_F = setCharAt(record['ACTV_MIO_NUM_F'], 2, ' ')\n                }\n            }\n        } else if (['111', '131', '791'].includes(record?.COV_CHG_CODE)) {\n            if (record?.COV_CHG_DATE) {\n                const formattedDate = record.COV_CHG_DATE.split(\"-\").reverse().join(\"-\");\n                const date = new Date(formattedDate);\n                if (date < new Date('01/01/2024')) {\n                    record.ACTV_MIO_NUM = (date.getMonth() + 1)\n                    record.ACTV_MIO_NUM_F = setCharAt(record['ACTV_MIO_NUM_F'], 2, 'L')\n                    record.OPSTATS = 'N'\n                    record.OPSTATS_F = setCharAt(record['OPSTATS_F'], 2, 'L')\n                }\n            }\n        }\n        // record.ACTION1 = 'Went through Set OPSTAT & ACTVMIO'\n    }\n\n    function setNONNORM() {\n        record.NONNORM = ''\n        if (record?.OPSTATS == 'Y') {\n            let year = parseInt(record?.REF_PER.substring(0, 4))\n            if (year > 2023) {\n                if (record?.RECORD_TYP_TXT == '20' && record?.ACTV_MIO_NUM < 12 &&\n                    (record?.ACTV_MIO_NUM_F?.charAt(2) == 'L' || parseFloat(aies_minus?.PAY_ANN_VAL) == 0)) {\n                    record.NONNORM = 'B'\n                    record.NONNORM_F = setCharAt(record['NONNORM_F'], 2, 'J');\n                } else {\n                    if (record.ACTV_MIO_NUM < 12) {\n                        record.NONNORM = 'S'\n                        record.NONNORM_F = setCharAt(record['NONNORM_F'], 2, 'J');\n                    }\n                }\n            } else {\n                if (record.RECORD_TYP_TXT == '20' && record.ACTV_MIO_NUM < 12 &&\n                    (record?.ACTV_MIO_NUM_F?.charAt(2) == 'L' || parseFloat(ec_2022?.PAY_ANN_VAL) == 0)) {\n                    record.NONNORM = 'B'\n                    record.NONNORM_F = setCharAt(record['NONNORM_F'], 2, 'J');\n                } else {\n                    if (record.ACTV_MIO_NUM < 12) {\n                        record.NONNORM = 'S'\n                        record.NONNORM_F = setCharAt(record['NONNORM_F'], 2, 'J');\n                    }\n                }\n            }\n        } else {\n            record.NONNORM = 'D'\n            record.NONNORM_F = setCharAt(record['NONNORM_F'], 2, 'J');\n        }\n        // record.ACTION2 = 'Went through Set NONNORM'\n    }\n\n    function setBasicSetVal(val) {\n        record[val] = 0;\n        let name = val + '_F'\n        record[name] = setCharAt(record[name], 2, 'Z');\n    }\n\n    function setBASIC() {\n        if (parseInt(record?.ACTV_MIO_NUM) < 10) {\n            if (!(record?.PAY_QTR1_VAL_F.charAt(1) === 'G' || record?.PAY_QTR1_VAL_F.charAt(2) === 'G')) {\n                setBasicSetVal('PAY_QTR1_VAL')\n            }\n            if (!(record?.EMP_MAR12_NUM_F.charAt(1) === 'G' || record?.EMP_MAR12_NUM_F.charAt(2) === 'G')) {\n                setBasicSetVal('EMP_MAR12_NUM')\n            }\n        } else {\n            if (aies_rp?.PAY_QTR1_VAL == 0 && record?.PAY_QTR1_VAL_F && ['R', 'T', 'K'].includes(record?.PAY_QTR1_VAL_F.charAt(0)) && record?.PAY_QTR1_VAL_F.charAt(1) == ' ') {\n                setBasicSetVal('EMP_MAR12_NUM')\n                setBasicSetVal('PAY_QTR1_VAL')\n            }\n        }\n        // record.ACTION3 = 'Went through Set Basic to 0'\n    }\n\n    function specialSeasonalSetVal() {\n        record.EMP_MAR12_NUM_F = setCharAt(record['EMP_MAR12_NUM_F'], 2, 'Z');\n        record.PAY_QTR1_VAL_F = setCharAt(record['PAY_QTR1_VAL_F'], 2, 'Z');\n    }\n    function pathSuccessSpecialSeasonFinal() {\n        if (record?.EMP_MAR12_NUM_F\n            && !(['R', 'T', 'K'].includes(record?.EMP_MAR12_NUM_F?.charAt(0)))\n            && record?.EMP_MAR12_NUM_F?.charAt(1) == ' '\n            && !(['L', 'N', 'Z'].includes(record?.EMP_MAR12_NUM_F?.charAt(2)))) {\n            if (record?.REPORTING_ID_TYP_TXT == 'SU') {\n                if (parseFloat(irs?.EMP_MAR12_NUM) == 0) {\n                    specialSeasonalSetVal()\n                }\n            } else {\n                if (parseFloat(br?.EMP_MAR12_NUM) == 0) {\n                    specialSeasonalSetVal()\n                }\n            }\n        }\n    }\n    function specialSeasonal() {\n        if (record?.PAY_QTR1_VAL_F\n            && !(['R', 'T', 'K'].includes(record?.PAY_QTR1_VAL_F?.charAt(0)))\n            && record?.PAY_QTR1_VAL_F?.charAt(1) == ' '\n            && !(['L', 'N', 'Z'].includes(record?.PAY_QTR1_VAL_F?.charAt(2)))\n        ) {\n            if (record?.REPORTING_ID_TYP_TXT == 'SU') {\n                if (parseFloat(irs?.PAY_QTR1_VAL) == 0) {\n                    pathSuccessSpecialSeasonFinal()\n                }\n            } else {\n                if (parseFloat(br?.PAY_QTR1_VAL) == 0) {\n                    pathSuccessSpecialSeasonFinal()\n                }\n            }\n        }\n        // record.ACTION4 = 'Went through Special Seasonal'\n    }\n\n    function nonNORMRouterPathA() {\n        if ((record?.NONNORM_F == \"   \") || (record?.NONNORM_F == \"  J\")) {\n            setNONNORM()\n        }\n        if (record?.NONNORM == 'B') {\n            setBASIC()\n        }\n        if (record?.NONNORM == 'S' && record?.ACTV_MIO_NUM < 10 && record?.PAY_QTR1_VAL == 0 && record?.EMP_MAR12_NUM == 0) {\n            specialSeasonal()\n        }\n        // record.ACTION = \"Exit to AIES Main Routing\";\n    }\n    function processRecord(record) {\n        if (['R', 'T', 'K'].includes(record?.ACTV_MIO_NUM_F?.charAt(0)) && record?.RECORD_TYP_TXT == '90') {\n            if (record?.ACTV_MIO_NUM < 12 && record?.REF_PER == '2022A1' && parseFloat(irs?.PAY_ANN_VAL) == 0) {\n                record.NONNORM = 'B';\n                record.NONNORM_F = setCharAt(record['NONNORM_F'], 2, 'L');\n            }\n            nonNORMRouterPathA()\n        } else {\n            if (['97', '98', '99'].includes(record?.BMF_FR941)) {\n                nonNORMRouterPathA()\n            } else {\n                if (record?.ACTV_MIO_NUM_F.charAt(1) == \" \" && record?.OPSTATS_F.charAt(1) == \" \") {\n                    setOPSTATSandACTV_MIO_NUM()\n                }\n                nonNORMRouterPathA()\n            }\n        }\n    }\n\n    processRecord(record);\n    return msg;\n}catch(e){\n    global.set('err', 'Exit Edit')\n    return msg;\n}\n\n\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1200,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1f4bd0f773cad3e4",
+        "type": "function",
+        "z": "b93bf22bc3258992",
+        "name": "reset msg",
+        "func": "function keysToUpperCase(obj) {\n    const output = {};\n    for (let key in obj) {\n        if (Object.prototype.hasOwnProperty.call(obj, key)) {\n            if (typeof obj[key] === 'object' && obj[key] !== null) {\n                output[key.toUpperCase()] = keysToUpperCase(obj[key]);\n            } else {\n                output[key.toUpperCase()] = obj[key];\n            }\n        }\n    }\n    return output;\n}\n\nlet p = msg.payload.map(keysToUpperCase);\nmsg.payload = p\nmsg.aies_rp = msg.payload\n\nmsg.payload = msg.records\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 960,
+        "y": 600,
+        "wires": [
+            [
+                "68fb12a28a7d603c"
+            ]
+        ]
+    },
+    {
+        "id": "6af96bc8ba5914b9",
+        "type": "function",
+        "z": "b93bf22bc3258992",
+        "name": "reset_msg_and_query_aies_refper_minus_one",
+        "func": "function keysToUpperCase(obj) {\n    const output = {};\n    for (let key in obj) {\n        if (Object.prototype.hasOwnProperty.call(obj, key)) {\n            if (typeof obj[key] === 'object' && obj[key] !== null) {\n                output[key.toUpperCase()] = keysToUpperCase(obj[key]);\n            } else {\n                output[key.toUpperCase()] = obj[key];\n            }\n        }\n    }\n    return output;\n}\n\nlet p = msg.payload.map(keysToUpperCase);\nmsg.payload = p\nmsg.br = msg.payload\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.records.csv[record_idx];\nlet id = record.REPORTING_ID\nlet ref_per = parseInt(record.REF_PER.substring(0,4)) - 1\nmsg.query = \"  SELECT * FROM product_aies.item_estabs_2023a1 where reporting_id = '\" + id + \"' and version = 'PO' and substring(ref_per,1,4) = '\" + ref_per + \"';\"\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 660,
+        "wires": [
+            [
+                "e8b8d40769de5366"
+            ]
+        ]
+    },
+    {
+        "id": "e8b8d40769de5366",
+        "type": "postgresql",
+        "z": "b93bf22bc3258992",
+        "name": "Select",
+        "query": "",
+        "postgreSQLConfig": "481a641c4005d1c8",
+        "split": false,
+        "rowsPerMsg": "1",
+        "outputs": 1,
+        "x": 670,
+        "y": 660,
+        "wires": [
+            [
+                "809ebb328caca31b"
+            ]
+        ]
+    },
+    {
+        "id": "809ebb328caca31b",
+        "type": "function",
+        "z": "b93bf22bc3258992",
+        "name": "reset_msg_and_query_aies_rp",
+        "func": "function keysToUpperCase(obj) {\n    const output = {};\n    for (let key in obj) {\n        if (Object.prototype.hasOwnProperty.call(obj, key)) {\n            if (typeof obj[key] === 'object' && obj[key] !== null) {\n                output[key.toUpperCase()] = keysToUpperCase(obj[key]);\n            } else {\n                output[key.toUpperCase()] = obj[key];\n            }\n        }\n    }\n    return output;\n}\n\nlet p = msg.payload.map(keysToUpperCase);\nmsg.payload = p\nmsg.aies_minus = msg.payload\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.records.csv[record_idx];\nlet id = record.REPORTING_ID\nlet ref_per = record.REF_PER\nmsg.query = \"  SELECT * FROM product_aies.item_estabs_2023a1 where reporting_id = '\" + id + \"' and version = 'REP' and ref_per = '\" + ref_per + \"';\"\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 720,
+        "wires": [
+            [
+                "d434625a1fb282ed"
+            ]
+        ]
+    },
+    {
+        "id": "d434625a1fb282ed",
+        "type": "postgresql",
+        "z": "b93bf22bc3258992",
+        "name": "Select",
+        "query": "",
+        "postgreSQLConfig": "481a641c4005d1c8",
+        "split": false,
+        "rowsPerMsg": "1",
+        "outputs": 1,
+        "x": 670,
+        "y": 720,
+        "wires": [
+            [
+                "1f4bd0f773cad3e4"
+            ]
         ]
     },
     {
