@@ -1532,22 +1532,22 @@
         "category": "",
         "in": [
             {
-                "x": 520,
-                "y": 380,
+                "x": 700,
+                "y": 600,
                 "wires": [
                     {
-                        "id": "fb06bfc8575a00fd"
+                        "id": "71a05b6359f45791"
                     }
                 ]
             }
         ],
         "out": [
             {
-                "x": 820,
-                "y": 380,
+                "x": 1660,
+                "y": 600,
                 "wires": [
                     {
-                        "id": "fb06bfc8575a00fd",
+                        "id": "71a05b6359f45791",
                         "port": 0
                     }
                 ]
@@ -2948,7 +2948,9 @@
             "d394b61bcc4755e6"
         ],
         "x": 14,
-        "y": 939
+        "y": 939,
+        "w": 1532,
+        "h": 82
     },
     {
         "id": "ef50b77b253a7883",
@@ -2968,7 +2970,9 @@
             "d587f5de3f4014c8"
         ],
         "x": 14,
-        "y": 239
+        "y": 239,
+        "w": 1792,
+        "h": 182
     },
     {
         "id": "62708d0bbe922798",
@@ -2992,7 +2996,9 @@
             "58df41cd8e54a653"
         ],
         "x": 14,
-        "y": 519
+        "y": 519,
+        "w": 1432,
+        "h": 322
     },
     {
         "id": "19463268a6c67561",
@@ -3010,6 +3016,8 @@
         ],
         "x": 14,
         "y": 99,
+        "w": 1432,
+        "h": 82,
         "info": "# Rules from Parameter Files"
     },
     {
@@ -6491,21 +6499,97 @@
         ]
     },
     {
-        "id": "fb06bfc8575a00fd",
+        "id": "71a05b6359f45791",
         "type": "function",
         "z": "aadaa91727c0d579",
         "name": "best admin function",
-        "func": "try{\n    let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\n    // Initialize variables\n    let RECORD_TYP_TXT = record['RECORD_TYP_TXT'];\n    let NAICS_SECTOR_OLD_NUM = record['NAICS_SECTOR_OLD_NUM'];\n    let A_C_FORM_CODE_IRS = record['A_C_FORM_CODE_IRS'];\n    let A_C_RCPT_NET_CURR = parseFloat(record['A_C_RCPT_NET_CURR']);\n    let A_C_RCPT_INTEREST_CURR = parseFloat(record['A_C_RCPT_INTEREST_CURR']);\n    let A_C_RCPT_GROSSRENT_CURR = parseFloat(record['A_C_RCPT_GROSSRENT_CURR']);\n    let A_C_RCPT_OTHINCOME_CURR = parseFloat(record['A_C_RCPT_OTHINCOME_CURR']);\n    let A_C_RCPT_GROSSINC_CURR = parseFloat(record['A_C_RCPT_GROSSINC_CURR']);\n    let A_C_RCPT_TOTINC_CURR = parseFloat(record['A_C_RCPT_TOTINC_CURR']);\n    let A_C_RCPT_TOTREV_CURR = parseFloat(record['A_C_RCPT_TOTREV_CURR']);\n    let A_C_COST_GOODSOLD_CURR = parseFloat(record['A_C_COST_GOODSOLD_CURR']);\n    let A_C_EXPS_RENT_CURR = parseFloat(record['A_C_EXPS_RENT_CURR']);\n    let A_C_EXPS_DIRECT_CURR = parseFloat(record['A_C_EXPS_DIRECT_CURR']);\n\n    // Set function\n    const setVariable = (variable, value) => {\n        record[variable] = value;\n    };\n\n    // Logic\n    if (RECORD_TYP_TXT == '90') {\n        if (A_C_FORM_CODE_IRS == ' ' || A_C_FORM_CODE_IRS == 'C1') {\n            setVariable('ECRCPTOT', A_C_RCPT_NET_CURR);\n            setVariable('ACTION', 'Go to Main Routing');\n\n        } else if (['52', '53', '55'].includes(NAICS_SECTOR_OLD_NUM)) {\n            if (['01', '02', '03', '04', '05'].includes(A_C_FORM_CODE_IRS)) {\n                setVariable('ECRCPTOT', A_C_RCPT_NET_CURR + A_C_RCPT_INTEREST_CURR + A_C_RCPT_GROSSRENT_CURR + A_C_RCPT_OTHINCOME_CURR);\n            } else if (['06', '07'].includes(A_C_FORM_CODE_IRS)) {\n                setVariable('ECRCPTOT', A_C_RCPT_GROSSINC_CURR + A_C_RCPT_INTEREST_CURR);\n            } else if (A_C_FORM_CODE_IRS == '08') {\n                setVariable('ECRCPTOT', A_C_RCPT_TOTINC_CURR);\n            } else if (['09', '10', '11'].includes(A_C_FORM_CODE_IRS)) {\n                setVariable('ECRCPTOT', A_C_RCPT_TOTREV_CURR);\n            } else if (A_C_FORM_CODE_IRS == '12') {\n                setVariable('ECRCPTOT', A_C_RCPT_NET_CURR);\n            } else if (A_C_FORM_CODE_IRS == '13') {\n                setVariable('ECRCPTOT', A_C_RCPT_TOTINC_CURR + A_C_RCPT_INTEREST_CURR + A_C_RCPT_GROSSRENT_CURR);\n            }\n            setVariable('ACTION', 'Go to Main Routing');\n        } else if (['06', '07'].includes(A_C_FORM_CODE_IRS)) {\n            setVariable('ACTION', 'Go to Main Routing');\n        } else if (['51', '54', '56', '61', '62', '71', '81'].includes(NAICS_SECTOR_OLD_NUM)) {\n            if (['01', '02', '03', '04', '05', '12'].includes(A_C_FORM_CODE_IRS)) {\n                setVariable('ECRCPTOT', A_C_RCPT_NET_CURR);\n            } else if (['08', '13'].includes(A_C_FORM_CODE_IRS)) {\n                setVariable('ECRCPTOT', A_C_RCPT_TOTINC_CURR);\n            } else if (A_C_FORM_CODE_IRS == '09') {\n                setVariable('ECRCPTOT', A_C_RCPT_TOTREV_CURR + A_C_COST_GOODSOLD_CURR + A_C_EXPS_RENT_CURR + A_C_EXPS_DIRECT_CURR);\n            } else if (A_C_FORM_CODE_IRS == '10') {\n                setVariable('ECRCPTOT', A_C_RCPT_TOTREV_CURR + A_C_COST_GOODSOLD_CURR + A_C_EXPS_DIRECT_CURR);\n            } else if (A_C_FORM_CODE_IRS == '11') {\n                setVariable('ECRCPTOT', A_C_RCPT_TOTREV_CURR);\n            }\n            setVariable('ACTION', 'Go to Main Routing');\n        } else if (['21', '23', '31', '42', '44', '45', '72'].includes(NAICS_SECTOR_OLD_NUM)) {\n            if (['01', '02', '03', '04', '05', '12'].includes(A_C_FORM_CODE_IRS)) {\n                setVariable('ECRCPTOT', A_C_RCPT_NET_CURR);\n            } else if (['08', '13'].includes(A_C_FORM_CODE_IRS)) {\n                setVariable('ECRCPTOT', A_C_RCPT_TOTINC_CURR);\n            } else if (['09', '10'].includes(A_C_FORM_CODE_IRS)) {\n                setVariable('ECRCPTOT', A_C_RCPT_TOTREV_CURR + A_C_COST_GOODSOLD_CURR);\n            } else if (A_C_FORM_CODE_IRS == '11') {\n                setVariable('ECRCPTOT', A_C_RCPT_TOTREV_CURR);\n            }\n            setVariable('ACTION', 'Go to Main Routing');\n        } else if (['11', '22', '48'].includes(NAICS_SECTOR_OLD_NUM)) {\n            if (['01', '02', '03', '04', '05', '12'].includes(A_C_FORM_CODE_IRS)) {\n                setVariable('ECRCPTOT', A_C_RCPT_NET_CURR);\n            } else if (['08', '13'].includes(A_C_FORM_CODE_IRS)) {\n                setVariable('ECRCPTOT', A_C_RCPT_TOTINC_CURR);\n            } else if (['09', '10', '11'].includes(A_C_FORM_CODE_IRS)) {\n                setVariable('ECRCPTOT', A_C_RCPT_TOTREV_CURR);\n            }\n            setVariable('ACTION', 'Go to Main Routing');\n        } else {\n            setVariable('ACTION', 'Go to Main Routing')\n        }\n    }\n    else {\n        setVariable('ACTION', 'Go to Main Routing')\n    }\n    //setVariable('ACTION', 'Go to Completeness');\n\n    msg.payload.csv[global.get(\"ptrModuleFacts\")] = record;\n\n    console.log({\n        msg: msg.payload.csv[global.get(\"ptrModuleFacts\")]\n    })\n    return msg;\n}catch(e){\n    global.set('err', 'Exit Edit')\n    return msg;\n}",
+        "func": "try{\n    let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\n    // Initialize variables\n    let REPORTING_ID_TYP_TXT = record['REPORTING_ID_TYP_TXT'];\n    let NAICS_SECTOR = record['NAICS_SECTOR'];\n    let IRS_FORM_CODE_IRS = record['IRS_FORM_CODE_IRS'];\n    let IRS_RCPT_NET_VAL = parseFloat(record['IRS_RCPT_NET_VAL']);\n    let IRS_RCPT_INTEREST_VAL = parseFloat(record['IRS_RCPT_INTEREST_VAL']);\n    let IRS_RCPT_GROSSRENT_VAL = parseFloat(record['IRS_RCPT_GROSSRENT_VAL']);\n    let IRS_RCPT_OTHR_VAL = parseFloat(record['IRS_RCPT_OTHR_VAL']);\n    let IRS_INCOME_GROSS_VAL = parseFloat(record['IRS_INCOME_GROSS_VAL']);\n    let IRS_INCOME_TOT_VAL = parseFloat(record['IRS_INCOME_TOT_VAL']);\n    let IRS_RCPT_TOT_VAL = parseFloat(record['IRS_RCPT_TOT_VAL']);\n    let IRS_COST_GOODSOLD_VAL = parseFloat(record['IRS_COST_GOODSOLD_VAL']);\n    let IRS_EXPS_RENT_VAL = parseFloat(record['IRS_EXPS_RENT_VAL']);\n    let IRS_EXPS_DIRECT_VAL = parseFloat(record['IRS_EXPS_DIRECT_VAL']);\n\n    // Set function\n    const setVariable = (variable, value) => {\n        record[variable] = value;\n    };\n\n    // Logic\n    if (REPORTING_ID_TYP_TXT == 'SU') {\n        if (IRS_FORM_CODE_IRS == ' ' || IRS_FORM_CODE_IRS == 'C1') {\n            setVariable('RCPT_TOT_ADMN_DVAL', IRS_RCPT_NET_VAL);\n\n        } else if (['52', '53', '55'].includes(NAICS_SECTOR)) {\n            if (['01', '02', '03', '04', '05'].includes(IRS_FORM_CODE_IRS)) {\n                setVariable('RCPT_TOT_ADMN_DVAL', IRS_RCPT_NET_VAL + IRS_RCPT_INTEREST_VAL + IRS_RCPT_GROSSRENT_VAL + IRS_RCPT_OTHR_VAL);\n            } else if (['06', '07'].includes(IRS_FORM_CODE_IRS)) {\n                setVariable('RCPT_TOT_ADMN_DVAL', IRS_INCOME_GROSS_VAL + IRS_RCPT_INTEREST_VAL);\n            } else if (IRS_FORM_CODE_IRS == '08') {\n                setVariable('RCPT_TOT_ADMN_DVAL', IRS_INCOME_TOT_VAL);\n            } else if (['09', '10', '11'].includes(IRS_FORM_CODE_IRS)) {\n                setVariable('RCPT_TOT_ADMN_DVAL', IRS_RCPT_TOT_VAL);\n            } else if (IRS_FORM_CODE_IRS == '12') {\n                setVariable('RCPT_TOT_ADMN_DVAL', IRS_RCPT_NET_VAL);\n            } else if (IRS_FORM_CODE_IRS == '13') {\n                setVariable('RCPT_TOT_ADMN_DVAL', IRS_INCOME_TOT_VAL + IRS_RCPT_INTEREST_VAL + IRS_RCPT_GROSSRENT_VAL);\n            }\n        } else if (['06', '07'].includes(IRS_FORM_CODE_IRS)) {\n\n        } else if (['51', '54', '56', '61', '62', '71', '81'].includes(NAICS_SECTOR)) {\n            if (['01', '02', '03', '04', '05', '12'].includes(IRS_FORM_CODE_IRS)) {\n                setVariable('RCPT_TOT_ADMN_DVAL', IRS_RCPT_NET_VAL);\n            } else if (['08', '13'].includes(IRS_FORM_CODE_IRS)) {\n                setVariable('RCPT_TOT_ADMN_DVAL', IRS_INCOME_TOT_VAL);\n            } else if (IRS_FORM_CODE_IRS == '09') {\n                setVariable('RCPT_TOT_ADMN_DVAL', IRS_RCPT_TOT_VAL + IRS_COST_GOODSOLD_VAL + IRS_EXPS_RENT_VAL + IRS_EXPS_DIRECT_VAL);\n            } else if (IRS_FORM_CODE_IRS == '10') {\n                setVariable('RCPT_TOT_ADMN_DVAL', IRS_RCPT_TOT_VAL + IRS_COST_GOODSOLD_VAL + IRS_EXPS_DIRECT_VAL);\n            } else if (IRS_FORM_CODE_IRS == '11') {\n                setVariable('RCPT_TOT_ADMN_DVAL', IRS_RCPT_TOT_VAL);\n            }\n        } else if (['21', '23', '31', '42', '44', '72'].includes(NAICS_SECTOR)) {\n            if (['01', '02', '03', '04', '05', '12'].includes(IRS_FORM_CODE_IRS)) {\n                setVariable('RCPT_TOT_ADMN_DVAL', IRS_RCPT_NET_VAL);\n            } else if (['08', '13'].includes(IRS_FORM_CODE_IRS)) {\n                setVariable('RCPT_TOT_ADMN_DVAL', IRS_INCOME_TOT_VAL);\n            } else if (['09', '10'].includes(IRS_FORM_CODE_IRS)) {\n                setVariable('RCPT_TOT_ADMN_DVAL', IRS_RCPT_TOT_VAL + IRS_COST_GOODSOLD_VAL);\n            } else if (IRS_FORM_CODE_IRS == '11') {\n                setVariable('RCPT_TOT_ADMN_DVAL', IRS_RCPT_TOT_VAL);\n            }\n        } else if (['11', '22', '48'].includes(NAICS_SECTOR)) {\n            if (['01', '02', '03', '04', '05', '12'].includes(IRS_FORM_CODE_IRS)) {\n                setVariable('RCPT_TOT_ADMN_DVAL', IRS_RCPT_NET_VAL);\n            } else if (['08', '13'].includes(IRS_FORM_CODE_IRS)) {\n                setVariable('RCPT_TOT_ADMN_DVAL', IRS_INCOME_TOT_VAL);\n            } else if (['09', '10', '11'].includes(IRS_FORM_CODE_IRS)) {\n                setVariable('RCPT_TOT_ADMN_DVAL', IRS_RCPT_TOT_VAL);\n            }\n        }\n    }\n\n    setVariable('ACTION', 'Go to Main Routing')\n\n    return msg;\n}catch(e){\n    global.set('err', 'Exit Edit')\n    return msg;\n}",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 680,
-        "y": 380,
+        "x": 1180,
+        "y": 440,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "74cc98e04c95ba20",
+        "type": "function",
+        "z": "aadaa91727c0d579",
+        "name": "best admin function db",
+        "func": "try{\n    let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\n    let irs = msg.irs[0]\n\n    // Initialize variables\n    let REPORTING_ID_TYP_TXT = record['REPORTING_ID_TYP_TXT'];\n    let NAICS_SECTOR = record['NAICS_SECTOR'];\n    let IRS_FORM_CODE_IRS = irs?.FORM_CODE_IRS;\n    let IRS_RCPT_NET_VAL = parseFloat(irs?.RCPT_NET_VAL);\n    let IRS_RCPT_INTEREST_VAL = parseFloat(irs?.RCPT_INTEREST_VAL);\n    let IRS_RCPT_GROSSRENT_VAL = parseFloat(irs?.RCPT_GROSSRENT_VAL);\n    let IRS_RCPT_OTHR_VAL = parseFloat(irs?.RCPT_OTHR_VAL);\n    let IRS_INCOME_GROSS_VAL = parseFloat(irs?.INCOME_GROSS_VAL);\n    let IRS_INCOME_TOT_VAL = parseFloat(irs?.INCOME_TOT_VAL);\n    let IRS_RCPT_TOT_VAL = parseFloat(irs?.RCPT_TOT_VAL);\n    let IRS_COST_GOODSOLD_VAL = parseFloat(irs?.COST_GOODSOLD_VAL);\n    let IRS_EXPS_RENT_VAL = parseFloat(irs?.EXPS_RENT_VAL);\n    let IRS_EXPS_DIRECT_VAL = parseFloat(irs?.EXPS_DIRECT_VAL);\n\n    // Set function\n    const setVariable = (variable, value) => {\n        record[variable] = value;\n    };\n\n    // Logic\n    if (REPORTING_ID_TYP_TXT == 'SU') {\n        if (IRS_FORM_CODE_IRS == ' ' || IRS_FORM_CODE_IRS == 'C1') {\n            setVariable('RCPT_TOT_ADMN_DVAL', IRS_RCPT_NET_VAL);\n\n        } else if (['52', '53', '55'].includes(NAICS_SECTOR)) {\n            if (['01', '02', '03', '04', '05'].includes(IRS_FORM_CODE_IRS)) {\n                setVariable('RCPT_TOT_ADMN_DVAL', IRS_RCPT_NET_VAL + IRS_RCPT_INTEREST_VAL + IRS_RCPT_GROSSRENT_VAL + IRS_RCPT_OTHR_VAL);\n            } else if (['06', '07'].includes(IRS_FORM_CODE_IRS)) {\n                setVariable('RCPT_TOT_ADMN_DVAL', IRS_INCOME_GROSS_VAL + IRS_RCPT_INTEREST_VAL);\n            } else if (IRS_FORM_CODE_IRS == '08') {\n                setVariable('RCPT_TOT_ADMN_DVAL', IRS_INCOME_TOT_VAL);\n            } else if (['09', '10', '11'].includes(IRS_FORM_CODE_IRS)) {\n                setVariable('RCPT_TOT_ADMN_DVAL', IRS_RCPT_TOT_VAL);\n            } else if (IRS_FORM_CODE_IRS == '12') {\n                setVariable('RCPT_TOT_ADMN_DVAL', IRS_RCPT_NET_VAL);\n            } else if (IRS_FORM_CODE_IRS == '13') {\n                setVariable('RCPT_TOT_ADMN_DVAL', IRS_INCOME_TOT_VAL + IRS_RCPT_INTEREST_VAL + IRS_RCPT_GROSSRENT_VAL);\n            }\n        } else if (['06', '07'].includes(IRS_FORM_CODE_IRS)) {\n\n        } else if (['51', '54', '56', '61', '62', '71', '81'].includes(NAICS_SECTOR)) {\n            if (['01', '02', '03', '04', '05', '12'].includes(IRS_FORM_CODE_IRS)) {\n                setVariable('RCPT_TOT_ADMN_DVAL', IRS_RCPT_NET_VAL);\n            } else if (['08', '13'].includes(IRS_FORM_CODE_IRS)) {\n                setVariable('RCPT_TOT_ADMN_DVAL', IRS_INCOME_TOT_VAL);\n            } else if (IRS_FORM_CODE_IRS == '09') {\n                setVariable('RCPT_TOT_ADMN_DVAL', IRS_RCPT_TOT_VAL + IRS_COST_GOODSOLD_VAL + IRS_EXPS_RENT_VAL + IRS_EXPS_DIRECT_VAL);\n            } else if (IRS_FORM_CODE_IRS == '10') {\n                setVariable('RCPT_TOT_ADMN_DVAL', IRS_RCPT_TOT_VAL + IRS_COST_GOODSOLD_VAL + IRS_EXPS_DIRECT_VAL);\n            } else if (IRS_FORM_CODE_IRS == '11') {\n                setVariable('RCPT_TOT_ADMN_DVAL', IRS_RCPT_TOT_VAL);\n            }\n        } else if (['21', '23', '31', '42', '44', '72'].includes(NAICS_SECTOR)) {\n            if (['01', '02', '03', '04', '05', '12'].includes(IRS_FORM_CODE_IRS)) {\n                setVariable('RCPT_TOT_ADMN_DVAL', IRS_RCPT_NET_VAL);\n            } else if (['08', '13'].includes(IRS_FORM_CODE_IRS)) {\n                setVariable('RCPT_TOT_ADMN_DVAL', IRS_INCOME_TOT_VAL);\n            } else if (['09', '10'].includes(IRS_FORM_CODE_IRS)) {\n                setVariable('RCPT_TOT_ADMN_DVAL', IRS_RCPT_TOT_VAL + IRS_COST_GOODSOLD_VAL);\n            } else if (IRS_FORM_CODE_IRS == '11') {\n                setVariable('RCPT_TOT_ADMN_DVAL', IRS_RCPT_TOT_VAL);\n            }\n        } else if (['11', '22', '48'].includes(NAICS_SECTOR)) {\n            if (['01', '02', '03', '04', '05', '12'].includes(IRS_FORM_CODE_IRS)) {\n                setVariable('RCPT_TOT_ADMN_DVAL', IRS_RCPT_NET_VAL);\n            } else if (['08', '13'].includes(IRS_FORM_CODE_IRS)) {\n                setVariable('RCPT_TOT_ADMN_DVAL', IRS_INCOME_TOT_VAL);\n            } else if (['09', '10', '11'].includes(IRS_FORM_CODE_IRS)) {\n                setVariable('RCPT_TOT_ADMN_DVAL', IRS_RCPT_TOT_VAL);\n            }\n        }\n    }\n\n    msg.payload.csv[global.get(\"ptrModuleFacts\")] = record;\n\n    console.log({\n        msg: msg.payload.csv[global.get(\"ptrModuleFacts\")]\n    })\n    return msg;\n}catch(e){\n    global.set('err', 'Exit Edit')\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1420,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "185683e447368035",
+        "type": "function",
+        "z": "aadaa91727c0d579",
+        "name": "query_irs",
+        "func": "msg.records = msg.payload\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.records.csv[record_idx];\nlet id = record.REPORTING_ID\nmsg.query = \"  SELECT * FROM product_aies.irs where reporting_id = '\" + id + \"' and version = 'PO';\"\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 920,
+        "y": 600,
+        "wires": [
+            [
+                "0cad9ee962e8ba11"
+            ]
+        ]
+    },
+    {
+        "id": "0cad9ee962e8ba11",
+        "type": "postgresql",
+        "z": "aadaa91727c0d579",
+        "name": "Select",
+        "query": "",
+        "postgreSQLConfig": "481a641c4005d1c8",
+        "split": false,
+        "rowsPerMsg": "1",
+        "outputs": 1,
+        "x": 1070,
+        "y": 600,
+        "wires": [
+            [
+                "d4e330a766be4f70"
+            ]
+        ]
+    },
+    {
+        "id": "d4e330a766be4f70",
+        "type": "function",
+        "z": "aadaa91727c0d579",
+        "name": "reset msg",
+        "func": "function keysToUpperCase(obj) {\n    const output = {};\n    for (let key in obj) {\n        if (Object.prototype.hasOwnProperty.call(obj, key)) {\n            if (typeof obj[key] === 'object' && obj[key] !== null) {\n                output[key.toUpperCase()] = keysToUpperCase(obj[key]);\n            } else {\n                output[key.toUpperCase()] = obj[key];\n            }\n        }\n    }\n    return output;\n}\n\nlet p = msg.payload.map(keysToUpperCase);\nmsg.payload = p\nmsg.irs = msg.payload\n\nmsg.payload = msg.records\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1220,
+        "y": 600,
+        "wires": [
+            [
+                "74cc98e04c95ba20"
+            ]
         ]
     },
     {
@@ -24859,7 +24943,7 @@
         "y": 900,
         "wires": [
             [
-                "66fdc22c898d5af9"
+                "f3b1a6532404a782"
             ]
         ]
     },
@@ -24872,7 +24956,7 @@
         "y": 1100,
         "wires": [
             [
-                "2ea97ef9be40b936"
+                "66fdc22c898d5af9"
             ]
         ]
     },
