@@ -6828,7 +6828,7 @@
         "type": "function",
         "z": "f9a2a2262f95bae3",
         "name": "Init Set ACTVMIO & OPSTATS",
-        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + ' ';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    const checkOPSTAT_STAT_F = (record) => {\n        const char = record?.OPSTAT_STAT_F ? record?.OPSTAT_STAT_F.charAt(0) : ' ';\n        return ['R', 'T', 'K'].includes(char);\n    };\n\n    function processACTV_MIO_NUM(record) {\n        let mioNum = parseInt(record?.ACTV_MIO_NUM) || 0;\n        if (mioNum === 0 || mioNum > 12) {\n            record.ACTV_MIO_NUM = '12';\n            record.ACTV_MIO_NUM_F = setCharAt(record['ACTV_MIO_NUM_F'], 2, 'J');\n        }\n    }\n\n    function determineFlow(record) {\n        if ((['111', '131'].includes(record?.COV_CHG_CODE) ||\n            (['791'].includes(record?.COV_CHG_CODE) && parseInt(record?.ACTV_MIO_NUM) < 12)) &&\n            new Date(record?.COV_CHG_DATE) < new Date('2024-01-01')) {\n            record.OPSTATS = 'N';\n        } else if (checkOPSTAT_STAT_F(record)) {\n            if (parseInt(record?.OPSTAT_STAT) === 4) {\n                record.OPSTATS = 'N';\n            } else if (parseInt(record?.OPSTAT_STAT) == 5) {\n                if (parseInt(record?.RP_ACTV_MIO_NUM) == 12) {\n                    record.OPSTATS = 'Y'\n                } else {\n                    record.OPSTATS = 'N';\n                }\n            } else {\n                record.OPSTATS = 'Y';\n            }\n        } else {\n            record.OPSTATS = 'Y'\n        }\n        if (checkOPSTAT_STAT_F(record)) {\n            record.OPSTATS_F = setCharAt(record['OPSTATS_F'], 2, 'R');\n        } else {\n            record.OPSTATS_F = setCharAt(record['OPSTATS_F'], 2, 'J');\n        }\n        record.ACTION = 'Go to NONNORM Router';\n\n    }\n\n    function processRecord(record) {\n        processACTV_MIO_NUM(record);\n        if (record?.OPSTATS === ' ') {\n            determineFlow(record);\n        } else {\n            if (record?.OPSTATS_F?.charAt(2) != 'R' && record?.OPSTATS_F?.charAt(1) === ' ') {\n                determineFlow(record);\n            } else {\n                record.ACTION = 'Go to NONNORM Router';\n            }\n        }\n        msg.payload.csv[record_idx] = record\n    }\n\n    processRecord(record);\n    return msg;\n}catch(e){\n    global.set('err', 'Exit Edit')\n    return msg;\n}",
+        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + ' ';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    const checkOPSTAT_STAT_F = (record) => {\n        const char = record?.OPSTAT_STAT_F ? record?.OPSTAT_STAT_F?.charAt(0) : ' ';\n        return ['R', 'T', 'K'].includes(char);\n    };\n\n    function processACTV_MIO_NUM(record) {\n        let mioNum = parseInt(record?.ACTV_MIO_NUM) || 0;\n        if (mioNum === 0 || mioNum > 12) {\n            record.ACTV_MIO_NUM = '12';\n            record.ACTV_MIO_NUM_F = setCharAt(record['ACTV_MIO_NUM_F'], 2, 'J');\n        }\n    }\n\n    function determineFlow(record) {\n        if ((['111', '131'].includes(record?.COV_CHG_CODE) ||\n            (['791'].includes(record?.COV_CHG_CODE) && parseInt(record?.ACTV_MIO_NUM) < 12)) &&\n            new Date(record?.COV_CHG_DATE) < new Date('2024-01-01')) {\n            record.OPSTATS = 'N';\n        } else if (checkOPSTAT_STAT_F(record)) {\n            if (parseInt(record?.OPSTAT_STAT) === 4) {\n                record.OPSTATS = 'N';\n            } else if (parseInt(record?.OPSTAT_STAT) == 5) {\n                if (parseInt(record?.RP_ACTV_MIO_NUM) == 12) {\n                    record.OPSTATS = 'Y'\n                } else {\n                    record.OPSTATS = 'N';\n                }\n            } else {\n                record.OPSTATS = 'Y';\n            }\n        } else {\n            record.OPSTATS = 'Y'\n        }\n        if (checkOPSTAT_STAT_F(record)) {\n            record.OPSTATS_F = setCharAt(record['OPSTATS_F'], 2, 'R');\n        } else {\n            record.OPSTATS_F = setCharAt(record['OPSTATS_F'], 2, 'J');\n        }\n        record.ACTION = 'Go to NONNORM Router';\n\n    }\n\n    function processRecord(record) {\n        processACTV_MIO_NUM(record);\n        if (record?.OPSTATS === ' ') {\n            determineFlow(record);\n        } else {\n            if (record?.OPSTATS_F?.charAt(2) != 'R' && record?.OPSTATS_F?.charAt(1) === ' ') {\n                determineFlow(record);\n            } else {\n                record.ACTION = 'Go to NONNORM Router';\n            }\n        }\n        msg.payload.csv[record_idx] = record\n    }\n\n    processRecord(record);\n    return msg;\n}catch(e){\n    global.set('err', 'Exit Edit')\n    return msg;\n}",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -24956,7 +24956,7 @@
         "y": 1100,
         "wires": [
             [
-                "66fdc22c898d5af9"
+                "2ea97ef9be40b936"
             ]
         ]
     },
@@ -24966,10 +24966,10 @@
         "z": "8790b12c7efb6fa0",
         "name": "",
         "x": 840,
-        "y": 1260,
+        "y": 1180,
         "wires": [
             [
-                "d4fcb395b8eab6fd"
+                "66fdc22c898d5af9"
             ]
         ]
     },
@@ -24979,10 +24979,10 @@
         "z": "8790b12c7efb6fa0",
         "name": "",
         "x": 860,
-        "y": 1180,
+        "y": 1260,
         "wires": [
             [
-                "35dc57de52a34904"
+                "d4fcb395b8eab6fd"
             ]
         ]
     },
@@ -25878,7 +25878,7 @@
                 "66fdc22c898d5af9"
             ],
             [
-                "1b67e6657388118d"
+                "77dcf5b1e0afb3a9"
             ]
         ]
     },
@@ -25911,7 +25911,7 @@
                 "66fdc22c898d5af9"
             ],
             [
-                "77dcf5b1e0afb3a9"
+                "1b67e6657388118d"
             ]
         ]
     },
@@ -26138,171 +26138,6 @@
                 "938b0666e999c4db"
             ]
         ]
-    },
-    {
-        "id": "7d80698b1653d7b9",
-        "type": "function",
-        "z": "8790b12c7efb6fa0",
-        "name": "insert_query",
-        "func": "\nmsg.query = '  SELECT * FROM product_aies.item_estabs_2023a1 LIMIT 10;'\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 370,
-        "y": 1900,
-        "wires": [
-            [
-                "fc1a115f1c08e0c4"
-            ]
-        ]
-    },
-    {
-        "id": "fc1a115f1c08e0c4",
-        "type": "postgresql",
-        "z": "8790b12c7efb6fa0",
-        "d": true,
-        "name": "Select",
-        "query": "",
-        "postgreSQLConfig": "481a641c4005d1c8",
-        "split": false,
-        "rowsPerMsg": "1",
-        "outputs": 1,
-        "x": 530,
-        "y": 1900,
-        "wires": [
-            [
-                "2831a221ab30e822"
-            ]
-        ]
-    },
-    {
-        "id": "2831a221ab30e822",
-        "type": "debug",
-        "z": "8790b12c7efb6fa0",
-        "name": "debug 108",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 710,
-        "y": 1900,
-        "wires": []
-    },
-    {
-        "id": "cdf7933db08b27f1",
-        "type": "function",
-        "z": "8790b12c7efb6fa0",
-        "name": "insert_query",
-        "func": "\n// msg.query = `update space_product_aies.napcs set\n// refper_unit_id = refper_unit_id,\n//     estab_id = estab_id,\n//     record_typ = record_typ,\n//     reporting_typ = reporting_typ,\n//     prod_code = prod_code,\n//     prod_code_val_rp = prod_code_val_rp,\n//     prod_code_rp_f = prod_code_rp_f,\n//     prod_code_val_pi = prod_code_val_pi,\n//     prod_code_pi_f = prod_code_pi_f,\n//     prod_code_val_po = prod_code_val_po,\n//     prod_code_po_f = prod_code_po_f,\n//     prod_code_val_wg = prod_code_val_wg,\n//     prod_code_wg_f = prod_code_wg_f,\n//     usable = usable,\n//     created_at = created_at,\n//     updated_at = updated_at\n// where\n// id = ${msg.}; `\n// return msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 370,
-        "y": 2020,
-        "wires": [
-            [
-                "7fd58a095d3a0124"
-            ]
-        ]
-    },
-    {
-        "id": "7fd58a095d3a0124",
-        "type": "postgresql",
-        "z": "8790b12c7efb6fa0",
-        "d": true,
-        "name": "Update",
-        "query": "",
-        "postgreSQLConfig": "481a641c4005d1c8",
-        "split": false,
-        "rowsPerMsg": "1",
-        "outputs": 1,
-        "x": 540,
-        "y": 2020,
-        "wires": [
-            [
-                "66a253510cb2d3d8"
-            ]
-        ]
-    },
-    {
-        "id": "66a253510cb2d3d8",
-        "type": "debug",
-        "z": "8790b12c7efb6fa0",
-        "name": "debug 109",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 710,
-        "y": 2020,
-        "wires": []
-    },
-    {
-        "id": "e3717df93ea2ccfd",
-        "type": "function",
-        "z": "8790b12c7efb6fa0",
-        "name": "insert_query",
-        "func": "\nmsg.query = `CREATE TABLE product_aies.napcs(\n    id SERIAL NOT NULL,\n    refper_unit_id bigint,\n    estab_id varchar(15),\n    record_typ varchar(3),\n    reporting_typ varchar(15),\n    prod_code varchar(50),\n    prod_code_val_rp integer,\n    prod_code_rp_f varchar(5),\n    prod_code_val_pi integer,\n    prod_code_pi_f varchar(5),\n    prod_code_val_po integer,\n    prod_code_po_f varchar(5),\n    prod_code_val_wg double precision,\n    prod_code_wg_f varchar(5),\n    usable varchar(5),\n    created_at timestamp without time zone,\n    updated_at timestamp without time zone,\n    PRIMARY KEY(id)\n);\nCREATE INDEX napcs_unit_id_index ON product_aies.napcs USING btree (\"refper_unit_id\");`\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 370,
-        "y": 2120,
-        "wires": [
-            [
-                "ea0a2707e3eefb80"
-            ]
-        ]
-    },
-    {
-        "id": "ea0a2707e3eefb80",
-        "type": "postgresql",
-        "z": "8790b12c7efb6fa0",
-        "d": true,
-        "name": "Update",
-        "query": "",
-        "postgreSQLConfig": "481a641c4005d1c8",
-        "split": false,
-        "rowsPerMsg": "1",
-        "outputs": 1,
-        "x": 540,
-        "y": 2120,
-        "wires": [
-            [
-                "b929e646c399ee9c"
-            ]
-        ]
-    },
-    {
-        "id": "b929e646c399ee9c",
-        "type": "debug",
-        "z": "8790b12c7efb6fa0",
-        "name": "debug 110",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 710,
-        "y": 2120,
-        "wires": []
     },
     {
         "id": "ba1a8e2376b579e6",
