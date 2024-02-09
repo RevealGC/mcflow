@@ -1558,39 +1558,6 @@
         "color": "#DDAA99"
     },
     {
-        "id": "05d1a91987f08f14",
-        "type": "subflow",
-        "name": "mfg_payqtr1",
-        "info": "",
-        "category": "",
-        "in": [
-            {
-                "x": 560,
-                "y": 120,
-                "wires": [
-                    {
-                        "id": "c660fc494a2e76e6"
-                    }
-                ]
-            }
-        ],
-        "out": [
-            {
-                "x": 820,
-                "y": 120,
-                "wires": [
-                    {
-                        "id": "c660fc494a2e76e6",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
-        "env": [],
-        "meta": {},
-        "color": "#DDAA99"
-    },
-    {
         "id": "48bdd199705157b9",
         "type": "subflow",
         "name": "mfg_payann",
@@ -1598,55 +1565,26 @@
         "category": "",
         "in": [
             {
-                "x": 660,
-                "y": 80,
+                "x": 500,
+                "y": 180,
                 "wires": [
                     {
-                        "id": "e2ac825ab490ae2d"
+                        "id": "b2865a1824aff9ec"
                     }
                 ]
             }
         ],
         "out": [
             {
-                "x": 920,
-                "y": 80,
+                "x": 1340,
+                "y": 220,
                 "wires": [
                     {
-                        "id": "e2ac825ab490ae2d",
+                        "id": "416362dcdd1a7e66",
                         "port": 0
-                    }
-                ]
-            }
-        ],
-        "env": [],
-        "meta": {},
-        "color": "#DDAA99"
-    },
-    {
-        "id": "9f8b85fce167ad51",
-        "type": "subflow",
-        "name": "mfg_empq1",
-        "info": "",
-        "category": "",
-        "in": [
-            {
-                "x": 680,
-                "y": 180,
-                "wires": [
+                    },
                     {
-                        "id": "e1c3e5836e2b8eca"
-                    }
-                ]
-            }
-        ],
-        "out": [
-            {
-                "x": 940,
-                "y": 180,
-                "wires": [
-                    {
-                        "id": "e1c3e5836e2b8eca",
+                        "id": "be2c852c16e1ae5f",
                         "port": 0
                     }
                 ]
@@ -3070,7 +3008,7 @@
                         "port": 0
                     },
                     {
-                        "id": "c448b41ae77a3f25",
+                        "id": "19e7c3efcb396af4",
                         "port": 0
                     }
                 ]
@@ -3104,6 +3042,72 @@
                 "wires": [
                     {
                         "id": "331014954d894fe9",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "9f8b85fce167ad51",
+        "type": "subflow",
+        "name": "mfg_empq1",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 680,
+                "y": 180,
+                "wires": [
+                    {
+                        "id": "e1c3e5836e2b8eca"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 940,
+                "y": 180,
+                "wires": [
+                    {
+                        "id": "e1c3e5836e2b8eca",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "05d1a91987f08f14",
+        "type": "subflow",
+        "name": "mfg_payqtr1",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 560,
+                "y": 120,
+                "wires": [
+                    {
+                        "id": "c660fc494a2e76e6"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 820,
+                "y": 120,
+                "wires": [
+                    {
+                        "id": "c660fc494a2e76e6",
                         "port": 0
                     }
                 ]
@@ -3180,7 +3184,9 @@
             "d394b61bcc4755e6"
         ],
         "x": 14,
-        "y": 939
+        "y": 939,
+        "w": 1532,
+        "h": 82
     },
     {
         "id": "ef50b77b253a7883",
@@ -3200,7 +3206,9 @@
             "d587f5de3f4014c8"
         ],
         "x": 14,
-        "y": 239
+        "y": 239,
+        "w": 1792,
+        "h": 182
     },
     {
         "id": "62708d0bbe922798",
@@ -3224,7 +3232,9 @@
             "58df41cd8e54a653"
         ],
         "x": 14,
-        "y": 519
+        "y": 519,
+        "w": 1432,
+        "h": 322
     },
     {
         "id": "19463268a6c67561",
@@ -3242,6 +3252,8 @@
         ],
         "x": 14,
         "y": 99,
+        "w": 1432,
+        "h": 82,
         "info": "# Rules from Parameter Files"
     },
     {
@@ -3356,9 +3368,7 @@
             "2c7eaaca104f6a2c"
         ],
         "x": 14,
-        "y": 599,
-        "w": 2232,
-        "h": 1942
+        "y": 599
     },
     {
         "id": "302cb8040ecade52",
@@ -3374,9 +3384,7 @@
             "a47c991027033263"
         ],
         "x": 714,
-        "y": 719,
-        "w": 372,
-        "h": 82
+        "y": 719
     },
     {
         "id": "d1e0f39ddacfeb20",
@@ -6738,54 +6746,76 @@
         ]
     },
     {
-        "id": "c660fc494a2e76e6",
-        "type": "function",
-        "z": "05d1a91987f08f14",
-        "name": "mfg_payqtr1",
-        "func": "function setCharAt(str, index, chr) {\n    if ([null, undefined].includes(str)) {\n        let newstr = ''\n        for (let i = 0; i < index; i++) {\n            newstr = newstr + ' ';\n        }\n        newstr = newstr + chr\n        return newstr;\n    } else {\n        if (index > str.length - 1) {\n            let addstr = index - str.length\n            let newstr = str\n            for (let i = 0; i < addstr; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            return str.substring(0, index) + chr + str.substring(index + 1);\n        }\n    }\n}\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nconst PAY_ANN_VAL = parseFloat(record['PAY_ANN_VAL'])\nconst PAY_ANN_PRDWRK_VAL = parseFloat(record['PAY_ANN_PRDWRK_VAL'])\nconst PAY_ANN_NONPRDWRK_VAL = parseFloat(record['PAY_ANN_NONPRDWRK_VAL'])\nconst EMP_MAR12_NUM = parseFloat(record['EMP_MAR12_NUM'])\nconst EMP_MAR12_PRDWRK_NUM = parseFloat(record['EMP_MAR12_PRDWRK_NUM'])\nconst EMP_MAR12_NONPRDWRK_NUM = parseFloat(record['EMP_MAR12_NONPRDWRK_NUM'])\nconst PAY_QTR1_VAL = parseFloat(record['PAY_QTR1_VAL'])\nconst PAY_QTR1_PRDWRK_VAL = parseFloat(record['PAY_QTR1_PRDWRK_VAL'])\nconst PAY_QTR1_NONPRDWRK_VAL = parseFloat(record['PAY_QTR1_NONPRDWRK_VAL'])\n\nif ((PAY_QTR1_PRDWRK_VAL + PAY_QTR1_NONPRDWRK_VAL == 0) && PAY_QTR1_VAL > 0) {\n    if (PAY_ANN_PRDWRK_VAL > 0 && PAY_ANN_NONPRDWRK_VAL > 0 && PAY_ANN_VAL > 0) {\n        record['PAY_QTR1_PRDWRK_VAL'] = Math.round((PAY_ANN_PRDWRK_VAL / PAY_ANN_VAL) * PAY_QTR1_VAL)\n        record['PAY_QTR1_NONPRDWRK_VAL'] = Math.round((PAY_ANN_NONPRDWRK_VAL / PAY_ANN_VAL) * PAY_QTR1_VAL)\n        record['PAY_QTR1_PRDWRK_VAL_F'] = setCharAt(record['PAY_QTR1_PRDWRK_VAL_F'], 2, 'J');\n        record['PAY_QTR1_NONPRDWRK_VAL_F'] = setCharAt(record['PAY_QTR1_NONPRDWRK_VAL_F'], 2, 'J');\n    } else if (EMP_MAR12_PRDWRK_NUM > 0 && EMP_MAR12_NONPRDWRK_NUM > 0 && EMP_MAR12_NUM > 0) {\n        record['PAY_QTR1_PRDWRK_VAL'] = Math.round((EMP_MAR12_PRDWRK_NUM / EMP_MAR12_NUM) * PAY_QTR1_VAL)\n        record['PAY_QTR1_NONPRDWRK_VAL'] = Math.round((EMP_MAR12_NONPRDWRK_NUM / EMP_MAR12_NUM) * PAY_QTR1_VAL)\n        record['PAY_QTR1_PRDWRK_VAL_F'] = setCharAt(record['PAY_QTR1_PRDWRK_VAL_F'], 2, 'J');\n        record['PAY_QTR1_NONPRDWRK_VAL_F'] = setCharAt(record['PAY_QTR1_NONPRDWRK_VAL_F'], 2, 'J');\n    } else {\n        record['PAY_QTR1_PRDWRK_VAL_F'] = setCharAt(record['PAY_QTR1_PRDWRK_VAL_F'], 2, 'X');\n        record['PAY_QTR1_NONPRDWRK_VAL_F'] = setCharAt(record['PAY_QTR1_NONPRDWRK_VAL_F'], 2, 'X');\n    }\n} else if ((PAY_QTR1_PRDWRK_VAL + PAY_QTR1_NONPRDWRK_VAL > 0) && PAY_QTR1_VAL > 0) {\n    if (PAY_QTR1_PRDWRK_VAL + PAY_QTR1_NONPRDWRK_VAL != PAY_QTR1_VAL) {\n        if (PAY_QTR1_PRDWRK_VAL == 0 && (PAY_QTR1_NONPRDWRK_VAL < PAY_QTR1_VAL)) {\n            record['PAY_QTR1_PRDWRK_VAL'] = PAY_QTR1_VAL - PAY_QTR1_NONPRDWRK_VAL\n            record['PAY_QTR1_PRDWRK_VAL_F'] = setCharAt(record['PAY_QTR1_PRDWRK_VAL_F'], 2, 'J');\n        } else if (PAY_QTR1_NONPRDWRK_VAL == 0 && (PAY_QTR1_PRDWRK_VAL < PAY_QTR1_VAL)) {\n            record['PAY_QTR1_NONPRDWRK_VAL'] = PAY_QTR1_VAL - PAY_QTR1_PRDWRK_VAL\n            record['PAY_QTR1_NONPRDWRK_VAL_F'] = setCharAt(record['PAY_QTR1_NONPRDWRK_VAL_F'], 2, 'J');\n        } else if (.8 <= (PAY_QTR1_PRDWRK_VAL + PAY_QTR1_NONPRDWRK_VAL) / PAY_QTR1_VAL &&\n            (PAY_QTR1_PRDWRK_VAL + PAY_QTR1_NONPRDWRK_VAL) / PAY_QTR1_VAL <= 1.2) {\n            const TEMP_DET_TOT = PAY_QTR1_PRDWRK_VAL + PAY_QTR1_NONPRDWRK_VAL\n            const TEMP_PAYQ1_PRDWORK = Math.round((PAY_QTR1_PRDWRK_VAL / TEMP_DET_TOT) * PAY_QTR1_VAL)\n            const TEMP_PAYQ1_NONPRDWORK = Math.round((PAY_QTR1_NONPRDWRK_VAL / TEMP_DET_TOT) * PAY_QTR1_VAL)\n            record['PAY_QTR1_NONPRDWRK_VAL'] = TEMP_PAYQ1_NONPRDWORK\n            record['PAY_QTR1_PRDWRK_VAL'] = TEMP_PAYQ1_PRDWORK\n            record['PAY_QTR1_PRDWRK_VAL_F'] = setCharAt(record['PAY_QTR1_PRDWRK_VAL_F'], 2, 'K');\n            record['PAY_QTR1_NONPRDWRK_VAL_F'] = setCharAt(record['PAY_QTR1_NONPRDWRK_VAL_F'], 2, 'K');\n            if (TEMP_PAYQ1_PRDWORK + TEMP_PAYQ1_NONPRDWORK != PAY_QTR1_VAL) {\n                if (TEMP_PAYQ1_PRDWORK + TEMP_PAYQ1_NONPRDWORK < PAY_QTR1_VAL) {\n                    if (TEMP_PAYQ1_PRDWORK > TEMP_PAYQ1_NONPRDWORK) {\n                        record['TEMP_PAYQ1_PRDWORK'] = Math.round(PAY_QTR1_VAL - TEMP_PAYQ1_NONPRDWORK)\n                    } else if (TEMP_PAYQ1_NONPRDWORK > TEMP_PAYQ1_PRDWORK) {\n                        record['TEMP_PAYQ1_NONPRDWORK'] = Math.round(PAY_QTR1_VAL - TEMP_PAYQ1_PRDWORK)\n                    }\n                } else {\n                    if (TEMP_PAYQ1_PRDWORK > TEMP_PAYQ1_NONPRDWORK) {\n                        record['TEMP_PAYQ1_NONPRDWORK'] = Math.round(PAY_QTR1_VAL - TEMP_PAYQ1_PRDWORK)\n                    } else if (TEMP_PAYQ1_NONPRDWORK > TEMP_PAYQ1_PRDWORK) {\n                        record['TEMP_PAYQ1_PRDWORK'] = Math.round(PAY_QTR1_VAL - TEMP_PAYQ1_NONPRDWORK)\n                    }\n                }\n            }\n        } else {\n            record['PAY_QTR1_PRDWRK_VAL_F'] = setCharAt(record['PAY_QTR1_PRDWRK_VAL_F'], 2, 'X');\n            record['PAY_QTR1_NONPRDWRK_VAL_F'] = setCharAt(record['PAY_QTR1_NONPRDWRK_VAL_F'], 2, 'X');\n        }\n    }\n}\n\nrecord['ACTION'] = 'Return to Main Routing'\n// global.set('action', 'Return to Main Routing')\n\nreturn msg;\n\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 690,
-        "y": 120,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "e2ac825ab490ae2d",
+        "id": "b2865a1824aff9ec",
         "type": "function",
         "z": "48bdd199705157b9",
         "name": "mfg_payann",
-        "func": "function setCharAt(str, index, chr) {\n    if ([null, undefined].includes(str)) {\n        let newstr = ''\n        for (let i = 0; i < index; i++) {\n            newstr = newstr + ' ';\n        }\n        newstr = newstr + chr\n        return newstr;\n    } else {\n        if (index > str.length - 1) {\n            let addstr = index - str.length\n            let newstr = str\n            for (let i = 0; i < addstr; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            return str.substring(0, index) + chr + str.substring(index + 1);\n        }\n    }\n}\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\nconst PAY_ANN_VAL = parseFloat(record['PAY_ANN_VAL'])\nconst PAY_ANN_PRDWRK_VAL = parseFloat(record['PAY_ANN_PRDWRK_VAL'])\nconst PAY_ANN_NONPRDWRK_VAL = parseFloat(record['PAY_ANN_NONPRDWRK_VAL'])\nconst EMP_MAR12_NUM = parseFloat(record['EMP_MAR12_NUM'])\nconst EMP_MAR12_PRDWRK_NUM = parseFloat(record['EMP_MAR12_PRDWRK_NUM'])\nconst EMP_MAR12_NONPRDWRK_NUM = parseFloat(record['EMP_MAR12_NONPRDWRK_NUM'])\nconst PAY_QTR1_VAL = parseFloat(record['PAY_QTR1_VAL'])\nconst PAY_QTR1_PRDWRK_VAL = parseFloat(record['PAY_QTR1_PRDWRK_VAL'])\nconst PAY_QTR1_NONPRDWRK_VAL = parseFloat(record['PAY_QTR1_NONPRDWRK_VAL'])\n\nif (parseInt(record['NAICS_SECTOR']) == 31 && record['SUBSAMP_IND_TXT'] != 'MC') {\n    if ((PAY_ANN_PRDWRK_VAL + PAY_ANN_NONPRDWRK_VAL == 0) && PAY_ANN_VAL > 0) {\n        if (EMP_MAR12_NONPRDWRK_NUM > 0 && EMP_MAR12_PRDWRK_NUM > 0 && EMP_MAR12_NUM > 0) {\n            record['PAY_ANN_PRDWRK_VAL'] = Math.round((EMP_MAR12_PRDWRK_NUM / EMP_MAR12_NUM) * PAY_ANN_VAL)\n            record['PAY_ANN_NONPRDWRK_VAL'] = Math.round((EMP_MAR12_NONPRDWRK_NUM / EMP_MAR12_NUM) * PAY_ANN_VAL)\n            record['PAY_ANN_PRDWRK_VAL_F'] = setCharAt(record['PAY_ANN_PRDWRK_VAL_F'], 2, 'J');\n            record['PAY_ANN_NONPRDWRK_VAL_F'] = setCharAt(record['PAY_ANN_NONPRDWRK_VAL_F'], 2, 'J');\n        } else if (PAY_QTR1_NONPRDWRK_VAL > 0 && PAY_QTR1_PRDWRK_VAL > 0 && PAY_QTR1_VAL > 0) {\n            record['PAY_ANN_PRDWRK_VAL'] = Math.round((PAY_QTR1_PRDWRK_VAL / PAY_QTR1_VAL) * PAY_ANN_VAL)\n            record['PAY_ANN_NONPRDWRK_VAL'] = Math.round((PAY_QTR1_NONPRDWRK_VAL / PAY_QTR1_VAL) * PAY_ANN_VAL)\n            record['PAY_ANN_PRDWRK_VAL_F'] = setCharAt(record['PAY_ANN_PRDWRK_VAL_F'], 2, 'J');\n            record['PAY_ANN_NONPRDWRK_VAL_F'] = setCharAt(record['PAY_ANN_NONPRDWRK_VAL_F'], 2, 'J');\n        } else {\n            record['PAY_ANN_PRDWRK_VAL_F'] = setCharAt(record['PAY_ANN_PRDWRK_VAL_F'], 2, 'X');\n            record['PAY_ANN_NONPRDWRK_VAL_F'] = setCharAt(record['PAY_ANN_NONPRDWRK_VAL_F'], 2, 'X');\n        }\n    } else if ((PAY_ANN_PRDWRK_VAL + PAY_ANN_NONPRDWRK_VAL > 0) && PAY_ANN_VAL > 0) {\n        if (PAY_ANN_PRDWRK_VAL + PAY_ANN_NONPRDWRK_VAL != PAY_ANN_VAL) {\n            if (PAY_ANN_PRDWRK_VAL == 0 && PAY_ANN_NONPRDWRK_VAL < PAY_ANN_VAL) {\n                record['PAY_ANN_PRDWRK_VAL'] = Math.round(PAY_ANN_VAL - PAY_ANN_NONPRDWRK_VAL)\n                record['PAY_ANN_PRDWRK_VAL_F'] = setCharAt(record['PAY_ANN_PRDWRK_VAL_F'], 2, 'K');\n            } else if (PAY_ANN_NONPRDWRK_VAL == 0 && PAY_ANN_PRDWRK_VAL < PAY_ANN_VAL) {\n                record['PAY_ANN_NONPRDWRK_VAL'] = Math.round(PAY_ANN_VAL - PAY_ANN_PRDWRK_VAL)\n                record['PAY_ANN_NONPRDWRK_VAL_F'] = setCharAt(record['PAY_ANN_NONPRDWRK_VAL_F'], 2, 'K');\n            } else if (.8 <= (PAY_ANN_PRDWRK_VAL + PAY_ANN_NONPRDWRK_VAL) / PAY_ANN_VAL &&\n                (PAY_ANN_PRDWRK_VAL + PAY_ANN_NONPRDWRK_VAL) / PAY_ANN_VAL <= 1.2) {\n                const TEMP_DET_TOT = PAY_ANN_NONPRDWRK_VAL + PAY_ANN_PRDWRK_VAL\n                const TEMP_PAYANN_PRDWORK = Math.round((PAY_ANN_PRDWRK_VAL / TEMP_DET_TOT) * PAY_ANN_VAL)\n                const TEMP_PAYANN_NONPRDWORK = Math.round((PAY_ANN_NONPRDWRK_VAL / TEMP_DET_TOT) * PAY_ANN_VAL)\n                record['PAY_ANN_NONPRDWRK_VAL'] = TEMP_PAYANN_NONPRDWORK\n                record['PAY_ANN_PRDWRK_VAL'] = TEMP_PAYANN_PRDWORK\n                record['PAY_ANN_PRDWRK_VAL_F'] = setCharAt(record['PAY_ANN_PRDWRK_VAL_F'], 2, 'K');\n                record['PAY_ANN_NONPRDWRK_VAL_F'] = setCharAt(record['PAY_ANN_NONPRDWRK_VAL_F'], 2, 'K');\n                if (TEMP_PAYANN_PRDWORK + TEMP_PAYANN_NONPRDWORK != PAY_ANN_VAL) {\n                    if (TEMP_PAYANN_PRDWORK + TEMP_PAYANN_NONPRDWORK < PAY_ANN_VAL) {\n                        if (TEMP_PAYANN_PRDWORK > TEMP_PAYANN_NONPRDWORK) {\n                            record['TEMP_PAYANN_PRDWORK'] = Math.round(PAY_ANN_VAL - TEMP_PAYANN_NONPRDWORK)\n                        } else if (TEMP_PAYANN_NONPRDWORK > TEMP_PAYANN_PRDWORK) {\n                            record['TEMP_PAYANN_NONPRDWORK'] = Math.round(PAY_ANN_VAL - TEMP_PAYANN_PRDWORK)\n                        }\n                    } else {\n                        if (TEMP_PAYANN_PRDWORK > TEMP_PAYANN_NONPRDWORK) {\n                            record['TEMP_PAYANN_NONPRDWORK'] = Math.round(PAY_ANN_VAL - TEMP_PAYANN_PRDWORK)\n                        } else if (TEMP_PAYANN_NONPRDWORK > TEMP_PAYANN_PRDWORK) {\n                            record['TEMP_PAYANN_PRDWORK'] = Math.round(PAY_ANN_VAL - TEMP_PAYANN_NONPRDWORK)\n                        }\n                    }\n                }\n            } else {\n                record['PAY_ANN_PRDWRK_VAL_F'] = setCharAt(record['PAY_ANN_PRDWRK_VAL_F'], 2, 'X');\n                record['PAY_ANN_NONPRDWRK_VAL_F'] = setCharAt(record['PAY_ANN_NONPRDWRK_VAL_F'], 2, 'X');\n            }\n        }\n    }\n    record['ACTION'] = 'Go To: EMPQ1'\n    // global.set('action', 'Go To: EMPQ1')\n} else {\n    record['ACTION'] = 'Return to Main Routing'\n    // global.set('action', 'Return to Main Routing')\n}\n\nreturn msg;",
+        "func": "function setCharAt(str, index, chr) {\n    if ([null, undefined].includes(str)) {\n        let newstr = ''\n        for (let i = 0; i < index; i++) {\n            newstr = newstr + '_';\n        }\n        newstr = newstr + chr\n        return newstr;\n    } else {\n        if (index > str.length - 1) {\n            let addstr = index - str.length\n            let newstr = str\n            for (let i = 0; i < addstr; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            return str.substring(0, index) + chr + str.substring(index + 1);\n        }\n    }\n}\n\nfunction flagRules(variable, details) {\n    if (record?.[variable] == 0) {\n        record[variable] = setCharAt(record?.[variable], 2, 'Z');\n    } else {\n        let found = 'N'\n        for (let i in details) {\n            let detail = details[i]\n            if (record?.[detail]) {\n                if (['R_', 'K_', 'T_'].includes(record?.[detail].substring(0, 2))) {\n                    found = 'Y'\n                } else if (['R', 'C', 'A', 'S', 'O', 'G'].includes(record?.[detail]?.charAt(1))) {\n                    found = 'Y'\n                } else {\n                    found = 'N'\n                    break\n                }\n                // } else {\n                //     found = 'N'\n                //     break\n            }\n        }\n        if (found == 'Y') {\n            record[variable] = setCharAt(record?.[variable], 2, 'Y');\n        } else {\n            record[variable] = setCharAt(record?.[variable], 2, 'S');\n        }\n    }\n}\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\nglobal.set('mfg_pay_emp', '')\n\n\nif (parseInt(record?.['NAICS_SECTOR']) == 31 && record?.['SUBSAMP_IND_TXT'] != 'MC') {\n    if ((record?.PAY_ANN_PRDWRK_VAL == 0) && record?.PAY_ANN_VAL > 0) {\n        if (record?.EMP_MAR12_PRDWRK_NUM > 0 && record?.EMP_MAR12_NUM > 0) {\n            record['PAY_ANN_PRDWRK_VAL'] = Math.round(0.9 * (record?.EMP_MAR12_PRDWRK_NUM / record?.EMP_MAR12_NUM) * record?.PAY_ANN_VAL)\n            record['PAY_ANN_NONPRDWRK_DVAL'] = Math.round((record?.PAY_ANN_VAL - record?.PAY_ANN_PRDWRK_VAL))\n            flagRules('PAY_ANN_PRDWRK_VAL_F', ['EMP_MAR12_PRDWRK_NUM_F', 'EMP_MAR12_NUM_F', 'PAY_ANN_VAL_F'])\n            flagRules('PAY_ANN_NONPRDWRK_DVAL_F', ['PAY_ANN_VAL_F', 'PAY_ANN_PRDWRK_F'])\n        } else if (record?.PAY_QTR1_PRDWRK_VAL > 0 && record?.PAY_QTR1_VAL > 0) {\n            record['PAY_ANN_PRDWRK_VAL'] = Math.round((record?.PAY_QTR1_PRDWRK_VAL / record?.PAY_QTR1_VAL) * record?.PAY_ANN_VAL)\n            record['PAY_ANN_NONPRDWRK_VAL_DVAL'] = Math.round((record?.PAY_ANN_VAL - record?.PAY_ANN_PRDWRK_VAL))\n            flagRules('PAY_ANN_PRDWRK_VAL_F', ['PAY_QTR1_PRDWRK_VAL_F', 'PAY_QTR1_VAL_F', 'PAY_ANN_VAL_F'])\n            flagRules('PAY_ANN_NONPRDWRK_DVAL_F', ['PAY_ANN_VAL_F', 'PAY_ANN_PRDWRK_VAL_F'])\n        } else {\n            record['PAY_ANN_PRDWRK_VAL_F'] = setCharAt(record['PAY_ANN_PRDWRK_VAL_F'], 2, 'X');\n        }\n    } else if ((record?.PAY_ANN_PRDWRK_VAL > 0) && record?.PAY_ANN_VAL > 0) {\n        if (record?.PAY_ANN_PRDWRK_VAL != record?.PAY_ANN_VAL) {\n            if (record?.PAY_ANN_PRDWRK_DVAL < record?.PAY_ANN_VAL) {\n                record['PAY_ANN_NON_PRDWRK_DVAL'] = Math.round(record?.PAY_ANN_VAL - record?.PAY_ANN_PRDWRK_VAL)\n                flagRules('PAY_ANN_NON_PRDWRK_DVAL_F', ['PAY_ANN_VAL_F', 'PAY_ANN_PRDWRK_VAL_F'])\n            } else {\n                record['PAY_ANN_PRDWRK_VAL_F'] = setCharAt(record['PAY_ANN_PRDWRK_VAL_F'], 2, 'X');\n            }\n        }\n    }\n    record['ACTION'] = 'Go To: EMPQ1'\n    // global.set('action', 'Go To: EMPQ1')\n} else {\n    record['ACTION'] = 'Return to Main Routing'\n    global.set('mfg_pay_emp', 'Return to Main Routing')\n}\n\nreturn msg;\n",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 790,
-        "y": 80,
+        "x": 650,
+        "y": 180,
+        "wires": [
+            [
+                "be2c852c16e1ae5f"
+            ]
+        ]
+    },
+    {
+        "id": "be2c852c16e1ae5f",
+        "type": "switch",
+        "z": "48bdd199705157b9",
+        "name": "",
+        "property": "mfg_pay_emp",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Return to Main Routing",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 830,
+        "y": 180,
+        "wires": [
+            [],
+            [
+                "0b4f5039edc9b58f"
+            ]
+        ]
+    },
+    {
+        "id": "416362dcdd1a7e66",
+        "type": "subflow:05d1a91987f08f14",
+        "z": "48bdd199705157b9",
+        "name": "",
+        "x": 1030,
+        "y": 240,
         "wires": [
             []
         ]
     },
     {
-        "id": "e1c3e5836e2b8eca",
-        "type": "function",
-        "z": "9f8b85fce167ad51",
-        "name": "mfg_empq1",
-        "func": "function setCharAt(str, index, chr) {\n    if ([null, undefined].includes(str)) {\n        let newstr = ''\n        for (let i = 0; i < index; i++) {\n            newstr = newstr + ' ';\n        }\n        newstr = newstr + chr\n        return newstr;\n    } else {\n        if (index > str.length - 1) {\n            let addstr = index - str.length\n            let newstr = str\n            for (let i = 0; i < addstr; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            return str.substring(0, index) + chr + str.substring(index + 1);\n        }\n    }\n}\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nconst PAY_ANN_VAL = parseFloat(record['PAY_ANN_VAL'])\nconst PAY_ANN_PRDWRK_VAL = parseFloat(record['PAY_ANN_PRDWRK_VAL'])\nconst PAY_ANN_NONPRDWRK_VAL = parseFloat(record['PAY_ANN_NONPRDWRK_VAL'])\nconst EMP_MAR12_NUM = parseFloat(record['EMP_MAR12_NUM'])\nconst EMP_MAR12_PRDWRK_NUM = parseFloat(record['EMP_MAR12_PRDWRK_NUM'])\nconst EMP_MAR12_NONPRDWRK_NUM = parseFloat(record['EMP_MAR12_NONPRDWRK_NUM'])\nconst PAY_QTR1_VAL = parseFloat(record['PAY_QTR1_VAL'])\nconst PAY_QTR1_PRDWRK_VAL = parseFloat(record['PAY_QTR1_PRDWRK_VAL'])\nconst PAY_QTR1_NONPRDWRK_VAL = parseFloat(record['PAY_QTR1_NONPRDWRK_VAL'])\n\nif ((EMP_MAR12_PRDWRK_NUM + EMP_MAR12_NONPRDWRK_NUM == 0) && EMP_MAR12_NUM > 0) {\n    if (PAY_ANN_PRDWRK_VAL > 0 && PAY_ANN_NONPRDWRK_VAL > 0 && PAY_ANN_VAL > 0) {\n        record['EMP_MAR12_PRDWRK_NUM'] = Math.round((PAY_ANN_PRDWRK_VAL / PAY_ANN_VAL) * EMP_MAR12_NUM)\n        record['EMP_MAR12_NONPRDWRK_NUM'] = Math.round((PAY_ANN_NONPRDWRK_VAL / PAY_ANN_VAL) * EMP_MAR12_NUM)\n        record['EMP_MAR12_PRDWRK_NUM_F'] = setCharAt(record['EMP_MAR12_PRDWRK_NUM_F'], 2, 'J');\n        record['EMP_MAR12_NONPRDWRK_NUM_F'] = setCharAt(record['EMP_MAR12_NONPRDWRK_NUM_F'], 2, 'J');\n    } else if (PAY_QTR1_NONPRDWRK_VAL > 0 && PAY_QTR1_PRDWRK_VAL > 0 && PAY_QTR1_VAL > 0) {\n        record['EMP_MAR12_PRDWRK_NUM'] = Math.round((PAY_QTR1_PRDWRK_VAL / PAY_QTR1_VAL) * EMP_MAR12_NUM)\n        record['EMP_MAR12_NONPRDWRK_NUM'] = Math.round((PAY_QTR1_NONPRDWRK_VAL / PAY_QTR1_VAL) * EMP_MAR12_NUM)\n        record['EMP_MAR12_PRDWRK_NUM_F'] = setCharAt(record['EMP_MAR12_PRDWRK_NUM_F'], 2, 'J');\n        record['EMP_MAR12_NONPRDWRK_NUM_F'] = setCharAt(record['EMP_MAR12_NONPRDWRK_NUM_F'], 2, 'J');\n    } else {\n        record['EMP_MAR12_PRDWRK_NUM_F'] = setCharAt(record['EMP_MAR12_PRDWRK_NUM_F'], 2, 'X');\n        record['EMP_MAR12_NONPRDWRK_NUM_F'] = setCharAt(record['EMP_MAR12_NONPRDWRK_NUM_F'], 2, 'X');\n    }\n} else if ((EMP_MAR12_NONPRDWRK_NUM + EMP_MAR12_PRDWRK_NUM > 0) && EMP_MAR12_NUM > 0) {\n    if (EMP_MAR12_NONPRDWRK_NUM + EMP_MAR12_PRDWRK_NUM != EMP_MAR12_NUM) {\n        if (EMP_MAR12_PRDWRK_NUM == 0 && (EMP_MAR12_NONPRDWRK_NUM < EMP_MAR12_NUM)) {\n            record['EMP_MAR12_PRDWRK_NUM'] = EMP_MAR12_NUM - EMP_MAR12_NONPRDWRK_NUM\n            record['EMP_MAR12_PRDWRK_NUM_F'] = setCharAt(record['EMP_MAR12_PRDWRK_NUM_F'], 2, 'J');\n        } else if (EMP_MAR12_NONPRDWRK_NUM == 0 && (EMP_MAR12_PRDWRK_NUM < EMP_MAR12_NUM)) {\n            record['EMP_MAR12_NONPRDWRK_NUM'] = EMP_MAR12_NUM - EMP_MAR12_PRDWRK_NUM\n            record['EMP_MAR12_NONPRDWRK_NUM_F'] = setCharAt(record['EMP_MAR12_NONPRDWRK_NUM_F'], 2, 'J');\n        } else if (.8 <= (EMP_MAR12_PRDWRK_NUM + EMP_MAR12_NONPRDWRK_NUM) / EMP_MAR12_NUM &&\n            (EMP_MAR12_PRDWRK_NUM + EMP_MAR12_NONPRDWRK_NUM) / EMP_MAR12_NUM <= 1.2) {\n            const TEMP_DET_TOT = EMP_MAR12_PRDWRK_NUM + EMP_MAR12_NONPRDWRK_NUM\n            const TEMP_EMP_PRDWORK = Math.round((EMP_MAR12_PRDWRK_NUM / TEMP_DET_TOT) * EMP_MAR12_NUM)\n            const TEMP_EMP_NONPRDWORK = Math.round((EMP_MAR12_NONPRDWRK_NUM / TEMP_DET_TOT) * EMP_MAR12_NUM)\n            record['EMP_MAR12_NONPRDWRK_NUM'] = TEMP_EMP_NONPRDWORK\n            record['EMP_MAR12_PRDWRK_NUM'] = TEMP_EMP_PRDWORK\n            record['EMP_MAR12_PRDWRK_NUM_F'] = setCharAt(record['EMP_MAR12_PRDWRK_NUM_F'], 2, 'K');\n            record['EMP_MAR12_NONPRDWRK_NUM_F'] = setCharAt(record['EMP_MAR12_NONPRDWRK_NUM_F'], 2, 'K');\n            if (TEMP_EMP_PRDWORK + TEMP_EMP_NONPRDWORK != EMP_MAR12_NUM) {\n                if (TEMP_EMP_PRDWORK + TEMP_EMP_NONPRDWORK < EMP_MAR12_NUM) {\n                    if (TEMP_EMP_PRDWORK > TEMP_EMP_NONPRDWORK) {\n                        record['EMP_MAR12_PRDWRK_NUM'] = Math.round(EMP_MAR12_NUM - TEMP_EMP_NONPRDWORK)\n                    } else if (TEMP_EMP_NONPRDWORK > TEMP_EMP_PRDWORK) {\n                        record['EMP_MAR12_NONPRDWRK_NUM'] = Math.round(EMP_MAR12_NUM - TEMP_EMP_PRDWORK)\n                    }\n                } else {\n                    if (TEMP_EMP_PRDWORK > TEMP_EMP_NONPRDWORK) {\n                        record['EMP_MAR12_NONPRDWRK_NUM'] = Math.round(EMP_MAR12_NUM - TEMP_EMP_PRDWORK)\n                    } else if (TEMP_EMP_NONPRDWORK > TEMP_EMP_PRDWORK) {\n                        record['EMP_MAR12_PRDWRK_NUM'] = Math.round(EMP_MAR12_NUM - TEMP_EMP_NONPRDWORK)\n                    }\n                }\n            }\n        } else {\n            record['EMP_MAR12_PRDWRK_NUM_F'] = setCharAt(record['EMP_MAR12_PRDWRK_NUM_F'], 2, 'X');\n            record['EMP_MAR12_NONPRDWRK_NUM_F'] = setCharAt(record['EMP_MAR12_NONPRDWRK_NUM_F'], 2, 'X');\n        }\n    }\n}\n\nrecord['ACTION'] = 'Go To: PAYQTR1'\n// global.set('action', 'Go To: PAYQTR1')\n\nreturn msg;\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 810,
-        "y": 180,
+        "id": "0b4f5039edc9b58f",
+        "type": "subflow:9f8b85fce167ad51",
+        "z": "48bdd199705157b9",
+        "name": "",
+        "x": 850,
+        "y": 240,
         "wires": [
-            []
+            [
+                "416362dcdd1a7e66"
+            ]
         ]
     },
     {
@@ -9453,7 +9483,9 @@
         "x": 860,
         "y": 1140,
         "wires": [
-            []
+            [
+                "1dc183ab4a8e863f"
+            ]
         ]
     },
     {
@@ -9468,6 +9500,42 @@
         "outputs": 1,
         "x": 950,
         "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e1c3e5836e2b8eca",
+        "type": "function",
+        "z": "9f8b85fce167ad51",
+        "name": "mfg_empq1",
+        "func": "function setCharAt(str, index, chr) {\n    if ([null, undefined].includes(str)) {\n        let newstr = ''\n        for (let i = 0; i < index; i++) {\n            newstr = newstr + '_';\n        }\n        newstr = newstr + chr\n        return newstr;\n    } else {\n        if (index > str.length - 1) {\n            let addstr = index - str.length\n            let newstr = str\n            for (let i = 0; i < addstr; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            return str.substring(0, index) + chr + str.substring(index + 1);\n        }\n    }\n}\n\nfunction flagRules(variable, details) {\n    if (record?.[variable] == 0) {\n        record[variable] = setCharAt(record?.[variable], 2, 'Z');\n    } else {\n        let found = 'N'\n        for (let i in details) {\n            let detail = details[i]\n            if (record?.[detail]) {\n                if (['R_', 'K_', 'T_'].includes(record?.[detail].substring(0, 2))) {\n                    found = 'Y'\n                } else if (['R', 'C', 'A', 'S', 'O', 'G'].includes(record?.[detail]?.charAt(1))) {\n                    found = 'Y'\n                } else {\n                    found = 'N'\n                    break\n                }\n                // } else {\n                //     found = 'N'\n                //     break\n            }\n        }\n        if (found == 'Y') {\n            record[variable] = setCharAt(record?.[variable], 2, 'Y');\n        } else {\n            record[variable] = setCharAt(record?.[variable], 2, 'S');\n        }\n    }\n}\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\n\nif (record?.EMP_MAR12_PRDWRK_NUM == 0 && record?.EMP_MAR12_NUM > 0) {\n    if (record?.PAY_ANN_PRDWRK_VAL > 0 && record?.PAY_ANN_VAL > 0) {\n        record['EMP_MAR12_PRDWRK_NUM'] = Math.round(1.1 * (record?.PAY_ANN_PRDWRK_VAL / record?.PAY_ANN_VAL) * record?.EMP_MAR12_NUM)\n        record['EMP_MAR12_NONPRDWRK_DNUM'] = Math.round(record?.EMP_MAR12_NUM - record?.EMP_MAR12_PRDWRK_NUM)\n        flagRules('EMP_MAR12_PRDWRK_NUM_F', ['PAY_ANN_PRDWRK_VAL_F', 'PAY_ANN_VAL_F', 'EMP_MAR12_NUM_F'])\n        flagRules('EMP_MAR12_NONPRDWRK_DNUM_F', ['EMP_MAR12_NUM_F', 'EMP_MAR12_PRDWRK_NUM_F'])\n    } else if (record?.PAY_QTR1_PRDWRK_VAL > 0 && record?.PAY_QTR1_VAL > 0) {\n        record['EMP_MAR12_PRDWRK_NUM'] = Math.round((record?.PAY_QTR1_PRDWRK_VAL / record?.PAY_QTR1_VAL) * record?.EMP_MAR12_NUM)\n        record['EMP_MAR12_NONPRDWRK_DNUM'] = Math.round(record?.EMP_MAR12_NUM - record?.EMP_MAR12_PRDWRK_NUM)\n        flagRules('EMP_MAR12_PRDWRK_NUM_F', ['PAY_QTR1_PRDWRK_VAL_F', 'PAY_QTR1_VAL_F', 'EMP_MAR12_NUM_F'])\n        flagRules('EMP_MAR12_NONPRDWRK_DNUM_F', ['EMP_MAR12_NUM_F', 'EMP_MAR12_PRDWRK_NUM_F']);\n    } else {\n        record['EMP_MAR12_PRDWRK_NUM_F'] = setCharAt(record['EMP_MAR12_PRDWRK_NUM_F'], 2, 'X');\n    }\n} else if (record?.EMP_MAR12_PRDWRK_NUM > 0 && record?.EMP_MAR12_NUM > 0) {\n    if (record?.EMP_MAR12_PRDWRK_NUM != record?.EMP_MAR12_NUM) {\n        if (record?.EMP_MAR12_PRDWRK_NUM < record?.EMP_MAR12_NUM) {\n            record['EMP_MAR12_NONPRDWRK_DNUM'] = record?.EMP_MAR12_NUM - record?.EMP_MAR12_PRDWRK_NUM\n            flagRules('EMP_MAR12_NONPRDWRK_DNUM_F', ['EMP_MAR12_NUM_F', 'EMP_MAR12_PRDWRK_NUM_F'])\n        } else {\n            record['EMP_MAR12_PRDWRK_NUM_F'] = setCharAt(record['EMP_MAR12_PRDWRK_NUM_F'], 2, 'X');\n        }\n    }\n}\n\nrecord['ACTION'] = 'Go To: PAYQTR1'\n// global.set('action', 'Go To: PAYQTR1')\n\nreturn msg;\n\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 810,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c660fc494a2e76e6",
+        "type": "function",
+        "z": "05d1a91987f08f14",
+        "name": "mfg_payqtr1",
+        "func": "function setCharAt(str, index, chr) {\n    if ([null, undefined].includes(str)) {\n        let newstr = ''\n        for (let i = 0; i < index; i++) {\n            newstr = newstr + '_';\n        }\n        newstr = newstr + chr\n        return newstr;\n    } else {\n        if (index > str.length - 1) {\n            let addstr = index - str.length\n            let newstr = str\n            for (let i = 0; i < addstr; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            return str.substring(0, index) + chr + str.substring(index + 1);\n        }\n    }\n}\n\nfunction flagRules(variable, details) {\n    if (record?.[variable] == 0) {\n        record[variable] = setCharAt(record?.[variable], 2, 'Z');\n    } else {\n        let found = 'N'\n        for (let i in details) {\n            let detail = details[i]\n            if (record?.[detail]) {\n                if (['R_', 'K_', 'T_'].includes(record?.[detail].substring(0, 2))) {\n                    found = 'Y'\n                } else if (['R', 'C', 'A', 'S', 'O', 'G'].includes(record?.[detail]?.charAt(1))) {\n                    found = 'Y'\n                } else {\n                    found = 'N'\n                    break\n                }\n                // } else {\n                //     found = 'N'\n                //     break\n            }\n        }\n        if (found == 'Y') {\n            record[variable] = setCharAt(record?.[variable], 2, 'Y');\n        } else {\n            record[variable] = setCharAt(record?.[variable], 2, 'S');\n        }\n    }\n}\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nif (record?.PAY_QTR1_PRDWRK_VAL == 0 && record?.PAY_QTR1_VAL > 0) {\n    if (record?.PAY_ANN_PRDWRK_VAL > 0 && record?.PAY_ANN_VAL > 0) {\n        record['PAY_QTR1_PRDWRK_VAL'] = Math.round((record?.PAY_ANN_PRDWRK_VAL / record?.PAY_ANN_VAL) * record?.PAY_QTR1_VAL)\n        record['PAY_QTR1_NONPRDWRK_DVAL'] = Math.round(record?.PAY_QTR1_VAL - record?.PAY_QTR1_PRDWRK_VAL)\n        flagRules('PAY_QTR1_PRDWRK_VAL_F', ['PAY_ANN_PRDWRK_VAL_F', 'PAY_ANN_VAL_F', 'PAY_QTR1_VAL_F']);\n        flagRules('PAY_QTR1_NONPRDWRK_DVAL_F', ['PAY_QTR1_VAL_F', 'PAY_QTR1_PRDWRK_VAL_F']);\n    } else if (record?.EMP_MAR12_PRDWRK_NUM > 0 && record?.EMP_MAR12_NUM > 0) {\n        record['PAY_QTR1_PRDWRK_VAL'] = Math.round((record?.EMP_MAR12_PRDWRK_NUM / record?.EMP_MAR12_NUM) * record?.PAY_QTR1_VAL)\n        record['PAY_QTR1_NONPRDWRK_DVAL'] = Math.round(record?.PAY_QTR1_VAL - record?.PAY_QTR1_PRDWRK_VAL);\n        flagRules('PAY_QTR1_PRDWRK_VAL_F', ['EMP_MAR12_PRDWRK_NUM_F', 'EMP_MAR12_NUM_F', 'PAY_QTR1_VAL_F']);\n        flagRules('PAY_QTR1_NONPRDWRK_DVAL_F', ['PAY_QTR1_VAL_F', 'PAY_QTR1_PRDWRK_VAL_F']);\n    } else {\n        record['PAY_QTR1_PRDWRK_VAL_F'] = setCharAt(record['PAY_QTR1_PRDWRK_VAL_F'], 2, 'X');\n    }\n} else if (record?.PAY_QTR1_PRDWRK_VAL > 0 && record?.PAY_QTR1_VAL > 0) {\n    if (record?.PAY_QTR1_PRDWRK_VAL != record?.PAY_QTR1_VAL) {\n        if (record?.PAY_QTR1_PRDWRK_VAL < record?.PAY_QTR1_VAL) {\n            record['PAY_QTR1_NONPRDWRK_DVAL'] = record?.PAY_QTR1_VAL - record?.PAY_QTR1_PRDWRK_VAL\n            flagRules('PAY_QTR1_NONPRDWRK_DVAL_F', ['PAY_QTR1_VAL_F', 'PAY_QTR1_PRDWRK_VAL_F']);\n        } else {\n            record['PAY_QTR1_PRDWRK_VAL_F'] = setCharAt(record['PAY_QTR1_PRDWRK_VAL_F'], 2, 'X');\n        }\n    }\n}\n\nrecord['ACTION'] = 'Return to Main Routing'\n// global.set('action', 'Return to Main Routing')\n\nreturn msg;\n\n\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 120,
         "wires": [
             []
         ]
