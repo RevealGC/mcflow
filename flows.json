@@ -27201,8 +27201,8 @@
         "type": "switch",
         "z": "8790b12c7efb6fa0",
         "name": "reporting_id_typ_txt",
-        "property": "payload.csv[0].REPORTING_ID_TYP_TXT",
-        "propertyType": "msg",
+        "property": "reporting_id_typ_txt",
+        "propertyType": "global",
         "rules": [
             {
                 "t": "eq",
@@ -27307,7 +27307,7 @@
         "y": 580,
         "wires": [
             [
-                "56807c0e8b3a451e"
+                "7393df42ef696382"
             ]
         ]
     },
@@ -27591,6 +27591,26 @@
             ],
             [
                 "66fdc22c898d5af9"
+            ]
+        ]
+    },
+    {
+        "id": "7393df42ef696382",
+        "type": "function",
+        "z": "8790b12c7efb6fa0",
+        "name": "Reporting_id_typ_txt",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nglobal.set('reporting_id_typ_txt',record?.REPORTING_ID_TYP_TXT)\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1100,
+        "y": 640,
+        "wires": [
+            [
+                "56807c0e8b3a451e"
             ]
         ]
     },
