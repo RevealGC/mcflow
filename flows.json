@@ -2844,6 +2844,72 @@
         "color": "#DDAA99"
     },
     {
+        "id": "0be109393cb5f28a",
+        "type": "subflow",
+        "name": "Lookup Cache Subflow",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 600,
+                "y": 100,
+                "wires": [
+                    {
+                        "id": "8c066284600dbc44"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 1620,
+                "y": 100,
+                "wires": [
+                    {
+                        "id": "f5dbe24054de29ce",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "8032608991ae0162",
+        "type": "subflow",
+        "name": "DBConn",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 840,
+                "y": 100,
+                "wires": [
+                    {
+                        "id": "331014954d894fe9"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 1060,
+                "y": 100,
+                "wires": [
+                    {
+                        "id": "331014954d894fe9",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
         "id": "6f23d11cf5bb4bde",
         "type": "subflow",
         "name": "MIV: NonLIFORANDOMModule",
@@ -3123,8 +3189,8 @@
         "category": "",
         "in": [
             {
-                "x": 380,
-                "y": 60,
+                "x": 180,
+                "y": 140,
                 "wires": [
                     {
                         "id": "0ba7321c6aef2c00"
@@ -3134,81 +3200,15 @@
         ],
         "out": [
             {
-                "x": 1600,
-                "y": 60,
+                "x": 1660,
+                "y": 320,
                 "wires": [
                     {
-                        "id": "1ce2615d35152c7e",
+                        "id": "26c648f63ad22868",
                         "port": 0
                     },
                     {
-                        "id": "29d71411aa13a380",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
-        "env": [],
-        "meta": {},
-        "color": "#DDAA99"
-    },
-    {
-        "id": "0be109393cb5f28a",
-        "type": "subflow",
-        "name": "Lookup Cache Subflow",
-        "info": "",
-        "category": "",
-        "in": [
-            {
-                "x": 600,
-                "y": 100,
-                "wires": [
-                    {
-                        "id": "8c066284600dbc44"
-                    }
-                ]
-            }
-        ],
-        "out": [
-            {
-                "x": 1620,
-                "y": 100,
-                "wires": [
-                    {
-                        "id": "f5dbe24054de29ce",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
-        "env": [],
-        "meta": {},
-        "color": "#DDAA99"
-    },
-    {
-        "id": "8032608991ae0162",
-        "type": "subflow",
-        "name": "DBConn",
-        "info": "",
-        "category": "",
-        "in": [
-            {
-                "x": 840,
-                "y": 100,
-                "wires": [
-                    {
-                        "id": "331014954d894fe9"
-                    }
-                ]
-            }
-        ],
-        "out": [
-            {
-                "x": 1060,
-                "y": 100,
-                "wires": [
-                    {
-                        "id": "331014954d894fe9",
+                        "id": "1ce2615d35152c7e",
                         "port": 0
                     }
                 ]
@@ -10444,11 +10444,106 @@
         ]
     },
     {
+        "id": "8c066284600dbc44",
+        "type": "function",
+        "z": "0be109393cb5f28a",
+        "name": "check cache",
+        "func": "// Retrieve the lookupCache\nlet cache = global.get(\"lookupCache\") || { data: [] };\n\n// Initialize msg.payload.lookup if it's not already an object\nmsg.payload.lookup = msg.payload.lookup || {};\n\n// List to keep track of missing parameters\nlet missingParams = [];\n\n// Check if the required params and their types exist in the cache\nif (msg?.payload?.lookup?.params){\n    for (let param of msg.payload.lookup.params.split(\",\")) {\n        let cachedValue = cache?.data && cache.data.find(\n            (cacheItem) =>\n                cacheItem.param === param.key && cacheItem.type === param.type\n        );\n\n        if (!cachedValue) {\n            missingParams.push(param);\n        }\n    }\n}\n\n\n// If there are missing parameters, set msg.payload.lookup.needsFetch to true\nif (missingParams.length > 0) {\n    msg.payload.lookup.needsFetch = true;\n    msg.payload.lookup.missingParams = missingParams;\n} else {\n    msg.payload.lookup.needsFetch = false;\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 770,
+        "y": 100,
+        "wires": [
+            [
+                "ce1e0380f0f1b0f9"
+            ]
+        ]
+    },
+    {
+        "id": "ce1e0380f0f1b0f9",
+        "type": "function",
+        "z": "0be109393cb5f28a",
+        "name": "prepare API Request",
+        "func": "const { moduleName, program, unit_type, missingParams } = msg.payload.lookup;\nconst params = (missingParams.length && missingParams.join(\",\")) || \"\";\n// const apiurl = `${(env.get('CENSUS_API') || 'https://mc.edl-7529180-ite.ite.edl.census.gov/api/').trim()}params?module=${moduleName}&params=${params}&program=${program}&unit_type=${unit_type}`;\nconst apiurl = `${('a301cb45559c445acaec11ab01bbbee1-2115632777.us-gov-east-1.elb.amazonaws.com/api/').trim()}params?module=${moduleName}&params=${params}&program=${program}&unit_type=${unit_type}`;\nmsg.url = apiurl;\nmsg.payloadBackup = msg.payload;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 980,
+        "y": 100,
+        "wires": [
+            [
+                "6c16d5bbc3143a33"
+            ]
+        ]
+    },
+    {
+        "id": "6c16d5bbc3143a33",
+        "type": "http request",
+        "z": "0be109393cb5f28a",
+        "name": "Lookup data API",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "basic",
+        "senderr": false,
+        "headers": [],
+        "x": 1210,
+        "y": 100,
+        "wires": [
+            [
+                "f5dbe24054de29ce"
+            ]
+        ]
+    },
+    {
+        "id": "f5dbe24054de29ce",
+        "type": "function",
+        "z": "0be109393cb5f28a",
+        "name": "cache result",
+        "func": "let cache = global.get(\"lookupCache\");\ncache = Array.isArray(cache?.data) ? cache : {\"data\":[]}\n\n// Get the payload\nlet payload = msg.payload;\n\n// Check if the API call was successful\nif (payload.status === \"success\") {\n\n    // Get the data array\n    let dataArr = payload.data;\n\n    // Extract the necessary fields from the API response and update the cache\n    for (let item of dataArr) {\n        const { id, module, param, values, json_values, program, unit_type } = item;\n        cache.data.push({ id, module, param, values, json_values, program, unit_type });\n    }\n    msg.payload = { ...msg.payloadBackup, dataArr };\n\n}\n// Save the updated cache\nglobal.set(\"lookupCache\", cache)\n// msg.payload = { ...msg.payloadBackup, dataArr };\n// msg.payload.cache = cache;\ndelete msg.payloadBackup;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1430,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "331014954d894fe9",
+        "type": "postgresql",
+        "z": "8032608991ae0162",
+        "name": "Select",
+        "query": "",
+        "postgreSQLConfig": "481a641c4005d1c8",
+        "split": false,
+        "rowsPerMsg": "1",
+        "outputs": 1,
+        "x": 950,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
         "id": "5c958e901a16d2a1",
         "type": "function",
         "z": "6f23d11cf5bb4bde",
         "name": "MIV: NonLIFORANDOMModule",
-        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + ' ';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    function NonLIFORANDOMModulePath(variable) {\n        let avg = ''\n        let avg_f = ''\n        let fifo = ''\n        let fifo_f = ''\n        let std = ''\n        let std_f = ''\n        let othnl = ''\n        let othnl_f = ''\n        let ival_tot = ''\n        let nl_tot = ''\n        let nl_tot_f = ''\n        let lifo = ''\n        if (variable == 'E') {\n            avg = 'INV_E_AVG_VAL'\n            avg_f = 'INV_E_AVG_VAL_F'\n            fifo = 'INV_E_FIFO_VAL'\n            fifo_f = 'INV_E_FIFO_VAL_F'\n            std = 'INV_E_STD_VAL'\n            std_f = 'INV_E_STD_VAL_F'\n            othnl = 'INV_E_OTHNL_VAL'\n            othnl_f = 'INV_E_OTHNL_VAL_F'\n            ival_tot = 'INV_E_IVAL_TOT_DVAL'\n            nl_tot = 'INV_E_NL_TOT_DVAL'\n            nl_tot_f = 'INV_E_NL_TOT_DVAL_F'\n            lifo = 'INV_E_LIFO_VAL'\n        } else if (variable == 'B') {\n            avg = 'INV_B_AVG_VAL'\n            avg_f = 'INV_B_AVG_VAL_F'\n            fifo = 'INV_B_FIFO_VAL'\n            fifo_f = 'INV_B_FIFO_VAL_F'\n            std = 'INV_B_STD_VAL'\n            std_f = 'INV_B_STD_VAL_F'\n            othnl = 'INV_B_OTHNL_VAL'\n            othnl_f = 'INV_B_OTHNL_VAL_F'\n            ival_tot = 'INV_B_IVAL_TOT_DVAL'\n            nl_tot = 'INV_B_NL_TOT_DVAL'\n            nl_tot_f = 'INV_B_NL_TOT_DVAL_F'\n            lifo = 'INV_B_LIFO_VAL'\n        }\n        if ((0 <= parseInt(record?.NLFLO)) && (30 >= parseInt(record?.NLFLO))) {\n            record[std] = parseFloat(record?.[ival_tot]) - parseFloat(record?.[lifo])\n            record[std_f] = setCharAt(record?.[std_f], 2, 'J')\n            record[fifo] = 0\n            record[fifo_f] = setCharAt(record?.[fifo_f], 2, 'J')\n            record[avg] = 0\n            record[avg_f] = setCharAt(record?.[avg_f], 2, 'J')\n            record[othnl] = 0\n            record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'J')\n\n        } else if ((31 <= parseInt(record?.NLFLO)) && (40 >= parseInt(record?.NLFLO))) {\n            record[avg] = parseFloat(record?.[ival_tot]) - parseFloat(record?.[lifo])\n            record[avg_f] = setCharAt(record?.[avg_f], 2, 'J')\n            record[fifo] = 0\n            record[fifo_f] = setCharAt(record?.[fifo_f], 2, 'J')\n            record[std] = 0\n            record[std_f] = setCharAt(record?.[std_f], 2, 'J')\n            record[othnl] = 0\n            record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'J')\n\n        } else if ((41 <= parseInt(record?.NLFLO)) && (50 >= parseInt(record?.NLFLO))) {\n            record[othnl] = parseFloat(record?.[ival_tot]) - parseFloat(record?.[lifo])\n            record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'J')\n            record[fifo] = 0\n            record[fifo_f] = setCharAt(record?.[fifo_f], 2, 'J')\n            record[std] = 0\n            record[std_f] = setCharAt(record?.[std_f], 2, 'J')\n            record[avg] = 0\n            record[avg_f] = setCharAt(record?.[avg_f], 2, 'J')\n\n        } else {\n            record[fifo] = parseFloat(record?.[ival_tot]) - parseFloat(record?.[lifo])\n            record[fifo_f] = setCharAt(record?.[fifo_f], 2, 'J')\n            record[avg] = 0\n            record[avg_f] = setCharAt(record?.[avg_f], 2, 'J')\n            record[std] = 0\n            record[std_f] = setCharAt(record?.[std_f], 2, 'J')\n            record[othnl] = 0\n            record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'J')\n        }\n        record[nl_tot] = parseFloat(record?.[fifo]) + parseFloat(record?.[avg]) + parseFloat(record?.[std]) + parseFloat(record?.[othnl])\n        record[nl_tot_f] = setCharAt(record?.[nl_tot_f], 2, 'J')\n    }\n    function NonLIFORANDOMModule() {\n        let NLFLOin = global.get('nlflo')\n        record.NLFLO = NLFLOin\n        let letter = global.get('miv')\n        NonLIFORANDOMModulePath(letter)\n        record.ACTION = 'Return to Evaluate Details Valuation Methods'\n    }\n\n    NonLIFORANDOMModule()\n    return msg\n}catch(e){\n    return msg \n}",
+        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    function flagRules(variable, details) {\n        if (record?.[variable] == 0) {\n            record[variable] = setCharAt(record?.[variable], 2, 'Z');\n        } else {\n            let found = 'N'\n            for (let i in details) {\n                let detail = details[i]\n                if (record?.[detail]) {\n                    if (['R_', 'K_', 'T_'].includes(record?.[detail].substring(0,2))) {\n                        found = 'Y'\n                    } else if (['R', 'C', 'A', 'S', 'O', 'G'].includes(record?.[detail]?.charAt(1))) {\n                        found = 'Y'\n                    } else {\n                        found = 'N'\n                        break\n                    }\n                // } else {\n                //     found = 'N'\n                //     break\n                }\n            }\n            if (found == 'Y') {\n                record[variable] = setCharAt(record?.[variable], 2, 'Y');\n            } else {\n                record[variable] = setCharAt(record?.[variable], 2, 'S');\n            }\n        }\n    }\n\n    function NonLIFORANDOMModulePath(variable) {\n        let avg = ''\n        let avg_f = ''\n        let fifo = ''\n        let fifo_f = ''\n        let std = ''\n        let std_f = ''\n        let othnl = ''\n        let othnl_f = ''\n        let ival_tot = ''\n        let ival_tot_f = ''\n        let nl_tot = ''\n        let nl_tot_f = ''\n        let lifo = ''\n        let lifo_f = ''\n        if (variable == 'E') {\n            avg = 'INV_E_AVG_VAL'\n            avg_f = 'INV_E_AVG_VAL_F'\n            fifo = 'INV_E_FIFO_VAL'\n            fifo_f = 'INV_E_FIFO_VAL_F'\n            std = 'INV_E_STD_VAL'\n            std_f = 'INV_E_STD_VAL_F'\n            othnl = 'INV_E_OTHNL_VAL'\n            othnl_f = 'INV_E_OTHNL_VAL_F'\n            ival_tot = 'INV_E_IVAL_TOT_DVAL'\n            ival_tot_f = 'INV_E_IVAL_TOT_DVAL_F'\n            nl_tot = 'INV_E_NL_TOT_DVAL'\n            nl_tot_f = 'INV_E_NL_TOT_DVAL_F'\n            lifo = 'INV_E_LIFO_VAL'\n            lifo_f = 'INV_E_LIFO_VAL_F'\n        } else if (variable == 'B') {\n            avg = 'INV_B_AVG_VAL'\n            avg_f = 'INV_B_AVG_VAL_F'\n            fifo = 'INV_B_FIFO_VAL'\n            fifo_f = 'INV_B_FIFO_VAL_F'\n            std = 'INV_B_STD_VAL'\n            std_f = 'INV_B_STD_VAL_F'\n            othnl = 'INV_B_OTHNL_VAL'\n            othnl_f = 'INV_B_OTHNL_VAL_F'\n            ival_tot = 'INV_B_IVAL_TOT_DVAL'\n            ival_tot_f = 'INV_B_IVAL_TOT_DVAL_F'\n            nl_tot = 'INV_B_NL_TOT_DVAL'\n            nl_tot_f = 'INV_B_NL_TOT_DVAL_F'\n            lifo = 'INV_B_LIFO_VAL'\n            lifo_f = 'INV_B_LIFO_VAL_F'\n        }\n        if ((0 <= parseInt(record?.NLFLO)) && (30 >= parseInt(record?.NLFLO))) {\n            record[std] = parseFloat(record?.[ival_tot]) - parseFloat(record?.[lifo])\n            flagRules(std_f, [ival_tot_f, lifo_f])\n            record[fifo] = 0\n            record[fifo_f] = setCharAt(record?.[fifo_f], 2, 'Z')\n            record[avg] = 0\n            record[avg_f] = setCharAt(record?.[avg_f], 2, 'Z')\n            record[othnl] = 0\n            record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'Z')\n\n        } else if ((31 <= parseInt(record?.NLFLO)) && (40 >= parseInt(record?.NLFLO))) {\n            record[avg] = parseFloat(record?.[ival_tot]) - parseFloat(record?.[lifo])\n            flagRules(avg_f, [ival_tot_f, lifo_f])\n            record[fifo] = 0\n            record[fifo_f] = setCharAt(record?.[fifo_f], 2, 'Z')\n            record[std] = 0\n            record[std_f] = setCharAt(record?.[std_f], 2, 'Z')\n            record[othnl] = 0\n            record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'Z')\n\n        } else if ((41 <= parseInt(record?.NLFLO)) && (50 >= parseInt(record?.NLFLO))) {\n            record[othnl] = parseFloat(record?.[ival_tot]) - parseFloat(record?.[lifo])\n            flagRules(othnl_f, [ival_tot_f, lifo_f])\n            record[fifo] = 0\n            record[fifo_f] = setCharAt(record?.[fifo_f], 2, 'Z')\n            record[std] = 0\n            record[std_f] = setCharAt(record?.[std_f], 2, 'Z')\n            record[avg] = 0\n            record[avg_f] = setCharAt(record?.[avg_f], 2, 'Z')\n\n        } else {\n            record[fifo] = parseFloat(record?.[ival_tot]) - parseFloat(record?.[lifo])\n            flagRules(fifo_f, [ival_tot_f, lifo_f])\n            record[avg] = 0\n            record[avg_f] = setCharAt(record?.[avg_f], 2, 'Z')\n            record[std] = 0\n            record[std_f] = setCharAt(record?.[std_f], 2, 'Z')\n            record[othnl] = 0\n            record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'Z')\n        }\n        record[nl_tot] = parseFloat(record?.[fifo]) + parseFloat(record?.[avg]) + parseFloat(record?.[std]) + parseFloat(record?.[othnl])\n        flagRules(nl_tot_f, [avg_f, std_f, othnl_f])\n    }\n    function NonLIFORANDOMModule() {\n        let NLFLOin = global.get('nlflo')\n        record.NLFLO = NLFLOin\n        let letter = global.get('miv')\n        NonLIFORANDOMModulePath(letter)\n        record.ACTION = 'Return to Evaluate Details Valuation Methods'\n    }\n\n    NonLIFORANDOMModule()\n    return msg\n}catch(e){\n    return msg \n}",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -10466,7 +10561,7 @@
         "type": "function",
         "z": "625b8c982fed66b7",
         "name": "MIV: EvaluateNoNLIFOValuationMethodModule",
-        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + ' ';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    function EvaluateNoNLIFOValuationMethod(variable) {\n        let avg = ''\n        let avg_f = ''\n        let fifo = ''\n        let fifo_f = ''\n        let std = ''\n        let std_f = ''\n        let othnl = ''\n        let othnl_f = ''\n        let ival_tot = ''\n        let nl_tot = ''\n        if (variable == 'E') {\n            avg = 'INV_E_AVG_VAL'\n            avg_f = 'INV_E_AVG_VAL_F'\n            fifo = 'INV_E_FIFO_VAL'\n            fifo_f = 'INV_E_FIFO_VAL_F'\n            std = 'INV_E_STD_VAL'\n            std_f = 'INV_E_STD_VAL_F'\n            othnl = 'INV_E_OTHNL_VAL'\n            othnl_f = 'INV_E_OTHNL_VAL_F'\n            ival_tot = 'INV_E_IVAL_TOT_DVAL'\n            nl_tot = 'INV_E_NL_TOT_DVAL'\n        } else if (variable == 'B') {\n            avg = 'INV_B_AVG_VAL'\n            avg_f = 'INV_B_AVG_VAL_F'\n            fifo = 'INV_B_FIFO_VAL'\n            fifo_f = 'INV_B_FIFO_VAL_F'\n            std = 'INV_B_STD_VAL'\n            std_f = 'INV_B_STD_VAL_F'\n            othnl = 'INV_B_OTHNL_VAL'\n            othnl_f = 'INV_B_OTHNL_VAL_F'\n            ival_tot = 'INV_B_IVAL_TOT_DVAL'\n            nl_tot = 'INV_B_NL_TOT_DVAL'\n        }\n        if (parseFloat(record?.[fifo]) > 0) {\n            if (0 == (parseFloat(record?.[avg]) + parseFloat(record?.[std]) + parseFloat(record?.[othnl]))) {\n                if (parseFloat(record?.[fifo]) != parseFloat(record?.[ival_tot])) {\n                    record[fifo] = record?.[ival_tot]\n                    record[fifo_f] = setCharAt(record?.[fifo_f], 2, 'L')\n                }\n            } else {\n                console.log(record[nl_tot], record[ival_tot])\n                record[fifo] = Math.round((parseFloat(record?.[fifo]) / parseFloat(record?.[nl_tot])) * parseFloat(record?.[ival_tot]))\n                record[fifo_f] = setCharAt(record?.[fifo_f], 2, 'K')\n                record[avg] = Math.round((parseFloat(record?.[avg]) / parseFloat(record?.[nl_tot])) * parseFloat(record?.[ival_tot]))\n                record[avg_f] = setCharAt(record?.[avg_f], 2, 'K')\n                record[std] = Math.round((parseFloat(record?.[std]) / parseFloat(record?.[nl_tot])) * parseFloat(record?.[ival_tot]))\n                record[std_f] = setCharAt(record?.[std_f], 2, 'K')\n                record[othnl] = Math.round(parseFloat(record?.[ival_tot]) - (parseFloat(record?.[fifo]) + parseFloat(record?.[avg]) + parseFloat(record?.[std])))\n                record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'K')\n            }\n        } else if (parseFloat(record?.[avg]) > 0) {\n            if ((parseFloat(record?.[std]) + parseFloat(record?.[othnl])) == 0) {\n                if (parseFloat(record?.[avg]) != parseFloat(record?.[ival_tot])) {\n                    record[avg] = record?.[ival_tot]\n                    record[avg_f] = setCharAt(record?.[avg_f], 2, 'L')\n                }\n            } else {\n                record[avg] = Math.round((parseFloat(record?.[avg]) / parseFloat(record?.[nl_tot])) * parseFloat(record?.[ival_tot]))\n                record[avg_f] = setCharAt(record?.[avg_f], 2, 'K')\n                record[std] = Math.round((parseFloat(record?.[std]) / parseFloat(record?.[nl_tot])) * parseFloat(record?.[ival_tot]))\n                record[std_f] = setCharAt(record?.[std_f], 2, 'K')\n                record[othnl] = Math.round(parseFloat(record?.[ival_tot]) - (parseFloat(record?.[avg]) + parseFloat(record?.[std])))\n                record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'K')\n            }\n\n        } else if (parseFloat(record?.[std]) > 0) {\n            if (parseFloat(record?.[othnl]) == 0) {\n                if (parseFloat(record?.[std]) != parseFloat(record?.[ival_tot])) {\n                    record[std] = record?.[ival_tot]\n                    record[std_f] = setCharAt(record?.[std_f], 2, 'L')\n                }\n            } else {\n                record[std] = Math.round((parseFloat(record?.[std]) / parseFloat(record?.[nl_tot])) * parseFloat(record?.[ival_tot]))\n                record[std_f] = setCharAt(record?.[std_f], 2, 'K')\n                record[othnl] = Math.round(parseFloat(record?.[ival_tot]) - parseFloat(record?.[std]))\n                record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'K')\n            }\n        } else if (parseFloat(record?.[othnl]) == parseFloat(record?.[ival_tot])) {\n        } else {\n            record[othnl] = parseFloat(record?.[ival_tot])\n            record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'L')\n        }\n    }\n\n    function EvaluateNoNLIFOValuationMethodModule() {\n        let letter = global.get('miv')\n        EvaluateNoNLIFOValuationMethod(letter)\n    }\n\n    EvaluateNoNLIFOValuationMethodModule()\n    return msg\n}catch(e){\n    return msg\n}",
+        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    function flagRules(variable, details) {\n        if (record?.[variable] == 0) {\n            record[variable] = setCharAt(record?.[variable], 2, 'Z');\n        } else {\n            let found = 'N'\n            for (let i in details) {\n                let detail = details[i]\n                if (record?.[detail]) {\n                    if (['R_', 'K_', 'T_'].includes(record?.[detail].substring(0,2))) {\n                        found = 'Y'\n                    } else if (['R', 'C', 'A', 'S', 'O', 'G'].includes(record?.[detail]?.charAt(1))) {\n                        found = 'Y'\n                    } else {\n                        found = 'N'\n                        break\n                    }\n                // } else {\n                //     found = 'N'\n                //     break\n                }\n            }\n            if (found == 'Y') {\n                record[variable] = setCharAt(record?.[variable], 2, 'Y');\n            } else {\n                record[variable] = setCharAt(record?.[variable], 2, 'S');\n            }\n        }\n    }\n\n    function EvaluateNoNLIFOValuationMethod(variable) {\n        let avg = ''\n        let avg_f = ''\n        let fifo = ''\n        let fifo_f = ''\n        let std = ''\n        let std_f = ''\n        let othnl = ''\n        let othnl_f = ''\n        let ival_tot = ''\n        let ival_tot_f = ''\n        let nl_tot = ''\n        if (variable == 'E') {\n            avg = 'INV_E_AVG_VAL'\n            avg_f = 'INV_E_AVG_VAL_F'\n            fifo = 'INV_E_FIFO_VAL'\n            fifo_f = 'INV_E_FIFO_VAL_F'\n            std = 'INV_E_STD_VAL'\n            std_f = 'INV_E_STD_VAL_F'\n            othnl = 'INV_E_OTHNL_VAL'\n            othnl_f = 'INV_E_OTHNL_VAL_F'\n            ival_tot = 'INV_E_IVAL_TOT_DVAL'\n            ival_tot_f = 'INV_E_IVAL_TOT_DVAL_F'\n            nl_tot = 'INV_E_NL_TOT_DVAL'\n        } else if (variable == 'B') {\n            avg = 'INV_B_AVG_VAL'\n            avg_f = 'INV_B_AVG_VAL_F'\n            fifo = 'INV_B_FIFO_VAL'\n            fifo_f = 'INV_B_FIFO_VAL_F'\n            std = 'INV_B_STD_VAL'\n            std_f = 'INV_B_STD_VAL_F'\n            othnl = 'INV_B_OTHNL_VAL'\n            othnl_f = 'INV_B_OTHNL_VAL_F'\n            ival_tot = 'INV_B_IVAL_TOT_DVAL'\n            ival_tot_f = 'INV_B_IVAL_TOT_DVAL_F'\n            nl_tot = 'INV_B_NL_TOT_DVAL'\n        }\n        if (parseFloat(record?.[fifo]) > 0) {\n            if (0 == (parseFloat(record?.[avg]) + parseFloat(record?.[std]) + parseFloat(record?.[othnl]))) {\n                if (parseFloat(record?.[fifo]) != parseFloat(record?.[ival_tot])) {\n                    record[fifo] = record?.[ival_tot]\n                    record[fifo_f] = setCharAt(record?.[fifo_f], 2, 'L')\n                }\n            } else {\n                record[fifo] = Math.round((parseFloat(record?.[fifo]) / parseFloat(record?.[nl_tot])) * parseFloat(record?.[ival_tot]))\n                record[fifo_f] = setCharAt(record?.[fifo_f], 2, 'K')\n                record[avg] = Math.round((parseFloat(record?.[avg]) / parseFloat(record?.[nl_tot])) * parseFloat(record?.[ival_tot]))\n                record[avg_f] = setCharAt(record?.[avg_f], 2, 'K')\n                record[std] = Math.round((parseFloat(record?.[std]) / parseFloat(record?.[nl_tot])) * parseFloat(record?.[ival_tot]))\n                record[std_f] = setCharAt(record?.[std_f], 2, 'K')\n                record[othnl] = Math.round(parseFloat(record?.[ival_tot]) - (parseFloat(record?.[fifo]) + parseFloat(record?.[avg]) + parseFloat(record?.[std])))\n                record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'K')\n            }\n        } else if (parseFloat(record?.[avg]) > 0) {\n            if ((parseFloat(record?.[std]) + parseFloat(record?.[othnl])) == 0) {\n                if (parseFloat(record?.[avg]) != parseFloat(record?.[ival_tot])) {\n                    record[avg] = record?.[ival_tot]\n                    flagRules(avg_f, [ival_tot_f])\n                }\n            } else {\n                record[avg] = Math.round((parseFloat(record?.[avg]) / parseFloat(record?.[nl_tot])) * parseFloat(record?.[ival_tot]))\n                record[avg_f] = setCharAt(record?.[avg_f], 2, 'K')\n                record[std] = Math.round((parseFloat(record?.[std]) / parseFloat(record?.[nl_tot])) * parseFloat(record?.[ival_tot]))\n                record[std_f] = setCharAt(record?.[std_f], 2, 'K')\n                record[othnl] = Math.round(parseFloat(record?.[ival_tot]) - (parseFloat(record?.[avg]) + parseFloat(record?.[std])))\n                record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'K')\n            }\n\n        } else if (parseFloat(record?.[std]) > 0) {\n            if (parseFloat(record?.[othnl]) == 0) {\n                if (parseFloat(record?.[std]) != parseFloat(record?.[ival_tot])) {\n                    record[std] = record?.[ival_tot]\n                    flagRules(std_f, [ival_tot_f])\n                }\n            } else {\n                record[std] = Math.round((parseFloat(record?.[std]) / parseFloat(record?.[nl_tot])) * parseFloat(record?.[ival_tot]))\n                record[std_f] = setCharAt(record?.[std_f], 2, 'K')\n                record[othnl] = Math.round(parseFloat(record?.[ival_tot]) - parseFloat(record?.[std]))\n                record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'K')\n            }\n        } else if (parseFloat(record?.[othnl]) == parseFloat(record?.[ival_tot])) {\n        } else {\n            record[othnl] = parseFloat(record?.[ival_tot])\n            flagRules(othnl_f, [ival_tot_f])\n        }\n    }\n\n    function EvaluateNoNLIFOValuationMethodModule() {\n        let letter = global.get('miv')\n        EvaluateNoNLIFOValuationMethod(letter)\n    }\n\n    EvaluateNoNLIFOValuationMethodModule()\n    return msg\n}catch(e){\n    return msg\n}",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -10484,7 +10579,7 @@
         "type": "function",
         "z": "3e0275f580e2d77c",
         "name": "MIV: EvaluateDetailValuationMethods",
-        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + ' ';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    function EvaluateDetailValuationMethods(variable) {\n        let avg = ''\n        let avg_f = ''\n        let fifo = ''\n        let fifo_f = ''\n        let std = ''\n        let std_f = ''\n        let othnl = ''\n        let othnl_f = ''\n        let ival_tot = ''\n        let nl_tot = ''\n        let nl_tot_f = ''\n        let lifo = ''\n        let lifo_f = ''\n        let ec_std = ''\n        let ec_avg = ''\n        let ec_fifo = ''\n        let ec_ival_tot = ''\n        let INVVSUMx = flow.get('$parent.invvsumx')\n        let INVDIFFx = flow.get('$parent.invdiffx')\n\n        if (variable == 'E') {\n            avg = 'INV_E_AVG_VAL'\n            avg_f = 'INV_E_AVG_VAL_F'\n            fifo = 'INV_E_FIFO_VAL'\n            fifo_f = 'INV_E_FIFO_VAL_F'\n            std = 'INV_E_STD_VAL'\n            std_f = 'INV_E_STD_VAL_F'\n            othnl = 'INV_E_OTHNL_VAL'\n            othnl_f = 'INV_E_OTHNL_VAL_F'\n            ival_tot = 'INV_E_IVAL_TOT_DVAL'\n            nl_tot = 'INV_E_NL_TOT_DVAL'\n            nl_tot_f = 'INV_E_NL_TOT_DVAL_F'\n            lifo = 'INV_E_LIFO_VAL'\n            lifo_f = 'INV_E_LIFO_VAL_F'\n            ec_std = 'EC_INV_E_STD_VAL'\n            ec_avg = 'EC_INV_E_AVG_VAL'\n            ec_fifo = 'EC_INV_E_FIFO_VAL'\n            ec_ival_tot = 'EC_INV_E_IVAL_TOT_DVAL'\n        } else if (variable == 'B') {\n            avg = 'INV_B_AVG_VAL'\n            avg_f = 'INV_B_AVG_VAL_F'\n            fifo = 'INV_B_FIFO_VAL'\n            fifo_f = 'INV_B_FIFO_VAL_F'\n            std = 'INV_B_STD_VAL'\n            std_f = 'INV_B_STD_VAL_F'\n            othnl = 'INV_B_OTHNL_VAL'\n            othnl_f = 'INV_B_OTHNL_VAL_F'\n            ival_tot = 'INV_B_IVAL_TOT_DVAL'\n            nl_tot = 'INV_B_NL_TOT_DVAL'\n            nl_tot_f = 'INV_B_NL_TOT_DVAL_F'\n            lifo = 'INV_B_LIFO_VAL'\n            lifo_f = 'INV_B_LIFO_VAL_F'\n            ec_std = 'EC_INV_B_STD_VAL'\n            ec_avg = 'EC_INV_B_AVG_VAL'\n            ec_fifo = 'EC_INV_B_FIFO_VAL'\n            ec_ival_tot = 'EC_INV_B_IVAL_TOT_DVAL'\n        }\n\n        if (parseFloat(record?.[lifo]) == 0) {\n            if (parseFloat(INVVSUMx) == 0) {\n                if (parseFloat(record?.[ec_ival_tot]) == 0) {\n                    flow.set('mivDetail','Call Random')\n                } else {\n                    record[fifo] = Math.round((parseFloat(record?.[ec_fifo]) / parseFloat(record?.[ec_ival_tot])) * parseFloat(record?.[ival_tot]))\n                    record[fifo_f] = setCharAt(record?.[fifo_f], 2, 'H')\n                    record[avg] = Math.round((parseFloat(record?.[ec_avg]) / parseFloat(record?.[ec_ival_tot])) * parseFloat(record?.[ival_tot]))\n                    record[avg_f] = setCharAt(record?.[avg_f], 2, 'H')\n                    record[std] = Math.round((parseFloat(record?.[ec_std]) / parseFloat(record?.[ec_ival_tot])) * parseFloat(record?.[ival_tot]))\n                    record[std_f] = setCharAt(record?.[std_f], 2, 'H')\n                    record[othnl] = Math.round(parseFloat(record?.[ival_tot]) -\n                        (\n                            parseFloat(record?.[lifo]) + parseFloat(record?.[fifo]) + parseFloat(record?.[avg]) + parseFloat(record?.[std])\n                        ))\n                    record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'H')\n                    flow.set('mivDetail','Route C')\n                }\n            } else {\n                    flow.set('mivDetail','Call NonLifo Valuation')\n            }\n        } else if (parseFloat(INVVSUMx) == 0) {\n            if (parseFloat(record?.[lifo]) == parseFloat(record?.[ival_tot])) {\n                    flow.set('mivDetail','Route A')\n            } else {\n                record[lifo] = record?.[ival_tot]\n                record[lifo_f] = setCharAt(record?.[lifo_f], 2, 'L')\n                    flow.set('mivDetail','Route A')\n            }\n        } else {\n            record[fifo] = Math.round((parseFloat(record?.[fifo]) / parseFloat(INVVSUMx)) * parseFloat(INVDIFFx))\n            record[fifo_f] = setCharAt(record?.[fifo_f], 2, 'K')\n\n            record[avg] = Math.round((parseFloat(record?.[ec_avg]) / parseFloat(INVVSUMx)) * parseFloat(INVDIFFx));\n            record[avg_f] = setCharAt(record?.[avg_f], 2, 'K');\n\n            record[std] = Math.round((parseFloat(record?.[ec_std]) / parseFloat(INVVSUMx)) * parseFloat(INVDIFFx));\n            record[std_f] = setCharAt(record?.[std_f], 2, 'K');\n\n            record[othnl] = Math.round(parseFloat(record?.[ival_tot]) - (parseFloat(record?.[lifo]) + parseFloat(record?.[fifo]) + parseFloat(record?.[avg]) + parseFloat(record?.[std])));\n            record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'K');\n\n            flow.set('mivDetail','Route C')\n        }\n    }\n    function EvaluateDetailValuationMethodsModule() {\n        let letter = global.get('miv')\n        flow.set('mivDetail','')\n        EvaluateDetailValuationMethods(letter)\n    }\n    EvaluateDetailValuationMethodsModule()\n    return msg\n}catch(e){\n    return msg\n}\n",
+        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    function flagRules(variable, details) {\n        if (record?.[variable] == 0) {\n            record[variable] = setCharAt(record?.[variable], 2, 'Z');\n        } else {\n            let found = 'N'\n            for (let i in details) {\n                let detail = details[i]\n                if (record?.[detail]) {\n                    if (['R_', 'K_', 'T_'].includes(record?.[detail].substring(0, 2))) {\n                        found = 'Y'\n                    } else if (['R', 'C', 'A', 'S', 'O', 'G'].includes(record?.[detail]?.charAt(1))) {\n                        found = 'Y'\n                    } else {\n                        found = 'N'\n                        break\n                    }\n                    // } else {\n                    //     found = 'N'\n                    //     break\n                }\n            }\n            if (found == 'Y') {\n                record[variable] = setCharAt(record?.[variable], 2, 'Y');\n            } else {\n                record[variable] = setCharAt(record?.[variable], 2, 'S');\n            }\n        }\n    }\n\n    function EvaluateDetailValuationMethods(variable) {\n        let avg = ''\n        let avg_f = ''\n        let fifo = ''\n        let fifo_f = ''\n        let std = ''\n        let std_f = ''\n        let othnl = ''\n        let othnl_f = ''\n        let ival_tot = ''\n        let ival_tot_f = ''\n        let nl_tot = ''\n        let nl_tot_f = ''\n        let lifo = ''\n        let lifo_f = ''\n        let ec_std = ''\n        let ec_avg = ''\n        let ec_fifo = ''\n        let ec_ival_tot = ''\n        let INVVSUMx = flow.get('$parent.invvsumx')\n        let INVDIFFx = flow.get('$parent.invdiffx')\n\n        if (variable == 'E') {\n            avg = 'INV_E_AVG_VAL'\n            avg_f = 'INV_E_AVG_VAL_F'\n            fifo = 'INV_E_FIFO_VAL'\n            fifo_f = 'INV_E_FIFO_VAL_F'\n            std = 'INV_E_STD_VAL'\n            std_f = 'INV_E_STD_VAL_F'\n            othnl = 'INV_E_OTHNL_VAL'\n            othnl_f = 'INV_E_OTHNL_VAL_F'\n            ival_tot = 'INV_E_IVAL_TOT_DVAL'\n            ival_tot_f = 'INV_E_IVAL_TOT_DVAL_F'\n            nl_tot = 'INV_E_NL_TOT_DVAL'\n            nl_tot_f = 'INV_E_NL_TOT_DVAL_F'\n            lifo = 'INV_E_LIFO_VAL'\n            lifo_f = 'INV_E_LIFO_VAL_F'\n            ec_std = 'EC_INV_E_STD_VAL'\n            ec_avg = 'EC_INV_E_AVG_VAL'\n            ec_fifo = 'EC_INV_E_FIFO_VAL'\n            ec_ival_tot = 'EC_INV_E_IVAL_TOT_DVAL'\n        } else if (variable == 'B') {\n            avg = 'INV_B_AVG_VAL'\n            avg_f = 'INV_B_AVG_VAL_F'\n            fifo = 'INV_B_FIFO_VAL'\n            fifo_f = 'INV_B_FIFO_VAL_F'\n            std = 'INV_B_STD_VAL'\n            std_f = 'INV_B_STD_VAL_F'\n            othnl = 'INV_B_OTHNL_VAL'\n            othnl_f = 'INV_B_OTHNL_VAL_F'\n            ival_tot = 'INV_B_IVAL_TOT_DVAL'\n            ival_tot_f = 'INV_B_IVAL_TOT_DVAL_F'\n            nl_tot = 'INV_B_NL_TOT_DVAL'\n            nl_tot_f = 'INV_B_NL_TOT_DVAL_F'\n            lifo = 'INV_B_LIFO_VAL'\n            lifo_f = 'INV_B_LIFO_VAL_F'\n            ec_std = 'EC_INV_B_STD_VAL'\n            ec_avg = 'EC_INV_B_AVG_VAL'\n            ec_fifo = 'EC_INV_B_FIFO_VAL'\n            ec_ival_tot = 'EC_INV_B_IVAL_TOT_DVAL'\n        }\n\n        if (parseFloat(record?.[lifo]) == 0) {\n            if (parseFloat(INVVSUMx) == 0) {\n                if (parseFloat(record?.[ec_ival_tot]) == 0) {\n                    flow.set('mivDetail','Call Random')\n                } else {\n                    record[fifo] = Math.round((parseFloat(record?.[ec_fifo]) / parseFloat(record?.[ec_ival_tot])) * parseFloat(record?.[ival_tot]))\n                    record[fifo_f] = setCharAt(record?.[fifo_f], 2, 'H')\n                    record[avg] = Math.round((parseFloat(record?.[ec_avg]) / parseFloat(record?.[ec_ival_tot])) * parseFloat(record?.[ival_tot]))\n                    record[avg_f] = setCharAt(record?.[avg_f], 2, 'H')\n                    record[std] = Math.round((parseFloat(record?.[ec_std]) / parseFloat(record?.[ec_ival_tot])) * parseFloat(record?.[ival_tot]))\n                    record[std_f] = setCharAt(record?.[std_f], 2, 'H')\n                    record[othnl] = Math.round(parseFloat(record?.[ival_tot]) -\n                        (\n                            parseFloat(record?.[lifo]) + parseFloat(record?.[fifo]) + parseFloat(record?.[avg]) + parseFloat(record?.[std])\n                        ))\n                    record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'H')\n                    flow.set('mivDetail','Route C')\n                }\n            } else {\n                    flow.set('mivDetail','Call NonLifo Valuation')\n            }\n        } else if (parseFloat(INVVSUMx) == 0) {\n            if (parseFloat(record?.[lifo]) == parseFloat(record?.[ival_tot])) {\n                    flow.set('mivDetail','Route A')\n            } else {\n                record[lifo] = record?.[ival_tot]\n                flagRules(lifo_f, [ival_tot_f])\n                    flow.set('mivDetail','Route A')\n            }\n        } else {\n            record[fifo] = Math.round((parseFloat(record?.[fifo]) / parseFloat(INVVSUMx)) * parseFloat(INVDIFFx))\n            record[fifo_f] = setCharAt(record?.[fifo_f], 2, 'K')\n\n            record[avg] = Math.round((parseFloat(record?.[ec_avg]) / parseFloat(INVVSUMx)) * parseFloat(INVDIFFx));\n            record[avg_f] = setCharAt(record?.[avg_f], 2, 'K');\n\n            record[std] = Math.round((parseFloat(record?.[ec_std]) / parseFloat(INVVSUMx)) * parseFloat(INVDIFFx));\n            record[std_f] = setCharAt(record?.[std_f], 2, 'K');\n\n            record[othnl] = Math.round(parseFloat(record?.[ival_tot]) - (parseFloat(record?.[lifo]) + parseFloat(record?.[fifo]) + parseFloat(record?.[avg]) + parseFloat(record?.[std])));\n            record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'K');\n\n            flow.set('mivDetail','Route C')\n        }\n    }\n    function EvaluateDetailValuationMethodsModule() {\n        let letter = global.get('miv')\n        flow.set('mivDetail','')\n        EvaluateDetailValuationMethods(letter)\n    }\n    EvaluateDetailValuationMethodsModule()\n    return msg\n}catch(e){\n    return msg\n}\n",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -10577,7 +10672,7 @@
         "type": "function",
         "z": "3e0275f580e2d77c",
         "name": "Route C",
-        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + ' ';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n\n    function EvaluateDetailPathC(variable) {\n        let othnl = ''\n        let avg = ''\n        let fifo = ''\n        let std = ''\n        let othnl_f = ''\n        if (variable == 'E') {\n            avg = 'INV_E_AVG_VAL'\n            fifo = 'INV_E_FIFO_VAL'\n            std = 'INV_E_STD_VAL'\n            othnl = 'INV_E_OTHNL_VAL'\n            othnl_f = 'INV_E_OTHNL_VAL_F'\n        } else if (variable == 'B') {\n            avg = 'INV_B_AVG_VAL'\n            fifo = 'INV_B_FIFO_VAL'\n            std = 'INV_B_STD_VAL'\n            othnl = 'INV_B_OTHNL_VAL'\n            othnl_f = 'INV_B_OTHNL_VAL_F'\n        }\n        if (parseFloat(record?.[othnl]) < 0) {\n            record[othnl] = Math.abs(record?.[othnl])\n\n            var max = Math.max(...[parseFloat(record?.[fifo]), parseFloat(record?.[avg]), parseFloat(record?.[std])])\n            if (parseFloat(record?.[fifo]) == max) {\n                record[fifo] = record?.[fifo] - record?.[othnl]\n            } else if (parseFloat(record?.[avg]) == max) {\n                record[avg] = record?.[avg] - record?.[othnl]\n            } else {\n                record[std] = record?.[std] - record?.[othnl]\n            }\n            record[othnl] = 0\n            record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'Z');\n        }\n    }\n    \n    function EvaluateDetailValuationMethodsModulePathC() {\n        let letter = global.get('miv')\n        EvaluateDetailPathC(letter)\n    }\n    EvaluateDetailValuationMethodsModulePathC()\n    return msg\n}catch(e){\n    return msg\n}\n",
+        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n\n    function EvaluateDetailPathC(variable) {\n        let othnl = ''\n        let avg = ''\n        let fifo = ''\n        let std = ''\n        let othnl_f = ''\n        if (variable == 'E') {\n            avg = 'INV_E_AVG_VAL'\n            fifo = 'INV_E_FIFO_VAL'\n            std = 'INV_E_STD_VAL'\n            othnl = 'INV_E_OTHNL_VAL'\n            othnl_f = 'INV_E_OTHNL_VAL_F'\n        } else if (variable == 'B') {\n            avg = 'INV_B_AVG_VAL'\n            fifo = 'INV_B_FIFO_VAL'\n            std = 'INV_B_STD_VAL'\n            othnl = 'INV_B_OTHNL_VAL'\n            othnl_f = 'INV_B_OTHNL_VAL_F'\n        }\n        if (parseFloat(record?.[othnl]) < 0) {\n            record[othnl] = Math.abs(record?.[othnl])\n\n            var max = Math.max(...[parseFloat(record?.[fifo]), parseFloat(record?.[avg]), parseFloat(record?.[std])])\n            if (parseFloat(record?.[fifo]) == max) {\n                record[fifo] = record?.[fifo] - record?.[othnl]\n            } else if (parseFloat(record?.[avg]) == max) {\n                record[avg] = record?.[avg] - record?.[othnl]\n            } else {\n                record[std] = record?.[std] - record?.[othnl]\n            }\n            record[othnl] = 0\n            record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'Z');\n        }\n    }\n    \n    function EvaluateDetailValuationMethodsModulePathC() {\n        let letter = global.get('miv')\n        EvaluateDetailPathC(letter)\n    }\n    EvaluateDetailValuationMethodsModulePathC()\n    return msg\n}catch(e){\n    return msg\n}\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -10597,7 +10692,7 @@
         "type": "function",
         "z": "3e0275f580e2d77c",
         "name": "Route A",
-        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + ' ';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    function EvaluateDetailPathA(variable) {\n        let othnl = ''\n        let avg = ''\n        let fifo = ''\n        let std = ''\n        let nl_tot = ''\n        let nl_tot_f = ''\n        if (variable == 'E') {\n            avg = 'INV_E_AVG_VAL'\n            fifo = 'INV_E_FIFO_VAL'\n            std = 'INV_E_STD_VAL'\n            othnl = 'INV_E_OTHNL_VAL'\n            nl_tot = 'INV_E_NL_TOT_DVAL'\n            nl_tot_f = 'INV_E_NL_TOT_DVAL_F'\n        } else if (variable == 'B') {\n            avg = 'INV_B_AVG_VAL'\n            fifo = 'INV_B_FIFO_VAL'\n            std = 'INV_B_STD_VAL'\n            othnl = 'INV_B_OTHNL_VAL'\n            nl_tot = 'INV_B_NL_TOT_DVAL'\n            nl_tot_f = 'INV_B_NL_TOT_DVAL_F'\n        }\n        if (parseFloat(record?.[nl_tot]) != (parseFloat(record?.[fifo]) + parseFloat(record?.[avg]) + parseFloat(record?.[std]) + parseFloat(record?.[othnl]))) {\n            record[nl_tot] = parseFloat(record?.[fifo]) + parseFloat(record?.[avg]) + parseFloat(record?.[std]) + parseFloat(record?.[othnl])\n            record[nl_tot_f] = setCharAt(record?.[nl_tot_f], 2, 'L')\n        }\n    }\n\n    function EvaluateDetailValuationMethodsModulePathA() {\n        let letter = global.get('miv')\n        EvaluateDetailPathA(letter)\n    }\n    EvaluateDetailValuationMethodsModulePathA()\n    return msg\n}catch(e){\n    return msg\n}\n",
+        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    function flagRules(variable, details) {\n        if (record?.[variable] == 0) {\n            record[variable] = setCharAt(record?.[variable], 2, 'Z');\n        } else {\n            let found = 'N'\n            for (let i in details) {\n                let detail = details[i]\n                if (record?.[detail]) {\n                    if (['R_', 'K_', 'T_'].includes(record?.[detail].substring(0, 2))) {\n                        found = 'Y'\n                    } else if (['R', 'C', 'A', 'S', 'O', 'G'].includes(record?.[detail]?.charAt(1))) {\n                        found = 'Y'\n                    } else {\n                        found = 'N'\n                        break\n                    }\n                    // } else {\n                    //     found = 'N'\n                    //     break\n                }\n            }\n            if (found == 'Y') {\n                record[variable] = setCharAt(record?.[variable], 2, 'Y');\n            } else {\n                record[variable] = setCharAt(record?.[variable], 2, 'S');\n            }\n        }\n    }\n    //[fifo_f, avg_f, std_f, othnl_f]\n\n    function EvaluateDetailPathA(variable) {\n        let othnl = ''\n        let othnl_f = ''\n        let avg = ''\n        let avg_f = ''\n        let fifo = ''\n        let fifo_f = ''\n        let std = ''\n        let std_f = ''\n        let nl_tot = ''\n        let nl_tot_f = ''\n        if (variable == 'E') {\n            avg = 'INV_E_AVG_VAL'\n            avg_f = 'INV_E_AVG_VAL_F'\n            fifo = 'INV_E_FIFO_VAL'\n            fifo_f = 'INV_E_FIFO_VAL_F'\n            std = 'INV_E_STD_VAL'\n            std_f = 'INV_E_STD_VAL_F'\n            othnl = 'INV_E_OTHNL_VAL'\n            othnl_f = 'INV_E_OTHNL_VAL_F'\n            nl_tot = 'INV_E_NL_TOT_DVAL'\n            nl_tot_f = 'INV_E_NL_TOT_DVAL_F'\n        } else if (variable == 'B') {\n            avg = 'INV_B_AVG_VAL'\n            avg_f = 'INV_B_AVG_VAL_F'\n            fifo = 'INV_B_FIFO_VAL'\n            fifo_f = 'INV_B_FIFO_VAL_F'\n            std = 'INV_B_STD_VAL'\n            std_f = 'INV_B_STD_VAL_F'            \n            othnl = 'INV_B_OTHNL_VAL'\n            othnl_f = 'INV_B_OTHNL_VAL_F'\n            nl_tot = 'INV_B_NL_TOT_DVAL'\n            nl_tot_f = 'INV_B_NL_TOT_DVAL_F'\n        }\n        if (parseFloat(record?.[nl_tot]) != (parseFloat(record?.[fifo]) + parseFloat(record?.[avg]) + parseFloat(record?.[std]) + parseFloat(record?.[othnl]))) {\n            record[nl_tot] = parseFloat(record?.[fifo]) + parseFloat(record?.[avg]) + parseFloat(record?.[std]) + parseFloat(record?.[othnl])\n            flagRules(nl_tot_f, [fifo_f, avg_f, std_f, othnl_f])\n            \n        }\n    }\n\n    function EvaluateDetailValuationMethodsModulePathA() {\n        let letter = global.get('miv')\n        EvaluateDetailPathA(letter)\n    }\n    EvaluateDetailValuationMethodsModulePathA()\n    return msg\n}catch(e){\n    return msg\n}\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -10611,11 +10706,29 @@
         ]
     },
     {
+        "id": "0352308a0506973d",
+        "type": "function",
+        "z": "3e0275f580e2d77c",
+        "name": "MIV: EvaluateDetailValuationMethods (Database)",
+        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n    let ec = msg.ec[0]\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    function flagRules(variable, details) {\n        if (record?.[variable] == 0) {\n            record[variable] = setCharAt(record?.[variable], 2, 'Z');\n        } else {\n            let found = 'N'\n            for (let i in details) {\n                let detail = details[i]\n                if (record?.[detail]) {\n                    if (['R_', 'K_', 'T_'].includes(record?.[detail].substring(0, 2))) {\n                        found = 'Y'\n                    } else if (['R', 'C', 'A', 'S', 'O', 'G'].includes(record?.[detail]?.charAt(1))) {\n                        found = 'Y'\n                    } else {\n                        found = 'N'\n                        break\n                    }\n                    // } else {\n                    //     found = 'N'\n                    //     break\n                }\n            }\n            if (found == 'Y') {\n                record[variable] = setCharAt(record?.[variable], 2, 'Y');\n            } else {\n                record[variable] = setCharAt(record?.[variable], 2, 'S');\n            }\n        }\n    }\n\n    function EvaluateDetailValuationMethods(variable) {\n        let avg = ''\n        let avg_f = ''\n        let fifo = ''\n        let fifo_f = ''\n        let std = ''\n        let std_f = ''\n        let othnl = ''\n        let othnl_f = ''\n        let ival_tot = ''\n        let ival_tot_f = ''\n        let nl_tot = ''\n        let nl_tot_f = ''\n        let lifo = ''\n        let lifo_f = ''\n        let ec_std = ''\n        let ec_avg = ''\n        let ec_fifo = ''\n        let ec_ival_tot = ''\n        let INVVSUMx = flow.get('$parent.invvsumx')\n        let INVDIFFx = flow.get('$parent.invdiffx')\n\n        if (variable == 'E') {\n            avg = 'INV_E_AVG_VAL'\n            avg_f = 'INV_E_AVG_VAL_F'\n            fifo = 'INV_E_FIFO_VAL'\n            fifo_f = 'INV_E_FIFO_VAL_F'\n            std = 'INV_E_STD_VAL'\n            std_f = 'INV_E_STD_VAL_F'\n            othnl = 'INV_E_OTHNL_VAL'\n            othnl_f = 'INV_E_OTHNL_VAL_F'\n            ival_tot = 'INV_E_IVAL_TOT_DVAL'\n            ival_tot_f = 'INV_E_IVAL_TOT_DVAL_F'\n            nl_tot = 'INV_E_NL_TOT_DVAL'\n            nl_tot_f = 'INV_E_NL_TOT_DVAL_F'\n            lifo = 'INV_E_LIFO_VAL'\n            lifo_f = 'INV_E_LIFO_VAL_F'\n            ec_std = 'INV_E_STD_VAL'\n            ec_avg = 'INV_E_AVG_VAL'\n            ec_fifo = 'INV_E_FIFO_VAL'\n            ec_ival_tot = 'INV_E_IVAL_TOT_DVAL'\n        } else if (variable == 'B') {\n            avg = 'INV_B_AVG_VAL'\n            avg_f = 'INV_B_AVG_VAL_F'\n            fifo = 'INV_B_FIFO_VAL'\n            fifo_f = 'INV_B_FIFO_VAL_F'\n            std = 'INV_B_STD_VAL'\n            std_f = 'INV_B_STD_VAL_F'\n            othnl = 'INV_B_OTHNL_VAL'\n            othnl_f = 'INV_B_OTHNL_VAL_F'\n            ival_tot = 'INV_B_IVAL_TOT_DVAL'\n            ival_tot_f = 'INV_B_IVAL_TOT_DVAL_F'\n            nl_tot = 'INV_B_NL_TOT_DVAL'\n            nl_tot_f = 'INV_B_NL_TOT_DVAL_F'\n            lifo = 'INV_B_LIFO_VAL'\n            lifo_f = 'INV_B_LIFO_VAL_F'\n            ec_std = 'INV_B_STD_VAL'\n            ec_avg = 'INV_B_AVG_VAL'\n            ec_fifo = 'INV_B_FIFO_VAL'\n            ec_ival_tot = 'INV_B_IVAL_TOT_DVAL'\n        }\n\n        if (parseFloat(record?.[lifo]) == 0) {\n            if (parseFloat(INVVSUMx) == 0) {\n                if (parseFloat(ec?.[ec_ival_tot]) == 0) {\n                    flow.set('mivDetail','Call Random')\n                } else {\n                    record[fifo] = Math.round((parseFloat(ec?.[ec_fifo]) / parseFloat(ec?.[ec_ival_tot])) * parseFloat(record?.[ival_tot]))\n                    record[fifo_f] = setCharAt(record?.[fifo_f], 2, 'H')\n                    record[avg] = Math.round((parseFloat(ec?.[ec_avg]) / parseFloat(ec?.[ec_ival_tot])) * parseFloat(record?.[ival_tot]))\n                    record[avg_f] = setCharAt(record?.[avg_f], 2, 'H')\n                    record[std] = Math.round((parseFloat(ec?.[ec_std]) / parseFloat(ec?.[ec_ival_tot])) * parseFloat(record?.[ival_tot]))\n                    record[std_f] = setCharAt(record?.[std_f], 2, 'H')\n                    record[othnl] = Math.round(parseFloat(record?.[ival_tot]) -\n                        (\n                            parseFloat(record?.[lifo]) + parseFloat(record?.[fifo]) + parseFloat(record?.[avg]) + parseFloat(record?.[std])\n                        ))\n                    record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'H')\n                    flow.set('mivDetail','Route C')\n                }\n            } else {\n                    flow.set('mivDetail','Call NonLifo Valuation')\n            }\n        } else if (parseFloat(INVVSUMx) == 0) {\n            if (parseFloat(record?.[lifo]) == parseFloat(record?.[ival_tot])) {\n                    flow.set('mivDetail','Route A')\n            } else {\n                record[lifo] = record?.[ival_tot]\n                flagRules(lifo_f, [ival_tot_f])\n                    flow.set('mivDetail','Route A')\n            }\n        } else {\n            record[fifo] = Math.round((parseFloat(record?.[fifo]) / parseFloat(INVVSUMx)) * parseFloat(INVDIFFx))\n            record[fifo_f] = setCharAt(record?.[fifo_f], 2, 'K')\n\n            record[avg] = Math.round((parseFloat(ec?.[ec_avg]) / parseFloat(INVVSUMx)) * parseFloat(INVDIFFx));\n            record[avg_f] = setCharAt(record?.[avg_f], 2, 'K');\n\n            record[std] = Math.round((parseFloat(ec?.[ec_std]) / parseFloat(INVVSUMx)) * parseFloat(INVDIFFx));\n            record[std_f] = setCharAt(record?.[std_f], 2, 'K');\n\n            record[othnl] = Math.round(parseFloat(record?.[ival_tot]) - (parseFloat(record?.[lifo]) + parseFloat(record?.[fifo]) + parseFloat(record?.[avg]) + parseFloat(record?.[std])));\n            record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'K');\n\n            flow.set('mivDetail','Route C')\n        }\n    }\n    function EvaluateDetailValuationMethodsModule() {\n        let letter = global.get('miv')\n        flow.set('mivDetail','')\n        EvaluateDetailValuationMethods(letter)\n    }\n    EvaluateDetailValuationMethodsModule()\n    return msg\n}catch(e){\n    return msg\n}\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
         "id": "9f9833d11c2323e2",
         "type": "function",
         "z": "0ab9d9d713d5103c",
         "name": "MIV: EvaluateNoNLIFOValuationMethodsModule",
-        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + ' ';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    function EvaluateNoNLIFOValuationMethodsModulePathA(variable, INVVSUMx) {\n        let ival_tot = ''\n        let lifo = ''\n        if (variable == 'E') {\n            ival_tot = 'INV_E_IVAL_TOT_DVAL'\n            lifo = 'INV_E_LIFO_VAL'\n        } else if (variable == 'B') {\n            ival_tot = 'INV_B_IVAL_TOT_DVAL'\n            lifo = 'INV_B_LIFO_VAL'\n        }\n        var INVDIFFx = parseFloat(record?.[ival_tot]) - parseFloat(record?.[lifo])\n        flow.set('invvsumx',INVVSUMx)\n        flow.set('invdiffx',INVDIFFx)\n        flow.set('callDet','Call Details')\n    }\n\n    function EvaluateValuationMethods(variable) {\n        let avg = ''\n        let avg_f = ''\n        let fifo = ''\n        let fifo_f = ''\n        let std = ''\n        let std_f = ''\n        let othnl = ''\n        let othnl_f = ''\n        let tot = ''\n        let ival_tot = ''\n        let ival_tot_f = ''\n        let nl_tot = ''\n        let nl_tot_f = ''\n        let lifo = ''\n        let lifo_f = ''\n        let lifo_rsv = ''\n        let lifo_rsv_f = ''\n\n        if (variable == 'E') {\n            avg = 'INV_E_AVG_VAL'\n            avg_f = 'INV_E_AVG_VAL_F'\n            fifo = 'INV_E_FIFO_VAL'\n            fifo_f = 'INV_E_FIFO_VAL_F'\n            std = 'INV_E_STD_VAL'\n            std_f = 'INV_E_STD_VAL_F'\n            othnl = 'INV_E_OTHNL_VAL'\n            othnl_f = 'INV_E_OTHNL_VAL_F'\n            tot = 'INV_E_TOT_VAL'\n            ival_tot = 'INV_E_IVAL_TOT_DVAL'\n            ival_tot_f = 'INV_E_IVAL_TOT_DVAL_F'\n            nl_tot = 'INV_E_NL_TOT_DVAL'\n            nl_tot_f = 'INV_E_NL_TOT_DVAL_F'\n            lifo = 'INV_E_LIFO_VAL'\n            lifo_f = 'INV_E_LIFO_VAL_F'\n            lifo_rsv = 'INV_E_LIFO_RSV_VAL'\n            lifo_rsv_f = 'INV_E_LIFO_RSV_VAL_F'\n        } else if (variable == 'B') {\n            avg = 'INV_B_AVG_VAL'\n            avg_f = 'INV_B_AVG_VAL_F'\n            fifo = 'INV_B_FIFO_VAL'\n            fifo_f = 'INV_B_FIFO_VAL_F'\n            std = 'INV_B_STD_VAL'\n            std_f = 'INV_B_STD_VAL_F'\n            othnl = 'INV_B_OTHNL_VAL'\n            othnl_f = 'INV_B_OTHNL_VAL_F'\n            tot = 'INV_B_TOT_VAL'\n            ival_tot = 'INV_B_IVAL_TOT_DVAL'\n            ival_tot_f = 'INV_B_IVAL_TOT_DVAL_F'\n            nl_tot = 'INV_B_NL_TOT_DVAL'\n            nl_tot_f = 'INV_B_NL_TOT_DVAL_F'\n            lifo = 'INV_B_LIFO_VAL'\n            lifo_f = 'INV_B_LIFO_VAL_F'\n            lifo_rsv = 'INV_B_LIFO_RSV_VAL'\n            lifo_rsv_f = 'INV_B_LIFO_RSV_VAL_F'\n        }\n        var INVVSUMx = parseFloat(record?.[fifo]) + parseFloat(record?.[avg]) + parseFloat(record?.[std]) + parseFloat(record?.[othnl])\n\n        if (parseInt(record?.[tot]) == 0) {\n            if ((parseFloat(record?.[lifo]) + parseFloat(record?.[fifo]) + parseFloat(record?.[avg]) + parseFloat(record?.[std]) + parseFloat(record?.[othnl]) + parseFloat(record?.[ival_tot]) + parseFloat(record?.[nl_tot])) > 0 || parseInt(record?.[lifo_rsv]) != 0) {\n                record[lifo] = 0;\n                record[lifo_f] = setCharAt(record?.[lifo_f], 2, 'Z');\n                record[fifo] = 0\n                record[fifo_f] = setCharAt(record?.[fifo_f], 2, 'Z');\n                record[avg] = 0;\n                record[avg_f] = setCharAt(record?.[avg_f], 2, 'Z');\n                record[std] = 0;\n                record[std_f] = setCharAt(record?.[std_f], 2, 'Z');\n                record[othnl] = 0;\n                record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'Z');\n                record[ival_tot] = 0;\n                record[ival_tot_f] = setCharAt(record?.[ival_tot_f], 2, 'Z');\n                record[nl_tot] = 0;\n                record[nl_tot_f] = setCharAt(record?.[nl_tot_f], 2, 'Z');\n                record[lifo_rsv] = 0;\n                record[lifo_rsv_f] = setCharAt(record?.[lifo_rsv_f], 2, 'Z');\n            }\n\n        } else if (parseFloat(record?.[tot]) == parseFloat(record?.[ival_tot])) {\n            if (parseFloat(record?.[ival_tot]) == parseFloat(record?.[lifo]) + parseFloat(INVVSUMx)) {\n                if (parseFloat(record?.[nl_tot]) == parseFloat(INVVSUMx)) {\n                } else {\n                    record[nl_tot] = INVVSUMx\n                    record[nl_tot_f] = setCharAt(record?.[nl_tot_f], 2, 'L');\n                }\n            } else {\n                EvaluateNoNLIFOValuationMethodsModulePathA(variable, INVVSUMx)\n            }\n        } else {\n            record[ival_tot] = record[tot]\n            record[ival_tot_f] = setCharAt(record?.[ival_tot_f], 2, 'L')\n            EvaluateNoNLIFOValuationMethodsModulePathA(variable, INVVSUMx)\n        }\n    }\n    function EvaluateValuationMethodsModule() {\n        flow.set('invvsumx','')\n        flow.set('invdiffx','')\n        flow.set('callDet','')\n        let letter = global.get('miv')\n        EvaluateValuationMethods(letter)\n    }\n\n    EvaluateValuationMethodsModule()\n    record.ACTION = 'Return to Non-LIFO Valuation Methods'\n\n    return msg;\n}catch(e){\n    return msg;\n}",
+        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    function EvaluateNoNLIFOValuationMethodsModulePathA(variable, INVVSUMx) {\n        let ival_tot = ''\n        let lifo = ''\n        if (variable == 'E') {\n            ival_tot = 'INV_E_IVAL_TOT_DVAL'\n            lifo = 'INV_E_LIFO_VAL'\n        } else if (variable == 'B') {\n            ival_tot = 'INV_B_IVAL_TOT_DVAL'\n            lifo = 'INV_B_LIFO_VAL'\n        }\n        var INVDIFFx = parseFloat(record?.[ival_tot]) - parseFloat(record?.[lifo])\n        flow.set('invvsumx',INVVSUMx)\n        flow.set('invdiffx',INVDIFFx)\n        flow.set('callDet','Call Details')\n    }\n\n    function EvaluateValuationMethods(variable) {\n        let avg = ''\n        let avg_f = ''\n        let fifo = ''\n        let fifo_f = ''\n        let std = ''\n        let std_f = ''\n        let othnl = ''\n        let othnl_f = ''\n        let tot = ''\n        let ival_tot = ''\n        let ival_tot_f = ''\n        let nl_tot = ''\n        let nl_tot_f = ''\n        let lifo = ''\n        let lifo_f = ''\n        let lifo_rsv = ''\n        let lifo_rsv_f = ''\n\n        if (variable == 'E') {\n            avg = 'INV_E_AVG_VAL'\n            avg_f = 'INV_E_AVG_VAL_F'\n            fifo = 'INV_E_FIFO_VAL'\n            fifo_f = 'INV_E_FIFO_VAL_F'\n            std = 'INV_E_STD_VAL'\n            std_f = 'INV_E_STD_VAL_F'\n            othnl = 'INV_E_OTHNL_VAL'\n            othnl_f = 'INV_E_OTHNL_VAL_F'\n            tot = 'INV_E_TOT_VAL'\n            ival_tot = 'INV_E_IVAL_TOT_DVAL'\n            ival_tot_f = 'INV_E_IVAL_TOT_DVAL_F'\n            nl_tot = 'INV_E_NL_TOT_DVAL'\n            nl_tot_f = 'INV_E_NL_TOT_DVAL_F'\n            lifo = 'INV_E_LIFO_VAL'\n            lifo_f = 'INV_E_LIFO_VAL_F'\n            lifo_rsv = 'INV_E_LIFO_RSV_VAL'\n            lifo_rsv_f = 'INV_E_LIFO_RSV_VAL_F'\n        } else if (variable == 'B') {\n            avg = 'INV_B_AVG_VAL'\n            avg_f = 'INV_B_AVG_VAL_F'\n            fifo = 'INV_B_FIFO_VAL'\n            fifo_f = 'INV_B_FIFO_VAL_F'\n            std = 'INV_B_STD_VAL'\n            std_f = 'INV_B_STD_VAL_F'\n            othnl = 'INV_B_OTHNL_VAL'\n            othnl_f = 'INV_B_OTHNL_VAL_F'\n            tot = 'INV_B_TOT_VAL'\n            ival_tot = 'INV_B_IVAL_TOT_DVAL'\n            ival_tot_f = 'INV_B_IVAL_TOT_DVAL_F'\n            nl_tot = 'INV_B_NL_TOT_DVAL'\n            nl_tot_f = 'INV_B_NL_TOT_DVAL_F'\n            lifo = 'INV_B_LIFO_VAL'\n            lifo_f = 'INV_B_LIFO_VAL_F'\n            lifo_rsv = 'INV_B_LIFO_RSV_VAL'\n            lifo_rsv_f = 'INV_B_LIFO_RSV_VAL_F'\n        }\n        var INVVSUMx = parseFloat(record?.[fifo]) + parseFloat(record?.[avg]) + parseFloat(record?.[std]) + parseFloat(record?.[othnl])\n\n        if (parseInt(record?.[tot]) == 0) {\n            if ((parseFloat(record?.[lifo]) + parseFloat(record?.[fifo]) + parseFloat(record?.[avg]) + parseFloat(record?.[std]) + parseFloat(record?.[othnl]) + parseFloat(record?.[ival_tot]) + parseFloat(record?.[nl_tot])) > 0 || parseInt(record?.[lifo_rsv]) != 0) {\n                record[lifo] = 0;\n                record[lifo_f] = setCharAt(record?.[lifo_f], 2, 'Z');\n                record[fifo] = 0\n                record[fifo_f] = setCharAt(record?.[fifo_f], 2, 'Z');\n                record[avg] = 0;\n                record[avg_f] = setCharAt(record?.[avg_f], 2, 'Z');\n                record[std] = 0;\n                record[std_f] = setCharAt(record?.[std_f], 2, 'Z');\n                record[othnl] = 0;\n                record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'Z');\n                record[ival_tot] = 0;\n                record[ival_tot_f] = setCharAt(record?.[ival_tot_f], 2, 'Z');\n                record[nl_tot] = 0;\n                record[nl_tot_f] = setCharAt(record?.[nl_tot_f], 2, 'Z');\n                record[lifo_rsv] = 0;\n                record[lifo_rsv_f] = setCharAt(record?.[lifo_rsv_f], 2, 'Z');\n            }\n\n        } else if (parseFloat(record?.[tot]) == parseFloat(record?.[ival_tot])) {\n            if (parseFloat(record?.[ival_tot]) == parseFloat(record?.[lifo]) + parseFloat(INVVSUMx)) {\n                if (parseFloat(record?.[nl_tot]) == parseFloat(INVVSUMx)) {\n                } else {\n                    record[nl_tot] = INVVSUMx\n                    record[nl_tot_f] = setCharAt(record?.[nl_tot_f], 2, 'L');\n                }\n            } else {\n                EvaluateNoNLIFOValuationMethodsModulePathA(variable, INVVSUMx)\n            }\n        } else {\n            record[ival_tot] = record[tot]\n            record[ival_tot_f] = setCharAt(record?.[ival_tot_f], 2, 'L')\n            EvaluateNoNLIFOValuationMethodsModulePathA(variable, INVVSUMx)\n        }\n    }\n    function EvaluateValuationMethodsModule() {\n        flow.set('invvsumx','')\n        flow.set('invdiffx','')\n        flow.set('callDet','')\n        let letter = global.get('miv')\n        EvaluateValuationMethods(letter)\n    }\n\n    EvaluateValuationMethodsModule()\n    record.ACTION = 'Return to Non-LIFO Valuation Methods'\n\n    return msg;\n}catch(e){\n    return msg;\n}",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -10686,7 +10799,7 @@
         "type": "function",
         "z": "c65f463988b11e12",
         "name": "MIV: Evaluate LIFO Module",
-        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    let cache = global.get(\"lookupCache\");\n\n    let inv_reserve_file = cache.data.find(\n        item =>\n            item.module === \"inv_reserve\" &&\n            item.param === 'inv_reserve' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"estab\"\n    )?.json_values;\n\n    function findParam() {\n        let NAICS_CODE = record.NAICS_CODE\n        NAICS_CODE = NAICS_CODE.toString()\n        for (let i in inv_reserve_file['INV_RESERVE']) {\n            let invReserve = inv_reserve_file['INV_RESERVE'][i]\n            let naics = invReserve['NAICSNEW']\n            naics = naics.toString()\n            if (NAICS_CODE.startsWith(naics)) {\n                return (invReserve);\n                break;\n            }\n        }\n    }\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + ' ';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n    function EvaluateLIFOModulePathB() {\n        record.ACTION = 'Return to LIFO Valuation Method'\n    }\n\n    function EvaluateLIFOModulePathC(name_lifo, name_tot, name_lifo_f) {\n        if (parseFloat(record?.[name_lifo]) > parseFloat(record?.[name_tot])) {\n            record[name_lifo] = record?.[name_tot]\n            record[name_lifo_f] = setCharAt(record?.[name_lifo_f], 2, 'L')\n        }\n        EvaluateLIFOModulePathB()\n    }\n\n    function EvalLIFO(variable, invReserve) {\n        let name_tot = ''\n        let name_lifo = ''\n        let name_lifo_rsv = ''\n        let name_lifo_f = ''\n        let name_lifo_rsv_f = ''\n        let ec_name_tot = ''\n        let ec_name_lifo = ''\n        let ec_name_lifo_rsv = ''\n        let rsv = ''\n        let beta = ''\n        if (variable == 'E') {\n            name_tot = 'INV_E_TOT_VAL'\n            name_lifo = 'INV_E_LIFO_VAL'\n            name_lifo_rsv = 'INV_E_LIFO_RSV_VAL'\n            name_lifo_f = 'INV_E_LIFO_VAL_F'\n            name_lifo_rsv_f = 'INV_E_LIFO_RSV_VAL_F'\n            ec_name_tot = 'EC_INV_E_TOT_VAL'\n            ec_name_lifo = 'EC_INV_E_LIFO_VAL'\n            ec_name_lifo_rsv = 'EC_INV_E_LIFO_RSV_VAL'\n            rsv = 'RSVE_TOTE_UL'\n            beta = 'BETA_E'\n        } else if (variable == 'B') {\n            name_tot = 'INV_B_TOT_VAL'\n            name_lifo = 'INV_B_LIFO_VAL'\n            name_lifo_rsv = 'INV_B_LIFO_RSV_VAL'\n            name_lifo_f = 'INV_B_LIFO_VAL_F'\n            name_lifo_rsv_f = 'INV_B_LIFO_RSV_VAL_F'\n            ec_name_tot = 'EC_INV_B_TOT_VAL'\n            ec_name_lifo = 'EC_INV_B_LIFO_VAL'\n            ec_name_lifo_rsv = 'EC_INV_B_LIFO_RSV_VAL'\n            rsv = 'RSVB_TOTB_BL'\n            beta = 'BETA_B'\n        }\n        rsv = invReserve[rsv]\n        beta = invReserve[beta]\n\n        if (parseInt(record?.[name_lifo]) == 0) {\n            if (parseInt(record?.[name_lifo_rsv]) == 0) {\n                if (parseInt(record?.[ec_name_lifo]) == 0 || parseInt(record?.[ec_name_tot]) == 0) {\n                    EvaluateLIFOModulePathB()\n                } else if ((record?.[name_lifo_f]?.charAt(0) != ' ' || record?.[name_lifo_f]?.charAt(1) != ' ')\n                    && (record?.[name_lifo_f]?.charAt(0) && record?.[name_lifo_f]?.charAt(1))) {\n                    EvaluateLIFOModulePathB()\n                } else {\n                    record[name_lifo] = Math.round((parseFloat(record?.[ec_name_lifo]) / parseFloat(record?.[ec_name_tot])) * parseFloat(record?.[name_tot]))\n                    record[name_lifo_f] = setCharAt(record?.[name_lifo_f], 2, 'H')\n                    record[name_lifo_rsv] = Math.round((parseFloat(record?.[ec_name_lifo_rsv]) / parseFloat(record?.[ec_name_tot])) * parseFloat(record?.[name_tot]))\n                    record[name_lifo_rsv_f] = setCharAt(record?.[name_lifo_rsv_f], 2, 'H')\n                    EvaluateLIFOModulePathB()\n                }\n\n            } else {\n                record[name_lifo_rsv] = 0\n                record[name_lifo_rsv_f] = setCharAt(record?.[name_lifo_rsv_f], 2, 'B')\n                EvaluateLIFOModulePathC(name_lifo, name_tot, name_lifo_f)\n            }\n        } else if (parseInt(record?.[name_lifo_rsv]) == 0) {\n            record[name_lifo_rsv] = Math.round(parseFloat(beta) * parseFloat(record?.[name_tot]))\n            record[name_lifo_rsv_f] = setCharAt(record?.[name_lifo_rsv_f], 2, 'B')\n            EvaluateLIFOModulePathC(name_lifo, name_tot, name_lifo_f)\n        } else if (parseFloat(record?.[name_lifo]) > Math.abs(parseFloat(record?.[name_lifo_rsv]))) {\n            EvaluateLIFOModulePathC(name_lifo, name_tot, name_lifo_f)\n        } else {\n            if (parseFloat(beta) > 0.70) {\n                record[name_lifo] = 4.0 * Math.abs(parseFloat(record?.[name_lifo_rsv]))\n            } else if (parseFloat(beta) <= 0.70 && parseFloat(beta) >= .50) {\n                record[name_lifo] = 5.0 * Math.abs(parseFloat(record?.[name_lifo_rsv]))\n            } else {\n                record[name_lifo] = 6.0 * Math.abs(parseFloat(record?.[name_lifo_rsv]))\n            }\n            record[name_lifo_f] = setCharAt(record?.[name_lifo_f], 2, 'B')\n            EvaluateLIFOModulePathC(name_lifo, name_tot, name_lifo_f)\n        }\n    }\n\n    function EvaluateLIFOModule() {\n        let invReserve = findParam()\n        let letter = global.get('miv')\n        EvalLIFO(letter, invReserve)\n    }\n    EvaluateLIFOModule()\n    return msg;\n}catch(e){\n    return msg;\n}",
+        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    let cache = global.get(\"lookupCache\");\n\n    let inv_reserve_file = cache.data.find(\n        item =>\n            item.module === \"inv_reserve\" &&\n            item.param === 'inv_reserve' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"estab\"\n    )?.json_values;\n\n    function findParam() {\n        let NAICS_CODE = record.NAICS_CODE\n        NAICS_CODE = NAICS_CODE.toString()\n        for (let i in inv_reserve_file['INV_RESERVE']) {\n            let invReserve = inv_reserve_file['INV_RESERVE'][i]\n            let naics = invReserve['NAICSNEW']\n            naics = naics.toString()\n            if (NAICS_CODE.startsWith(naics)) {\n                return (invReserve);\n                break;\n            }\n        }\n    }\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    function flagRules(variable, details) {\n        if (record?.[variable] == 0) {\n            record[variable] = setCharAt(record?.[variable], 2, 'Z');\n        } else {\n            let found = 'N'\n            for (let i in details) {\n                let detail = details[i]\n                if (record?.[detail]) {\n                    if (['R_', 'K_', 'T_'].includes(record?.[detail].substring(0, 2))) {\n                        found = 'Y'\n                    } else if (['R', 'C', 'A', 'S', 'O', 'G'].includes(record?.[detail]?.charAt(1))) {\n                        found = 'Y'\n                    } else {\n                        found = 'N'\n                        break\n                    }\n                    // } else {\n                    //     found = 'N'\n                    //     break\n                }\n            }\n            if (found == 'Y') {\n                record[variable] = setCharAt(record?.[variable], 2, 'Y');\n            } else {\n                record[variable] = setCharAt(record?.[variable], 2, 'S');\n            }\n        }\n    }\n\n    function EvaluateLIFOModulePathB() {\n        record.ACTION = 'Return to LIFO Valuation Method'\n    }\n\n    function EvaluateLIFOModulePathC(name_lifo, name_tot, name_lifo_f, name_tot_f) {\n        if (parseFloat(record?.[name_lifo]) > parseFloat(record?.[name_tot])) {\n            record[name_lifo] = record?.[name_tot]\n            flagRules(name_lifo_f,[name_tot_f] )\n        }\n        EvaluateLIFOModulePathB()\n    }\n\n    function EvalLIFO(variable, invReserve) {\n        let name_tot = ''\n        let name_tot_f = ''\n        let name_lifo = ''\n        let name_lifo_rsv = ''\n        let name_lifo_f = ''\n        let name_lifo_rsv_f = ''\n        let ec_name_tot = ''\n        let ec_name_lifo = ''\n        let ec_name_lifo_rsv = ''\n        let rsv = ''\n        let beta = ''\n        if (variable == 'E') {\n            name_tot = 'INV_E_TOT_VAL'\n            name_tot_f = 'INV_E_TOT_VAL_F'\n            name_lifo = 'INV_E_LIFO_VAL'\n            name_lifo_rsv = 'INV_E_LIFO_RSV_VAL'\n            name_lifo_f = 'INV_E_LIFO_VAL_F'\n            name_lifo_rsv_f = 'INV_E_LIFO_RSV_VAL_F'\n            ec_name_tot = 'EC_INV_E_TOT_VAL'\n            ec_name_lifo = 'EC_INV_E_LIFO_VAL'\n            ec_name_lifo_rsv = 'EC_INV_E_LIFO_RSV_VAL'\n            rsv = 'RSVE_TOTE_UL'\n            beta = 'BETA_E'\n        } else if (variable == 'B') {\n            name_tot = 'INV_B_TOT_VAL'\n            name_tot_f = 'INV_B_TOT_VAL_F'\n            name_lifo = 'INV_B_LIFO_VAL'\n            name_lifo_rsv = 'INV_B_LIFO_RSV_VAL'\n            name_lifo_f = 'INV_B_LIFO_VAL_F'\n            name_lifo_rsv_f = 'INV_B_LIFO_RSV_VAL_F'\n            ec_name_tot = 'EC_INV_B_TOT_VAL'\n            ec_name_lifo = 'EC_INV_B_LIFO_VAL'\n            ec_name_lifo_rsv = 'EC_INV_B_LIFO_RSV_VAL'\n            rsv = 'RSVB_TOTB_BL'\n            beta = 'BETA_B'\n        }\n        rsv = invReserve[rsv]\n        beta = invReserve[beta]\n\n        if (parseInt(record?.[name_lifo]) == 0) {\n            if (parseInt(record?.[name_lifo_rsv]) == 0) {\n                if (parseInt(record?.[ec_name_lifo]) == 0 || parseInt(record?.[ec_name_tot]) == 0) {\n                    EvaluateLIFOModulePathB()\n                } else if ((record?.[name_lifo_f]?.charAt(0) != ' ' || record?.[name_lifo_f]?.charAt(1) != ' ')\n                    && (record?.[name_lifo_f]?.charAt(0) && record?.[name_lifo_f]?.charAt(1))) {\n                    EvaluateLIFOModulePathB()\n                } else {\n                    record[name_lifo] = Math.round((parseFloat(record?.[ec_name_lifo]) / parseFloat(record?.[ec_name_tot])) * parseFloat(record?.[name_tot]))\n                    record[name_lifo_f] = setCharAt(record?.[name_lifo_f], 2, 'H')\n                    record[name_lifo_rsv] = Math.round((parseFloat(record?.[ec_name_lifo_rsv]) / parseFloat(record?.[ec_name_tot])) * parseFloat(record?.[name_tot]))\n                    record[name_lifo_rsv_f] = setCharAt(record?.[name_lifo_rsv_f], 2, 'H')\n                    EvaluateLIFOModulePathB()\n                }\n\n            } else {\n                record[name_lifo_rsv] = 0\n                record[name_lifo_rsv_f] = setCharAt(record?.[name_lifo_rsv_f], 2, 'W')\n                EvaluateLIFOModulePathC(name_lifo, name_tot, name_lifo_f)\n            }\n        } else if (parseInt(record?.[name_lifo_rsv]) == 0) {\n            record[name_lifo_rsv] = Math.round(parseFloat(beta) * parseFloat(record?.[name_tot]))\n            record[name_lifo_rsv_f] = setCharAt(record?.[name_lifo_rsv_f], 2, 'W')\n            EvaluateLIFOModulePathC(name_lifo, name_tot, name_lifo_f)\n        } else if (parseFloat(record?.[name_lifo]) > Math.abs(parseFloat(record?.[name_lifo_rsv]))) {\n            EvaluateLIFOModulePathC(name_lifo, name_tot, name_lifo_f)\n        } else {\n            if (parseFloat(beta) > 0.70) {\n                record[name_lifo] = 4.0 * Math.abs(parseFloat(record?.[name_lifo_rsv]))\n            } else if (parseFloat(beta) <= 0.70 && parseFloat(beta) >= .50) {\n                record[name_lifo] = 5.0 * Math.abs(parseFloat(record?.[name_lifo_rsv]))\n            } else {\n                record[name_lifo] = 6.0 * Math.abs(parseFloat(record?.[name_lifo_rsv]))\n            }\n            record[name_lifo_f] = setCharAt(record?.[name_lifo_f], 2, 'W')\n            EvaluateLIFOModulePathC(name_lifo, name_tot, name_lifo_f)\n        }\n    }\n\n    function EvaluateLIFOModule() {\n        let invReserve = findParam()\n        let letter = global.get('miv')\n        EvalLIFO(letter, invReserve)\n    }\n    EvaluateLIFOModule()\n    return msg;\n}catch(e){\n    return msg;\n}",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -10700,11 +10813,29 @@
         ]
     },
     {
+        "id": "c8c6c13ac9fe72a7",
+        "type": "function",
+        "z": "c65f463988b11e12",
+        "name": "MIV: Evaluate LIFO Module (Database)",
+        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n    let ec = msg.ec[0]\n\n    let cache = global.get(\"lookupCache\");\n\n    let inv_reserve_file = cache.data.find(\n        item =>\n            item.module === \"inv_reserve\" &&\n            item.param === 'inv_reserve' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"estab\"\n    )?.json_values;\n\n    function findParam() {\n        let NAICS_CODE = record.NAICS_CODE\n        NAICS_CODE = NAICS_CODE.toString()\n        for (let i in inv_reserve_file['INV_RESERVE']) {\n            let invReserve = inv_reserve_file['INV_RESERVE'][i]\n            let naics = invReserve['NAICSNEW']\n            naics = naics.toString()\n            if (NAICS_CODE.startsWith(naics)) {\n                return (invReserve);\n                break;\n            }\n        }\n    }\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    function flagRules(variable, details) {\n        if (record?.[variable] == 0) {\n            record[variable] = setCharAt(record?.[variable], 2, 'Z');\n        } else {\n            let found = 'N'\n            for (let i in details) {\n                let detail = details[i]\n                if (record?.[detail]) {\n                    if (['R_', 'K_', 'T_'].includes(record?.[detail].substring(0, 2))) {\n                        found = 'Y'\n                    } else if (['R', 'C', 'A', 'S', 'O', 'G'].includes(record?.[detail]?.charAt(1))) {\n                        found = 'Y'\n                    } else {\n                        found = 'N'\n                        break\n                    }\n                    // } else {\n                    //     found = 'N'\n                    //     break\n                }\n            }\n            if (found == 'Y') {\n                record[variable] = setCharAt(record?.[variable], 2, 'Y');\n            } else {\n                record[variable] = setCharAt(record?.[variable], 2, 'S');\n            }\n        }\n    }\n\n    function EvaluateLIFOModulePathB() {\n        record.ACTION = 'Return to LIFO Valuation Method'\n    }\n\n    function EvaluateLIFOModulePathC(name_lifo, name_tot, name_lifo_f, name_tot_f) {\n        if (parseFloat(record?.[name_lifo]) > parseFloat(record?.[name_tot])) {\n            record[name_lifo] = record?.[name_tot]\n            flagRules(name_lifo_f,[name_tot_f] )\n        }\n        EvaluateLIFOModulePathB()\n    }\n\n    function EvalLIFO(variable, invReserve) {\n        let name_tot = ''\n        let name_tot_f = ''\n        let name_lifo = ''\n        let name_lifo_rsv = ''\n        let name_lifo_f = ''\n        let name_lifo_rsv_f = ''\n        let ec_name_tot = ''\n        let ec_name_lifo = ''\n        let ec_name_lifo_rsv = ''\n        let rsv = ''\n        let beta = ''\n        if (variable == 'E') {\n            name_tot = 'INV_E_TOT_VAL'\n            name_tot_f = 'INV_E_TOT_VAL_F'\n            name_lifo = 'INV_E_LIFO_VAL'\n            name_lifo_rsv = 'INV_E_LIFO_RSV_VAL'\n            name_lifo_f = 'INV_E_LIFO_VAL_F'\n            name_lifo_rsv_f = 'INV_E_LIFO_RSV_VAL_F'\n            ec_name_tot = 'INV_E_TOT_VAL'\n            ec_name_lifo = 'INV_E_LIFO_VAL'\n            ec_name_lifo_rsv = 'INV_E_LIFO_RSV_VAL'\n            rsv = 'RSVE_TOTE_UL'\n            beta = 'BETA_E'\n        } else if (variable == 'B') {\n            name_tot = 'INV_B_TOT_VAL'\n            name_tot_f = 'INV_B_TOT_VAL_F'\n            name_lifo = 'INV_B_LIFO_VAL'\n            name_lifo_rsv = 'INV_B_LIFO_RSV_VAL'\n            name_lifo_f = 'INV_B_LIFO_VAL_F'\n            name_lifo_rsv_f = 'INV_B_LIFO_RSV_VAL_F'\n            ec_name_tot = 'INV_B_TOT_VAL'\n            ec_name_lifo = 'INV_B_LIFO_VAL'\n            ec_name_lifo_rsv = 'INV_B_LIFO_RSV_VAL'\n            rsv = 'RSVB_TOTB_BL'\n            beta = 'BETA_B'\n        }\n        rsv = invReserve[rsv]\n        beta = invReserve[beta]\n\n        if (parseInt(record?.[name_lifo]) == 0) {\n            if (parseInt(record?.[name_lifo_rsv]) == 0) {\n                if (parseInt(ec?.[ec_name_lifo]) == 0 || parseInt(ec?.[ec_name_tot]) == 0) {\n                    EvaluateLIFOModulePathB()\n                } else if ((record?.[name_lifo_f]?.charAt(0) != ' ' || record?.[name_lifo_f]?.charAt(1) != ' ')\n                    && (record?.[name_lifo_f]?.charAt(0) && record?.[name_lifo_f]?.charAt(1))) {\n                    EvaluateLIFOModulePathB()\n                } else {\n                    record[name_lifo] = Math.round((parseFloat(ec?.[ec_name_lifo]) / parseFloat(ec?.[ec_name_tot])) * parseFloat(record?.[name_tot]))\n                    record[name_lifo_f] = setCharAt(record?.[name_lifo_f], 2, 'H')\n                    record[name_lifo_rsv] = Math.round((parseFloat(ec?.[ec_name_lifo_rsv]) / parseFloat(ec?.[ec_name_tot])) * parseFloat(record?.[name_tot]))\n                    record[name_lifo_rsv_f] = setCharAt(record?.[name_lifo_rsv_f], 2, 'H')\n                    EvaluateLIFOModulePathB()\n                }\n\n            } else {\n                record[name_lifo_rsv] = 0\n                record[name_lifo_rsv_f] = setCharAt(record?.[name_lifo_rsv_f], 2, 'W')\n                EvaluateLIFOModulePathC(name_lifo, name_tot, name_lifo_f)\n            }\n        } else if (parseInt(record?.[name_lifo_rsv]) == 0) {\n            record[name_lifo_rsv] = Math.round(parseFloat(beta) * parseFloat(record?.[name_tot]))\n            record[name_lifo_rsv_f] = setCharAt(record?.[name_lifo_rsv_f], 2, 'W')\n            EvaluateLIFOModulePathC(name_lifo, name_tot, name_lifo_f)\n        } else if (parseFloat(record?.[name_lifo]) > Math.abs(parseFloat(record?.[name_lifo_rsv]))) {\n            EvaluateLIFOModulePathC(name_lifo, name_tot, name_lifo_f)\n        } else {\n            if (parseFloat(beta) > 0.70) {\n                record[name_lifo] = 4.0 * Math.abs(parseFloat(record?.[name_lifo_rsv]))\n            } else if (parseFloat(beta) <= 0.70 && parseFloat(beta) >= .50) {\n                record[name_lifo] = 5.0 * Math.abs(parseFloat(record?.[name_lifo_rsv]))\n            } else {\n                record[name_lifo] = 6.0 * Math.abs(parseFloat(record?.[name_lifo_rsv]))\n            }\n            record[name_lifo_f] = setCharAt(record?.[name_lifo_f], 2, 'W')\n            EvaluateLIFOModulePathC(name_lifo, name_tot, name_lifo_f)\n        }\n    }\n\n    function EvaluateLIFOModule() {\n        let invReserve = findParam()\n        let letter = global.get('miv')\n        EvalLIFO(letter, invReserve)\n    }\n    EvaluateLIFOModule()\n    return msg;\n}catch(e){\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 810,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
         "id": "2aefe1848ae82c98",
         "type": "function",
         "z": "17fe2bc799b77fa4",
         "name": "MIV: Evaluate LIFO Reverse Module",
-        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    let cache = global.get(\"lookupCache\");\n\n    let inv_reserve_file = cache.data.find(\n        item =>\n            item.module === \"inv_reserve\" &&\n            item.param === 'inv_reserve' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"estab\"\n    )?.json_values;\n\n    function findParam() {\n        let NAICS_CODE = record.NAICS_CODE\n        NAICS_CODE = NAICS_CODE.toString()\n        for (let i in inv_reserve_file['INV_RESERVE']) {\n            let invReserve = inv_reserve_file['INV_RESERVE'][i]\n            let naics = invReserve['NAICSNEW']\n            naics = naics.toString()\n            if (NAICS_CODE.startsWith(naics)) {\n                return (invReserve);\n                break;\n            }\n        }\n    }\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + ' ';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    function EvaluateLifoReserve(variable, invReserve) {\n        let name_tot = ''\n        let name_lifo = ''\n        let name_lifo_rsv = ''\n        let name_lifo_f = ''\n        let name_lifo_rsv_f = ''\n        let rsv = ''\n        let beta = ''\n        if (variable == 'E') {\n            name_tot = 'INV_E_TOT_VAL'\n            name_lifo = 'INV_E_LIFO_VAL'\n            name_lifo_rsv = 'INV_E_LIFO_RSV_VAL'\n            name_lifo_f = 'INV_E_LIFO_VAL_F'\n            name_lifo_rsv_f = 'INV_E_LIFO_RSV_VAL_F'\n            rsv = 'RSVE_TOTE_UL'\n            beta = 'BETA_E'\n        } else if (variable == 'B') {\n            name_tot = 'INV_B_TOT_VAL'\n            name_lifo = 'INV_B_LIFO_VAL'\n            name_lifo_rsv = 'INV_B_LIFO_RSV_VAL'\n            name_lifo_f = 'INV_B_LIFO_VAL_F'\n            name_lifo_rsv_f = 'INV_B_LIFO_RSV_VAL_F'\n            rsv = 'RSVB_TOTB_BL'\n            beta = 'BETA_B'\n        }\n        rsv = invReserve[rsv]\n        beta = invReserve[beta]\n\n        if (parseInt(record?.[name_tot]) == 0) {\n            if (parseInt(record?.[name_lifo]) != 0 || parseInt(record?.[name_lifo_rsv]) != 0) {\n                record[name_lifo] = 0\n                record[name_lifo_f] = setCharAt(record?.[name_lifo_f], 2, 'Z')\n                record[name_lifo_rsv] = 0\n                record[name_lifo_rsv_f] = setCharAt(record?.[name_lifo_rsv_f], 2, 'Z')\n            }\n        } else if (parseInt(record?.[name_lifo_rsv]) < 0 || parseInt(record?.[name_lifo_rsv]) > 0) {\n            if (Math.abs(parseFloat(record?.[name_lifo_rsv])) / parseFloat(record?.[name_tot]) >= parseFloat(rsv)) {\n                record[name_lifo_rsv] = Math.round(parseFloat(beta) * parseFloat(record?.[name_tot]))\n                record[name_lifo_rsv_f] = setCharAt(record?.[name_lifo_rsv_f], 2, 'B')\n            }\n        }\n    }\n\n    function EvaluateLifoReserveModule() {\n        let invReserve = findParam()\n        let letter = global.get('miv')\n        EvaluateLifoReserve(letter, invReserve)\n        record.ACTION = 'Return to LIFO Valuation Method'\n    }\n\n    EvaluateLifoReserveModule()\n    return msg\n}catch(e){\n    return msg\n}",
+        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    let cache = global.get(\"lookupCache\");\n\n    let inv_reserve_file = cache.data.find(\n        item =>\n            item.module === \"inv_reserve\" &&\n            item.param === 'inv_reserve' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"estab\"\n    )?.json_values;\n\n    function findParam() {\n        let NAICS_CODE = record.NAICS_CODE\n        NAICS_CODE = NAICS_CODE.toString()\n        for (let i in inv_reserve_file['INV_RESERVE']) {\n            let invReserve = inv_reserve_file['INV_RESERVE'][i]\n            let naics = invReserve['NAICSNEW']\n            naics = naics.toString()\n            if (NAICS_CODE.startsWith(naics)) {\n                return (invReserve);\n                break;\n            }\n        }\n    }\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    function EvaluateLifoReserve(variable, invReserve) {\n        let name_tot = ''\n        let name_lifo = ''\n        let name_lifo_rsv = ''\n        let name_lifo_f = ''\n        let name_lifo_rsv_f = ''\n        let rsv = ''\n        let beta = ''\n        if (variable == 'E') {\n            name_tot = 'INV_E_TOT_VAL'\n            name_lifo = 'INV_E_LIFO_VAL'\n            name_lifo_rsv = 'INV_E_LIFO_RSV_VAL'\n            name_lifo_f = 'INV_E_LIFO_VAL_F'\n            name_lifo_rsv_f = 'INV_E_LIFO_RSV_VAL_F'\n            rsv = 'RSVE_TOTE_UL'\n            beta = 'BETA_E'\n        } else if (variable == 'B') {\n            name_tot = 'INV_B_TOT_VAL'\n            name_lifo = 'INV_B_LIFO_VAL'\n            name_lifo_rsv = 'INV_B_LIFO_RSV_VAL'\n            name_lifo_f = 'INV_B_LIFO_VAL_F'\n            name_lifo_rsv_f = 'INV_B_LIFO_RSV_VAL_F'\n            rsv = 'RSVB_TOTB_BL'\n            beta = 'BETA_B'\n        }\n        rsv = invReserve[rsv]\n        beta = invReserve[beta]\n\n        if (parseInt(record?.[name_tot]) == 0) {\n            if (parseInt(record?.[name_lifo]) != 0 || parseInt(record?.[name_lifo_rsv]) != 0) {\n                record[name_lifo] = 0\n                record[name_lifo_f] = setCharAt(record?.[name_lifo_f], 2, 'Z')\n                record[name_lifo_rsv] = 0\n                record[name_lifo_rsv_f] = setCharAt(record?.[name_lifo_rsv_f], 2, 'Z')\n            }\n        } else if (parseInt(record?.[name_lifo_rsv]) < 0 || parseInt(record?.[name_lifo_rsv]) > 0) {\n            if (Math.abs(parseFloat(record?.[name_lifo_rsv])) / parseFloat(record?.[name_tot]) >= parseFloat(rsv)) {\n                record[name_lifo_rsv] = Math.round(parseFloat(beta) * parseFloat(record?.[name_tot]))\n                record[name_lifo_rsv_f] = setCharAt(record?.[name_lifo_rsv_f], 2, 'W')\n            }\n        }\n    }\n\n    function EvaluateLifoReserveModule() {\n        let invReserve = findParam()\n        let letter = global.get('miv')\n        EvaluateLifoReserve(letter, invReserve)\n        record.ACTION = 'Return to LIFO Valuation Method'\n    }\n\n    EvaluateLifoReserveModule()\n    return msg\n}catch(e){\n    return msg\n}",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -10742,19 +10873,19 @@
         ]
     },
     {
-        "id": "29d71411aa13a380",
+        "id": "26c648f63ad22868",
         "type": "function",
         "z": "75eae7f006cc0f8a",
         "name": "MIV: Inventories Balance",
-        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    let cache = global.get(\"lookupCache\");\n\n    let inv_reserve_file = cache.data.find(\n        item =>\n            item.module === \"inv_reserve\" &&\n            item.param === 'inv_reserve' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"estab\"\n    )?.json_values;\n\n    function findParam() {\n        let NAICS_CODE = record.NAICS_CODE\n        NAICS_CODE = NAICS_CODE.toString()\n        for (let i in inv_reserve_file['INV_RESERVE']) {\n            let invReserve = inv_reserve_file['INV_RESERVE'][i]\n            let naics = invReserve['NAICSNEW']\n            naics = naics.toString()\n            if (NAICS_CODE.startsWith(naics)) {\n                return (invReserve);\n                break;\n            }\n        }\n    }\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + ' ';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    function MIVInventoriesBalance() {\n        if (record?.NAICS_SECTOR == '31' && record?.HISTSTAT == 'Y' && record?.INV_B_LIFO_VAL == record?.EC_INV_E_LIFO_VAL) {\n            if (record?.INV_B_LIFO_RSV_VAL == record?.EC_INV_E_LIFO_RSV_VAL) {\n            } else {\n                record.INV_B_LIFO_RSV_VAL = record?.EC_INV_E_LIFO_RSV_VAL\n                record.INV_B_LIFO_RSV_VAL_F = setCharAt(record.INV_B_LIFO_RSV_VAL_F, 2, 'J')\n            }\n        }\n        record.ACTION = 'Go To Main Routing'\n    }\n\n    MIVInventoriesBalance()\n    return msg\n}catch(e){\n    return msg\n}",
+        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    let cache = global.get(\"lookupCache\");\n\n    let inv_reserve_file = cache.data.find(\n        item =>\n            item.module === \"inv_reserve\" &&\n            item.param === 'inv_reserve' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"estab\"\n    )?.json_values;\n\n    function findParam() {\n        let NAICS_CODE = record.NAICS_CODE\n        NAICS_CODE = NAICS_CODE.toString()\n        for (let i in inv_reserve_file['INV_RESERVE']) {\n            let invReserve = inv_reserve_file['INV_RESERVE'][i]\n            let naics = invReserve['NAICSNEW']\n            naics = naics.toString()\n            if (NAICS_CODE.startsWith(naics)) {\n                return (invReserve);\n                break;\n            }\n        }\n    }\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    function MIVInventoriesBalance() {\n        if (record?.NAICS_SECTOR == '31' && record?.HISTSTAT == 'Y' && record?.INV_B_LIFO_VAL == record?.EC_INV_E_LIFO_VAL) {\n            if (record?.INV_B_LIFO_RSV_VAL == record?.EC_INV_E_LIFO_RSV_VAL) {\n            } else {\n                record.INV_B_LIFO_RSV_VAL = record?.EC_INV_E_LIFO_RSV_VAL\n                record.INV_B_LIFO_RSV_VAL_F = setCharAt(record.INV_B_LIFO_RSV_VAL_F, 2, 'H')\n            }\n        }\n        record.ACTION = 'Go To Main Routing'\n    }\n\n    MIVInventoriesBalance()\n    return msg\n}catch(e){\n    return msg\n}",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1430,
-        "y": 360,
+        "x": 1390,
+        "y": 420,
         "wires": [
             []
         ]
@@ -10771,8 +10902,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 510,
-        "y": 60,
+        "x": 450,
+        "y": 80,
         "wires": [
             [
                 "1ce2615d35152c7e"
@@ -10799,8 +10930,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 670,
-        "y": 60,
+        "x": 630,
+        "y": 80,
         "wires": [
             [],
             [
@@ -10813,8 +10944,8 @@
         "type": "subflow:7d33e2bb432d595f",
         "z": "75eae7f006cc0f8a",
         "name": "",
-        "x": 740,
-        "y": 200,
+        "x": 700,
+        "y": 260,
         "wires": [
             [
                 "9a0715fcd68cdf02"
@@ -10840,8 +10971,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 700,
-        "y": 140,
+        "x": 660,
+        "y": 200,
         "wires": [
             [
                 "c111167fdd9933ec"
@@ -10853,8 +10984,8 @@
         "type": "subflow:7d33e2bb432d595f",
         "z": "75eae7f006cc0f8a",
         "name": "",
-        "x": 740,
-        "y": 320,
+        "x": 700,
+        "y": 380,
         "wires": [
             [
                 "e21846d27893c031"
@@ -10880,8 +11011,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 700,
-        "y": 260,
+        "x": 660,
+        "y": 320,
         "wires": [
             [
                 "d9e3ba10f3818cec"
@@ -10907,8 +11038,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1020,
-        "y": 180,
+        "x": 980,
+        "y": 240,
         "wires": [
             [
                 "65ebda6db324fbed"
@@ -10934,8 +11065,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1020,
-        "y": 300,
+        "x": 980,
+        "y": 360,
         "wires": [
             [
                 "0283c45bf9ceb4d4"
@@ -10947,8 +11078,8 @@
         "type": "subflow:379e12b168b021d1",
         "z": "75eae7f006cc0f8a",
         "name": "",
-        "x": 1100,
-        "y": 240,
+        "x": 1060,
+        "y": 300,
         "wires": [
             [
                 "4f08ace64dfaae1c"
@@ -10960,11 +11091,11 @@
         "type": "subflow:379e12b168b021d1",
         "z": "75eae7f006cc0f8a",
         "name": "",
-        "x": 1100,
-        "y": 360,
+        "x": 1060,
+        "y": 420,
         "wires": [
             [
-                "29d71411aa13a380"
+                "26c648f63ad22868"
             ]
         ]
     },
@@ -10980,8 +11111,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1000,
-        "y": 120,
+        "x": 960,
+        "y": 180,
         "wires": [
             [
                 "2da3ad9dd5211ef1"
@@ -10989,96 +11120,70 @@
         ]
     },
     {
-        "id": "8c066284600dbc44",
+        "id": "2e7758c6aa575d8b",
         "type": "function",
-        "z": "0be109393cb5f28a",
-        "name": "check cache",
-        "func": "// Retrieve the lookupCache\nlet cache = global.get(\"lookupCache\") || { data: [] };\n\n// Initialize msg.payload.lookup if it's not already an object\nmsg.payload.lookup = msg.payload.lookup || {};\n\n// List to keep track of missing parameters\nlet missingParams = [];\n\n// Check if the required params and their types exist in the cache\nif (msg?.payload?.lookup?.params){\n    for (let param of msg.payload.lookup.params.split(\",\")) {\n        let cachedValue = cache?.data && cache.data.find(\n            (cacheItem) =>\n                cacheItem.param === param.key && cacheItem.type === param.type\n        );\n\n        if (!cachedValue) {\n            missingParams.push(param);\n        }\n    }\n}\n\n\n// If there are missing parameters, set msg.payload.lookup.needsFetch to true\nif (missingParams.length > 0) {\n    msg.payload.lookup.needsFetch = true;\n    msg.payload.lookup.missingParams = missingParams;\n} else {\n    msg.payload.lookup.needsFetch = false;\n}\n\nreturn msg;\n",
+        "z": "75eae7f006cc0f8a",
+        "name": "query_ec",
+        "func": "msg.records = msg.payload\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.records.csv[record_idx];\nlet id = record.REPORTING_ID\nmsg.query = \"  SELECT * FROM product_aies.ec where reporting_id = '\" + id + \"' and version = 'PO';\"\n\nreturn msg;",
         "outputs": 1,
+        "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 770,
-        "y": 100,
+        "x": 180,
+        "y": 20,
         "wires": [
             [
-                "ce1e0380f0f1b0f9"
+                "fc744f0fa884efe1"
             ]
         ]
     },
     {
-        "id": "ce1e0380f0f1b0f9",
+        "id": "a8c458bc9c88fce6",
         "type": "function",
-        "z": "0be109393cb5f28a",
-        "name": "prepare API Request",
-        "func": "const { moduleName, program, unit_type, missingParams } = msg.payload.lookup;\nconst params = (missingParams.length && missingParams.join(\",\")) || \"\";\n// const apiurl = `${(env.get('CENSUS_API') || 'https://mc.edl-7529180-ite.ite.edl.census.gov/api/').trim()}params?module=${moduleName}&params=${params}&program=${program}&unit_type=${unit_type}`;\nconst apiurl = `${('a301cb45559c445acaec11ab01bbbee1-2115632777.us-gov-east-1.elb.amazonaws.com/api/').trim()}params?module=${moduleName}&params=${params}&program=${program}&unit_type=${unit_type}`;\nmsg.url = apiurl;\nmsg.payloadBackup = msg.payload;\nreturn msg;\n",
+        "z": "75eae7f006cc0f8a",
+        "name": "reset msg",
+        "func": "function keysToUpperCase(obj) {\n    const output = {};\n    for (let key in obj) {\n        if (Object.prototype.hasOwnProperty.call(obj, key)) {\n            if (typeof obj[key] === 'object' && obj[key] !== null) {\n                output[key.toUpperCase()] = keysToUpperCase(obj[key]);\n            } else {\n                output[key.toUpperCase()] = obj[key];\n            }\n        }\n    }\n    return output;\n}\n\nlet p = msg.payload.map(keysToUpperCase);\nmsg.payload = p\nmsg.ec = msg.payload\n\nmsg.payload = msg.records\nreturn msg;",
         "outputs": 1,
+        "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 980,
-        "y": 100,
-        "wires": [
-            [
-                "6c16d5bbc3143a33"
-            ]
-        ]
-    },
-    {
-        "id": "6c16d5bbc3143a33",
-        "type": "http request",
-        "z": "0be109393cb5f28a",
-        "name": "Lookup data API",
-        "method": "GET",
-        "ret": "obj",
-        "paytoqs": "ignore",
-        "url": "",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "basic",
-        "senderr": false,
-        "headers": [],
-        "x": 1210,
-        "y": 100,
-        "wires": [
-            [
-                "f5dbe24054de29ce"
-            ]
-        ]
-    },
-    {
-        "id": "f5dbe24054de29ce",
-        "type": "function",
-        "z": "0be109393cb5f28a",
-        "name": "cache result",
-        "func": "let cache = global.get(\"lookupCache\");\ncache = Array.isArray(cache?.data) ? cache : {\"data\":[]}\n\n// Get the payload\nlet payload = msg.payload;\n\n// Check if the API call was successful\nif (payload.status === \"success\") {\n\n    // Get the data array\n    let dataArr = payload.data;\n\n    // Extract the necessary fields from the API response and update the cache\n    for (let item of dataArr) {\n        const { id, module, param, values, json_values, program, unit_type } = item;\n        cache.data.push({ id, module, param, values, json_values, program, unit_type });\n    }\n    msg.payload = { ...msg.payloadBackup, dataArr };\n\n}\n// Save the updated cache\nglobal.set(\"lookupCache\", cache)\n// msg.payload = { ...msg.payloadBackup, dataArr };\n// msg.payload.cache = cache;\ndelete msg.payloadBackup;\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1430,
-        "y": 100,
+        "x": 500,
+        "y": 20,
         "wires": [
             []
         ]
     },
     {
-        "id": "331014954d894fe9",
-        "type": "postgresql",
-        "z": "8032608991ae0162",
-        "name": "Select",
-        "query": "",
-        "postgreSQLConfig": "481a641c4005d1c8",
-        "split": false,
-        "rowsPerMsg": "1",
+        "id": "fc744f0fa884efe1",
+        "type": "subflow:8032608991ae0162",
+        "z": "75eae7f006cc0f8a",
+        "name": "",
+        "x": 340,
+        "y": 20,
+        "wires": [
+            [
+                "a8c458bc9c88fce6"
+            ]
+        ]
+    },
+    {
+        "id": "6b33a8a9088ae491",
+        "type": "function",
+        "z": "75eae7f006cc0f8a",
+        "name": "MIV: Inventories Balance (Database)",
+        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n    let ec = msg.ec[0]\n\n    let cache = global.get(\"lookupCache\");\n\n    let inv_reserve_file = cache.data.find(\n        item =>\n            item.module === \"inv_reserve\" &&\n            item.param === 'inv_reserve' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"estab\"\n    )?.json_values;\n\n    function findParam() {\n        let NAICS_CODE = record.NAICS_CODE\n        NAICS_CODE = NAICS_CODE.toString()\n        for (let i in inv_reserve_file['INV_RESERVE']) {\n            let invReserve = inv_reserve_file['INV_RESERVE'][i]\n            let naics = invReserve['NAICSNEW']\n            naics = naics.toString()\n            if (NAICS_CODE.startsWith(naics)) {\n                return (invReserve);\n                break;\n            }\n        }\n    }\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    function MIVInventoriesBalance() {\n        if (record?.NAICS_SECTOR == '31' && record?.HISTSTAT == 'Y' && record?.INV_B_LIFO_VAL == ec?.INV_E_LIFO_VAL) {\n            if (record?.INV_B_LIFO_RSV_VAL == ec?.INV_E_LIFO_RSV_VAL) {\n            } else {\n                record.INV_B_LIFO_RSV_VAL = ec?.INV_E_LIFO_RSV_VAL\n                record.INV_B_LIFO_RSV_VAL_F = setCharAt(record.INV_B_LIFO_RSV_VAL_F, 2, 'H')\n            }\n        }\n        record.ACTION = 'Go To Main Routing'\n    }\n\n    MIVInventoriesBalance()\n    return msg\n}catch(e){\n    return msg\n}",
         "outputs": 1,
-        "x": 950,
-        "y": 100,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1430,
+        "y": 480,
         "wires": [
             []
         ]
@@ -24090,6 +24195,19 @@
         "wires": []
     },
     {
+        "id": "cda5b0bb838b6adc",
+        "type": "subflow:75eae7f006cc0f8a",
+        "z": "538d3e65e0f18773",
+        "name": "",
+        "x": 1030,
+        "y": 240,
+        "wires": [
+            [
+                "290f0910bd81e94b"
+            ]
+        ]
+    },
+    {
         "id": "594b9aeaf4c1606a",
         "type": "subflow:0be109393cb5f28a",
         "z": "538d3e65e0f18773",
@@ -24098,7 +24216,7 @@
         "y": 240,
         "wires": [
             [
-                "a6b36cb4eda2d3e9"
+                "cda5b0bb838b6adc"
             ]
         ]
     },
@@ -24126,19 +24244,6 @@
         "wires": [
             [
                 "594b9aeaf4c1606a"
-            ]
-        ]
-    },
-    {
-        "id": "a6b36cb4eda2d3e9",
-        "type": "subflow:75eae7f006cc0f8a",
-        "z": "538d3e65e0f18773",
-        "name": "",
-        "x": 1030,
-        "y": 240,
-        "wires": [
-            [
-                "290f0910bd81e94b"
             ]
         ]
     },
