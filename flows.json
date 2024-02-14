@@ -1154,39 +1154,6 @@
         "color": "#DDAA99"
     },
     {
-        "id": "0be109393cb5f28a",
-        "type": "subflow",
-        "name": "Lookup Cache Subflow",
-        "info": "",
-        "category": "",
-        "in": [
-            {
-                "x": 600,
-                "y": 100,
-                "wires": [
-                    {
-                        "id": "8c066284600dbc44"
-                    }
-                ]
-            }
-        ],
-        "out": [
-            {
-                "x": 1620,
-                "y": 100,
-                "wires": [
-                    {
-                        "id": "f5dbe24054de29ce",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
-        "env": [],
-        "meta": {},
-        "color": "#DDAA99"
-    },
-    {
         "id": "9e4e212b0811233d",
         "type": "subflow",
         "name": "Pre Db Write Back For Leased",
@@ -1259,39 +1226,6 @@
         "info": "",
         "in": [],
         "out": []
-    },
-    {
-        "id": "b576348e42469acf",
-        "type": "subflow",
-        "name": "M_GOCO",
-        "info": "",
-        "category": "",
-        "in": [
-            {
-                "x": 660,
-                "y": 60,
-                "wires": [
-                    {
-                        "id": "d1b1713300484045"
-                    }
-                ]
-            }
-        ],
-        "out": [
-            {
-                "x": 960,
-                "y": 60,
-                "wires": [
-                    {
-                        "id": "d1b1713300484045",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
-        "env": [],
-        "meta": {},
-        "color": "#DDAA99"
     },
     {
         "id": "5eae5184a8f175fd",
@@ -1523,208 +1457,6 @@
                     },
                     {
                         "id": "be2c852c16e1ae5f",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
-        "env": [],
-        "meta": {},
-        "color": "#DDAA99"
-    },
-    {
-        "id": "b3b1701e035827dc",
-        "type": "subflow",
-        "name": "NAPCS HDICAT",
-        "info": "",
-        "category": "",
-        "in": [
-            {
-                "x": 580,
-                "y": 280,
-                "wires": [
-                    {
-                        "id": "f6885c586821c8cd"
-                    }
-                ]
-            }
-        ],
-        "out": [
-            {
-                "x": 900,
-                "y": 280,
-                "wires": [
-                    {
-                        "id": "f6885c586821c8cd",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
-        "env": [],
-        "meta": {},
-        "color": "#DDAA99"
-    },
-    {
-        "id": "4b2a066dec42e6f4",
-        "type": "subflow",
-        "name": "NAPCS NO DONOR",
-        "info": "",
-        "category": "",
-        "in": [
-            {
-                "x": 360,
-                "y": 500,
-                "wires": [
-                    {
-                        "id": "3f577bb0f73d0ae2"
-                    }
-                ]
-            }
-        ],
-        "out": [
-            {
-                "x": 2380,
-                "y": 520,
-                "wires": [
-                    {
-                        "id": "6f8e4805c41cb820",
-                        "port": 0
-                    },
-                    {
-                        "id": "99aa6097013685ea",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
-        "env": [],
-        "meta": {},
-        "color": "#DDAA99"
-    },
-    {
-        "id": "e77217f4bfc52a38",
-        "type": "subflow",
-        "name": "NAPCS RECALCULATE BALANCE",
-        "info": "",
-        "category": "",
-        "in": [
-            {
-                "x": 580,
-                "y": 260,
-                "wires": [
-                    {
-                        "id": "e07677c8e679affd"
-                    }
-                ]
-            }
-        ],
-        "out": [
-            {
-                "x": 960,
-                "y": 260,
-                "wires": [
-                    {
-                        "id": "e07677c8e679affd",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
-        "env": [],
-        "meta": {},
-        "color": "#DDAA99"
-    },
-    {
-        "id": "fbb1e70dfe5fe82f",
-        "type": "subflow",
-        "name": "NAPCS BL Rounding",
-        "info": "",
-        "category": "",
-        "in": [
-            {
-                "x": 640,
-                "y": 200,
-                "wires": [
-                    {
-                        "id": "b2afff84193f1485"
-                    }
-                ]
-            }
-        ],
-        "out": [
-            {
-                "x": 980,
-                "y": 200,
-                "wires": [
-                    {
-                        "id": "b2afff84193f1485",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
-        "env": [],
-        "meta": {},
-        "color": "#DDAA99"
-    },
-    {
-        "id": "c706d1ca2706f3bf",
-        "type": "subflow",
-        "name": "NAPCS Balance - Balancing",
-        "info": "",
-        "category": "",
-        "in": [
-            {
-                "x": 720,
-                "y": 100,
-                "wires": [
-                    {
-                        "id": "1fe10b7b2609c70b"
-                    }
-                ]
-            }
-        ],
-        "out": [
-            {
-                "x": 960,
-                "y": 100,
-                "wires": [
-                    {
-                        "id": "1fe10b7b2609c70b",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
-        "env": [],
-        "meta": {},
-        "color": "#DDAA99"
-    },
-    {
-        "id": "d32a58c0544f501c",
-        "type": "subflow",
-        "name": "NAPCS Balance",
-        "info": "",
-        "category": "",
-        "in": [
-            {
-                "x": 620,
-                "y": 140,
-                "wires": [
-                    {
-                        "id": "401fdae063b57aa5"
-                    }
-                ]
-            }
-        ],
-        "out": [
-            {
-                "x": 900,
-                "y": 140,
-                "wires": [
-                    {
-                        "id": "401fdae063b57aa5",
                         "port": 0
                     }
                 ]
@@ -3144,6 +2876,327 @@
                     },
                     {
                         "id": "da72f5fb7dbd5250",
+                        "port": 1
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "b3b1701e035827dc",
+        "type": "subflow",
+        "name": "NAPCS HDICAT",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 580,
+                "y": 280,
+                "wires": [
+                    {
+                        "id": "f6885c586821c8cd"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 900,
+                "y": 280,
+                "wires": [
+                    {
+                        "id": "f6885c586821c8cd",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "b576348e42469acf",
+        "type": "subflow",
+        "name": "M_GOCO",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 660,
+                "y": 60,
+                "wires": [
+                    {
+                        "id": "d1b1713300484045"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 960,
+                "y": 60,
+                "wires": [
+                    {
+                        "id": "d1b1713300484045",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "0be109393cb5f28a",
+        "type": "subflow",
+        "name": "Lookup Cache Subflow",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 600,
+                "y": 100,
+                "wires": [
+                    {
+                        "id": "8c066284600dbc44"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 1620,
+                "y": 100,
+                "wires": [
+                    {
+                        "id": "f5dbe24054de29ce",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "4b2a066dec42e6f4",
+        "type": "subflow",
+        "name": "NAPCS NO DONOR",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 360,
+                "y": 500,
+                "wires": [
+                    {
+                        "id": "3f577bb0f73d0ae2"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 2380,
+                "y": 520,
+                "wires": [
+                    {
+                        "id": "6f8e4805c41cb820",
+                        "port": 0
+                    },
+                    {
+                        "id": "99aa6097013685ea",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "e77217f4bfc52a38",
+        "type": "subflow",
+        "name": "NAPCS RECALCULATE BALANCE",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 580,
+                "y": 260,
+                "wires": [
+                    {
+                        "id": "e07677c8e679affd"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 960,
+                "y": 260,
+                "wires": [
+                    {
+                        "id": "e07677c8e679affd",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "fbb1e70dfe5fe82f",
+        "type": "subflow",
+        "name": "NAPCS BL Rounding",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 640,
+                "y": 200,
+                "wires": [
+                    {
+                        "id": "b2afff84193f1485"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 980,
+                "y": 200,
+                "wires": [
+                    {
+                        "id": "b2afff84193f1485",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "c706d1ca2706f3bf",
+        "type": "subflow",
+        "name": "NAPCS Balance - Balancing",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 720,
+                "y": 100,
+                "wires": [
+                    {
+                        "id": "1fe10b7b2609c70b"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 960,
+                "y": 100,
+                "wires": [
+                    {
+                        "id": "1fe10b7b2609c70b",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "d32a58c0544f501c",
+        "type": "subflow",
+        "name": "NAPCS Balance",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 620,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "401fdae063b57aa5"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 1820,
+                "y": 120,
+                "wires": [
+                    {
+                        "id": "03b8fb7bd5b0caa5",
+                        "port": 0
+                    },
+                    {
+                        "id": "0265195f902cf9bb",
+                        "port": 0
+                    },
+                    {
+                        "id": "75879436990d7deb",
+                        "port": 0
+                    },
+                    {
+                        "id": "72b2653deb32a23b",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "e825fc8e32eb1364",
+        "type": "subflow",
+        "name": "ESTAB QFLOW 2",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 540,
+                "y": 160,
+                "wires": [
+                    {
+                        "id": "73281bb1471fee97"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 1240,
+                "y": 200,
+                "wires": [
+                    {
+                        "id": "ae433fa4228520c2",
+                        "port": 0
+                    },
+                    {
+                        "id": "319c5fef8300c280",
+                        "port": 0
+                    },
+                    {
+                        "id": "319c5fef8300c280",
                         "port": 1
                     }
                 ]
@@ -6464,85 +6517,6 @@
         ]
     },
     {
-        "id": "8c066284600dbc44",
-        "type": "function",
-        "z": "0be109393cb5f28a",
-        "name": "check cache",
-        "func": "// Retrieve the lookupCache\nlet cache = global.get(\"lookupCache\") || { data: [] };\n\n// Initialize msg.payload.lookup if it's not already an object\nmsg.payload.lookup = msg.payload.lookup || {};\n\n// List to keep track of missing parameters\nlet missingParams = [];\n\n// Check if the required params and their types exist in the cache\nif (msg?.payload?.lookup?.params){\n    for (let param of msg.payload.lookup.params.split(\",\")) {\n        let cachedValue = cache?.data && cache.data.find(\n            (cacheItem) =>\n                cacheItem.param === param.key && cacheItem.type === param.type\n        );\n\n        if (!cachedValue) {\n            missingParams.push(param);\n        }\n    }\n}\n\n\n// If there are missing parameters, set msg.payload.lookup.needsFetch to true\nif (missingParams.length > 0) {\n    msg.payload.lookup.needsFetch = true;\n    msg.payload.lookup.missingParams = missingParams;\n} else {\n    msg.payload.lookup.needsFetch = false;\n}\n\nreturn msg;\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 770,
-        "y": 100,
-        "wires": [
-            [
-                "ce1e0380f0f1b0f9"
-            ]
-        ]
-    },
-    {
-        "id": "ce1e0380f0f1b0f9",
-        "type": "function",
-        "z": "0be109393cb5f28a",
-        "name": "prepare API Request",
-        "func": "const { moduleName, program, unit_type, missingParams } = msg.payload.lookup;\nconst params = (missingParams.length && missingParams.join(\",\")) || \"\";\n// const apiurl = `${(env.get('CENSUS_API') || 'https://mc.edl-7529180-ite.ite.edl.census.gov/api/').trim()}params?module=${moduleName}&params=${params}&program=${program}&unit_type=${unit_type}`;\nconst apiurl = `${('a301cb45559c445acaec11ab01bbbee1-2115632777.us-gov-east-1.elb.amazonaws.com/api/').trim()}params?module=${moduleName}&params=${params}&program=${program}&unit_type=${unit_type}`;\nmsg.url = apiurl;\nmsg.payloadBackup = msg.payload;\nreturn msg;\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 980,
-        "y": 100,
-        "wires": [
-            [
-                "6c16d5bbc3143a33"
-            ]
-        ]
-    },
-    {
-        "id": "6c16d5bbc3143a33",
-        "type": "http request",
-        "z": "0be109393cb5f28a",
-        "name": "Lookup data API",
-        "method": "GET",
-        "ret": "obj",
-        "paytoqs": "ignore",
-        "url": "",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "basic",
-        "senderr": false,
-        "headers": [],
-        "x": 1210,
-        "y": 100,
-        "wires": [
-            [
-                "f5dbe24054de29ce"
-            ]
-        ]
-    },
-    {
-        "id": "f5dbe24054de29ce",
-        "type": "function",
-        "z": "0be109393cb5f28a",
-        "name": "cache result",
-        "func": "let cache = global.get(\"lookupCache\");\ncache = Array.isArray(cache?.data) ? cache : {\"data\":[]}\n\n// Get the payload\nlet payload = msg.payload;\n\n// Check if the API call was successful\nif (payload.status === \"success\") {\n\n    // Get the data array\n    let dataArr = payload.data;\n\n    // Extract the necessary fields from the API response and update the cache\n    for (let item of dataArr) {\n        const { id, module, param, values, json_values, program, unit_type } = item;\n        cache.data.push({ id, module, param, values, json_values, program, unit_type });\n    }\n    msg.payload = { ...msg.payloadBackup, dataArr };\n\n}\n// Save the updated cache\nglobal.set(\"lookupCache\", cache)\n// msg.payload = { ...msg.payloadBackup, dataArr };\n// msg.payload.cache = cache;\ndelete msg.payloadBackup;\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1430,
-        "y": 100,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "e4588ba92d2276e3",
         "type": "function",
         "z": "9e4e212b0811233d",
@@ -6617,24 +6591,6 @@
             [
                 "5507f546d88c96b5"
             ]
-        ]
-    },
-    {
-        "id": "d1b1713300484045",
-        "type": "function",
-        "z": "b576348e42469acf",
-        "name": "NAPCS: M_GOCO",
-        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + ' ';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    let cache = global.get(\"lookupCache\");\n    let naics_napcs = cache.data.find(\n        item =>\n            item.module === \"napcs\" &&\n            item.param === 'naics_to_napcs_m_goco' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"all\"\n    )?.json_values;\n\n    var napcs = naics_napcs['NAICS_TO_NAPCS_M_GOCO']\n    function isNaicsCodeFound() {\n        for (let i in napcs) {\n            let row = napcs[i]\n            if (record?.NAICS_CODE.substr(0, 3) == row['NAICS-3']) {\n                return (row.NAPCS)\n            }\n        }\n    }\n\n    let isNaicsFound = naics_napcs?.NAICS_TO_NAPCS_M_GOCO.some(n => n['NAICS-3'] == record?.NAICS_CODE.substr(0, 3));\n\n    function NAPCSMGOCO() {\n        if (record?.NAPCS_IND == 'U') {\n            record.PROD_CODE_VAL = 0\n            record.USABLE = 'D'\n            record.PROD_CODE_F = setCharAt(record?.PROD_CODE_F || ' ', 1, 'J')\n        }\n\n        if (isNaicsFound) {\n            record.NAPCS_IND = 'U'\n            record.PROD_CODE = isNaicsCodeFound()\n            record.PROD_CODE_VAL = record?.RCPT_TOT_VAL\n            record.REF_PER = record?.REF_PER\n            record.PROD_CODE_F = setCharAt(record?.PROD_CODE_F || '  ', 2, 'J')\n\n            const fields = [\n                \"CAPEX_BUILD_NEW_VAL\", \"CAPEX_BUILD_USED_VAL\", \"CAPEX_BUILD_TOT_DVAL\",\n                \"CAPEX_MACH_NEW_VAL\", \"CAPEX_MACH_USED_VAL\", \"CAPEX_MACH_TOT_DVAL\",\n                \"CAPEX_AUTO_VAL\", \"CAPEX_COMPTR_VAL\", \"CAPEX_OTHMACH_VAL\",\n                \"CAPEX_OTH_NEW_VAL\", \"CAPEX_OTH_NEW_WRTIN_TXT\", \"CAPEX_OTH_USED_VAL\",\n                \"CAPEX_OTH_USED_WRTIN_TXT\", \"CAPEX_OTH_TOT_DVAL\", \"CAPEX_NEW_TOT_DVAL\",\n                \"CAPEX_USED_TOT_DVAL\", \"CAPEX_TOT_DVAL\",\n\n                \"CAPEX_BUILD_NEW_VAL_F\", \"CAPEX_BUILD_USED_VAL_F\", \"CAPEX_BUILD_TOT_DVAL_F\",\n                \"CAPEX_MACH_NEW_VAL_F\", \"CAPEX_MACH_USED_VAL_F\", \"CAPEX_MACH_TOT_DVAL_F\",\n                \"CAPEX_AUTO_VAL_F\", \"CAPEX_COMPTR_VAL_F\", \"CAPEX_OTHMACH_VAL_F\",\n                \"CAPEX_OTH_NEW_VAL_F\", \"CAPEX_OTH_NEW_WRTIN_TXT_F\", \"CAPEX_OTH_USED_VAL_F\",\n                \"CAPEX_OTH_USED_WRTIN_TXT_F\", \"CAPEX_OTH_TOT_DVAL_F\", \"CAPEX_NEW_TOT_DVAL_F\",\n                \"CAPEX_USED_TOT_DVAL_F\", \"CAPEX_TOT_DVAL_F\",\n\n                \"INV_E_FIN_VAL\", \"INV_E_WIP_VAL\", \"INV_E_MAT_VAL\",\n                \"INV_E_TOT_VAL\", \"INV_B_FIN_VAL\", \"INV_B_WIP_VAL\",\n                \"INV_B_MAT_VAL\", \"INV_B_TOT_VAL\", \"INV_E_FIFO_VAL\",\n                \"INV_E_AVG_VAL\", \"INV_E_STD_VAL\", \"INV_E_OTHNL_VAL\",\n                \"INV_E_NL_TOT_DVAL\", \"INV_B_FIFO_VAL\", \"INV_B_AVG_VAL\",\n                \"INV_B_STD_VAL\", \"INV_B_OTHNL_VAL\", \"INV_B_NL_TOT_DVAL\", \"INV_E_LIFO_VAL\", \"INV_B_LIFO_VAL\",\n                \"INV_E_IVAL_TOT_DVAL\", \"INV_B_IVAL_TOT_DVAL\", \"INV_E_LIFO_RSV_VAL\",\n                \"INV_B_LIFO_RSV_VAL\",\n\n                \"INV_E_FIN_VAL_F\", \"INV_E_WIP_VAL_F\",\n                \"INV_E_MAT_VAL_F\", \"INV_E_TOT_VAL_F\", \"INV_B_FIN_VAL_F\",\n                \"INV_B_WIP_VAL_F\", \"INV_B_MAT_VAL_F\", \"INV_B_TOT_VAL_F\",\n                \"INV_E_FIFO_VAL_F\", \"INV_E_AVG_VAL_F\", \"INV_E_STD_VAL_F\",\n                \"INV_E_OTHNL_VAL_F\", \"INV_E_NL_TOT_DVAL_F\", \"INV_B_FIFO_VAL_F\",\n                \"INV_B_AVG_VAL_F\", \"INV_B_STD_VAL_F\", \"INV_B_OTHNL_VAL_F\",\n                \"INV_B_NL_TOT_DVAL_F\", \"INV_E_LIFO_VAL_F\", \"INV_B_LIFO_VAL_F\",\n                \"INV_E_IVAL_TOT_DVAL_F\", \"INV_B_IVAL_TOT_DVAL_F\", \"INV_E_LIFO_RSV_VAL_F\",\n                \"INV_B_LIFO_RSV_VAL_F\"\n            ];\n\n            fields.forEach(field => {\n                if (field.endsWith(\"_F\")) {\n                    record[field] = setCharAt(record[field] || '  ', 2, 'J')\n                } else {\n                    record[field] = 0;\n                }\n            });\n            record.EXPS_MAT_V1_VAL = 0;\n            record.EXPS_CSTMTOT_DVAL_F = setCharAt(record.EXPS_CSTMTOT_DVAL_F, 2, 'L');\n\n            record.EXPS_CSTMTOT_DVAL =\n                (parseFloat(record?.EXPS_ELEC_VAL) || 0)\n                + (parseFloat(record?.EXPS_FUEL_VAL) || 0)\n                + (parseFloat(record?.EXPS_CONTRACT_VAL) || 0)\n                + (parseFloat(record?.EXPS_RESALE_VAL) || 0);\n\n        } else {\n            record.TABSTAT = 'N'\n            record.NONTABFL = 'R'\n            record.STOP = 'T'\n            record.REFERRAL_FLAG = 'GOCO_NAICS_NO_MATCH'\n        }\n        record.ACTION = 'END'\n    }\n\n    NAPCSMGOCO()\n    msg.payload.csv[record_idx] = record\n\n    return msg\n}catch(e){\n    return msg;\n}",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 810,
-        "y": 60,
-        "wires": [
-            []
         ]
     },
     {
@@ -6853,324 +6809,6 @@
             [
                 "416362dcdd1a7e66"
             ]
-        ]
-    },
-    {
-        "id": "f6885c586821c8cd",
-        "type": "function",
-        "z": "b3b1701e035827dc",
-        "name": "NAPCS HDICAT",
-        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nfunction setCharAt(str, index, chr) {\n    if ([null, undefined].includes(str)) {\n        let newstr = ''\n        for (let i = 0; i < index; i++) {\n            newstr = newstr + ' ';\n        }\n        newstr = newstr + chr\n        return newstr;\n    } else {\n        if (index > str.length - 1) {\n            let addstr = index - str.length\n            let newstr = str\n            for (let i = 0; i < addstr; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            return str.substring(0, index) + chr + str.substring(index + 1);\n        }\n    }\n}\nfunction NAPCSHDICAT() {\n    console.log(1)\n   if(record?.TABSTAT == 'Y' && parseFloat(record?.RCPT_TOT_VAL) > 0 && ['20','90'].includes(record?.RECORD_TYP_TXT)){\n       console.log(2)\n        if(record?.NAPCS_IND == 'U'){\n            console.log(3)\n            if(['T','E'].includes(record?.NAPCS_NODONOR)){\n                console.log(4)\n                // setCharAt(record.NAPCS_HDICAT || ' ', 1, 'NC')\n                record.NAPCS_HDICAT = 'NC'\n            }else{\n                console.log(5)\n                // setCharAt(record.NAPCS_HDICAT || ' ', 1, 'C')\n                record.NAPCS_HDICAT = 'C'\n            }\n        }else{\n            console.log(6)\n            // setCharAt(record.NAPCS_HDICAT || ' ', 1, 'F')\n            record.NAPCS_HDICAT = 'F'\n        }\n   }else{\n       console.log(7)\n    record.NAPCS_HDICAT = ' '\n   }\n    console.log(8)\n    record.ACTION = 'END'\n}\nNAPCSHDICAT()\nmsg.payload.csv[record_idx] = record\nreturn msg\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 740,
-        "y": 280,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "3f577bb0f73d0ae2",
-        "type": "change",
-        "z": "4b2a066dec42e6f4",
-        "name": "Set NODONOR",
-        "rules": [
-            {
-                "t": "set",
-                "p": "nodonor",
-                "pt": "global",
-                "to": "\"\"",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 500,
-        "y": 500,
-        "wires": [
-            [
-                "3e9e6c5951dea430"
-            ]
-        ]
-    },
-    {
-        "id": "3e9e6c5951dea430",
-        "type": "change",
-        "z": "4b2a066dec42e6f4",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload.lookup",
-                "pt": "msg",
-                "to": "{\"moduleName\":\"napcs\",\"program\":\"aies\",\"unit_type\":\"all\",\"params\":\"napcs_m_goco\"}",
-                "tot": "json"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 710,
-        "y": 500,
-        "wires": [
-            [
-                "75ae4bd5c0d07b66"
-            ]
-        ]
-    },
-    {
-        "id": "75ae4bd5c0d07b66",
-        "type": "subflow:0be109393cb5f28a",
-        "z": "4b2a066dec42e6f4",
-        "name": "",
-        "x": 990,
-        "y": 500,
-        "wires": [
-            [
-                "4b8c2d9a659b2ad5"
-            ]
-        ]
-    },
-    {
-        "id": "4b8c2d9a659b2ad5",
-        "type": "function",
-        "z": "4b2a066dec42e6f4",
-        "name": "NODONOR Check GOCO",
-        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nlet cache = global.get(\"lookupCache\");\nlet m_goco = cache.data.find(\n    item =>\n        item.module === \"napcs\" &&\n        item.param === 'napcs_m_goco' &&\n        item.program === \"aies\" &&\n        item.unit_type === \"all\"\n)?.json_values;\n\nlet isIdFound = m_goco?.NAPCS_M_GOCO.some(n => n['SURVUID'] == record?.REPORTING_ID);\n\nfunction callMGOCO() {\n    if (isIdFound) {\n        global.set('nodonor', 'go to m_goco');\n        record.NAPCS_NODONOR = 'E'\n    }\n}\n\ncallMGOCO()\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1250,
-        "y": 500,
-        "wires": [
-            [
-                "1c7ef6807114346f"
-            ]
-        ]
-    },
-    {
-        "id": "1c7ef6807114346f",
-        "type": "switch",
-        "z": "4b2a066dec42e6f4",
-        "name": "",
-        "property": "nodonor",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "go to m_goco",
-                "vt": "str"
-            },
-            {
-                "t": "neq",
-                "v": "go to m_goco",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 1470,
-        "y": 560,
-        "wires": [
-            [
-                "26275dd2ba68ba28"
-            ],
-            [
-                "7c59477af52f8d1f"
-            ]
-        ]
-    },
-    {
-        "id": "26275dd2ba68ba28",
-        "type": "change",
-        "z": "4b2a066dec42e6f4",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload.lookup",
-                "pt": "msg",
-                "to": "{\"moduleName\":\"napcs\",\"program\":\"aies\",\"unit_type\":\"all\",\"params\":\"naics_to_napcs_m_goco\"}",
-                "tot": "json"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1670,
-        "y": 500,
-        "wires": [
-            [
-                "d88d65205ecb3dd9"
-            ]
-        ]
-    },
-    {
-        "id": "d88d65205ecb3dd9",
-        "type": "subflow:0be109393cb5f28a",
-        "z": "4b2a066dec42e6f4",
-        "name": "",
-        "x": 1930,
-        "y": 500,
-        "wires": [
-            [
-                "6f8e4805c41cb820"
-            ]
-        ]
-    },
-    {
-        "id": "7c59477af52f8d1f",
-        "type": "change",
-        "z": "4b2a066dec42e6f4",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload.lookup",
-                "pt": "msg",
-                "to": "{\"moduleName\":\"napcs\",\"program\":\"aies\",\"unit_type\":\"all\",\"params\":\"napcs_nodonor_cutoff\"}",
-                "tot": "json"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1670,
-        "y": 600,
-        "wires": [
-            [
-                "b36fed60d5154170"
-            ]
-        ]
-    },
-    {
-        "id": "b36fed60d5154170",
-        "type": "subflow:0be109393cb5f28a",
-        "z": "4b2a066dec42e6f4",
-        "name": "",
-        "x": 1930,
-        "y": 600,
-        "wires": [
-            [
-                "99aa6097013685ea"
-            ]
-        ]
-    },
-    {
-        "id": "6f8e4805c41cb820",
-        "type": "subflow:b576348e42469acf",
-        "z": "4b2a066dec42e6f4",
-        "name": "",
-        "x": 2140,
-        "y": 500,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "99aa6097013685ea",
-        "type": "function",
-        "z": "4b2a066dec42e6f4",
-        "name": "NAPCS: NODONOR",
-        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + ' ';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    let cache = global.get(\"lookupCache\");\n    let naics_napcs = cache.data.find(\n        item =>\n            item.module === \"napcs\" &&\n            item.param === 'napcs_nodonor_cutoff' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"all\"\n    )?.json_values;\n\n    var napcs = naics_napcs['NAPCS_NODONOR_CUTOFF']\n    function isNaicsCodeFound() {\n        for (let i in napcs) {\n            let row = napcs[i]\n            if (record?.NAICS_CODE == row['NAIC']) {\n                return (row.CUTOFF)\n            }\n        }\n    }\n\n    function find9000() {\n        let id = record['REPORTING_ID']\n        let allData = msg.payload.csv;\n        for (let i in allData) {\n            let row = allData[i]\n            if (row.REPORTING_ID == id) {\n                if (row?.PROD_CODE && row?.PROD_CODE == '9000000000') {\n                    return (row?.PROD_CODE_VAL)\n                }\n            }\n        }\n    }\n\n    function NAPCSNODONOR() {\n        if (['T', 'B'].includes(record?.NAPCS_NODONOR) || !(['20', '90'].includes(record?.RECORD_TYP_TXT))) {\n        } else {\n            record.NAPCS_NODONOR = ' ';\n            if (record?.NAPCS_IND === 'U' && parseFloat(record?.RCPT_TOT_VAL) > 0) {\n                let isNaicsFound = naics_napcs?.NAPCS_NODONOR_CUTOFF.some(n => n['NAIC'] == record?.NAICS_CODE);\n                if (isNaicsFound) {\n                    let cutoff = isNaicsCodeFound()\n                    let val_9000 = find9000()\n                    if ((parseFloat(record?.NAPCS_OTH) / parseFloat(record?.RCPT_TOT_VAL)) >= parseFloat(cutoff)) {\n                        record.NAPCS_NODONOR = 'E'\n                    } else if ((parseFloat(val_9000) / parseFloat(record?.RCPT_TOT_VAL)) >= 0.5) {\n                        record.NAPCS_NODONOR = 'E'\n                    } else if (((parseFloat(val_9000) + parseFloat(record?.NAPCS_OTH)) / parseFloat(record?.RCPT_TOT_VAL)) >= 0.5) {\n                        record.NAPCS_NODONOR = 'E'\n                    } else if (record?.NAPCS_IMP === 'Y') {\n                        record.NAPCS_NODONOR = 'E'\n                    }\n                } else {\n                    record.REFERRAL_FLAG = 'MISSING_NAICOLD_NODONOR'\n                    record.TABSTAT = 'N';\n                    record.NONTABFL = 'R';\n                }\n            }\n        }\n        record.ACTION = 'END'\n    }\n\n    NAPCSNODONOR();\n    return msg;\n}catch(e){\n    return msg;\n}",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 2180,
-        "y": 600,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "e07677c8e679affd",
-        "type": "function",
-        "z": "e77217f4bfc52a38",
-        "name": "napcs_recalculate_napcs_fields",
-        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    msg.cache = global.get(\"lookupCache\")\n        .data.find(\n            item =>\n                item.module === \"napcs\" &&\n                item.param === 'napcs_balance' &&\n                item.program === \"aies\" &&\n                item.unit_type === \"all\"\n        )?.json_values;\n\n    var jsonData = msg.cache\n\n    const jsonD = jsonData.NAPCS_BALANCE\n\n    function calculateNAPCS(jsonD) {\n        let NAPCS_BLTOT = jsonD.reduce((acc, item) => {\n            if (item.PROD_CODE.substr(6, 3) === '000') {\n                return acc + item.PROD_CODE_VAL;\n            }\n            return acc;\n        }, 0);\n\n        let NAPCS_BAL = record.RCPT_TOT_VAL - NAPCS_BLTOT;\n\n        let NAPCS_PRM = jsonD.reduce((acc, item) => {\n            if (item.PROD_CODE.startsWith('2')) {\n                return acc + item.PROD_CODE_VAL;\n            }\n            return acc;\n        }, 0);\n\n        let NAPCS_OTH_1 = jsonD.reduce((acc, item) => {\n            if (!item.PROD_CODE.startsWith('2')) {\n                return acc + item.PROD_CODE_VAL;\n            }\n            return acc;\n        }, 0);\n\n        let NAPCS_OTH_2 = jsonD.reduce((acc, item) => {\n            if (item.PROD_CODE.substr(0, 7) === '9000000') {\n                return acc + item.PROD_CODE_VAL;\n            }\n            return acc;\n        }, 0);\n\n        let NAPCS_OTH = NAPCS_OTH_1 - NAPCS_OTH_2\n\n        return { NAPCS_BLTOT, NAPCS_BAL, NAPCS_PRM, NAPCS_OTH };\n    }\n\n    record = { ...record, ...calculateNAPCS(jsonD) }\n\n    msg.payload.csv[record_idx] = record\n    return msg\n\n}catch(e){\n    return msg\n}",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 770,
-        "y": 260,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "b2afff84193f1485",
-        "type": "function",
-        "z": "fbb1e70dfe5fe82f",
-        "name": "NAPCS BL ROUNDING",
-        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nlet id = record.REPORTING_ID\nlet allData = msg.payload.csv;\nlet newarr = []\nlet newarr2 = []\nlet j = 0\nlet k = 0\nfor (let i in allData) {\n    let row = allData[i]\n    if (row.REPORTING_ID == id) {\n        if (row.PROD_CODE) {\n            if (row.NAPCSCODE_MF == 'Y') {\n                newarr[j] = row\n                j = j + 1\n            } else {\n                newarr2[k] = row\n                k = k + 1\n            }\n        }\n    }\n}\nnewarr.sort((a, b) => a.PROD_CODE_VAL - b.PROD_CODE_VAL);\nnewarr2.sort((a, b) => b.PROD_CODE_VAL - a.PROD_CODE_VAL);\nnewarr = newarr.concat(newarr2)\n\nlet remainder = 0\nfor (let i in newarr) {\n    let row = newarr[i]\n    let adjusted = parseFloat(row?.PROD_CODE_VAL) + remainder\n    let rounded = Math.round(adjusted)\n    if (row?.NAPCSCODE_MF == 'Y' && rounded == 0) {\n        rounded = 1\n    } else if (rounded < 0) {\n        rounded = 0\n    }\n    remainder = adjusted - rounded\n    // row.EXACT, row.ADJUSTED, row.ROUNDED, row.FRACTIONAL are for testing purposes only\n    row.EXACT = row?.PROD_CODE_VAL\n    row.ADJUSTED = adjusted\n    row.ROUNDED = rounded\n    row.FRACTIONAL = remainder\n    row.PROD_CODE_VAL = rounded\n    newarr[i] = row\n}\n\nreturn msg\n",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 810,
-        "y": 200,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "1fe10b7b2609c70b",
-        "type": "function",
-        "z": "c706d1ca2706f3bf",
-        "name": "Balancing",
-        "func": "// try {\n//     let record_idx = global.get(\"ptrModuleFacts\");\n//     let record = msg.payload.csv[record_idx];\n\n//     //The napcs balancing module uses naics_tolerance params\n//     msg.cache = global.get(\"lookupCache\")\n//         .data.find(\n//             item =>\n//                 item.module === 'naics' &&\n//                 item.param === 'naics_tolerance' &&\n//                 item.program === 'aies' &&\n//                 item.unit_type === 'all'\n//         )?.json_values;\n\n//     var jsonData = msg.cache\n\n//     const setCharAt = (str, index, char) => {\n//         if (index > str.length - 1) return str.padEnd(index, ' ') + char;\n//         return str.substr(0, index) + char + str.substr(index + char.length);\n//     };\n\n//     function naicsFind() {\n//         let found = false;\n//         for (let i = 0; i < jsonData.NAICS_TOLERANCE.length; i++) {\n//             if (jsonData.NAICS_TOLERANCE[i].NAICS !== record.NAICS_CODE) {\n//                 found = true;\n//             }\n//             else {\n//                 break;\n//             }\n//         }\n\n//         if (found) {\n//             record.TABSTAT = 'N'\n//             record.NONTABFL = 'R'\n//             record.STOP = 'T'\n//             record.REFERRAL_FLAG = 'MIS_NAICSOLD_NAICSTOLERANCE' // checked with Census\n//             balancePathA()\n//         }\n//         else if (record.NAPCS_BLTOT == record.RCPT_TOT_VAL) {\n//             balancePathA()\n//         } else if (record.NAPCS_BLTOT != record.RCPT_TOT_VAL) {\n//             setProdCodeVal()\n//         }\n\n//     }\n\n//     function setProdCodeVal() {\n//         let found1 = false;\n//         for (let i = 0; i < jsonData.NAICS_TOLERANCE.length; i++) {\n//             if (jsonData.NAICS_TOLERANCE[i].LL <= parseFloat(record.NAPCS_BLTOT) || jsonData.NAICS_TOLERANCE[i].UL >= parseFloat(record.RCPT_TOT_VAL)) {\n//                 found1 = true;\n//             }\n//             else {\n//                 break;\n//             }\n//         }\n//         if (found1) {\n//             record.PROD_CODE_VAL = (parseFloat(record.PROD_CODE_VAL) / parseFloat(record.NAPCS_BLTOT) * parseFloat(record.RCPT_TOT_VAL))\n//             record.PROD_CODE_F = setCharAt(record?.PROD_CODE_F || '  ', 2, 'K')\n//             balancePathA()\n//         }\n//         else if ((parseFloat(record?.RCPT_TOT_VAL) == parseFloat(record?.RCPT_TOT_VAL_PI)) || (parseFloat(record?.RCPT_TOT_VAL_PI) == 0)) {\n//             balancePathB()\n//         }\n//         else if ((parseFloat(record?.RCPT_TOT_VAL) != parseFloat(record?.RCPT_TOT_VAL_PI)) && (parseFloat(record?.RCPT_TOT_VAL_PI) != 0)) {\n//             setProdCodeValPi()\n//         }\n//     }\n\n//     function setProdCodeValPi() {\n//         let found1 = false;\n//         for (let i = 0; i < jsonData.NAICS_TOLERANCE.length; i++) {\n//             if (jsonData.NAICS_TOLERANCE[i].LL <= parseFloat(record.NAPCS_BLTOT) || jsonData.NAICS_TOLERANCE[i].UL >= parseFloat(record.RCPT_TOT_VAL_PI)) {\n//                 found1 = true;\n//             }\n//             else {\n//                 break;\n//             }\n//         }\n//         if (found1) {\n//             record.PROD_CODE_VAL = (parseFloat(record.PROD_CODE_VAL) / parseFloat(record.NAPCS_BLTOT) * parseFloat(record.RCPT_TOT_VAL))\n//             record.PROD_CODE_F = setCharAt(record?.PROD_CODE_F || '  ', 2, 'K')\n//             balancePathA()\n//         } else {\n//             balancePathB()\n//         }\n//     }\n\n//     if (parseInt(record?.RCPT_TOT_VAL) > 0) {\n//         naicsFind()\n//     } else {\n//         balancePathB()\n//     }\n\n//     function balancePathA() {\n//         record['ACTION is for A '] = 'This is path A'\n//         msg.payload.csv[record_idx] = record;\n//         return msg\n//     }\n//     function balancePathB() {\n//         record.NAPCS_IND = 'N'\n//         balancePathA()\n//         record['ACTION is for B'] = 'This is path B'\n//     }\n\n//     msg.payload.csv[record_idx] = record\n//     return msg\n// } catch (e) {\n//     return msg;\n// }\ntry {\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    msg.cache = global.get(\"lookupCache\")\n        .data.find(\n            item =>\n                item.module === 'naics' &&\n                item.param === 'naics_tolerance' &&\n                item.program === 'aies' &&\n                item.unit_type === 'all'\n        )?.json_values;\n\n    var jsonData = msg.cache['NAICS_TOLERANCE']\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + ' ';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    function findTol() {\n        let naics = record?.NAICS_CODE\n        for (let i in jsonData) {\n            let row = jsonData[i]\n            if (row.NAICS == naics) {\n                let LL = row.LL\n                let UL = row.UL;\n                return { LL, UL };\n            }\n        }\n    }\n\n    function evalBalancing() {\n        if (record?.RCPT_TOT_VAL > 0) {\n            let naics = jsonData.some(element => (element.NAICS == record?.NAICS_CODE));\n            if (naics) {\n                let { LL, UL } = findTol()\n\n                if (record?.NAPCS_BLTOT == record?.RCPT_TOT_VAL) {\n\n                } else if ((parseFloat(LL) <= (parseFloat(record?.NAPCS_BLTOT) / parseFloat(record?.RCPT_TOT_VAL))) &&\n                    ((parseFloat(record?.NAPCS_BLTOT) / parseFloat(record?.RCPT_TOT_VAL)) <= parseFloat(UL))) {\n                    record.PROD_CODE_VAL = (parseFloat(record?.PROD_CODE_VAL) / parseFloat(record?.NAPCS_BLTOT)) * parseFloat(record?.RCPT_TOT_VAL)\n                    record.PROD_CODE_F = setCharAt(record?.PROD_CODE_F, 2, 'K')\n\n                } else if ((parseFloat(record?.RCPT_TOT_VAL) == parseFloat(record?.RCPT_TOT_VAL_PI)) || (parseFloat(record?.RCPT_TOT_VAL_PI) == 0)) {\n                    record.NAPCS_IND = 'N'\n\n                } else if ((parseFloat(LL) <= (parseFloat(record?.NAPCS_BLTOT) / parseFloat(record?.RCPT_TOT_VAL_PI))) &&\n                    ((parseFloat(record?.NAPCS_BLTOT) / parseFloat(record?.RCPT_TOT_VAL_PI)) <= parseFloat(UL))) {\n                    record.PROD_CODE_VAL = (parseFloat(record?.PROD_CODE_VAL) / parseFloat(record?.NAPCS_BLTOT)) * parseFloat(record?.RCPT_TOT_VAL)\n                    record.PROD_CODE_F = setCharAt(record?.PROD_CODE_F, 2, 'K')\n                } else {\n                    record.NAPCS_IND = 'N'\n                }\n            } else {\n                record.TABSTAT = 'N'\n                record.NONTABFL = 'R'\n                record.STOP = 'T'\n                record.REFERRAL_FLAG = 'MIS_NAICSOLD_NAICSTOLERANCE' // checked with Census\n            }\n        } else {\n            record.NAPCS_IND = 'N'\n        }\n        record.ACTION = 'End'\n    }\n\n    evalBalancing()\n    msg.payload.csv[record_idx] = record\n    return msg\n\n} catch (e) {\n    return msg;\n}",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 840,
-        "y": 100,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "401fdae063b57aa5",
-        "type": "function",
-        "z": "d32a58c0544f501c",
-        "name": "NAPCS Balance",
-        "func": "try {\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n    let id = record['REPORTING_ID']\n\n    let allData = msg.payload.csv;\n    let NAPCS_BLTOT = 0\n    let NAPCS_PRM = 0\n    const setCharAt = (str, index, char) => {\n        if (index > str.length - 1) return str.padEnd(index, ' ') + char;\n        return str.substr(0, index) + char + str.substr(index + char.length);\n    };\n\n    if (record?.NAICS_SECTOR === '31' && record?.SUBSAMP_IND_TXT !== 'MC') {\n        if (record?.NAPCS_IND === undefined || record?.NAPCS_IND === null) {\n            if (record?.HISTSTAT === 'Y' &&\n                record?.EC_NAPCS_IND === 'U' &&\n                (parseInt(record?.EC_NAPCS_BLTOT) > 0) &&\n                (parseInt(record?.EC_RCPT_TOT_VAL) > 0) &&\n                (parseInt(record?.RCPT_TOT_VAL) > 0) &&\n                record?.NAPCS_IMP === 'Y') {\n                for (let index in allData) {\n                    let row = allData[index]\n                    if (row.EC_REPORTING_ID === id &&\n                        row.EC_REF_PER === '2022U1' &&\n                        (row.EC_NAPCS_USABLE !== 'I' || row.EC_NAPCS_USABLE !== 'D' || row.EC_NAPCS_USABLE !== 'X') &&\n                        (parseInt(row.EC_NAPCS_PROD_CODE_VAL) > 0) &&\n                        row.EC_NAPCS_PROD_CODE.substring(0, 7) !== '9000000') {\n                        row.NAPCS_IND = 'U'\n                        row.NAPCS_IMP = 'Y'\n                        row.PROD_CODE = record.EC_NAPCS_PROD_CODE\n                        row.USABLE = 'U'\n                        record.PROD_CODE_VAL = (parseFloat(record.EC_NAPCS_PROD_CODE_VAL) * (\n                            parseFloat(record.RCPT_TOT_VAL)) /\n                            parseFloat(record.EC_RCPT_TOT_VAL))\n                        record.REPORTING_ID = record.REPORTING_ID\n                        record.REF_PER = record.REF_PER\n                        record.PROD_CODE_F = setCharAt(record.PROD_CODE_F.toString(), 2, 'H');\n                    }\n                    if ((parseInt(row.EC_NAPCS_PROD_CODE_VAL) > 0) &&\n                        row.EC_NAPCS_PROD_CODE.substring(0, 7) === '9000000') {\n                        row.NAPCS_IND = 'U'\n                        row.NAPCS_IMP = 'Y'\n                        row.PROD_CODE = record.EC_NAPCS_PROD_CODE\n                        row.USABLE = 'J'\n                        record.PROD_CODE_VAL = (parseFloat(record.EC_NAPCS_PROD_CODE_VAL) *\n                            (parseFloat(record.RCPT_TOT_VAL)) / parseFloat(record.EC_RCPT_TOT_VAL))\n                        record.REPORTING_ID = record.REPORTING_ID\n                        record.REF_PER = record.REF_PER\n                        record.PROD_CODE_F = setCharAt(record.PROD_CODE_F.toString(), 2, 'H');\n                    }\n                    if (row.PROD_CODE.substr(7, 3) === '000') {\n                        record.NAPCS_BLTOT = parseInt(record.NAPCS_BLTOT) + parseInt(record.PROD_CODE_VAL)\n                    }\n\n                }\n\n            }\n\n        }\n\n    }\n\n    function NAPCSBalancepathA() {\n        // call Balancing Module\n        if (record.NAPCS_IND === 'U') {\n            // call BL Rounding Module\n        }\n\n        // for Each Prod_code on record\n        if (parseInt(record.PROD_CODE_VAL) === 0) {\n            record.USABLE = 'D'\n        }\n\n        // Recalculate NAPCS Field Module\n        if (parseInt(record.NAPCS_BAL) !== 0 || record.NAPCS_IND === 'U') {\n            record.NAPCS_IND = 'N'\n        }\n        record['ACTION'] = 'This is path A'\n        NAPCSBalancepathB()\n    }\n\n    function NAPCSBalancepathB() {\n        //call NO DONOR\n        //call HDICAT\n        //END\n        record['ACTION'] = 'This is path B'\n    }\n    msg.payload.csv[record_idx] = record\n    return msg;\n} catch (e) {\n    return msg;\n}\n\n",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 760,
-        "y": 140,
-        "wires": [
-            []
         ]
     },
     {
@@ -9823,6 +9461,748 @@
             [
                 "b8e346bc389719b0"
             ],
+            []
+        ]
+    },
+    {
+        "id": "f6885c586821c8cd",
+        "type": "function",
+        "z": "b3b1701e035827dc",
+        "name": "NAPCS HDICAT",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nfunction setCharAt(str, index, chr) {\n    if ([null, undefined].includes(str)) {\n        let newstr = ''\n        for (let i = 0; i < index; i++) {\n            newstr = newstr + ' ';\n        }\n        newstr = newstr + chr\n        return newstr;\n    } else {\n        if (index > str.length - 1) {\n            let addstr = index - str.length\n            let newstr = str\n            for (let i = 0; i < addstr; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            return str.substring(0, index) + chr + str.substring(index + 1);\n        }\n    }\n}\nfunction NAPCSHDICAT() {\n   if(record?.TABSTAT == 'Y' && parseFloat(record?.RCPT_TOT_VAL) > 0 && ['20','90'].includes(record?.RECORD_TYP_TXT)){\n        if(record?.NAPCS_IND == 'U'){\n            if(['T','E'].includes(record?.NAPCS_NODONOR)){\n                // setCharAt(record.NAPCS_HDICAT || ' ', 1, 'NC')\n                record.NAPCS_HDICAT = 'NC'\n            }else{\n                // setCharAt(record.NAPCS_HDICAT || ' ', 1, 'C')\n                record.NAPCS_HDICAT = ' C'\n            }\n        }else{\n            // setCharAt(record.NAPCS_HDICAT || ' ', 1, 'F')\n            record.NAPCS_HDICAT = ' F'\n        }\n   }else{\n    record.NAPCS_HDICAT = ' '\n   }\n    record.ACTION = 'END'\n}\nNAPCSHDICAT()\nmsg.payload.csv[record_idx] = record\nreturn msg\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d1b1713300484045",
+        "type": "function",
+        "z": "b576348e42469acf",
+        "name": "NAPCS: M_GOCO",
+        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + ' ';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    let cache = global.get(\"lookupCache\");\n    let naics_napcs = cache.data.find(\n        item =>\n            item.module === \"napcs\" &&\n            item.param === 'naics_to_napcs_m_goco' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"all\"\n    )?.json_values;\n\n    var napcs = naics_napcs['NAICS_TO_NAPCS_M_GOCO']\n    function isNaicsCodeFound() {\n        for (let i in napcs) {\n            let row = napcs[i]\n            if (record?.NAICS_CODE.substr(0, 3) == row['NAICS-3']) {\n                return (row.NAPCS)\n            }\n        }\n    }\n\n    let isNaicsFound = naics_napcs?.NAICS_TO_NAPCS_M_GOCO.some(n => n['NAICS-3'] == record?.NAICS_CODE.substr(0, 3));\n\n    function NAPCSMGOCO() {\n        if (record?.NAPCS_IND == 'U') {\n            record.PROD_CODE_VAL = 0\n            record.USABLE = 'D'\n            record.PROD_CODE_F = setCharAt(record?.PROD_CODE_F || ' ', 1, 'J')\n        }\n\n        if (isNaicsFound) {\n            record.NAPCS_IND = 'U'\n            record.PROD_CODE = isNaicsCodeFound()\n            record.PROD_CODE_VAL = record?.RCPT_TOT_VAL\n            record.REF_PER = record?.REF_PER\n            record.PROD_CODE_F = setCharAt(record?.PROD_CODE_F || '  ', 2, 'J')\n\n            const fields = [\n                \"CAPEX_BUILD_NEW_VAL\", \"CAPEX_BUILD_USED_VAL\", \"CAPEX_BUILD_TOT_DVAL\",\n                \"CAPEX_MACH_NEW_VAL\", \"CAPEX_MACH_USED_VAL\", \"CAPEX_MACH_TOT_DVAL\",\n                \"CAPEX_AUTO_VAL\", \"CAPEX_COMPTR_VAL\", \"CAPEX_OTHMACH_VAL\",\n                \"CAPEX_OTH_NEW_VAL\", \"CAPEX_OTH_NEW_WRTIN_TXT\", \"CAPEX_OTH_USED_VAL\",\n                \"CAPEX_OTH_USED_WRTIN_TXT\", \"CAPEX_OTH_TOT_DVAL\", \"CAPEX_NEW_TOT_DVAL\",\n                \"CAPEX_USED_TOT_DVAL\", \"CAPEX_TOT_DVAL\",\n\n                \"CAPEX_BUILD_NEW_VAL_F\", \"CAPEX_BUILD_USED_VAL_F\", \"CAPEX_BUILD_TOT_DVAL_F\",\n                \"CAPEX_MACH_NEW_VAL_F\", \"CAPEX_MACH_USED_VAL_F\", \"CAPEX_MACH_TOT_DVAL_F\",\n                \"CAPEX_AUTO_VAL_F\", \"CAPEX_COMPTR_VAL_F\", \"CAPEX_OTHMACH_VAL_F\",\n                \"CAPEX_OTH_NEW_VAL_F\", \"CAPEX_OTH_NEW_WRTIN_TXT_F\", \"CAPEX_OTH_USED_VAL_F\",\n                \"CAPEX_OTH_USED_WRTIN_TXT_F\", \"CAPEX_OTH_TOT_DVAL_F\", \"CAPEX_NEW_TOT_DVAL_F\",\n                \"CAPEX_USED_TOT_DVAL_F\", \"CAPEX_TOT_DVAL_F\",\n\n                \"INV_E_FIN_VAL\", \"INV_E_WIP_VAL\", \"INV_E_MAT_VAL\",\n                \"INV_E_TOT_VAL\", \"INV_B_FIN_VAL\", \"INV_B_WIP_VAL\",\n                \"INV_B_MAT_VAL\", \"INV_B_TOT_VAL\", \"INV_E_FIFO_VAL\",\n                \"INV_E_AVG_VAL\", \"INV_E_STD_VAL\", \"INV_E_OTHNL_VAL\",\n                \"INV_E_NL_TOT_DVAL\", \"INV_B_FIFO_VAL\", \"INV_B_AVG_VAL\",\n                \"INV_B_STD_VAL\", \"INV_B_OTHNL_VAL\", \"INV_B_NL_TOT_DVAL\", \"INV_E_LIFO_VAL\", \"INV_B_LIFO_VAL\",\n                \"INV_E_IVAL_TOT_DVAL\", \"INV_B_IVAL_TOT_DVAL\", \"INV_E_LIFO_RSV_VAL\",\n                \"INV_B_LIFO_RSV_VAL\",\n\n                \"INV_E_FIN_VAL_F\", \"INV_E_WIP_VAL_F\",\n                \"INV_E_MAT_VAL_F\", \"INV_E_TOT_VAL_F\", \"INV_B_FIN_VAL_F\",\n                \"INV_B_WIP_VAL_F\", \"INV_B_MAT_VAL_F\", \"INV_B_TOT_VAL_F\",\n                \"INV_E_FIFO_VAL_F\", \"INV_E_AVG_VAL_F\", \"INV_E_STD_VAL_F\",\n                \"INV_E_OTHNL_VAL_F\", \"INV_E_NL_TOT_DVAL_F\", \"INV_B_FIFO_VAL_F\",\n                \"INV_B_AVG_VAL_F\", \"INV_B_STD_VAL_F\", \"INV_B_OTHNL_VAL_F\",\n                \"INV_B_NL_TOT_DVAL_F\", \"INV_E_LIFO_VAL_F\", \"INV_B_LIFO_VAL_F\",\n                \"INV_E_IVAL_TOT_DVAL_F\", \"INV_B_IVAL_TOT_DVAL_F\", \"INV_E_LIFO_RSV_VAL_F\",\n                \"INV_B_LIFO_RSV_VAL_F\"\n            ];\n\n            fields.forEach(field => {\n                if (field.endsWith(\"_F\")) {\n                    record[field] = setCharAt(record[field] || '  ', 2, 'J')\n                } else {\n                    record[field] = 0;\n                }\n            });\n            record.EXPS_MAT_V1_VAL = 0;\n            record.EXPS_CSTMTOT_DVAL_F = setCharAt(record.EXPS_CSTMTOT_DVAL_F, 2, 'L');\n\n            record.EXPS_CSTMTOT_DVAL =\n                (parseFloat(record?.EXPS_ELEC_VAL) || 0)\n                + (parseFloat(record?.EXPS_FUEL_VAL) || 0)\n                + (parseFloat(record?.EXPS_CONTRACT_VAL) || 0)\n                + (parseFloat(record?.EXPS_RESALE_VAL) || 0);\n\n        } else {\n            record.TABSTAT = 'N'\n            record.NONTABFL = 'R'\n            record.STOP = 'T'\n            record.REFERRAL_FLAG = 'GOCO_NAICS_NO_MATCH'\n            global.set('action','Exit Edit')\n        }\n        record.ACTION = 'END'\n    }\n\n    NAPCSMGOCO()\n    msg.payload.csv[record_idx] = record\n\n    return msg\n}catch(e){\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 810,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8c066284600dbc44",
+        "type": "function",
+        "z": "0be109393cb5f28a",
+        "name": "check cache",
+        "func": "// Retrieve the lookupCache\nlet cache = global.get(\"lookupCache\") || { data: [] };\n\n// Initialize msg.payload.lookup if it's not already an object\nmsg.payload.lookup = msg.payload.lookup || {};\n\n// List to keep track of missing parameters\nlet missingParams = [];\n\n// Check if the required params and their types exist in the cache\nif (msg?.payload?.lookup?.params){\n    for (let param of msg.payload.lookup.params.split(\",\")) {\n        let cachedValue = cache?.data && cache.data.find(\n            (cacheItem) =>\n                cacheItem.param === param.key && cacheItem.type === param.type\n        );\n\n        if (!cachedValue) {\n            missingParams.push(param);\n        }\n    }\n}\n\n\n// If there are missing parameters, set msg.payload.lookup.needsFetch to true\nif (missingParams.length > 0) {\n    msg.payload.lookup.needsFetch = true;\n    msg.payload.lookup.missingParams = missingParams;\n} else {\n    msg.payload.lookup.needsFetch = false;\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 770,
+        "y": 100,
+        "wires": [
+            [
+                "ce1e0380f0f1b0f9"
+            ]
+        ]
+    },
+    {
+        "id": "ce1e0380f0f1b0f9",
+        "type": "function",
+        "z": "0be109393cb5f28a",
+        "name": "prepare API Request",
+        "func": "const { moduleName, program, unit_type, missingParams } = msg.payload.lookup;\nconst params = (missingParams.length && missingParams.join(\",\")) || \"\";\n// const apiurl = `${(env.get('CENSUS_API') || 'https://mc.edl-7529180-ite.ite.edl.census.gov/api/').trim()}params?module=${moduleName}&params=${params}&program=${program}&unit_type=${unit_type}`;\nconst apiurl = `${('a301cb45559c445acaec11ab01bbbee1-2115632777.us-gov-east-1.elb.amazonaws.com/api/').trim()}params?module=${moduleName}&params=${params}&program=${program}&unit_type=${unit_type}`;\nmsg.url = apiurl;\nmsg.payloadBackup = msg.payload;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 980,
+        "y": 100,
+        "wires": [
+            [
+                "6c16d5bbc3143a33"
+            ]
+        ]
+    },
+    {
+        "id": "6c16d5bbc3143a33",
+        "type": "http request",
+        "z": "0be109393cb5f28a",
+        "name": "Lookup data API",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "basic",
+        "senderr": false,
+        "headers": [],
+        "x": 1210,
+        "y": 100,
+        "wires": [
+            [
+                "f5dbe24054de29ce"
+            ]
+        ]
+    },
+    {
+        "id": "f5dbe24054de29ce",
+        "type": "function",
+        "z": "0be109393cb5f28a",
+        "name": "cache result",
+        "func": "let cache = global.get(\"lookupCache\");\ncache = Array.isArray(cache?.data) ? cache : {\"data\":[]}\n\n// Get the payload\nlet payload = msg.payload;\n\n// Check if the API call was successful\nif (payload.status === \"success\") {\n\n    // Get the data array\n    let dataArr = payload.data;\n\n    // Extract the necessary fields from the API response and update the cache\n    for (let item of dataArr) {\n        const { id, module, param, values, json_values, program, unit_type } = item;\n        cache.data.push({ id, module, param, values, json_values, program, unit_type });\n    }\n    msg.payload = { ...msg.payloadBackup, dataArr };\n\n}\n// Save the updated cache\nglobal.set(\"lookupCache\", cache)\n// msg.payload = { ...msg.payloadBackup, dataArr };\n// msg.payload.cache = cache;\ndelete msg.payloadBackup;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1430,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3f577bb0f73d0ae2",
+        "type": "change",
+        "z": "4b2a066dec42e6f4",
+        "name": "Set NODONOR",
+        "rules": [
+            {
+                "t": "set",
+                "p": "nodonor",
+                "pt": "global",
+                "to": "\"\"",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 500,
+        "y": 500,
+        "wires": [
+            [
+                "3e9e6c5951dea430"
+            ]
+        ]
+    },
+    {
+        "id": "3e9e6c5951dea430",
+        "type": "change",
+        "z": "4b2a066dec42e6f4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.lookup",
+                "pt": "msg",
+                "to": "{\"moduleName\":\"napcs\",\"program\":\"aies\",\"unit_type\":\"all\",\"params\":\"napcs_m_goco\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 710,
+        "y": 500,
+        "wires": [
+            [
+                "75ae4bd5c0d07b66"
+            ]
+        ]
+    },
+    {
+        "id": "75ae4bd5c0d07b66",
+        "type": "subflow:0be109393cb5f28a",
+        "z": "4b2a066dec42e6f4",
+        "name": "",
+        "x": 990,
+        "y": 500,
+        "wires": [
+            [
+                "4b8c2d9a659b2ad5"
+            ]
+        ]
+    },
+    {
+        "id": "4b8c2d9a659b2ad5",
+        "type": "function",
+        "z": "4b2a066dec42e6f4",
+        "name": "NODONOR Check GOCO",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nlet cache = global.get(\"lookupCache\");\nlet m_goco = cache.data.find(\n    item =>\n        item.module === \"napcs\" &&\n        item.param === 'napcs_m_goco' &&\n        item.program === \"aies\" &&\n        item.unit_type === \"all\"\n)?.json_values;\n\nlet isIdFound = m_goco?.NAPCS_M_GOCO.some(n => n['SURVUID'] == record?.REPORTING_ID);\n\nfunction callMGOCO() {\n    if (isIdFound) {\n        global.set('nodonor', 'go to m_goco');\n        record.NAPCS_NODONOR = 'E'\n    }\n}\n\ncallMGOCO()\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1250,
+        "y": 500,
+        "wires": [
+            [
+                "1c7ef6807114346f"
+            ]
+        ]
+    },
+    {
+        "id": "1c7ef6807114346f",
+        "type": "switch",
+        "z": "4b2a066dec42e6f4",
+        "name": "",
+        "property": "nodonor",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "go to m_goco",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "go to m_goco",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1470,
+        "y": 560,
+        "wires": [
+            [
+                "26275dd2ba68ba28"
+            ],
+            [
+                "7c59477af52f8d1f"
+            ]
+        ]
+    },
+    {
+        "id": "26275dd2ba68ba28",
+        "type": "change",
+        "z": "4b2a066dec42e6f4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.lookup",
+                "pt": "msg",
+                "to": "{\"moduleName\":\"napcs\",\"program\":\"aies\",\"unit_type\":\"all\",\"params\":\"naics_to_napcs_m_goco\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1670,
+        "y": 500,
+        "wires": [
+            [
+                "d88d65205ecb3dd9"
+            ]
+        ]
+    },
+    {
+        "id": "d88d65205ecb3dd9",
+        "type": "subflow:0be109393cb5f28a",
+        "z": "4b2a066dec42e6f4",
+        "name": "",
+        "x": 1930,
+        "y": 500,
+        "wires": [
+            [
+                "6f8e4805c41cb820"
+            ]
+        ]
+    },
+    {
+        "id": "7c59477af52f8d1f",
+        "type": "change",
+        "z": "4b2a066dec42e6f4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.lookup",
+                "pt": "msg",
+                "to": "{\"moduleName\":\"napcs\",\"program\":\"aies\",\"unit_type\":\"all\",\"params\":\"napcs_nodonor_cutoff\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1670,
+        "y": 600,
+        "wires": [
+            [
+                "b36fed60d5154170"
+            ]
+        ]
+    },
+    {
+        "id": "b36fed60d5154170",
+        "type": "subflow:0be109393cb5f28a",
+        "z": "4b2a066dec42e6f4",
+        "name": "",
+        "x": 1930,
+        "y": 600,
+        "wires": [
+            [
+                "99aa6097013685ea"
+            ]
+        ]
+    },
+    {
+        "id": "6f8e4805c41cb820",
+        "type": "subflow:b576348e42469acf",
+        "z": "4b2a066dec42e6f4",
+        "name": "",
+        "x": 2140,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "99aa6097013685ea",
+        "type": "function",
+        "z": "4b2a066dec42e6f4",
+        "name": "NAPCS: NODONOR",
+        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + ' ';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    let cache = global.get(\"lookupCache\");\n    let naics_napcs = cache.data.find(\n        item =>\n            item.module === \"napcs\" &&\n            item.param === 'napcs_nodonor_cutoff' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"all\"\n    )?.json_values;\n\n    var napcs = naics_napcs['NAPCS_NODONOR_CUTOFF']\n    function isNaicsCodeFound() {\n        for (let i in napcs) {\n            let row = napcs[i]\n            if (record?.NAICS_CODE == row['NAIC']) {\n                return (row.CUTOFF)\n            }\n        }\n    }\n\n    function find9000() {\n        let id = record['REPORTING_ID']\n        let allData = msg.payload.csv;\n        for (let i in allData) {\n            let row = allData[i]\n            if (row.REPORTING_ID == id) {\n                if (row?.PROD_CODE && row?.PROD_CODE == '9000000000') {\n                    return (row?.PROD_CODE_VAL)\n                }\n            }\n        }\n    }\n\n    function NAPCSNODONOR() {\n        if (['T', 'B'].includes(record?.NAPCS_NODONOR) || !(['20', '90'].includes(record?.RECORD_TYP_TXT))) {\n        } else {\n            record.NAPCS_NODONOR = ' ';\n            if (record?.NAPCS_IND === 'U' && parseFloat(record?.RCPT_TOT_VAL) > 0) {\n                let isNaicsFound = naics_napcs?.NAPCS_NODONOR_CUTOFF.some(n => n['NAIC'] == record?.NAICS_CODE);\n                if (isNaicsFound) {\n                    let cutoff = isNaicsCodeFound()\n                    let val_9000 = find9000()\n                    if ((parseFloat(record?.NAPCS_OTH) / parseFloat(record?.RCPT_TOT_VAL)) >= parseFloat(cutoff)) {\n                        record.NAPCS_NODONOR = 'E'\n                    } else if ((parseFloat(val_9000) / parseFloat(record?.RCPT_TOT_VAL)) >= 0.5) {\n                        record.NAPCS_NODONOR = 'E'\n                    } else if (((parseFloat(val_9000) + parseFloat(record?.NAPCS_OTH)) / parseFloat(record?.RCPT_TOT_VAL)) >= 0.5) {\n                        record.NAPCS_NODONOR = 'E'\n                    } else if (record?.NAPCS_IMP === 'Y') {\n                        record.NAPCS_NODONOR = 'E'\n                    }\n                } else {\n                    record.REFERRAL_FLAG = 'MISSING_NAICOLD_NODONOR'\n                    record.TABSTAT = 'N';\n                    record.NONTABFL = 'R';\n                    global.set('action','Exit Edit')\n                }\n            }\n        }\n        record.ACTION = 'END'\n    }\n\n    NAPCSNODONOR();\n    return msg;\n}catch(e){\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2180,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e07677c8e679affd",
+        "type": "function",
+        "z": "e77217f4bfc52a38",
+        "name": "napcs_recalculate_napcs_fields",
+        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    let allData= msg.payload.csv\n    let id = record?.REPORTING_ID\n\n    let NAPCS_BLTOT = 0\n    let NAPCS_PRM = 0\n    let NAPCS_OTH = 0\n\n    for (let i in allData) {\n        let row = allData[i]\n        if (row.REPORTING_ID == id) {\n            if (row?.PROD_CODE) {\n                if (['I', 'D', 'X'].includes(row?.USABLE)) {\n                } else {\n                    if (row?.PROD_CODE.substring(7, 10) == '000') {\n                        NAPCS_BLTOT = NAPCS_BLTOT + parseFloat(row?.PROD_CODE_VAL)\n                    }\n                    if (row?.PROD_CODE.substring(0, 1) == '2') {\n                        NAPCS_PRM = NAPCS_PRM + parseFloat(row?.PROD_CODE_VAL)\n                    }\n                    if (row?.PROD_CODE.substring(0, 1) != '2') {\n                        if (row.PROD_CODE.substring(0, 7) == '9000000') {\n                        } else {\n                            NAPCS_OTH = NAPCS_OTH + parseFloat(row?.PROD_CODE_VAL)\n                        }\n                    }\n                }\n            }\n        }\n    }\n\n    record['NAPCS_BLTOT'] = NAPCS_BLTOT\n    record['NAPCS_PRM'] = NAPCS_PRM\n    record['NAPCS_OTH'] = NAPCS_OTH\n    \n    msg.payload.csv[record_idx] = record\n    return msg\n\n}catch(e){\n    return msg\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 770,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b2afff84193f1485",
+        "type": "function",
+        "z": "fbb1e70dfe5fe82f",
+        "name": "NAPCS BL ROUNDING",
+        "func": "let record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.payload.csv[record_idx];\n\nlet id = record.REPORTING_ID\nlet allData = msg.payload.csv;\nlet newarr = []\nlet newarr2 = []\nlet j = 0\nlet k = 0\nfor (let i in allData) {\n    let row = allData[i]\n    if (row.REPORTING_ID == id) {\n        if (row.PROD_CODE) {\n            if (row.NAPCSCODE_MF == 'Y') {\n                newarr[j] = row\n                j = j + 1\n            } else {\n                newarr2[k] = row\n                k = k + 1\n            }\n        }\n    }\n}\nnewarr.sort((a, b) => a.PROD_CODE_VAL - b.PROD_CODE_VAL);\nnewarr2.sort((a, b) => b.PROD_CODE_VAL - a.PROD_CODE_VAL);\nnewarr = newarr.concat(newarr2)\n\nlet remainder = 0\nfor (let i in newarr) {\n    let row = newarr[i]\n    let adjusted = parseFloat(row?.PROD_CODE_VAL) + remainder\n    let rounded = Math.round(adjusted)\n    if (row?.NAPCSCODE_MF == 'Y' && rounded == 0) {\n        rounded = 1\n    } else if (rounded < 0) {\n        rounded = 0\n    }\n    remainder = adjusted - rounded\n    // row.EXACT, row.ADJUSTED, row.ROUNDED, row.FRACTIONAL are for testing purposes only\n    // row.EXACT = row?.PROD_CODE_VAL\n    // row.ADJUSTED = adjusted\n    // row.ROUNDED = rounded\n    // row.FRACTIONAL = remainder\n    row.PROD_CODE_VAL = rounded\n    newarr[i] = row\n}\n\nreturn msg\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 810,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1fe10b7b2609c70b",
+        "type": "function",
+        "z": "c706d1ca2706f3bf",
+        "name": "Balancing",
+        "func": "try {\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let allData = msg.payload.csv;\n    let record = allData[record_idx];\n\n    let id = record?.REPORTING_ID\n\n    msg.cache = global.get(\"lookupCache\")\n        .data.find(\n            item =>\n                item.module === 'naics' &&\n                item.param === 'naics_tolerance' &&\n                item.program === 'aies' &&\n                item.unit_type === 'all'\n        )?.json_values;\n\n    var jsonData = msg.cache['NAICS_TOLERANCE']\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + ' ';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + ' ';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    function findTol() {\n        let naics = record?.NAICS_CODE\n        for (let i in jsonData) {\n            let row = jsonData[i]\n            if (row.NAICS.startsWith(naics)) {\n                let LL = row.LL\n                let UL = row.UL;\n                return { LL, UL };\n            }\n        }\n    }\n\n    function evalBalancing() {\n        if (record?.RCPT_TOT_VAL > 0) {\n            let naics = jsonData.some(element => (element.NAICS.startsWith(record?.NAICS_CODE)));\n            if (naics) {\n                let { LL, UL } = findTol()\n\n                if (record?.NAPCS_BLTOT == record?.RCPT_TOT_VAL) {\n\n                } else if ((parseFloat(LL) <= (parseFloat(record?.NAPCS_BLTOT) / parseFloat(record?.RCPT_TOT_VAL))) &&\n                    ((parseFloat(record?.NAPCS_BLTOT) / parseFloat(record?.RCPT_TOT_VAL)) <= parseFloat(UL))) {\n                    for (let i in allData) {\n                        let row = allData[i]\n                        if (row?.REPORTING_ID == id && row?.PROD_CODE_VAL) {\n                            row.PROD_CODE_VAL = (parseFloat(row?.PROD_CODE_VAL) / parseFloat(record?.NAPCS_BLTOT)) * parseFloat(record?.RCPT_TOT_VAL)\n                            row.PROD_CODE_F = setCharAt(row?.PROD_CODE_F, 2, 'K')\n                            allData[i] = row\n                        }\n                    }\n                } else if ((parseFloat(record?.RCPT_TOT_VAL) == parseFloat(record?.RCPT_TOT_VAL_PI)) || (parseFloat(record?.RCPT_TOT_VAL_PI) == 0)) {\n                    record.NAPCS_IND = 'N'\n\n                } else if ((parseFloat(LL) <= (parseFloat(record?.NAPCS_BLTOT) / parseFloat(record?.RCPT_TOT_VAL_PI))) &&\n                    ((parseFloat(record?.NAPCS_BLTOT) / parseFloat(record?.RCPT_TOT_VAL_PI)) <= parseFloat(UL))) {\n                    for (let i in allData) {\n                        let row = allData[i]\n                        if (row?.REPORTING_ID == id && row?.PROD_CODE_VAL) {\n                            row.PROD_CODE_VAL = (parseFloat(row?.PROD_CODE_VAL) / parseFloat(record?.NAPCS_BLTOT)) * parseFloat(record?.RCPT_TOT_VAL)\n                        row.PROD_CODE_F = setCharAt(row?.PROD_CODE_F, 2, 'K')\n                        allData[i] = row\n                        }\n                    }\n                } else {\n                    record.NAPCS_IND = 'N'\n                }\n            } else {\n                record.TABSTAT = 'N'\n                record.NONTABFL = 'R'\n                record.STOP = 'T'\n                record.REFERRAL_FLAG = 'MIS_NAICSOLD_NAICSTOLERANCE' // checked with Census\n                global.set('action','Exit Edit')\n            }\n        } else {\n            record.NAPCS_IND = 'N'\n        }\n        record.ACTION = 'End'\n    }\n\n    evalBalancing()\n    allData[record_idx] = record\n    msg.payload.csv = allData\n    return msg\n\n} catch (e) {\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "401fdae063b57aa5",
+        "type": "function",
+        "z": "d32a58c0544f501c",
+        "name": "NAPCS Balance",
+        "func": "try {\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n    let id = record['REPORTING_ID']\n\n    let allData = msg.payload.csv;\n    let NAPCS_BLTOT = 0\n    let NAPCS_PRM = 0\n    const setCharAt = (str, index, char) => {\n        if (index > str.length - 1) return str.padEnd(index, ' ') + char;\n        return str.substr(0, index) + char + str.substr(index + char.length);\n    };\n\n    global.set('napcsBal','')\n    global.set('action','')\n\n    if (record?.NAICS_SECTOR === '31' && record?.SUBSAMP_IND_TXT !== 'MC') {\n        if (record?.NAPCS_IND == ' ') {\n            if (record?.HISTSTAT === 'Y' &&\n                record?.EC_NAPCS_IND === 'U' &&\n                (parseInt(record?.EC_NAPCS_BLTOT) > 0) &&\n                (parseInt(record?.EC_RCPT_TOT_VAL) > 0) &&\n                (parseInt(record?.RCPT_TOT_VAL) > 0) &&\n                record?.NAPCS_IMP === 'Y') {\n                for (let index in allData) {\n                    let row = allData[index]\n                    if (row.EC_REPORTING_ID === id &&\n                        row.EC_REF_PER === '2022U1' &&\n                        (row.EC_NAPCS_USABLE !== 'I' || row.EC_NAPCS_USABLE !== 'D' || row.EC_NAPCS_USABLE !== 'X') &&\n                        (parseInt(row.EC_NAPCS_PROD_CODE_VAL) > 0) &&\n                        row.EC_NAPCS_PROD_CODE.substring(0, 7) !== '9000000') {\n                        row.NAPCS_IND = 'U'\n                        row.NAPCS_IMP = 'Y'\n                        row.PROD_CODE = record.EC_NAPCS_PROD_CODE\n                        row.USABLE = 'U'\n                        record.PROD_CODE_VAL = (parseFloat(record.EC_NAPCS_PROD_CODE_VAL) * (\n                            parseFloat(record.RCPT_TOT_VAL)) /\n                            parseFloat(record.EC_RCPT_TOT_VAL))\n                        record.REPORTING_ID = record.REPORTING_ID\n                        record.REF_PER = record.REF_PER\n                        record.PROD_CODE_F = setCharAt(record.PROD_CODE_F.toString(), 2, 'H');\n                    }\n                    if ((parseInt(row.EC_NAPCS_PROD_CODE_VAL) > 0) &&\n                        row.EC_NAPCS_PROD_CODE.substring(0, 7) === '9000000') {\n                        row.NAPCS_IND = 'U'\n                        row.NAPCS_IMP = 'Y'\n                        row.PROD_CODE = record.EC_NAPCS_PROD_CODE\n                        row.USABLE = 'J'\n                        record.PROD_CODE_VAL = (parseFloat(record.EC_NAPCS_PROD_CODE_VAL) *\n                            (parseFloat(record.RCPT_TOT_VAL)) / parseFloat(record.EC_RCPT_TOT_VAL))\n                        record.REPORTING_ID = record.REPORTING_ID\n                        record.REF_PER = record.REF_PER\n                        record.PROD_CODE_F = setCharAt(record.PROD_CODE_F.toString(), 2, 'H');\n                    }\n                    if (row.PROD_CODE.substr(7, 3) === '000') {\n                        record.NAPCS_BLTOT = parseInt(record.NAPCS_BLTOT) + parseInt(record.PROD_CODE_VAL)\n                    }\n\n                }\n                global.set('napcsBal', 'Route A')\n            } else {\n                global.set('napcsBal', 'Route B')\n            }\n        } else {\n            global.set('napcsBal', 'Route A')\n        }\n    } else {\n        global.set('napcsBal', 'Main Route')\n    }\n\n    function NAPCSBalancepathA() {\n        // call Balancing Module\n        if (record.NAPCS_IND === 'U') {\n            // call BL Rounding Module\n        }\n\n        // for Each Prod_code on record\n        if (parseInt(record.PROD_CODE_VAL) === 0) {\n            record.USABLE = 'D'\n        }\n\n        // Recalculate NAPCS Field Module\n        if (parseInt(record.NAPCS_BAL) !== 0 || record.NAPCS_IND === 'U') {\n            record.NAPCS_IND = 'N'\n        }\n        record['ACTION'] = 'This is path A'\n        NAPCSBalancepathB()\n    }\n\n    function NAPCSBalancepathB() {\n        //call NO DONOR\n        //call HDICAT\n        //END\n        record['ACTION'] = 'This is path B'\n    }\n    msg.payload.csv[record_idx] = record\n    return msg;\n} catch (e) {\n    global.set('err','Exit Edit')\n    return msg;\n}\n\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 760,
+        "y": 140,
+        "wires": [
+            [
+                "03b8fb7bd5b0caa5"
+            ]
+        ]
+    },
+    {
+        "id": "03b8fb7bd5b0caa5",
+        "type": "switch",
+        "z": "d32a58c0544f501c",
+        "name": "",
+        "property": "napcsBal",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Main Route",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Route A",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Route B",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 950,
+        "y": 140,
+        "wires": [
+            [],
+            [
+                "f3c9ed8ece9824e7"
+            ],
+            [
+                "7e243549edd2f857"
+            ]
+        ]
+    },
+    {
+        "id": "fa743c474c8459ee",
+        "type": "switch",
+        "z": "d32a58c0544f501c",
+        "name": "",
+        "property": "napcsBal",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "BL Rounding",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1170,
+        "y": 340,
+        "wires": [
+            [
+                "2d5bd626ccbe866c"
+            ],
+            [
+                "66953372c8123589"
+            ]
+        ]
+    },
+    {
+        "id": "f3c9ed8ece9824e7",
+        "type": "subflow:c706d1ca2706f3bf",
+        "z": "d32a58c0544f501c",
+        "name": "",
+        "x": 1200,
+        "y": 180,
+        "wires": [
+            [
+                "75879436990d7deb"
+            ]
+        ]
+    },
+    {
+        "id": "c359203e32ea9253",
+        "type": "function",
+        "z": "d32a58c0544f501c",
+        "name": "NAPCS Balance 2",
+        "func": "try {\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    if (record?.NAPCS_IND == 'U') {\n        global.set('napcsBal','BL Rounding')\n    }\n    return msg;\n} catch(e) {\n    global.set('err','Exit Edit')\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1190,
+        "y": 260,
+        "wires": [
+            [
+                "fa743c474c8459ee"
+            ]
+        ]
+    },
+    {
+        "id": "2d5bd626ccbe866c",
+        "type": "subflow:fbb1e70dfe5fe82f",
+        "z": "d32a58c0544f501c",
+        "name": "",
+        "x": 1400,
+        "y": 340,
+        "wires": [
+            [
+                "66953372c8123589"
+            ]
+        ]
+    },
+    {
+        "id": "66953372c8123589",
+        "type": "function",
+        "z": "d32a58c0544f501c",
+        "name": "NAPCS Balance 3",
+        "func": "try {\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n    let id = record['REPORTING_ID']\n\n    let allData = msg.payload.csv;\n\n    for (let i in allData) {\n        let row = allData[i]\n        if (row.REPORTING_ID == id && row.PROD_CODE_VAL == 0) {\n            row.USABLE = 'D'\n            allData[i] = row\n        } \n    }\n\n    msg.payload.csv = allData\n    return msg;\n} catch(e) {\n    global.set('err','Exit Edit')\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1190,
+        "y": 420,
+        "wires": [
+            [
+                "eeedbeab13ecf5f0"
+            ]
+        ]
+    },
+    {
+        "id": "eeedbeab13ecf5f0",
+        "type": "subflow:e77217f4bfc52a38",
+        "z": "d32a58c0544f501c",
+        "name": "",
+        "x": 1240,
+        "y": 480,
+        "wires": [
+            [
+                "f3c44589923692eb"
+            ]
+        ]
+    },
+    {
+        "id": "f3c44589923692eb",
+        "type": "function",
+        "z": "d32a58c0544f501c",
+        "name": "NAPCS Balance 4",
+        "func": "try {\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    if (record?.NAPCS_BAL != 0 && record?.NAPCS_IND == 'U') {\n        record.NAPCS_IND = 'N'\n    }\n\n    msg.payload.csv[record_idx] = record\n    return msg;\n} catch(e) {\n    global.set('err','Exit Edit')\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1190,
+        "y": 540,
+        "wires": [
+            [
+                "7e243549edd2f857"
+            ]
+        ]
+    },
+    {
+        "id": "7e243549edd2f857",
+        "type": "subflow:4b2a066dec42e6f4",
+        "z": "d32a58c0544f501c",
+        "name": "",
+        "x": 1200,
+        "y": 600,
+        "wires": [
+            [
+                "72b2653deb32a23b"
+            ]
+        ]
+    },
+    {
+        "id": "0265195f902cf9bb",
+        "type": "subflow:b3b1701e035827dc",
+        "z": "d32a58c0544f501c",
+        "name": "",
+        "x": 1620,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "75879436990d7deb",
+        "type": "switch",
+        "z": "d32a58c0544f501c",
+        "name": "",
+        "property": "action",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1430,
+        "y": 180,
+        "wires": [
+            [],
+            [
+                "c359203e32ea9253"
+            ]
+        ]
+    },
+    {
+        "id": "72b2653deb32a23b",
+        "type": "switch",
+        "z": "d32a58c0544f501c",
+        "name": "",
+        "property": "action",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1410,
+        "y": 600,
+        "wires": [
+            [],
+            [
+                "0265195f902cf9bb"
+            ]
+        ]
+    },
+    {
+        "id": "73281bb1471fee97",
+        "type": "subflow:d32a58c0544f501c",
+        "z": "e825fc8e32eb1364",
+        "name": "",
+        "x": 700,
+        "y": 160,
+        "wires": [
+            [
+                "ae433fa4228520c2"
+            ]
+        ]
+    },
+    {
+        "id": "ae433fa4228520c2",
+        "type": "switch",
+        "z": "e825fc8e32eb1364",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 920,
+        "y": 160,
+        "wires": [
+            [],
+            [
+                "319c5fef8300c280"
+            ]
+        ]
+    },
+    {
+        "id": "319c5fef8300c280",
+        "type": "switch",
+        "z": "e825fc8e32eb1364",
+        "name": "Exit Check",
+        "property": "action",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 910,
+        "y": 220,
+        "wires": [
+            [],
             []
         ]
     },
@@ -27033,13 +27413,13 @@
         "repair": false,
         "outputs": 2,
         "x": 1750,
-        "y": 380,
+        "y": 360,
         "wires": [
             [
                 "66fdc22c898d5af9"
             ],
             [
-                "66fdc22c898d5af9"
+                "0b7cc3acbec1c3e3"
             ]
         ]
     },
@@ -27132,6 +27512,85 @@
         "wires": [
             [
                 "33f528d747418689"
+            ]
+        ]
+    },
+    {
+        "id": "0b7cc3acbec1c3e3",
+        "type": "subflow:e825fc8e32eb1364",
+        "z": "8790b12c7efb6fa0",
+        "name": "",
+        "x": 1510,
+        "y": 420,
+        "wires": [
+            [
+                "9866b63bc4275454"
+            ]
+        ]
+    },
+    {
+        "id": "9866b63bc4275454",
+        "type": "switch",
+        "z": "8790b12c7efb6fa0",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1740,
+        "y": 420,
+        "wires": [
+            [
+                "66fdc22c898d5af9"
+            ],
+            [
+                "d4f45bc6d26dc500"
+            ]
+        ]
+    },
+    {
+        "id": "d4f45bc6d26dc500",
+        "type": "switch",
+        "z": "8790b12c7efb6fa0",
+        "name": "Exit Check",
+        "property": "action",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1750,
+        "y": 480,
+        "wires": [
+            [
+                "66fdc22c898d5af9"
+            ],
+            [
+                "66fdc22c898d5af9"
             ]
         ]
     },
