@@ -2671,179 +2671,6 @@
         "color": "#DDAA99"
     },
     {
-        "id": "89f071f1deb9a1b1",
-        "type": "subflow",
-        "name": "Completeness",
-        "info": "",
-        "category": "",
-        "in": [
-            {
-                "x": 820,
-                "y": 280,
-                "wires": [
-                    {
-                        "id": "44cfe99b5f9e273f"
-                    }
-                ]
-            }
-        ],
-        "out": [
-            {
-                "x": 1640,
-                "y": 660,
-                "wires": [
-                    {
-                        "id": "917c64f63bd2f19c",
-                        "port": 1
-                    },
-                    {
-                        "id": "8d172b24625dc196",
-                        "port": 0
-                    },
-                    {
-                        "id": "cb75b2a1c3d302c2",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
-        "env": [],
-        "meta": {},
-        "color": "#DDAA99"
-    },
-    {
-        "id": "7c71f52633d8c794",
-        "type": "subflow",
-        "name": "RCPT_TOT_VAL",
-        "info": "",
-        "category": "",
-        "in": [
-            {
-                "x": 560,
-                "y": 520,
-                "wires": [
-                    {
-                        "id": "9cd4f165207e607e"
-                    }
-                ]
-            }
-        ],
-        "out": [
-            {
-                "x": 820,
-                "y": 520,
-                "wires": [
-                    {
-                        "id": "9cd4f165207e607e",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
-        "env": [],
-        "meta": {},
-        "color": "#DDAA99"
-    },
-    {
-        "id": "4781d07fda613850",
-        "type": "subflow",
-        "name": "EMP_MAR12_NUM",
-        "info": "",
-        "category": "",
-        "in": [
-            {
-                "x": 680,
-                "y": 320,
-                "wires": [
-                    {
-                        "id": "8ffe802b67aef5e3"
-                    }
-                ]
-            }
-        ],
-        "out": [
-            {
-                "x": 980,
-                "y": 320,
-                "wires": [
-                    {
-                        "id": "8ffe802b67aef5e3",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
-        "env": [],
-        "meta": {},
-        "color": "#DDAA99"
-    },
-    {
-        "id": "253763f13152858b",
-        "type": "subflow",
-        "name": "PAY_QTR1_VAL",
-        "info": "",
-        "category": "",
-        "in": [
-            {
-                "x": 480,
-                "y": 240,
-                "wires": [
-                    {
-                        "id": "8b5375b4024c9c0b"
-                    }
-                ]
-            }
-        ],
-        "out": [
-            {
-                "x": 740,
-                "y": 240,
-                "wires": [
-                    {
-                        "id": "8b5375b4024c9c0b",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
-        "env": [],
-        "meta": {},
-        "color": "#DDAA99"
-    },
-    {
-        "id": "27c40a87c581e266",
-        "type": "subflow",
-        "name": "PAY_ANN_VAL",
-        "info": "",
-        "category": "",
-        "in": [
-            {
-                "x": 680,
-                "y": 320,
-                "wires": [
-                    {
-                        "id": "32987fccfff7af52"
-                    }
-                ]
-            }
-        ],
-        "out": [
-            {
-                "x": 940,
-                "y": 320,
-                "wires": [
-                    {
-                        "id": "32987fccfff7af52",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
-        "env": [],
-        "meta": {},
-        "color": "#DDAA99"
-    },
-    {
         "id": "0be109393cb5f28a",
         "type": "subflow",
         "name": "Lookup Cache Subflow",
@@ -2867,39 +2694,6 @@
                 "wires": [
                     {
                         "id": "f5dbe24054de29ce",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
-        "env": [],
-        "meta": {},
-        "color": "#DDAA99"
-    },
-    {
-        "id": "8032608991ae0162",
-        "type": "subflow",
-        "name": "DBConn",
-        "info": "",
-        "category": "",
-        "in": [
-            {
-                "x": 840,
-                "y": 100,
-                "wires": [
-                    {
-                        "id": "331014954d894fe9"
-                    }
-                ]
-            }
-        ],
-        "out": [
-            {
-                "x": 1060,
-                "y": 100,
-                "wires": [
-                    {
-                        "id": "331014954d894fe9",
                         "port": 0
                     }
                 ]
@@ -3209,6 +3003,212 @@
                     },
                     {
                         "id": "1ce2615d35152c7e",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "4781d07fda613850",
+        "type": "subflow",
+        "name": "EMP_MAR12_NUM",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 680,
+                "y": 320,
+                "wires": [
+                    {
+                        "id": "8ffe802b67aef5e3"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 980,
+                "y": 320,
+                "wires": [
+                    {
+                        "id": "8ffe802b67aef5e3",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "253763f13152858b",
+        "type": "subflow",
+        "name": "PAY_QTR1_VAL",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 480,
+                "y": 240,
+                "wires": [
+                    {
+                        "id": "8b5375b4024c9c0b"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 740,
+                "y": 240,
+                "wires": [
+                    {
+                        "id": "8b5375b4024c9c0b",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "7c71f52633d8c794",
+        "type": "subflow",
+        "name": "RCPT_TOT_VAL",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 560,
+                "y": 520,
+                "wires": [
+                    {
+                        "id": "9cd4f165207e607e"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 820,
+                "y": 520,
+                "wires": [
+                    {
+                        "id": "9cd4f165207e607e",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "8032608991ae0162",
+        "type": "subflow",
+        "name": "DBConn",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 840,
+                "y": 100,
+                "wires": [
+                    {
+                        "id": "331014954d894fe9"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 1060,
+                "y": 100,
+                "wires": [
+                    {
+                        "id": "331014954d894fe9",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "27c40a87c581e266",
+        "type": "subflow",
+        "name": "PAY_ANN_VAL",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 680,
+                "y": 320,
+                "wires": [
+                    {
+                        "id": "32987fccfff7af52"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 940,
+                "y": 320,
+                "wires": [
+                    {
+                        "id": "32987fccfff7af52",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "89f071f1deb9a1b1",
+        "type": "subflow",
+        "name": "Completeness",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 820,
+                "y": 280,
+                "wires": [
+                    {
+                        "id": "44cfe99b5f9e273f"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 1640,
+                "y": 660,
+                "wires": [
+                    {
+                        "id": "917c64f63bd2f19c",
+                        "port": 1
+                    },
+                    {
+                        "id": "8d172b24625dc196",
+                        "port": 0
+                    },
+                    {
+                        "id": "cb75b2a1c3d302c2",
                         "port": 0
                     }
                 ]
@@ -9667,783 +9667,6 @@
         ]
     },
     {
-        "id": "44cfe99b5f9e273f",
-        "type": "function",
-        "z": "89f071f1deb9a1b1",
-        "name": "Completeness",
-        "func": "try{\n    let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n    var list = []\n\n    if (['SU','MU','KAU'].includes(record?.REPORTING_ID_TYP_TXT)) {\n\n        if (parseFloat(record?.PAY_ANN_VAL) > 0 || record?.PAY_ANN_VAL_F?.charAt(1) == 'G' || record?.PAY_ANN_VAL_F?.charAt(2) == 'Z') {\n        } else {\n            list.push('PAY_ANN_VAL')\n            // call pay_ann\n        }\n        if ((parseFloat(record?.PAY_QTR1_VAL) > 0) || (['G','Z'].includes(record?.PAY_QTR1_VAL_F?.charAt(1)))) {\n        } else {\n            list.push('PAY_QTR1_VAL')\n            // call pay_qtr1\n        }\n        if (parseFloat(record?.EMP_MAR12_NUM) > 0 || ['G', 'Z'].includes(record?.EMP_MAR_12_NUM_F?.charAt(1))) {\n        } else {\n            list.push('EMP_MAR12_NUM')\n            // call emp\n        }\n        if (parseFloat(record?.RCPT_TOT_VAL) > 0 || ['G', 'Z'].includes(record?.RCPT_TOT_VAL_F?.charAt(1)) || (parseFloat(record?.RCPT_TOT_VAL < 0) && record?.RCPT_TOT_VAL_F?.charAt(1) == 'G')) {\n        } else {\n            list.push('RCPT_TOT_VAL')\n            // call rcpt_tot\n        }\n    } \n    record.ACTION = 'Go To Main Routing'\n    global.set('completeness',list)\n    // console.log(global.get('completeness'))\n    // console.log(global.get('action'))\n    \n\n    return msg;\n}catch(e){\n    global.set('err', 'Exit Edit')\n    return msg;\n}",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 960,
-        "y": 280,
-        "wires": [
-            [
-                "14faa784647a76d7"
-            ]
-        ]
-    },
-    {
-        "id": "14faa784647a76d7",
-        "type": "switch",
-        "z": "89f071f1deb9a1b1",
-        "name": "",
-        "property": "completeness",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "cont",
-                "v": "PAY_ANN_VAL",
-                "vt": "str"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 1150,
-        "y": 280,
-        "wires": [
-            [
-                "df2c04daaf41cfe9"
-            ],
-            [
-                "d5608bc7b22bbd86"
-            ]
-        ]
-    },
-    {
-        "id": "df2c04daaf41cfe9",
-        "type": "subflow:27c40a87c581e266",
-        "z": "89f071f1deb9a1b1",
-        "name": "",
-        "x": 1340,
-        "y": 280,
-        "wires": [
-            [
-                "cb75b2a1c3d302c2"
-            ]
-        ]
-    },
-    {
-        "id": "8d172b24625dc196",
-        "type": "subflow:7c71f52633d8c794",
-        "z": "89f071f1deb9a1b1",
-        "name": "",
-        "x": 1370,
-        "y": 520,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "2c1c1d2268bfe5f8",
-        "type": "subflow:253763f13152858b",
-        "z": "89f071f1deb9a1b1",
-        "name": "",
-        "x": 1350,
-        "y": 360,
-        "wires": [
-            [
-                "79716909567e3e73"
-            ]
-        ]
-    },
-    {
-        "id": "e11ca2f83d0c6ec8",
-        "type": "subflow:4781d07fda613850",
-        "z": "89f071f1deb9a1b1",
-        "name": "",
-        "x": 1360,
-        "y": 440,
-        "wires": [
-            [
-                "917c64f63bd2f19c"
-            ]
-        ]
-    },
-    {
-        "id": "d5608bc7b22bbd86",
-        "type": "switch",
-        "z": "89f071f1deb9a1b1",
-        "name": "",
-        "property": "completeness",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "cont",
-                "v": "PAY_QTR1_VAL",
-                "vt": "str"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 1150,
-        "y": 360,
-        "wires": [
-            [
-                "2c1c1d2268bfe5f8"
-            ],
-            [
-                "79716909567e3e73"
-            ]
-        ]
-    },
-    {
-        "id": "79716909567e3e73",
-        "type": "switch",
-        "z": "89f071f1deb9a1b1",
-        "name": "",
-        "property": "completeness",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "cont",
-                "v": "EMP_MAR12_NUM",
-                "vt": "str"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 1150,
-        "y": 440,
-        "wires": [
-            [
-                "e11ca2f83d0c6ec8"
-            ],
-            [
-                "917c64f63bd2f19c"
-            ]
-        ]
-    },
-    {
-        "id": "917c64f63bd2f19c",
-        "type": "switch",
-        "z": "89f071f1deb9a1b1",
-        "name": "",
-        "property": "completeness",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "cont",
-                "v": "RCPT_TOT_VAL",
-                "vt": "str"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 1150,
-        "y": 520,
-        "wires": [
-            [
-                "8d172b24625dc196"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "cb75b2a1c3d302c2",
-        "type": "switch",
-        "z": "89f071f1deb9a1b1",
-        "name": "Exit Check",
-        "property": "action",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "Exit Edit",
-                "vt": "str"
-            },
-            {
-                "t": "neq",
-                "v": "Exit Edit",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 1550,
-        "y": 280,
-        "wires": [
-            [],
-            [
-                "d5608bc7b22bbd86"
-            ]
-        ]
-    },
-    {
-        "id": "9cd4f165207e607e",
-        "type": "function",
-        "z": "7c71f52633d8c794",
-        "name": "rcpt_tot_val",
-        "func": "try {\n    let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\n    let cache = global.get(\"lookupCache\");\n    let cy_py_factor = cache.data.find(\n        item =>\n            item.module === \"core_4\" &&\n            item.param === 'core_4' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"all\"\n    )?.json_values;\n\n    function findCY() {\n        let cy_py = {}\n        for (let i in cy_py_factor['CY_PY_K_FACTORS']) {\n            let cy_py_fact = cy_py_factor['CY_PY_K_FACTORS'][i]\n            if (record.NAICS_CODE.startsWith(cy_py_fact['NAICS_CODE'])) {\n                cy_py = cy_py_fact\n                break;\n            }\n        }\n        return (cy_py);\n    }\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    if (record?.NAICS_SECTOR == '31' && record?.COV_CHG_CODE == '401') {\n        if (record?.RCPT_TOT_VAL == 0 || !(record?.RCPT_TOT_VAL)) {\n        }\n    } else if (record?.NAICS_SECTOR == '31' && record?.NAPCS_BLTOT > 0) {\n        record['RCPT_TOT_VAL'] = record?.NAPCS_BLTOT;\n        record['RCPT_TOT_VAL_F'] = setCharAt(record['RCPT_TOT_VAL_F'], 2, 'Y');\n    } else if (record?.REPORTING_ID_TYP_TXT === 'SU' && parseFloat(record?.RCPT_TOT_ADMN_DVAL) > 0) {\n        record['RCPT_TOT_VAL'] = record?.RCPT_TOT_ADMN_DVAL;\n        record['RCPT_TOT_VAL_F'] = setCharAt(record['RCPT_TOT_VAL_F'], 2, 'A');\n    } else if (record?.EC_RCPT_TOT_VAL > 0) {\n        let cy_py = findCY()\n        record['RCPT_TOT_VAL'] = parseFloat(record?.EC_RCPT_TOT_VAL) * parseFloat(cy_py.RCPTOT);\n        record['RCPT_TOT_VAL_F'] = setCharAt(record['RCPT_TOT_VAL_F'], 2, 'H');\n    }\n    return msg;\n} catch(e) {\n    global.set('err','Exit Edit')\n    return msg;\n}",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 690,
-        "y": 520,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "d327193a580c576d",
-        "type": "function",
-        "z": "7c71f52633d8c794",
-        "name": "query_ec",
-        "func": "msg.records = msg.payload\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.records.csv[record_idx];\nlet id = record.REPORTING_ID\nmsg.query = \"  SELECT * FROM product_aies.ec where reporting_id = '\" + id + \"' and version = 'PO';\"\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 460,
-        "y": 440,
-        "wires": [
-            [
-                "040aab495fd991c9"
-            ]
-        ]
-    },
-    {
-        "id": "68bc88d03368c666",
-        "type": "function",
-        "z": "7c71f52633d8c794",
-        "name": "reset msg",
-        "func": "function keysToUpperCase(obj) {\n    const output = {};\n    for (let key in obj) {\n        if (Object.prototype.hasOwnProperty.call(obj, key)) {\n            if (typeof obj[key] === 'object' && obj[key] !== null) {\n                output[key.toUpperCase()] = keysToUpperCase(obj[key]);\n            } else {\n                output[key.toUpperCase()] = obj[key];\n            }\n        }\n    }\n    return output;\n}\n\nlet p = msg.payload.map(keysToUpperCase);\nmsg.payload = p\nmsg.ec = msg.payload\n\nmsg.payload = msg.records\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 780,
-        "y": 440,
-        "wires": [
-            [
-                "698b158f50631fa6"
-            ]
-        ]
-    },
-    {
-        "id": "040aab495fd991c9",
-        "type": "subflow:8032608991ae0162",
-        "z": "7c71f52633d8c794",
-        "name": "",
-        "x": 620,
-        "y": 440,
-        "wires": [
-            [
-                "68bc88d03368c666"
-            ]
-        ]
-    },
-    {
-        "id": "698b158f50631fa6",
-        "type": "function",
-        "z": "7c71f52633d8c794",
-        "name": "rcpt_tot_val",
-        "func": "try {\n    let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n    let ec = msg.ec[0]\n\n    let cache = global.get(\"lookupCache\");\n    let cy_py_factor = cache.data.find(\n        item =>\n            item.module === \"core_4\" &&\n            item.param === 'core_4' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"all\"\n    )?.json_values;\n\n    function findCY() {\n        let cy_py = {}\n        for (let i in cy_py_factor['CY_PY_K_FACTORS']) {\n            let cy_py_fact = cy_py_factor['CY_PY_K_FACTORS'][i]\n            if (record.NAICS_CODE.startsWith(cy_py_fact['NAICS_CODE'])) {\n                cy_py = cy_py_fact\n                break;\n            }\n        }\n        return (cy_py);\n    }\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    if (record?.NAICS_SECTOR == '31' && record?.COV_CHG_CODE == '401') {\n        if (record?.RCPT_TOT_VAL == 0 || !(record?.RCPT_TOT_VAL)) {\n        }\n    } else if (record?.NAICS_SECTOR == '31' && record?.NAPCS_BLTOT > 0) {\n        record['RCPT_TOT_VAL'] = record?.NAPCS_BLTOT;\n        record['RCPT_TOT_VAL_F'] = setCharAt(record['RCPT_TOT_VAL_F'], 2, 'Y');\n    } else if (record?.REPORTING_ID_TYP_TXT === 'SU' && parseFloat(record?.RCPT_TOT_ADMN_DVAL) > 0) {\n        record['RCPT_TOT_VAL'] = record?.RCPT_TOT_ADMN_DVAL;\n        record['RCPT_TOT_VAL_F'] = setCharAt(record['RCPT_TOT_VAL_F'], 2, 'A');\n    } else if (ec.RCPT_TOT_VAL > 0) {\n        let cy_py = findCY()\n        record['RCPT_TOT_VAL'] = parseFloat(ec.RCPT_TOT_VAL) * parseFloat(cy_py.RCPTOT);\n        record['RCPT_TOT_VAL_F'] = setCharAt(record['RCPT_TOT_VAL_F'], 2, 'H');\n    }\n    return msg;\n} catch(e) {\n    global.set('err','Exit Edit')\n    return msg;\n}",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 960.8125,
-        "y": 438.82501220703125,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "8ffe802b67aef5e3",
-        "type": "function",
-        "z": "4781d07fda613850",
-        "name": "EMP_MAR12_NUM",
-        "func": "try {\n    let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\n    const setVariable = (variable, value) => {\n        record[variable] = value;\n    };\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    let cache = global.get(\"lookupCache\");\n    let cy_py_factor = cache.data.find(\n        item =>\n            item.module === \"core_4\" &&\n            item.param === 'core_4' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"all\"\n    )?.json_values;\n\n    function findCY() {\n        let cy_py = {}\n        for (let i in cy_py_factor['CY_PY_K_FACTORS']) {\n            let cy_py_fact = cy_py_factor['CY_PY_K_FACTORS'][i]\n            if (record.NAICS_CODE.startsWith(cy_py_fact['NAICS_CODE'])) {\n                cy_py = cy_py_fact\n                break;\n            }\n        }\n        return (cy_py);\n    }\n\n    if (record?.['REPORTING_ID_TYP_TXT'] === 'SU') {\n        if (parseFloat(record?.['IRS_EMP_MAR12_NUM']) > 0) {\n            setVariable('EMP_MAR12_NUM', record?.['IRS_EMP_MAR12_NUM']);\n            record['EMP_MAR12_NUM_F'] = setCharAt(record?.['EMP_MAR12_NUM_F'], 2, 'A');\n        }else{\n            if (parseFloat(record?.['EC_EMP_MAR12_NUM']) > 0) {\n                let cy_py = findCY()\n                setVariable('EMP_MAR12_NUM', parseFloat(record?.['EC_EMP_MAR12_NUM']) * parseFloat(cy_py.EMPQ1));\n                record['EMP_MAR12_NUM_F'] = setCharAt(record?.['EMP_MAR12_NUM_F'], 2, 'H');\n            }\n        }\n    } else if (record?.['REPORTING_ID_TYP_TXT'] === 'MU' && parseFloat(record?.['BR_EMP_MAR12_NUM']) > 0) {\n        setVariable('EMP_MAR12_NUM', record?.['BR_EMP_MAR12_NUM']);\n        record['EMP_MAR12_NUM_F'] = setCharAt(record?.['EMP_MAR12_NUM_F'], 2, 'O');\n    } else if (parseFloat(record?.['EC_EMP_MAR12_NUM']) > 0) {\n        let cy_py = findCY()\n        setVariable('EMP_MAR12_NUM', parseFloat(record?.['EC_EMP_MAR12_NUM']) * parseFloat(cy_py.EMPQ1));\n        record['EMP_MAR12_NUM_F'] = setCharAt(record?.['EMP_MAR12_NUM_F'], 2, 'H');\n    }\n\n    return msg;\n} catch(e) {\n    global.set('err','Exit Edit')\n    return msg;\n}",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 830,
-        "y": 320,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "1ff5e07d3e5e06cd",
-        "type": "function",
-        "z": "4781d07fda613850",
-        "name": "query_irs",
-        "func": "msg.records = msg.payload\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.records.csv[record_idx];\nlet id = record.REPORTING_ID\nmsg.query = \"  SELECT * FROM product_aies.irs where reporting_id = '\" + id + \"' and version = 'PO';\"\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 410,
-        "y": 120,
-        "wires": [
-            [
-                "b685a7e00abbc79b"
-            ]
-        ]
-    },
-    {
-        "id": "ca38791050e0b8cf",
-        "type": "function",
-        "z": "4781d07fda613850",
-        "name": "reset_msg_and_query_ec",
-        "func": "function keysToUpperCase(obj) {\n    const output = {};\n    for (let key in obj) {\n        if (Object.prototype.hasOwnProperty.call(obj, key)) {\n            if (typeof obj[key] === 'object' && obj[key] !== null) {\n                output[key.toUpperCase()] = keysToUpperCase(obj[key]);\n            } else {\n                output[key.toUpperCase()] = obj[key];\n            }\n        }\n    }\n    return output;\n}\n\nlet p = msg.payload.map(keysToUpperCase);\nmsg.payload = p\nmsg.irs = msg.payload\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.records.csv[record_idx];\nlet id = record.REPORTING_ID\nmsg.query = \"  SELECT * FROM product_aies.ec where reporting_id = '\" + id + \"' and version = 'PO';\"\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 380,
-        "y": 180,
-        "wires": [
-            [
-                "93ddb63d83f97847"
-            ]
-        ]
-    },
-    {
-        "id": "4389f4ce6fea910c",
-        "type": "function",
-        "z": "4781d07fda613850",
-        "name": "reset_msg_and_query_br",
-        "func": "function keysToUpperCase(obj) {\n    const output = {};\n    for (let key in obj) {\n        if (Object.prototype.hasOwnProperty.call(obj, key)) {\n            if (typeof obj[key] === 'object' && obj[key] !== null) {\n                output[key.toUpperCase()] = keysToUpperCase(obj[key]);\n            } else {\n                output[key.toUpperCase()] = obj[key];\n            }\n        }\n    }\n    return output;\n}\n\nlet p = msg.payload.map(keysToUpperCase);\nmsg.payload = p\nmsg.ec = msg.payload\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.records.csv[record_idx];\nlet id = record.REPORTING_ID\nmsg.query = \"  SELECT * FROM product_aies.br where reporting_id = '\" + id + \"' and version = 'PO';\"\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 390,
-        "y": 240,
-        "wires": [
-            [
-                "20916d3e72e35cae"
-            ]
-        ]
-    },
-    {
-        "id": "314c6ee064ceb676",
-        "type": "function",
-        "z": "4781d07fda613850",
-        "name": "reset msg",
-        "func": "function keysToUpperCase(obj) {\n    const output = {};\n    for (let key in obj) {\n        if (Object.prototype.hasOwnProperty.call(obj, key)) {\n            if (typeof obj[key] === 'object' && obj[key] !== null) {\n                output[key.toUpperCase()] = keysToUpperCase(obj[key]);\n            } else {\n                output[key.toUpperCase()] = obj[key];\n            }\n        }\n    }\n    return output;\n}\n\nlet p = msg.payload.map(keysToUpperCase);\nmsg.payload = p\nmsg.br = msg.payload\n\nmsg.payload = msg.records\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 790,
-        "y": 240,
-        "wires": [
-            [
-                "ed41e14ea62fdff2"
-            ]
-        ]
-    },
-    {
-        "id": "b685a7e00abbc79b",
-        "type": "subflow:8032608991ae0162",
-        "z": "4781d07fda613850",
-        "name": "",
-        "x": 610,
-        "y": 120,
-        "wires": [
-            [
-                "ca38791050e0b8cf"
-            ]
-        ]
-    },
-    {
-        "id": "93ddb63d83f97847",
-        "type": "subflow:8032608991ae0162",
-        "z": "4781d07fda613850",
-        "name": "",
-        "x": 610,
-        "y": 180,
-        "wires": [
-            [
-                "4389f4ce6fea910c"
-            ]
-        ]
-    },
-    {
-        "id": "20916d3e72e35cae",
-        "type": "subflow:8032608991ae0162",
-        "z": "4781d07fda613850",
-        "name": "",
-        "x": 610,
-        "y": 240,
-        "wires": [
-            [
-                "314c6ee064ceb676"
-            ]
-        ]
-    },
-    {
-        "id": "ed41e14ea62fdff2",
-        "type": "function",
-        "z": "4781d07fda613850",
-        "name": "EMP_MAR12_NUM",
-        "func": "try {\n    let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n    let br = msg.br[0]\n    let irs = msg.irs[0]\n    let ec = msg.ec[0]\n\n\n    const setVariable = (variable, value) => {\n        record[variable] = value;\n    };\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    let cache = global.get(\"lookupCache\");\n    let cy_py_factor = cache.data.find(\n        item =>\n            item.module === \"core_4\" &&\n            item.param === 'core_4' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"all\"\n    )?.json_values;\n\n    function findCY() {\n        let cy_py = {}\n        for (let i in cy_py_factor['CY_PY_K_FACTORS']) {\n            let cy_py_fact = cy_py_factor['CY_PY_K_FACTORS'][i]\n            if (record.NAICS_CODE.startsWith(cy_py_fact['NAICS_CODE'])) {\n                cy_py = cy_py_fact\n                break;\n            }\n        }\n        return (cy_py);\n    }\n\n    if (record?.['REPORTING_ID_TYP_TXT'] === 'SU') {\n        if (parseFloat(irs?.['EMP_MAR12_NUM']) > 0) {\n            setVariable('EMP_MAR12_NUM', irs?.['EMP_MAR12_NUM']);\n            record['EMP_MAR12_NUM_F'] = setCharAt(record?.['EMP_MAR12_NUM_F'], 2, 'A');\n        }else{\n            if (parseFloat(ec?.['EMP_MAR12_NUM']) > 0) {\n                let cy_py = findCY()\n                setVariable('EMP_MAR12_NUM', parseFloat(ec?.['EMP_MAR12_NUM']) * parseFloat(cy_py.EMPQ1));\n                record['EMP_MAR12_NUM_F'] = setCharAt(record?.['EMP_MAR12_NUM_F'], 2, 'H');\n            }\n        }\n    } else if (record?.['REPORTING_ID_TYP_TXT'] === 'MU' && parseFloat(br?.['EMP_MAR12_NUM']) > 0) {\n        setVariable('EMP_MAR12_NUM', br?.['EMP_MAR12_NUM']);\n        record['EMP_MAR12_NUM_F'] = setCharAt(record?.['EMP_MAR12_NUM_F'], 2, 'O');\n    } else if (parseFloat(ec?.['EMP_MAR12_NUM']) > 0) {\n        let cy_py = findCY()\n        setVariable('EMP_MAR12_NUM', parseFloat(ec?.['EMP_MAR12_NUM']) * parseFloat(cy_py.EMPQ1));\n        record['EMP_MAR12_NUM_F'] = setCharAt(record?.['EMP_MAR12_NUM_F'], 2, 'H');\n    }\n\n    return msg;\n} catch(e) {\n    global.set('err','Exit Edit')\n    return msg;\n}",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1020,
-        "y": 240,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "8b5375b4024c9c0b",
-        "type": "function",
-        "z": "253763f13152858b",
-        "name": "pay_qtr1_val",
-        "func": "try {\n    let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\n    const setVariable = (variable, value) => {\n        record[variable] = value;\n    };\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    let cache = global.get(\"lookupCache\");\n    let cy_py_factor = cache.data.find(\n        item =>\n            item.module === \"core_4\" &&\n            item.param === 'core_4' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"all\"\n    )?.json_values;\n\n    function findCY() {\n        let cy_py = {}\n        for (let i in cy_py_factor['CY_PY_K_FACTORS']) {\n            let cy_py_fact = cy_py_factor['CY_PY_K_FACTORS'][i]\n            if (record.NAICS_CODE.startsWith(cy_py_fact['NAICS_CODE'])) {\n                cy_py = cy_py_fact\n                break;\n            }\n        }\n        return (cy_py);\n    }\n\n\n    if (record?.['REPORTING_ID_TYP_TXT'] === 'SU') {\n        if (parseFloat(record?.['IRS_PAY_QTR1_VAL']) > 0) {\n            setVariable('PAY_QTR1_VAL', record?.['IRS_PAY_QTR1_VAL']);\n            record['PAY_QTR1_VAL_F'] = setCharAt(record['PAY_QTR1_VAL_F'], 2, 'A');\n        } else {\n            if (parseFloat(record?.['EC_PAY_QTR1_VAL']) > 0) {\n                let cy_py = findCY()\n                setVariable('PAY_QTR1_VAL', parseFloat(record?.['EC_PAY_QTR1_VAL']) * parseFloat(cy_py.PAYQTR1));\n                record['PAY_QTR1_VAL_F'] = setCharAt(record?.['PAY_QTR1_VAL_F'], 2, 'H');\n            }\n        }\n    } else if (record?.['REPORTING_ID_TYP_TXT'] === 'MU' && parseFloat(record?.['BR_PAY_QTR1_VAL']) > 0) {\n        setVariable('PAY_QTR1_VAL', record?.['BR_PAY_QTR1_VAL']);\n        record['PAY_QTR1_VAL_F'] = setCharAt(record?.['PAY_QTR1_VAL_F'], 2, 'O');\n    } else if (parseFloat(record?.['EC_PAY_QTR1_VAL']) > 0) {\n        let cy_py = findCY()\n        setVariable('PAY_QTR1_VAL', parseFloat(record?.['EC_PAY_QTR1_VAL']) * parseFloat(cy_py.PAYQTR1));\n        record['PAY_QTR1_VAL_F'] = setCharAt(record['PAY_QTR1_VAL_F'], 2, 'H');\n    }\n    return msg;\n} catch(e) {\n    global.set('err','Exit Edit')\n    return msg;\n}",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 610,
-        "y": 240,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "024267d04aba8fd6",
-        "type": "function",
-        "z": "253763f13152858b",
-        "name": "query_irs",
-        "func": "msg.records = msg.payload\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.records.csv[record_idx];\nlet id = record.REPORTING_ID\nmsg.query = \"  SELECT * FROM product_aies.irs where reporting_id = '\" + id + \"' and version = 'PO';\"\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 340,
-        "y": 60,
-        "wires": [
-            [
-                "7ce42f1a98cc6d90"
-            ]
-        ]
-    },
-    {
-        "id": "16d2b53bc237c01a",
-        "type": "function",
-        "z": "253763f13152858b",
-        "name": "reset_msg_and_query_ec",
-        "func": "function keysToUpperCase(obj) {\n    const output = {};\n    for (let key in obj) {\n        if (Object.prototype.hasOwnProperty.call(obj, key)) {\n            if (typeof obj[key] === 'object' && obj[key] !== null) {\n                output[key.toUpperCase()] = keysToUpperCase(obj[key]);\n            } else {\n                output[key.toUpperCase()] = obj[key];\n            }\n        }\n    }\n    return output;\n}\n\nlet p = msg.payload.map(keysToUpperCase);\nmsg.payload = p\nmsg.irs = msg.payload\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.records.csv[record_idx];\nlet id = record.REPORTING_ID\nmsg.query = \"  SELECT * FROM product_aies.ec where reporting_id = '\" + id + \"' and version = 'PO';\"\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 310,
-        "y": 120,
-        "wires": [
-            [
-                "bcd3982cdb005969"
-            ]
-        ]
-    },
-    {
-        "id": "9ced159be1b118de",
-        "type": "function",
-        "z": "253763f13152858b",
-        "name": "reset_msg_and_query_br",
-        "func": "function keysToUpperCase(obj) {\n    const output = {};\n    for (let key in obj) {\n        if (Object.prototype.hasOwnProperty.call(obj, key)) {\n            if (typeof obj[key] === 'object' && obj[key] !== null) {\n                output[key.toUpperCase()] = keysToUpperCase(obj[key]);\n            } else {\n                output[key.toUpperCase()] = obj[key];\n            }\n        }\n    }\n    return output;\n}\n\nlet p = msg.payload.map(keysToUpperCase);\nmsg.payload = p\nmsg.ec = msg.payload\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.records.csv[record_idx];\nlet id = record.REPORTING_ID\nmsg.query = \"  SELECT * FROM product_aies.br where reporting_id = '\" + id + \"' and version = 'PO';\"\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 320,
-        "y": 180,
-        "wires": [
-            [
-                "7087aba5719ae32e"
-            ]
-        ]
-    },
-    {
-        "id": "d564e69c94ed087c",
-        "type": "function",
-        "z": "253763f13152858b",
-        "name": "reset msg",
-        "func": "function keysToUpperCase(obj) {\n    const output = {};\n    for (let key in obj) {\n        if (Object.prototype.hasOwnProperty.call(obj, key)) {\n            if (typeof obj[key] === 'object' && obj[key] !== null) {\n                output[key.toUpperCase()] = keysToUpperCase(obj[key]);\n            } else {\n                output[key.toUpperCase()] = obj[key];\n            }\n        }\n    }\n    return output;\n}\n\nlet p = msg.payload.map(keysToUpperCase);\nmsg.payload = p\nmsg.br = msg.payload\n\nmsg.payload = msg.records\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 720,
-        "y": 180,
-        "wires": [
-            [
-                "37c1a5ff5ac2724a"
-            ]
-        ]
-    },
-    {
-        "id": "7ce42f1a98cc6d90",
-        "type": "subflow:8032608991ae0162",
-        "z": "253763f13152858b",
-        "name": "",
-        "x": 540,
-        "y": 60,
-        "wires": [
-            [
-                "16d2b53bc237c01a"
-            ]
-        ]
-    },
-    {
-        "id": "bcd3982cdb005969",
-        "type": "subflow:8032608991ae0162",
-        "z": "253763f13152858b",
-        "name": "",
-        "x": 540,
-        "y": 120,
-        "wires": [
-            [
-                "9ced159be1b118de"
-            ]
-        ]
-    },
-    {
-        "id": "7087aba5719ae32e",
-        "type": "subflow:8032608991ae0162",
-        "z": "253763f13152858b",
-        "name": "",
-        "x": 540,
-        "y": 180,
-        "wires": [
-            [
-                "d564e69c94ed087c"
-            ]
-        ]
-    },
-    {
-        "id": "37c1a5ff5ac2724a",
-        "type": "function",
-        "z": "253763f13152858b",
-        "name": "pay_qtr1_val",
-        "func": "try {\n    let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n    let irs = msg.irs[0]\n    let br = msg.br[0]\n    let ec = msg.ec[0]\n\n    const setVariable = (variable, value) => {\n        record[variable] = value;\n    };\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    let cache = global.get(\"lookupCache\");\n    let cy_py_factor = cache.data.find(\n        item =>\n            item.module === \"core_4\" &&\n            item.param === 'core_4' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"all\"\n    )?.json_values;\n\n    function findCY() {\n        let cy_py = {}\n        for (let i in cy_py_factor['CY_PY_K_FACTORS']) {\n            let cy_py_fact = cy_py_factor['CY_PY_K_FACTORS'][i]\n            if (record.NAICS_CODE.startsWith(cy_py_fact['NAICS_CODE'])) {\n                cy_py = cy_py_fact\n                break;\n            }\n        }\n        return (cy_py);\n    }\n\n\n    if (record?.['REPORTING_ID_TYP_TXT'] === 'SU') {\n        if (parseFloat(irs?.['PAY_QTR1_VAL']) > 0) {\n            setVariable('PAY_QTR1_VAL', irs?.['PAY_QTR1_VAL']);\n            record['PAY_QTR1_VAL_F'] = setCharAt(record['PAY_QTR1_VAL_F'], 2, 'A');\n        } else {\n            if (parseFloat(ec?.['PAY_QTR1_VAL']) > 0) {\n                let cy_py = findCY()\n                setVariable('PAY_QTR1_VAL', parseFloat(ec?.['PAY_QTR1_VAL']) * parseFloat(cy_py.PAYQTR1));\n                record['PAY_QTR1_VAL_F'] = setCharAt(record?.['PAY_QTR1_VAL_F'], 2, 'H');\n            }\n        }\n    } else if (record?.['REPORTING_ID_TYP_TXT'] === 'MU' && parseFloat(br?.['PAY_QTR1_VAL']) > 0) {\n        setVariable('PAY_QTR1_VAL', br?.['PAY_QTR1_VAL']);\n        record['PAY_QTR1_VAL_F'] = setCharAt(record?.['PAY_QTR1_VAL_F'], 2, 'O');\n    } else if (parseFloat(ec?.['PAY_QTR1_VAL']) > 0) {\n        let cy_py = findCY()\n        setVariable('PAY_QTR1_VAL', parseFloat(ec?.['PAY_QTR1_VAL']) * parseFloat(cy_py.PAYQTR1));\n        record['PAY_QTR1_VAL_F'] = setCharAt(record['PAY_QTR1_VAL_F'], 2, 'H');\n    }\n    return msg;\n} catch(e) {\n    global.set('err','Exit Edit')\n    return msg;\n}",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 910,
-        "y": 180,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "32987fccfff7af52",
-        "type": "function",
-        "z": "27c40a87c581e266",
-        "name": "pay_ann_val",
-        "func": "try {\n    let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\n    // Set function\n    const setVariable = (variable, value) => {\n        record[variable] = value;\n    };\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    function flagRules(variable, details) {\n        if (record?.[variable] == 0) {\n            record[variable] = setCharAt(record?.[variable], 2, 'Z');\n        } else {\n            let found = 'N'\n            for (let i in details) {\n                let detail = details[i]\n                if (record?.[detail]) {\n                    if (['R_', 'K_', 'T_'].includes(record?.[detail].substring(0, 2))) {\n                        found = 'Y'\n                    } else if (['R', 'C', 'A', 'S', 'O', 'G'].includes(record?.[detail]?.charAt(1))) {\n                        found = 'Y'\n                    } else {\n                        found = 'N'\n                        break\n                    }\n                    // } else {\n                    //     found = 'N'\n                    //     break\n                }\n            }\n            if (found == 'Y') {\n                record[variable] = setCharAt(record?.[variable], 2, 'Y');\n            } else {\n                record[variable] = setCharAt(record?.[variable], 2, 'S');\n            }\n        }\n    }\n\n    let cache = global.get(\"lookupCache\");\n    let cy_py_factor = cache.data.find(\n        item =>\n            item.module === \"core_4\" &&\n            item.param === 'core_4' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"all\"\n    )?.json_values;\n\n    function findCY() {\n        let cy_py = {}\n        for (let i in cy_py_factor['CY_PY_K_FACTORS']) {\n            let cy_py_fact = cy_py_factor['CY_PY_K_FACTORS'][i]\n            if (record.NAICS_CODE.startsWith(cy_py_fact['NAICS_CODE'])) {\n                cy_py = cy_py_fact\n                break;\n            }\n        }\n        return (cy_py);\n    }\n\n    const setVals = () => {\n        setVariable('PAY_QTR1_VAL', 0);\n        record['PAY_QTR1_VAL_F'] = setCharAt(record['PAY_QTR1_VAL_F'], 1, 'G');\n        setVariable('EMP_MAR12_NUM', 0);\n        record['EMP_MAR12_NUM_F'] = setCharAt(record['EMP_MAR12_NUM_F'], 1, 'G');\n        setVariable('EXIMP', 'E');\n        setVariable('Referral_Flag', 'LEASED_ONLY');\n    }\n    global.set('action','')\n\n    if (record?.REPORTING_ID_TYP_TXT == 'SU' && parseFloat(record?.IRS_PAY_ANN_VAL) > 0) {\n        setVariable('PAY_ANN_VAL', record?.IRS_PAY_ANN_VAL);\n        record['PAY_ANN_VAL_F'] = setCharAt(record['PAY_ANN_VAL_F'], 2, 'A');\n    } else if (record?.REPORTING_ID_TYP_TXT == 'MU' && parseFloat(record?.BR_PAY_ANN_VAL) > 0) {\n        setVariable('PAY_ANN_VAL', record?.BR_PAY_ANN_VAL);\n        record['PAY_ANN_VAL_F'] = setCharAt(record['PAY_ANN_VAL_F'], 2, 'O');\n    } else if (parseFloat(record?.BR_PAY_ANN_LSD_VAL) > 0) {\n        setVariable('PAY_ANN_VAL', record?.BR_PAY_ANN_LSD_VAL);\n        record['PAY_ANN_VAL_F'] = setCharAt(record['PAY_ANN_VAL_F'], 2, 'O');\n        setVals()\n    } else if (parseFloat(record?.EXPS_TEMPSTAF_VAL) > 0) {\n        setVariable('PAY_ANN_VAL', record?.EXPS_TEMPSTAF_VAL);\n        flagRules('PAY_ANN_VAL_F', ['EXPS_TEMPSTAF_VAL_F'])\n        setVals()\n    } else if (parseFloat(record?.EC_PAY_ANN_VAL) > 0) {\n        let cy_py = findCY()\n        setVariable('PAY_ANN_VAL', parseFloat(record?.EC_PAY_ANN_VAL) * parseFloat(cy_py.PAYANN));\n        record['PAY_ANN_VAL_F'] = setCharAt(record['PAY_ANN_VAL_F'], 2, 'H');\n    } else {\n        setVariable('TABSTAT', 'N')\n        setVariable('NONTABFL', 'N')\n        if (parseFloat(record?.RCPT_TOT_VAL) > 0 && record?.RCPT_TOT_VAL_F?.charAt(0) == 'R') {\n            setVariable('Referral_Flag', 'NO_PAYROLL_W_RECEIPTS')\n        }\n        setVariable('ACTION', 'EXIT EDIT')\n        global.set('action','Exit Edit')\n    }\n\n    return msg;\n} catch(e) {\n    global.set('err','Exit Edit')\n    return msg;\n}\n\n\n",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 810,
-        "y": 320,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "d3fbf4b025b4fcbf",
-        "type": "function",
-        "z": "27c40a87c581e266",
-        "name": "query_irs",
-        "func": "msg.records = msg.payload\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.records.csv[record_idx];\nlet id = record.REPORTING_ID\nmsg.query = \"  SELECT * FROM product_aies.irs where reporting_id = '\" + id + \"' and version = 'PO';\"\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 460,
-        "y": 100,
-        "wires": [
-            [
-                "689738197e247f5c"
-            ]
-        ]
-    },
-    {
-        "id": "9b0194667aaa7e7d",
-        "type": "function",
-        "z": "27c40a87c581e266",
-        "name": "reset_msg_and_query_ec",
-        "func": "function keysToUpperCase(obj) {\n    const output = {};\n    for (let key in obj) {\n        if (Object.prototype.hasOwnProperty.call(obj, key)) {\n            if (typeof obj[key] === 'object' && obj[key] !== null) {\n                output[key.toUpperCase()] = keysToUpperCase(obj[key]);\n            } else {\n                output[key.toUpperCase()] = obj[key];\n            }\n        }\n    }\n    return output;\n}\n\nlet p = msg.payload.map(keysToUpperCase);\nmsg.payload = p\nmsg.irs = msg.payload\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.records.csv[record_idx];\nlet id = record.REPORTING_ID\nmsg.query = \"  SELECT * FROM product_aies.ec where reporting_id = '\" + id + \"' and version = 'PO';\"\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 430,
-        "y": 160,
-        "wires": [
-            [
-                "458259c7dc611976"
-            ]
-        ]
-    },
-    {
-        "id": "dda1c7f0f27d8f32",
-        "type": "function",
-        "z": "27c40a87c581e266",
-        "name": "reset_msg_and_query_br",
-        "func": "function keysToUpperCase(obj) {\n    const output = {};\n    for (let key in obj) {\n        if (Object.prototype.hasOwnProperty.call(obj, key)) {\n            if (typeof obj[key] === 'object' && obj[key] !== null) {\n                output[key.toUpperCase()] = keysToUpperCase(obj[key]);\n            } else {\n                output[key.toUpperCase()] = obj[key];\n            }\n        }\n    }\n    return output;\n}\n\nlet p = msg.payload.map(keysToUpperCase);\nmsg.payload = p\nmsg.ec = msg.payload\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.records.csv[record_idx];\nlet id = record.REPORTING_ID\nmsg.query = \"  SELECT * FROM product_aies.br where reporting_id = '\" + id + \"' and version = 'PO';\"\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 440,
-        "y": 220,
-        "wires": [
-            [
-                "4262daf8b1a7e14a"
-            ]
-        ]
-    },
-    {
-        "id": "5f029cd342f9cc77",
-        "type": "function",
-        "z": "27c40a87c581e266",
-        "name": "reset msg",
-        "func": "function keysToUpperCase(obj) {\n    const output = {};\n    for (let key in obj) {\n        if (Object.prototype.hasOwnProperty.call(obj, key)) {\n            if (typeof obj[key] === 'object' && obj[key] !== null) {\n                output[key.toUpperCase()] = keysToUpperCase(obj[key]);\n            } else {\n                output[key.toUpperCase()] = obj[key];\n            }\n        }\n    }\n    return output;\n}\n\nlet p = msg.payload.map(keysToUpperCase);\nmsg.payload = p\nmsg.br = msg.payload\n\nmsg.payload = msg.records\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 840,
-        "y": 220,
-        "wires": [
-            [
-                "b76253c6ef1f5b92"
-            ]
-        ]
-    },
-    {
-        "id": "689738197e247f5c",
-        "type": "subflow:8032608991ae0162",
-        "z": "27c40a87c581e266",
-        "name": "",
-        "x": 660,
-        "y": 100,
-        "wires": [
-            [
-                "9b0194667aaa7e7d"
-            ]
-        ]
-    },
-    {
-        "id": "458259c7dc611976",
-        "type": "subflow:8032608991ae0162",
-        "z": "27c40a87c581e266",
-        "name": "",
-        "x": 660,
-        "y": 160,
-        "wires": [
-            [
-                "dda1c7f0f27d8f32"
-            ]
-        ]
-    },
-    {
-        "id": "4262daf8b1a7e14a",
-        "type": "subflow:8032608991ae0162",
-        "z": "27c40a87c581e266",
-        "name": "",
-        "x": 660,
-        "y": 220,
-        "wires": [
-            [
-                "5f029cd342f9cc77"
-            ]
-        ]
-    },
-    {
-        "id": "b76253c6ef1f5b92",
-        "type": "function",
-        "z": "27c40a87c581e266",
-        "name": "pay_ann_val",
-        "func": "try {\n    let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n    let irs = msg.irs[0]\n    let br = msg.br[0]\n    let ec = msg.ec[0]\n\n    // Set function\n    const setVariable = (variable, value) => {\n        record[variable] = value;\n    };\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n    function flagRules(variable, details) {\n        if (record?.[variable] == 0) {\n            record[variable] = setCharAt(record?.[variable], 2, 'Z');\n        } else {\n            let found = 'N'\n            for (let i in details) {\n                let detail = details[i]\n                if (record?.[detail]) {\n                    if (['R_', 'K_', 'T_'].includes(record?.[detail].substring(0, 2))) {\n                        found = 'Y'\n                    } else if (['R', 'C', 'A', 'S', 'O', 'G'].includes(record?.[detail]?.charAt(1))) {\n                        found = 'Y'\n                    } else {\n                        found = 'N'\n                        break\n                    }\n                    // } else {\n                    //     found = 'N'\n                    //     break\n                }\n            }\n            if (found == 'Y') {\n                record[variable] = setCharAt(record?.[variable], 2, 'Y');\n            } else {\n                record[variable] = setCharAt(record?.[variable], 2, 'S');\n            }\n        }\n    }\n\n    let cache = global.get(\"lookupCache\");\n    let cy_py_factor = cache.data.find(\n        item =>\n            item.module === \"core_4\" &&\n            item.param === 'core_4' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"all\"\n    )?.json_values;\n\n    function findCY() {\n        let cy_py = {}\n        for (let i in cy_py_factor['CY_PY_K_FACTORS']) {\n            let cy_py_fact = cy_py_factor['CY_PY_K_FACTORS'][i]\n            if (record.NAICS_CODE.startsWith(cy_py_fact['NAICS_CODE'])) {\n                cy_py = cy_py_fact\n                break;\n            }\n        }\n        return (cy_py);\n    }\n\n    const setVals = () => {\n        setVariable('PAY_QTR1_VAL', 0);\n        record['PAY_QTR1_VAL_F'] = setCharAt(record['PAY_QTR1_VAL_F'], 1, 'G');\n        setVariable('EMP_MAR12_NUM', 0);\n        record['EMP_MAR12_NUM_F'] = setCharAt(record['EMP_MAR12_NUM_F'], 1, 'G');\n        setVariable('EXIMP', 'E');\n        setVariable('Referral_Flag', 'LEASED_ONLY');\n    }\n    global.set('action','')\n\n    if (record?.REPORTING_ID_TYP_TXT == 'SU' && parseFloat(irs?.PAY_ANN_VAL) > 0) {\n        setVariable('PAY_ANN_VAL', irs?.PAY_ANN_VAL);\n        record['PAY_ANN_VAL_F'] = setCharAt(record['PAY_ANN_VAL_F'], 2, 'A');\n    } else if (record?.REPORTING_ID_TYP_TXT == 'MU' && parseFloat(br?.PAY_ANN_VAL) > 0) {\n        setVariable('PAY_ANN_VAL', br?.PAY_ANN_VAL);\n        record['PAY_ANN_VAL_F'] = setCharAt(record['PAY_ANN_VAL_F'], 2, 'O');\n    } else if (parseFloat(br?.PAY_ANN_LSD_VAL) > 0) {\n        setVariable('PAY_ANN_VAL', br?.PAY_ANN_LSD_VAL);\n        record['PAY_ANN_VAL_F'] = setCharAt(record['PAY_ANN_VAL_F'], 2, 'O');\n        setVals()\n    } else if (parseFloat(record?.EXPS_TEMPSTAF_VAL) > 0) {\n        setVariable('PAY_ANN_VAL', record?.EXPS_TEMPSTAF_VAL);\n        flagRules('PAY_ANN_VAL_F', ['EXPS_TEMPSTAF_VAL_F'])\n        setVals()\n    } else if (parseFloat(ec?.PAY_ANN_VAL) > 0) {\n        let cy_py = findCY()\n        setVariable('PAY_ANN_VAL', parseFloat(ec?.PAY_ANN_VAL) * parseFloat(cy_py.PAYANN));\n        record['PAY_ANN_VAL_F'] = setCharAt(record['PAY_ANN_VAL_F'], 2, 'H');\n    } else {\n        setVariable('TABSTAT', 'N')\n        setVariable('NONTABFL', 'N')\n        if (parseFloat(record?.RCPT_TOT_VAL) > 0 && record?.RCPT_TOT_VAL_F?.charAt(0) == 'R') {\n            setVariable('Referral_Flag', 'NO_PAYROLL_W_RECEIPTS')\n        }\n        setVariable('ACTION', 'EXIT EDIT')\n        global.set('action','Exit Edit')\n    }\n\n    return msg;\n} catch(e) {\n    global.set('err','Exit Edit')\n    return msg;\n}\n\n\n",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1010,
-        "y": 220,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "8c066284600dbc44",
         "type": "function",
         "z": "0be109393cb5f28a",
@@ -10517,22 +9740,6 @@
         "finalize": "",
         "libs": [],
         "x": 1430,
-        "y": 100,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "331014954d894fe9",
-        "type": "postgresql",
-        "z": "8032608991ae0162",
-        "name": "Select",
-        "query": "",
-        "postgreSQLConfig": "481a641c4005d1c8",
-        "split": false,
-        "rowsPerMsg": "1",
-        "outputs": 1,
-        "x": 950,
         "y": 100,
         "wires": [
             []
@@ -11186,6 +10393,799 @@
         "y": 480,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "8ffe802b67aef5e3",
+        "type": "function",
+        "z": "4781d07fda613850",
+        "name": "EMP_MAR12_NUM",
+        "func": "try {\n    let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\n    const setVariable = (variable, value) => {\n        record[variable] = value;\n    };\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    let cache = global.get(\"lookupCache\");\n    let cy_py_factor = cache.data.find(\n        item =>\n            item.module === \"core_4\" &&\n            item.param === 'core_4' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"all\"\n    )?.json_values;\n\n    function findCY() {\n        let cy_py = {}\n        for (let i in cy_py_factor['CY_PY_K_FACTORS']) {\n            let cy_py_fact = cy_py_factor['CY_PY_K_FACTORS'][i]\n            if (record.NAICS_CODE.startsWith(cy_py_fact['NAICS_CODE'])) {\n                cy_py = cy_py_fact\n                break;\n            }\n        }\n        return (cy_py);\n    }\n\n    if (record?.['REPORTING_ID_TYP_TXT'] === 'SU') {\n        if (parseFloat(record?.['IRS_EMP_MAR12_NUM']) > 0) {\n            setVariable('EMP_MAR12_NUM', record?.['IRS_EMP_MAR12_NUM']);\n            record['EMP_MAR12_NUM_F'] = setCharAt(record?.['EMP_MAR12_NUM_F'], 2, 'A');\n        }else{\n            if (parseFloat(record?.['EC_EMP_MAR12_NUM']) > 0) {\n                let cy_py = findCY()\n                setVariable('EMP_MAR12_NUM', Math.round(parseFloat(record?.['EC_EMP_MAR12_NUM']) * parseFloat(cy_py.EMPQ1)));\n                record['EMP_MAR12_NUM_F'] = setCharAt(record?.['EMP_MAR12_NUM_F'], 2, 'H');\n            }\n        }\n    } else if (record?.['REPORTING_ID_TYP_TXT'] === 'MU' && parseFloat(record?.['BR_EMP_MAR12_NUM']) > 0) {\n        setVariable('EMP_MAR12_NUM', record?.['BR_EMP_MAR12_NUM']);\n        record['EMP_MAR12_NUM_F'] = setCharAt(record?.['EMP_MAR12_NUM_F'], 2, 'O');\n    } else if (parseFloat(record?.['EC_EMP_MAR12_NUM']) > 0) {\n        let cy_py = findCY()\n        setVariable('EMP_MAR12_NUM', Math.round(parseFloat(record?.['EC_EMP_MAR12_NUM']) * parseFloat(cy_py.EMPQ1)));\n        record['EMP_MAR12_NUM_F'] = setCharAt(record?.['EMP_MAR12_NUM_F'], 2, 'H');\n    }\n\n    return msg;\n} catch(e) {\n    global.set('err','Exit Edit')\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1ff5e07d3e5e06cd",
+        "type": "function",
+        "z": "4781d07fda613850",
+        "name": "query_irs",
+        "func": "msg.records = msg.payload\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.records.csv[record_idx];\nlet id = record.REPORTING_ID\nmsg.query = \"  SELECT * FROM product_aies.irs where reporting_id = '\" + id + \"' and version = 'PO';\"\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 120,
+        "wires": [
+            [
+                "b685a7e00abbc79b"
+            ]
+        ]
+    },
+    {
+        "id": "ca38791050e0b8cf",
+        "type": "function",
+        "z": "4781d07fda613850",
+        "name": "reset_msg_and_query_ec",
+        "func": "function keysToUpperCase(obj) {\n    const output = {};\n    for (let key in obj) {\n        if (Object.prototype.hasOwnProperty.call(obj, key)) {\n            if (typeof obj[key] === 'object' && obj[key] !== null) {\n                output[key.toUpperCase()] = keysToUpperCase(obj[key]);\n            } else {\n                output[key.toUpperCase()] = obj[key];\n            }\n        }\n    }\n    return output;\n}\n\nlet p = msg.payload.map(keysToUpperCase);\nmsg.payload = p\nmsg.irs = msg.payload\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.records.csv[record_idx];\nlet id = record.REPORTING_ID\nmsg.query = \"  SELECT * FROM product_aies.ec where reporting_id = '\" + id + \"' and version = 'PO';\"\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 180,
+        "wires": [
+            [
+                "93ddb63d83f97847"
+            ]
+        ]
+    },
+    {
+        "id": "4389f4ce6fea910c",
+        "type": "function",
+        "z": "4781d07fda613850",
+        "name": "reset_msg_and_query_br",
+        "func": "function keysToUpperCase(obj) {\n    const output = {};\n    for (let key in obj) {\n        if (Object.prototype.hasOwnProperty.call(obj, key)) {\n            if (typeof obj[key] === 'object' && obj[key] !== null) {\n                output[key.toUpperCase()] = keysToUpperCase(obj[key]);\n            } else {\n                output[key.toUpperCase()] = obj[key];\n            }\n        }\n    }\n    return output;\n}\n\nlet p = msg.payload.map(keysToUpperCase);\nmsg.payload = p\nmsg.ec = msg.payload\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.records.csv[record_idx];\nlet id = record.REPORTING_ID\nmsg.query = \"  SELECT * FROM product_aies.br where reporting_id = '\" + id + \"' and version = 'PO';\"\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 240,
+        "wires": [
+            [
+                "20916d3e72e35cae"
+            ]
+        ]
+    },
+    {
+        "id": "314c6ee064ceb676",
+        "type": "function",
+        "z": "4781d07fda613850",
+        "name": "reset msg",
+        "func": "function keysToUpperCase(obj) {\n    const output = {};\n    for (let key in obj) {\n        if (Object.prototype.hasOwnProperty.call(obj, key)) {\n            if (typeof obj[key] === 'object' && obj[key] !== null) {\n                output[key.toUpperCase()] = keysToUpperCase(obj[key]);\n            } else {\n                output[key.toUpperCase()] = obj[key];\n            }\n        }\n    }\n    return output;\n}\n\nlet p = msg.payload.map(keysToUpperCase);\nmsg.payload = p\nmsg.br = msg.payload\n\nmsg.payload = msg.records\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 790,
+        "y": 240,
+        "wires": [
+            [
+                "ed41e14ea62fdff2"
+            ]
+        ]
+    },
+    {
+        "id": "b685a7e00abbc79b",
+        "type": "subflow:8032608991ae0162",
+        "z": "4781d07fda613850",
+        "name": "",
+        "x": 610,
+        "y": 120,
+        "wires": [
+            [
+                "ca38791050e0b8cf"
+            ]
+        ]
+    },
+    {
+        "id": "93ddb63d83f97847",
+        "type": "subflow:8032608991ae0162",
+        "z": "4781d07fda613850",
+        "name": "",
+        "x": 610,
+        "y": 180,
+        "wires": [
+            [
+                "4389f4ce6fea910c"
+            ]
+        ]
+    },
+    {
+        "id": "20916d3e72e35cae",
+        "type": "subflow:8032608991ae0162",
+        "z": "4781d07fda613850",
+        "name": "",
+        "x": 610,
+        "y": 240,
+        "wires": [
+            [
+                "314c6ee064ceb676"
+            ]
+        ]
+    },
+    {
+        "id": "ed41e14ea62fdff2",
+        "type": "function",
+        "z": "4781d07fda613850",
+        "name": "EMP_MAR12_NUM",
+        "func": "try {\n    let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n    let br = msg.br[0]\n    let irs = msg.irs[0]\n    let ec = msg.ec[0]\n\n\n    const setVariable = (variable, value) => {\n        record[variable] = value;\n    };\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    let cache = global.get(\"lookupCache\");\n    let cy_py_factor = cache.data.find(\n        item =>\n            item.module === \"core_4\" &&\n            item.param === 'core_4' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"all\"\n    )?.json_values;\n\n    function findCY() {\n        let cy_py = {}\n        for (let i in cy_py_factor['CY_PY_K_FACTORS']) {\n            let cy_py_fact = cy_py_factor['CY_PY_K_FACTORS'][i]\n            if (record.NAICS_CODE.startsWith(cy_py_fact['NAICS_CODE'])) {\n                cy_py = cy_py_fact\n                break;\n            }\n        }\n        return (cy_py);\n    }\n\n    if (record?.['REPORTING_ID_TYP_TXT'] === 'SU') {\n        if (parseFloat(irs?.['EMP_MAR12_NUM']) > 0) {\n            setVariable('EMP_MAR12_NUM', irs?.['EMP_MAR12_NUM']);\n            record['EMP_MAR12_NUM_F'] = setCharAt(record?.['EMP_MAR12_NUM_F'], 2, 'A');\n        }else{\n            if (parseFloat(ec?.['EMP_MAR12_NUM']) > 0) {\n                let cy_py = findCY()\n                setVariable('EMP_MAR12_NUM', Math.round(parseFloat(ec?.['EMP_MAR12_NUM']) * parseFloat(cy_py.EMPQ1)));\n                record['EMP_MAR12_NUM_F'] = setCharAt(record?.['EMP_MAR12_NUM_F'], 2, 'H');\n            }\n        }\n    } else if (record?.['REPORTING_ID_TYP_TXT'] === 'MU' && parseFloat(br?.['EMP_MAR12_NUM']) > 0) {\n        setVariable('EMP_MAR12_NUM', br?.['EMP_MAR12_NUM']);\n        record['EMP_MAR12_NUM_F'] = setCharAt(record?.['EMP_MAR12_NUM_F'], 2, 'O');\n    } else if (parseFloat(ec?.['EMP_MAR12_NUM']) > 0) {\n        let cy_py = findCY()\n        setVariable('EMP_MAR12_NUM', Math.round(parseFloat(ec?.['EMP_MAR12_NUM']) * parseFloat(cy_py.EMPQ1)));\n        record['EMP_MAR12_NUM_F'] = setCharAt(record?.['EMP_MAR12_NUM_F'], 2, 'H');\n    }\n\n    return msg;\n} catch(e) {\n    global.set('err','Exit Edit')\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1020,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8b5375b4024c9c0b",
+        "type": "function",
+        "z": "253763f13152858b",
+        "name": "pay_qtr1_val",
+        "func": "try {\n    let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\n    const setVariable = (variable, value) => {\n        record[variable] = value;\n    };\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    let cache = global.get(\"lookupCache\");\n    let cy_py_factor = cache.data.find(\n        item =>\n            item.module === \"core_4\" &&\n            item.param === 'core_4' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"all\"\n    )?.json_values;\n\n    function findCY() {\n        let cy_py = {}\n        for (let i in cy_py_factor['CY_PY_K_FACTORS']) {\n            let cy_py_fact = cy_py_factor['CY_PY_K_FACTORS'][i]\n            if (record.NAICS_CODE.startsWith(cy_py_fact['NAICS_CODE'])) {\n                cy_py = cy_py_fact\n                break;\n            }\n        }\n        return (cy_py);\n    }\n\n\n    if (record?.['REPORTING_ID_TYP_TXT'] === 'SU') {\n        if (parseFloat(record?.['IRS_PAY_QTR1_VAL']) > 0) {\n            setVariable('PAY_QTR1_VAL', record?.['IRS_PAY_QTR1_VAL']);\n            record['PAY_QTR1_VAL_F'] = setCharAt(record['PAY_QTR1_VAL_F'], 2, 'A');\n        } else {\n            if (parseFloat(record?.['EC_PAY_QTR1_VAL']) > 0) {\n                let cy_py = findCY()\n                setVariable('PAY_QTR1_VAL', Math.round(parseFloat(record?.['EC_PAY_QTR1_VAL']) * parseFloat(cy_py.PAYQTR1)));\n                record['PAY_QTR1_VAL_F'] = setCharAt(record?.['PAY_QTR1_VAL_F'], 2, 'H');\n            }\n        }\n    } else if (record?.['REPORTING_ID_TYP_TXT'] === 'MU' && parseFloat(record?.['BR_PAY_QTR1_VAL']) > 0) {\n        setVariable('PAY_QTR1_VAL', record?.['BR_PAY_QTR1_VAL']);\n        record['PAY_QTR1_VAL_F'] = setCharAt(record?.['PAY_QTR1_VAL_F'], 2, 'O');\n    } else if (parseFloat(record?.['EC_PAY_QTR1_VAL']) > 0) {\n        let cy_py = findCY()\n        setVariable('PAY_QTR1_VAL', Math.round(parseFloat(record?.['EC_PAY_QTR1_VAL']) * parseFloat(cy_py.PAYQTR1)));\n        record['PAY_QTR1_VAL_F'] = setCharAt(record['PAY_QTR1_VAL_F'], 2, 'H');\n    }\n    return msg;\n} catch(e) {\n    global.set('err','Exit Edit')\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "024267d04aba8fd6",
+        "type": "function",
+        "z": "253763f13152858b",
+        "name": "query_irs",
+        "func": "msg.records = msg.payload\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.records.csv[record_idx];\nlet id = record.REPORTING_ID\nmsg.query = \"  SELECT * FROM product_aies.irs where reporting_id = '\" + id + \"' and version = 'PO';\"\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 60,
+        "wires": [
+            [
+                "7ce42f1a98cc6d90"
+            ]
+        ]
+    },
+    {
+        "id": "16d2b53bc237c01a",
+        "type": "function",
+        "z": "253763f13152858b",
+        "name": "reset_msg_and_query_ec",
+        "func": "function keysToUpperCase(obj) {\n    const output = {};\n    for (let key in obj) {\n        if (Object.prototype.hasOwnProperty.call(obj, key)) {\n            if (typeof obj[key] === 'object' && obj[key] !== null) {\n                output[key.toUpperCase()] = keysToUpperCase(obj[key]);\n            } else {\n                output[key.toUpperCase()] = obj[key];\n            }\n        }\n    }\n    return output;\n}\n\nlet p = msg.payload.map(keysToUpperCase);\nmsg.payload = p\nmsg.irs = msg.payload\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.records.csv[record_idx];\nlet id = record.REPORTING_ID\nmsg.query = \"  SELECT * FROM product_aies.ec where reporting_id = '\" + id + \"' and version = 'PO';\"\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 120,
+        "wires": [
+            [
+                "bcd3982cdb005969"
+            ]
+        ]
+    },
+    {
+        "id": "9ced159be1b118de",
+        "type": "function",
+        "z": "253763f13152858b",
+        "name": "reset_msg_and_query_br",
+        "func": "function keysToUpperCase(obj) {\n    const output = {};\n    for (let key in obj) {\n        if (Object.prototype.hasOwnProperty.call(obj, key)) {\n            if (typeof obj[key] === 'object' && obj[key] !== null) {\n                output[key.toUpperCase()] = keysToUpperCase(obj[key]);\n            } else {\n                output[key.toUpperCase()] = obj[key];\n            }\n        }\n    }\n    return output;\n}\n\nlet p = msg.payload.map(keysToUpperCase);\nmsg.payload = p\nmsg.ec = msg.payload\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.records.csv[record_idx];\nlet id = record.REPORTING_ID\nmsg.query = \"  SELECT * FROM product_aies.br where reporting_id = '\" + id + \"' and version = 'PO';\"\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 180,
+        "wires": [
+            [
+                "7087aba5719ae32e"
+            ]
+        ]
+    },
+    {
+        "id": "d564e69c94ed087c",
+        "type": "function",
+        "z": "253763f13152858b",
+        "name": "reset msg",
+        "func": "function keysToUpperCase(obj) {\n    const output = {};\n    for (let key in obj) {\n        if (Object.prototype.hasOwnProperty.call(obj, key)) {\n            if (typeof obj[key] === 'object' && obj[key] !== null) {\n                output[key.toUpperCase()] = keysToUpperCase(obj[key]);\n            } else {\n                output[key.toUpperCase()] = obj[key];\n            }\n        }\n    }\n    return output;\n}\n\nlet p = msg.payload.map(keysToUpperCase);\nmsg.payload = p\nmsg.br = msg.payload\n\nmsg.payload = msg.records\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 180,
+        "wires": [
+            [
+                "37c1a5ff5ac2724a"
+            ]
+        ]
+    },
+    {
+        "id": "7ce42f1a98cc6d90",
+        "type": "subflow:8032608991ae0162",
+        "z": "253763f13152858b",
+        "name": "",
+        "x": 540,
+        "y": 60,
+        "wires": [
+            [
+                "16d2b53bc237c01a"
+            ]
+        ]
+    },
+    {
+        "id": "bcd3982cdb005969",
+        "type": "subflow:8032608991ae0162",
+        "z": "253763f13152858b",
+        "name": "",
+        "x": 540,
+        "y": 120,
+        "wires": [
+            [
+                "9ced159be1b118de"
+            ]
+        ]
+    },
+    {
+        "id": "7087aba5719ae32e",
+        "type": "subflow:8032608991ae0162",
+        "z": "253763f13152858b",
+        "name": "",
+        "x": 540,
+        "y": 180,
+        "wires": [
+            [
+                "d564e69c94ed087c"
+            ]
+        ]
+    },
+    {
+        "id": "37c1a5ff5ac2724a",
+        "type": "function",
+        "z": "253763f13152858b",
+        "name": "pay_qtr1_val",
+        "func": "try {\n    let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n    let irs = msg.irs[0]\n    let br = msg.br[0]\n    let ec = msg.ec[0]\n\n    const setVariable = (variable, value) => {\n        record[variable] = value;\n    };\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    let cache = global.get(\"lookupCache\");\n    let cy_py_factor = cache.data.find(\n        item =>\n            item.module === \"core_4\" &&\n            item.param === 'core_4' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"all\"\n    )?.json_values;\n\n    function findCY() {\n        let cy_py = {}\n        for (let i in cy_py_factor['CY_PY_K_FACTORS']) {\n            let cy_py_fact = cy_py_factor['CY_PY_K_FACTORS'][i]\n            if (record.NAICS_CODE.startsWith(cy_py_fact['NAICS_CODE'])) {\n                cy_py = cy_py_fact\n                break;\n            }\n        }\n        return (cy_py);\n    }\n\n\n    if (record?.['REPORTING_ID_TYP_TXT'] === 'SU') {\n        if (parseFloat(irs?.['PAY_QTR1_VAL']) > 0) {\n            setVariable('PAY_QTR1_VAL', irs?.['PAY_QTR1_VAL']);\n            record['PAY_QTR1_VAL_F'] = setCharAt(record['PAY_QTR1_VAL_F'], 2, 'A');\n        } else {\n            if (parseFloat(ec?.['PAY_QTR1_VAL']) > 0) {\n                let cy_py = findCY()\n                setVariable('PAY_QTR1_VAL', Math.round(parseFloat(ec?.['PAY_QTR1_VAL']) * parseFloat(cy_py.PAYQTR1)));\n                record['PAY_QTR1_VAL_F'] = setCharAt(record?.['PAY_QTR1_VAL_F'], 2, 'H');\n            }\n        }\n    } else if (record?.['REPORTING_ID_TYP_TXT'] === 'MU' && parseFloat(br?.['PAY_QTR1_VAL']) > 0) {\n        setVariable('PAY_QTR1_VAL', br?.['PAY_QTR1_VAL']);\n        record['PAY_QTR1_VAL_F'] = setCharAt(record?.['PAY_QTR1_VAL_F'], 2, 'O');\n    } else if (parseFloat(ec?.['PAY_QTR1_VAL']) > 0) {\n        let cy_py = findCY()\n        setVariable('PAY_QTR1_VAL', Math.round(parseFloat(ec?.['PAY_QTR1_VAL']) * parseFloat(cy_py.PAYQTR1)));\n        record['PAY_QTR1_VAL_F'] = setCharAt(record['PAY_QTR1_VAL_F'], 2, 'H');\n    }\n    return msg;\n} catch(e) {\n    global.set('err','Exit Edit')\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 910,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9cd4f165207e607e",
+        "type": "function",
+        "z": "7c71f52633d8c794",
+        "name": "rcpt_tot_val",
+        "func": "try {\n    let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\n    let cache = global.get(\"lookupCache\");\n    let cy_py_factor = cache.data.find(\n        item =>\n            item.module === \"core_4\" &&\n            item.param === 'core_4' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"all\"\n    )?.json_values;\n\n    function findCY() {\n        let cy_py = {}\n        for (let i in cy_py_factor['CY_PY_K_FACTORS']) {\n            let cy_py_fact = cy_py_factor['CY_PY_K_FACTORS'][i]\n            if (record.NAICS_CODE.startsWith(cy_py_fact['NAICS_CODE'])) {\n                cy_py = cy_py_fact\n                break;\n            }\n        }\n        return (cy_py);\n    }\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    if (record?.NAICS_SECTOR == '31' && record?.COV_CHG_CODE == '401') {\n        if (record?.RCPT_TOT_VAL == 0 || !(record?.RCPT_TOT_VAL)) {\n        }\n    } else if (record?.NAICS_SECTOR == '31' && record?.NAPCS_BLTOT > 0) {\n        record['RCPT_TOT_VAL'] = record?.NAPCS_BLTOT;\n        record['RCPT_TOT_VAL_F'] = setCharAt(record['RCPT_TOT_VAL_F'], 2, 'Y');\n    } else if (record?.REPORTING_ID_TYP_TXT === 'SU' && parseFloat(record?.RCPT_TOT_ADMN_DVAL) > 0) {\n        record['RCPT_TOT_VAL'] = record?.RCPT_TOT_ADMN_DVAL;\n        record['RCPT_TOT_VAL_F'] = setCharAt(record['RCPT_TOT_VAL_F'], 2, 'A');\n    } else if (record?.EC_RCPT_TOT_VAL > 0) {\n        let cy_py = findCY()\n        record['RCPT_TOT_VAL'] = Math.round(parseFloat(record?.EC_RCPT_TOT_VAL) * parseFloat(cy_py.RCPTOT));\n        record['RCPT_TOT_VAL_F'] = setCharAt(record['RCPT_TOT_VAL_F'], 2, 'H');\n    }\n    return msg;\n} catch(e) {\n    global.set('err','Exit Edit')\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d327193a580c576d",
+        "type": "function",
+        "z": "7c71f52633d8c794",
+        "name": "query_ec",
+        "func": "msg.records = msg.payload\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.records.csv[record_idx];\nlet id = record.REPORTING_ID\nmsg.query = \"  SELECT * FROM product_aies.ec where reporting_id = '\" + id + \"' and version = 'PO';\"\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 440,
+        "wires": [
+            [
+                "040aab495fd991c9"
+            ]
+        ]
+    },
+    {
+        "id": "68bc88d03368c666",
+        "type": "function",
+        "z": "7c71f52633d8c794",
+        "name": "reset msg",
+        "func": "function keysToUpperCase(obj) {\n    const output = {};\n    for (let key in obj) {\n        if (Object.prototype.hasOwnProperty.call(obj, key)) {\n            if (typeof obj[key] === 'object' && obj[key] !== null) {\n                output[key.toUpperCase()] = keysToUpperCase(obj[key]);\n            } else {\n                output[key.toUpperCase()] = obj[key];\n            }\n        }\n    }\n    return output;\n}\n\nlet p = msg.payload.map(keysToUpperCase);\nmsg.payload = p\nmsg.ec = msg.payload\n\nmsg.payload = msg.records\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 780,
+        "y": 440,
+        "wires": [
+            [
+                "698b158f50631fa6"
+            ]
+        ]
+    },
+    {
+        "id": "040aab495fd991c9",
+        "type": "subflow:8032608991ae0162",
+        "z": "7c71f52633d8c794",
+        "name": "",
+        "x": 620,
+        "y": 440,
+        "wires": [
+            [
+                "68bc88d03368c666"
+            ]
+        ]
+    },
+    {
+        "id": "698b158f50631fa6",
+        "type": "function",
+        "z": "7c71f52633d8c794",
+        "name": "rcpt_tot_val",
+        "func": "try {\n    let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n    let ec = msg.ec[0]\n\n    let cache = global.get(\"lookupCache\");\n    let cy_py_factor = cache.data.find(\n        item =>\n            item.module === \"core_4\" &&\n            item.param === 'core_4' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"all\"\n    )?.json_values;\n\n    function findCY() {\n        let cy_py = {}\n        for (let i in cy_py_factor['CY_PY_K_FACTORS']) {\n            let cy_py_fact = cy_py_factor['CY_PY_K_FACTORS'][i]\n            if (record.NAICS_CODE.startsWith(cy_py_fact['NAICS_CODE'])) {\n                cy_py = cy_py_fact\n                break;\n            }\n        }\n        return (cy_py);\n    }\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    if (record?.NAICS_SECTOR == '31' && record?.COV_CHG_CODE == '401') {\n        if (record?.RCPT_TOT_VAL == 0 || !(record?.RCPT_TOT_VAL)) {\n        }\n    } else if (record?.NAICS_SECTOR == '31' && record?.NAPCS_BLTOT > 0) {\n        record['RCPT_TOT_VAL'] = record?.NAPCS_BLTOT;\n        record['RCPT_TOT_VAL_F'] = setCharAt(record['RCPT_TOT_VAL_F'], 2, 'Y');\n    } else if (record?.REPORTING_ID_TYP_TXT === 'SU' && parseFloat(record?.RCPT_TOT_ADMN_DVAL) > 0) {\n        record['RCPT_TOT_VAL'] = record?.RCPT_TOT_ADMN_DVAL;\n        record['RCPT_TOT_VAL_F'] = setCharAt(record['RCPT_TOT_VAL_F'], 2, 'A');\n    } else if (ec.RCPT_TOT_VAL > 0) {\n        let cy_py = findCY()\n        record['RCPT_TOT_VAL'] = Math.round(parseFloat(ec.RCPT_TOT_VAL) * parseFloat(cy_py.RCPTOT));\n        record['RCPT_TOT_VAL_F'] = setCharAt(record['RCPT_TOT_VAL_F'], 2, 'H');\n    }\n    return msg;\n} catch(e) {\n    global.set('err','Exit Edit')\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 960.8125,
+        "y": 438.82501220703125,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "331014954d894fe9",
+        "type": "postgresql",
+        "z": "8032608991ae0162",
+        "name": "Select",
+        "query": "",
+        "postgreSQLConfig": "481a641c4005d1c8",
+        "split": false,
+        "rowsPerMsg": "1",
+        "outputs": 1,
+        "x": 950,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "32987fccfff7af52",
+        "type": "function",
+        "z": "27c40a87c581e266",
+        "name": "pay_ann_val",
+        "func": "try {\n    let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\n    // Set function\n    const setVariable = (variable, value) => {\n        record[variable] = value;\n    };\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    function flagRules(variable, details) {\n        if (record?.[variable] == 0) {\n            record[variable] = setCharAt(record?.[variable], 2, 'Z');\n        } else {\n            let found = 'N'\n            for (let i in details) {\n                let detail = details[i]\n                if (record?.[detail]) {\n                    if (['R_', 'K_', 'T_'].includes(record?.[detail].substring(0, 2))) {\n                        found = 'Y'\n                    } else if (['R', 'C', 'A', 'S', 'O', 'G'].includes(record?.[detail]?.charAt(1))) {\n                        found = 'Y'\n                    } else {\n                        found = 'N'\n                        break\n                    }\n                    // } else {\n                    //     found = 'N'\n                    //     break\n                }\n            }\n            if (found == 'Y') {\n                record[variable] = setCharAt(record?.[variable], 2, 'Y');\n            } else {\n                record[variable] = setCharAt(record?.[variable], 2, 'S');\n            }\n        }\n    }\n\n    let cache = global.get(\"lookupCache\");\n    let cy_py_factor = cache.data.find(\n        item =>\n            item.module === \"core_4\" &&\n            item.param === 'core_4' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"all\"\n    )?.json_values;\n\n    function findCY() {\n        let cy_py = {}\n        for (let i in cy_py_factor['CY_PY_K_FACTORS']) {\n            let cy_py_fact = cy_py_factor['CY_PY_K_FACTORS'][i]\n            if (record.NAICS_CODE.startsWith(cy_py_fact['NAICS_CODE'])) {\n                cy_py = cy_py_fact\n                break;\n            }\n        }\n        return (cy_py);\n    }\n\n    const setVals = () => {\n        setVariable('PAY_QTR1_VAL', 0);\n        record['PAY_QTR1_VAL_F'] = setCharAt(record['PAY_QTR1_VAL_F'], 1, 'G');\n        setVariable('EMP_MAR12_NUM', 0);\n        record['EMP_MAR12_NUM_F'] = setCharAt(record['EMP_MAR12_NUM_F'], 1, 'G');\n        setVariable('EXIMP', 'E');\n        setVariable('Referral_Flag', 'LEASED_ONLY');\n    }\n    global.set('action','')\n\n    if (record?.REPORTING_ID_TYP_TXT == 'SU' && parseFloat(record?.IRS_PAY_ANN_VAL) > 0) {\n        setVariable('PAY_ANN_VAL', record?.IRS_PAY_ANN_VAL);\n        record['PAY_ANN_VAL_F'] = setCharAt(record['PAY_ANN_VAL_F'], 2, 'A');\n    } else if (record?.REPORTING_ID_TYP_TXT == 'MU' && parseFloat(record?.BR_PAY_ANN_VAL) > 0) {\n        setVariable('PAY_ANN_VAL', record?.BR_PAY_ANN_VAL);\n        record['PAY_ANN_VAL_F'] = setCharAt(record['PAY_ANN_VAL_F'], 2, 'O');\n    } else if (parseFloat(record?.BR_PAY_ANN_LSD_VAL) > 0) {\n        setVariable('PAY_ANN_VAL', record?.BR_PAY_ANN_LSD_VAL);\n        record['PAY_ANN_VAL_F'] = setCharAt(record['PAY_ANN_VAL_F'], 2, 'O');\n        setVals()\n    } else if (parseFloat(record?.EXPS_TEMPSTAF_VAL) > 0) {\n        setVariable('PAY_ANN_VAL', record?.EXPS_TEMPSTAF_VAL);\n        flagRules('PAY_ANN_VAL_F', ['EXPS_TEMPSTAF_VAL_F'])\n        setVals()\n    } else if (parseFloat(record?.EC_PAY_ANN_VAL) > 0) {\n        let cy_py = findCY()\n        setVariable('PAY_ANN_VAL', Math.round(parseFloat(record?.EC_PAY_ANN_VAL) * parseFloat(cy_py.PAYANN)));\n        record['PAY_ANN_VAL_F'] = setCharAt(record['PAY_ANN_VAL_F'], 2, 'H');\n    } else {\n        setVariable('TABSTAT', 'N')\n        setVariable('NONTABFL', 'N')\n        if (parseFloat(record?.RCPT_TOT_VAL) > 0 && record?.RCPT_TOT_VAL_F?.charAt(0) == 'R') {\n            setVariable('Referral_Flag', 'NO_PAYROLL_W_RECEIPTS')\n        }\n        setVariable('ACTION', 'EXIT EDIT')\n        global.set('action','Exit Edit')\n    }\n\n    return msg;\n} catch(e) {\n    global.set('err','Exit Edit')\n    return msg;\n}\n\n\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 810,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d3fbf4b025b4fcbf",
+        "type": "function",
+        "z": "27c40a87c581e266",
+        "name": "query_irs",
+        "func": "msg.records = msg.payload\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.records.csv[record_idx];\nlet id = record.REPORTING_ID\nmsg.query = \"  SELECT * FROM product_aies.irs where reporting_id = '\" + id + \"' and version = 'PO';\"\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 100,
+        "wires": [
+            [
+                "689738197e247f5c"
+            ]
+        ]
+    },
+    {
+        "id": "9b0194667aaa7e7d",
+        "type": "function",
+        "z": "27c40a87c581e266",
+        "name": "reset_msg_and_query_ec",
+        "func": "function keysToUpperCase(obj) {\n    const output = {};\n    for (let key in obj) {\n        if (Object.prototype.hasOwnProperty.call(obj, key)) {\n            if (typeof obj[key] === 'object' && obj[key] !== null) {\n                output[key.toUpperCase()] = keysToUpperCase(obj[key]);\n            } else {\n                output[key.toUpperCase()] = obj[key];\n            }\n        }\n    }\n    return output;\n}\n\nlet p = msg.payload.map(keysToUpperCase);\nmsg.payload = p\nmsg.irs = msg.payload\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.records.csv[record_idx];\nlet id = record.REPORTING_ID\nmsg.query = \"  SELECT * FROM product_aies.ec where reporting_id = '\" + id + \"' and version = 'PO';\"\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 160,
+        "wires": [
+            [
+                "458259c7dc611976"
+            ]
+        ]
+    },
+    {
+        "id": "dda1c7f0f27d8f32",
+        "type": "function",
+        "z": "27c40a87c581e266",
+        "name": "reset_msg_and_query_br",
+        "func": "function keysToUpperCase(obj) {\n    const output = {};\n    for (let key in obj) {\n        if (Object.prototype.hasOwnProperty.call(obj, key)) {\n            if (typeof obj[key] === 'object' && obj[key] !== null) {\n                output[key.toUpperCase()] = keysToUpperCase(obj[key]);\n            } else {\n                output[key.toUpperCase()] = obj[key];\n            }\n        }\n    }\n    return output;\n}\n\nlet p = msg.payload.map(keysToUpperCase);\nmsg.payload = p\nmsg.ec = msg.payload\n\nlet record_idx = global.get(\"ptrModuleFacts\");\nlet record = msg.records.csv[record_idx];\nlet id = record.REPORTING_ID\nmsg.query = \"  SELECT * FROM product_aies.br where reporting_id = '\" + id + \"' and version = 'PO';\"\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 220,
+        "wires": [
+            [
+                "4262daf8b1a7e14a"
+            ]
+        ]
+    },
+    {
+        "id": "5f029cd342f9cc77",
+        "type": "function",
+        "z": "27c40a87c581e266",
+        "name": "reset msg",
+        "func": "function keysToUpperCase(obj) {\n    const output = {};\n    for (let key in obj) {\n        if (Object.prototype.hasOwnProperty.call(obj, key)) {\n            if (typeof obj[key] === 'object' && obj[key] !== null) {\n                output[key.toUpperCase()] = keysToUpperCase(obj[key]);\n            } else {\n                output[key.toUpperCase()] = obj[key];\n            }\n        }\n    }\n    return output;\n}\n\nlet p = msg.payload.map(keysToUpperCase);\nmsg.payload = p\nmsg.br = msg.payload\n\nmsg.payload = msg.records\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 220,
+        "wires": [
+            [
+                "b76253c6ef1f5b92"
+            ]
+        ]
+    },
+    {
+        "id": "689738197e247f5c",
+        "type": "subflow:8032608991ae0162",
+        "z": "27c40a87c581e266",
+        "name": "",
+        "x": 660,
+        "y": 100,
+        "wires": [
+            [
+                "9b0194667aaa7e7d"
+            ]
+        ]
+    },
+    {
+        "id": "458259c7dc611976",
+        "type": "subflow:8032608991ae0162",
+        "z": "27c40a87c581e266",
+        "name": "",
+        "x": 660,
+        "y": 160,
+        "wires": [
+            [
+                "dda1c7f0f27d8f32"
+            ]
+        ]
+    },
+    {
+        "id": "4262daf8b1a7e14a",
+        "type": "subflow:8032608991ae0162",
+        "z": "27c40a87c581e266",
+        "name": "",
+        "x": 660,
+        "y": 220,
+        "wires": [
+            [
+                "5f029cd342f9cc77"
+            ]
+        ]
+    },
+    {
+        "id": "b76253c6ef1f5b92",
+        "type": "function",
+        "z": "27c40a87c581e266",
+        "name": "pay_ann_val",
+        "func": "try {\n    let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n    let irs = msg.irs[0]\n    let br = msg.br[0]\n    let ec = msg.ec[0]\n\n    // Set function\n    const setVariable = (variable, value) => {\n        record[variable] = value;\n    };\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n    function flagRules(variable, details) {\n        if (record?.[variable] == 0) {\n            record[variable] = setCharAt(record?.[variable], 2, 'Z');\n        } else {\n            let found = 'N'\n            for (let i in details) {\n                let detail = details[i]\n                if (record?.[detail]) {\n                    if (['R_', 'K_', 'T_'].includes(record?.[detail].substring(0, 2))) {\n                        found = 'Y'\n                    } else if (['R', 'C', 'A', 'S', 'O', 'G'].includes(record?.[detail]?.charAt(1))) {\n                        found = 'Y'\n                    } else {\n                        found = 'N'\n                        break\n                    }\n                    // } else {\n                    //     found = 'N'\n                    //     break\n                }\n            }\n            if (found == 'Y') {\n                record[variable] = setCharAt(record?.[variable], 2, 'Y');\n            } else {\n                record[variable] = setCharAt(record?.[variable], 2, 'S');\n            }\n        }\n    }\n\n    let cache = global.get(\"lookupCache\");\n    let cy_py_factor = cache.data.find(\n        item =>\n            item.module === \"core_4\" &&\n            item.param === 'core_4' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"all\"\n    )?.json_values;\n\n    function findCY() {\n        let cy_py = {}\n        for (let i in cy_py_factor['CY_PY_K_FACTORS']) {\n            let cy_py_fact = cy_py_factor['CY_PY_K_FACTORS'][i]\n            if (record.NAICS_CODE.startsWith(cy_py_fact['NAICS_CODE'])) {\n                cy_py = cy_py_fact\n                break;\n            }\n        }\n        return (cy_py);\n    }\n\n    const setVals = () => {\n        setVariable('PAY_QTR1_VAL', 0);\n        record['PAY_QTR1_VAL_F'] = setCharAt(record['PAY_QTR1_VAL_F'], 1, 'G');\n        setVariable('EMP_MAR12_NUM', 0);\n        record['EMP_MAR12_NUM_F'] = setCharAt(record['EMP_MAR12_NUM_F'], 1, 'G');\n        setVariable('EXIMP', 'E');\n        setVariable('Referral_Flag', 'LEASED_ONLY');\n    }\n    global.set('action','')\n\n    if (record?.REPORTING_ID_TYP_TXT == 'SU' && parseFloat(irs?.PAY_ANN_VAL) > 0) {\n        setVariable('PAY_ANN_VAL', irs?.PAY_ANN_VAL);\n        record['PAY_ANN_VAL_F'] = setCharAt(record['PAY_ANN_VAL_F'], 2, 'A');\n    } else if (record?.REPORTING_ID_TYP_TXT == 'MU' && parseFloat(br?.PAY_ANN_VAL) > 0) {\n        setVariable('PAY_ANN_VAL', br?.PAY_ANN_VAL);\n        record['PAY_ANN_VAL_F'] = setCharAt(record['PAY_ANN_VAL_F'], 2, 'O');\n    } else if (parseFloat(br?.PAY_ANN_LSD_VAL) > 0) {\n        setVariable('PAY_ANN_VAL', br?.PAY_ANN_LSD_VAL);\n        record['PAY_ANN_VAL_F'] = setCharAt(record['PAY_ANN_VAL_F'], 2, 'O');\n        setVals()\n    } else if (parseFloat(record?.EXPS_TEMPSTAF_VAL) > 0) {\n        setVariable('PAY_ANN_VAL', record?.EXPS_TEMPSTAF_VAL);\n        flagRules('PAY_ANN_VAL_F', ['EXPS_TEMPSTAF_VAL_F'])\n        setVals()\n    } else if (parseFloat(ec?.PAY_ANN_VAL) > 0) {\n        let cy_py = findCY()\n        setVariable('PAY_ANN_VAL', Math.round(parseFloat(ec?.PAY_ANN_VAL) * parseFloat(cy_py.PAYANN)));\n        record['PAY_ANN_VAL_F'] = setCharAt(record['PAY_ANN_VAL_F'], 2, 'H');\n    } else {\n        setVariable('TABSTAT', 'N')\n        setVariable('NONTABFL', 'N')\n        if (parseFloat(record?.RCPT_TOT_VAL) > 0 && record?.RCPT_TOT_VAL_F?.charAt(0) == 'R') {\n            setVariable('Referral_Flag', 'NO_PAYROLL_W_RECEIPTS')\n        }\n        setVariable('ACTION', 'EXIT EDIT')\n        global.set('action','Exit Edit')\n    }\n\n    return msg;\n} catch(e) {\n    global.set('err','Exit Edit')\n    return msg;\n}\n\n\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "44cfe99b5f9e273f",
+        "type": "function",
+        "z": "89f071f1deb9a1b1",
+        "name": "Completeness",
+        "func": "try{\n    let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n    var list = []\n\n    if (['SU','MU','KAU'].includes(record?.REPORTING_ID_TYP_TXT)) {\n\n        if (parseFloat(record?.PAY_ANN_VAL) > 0 || record?.PAY_ANN_VAL_F?.charAt(1) == 'G' || record?.PAY_ANN_VAL_F?.charAt(2) == 'Z') {\n        } else {\n            list.push('PAY_ANN_VAL')\n            // call pay_ann\n        }\n        if ((parseFloat(record?.PAY_QTR1_VAL) > 0) || (['G','Z'].includes(record?.PAY_QTR1_VAL_F?.charAt(1)))) {\n        } else {\n            list.push('PAY_QTR1_VAL')\n            // call pay_qtr1\n        }\n        if (parseFloat(record?.EMP_MAR12_NUM) > 0 || ['G', 'Z'].includes(record?.EMP_MAR_12_NUM_F?.charAt(1))) {\n        } else {\n            list.push('EMP_MAR12_NUM')\n            // call emp\n        }\n        if (parseFloat(record?.RCPT_TOT_VAL) > 0 || ['G', 'Z'].includes(record?.RCPT_TOT_VAL_F?.charAt(1)) || (parseFloat(record?.RCPT_TOT_VAL < 0) && record?.RCPT_TOT_VAL_F?.charAt(1) == 'G')) {\n        } else {\n            list.push('RCPT_TOT_VAL')\n            // call rcpt_tot\n        }\n    } \n    record.ACTION = 'Go To Main Routing'\n    global.set('completeness',list)\n    // console.log(global.get('completeness'))\n    // console.log(global.get('action'))\n    \n\n    return msg;\n}catch(e){\n    global.set('err', 'Exit Edit')\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 960,
+        "y": 280,
+        "wires": [
+            [
+                "14faa784647a76d7"
+            ]
+        ]
+    },
+    {
+        "id": "14faa784647a76d7",
+        "type": "switch",
+        "z": "89f071f1deb9a1b1",
+        "name": "",
+        "property": "completeness",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "PAY_ANN_VAL",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1150,
+        "y": 280,
+        "wires": [
+            [
+                "df2c04daaf41cfe9"
+            ],
+            [
+                "d5608bc7b22bbd86"
+            ]
+        ]
+    },
+    {
+        "id": "df2c04daaf41cfe9",
+        "type": "subflow:27c40a87c581e266",
+        "z": "89f071f1deb9a1b1",
+        "name": "",
+        "x": 1340,
+        "y": 280,
+        "wires": [
+            [
+                "cb75b2a1c3d302c2"
+            ]
+        ]
+    },
+    {
+        "id": "8d172b24625dc196",
+        "type": "subflow:7c71f52633d8c794",
+        "z": "89f071f1deb9a1b1",
+        "name": "",
+        "x": 1370,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2c1c1d2268bfe5f8",
+        "type": "subflow:253763f13152858b",
+        "z": "89f071f1deb9a1b1",
+        "name": "",
+        "x": 1350,
+        "y": 360,
+        "wires": [
+            [
+                "79716909567e3e73"
+            ]
+        ]
+    },
+    {
+        "id": "e11ca2f83d0c6ec8",
+        "type": "subflow:4781d07fda613850",
+        "z": "89f071f1deb9a1b1",
+        "name": "",
+        "x": 1360,
+        "y": 440,
+        "wires": [
+            [
+                "917c64f63bd2f19c"
+            ]
+        ]
+    },
+    {
+        "id": "d5608bc7b22bbd86",
+        "type": "switch",
+        "z": "89f071f1deb9a1b1",
+        "name": "",
+        "property": "completeness",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "PAY_QTR1_VAL",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1150,
+        "y": 360,
+        "wires": [
+            [
+                "2c1c1d2268bfe5f8"
+            ],
+            [
+                "79716909567e3e73"
+            ]
+        ]
+    },
+    {
+        "id": "79716909567e3e73",
+        "type": "switch",
+        "z": "89f071f1deb9a1b1",
+        "name": "",
+        "property": "completeness",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "EMP_MAR12_NUM",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1150,
+        "y": 440,
+        "wires": [
+            [
+                "e11ca2f83d0c6ec8"
+            ],
+            [
+                "917c64f63bd2f19c"
+            ]
+        ]
+    },
+    {
+        "id": "917c64f63bd2f19c",
+        "type": "switch",
+        "z": "89f071f1deb9a1b1",
+        "name": "",
+        "property": "completeness",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "RCPT_TOT_VAL",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1150,
+        "y": 520,
+        "wires": [
+            [
+                "8d172b24625dc196"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "cb75b2a1c3d302c2",
+        "type": "switch",
+        "z": "89f071f1deb9a1b1",
+        "name": "Exit Check",
+        "property": "action",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1550,
+        "y": 280,
+        "wires": [
+            [],
+            [
+                "d5608bc7b22bbd86"
+            ]
         ]
     },
     {
@@ -21862,19 +21862,6 @@
         "wires": []
     },
     {
-        "id": "97dfe25c81eece11",
-        "type": "subflow:89f071f1deb9a1b1",
-        "z": "3248e82e44cba772",
-        "name": "",
-        "x": 940,
-        "y": 400,
-        "wires": [
-            [
-                "daa2e09cc7fbb842"
-            ]
-        ]
-    },
-    {
         "id": "bac40e27e751601f",
         "type": "subflow:0be109393cb5f28a",
         "z": "3248e82e44cba772",
@@ -21883,7 +21870,7 @@
         "y": 400,
         "wires": [
             [
-                "97dfe25c81eece11"
+                "eecb05adfc87798e"
             ]
         ]
     },
@@ -21911,6 +21898,19 @@
         "wires": [
             [
                 "bac40e27e751601f"
+            ]
+        ]
+    },
+    {
+        "id": "eecb05adfc87798e",
+        "type": "subflow:89f071f1deb9a1b1",
+        "z": "3248e82e44cba772",
+        "name": "",
+        "x": 940,
+        "y": 400,
+        "wires": [
+            [
+                "daa2e09cc7fbb842"
             ]
         ]
     },
