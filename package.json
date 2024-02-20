@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "set DB_HOST=aies-cloud-aurora-pg-dev-instance-1.cjflqg3bd6i9.us-gov-east-1.rds.amazonaws.com && set DB_PORT=5432 && set DB_DATABASE=space_ite && set DB_USER=postgres && set DB_PASSWORD=RootNew123!! && set CENSUS_API=https://mc.edl-7529180-ite.ite.edl.census.gov/api/ && node-red -s settings.js -u . -p 1880 -f flows.json",
-    "start:linux": "DB_HOST=aies-cloud-aurora-pg-dev-instance-1.cjflqg3bd6i9.us-gov-east-1.rds.amazonaws.com DB_PORT=5432 DB_DATABASE=space_ite DB_USER=postgres DB_PASSWORD=RootNew123!! CENSUS_API=https://mc.edl-7529180-ite.ite.edl.census.gov/api/ node-red -s settings.js -u . -p 1880 -f flows.json"
+    "start": "set DB_HOST=aies-cloud-aurora-pg-dev-instance-1.cjflqg3bd6i9.us-gov-east-1.rds.amazonaws.com && set DB_PORT=5432 && set DB_DATABASE=space_ite && set DB_USER=postgres && set DB_PASSWORD=RootNew123!! && set CENSUS_API=https://mc.edl-7529180-ite.ite.edl.census.gov/api/ && set DB_ESTAB_TABLE=item_estabs_2023a1 && set DB_ENT_TABLE=item_ents_2023a1 && set DB_KAU_TABLE=item_kaus_2023a1 && set DB_CONTROL_ESTAB_TABLE=control_estabs_2023a1 && set DB_CONTROL_ENT_TABLE=control_ents_2023a1 && set DB_RULES_TABLE=rules_repository && set DB_SPAD_TABLE=spad_2 && set DB_IRS_TABLE=irs && set DB_EC_TABLE=ec && set DB_BR_TABLE=br && set DB_NAPCS_TABLE=ec_napcs && set DB_PARAMS_TABLE=params && node-red -s settings.js -u . -p 1880 -f flows.json",
+    "start:linux": "DB_HOST=aies-cloud-aurora-pg-dev-instance-1.cjflqg3bd6i9.us-gov-east-1.rds.amazonaws.com DB_PORT=5432 DB_DATABASE=space_ite DB_USER=postgres DB_PASSWORD=RootNew123!! CENSUS_API=https://mc.edl-7529180-ite.ite.edl.census.gov/api/ DB_ESTAB_TABLE=item_estabs_2023a1 DB_ENT_TABLE=item_ents_2023a1 DB_KAU_TABLE=item_kaus_2023a1 DB_CONTROL_ESTAB_TABLE=control_estabs_2023a1 DB_CONTROL_ENT_TABLE=control_ents_2023a1 DB_RULES_TABLE=rules_repository DB_SPAD_TABLE=spad_2 DB_IRS_TABLE=irs DB_EC_TABLE=ec DB_BR_TABLE=br DB_NAPCS_TABLE=ec_napcs DB_PARAMS_TABLE=params node-red -s settings.js -u . -p 1880 -f flows.json"
   },
   "keywords": [],
   "author": "",
