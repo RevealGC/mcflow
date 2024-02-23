@@ -1349,11 +1349,11 @@
         "category": "",
         "in": [
             {
-                "x": 780,
-                "y": 160,
+                "x": 640,
+                "y": 80,
                 "wires": [
                     {
-                        "id": "73281bb1471fee97"
+                        "id": "135a1a788946edb0"
                     }
                 ]
             }
@@ -1361,7 +1361,7 @@
         "out": [
             {
                 "x": 1500,
-                "y": 300,
+                "y": 380,
                 "wires": [
                     {
                         "id": "ae433fa4228520c2",
@@ -1381,6 +1381,22 @@
                     },
                     {
                         "id": "7ac782997ef097e8",
+                        "port": 0
+                    },
+                    {
+                        "id": "9d789008caa8ba51",
+                        "port": 0
+                    },
+                    {
+                        "id": "4c6ceb5e898b5479",
+                        "port": 0
+                    },
+                    {
+                        "id": "c8552ac5cfd4a57b",
+                        "port": 0
+                    },
+                    {
+                        "id": "06729ee2b17699f5",
                         "port": 0
                     }
                 ]
@@ -1459,7 +1475,7 @@
                 "y": 60,
                 "wires": [
                     {
-                        "id": "89974ffc29206e69"
+                        "id": "263d12a695ae25c7"
                     }
                 ]
             }
@@ -1467,7 +1483,7 @@
         "out": [
             {
                 "x": 1900,
-                "y": 360,
+                "y": 480,
                 "wires": [
                     {
                         "id": "9e9b4cee68be6e9c",
@@ -1520,6 +1536,14 @@
                     {
                         "id": "478bc0c651014446",
                         "port": 0
+                    },
+                    {
+                        "id": "8333d3a99f8e7e21",
+                        "port": 0
+                    },
+                    {
+                        "id": "7ba256c934b12f11",
+                        "port": 0
                     }
                 ]
             }
@@ -1537,10 +1561,10 @@
         "in": [
             {
                 "x": 160,
-                "y": 140,
+                "y": 120,
                 "wires": [
                     {
-                        "id": "b8dffbc837e09dbf"
+                        "id": "6ba9ddc736a3e71f"
                     }
                 ]
             }
@@ -1548,7 +1572,7 @@
         "out": [
             {
                 "x": 1700,
-                "y": 500,
+                "y": 600,
                 "wires": [
                     {
                         "id": "982c220cddec7b9e",
@@ -1621,6 +1645,14 @@
                     {
                         "id": "846313c80863bec1",
                         "port": 0
+                    },
+                    {
+                        "id": "55a0f64d6e87c32e",
+                        "port": 0
+                    },
+                    {
+                        "id": "ee52a2b66cdd88bd",
+                        "port": 0
                     }
                 ]
             }
@@ -1638,18 +1670,18 @@
         "in": [
             {
                 "x": 60,
-                "y": 960,
+                "y": 1080,
                 "wires": [
                     {
-                        "id": "3e9afa1acdca1e32"
+                        "id": "06d17a6bdfc37b22"
                     }
                 ]
             }
         ],
         "out": [
             {
-                "x": 2520,
-                "y": 980,
+                "x": 3060,
+                "y": 1140,
                 "wires": [
                     {
                         "id": "45bb5e2345aab7b4",
@@ -1666,6 +1698,14 @@
                     {
                         "id": "3e9afa1acdca1e32",
                         "port": 4
+                    },
+                    {
+                        "id": "0c13b9d9bca75c6f",
+                        "port": 1
+                    },
+                    {
+                        "id": "e5e2d32280b18101",
+                        "port": 1
                     }
                 ]
             }
@@ -1682,22 +1722,30 @@
         "category": "",
         "in": [
             {
-                "x": 140,
-                "y": 80,
+                "x": 200,
+                "y": 180,
                 "wires": [
                     {
-                        "id": "34c3fba005671a29"
+                        "id": "a09933b51e0ca1e6"
                     }
                 ]
             }
         ],
         "out": [
             {
-                "x": 500,
-                "y": 80,
+                "x": 700,
+                "y": 280,
                 "wires": [
                     {
                         "id": "34c3fba005671a29",
+                        "port": 0
+                    },
+                    {
+                        "id": "c8d865456d28d484",
+                        "port": 0
+                    },
+                    {
+                        "id": "8814e76868a358a9",
                         "port": 0
                     }
                 ]
@@ -1716,17 +1764,17 @@
         "in": [
             {
                 "x": 40,
-                "y": 40,
+                "y": 100,
                 "wires": [
                     {
-                        "id": "6f2cfc149ad8c588"
+                        "id": "9cc268ba9544a600"
                     }
                 ]
             }
         ],
         "out": [
             {
-                "x": 720,
+                "x": 1420,
                 "y": 100,
                 "wires": [
                     {
@@ -1734,7 +1782,23 @@
                         "port": 0
                     },
                     {
-                        "id": "f44b99488ee8859a",
+                        "id": "5e57335b6495d3dc",
+                        "port": 0
+                    },
+                    {
+                        "id": "af4e4f77189ff57f",
+                        "port": 0
+                    },
+                    {
+                        "id": "2a3171df667cae95",
+                        "port": 0
+                    },
+                    {
+                        "id": "e800f2c386e8f951",
+                        "port": 0
+                    },
+                    {
+                        "id": "1a201df59ad60252",
                         "port": 0
                     }
                 ]
@@ -1753,18 +1817,18 @@
         "in": [
             {
                 "x": 60,
-                "y": 40,
+                "y": 60,
                 "wires": [
                     {
-                        "id": "e61f378b2eae2b98"
+                        "id": "091b290531e1645c"
                     }
                 ]
             }
         ],
         "out": [
             {
-                "x": 580,
-                "y": 80,
+                "x": 760,
+                "y": 200,
                 "wires": [
                     {
                         "id": "21ad1273aa88b69a",
@@ -1772,6 +1836,14 @@
                     },
                     {
                         "id": "0aeccdef357aeb12",
+                        "port": 0
+                    },
+                    {
+                        "id": "721901718b909c7b",
+                        "port": 0
+                    },
+                    {
+                        "id": "3f6dd7fcc05a08b1",
                         "port": 0
                     }
                 ]
@@ -1789,19 +1861,19 @@
         "category": "",
         "in": [
             {
-                "x": 60,
-                "y": 40,
+                "x": 220,
+                "y": 80,
                 "wires": [
                     {
-                        "id": "8d7f02887466fd92"
+                        "id": "e1834279ae066fd6"
                     }
                 ]
             }
         ],
         "out": [
             {
-                "x": 840,
-                "y": 100,
+                "x": 1000,
+                "y": 260,
                 "wires": [
                     {
                         "id": "d6f8e720b596f834",
@@ -1817,6 +1889,10 @@
                     },
                     {
                         "id": "6f835983aa2e0505",
+                        "port": 0
+                    },
+                    {
+                        "id": "d425fb90caf5253f",
                         "port": 0
                     }
                 ]
@@ -1835,21 +1911,29 @@
         "in": [
             {
                 "x": 260,
-                "y": 120,
+                "y": 200,
                 "wires": [
                     {
-                        "id": "45426c909f20f8e7"
+                        "id": "053216ce9454e2cd"
                     }
                 ]
             }
         ],
         "out": [
             {
-                "x": 600,
-                "y": 120,
+                "x": 960,
+                "y": 240,
                 "wires": [
                     {
                         "id": "45426c909f20f8e7",
+                        "port": 0
+                    },
+                    {
+                        "id": "13b54fc672b81998",
+                        "port": 0
+                    },
+                    {
+                        "id": "d97d4e2bef6902c3",
                         "port": 0
                     }
                 ]
@@ -1934,18 +2018,18 @@
         "in": [
             {
                 "x": 80,
-                "y": 940,
+                "y": 1260,
                 "wires": [
                     {
-                        "id": "0ad4cebef3e64c46"
+                        "id": "fe1bb24f16a5db46"
                     }
                 ]
             }
         ],
         "out": [
             {
-                "x": 2340,
-                "y": 1040,
+                "x": 2880,
+                "y": 1180,
                 "wires": [
                     {
                         "id": "789bd77c010226b7",
@@ -1962,6 +2046,14 @@
                     {
                         "id": "0ad4cebef3e64c46",
                         "port": 4
+                    },
+                    {
+                        "id": "3560976c9c238e09",
+                        "port": 1
+                    },
+                    {
+                        "id": "6c299fa0da28810e",
+                        "port": 1
                     }
                 ]
             }
@@ -4096,6 +4188,105 @@
         "color": "#DDAA99"
     },
     {
+        "id": "1a2581dce20863e3",
+        "type": "subflow",
+        "name": "Check_Scope",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 240,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "513fe743c07a7cac"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 540,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "513fe743c07a7cac",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "7c74ea1220a33f32",
+        "type": "subflow",
+        "name": "Sector_31",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 260,
+                "y": 100,
+                "wires": [
+                    {
+                        "id": "af6b654eb7fd90cf"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 500,
+                "y": 100,
+                "wires": [
+                    {
+                        "id": "af6b654eb7fd90cf",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "a307acf02307bc62",
+        "type": "subflow",
+        "name": "Check_Nontabfl_estab",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 120,
+                "y": 40,
+                "wires": [
+                    {
+                        "id": "264c6fe27b557bb8"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 440,
+                "y": 40,
+                "wires": [
+                    {
+                        "id": "264c6fe27b557bb8",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
         "id": "7dc18555ca029842",
         "type": "group",
         "z": "d103860e993c1512",
@@ -4347,9 +4538,7 @@
             "5e674b959c1b250a"
         ],
         "x": 14,
-        "y": 599,
-        "w": 2232,
-        "h": 1982
+        "y": 599
     },
     {
         "id": "302cb8040ecade52",
@@ -4365,9 +4554,7 @@
             "a47c991027033263"
         ],
         "x": 704,
-        "y": 719,
-        "w": 382,
-        "h": 82
+        "y": 719
     },
     {
         "id": "d1e0f39ddacfeb20",
@@ -7472,24 +7659,6 @@
         ]
     },
     {
-        "id": "87790c3eda62986b",
-        "type": "function",
-        "z": "6e56f7f07e320f38",
-        "name": "estab_to_kau",
-        "func": "try {\n    let record_idx = global.get(\"ptrModuleFacts\")\n    let record = msg.payload.csv[record_idx];\n    let estabs = msg.payload.csv\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    function childFlagRules(variable, details) {\n        let flagname = variable + '_F'\n        if (record?.[variable] == 0) {\n            record[flagname] = setCharAt(record?.[flagname], 2, 'Z');\n        } else {\n            let found = 'N'\n            let id = record?.KAU_ID\n            for (let i in details) {\n                let detail = details[i]\n                for (let j in estabs) {\n                    let row = estabs[j]\n                    if (row?.['KAU_ID'] == id && row?.TABSTAT == 'Y' && ['MU','SU'].includes(row?.REPORTING_ID_TYP_TXT)) {\n                        if (row?.[detail]) {\n                            if (['R_', 'K_', 'T_'].includes(row?.[detail].substring(0, 2))) {\n                                found = 'Y'\n                            } else if (['R', 'C', 'A', 'S', 'O', 'G'].includes(row?.[detail]?.charAt(1))) {\n                                found = 'Y'\n                            } else {\n                                found = 'N'\n                                break\n                            }\n                            // } else {\n                            //     found = 'N'\n                            //     break\n                        }\n                    }\n                }\n            }\n            if (found == 'Y') {\n                record[flagname] = setCharAt(record?.[flagname], 2, 'Y');\n            } else {\n                record[flagname] = setCharAt(record?.[flagname], 2, 'S');\n            }\n        }\n    }\n\n    let list = ['RCPT_TOT_VAL', 'EMP_MAR12_NUM', 'PAY_ANN_VAL', 'PAY_QTR1_VAL', 'CAPEX_NEW_TOT_DVAL']\n\n    for (let i in list) {\n        let name = list[i]\n        let name_f = name + '_F'\n        let temptot = 0\n        let id = record?.KAU_ID\n        for (let i in estabs) {\n            let row = estabs[i]\n            if (row?.KAU_ID == id && row?.TABSTAT == 'Y' && ['MU','SU'].includes(row?.REPORTING_ID_TYP_TXT)) {\n                temptot = temptot + parseFloat(row?.[name])\n            }\n        }\n        if (parseFloat(record?.[name]) == parseFloat(temptot)) {\n        } else if (parseFloat(record?.[name]) == 0 && parseFloat(temptot) > 0) {\n            record[name] = temptot\n            childFlagRules(name, [name_f])\n        } else if (0.8 <= parseFloat(record?.[name]) / parseFloat(temptot) && parseFloat(record?.[name]) / parseFloat(temptot) <= 1.2) {\n            record[name] = temptot\n            childFlagRules(name, [name_f])\n        } else {\n            record[name_f] = setCharAt(record?.[name_f],2,'X')\n        }\n    }\n\n    return msg;\n} catch (e) {\n    global.set('err','Exit Edit')\n    msg.payload.exit = 'Estab to KAU'\n    return msg;\n}",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 820,
-        "y": 60,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "09b6017c32b68df0",
         "type": "function",
         "z": "6e56f7f07e320f38",
@@ -7503,6 +7672,24 @@
         "libs": [],
         "x": 830,
         "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "87790c3eda62986b",
+        "type": "function",
+        "z": "6e56f7f07e320f38",
+        "name": "estab_to_kau",
+        "func": "try {\n    let record_idx = global.get(\"ptrModuleFacts\")\n    let record = msg.payload.csv[record_idx];\n    let estabs = msg.payload.csv\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    function childFlagRules(variable, details) {\n        let flagname = variable + '_F'\n        if (record?.[variable] == 0) {\n            record[flagname] = setCharAt(record?.[flagname], 2, 'Z');\n        } else {\n            let found = 'N'\n            let id = record?.KAU_ID\n            for (let i in details) {\n                let detail = details[i]\n                for (let j in estabs) {\n                    let row = estabs[j]\n                    if (row?.['KAU_ID'] == id && row?.TABSTAT == 'Y' && ['MU','SU'].includes(row?.REPORTING_ID_TYP_TXT)) {\n                        if (row?.[detail]) {\n                            if (['R_', 'K_', 'T_'].includes(row?.[detail].substring(0, 2))) {\n                                found = 'Y'\n                            } else if (['R', 'C', 'A', 'S', 'O', 'G'].includes(row?.[detail]?.charAt(1))) {\n                                found = 'Y'\n                            } else {\n                                found = 'N'\n                                break\n                            }\n                            // } else {\n                            //     found = 'N'\n                            //     break\n                        }\n                    }\n                }\n            }\n            if (found == 'Y') {\n                record[flagname] = setCharAt(record?.[flagname], 2, 'Y');\n            } else {\n                record[flagname] = setCharAt(record?.[flagname], 2, 'S');\n            }\n        }\n    }\n\n    let list = ['RCPT_TOT_VAL', 'EMP_MAR12_NUM', 'PAY_ANN_VAL', 'PAY_QTR1_VAL', 'CAPEX_NEW_TOT_DVAL']\n\n    for (let i in list) {\n        let name = list[i]\n        let name_f = name + '_F'\n        let temptot = 0\n        let id = record?.KAU_ID\n        for (let i in estabs) {\n            let row = estabs[i]\n            if (row?.KAU_ID == id && row?.TABSTAT == 'Y' && ['MU','SU'].includes(row?.REPORTING_ID_TYP_TXT)) {\n                temptot = temptot + parseFloat(row?.[name])\n            }\n        }\n        if (parseFloat(record?.[name]) == parseFloat(temptot)) {\n        } else if (parseFloat(record?.[name]) == 0 && parseFloat(temptot) > 0) {\n            record[name] = temptot\n            childFlagRules(name, [name_f])\n        } else if (0.8 <= parseFloat(record?.[name]) / parseFloat(temptot) && parseFloat(record?.[name]) / parseFloat(temptot) <= 1.2) {\n            record[name] = temptot\n            childFlagRules(name, [name_f])\n        } else {\n            record[name_f] = setCharAt(record?.[name_f],2,'X')\n        }\n    }\n\n    return msg;\n} catch (e) {\n    global.set('err','Exit Edit')\n    msg.payload.exit = 'Estab to KAU'\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 60,
         "wires": [
             []
         ]
@@ -7623,8 +7810,8 @@
         "type": "subflow:d32a58c0544f501c",
         "z": "e825fc8e32eb1364",
         "name": "",
-        "x": 940,
-        "y": 160,
+        "x": 800,
+        "y": 360,
         "wires": [
             [
                 "ae433fa4228520c2"
@@ -7653,8 +7840,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1160,
-        "y": 160,
+        "x": 1020,
+        "y": 360,
         "wires": [
             [],
             [
@@ -7684,8 +7871,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1170,
-        "y": 220,
+        "x": 1030,
+        "y": 420,
         "wires": [
             [],
             [
@@ -7698,8 +7885,8 @@
         "type": "subflow:48bdd199705157b9",
         "z": "e825fc8e32eb1364",
         "name": "",
-        "x": 930,
-        "y": 300,
+        "x": 790,
+        "y": 500,
         "wires": [
             [
                 "83cbcd1e98fc4cc2"
@@ -7711,8 +7898,8 @@
         "type": "subflow:5e2c6717be2fdd36",
         "z": "e825fc8e32eb1364",
         "name": "",
-        "x": 930,
-        "y": 380,
+        "x": 790,
+        "y": 580,
         "wires": [
             [
                 "9f3ad64be44f7098"
@@ -7741,8 +7928,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1160,
-        "y": 300,
+        "x": 1020,
+        "y": 500,
         "wires": [
             [],
             [
@@ -7755,8 +7942,8 @@
         "type": "subflow:b68b1cdb465a831c",
         "z": "e825fc8e32eb1364",
         "name": "",
-        "x": 1160,
-        "y": 440,
+        "x": 1020,
+        "y": 640,
         "wires": [
             []
         ]
@@ -7783,12 +7970,162 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1160,
-        "y": 380,
+        "x": 1020,
+        "y": 580,
         "wires": [
             [],
             [
                 "7ac782997ef097e8"
+            ]
+        ]
+    },
+    {
+        "id": "a32e7e21ab60c93b",
+        "type": "subflow:7c74ea1220a33f32",
+        "z": "e825fc8e32eb1364",
+        "name": "",
+        "x": 800,
+        "y": 240,
+        "wires": [
+            [
+                "9d789008caa8ba51"
+            ]
+        ]
+    },
+    {
+        "id": "9d789008caa8ba51",
+        "type": "switch",
+        "z": "e825fc8e32eb1364",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1020,
+        "y": 240,
+        "wires": [
+            [],
+            [
+                "4c6ceb5e898b5479"
+            ]
+        ]
+    },
+    {
+        "id": "4c6ceb5e898b5479",
+        "type": "switch",
+        "z": "e825fc8e32eb1364",
+        "name": "sector check",
+        "property": "naicsSector",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "neq",
+                "v": "Y",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Y",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1030,
+        "y": 300,
+        "wires": [
+            [],
+            [
+                "73281bb1471fee97"
+            ]
+        ]
+    },
+    {
+        "id": "135a1a788946edb0",
+        "type": "subflow:f9cd233b8803b29d",
+        "z": "e825fc8e32eb1364",
+        "name": "",
+        "x": 790,
+        "y": 80,
+        "wires": [
+            [
+                "c8552ac5cfd4a57b"
+            ]
+        ]
+    },
+    {
+        "id": "c8552ac5cfd4a57b",
+        "type": "switch",
+        "z": "e825fc8e32eb1364",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1020,
+        "y": 80,
+        "wires": [
+            [],
+            [
+                "06729ee2b17699f5"
+            ]
+        ]
+    },
+    {
+        "id": "06729ee2b17699f5",
+        "type": "switch",
+        "z": "e825fc8e32eb1364",
+        "name": "tabstat",
+        "property": "tabstat",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "N",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "N",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1030,
+        "y": 160,
+        "wires": [
+            [],
+            [
+                "a32e7e21ab60c93b"
             ]
         ]
     },
@@ -8073,7 +8410,7 @@
         "z": "88823d21c11ae7b5",
         "name": "",
         "x": 820,
-        "y": 120,
+        "y": 240,
         "wires": [
             [
                 "9e9b4cee68be6e9c"
@@ -8103,7 +8440,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1050,
-        "y": 180,
+        "y": 300,
         "wires": [
             [],
             [
@@ -8117,7 +8454,7 @@
         "z": "88823d21c11ae7b5",
         "name": "",
         "x": 1360,
-        "y": 640,
+        "y": 760,
         "wires": [
             [
                 "4d5edc2ef2a2765f"
@@ -8130,7 +8467,7 @@
         "z": "88823d21c11ae7b5",
         "name": "",
         "x": 1340,
-        "y": 580,
+        "y": 700,
         "wires": [
             [
                 "52b0141e97338396"
@@ -8143,7 +8480,7 @@
         "z": "88823d21c11ae7b5",
         "name": "",
         "x": 1360,
-        "y": 700,
+        "y": 820,
         "wires": [
             [
                 "36eb5b1bc3f37a3f"
@@ -8173,7 +8510,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1040,
-        "y": 120,
+        "y": 240,
         "wires": [
             [],
             [
@@ -8204,7 +8541,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1480,
-        "y": 480,
+        "y": 600,
         "wires": [
             [],
             [
@@ -8235,7 +8572,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1500,
-        "y": 580,
+        "y": 700,
         "wires": [
             [],
             [
@@ -8266,7 +8603,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1560,
-        "y": 640,
+        "y": 760,
         "wires": [
             [],
             [
@@ -8280,7 +8617,7 @@
         "z": "88823d21c11ae7b5",
         "name": "",
         "x": 790,
-        "y": 240,
+        "y": 360,
         "wires": [
             [
                 "ca3f2d5ace132159"
@@ -8310,7 +8647,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1040,
-        "y": 240,
+        "y": 360,
         "wires": [
             [],
             [
@@ -8349,7 +8686,7 @@
         "repair": false,
         "outputs": 4,
         "x": 810,
-        "y": 320,
+        "y": 440,
         "wires": [
             [],
             [
@@ -8367,7 +8704,7 @@
         "z": "88823d21c11ae7b5",
         "name": "",
         "x": 1040,
-        "y": 380,
+        "y": 500,
         "wires": [
             [
                 "927b048b92d700b0"
@@ -8397,7 +8734,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1240,
-        "y": 380,
+        "y": 500,
         "wires": [
             [],
             [
@@ -8428,7 +8765,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1230,
-        "y": 440,
+        "y": 560,
         "wires": [
             [
                 "969a8179dd9281f7"
@@ -8444,7 +8781,7 @@
         "z": "88823d21c11ae7b5",
         "name": "",
         "x": 1460,
-        "y": 420,
+        "y": 540,
         "wires": [
             [
                 "e4f66c7916ddf51b"
@@ -8474,7 +8811,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1570,
-        "y": 760,
+        "y": 880,
         "wires": [
             [],
             [
@@ -8505,7 +8842,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1560,
-        "y": 700,
+        "y": 820,
         "wires": [
             [],
             [
@@ -8519,7 +8856,7 @@
         "z": "88823d21c11ae7b5",
         "name": "",
         "x": 1580,
-        "y": 820,
+        "y": 940,
         "wires": [
             []
         ]
@@ -8530,7 +8867,7 @@
         "z": "88823d21c11ae7b5",
         "name": "",
         "x": 800,
-        "y": 60,
+        "y": 180,
         "wires": [
             [
                 "478bc0c651014446"
@@ -8560,11 +8897,86 @@
         "repair": false,
         "outputs": 2,
         "x": 1040,
-        "y": 60,
+        "y": 180,
         "wires": [
             [],
             [
                 "dbaacd53577bf3a4"
+            ]
+        ]
+    },
+    {
+        "id": "263d12a695ae25c7",
+        "type": "subflow:7c74ea1220a33f32",
+        "z": "88823d21c11ae7b5",
+        "name": "",
+        "x": 820,
+        "y": 60,
+        "wires": [
+            [
+                "8333d3a99f8e7e21"
+            ]
+        ]
+    },
+    {
+        "id": "8333d3a99f8e7e21",
+        "type": "switch",
+        "z": "88823d21c11ae7b5",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1040,
+        "y": 60,
+        "wires": [
+            [],
+            [
+                "7ba256c934b12f11"
+            ]
+        ]
+    },
+    {
+        "id": "7ba256c934b12f11",
+        "type": "switch",
+        "z": "88823d21c11ae7b5",
+        "name": "sector check",
+        "property": "naicsSector",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Y",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Y",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1050,
+        "y": 120,
+        "wires": [
+            [],
+            [
+                "89974ffc29206e69"
             ]
         ]
     },
@@ -8574,7 +8986,7 @@
         "z": "e14f077595377a58",
         "name": "",
         "x": 340,
-        "y": 140,
+        "y": 240,
         "wires": [
             [
                 "982c220cddec7b9e"
@@ -8587,7 +8999,7 @@
         "z": "e14f077595377a58",
         "name": "",
         "x": 370,
-        "y": 260,
+        "y": 360,
         "wires": [
             [
                 "becd4f267d7bebe1"
@@ -8600,7 +9012,7 @@
         "z": "e14f077595377a58",
         "name": "",
         "x": 850,
-        "y": 860,
+        "y": 960,
         "wires": [
             [
                 "7b9d9404cfeb99a9"
@@ -8613,7 +9025,7 @@
         "z": "e14f077595377a58",
         "name": "",
         "x": 840,
-        "y": 980,
+        "y": 1080,
         "wires": [
             [
                 "fe6143ae0ee78339"
@@ -8626,7 +9038,7 @@
         "z": "e14f077595377a58",
         "name": "",
         "x": 880,
-        "y": 1060,
+        "y": 1160,
         "wires": [
             [
                 "8a0ec78248fea72d"
@@ -8639,7 +9051,7 @@
         "z": "e14f077595377a58",
         "name": "",
         "x": 280,
-        "y": 380,
+        "y": 480,
         "wires": [
             [
                 "fd75f640d7ac55f9"
@@ -8652,7 +9064,7 @@
         "z": "e14f077595377a58",
         "name": "",
         "x": 340,
-        "y": 440,
+        "y": 540,
         "wires": [
             [
                 "1c967b0b7f6535cc"
@@ -8682,7 +9094,7 @@
         "repair": false,
         "outputs": 2,
         "x": 590,
-        "y": 200,
+        "y": 300,
         "wires": [
             [],
             [
@@ -8713,7 +9125,7 @@
         "repair": false,
         "outputs": 2,
         "x": 590,
-        "y": 320,
+        "y": 420,
         "wires": [
             [],
             [
@@ -8752,7 +9164,7 @@
         "repair": false,
         "outputs": 4,
         "x": 590,
-        "y": 640,
+        "y": 740,
         "wires": [
             [],
             [
@@ -8770,7 +9182,7 @@
         "z": "e14f077595377a58",
         "name": "",
         "x": 900,
-        "y": 640,
+        "y": 740,
         "wires": [
             [
                 "8b7d688028229f6a"
@@ -8800,7 +9212,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1090,
-        "y": 920,
+        "y": 1020,
         "wires": [
             [],
             [
@@ -8831,7 +9243,7 @@
         "repair": false,
         "outputs": 2,
         "x": 580,
-        "y": 140,
+        "y": 240,
         "wires": [
             [],
             [
@@ -8862,7 +9274,7 @@
         "repair": false,
         "outputs": 2,
         "x": 580,
-        "y": 260,
+        "y": 360,
         "wires": [
             [],
             [
@@ -8893,7 +9305,7 @@
         "repair": false,
         "outputs": 2,
         "x": 580,
-        "y": 380,
+        "y": 480,
         "wires": [
             [],
             [
@@ -8924,7 +9336,7 @@
         "repair": false,
         "outputs": 2,
         "x": 580,
-        "y": 440,
+        "y": 540,
         "wires": [
             [],
             [
@@ -8955,7 +9367,7 @@
         "repair": false,
         "outputs": 2,
         "x": 580,
-        "y": 560,
+        "y": 660,
         "wires": [
             [],
             [
@@ -8986,7 +9398,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1100,
-        "y": 640,
+        "y": 740,
         "wires": [
             [],
             [
@@ -9017,7 +9429,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1080,
-        "y": 860,
+        "y": 960,
         "wires": [
             [],
             [
@@ -9048,7 +9460,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1080,
-        "y": 980,
+        "y": 1080,
         "wires": [
             [],
             [
@@ -9079,7 +9491,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1080,
-        "y": 1060,
+        "y": 1160,
         "wires": [
             [],
             [
@@ -9110,7 +9522,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1080,
-        "y": 1140,
+        "y": 1240,
         "wires": [
             [],
             [
@@ -9124,7 +9536,7 @@
         "z": "e14f077595377a58",
         "name": "",
         "x": 360,
-        "y": 500,
+        "y": 600,
         "wires": [
             [
                 "846313c80863bec1"
@@ -9137,7 +9549,7 @@
         "z": "e14f077595377a58",
         "name": "",
         "x": 1060,
-        "y": 720,
+        "y": 820,
         "wires": [
             [
                 "0e421a8775d3359f"
@@ -9167,7 +9579,7 @@
         "repair": false,
         "outputs": 2,
         "x": 830,
-        "y": 720,
+        "y": 820,
         "wires": [
             [
                 "433199b7a17d6ed6"
@@ -9200,7 +9612,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1080,
-        "y": 780,
+        "y": 880,
         "wires": [
             [],
             [
@@ -9214,7 +9626,7 @@
         "z": "e14f077595377a58",
         "name": "",
         "x": 860,
-        "y": 1140,
+        "y": 1240,
         "wires": [
             [
                 "1dc183ab4a8e863f"
@@ -9227,7 +9639,7 @@
         "z": "e14f077595377a58",
         "name": "",
         "x": 370,
-        "y": 560,
+        "y": 660,
         "wires": [
             [
                 "37794fbf4726f868"
@@ -9240,7 +9652,7 @@
         "z": "e14f077595377a58",
         "name": "",
         "x": 1080,
-        "y": 1200,
+        "y": 1300,
         "wires": [
             []
         ]
@@ -9268,11 +9680,86 @@
         "repair": false,
         "outputs": 2,
         "x": 580,
-        "y": 500,
+        "y": 600,
         "wires": [
             [],
             [
                 "33b7f2bf8eb4a2b1"
+            ]
+        ]
+    },
+    {
+        "id": "6ba9ddc736a3e71f",
+        "type": "subflow:a307acf02307bc62",
+        "z": "e14f077595377a58",
+        "name": "",
+        "x": 340,
+        "y": 120,
+        "wires": [
+            [
+                "55a0f64d6e87c32e"
+            ]
+        ]
+    },
+    {
+        "id": "ee52a2b66cdd88bd",
+        "type": "switch",
+        "z": "e14f077595377a58",
+        "name": "Exit Check",
+        "property": "action",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 590,
+        "y": 180,
+        "wires": [
+            [],
+            [
+                "b8dffbc837e09dbf"
+            ]
+        ]
+    },
+    {
+        "id": "55a0f64d6e87c32e",
+        "type": "switch",
+        "z": "e14f077595377a58",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 580,
+        "y": 120,
+        "wires": [
+            [],
+            [
+                "ee52a2b66cdd88bd"
             ]
         ]
     },
@@ -9311,8 +9798,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 5,
-        "x": 230,
-        "y": 960,
+        "x": 750,
+        "y": 1080,
         "wires": [
             [
                 "4d36647b3ef53a21"
@@ -9351,8 +9838,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1610,
-        "y": 900,
+        "x": 2130,
+        "y": 1020,
         "wires": [
             [
                 "1ea6bf1688faa74b"
@@ -9384,8 +9871,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1600,
-        "y": 840,
+        "x": 2120,
+        "y": 960,
         "wires": [
             [
                 "1ea6bf1688faa74b"
@@ -9400,8 +9887,8 @@
         "type": "subflow:e14f077595377a58",
         "z": "e3961d077dbf1770",
         "name": "",
-        "x": 1330,
-        "y": 40,
+        "x": 1840,
+        "y": 80,
         "wires": [
             [
                 "1c45742cdc12965c"
@@ -9430,8 +9917,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1570,
-        "y": 40,
+        "x": 2080,
+        "y": 80,
         "wires": [
             [
                 "45bb5e2345aab7b4"
@@ -9463,8 +9950,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1580,
-        "y": 80,
+        "x": 2090,
+        "y": 120,
         "wires": [
             [
                 "45bb5e2345aab7b4"
@@ -9479,8 +9966,8 @@
         "type": "subflow:88823d21c11ae7b5",
         "z": "e3961d077dbf1770",
         "name": "",
-        "x": 1340,
-        "y": 540,
+        "x": 1860,
+        "y": 580,
         "wires": [
             [
                 "abf305bf5f16e7c0"
@@ -9509,8 +9996,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1580,
-        "y": 540,
+        "x": 2100,
+        "y": 580,
         "wires": [
             [
                 "d31a515ec0b1407d"
@@ -9529,12 +10016,12 @@
         "propertyType": "global",
         "rules": [
             {
-                "t": "eq",
+                "t": "neq",
                 "v": "Exit Edit",
                 "vt": "str"
             },
             {
-                "t": "neq",
+                "t": "eq",
                 "v": "Exit Edit",
                 "vt": "str"
             }
@@ -9542,14 +10029,14 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1590,
-        "y": 600,
+        "x": 1850,
+        "y": 640,
         "wires": [
             [
-                "1e5f51072d8816ce"
+                "aabad68ca0355312"
             ],
             [
-                "aabad68ca0355312"
+                "7086890ee73ff32c"
             ]
         ]
     },
@@ -9558,8 +10045,8 @@
         "type": "subflow:a2511614f51e5116",
         "z": "e3961d077dbf1770",
         "name": "",
-        "x": 1340,
-        "y": 840,
+        "x": 1860,
+        "y": 960,
         "wires": [
             [
                 "1e5319cbac33e97f"
@@ -9571,8 +10058,8 @@
         "type": "subflow:e825fc8e32eb1364",
         "z": "e3961d077dbf1770",
         "name": "",
-        "x": 1340,
-        "y": 140,
+        "x": 1850,
+        "y": 180,
         "wires": [
             [
                 "c9a93f4233c80146"
@@ -9601,8 +10088,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1570,
-        "y": 140,
+        "x": 2080,
+        "y": 180,
         "wires": [
             [
                 "45bb5e2345aab7b4"
@@ -9634,8 +10121,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1580,
-        "y": 200,
+        "x": 2090,
+        "y": 240,
         "wires": [
             [
                 "45bb5e2345aab7b4"
@@ -9650,8 +10137,8 @@
         "type": "subflow:23c54fc1c5be665e",
         "z": "e3961d077dbf1770",
         "name": "",
-        "x": 500,
-        "y": 380,
+        "x": 1020,
+        "y": 420,
         "wires": [
             [
                 "fc0c85ce082b26e4"
@@ -9663,8 +10150,8 @@
         "type": "subflow:537136f85533687f",
         "z": "e3961d077dbf1770",
         "name": "",
-        "x": 500,
-        "y": 760,
+        "x": 1020,
+        "y": 800,
         "wires": [
             [
                 "39050c3eef239ea1"
@@ -9676,8 +10163,8 @@
         "type": "subflow:010b1368b661e966",
         "z": "e3961d077dbf1770",
         "name": "",
-        "x": 1340,
-        "y": 260,
+        "x": 1860,
+        "y": 300,
         "wires": [
             [
                 "cc810ce419b9d88c"
@@ -9706,8 +10193,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1580,
-        "y": 260,
+        "x": 2100,
+        "y": 300,
         "wires": [
             [
                 "45bb5e2345aab7b4"
@@ -9722,8 +10209,8 @@
         "type": "subflow:326ee5d4d26564c7",
         "z": "e3961d077dbf1770",
         "name": "",
-        "x": 1340,
-        "y": 340,
+        "x": 1860,
+        "y": 380,
         "wires": [
             [
                 "a4e9fc2100454480"
@@ -9752,8 +10239,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1580,
-        "y": 340,
+        "x": 2100,
+        "y": 380,
         "wires": [
             [
                 "45bb5e2345aab7b4"
@@ -9768,8 +10255,8 @@
         "type": "subflow:2313e47e41070980",
         "z": "e3961d077dbf1770",
         "name": "",
-        "x": 1340,
-        "y": 660,
+        "x": 2100,
+        "y": 640,
         "wires": [
             [
                 "6bf1f479b159aa9c"
@@ -9798,8 +10285,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1580,
-        "y": 660,
+        "x": 2100,
+        "y": 700,
         "wires": [
             [
                 "d31a515ec0b1407d"
@@ -9814,8 +10301,8 @@
         "type": "subflow:c1249a800f33a884",
         "z": "e3961d077dbf1770",
         "name": "",
-        "x": 1340,
-        "y": 720,
+        "x": 1860,
+        "y": 760,
         "wires": [
             [
                 "908be280009d4bf0"
@@ -9844,8 +10331,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1580,
-        "y": 720,
+        "x": 2100,
+        "y": 760,
         "wires": [
             [
                 "d31a515ec0b1407d"
@@ -9880,8 +10367,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 3,
-        "x": 700,
-        "y": 380,
+        "x": 1220,
+        "y": 420,
         "wires": [
             [
                 "bfc3a1bacf9af003"
@@ -9919,8 +10406,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 3,
-        "x": 700,
-        "y": 760,
+        "x": 1360,
+        "y": 800,
         "wires": [
             [
                 "9b1693c8a01686d2"
@@ -9945,8 +10432,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2270,
-        "y": 380,
+        "x": 2790,
+        "y": 420,
         "wires": [
             []
         ]
@@ -9963,8 +10450,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2270,
-        "y": 760,
+        "x": 2790,
+        "y": 800,
         "wires": [
             []
         ]
@@ -9981,8 +10468,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2270,
-        "y": 940,
+        "x": 2790,
+        "y": 1060,
         "wires": [
             []
         ]
@@ -10007,8 +10494,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 720,
-        "y": 940,
+        "x": 1240,
+        "y": 1060,
         "wires": [
             [
                 "433c7f59a03e99a5"
@@ -10023,8 +10510,8 @@
         "type": "subflow:9327a343376a53f9",
         "z": "e3961d077dbf1770",
         "name": "",
-        "x": 1340,
-        "y": 480,
+        "x": 1860,
+        "y": 520,
         "wires": [
             [
                 "31cab1a65412800f"
@@ -10053,8 +10540,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1580,
-        "y": 480,
+        "x": 2100,
+        "y": 520,
         "wires": [
             [
                 "d31a515ec0b1407d"
@@ -10084,8 +10571,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1020,
-        "y": 360,
+        "x": 1540,
+        "y": 400,
         "wires": [
             [
                 "09ea6838f40719cc"
@@ -10117,8 +10604,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 870,
-        "y": 400,
+        "x": 1390,
+        "y": 440,
         "wires": [
             [
                 "6ed4c958a0230c04"
@@ -10133,8 +10620,8 @@
         "type": "subflow:96f29b19e2260e65",
         "z": "e3961d077dbf1770",
         "name": "",
-        "x": 1350,
-        "y": 400,
+        "x": 1870,
+        "y": 440,
         "wires": [
             [
                 "45bb5e2345aab7b4"
@@ -10142,16 +10629,76 @@
         ]
     },
     {
-        "id": "1e5f51072d8816ce",
-        "type": "subflow:96f29b19e2260e65",
+        "id": "06d17a6bdfc37b22",
+        "type": "subflow:1a2581dce20863e3",
         "z": "e3961d077dbf1770",
         "name": "",
-        "x": 2050,
-        "y": 600,
+        "x": 170,
+        "y": 1200,
         "wires": [
             [
-                "d31a515ec0b1407d"
+                "e5e2d32280b18101"
             ]
+        ]
+    },
+    {
+        "id": "e5e2d32280b18101",
+        "type": "switch",
+        "z": "e3961d077dbf1770",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 360,
+        "y": 1200,
+        "wires": [
+            [
+                "0c13b9d9bca75c6f"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "0c13b9d9bca75c6f",
+        "type": "switch",
+        "z": "e3961d077dbf1770",
+        "name": "scopecheck",
+        "property": "scope",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Y",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 530,
+        "y": 1160,
+        "wires": [
+            [
+                "3e9afa1acdca1e32"
+            ],
+            []
         ]
     },
     {
@@ -10159,10 +10706,85 @@
         "type": "subflow:50ae5f8d28de46c8",
         "z": "9327a343376a53f9",
         "name": "",
-        "x": 320,
-        "y": 80,
+        "x": 450,
+        "y": 320,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "a09933b51e0ca1e6",
+        "type": "subflow:7c74ea1220a33f32",
+        "z": "9327a343376a53f9",
+        "name": "",
+        "x": 320,
+        "y": 180,
+        "wires": [
+            [
+                "c8d865456d28d484"
+            ]
+        ]
+    },
+    {
+        "id": "c8d865456d28d484",
+        "type": "switch",
+        "z": "9327a343376a53f9",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 500,
+        "y": 180,
+        "wires": [
+            [],
+            [
+                "8814e76868a358a9"
+            ]
+        ]
+    },
+    {
+        "id": "8814e76868a358a9",
+        "type": "switch",
+        "z": "9327a343376a53f9",
+        "name": "sector check",
+        "property": "naicsSector",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Y",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Y",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 350,
+        "y": 260,
+        "wires": [
+            [],
+            [
+                "34c3fba005671a29"
+            ]
         ]
     },
     {
@@ -10170,8 +10792,8 @@
         "type": "subflow:b68b1cdb465a831c",
         "z": "c1249a800f33a884",
         "name": "",
-        "x": 200,
-        "y": 40,
+        "x": 800,
+        "y": 180,
         "wires": [
             [
                 "830498417c682834"
@@ -10200,8 +10822,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 400,
-        "y": 40,
+        "x": 1000,
+        "y": 180,
         "wires": [
             [],
             [
@@ -10214,10 +10836,285 @@
         "type": "subflow:96f29b19e2260e65",
         "z": "c1249a800f33a884",
         "name": "",
-        "x": 210,
+        "x": 810,
+        "y": 240,
+        "wires": [
+            [
+                "af4e4f77189ff57f"
+            ]
+        ]
+    },
+    {
+        "id": "9cc268ba9544a600",
+        "type": "subflow:7c74ea1220a33f32",
+        "z": "c1249a800f33a884",
+        "name": "",
+        "x": 160,
         "y": 100,
         "wires": [
+            [
+                "5e57335b6495d3dc"
+            ]
+        ]
+    },
+    {
+        "id": "5e57335b6495d3dc",
+        "type": "switch",
+        "z": "c1249a800f33a884",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 340,
+        "y": 100,
+        "wires": [
+            [],
+            [
+                "06c17232e6204585"
+            ]
+        ]
+    },
+    {
+        "id": "06c17232e6204585",
+        "type": "switch",
+        "z": "c1249a800f33a884",
+        "name": "sector check",
+        "property": "naicsSector",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Y",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Y",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 210,
+        "y": 160,
+        "wires": [
+            [
+                "c0dbc83808816924"
+            ],
+            [
+                "4e95996f9340ca3f"
+            ]
+        ]
+    },
+    {
+        "id": "1a201df59ad60252",
+        "type": "subflow:0179503501c47e39",
+        "z": "c1249a800f33a884",
+        "name": "",
+        "x": 1010,
+        "y": 480,
+        "wires": [
             []
+        ]
+    },
+    {
+        "id": "af66e212735460aa",
+        "type": "subflow:6ace7023ea973ebe",
+        "z": "c1249a800f33a884",
+        "name": "",
+        "x": 790,
+        "y": 320,
+        "wires": [
+            [
+                "2a3171df667cae95"
+            ]
+        ]
+    },
+    {
+        "id": "4e95996f9340ca3f",
+        "type": "subflow:1ff4019fd0378d4a",
+        "z": "c1249a800f33a884",
+        "name": "",
+        "x": 770,
+        "y": 400,
+        "wires": [
+            [
+                "e800f2c386e8f951"
+            ]
+        ]
+    },
+    {
+        "id": "af4e4f77189ff57f",
+        "type": "switch",
+        "z": "c1249a800f33a884",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1020,
+        "y": 240,
+        "wires": [
+            [],
+            [
+                "af66e212735460aa"
+            ]
+        ]
+    },
+    {
+        "id": "2a3171df667cae95",
+        "type": "switch",
+        "z": "c1249a800f33a884",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1020,
+        "y": 320,
+        "wires": [
+            [],
+            [
+                "4e95996f9340ca3f"
+            ]
+        ]
+    },
+    {
+        "id": "e800f2c386e8f951",
+        "type": "switch",
+        "z": "c1249a800f33a884",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1020,
+        "y": 400,
+        "wires": [
+            [],
+            [
+                "1a201df59ad60252"
+            ]
+        ]
+    },
+    {
+        "id": "c0dbc83808816924",
+        "type": "switch",
+        "z": "c1249a800f33a884",
+        "name": "tabstat",
+        "property": "tabstat",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "neq",
+                "v": "N",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "N",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 390,
+        "y": 160,
+        "wires": [
+            [
+                "50ca1ad5bc59ce79"
+            ],
+            [
+                "f44b99488ee8859a"
+            ]
+        ]
+    },
+    {
+        "id": "50ca1ad5bc59ce79",
+        "type": "switch",
+        "z": "c1249a800f33a884",
+        "name": "action check",
+        "property": "action",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 570,
+        "y": 160,
+        "wires": [
+            [
+                "6f2cfc149ad8c588"
+            ],
+            [
+                "f44b99488ee8859a"
+            ]
         ]
     },
     {
@@ -10225,8 +11122,8 @@
         "type": "subflow:5e2c6717be2fdd36",
         "z": "2313e47e41070980",
         "name": "",
-        "x": 210,
-        "y": 40,
+        "x": 230,
+        "y": 180,
         "wires": [
             [
                 "0aeccdef357aeb12"
@@ -10238,8 +11135,8 @@
         "type": "subflow:e4fb9739caef0397",
         "z": "2313e47e41070980",
         "name": "",
-        "x": 250,
-        "y": 120,
+        "x": 270,
+        "y": 260,
         "wires": [
             []
         ]
@@ -10266,8 +11163,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 400,
-        "y": 40,
+        "x": 420,
+        "y": 180,
         "wires": [
             [],
             [
@@ -10276,12 +11173,87 @@
         ]
     },
     {
+        "id": "091b290531e1645c",
+        "type": "subflow:7c74ea1220a33f32",
+        "z": "2313e47e41070980",
+        "name": "",
+        "x": 200,
+        "y": 60,
+        "wires": [
+            [
+                "3f6dd7fcc05a08b1"
+            ]
+        ]
+    },
+    {
+        "id": "3f6dd7fcc05a08b1",
+        "type": "switch",
+        "z": "2313e47e41070980",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 420,
+        "y": 60,
+        "wires": [
+            [],
+            [
+                "721901718b909c7b"
+            ]
+        ]
+    },
+    {
+        "id": "721901718b909c7b",
+        "type": "switch",
+        "z": "2313e47e41070980",
+        "name": "sector check",
+        "property": "naicsSector",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Y",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Y",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 430,
+        "y": 120,
+        "wires": [
+            [],
+            [
+                "e61f378b2eae2b98"
+            ]
+        ]
+    },
+    {
         "id": "8d7f02887466fd92",
         "type": "subflow:1159e6c8f76efda3",
         "z": "326ee5d4d26564c7",
         "name": "",
-        "x": 220,
-        "y": 40,
+        "x": 380,
+        "y": 200,
         "wires": [
             [
                 "d6f8e720b596f834"
@@ -10310,8 +11282,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 460,
-        "y": 40,
+        "x": 620,
+        "y": 200,
         "wires": [
             [],
             [
@@ -10324,8 +11296,8 @@
         "type": "subflow:75eae7f006cc0f8a",
         "z": "326ee5d4d26564c7",
         "name": "",
-        "x": 230,
-        "y": 120,
+        "x": 390,
+        "y": 280,
         "wires": [
             [
                 "8a44f6b08ad2985a"
@@ -10354,8 +11326,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 460,
-        "y": 120,
+        "x": 620,
+        "y": 280,
         "wires": [
             [],
             [
@@ -10368,8 +11340,8 @@
         "type": "subflow:b68b1cdb465a831c",
         "z": "326ee5d4d26564c7",
         "name": "",
-        "x": 200,
-        "y": 180,
+        "x": 360,
+        "y": 340,
         "wires": [
             [
                 "4a37c9068b162a16"
@@ -10398,8 +11370,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 460,
-        "y": 180,
+        "x": 620,
+        "y": 340,
         "wires": [
             [],
             [
@@ -10412,10 +11384,87 @@
         "type": "subflow:96f29b19e2260e65",
         "z": "326ee5d4d26564c7",
         "name": "",
-        "x": 470,
-        "y": 240,
+        "x": 390,
+        "y": 620,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "e1834279ae066fd6",
+        "type": "subflow:7c74ea1220a33f32",
+        "z": "326ee5d4d26564c7",
+        "name": "",
+        "x": 360,
+        "y": 80,
+        "wires": [
+            [
+                "d425fb90caf5253f"
+            ]
+        ]
+    },
+    {
+        "id": "d425fb90caf5253f",
+        "type": "switch",
+        "z": "326ee5d4d26564c7",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 580,
+        "y": 80,
+        "wires": [
+            [],
+            [
+                "9cfaa4ae76ee60c6"
+            ]
+        ]
+    },
+    {
+        "id": "9cfaa4ae76ee60c6",
+        "type": "switch",
+        "z": "326ee5d4d26564c7",
+        "name": "sector check",
+        "property": "naicsSector",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Y",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Y",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 110,
+        "y": 140,
+        "wires": [
+            [
+                "8d7f02887466fd92"
+            ],
+            [
+                "6f835983aa2e0505"
+            ]
         ]
     },
     {
@@ -10423,10 +11472,85 @@
         "type": "subflow:e4fb9739caef0397",
         "z": "010b1368b661e966",
         "name": "",
-        "x": 430,
-        "y": 120,
+        "x": 590,
+        "y": 320,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "053216ce9454e2cd",
+        "type": "subflow:7c74ea1220a33f32",
+        "z": "010b1368b661e966",
+        "name": "",
+        "x": 400,
+        "y": 200,
+        "wires": [
+            [
+                "d97d4e2bef6902c3"
+            ]
+        ]
+    },
+    {
+        "id": "d97d4e2bef6902c3",
+        "type": "switch",
+        "z": "010b1368b661e966",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 620,
+        "y": 200,
+        "wires": [
+            [],
+            [
+                "13b54fc672b81998"
+            ]
+        ]
+    },
+    {
+        "id": "13b54fc672b81998",
+        "type": "switch",
+        "z": "010b1368b661e966",
+        "name": "sector check",
+        "property": "naicsSector",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "neq",
+                "v": "Y",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Y",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 630,
+        "y": 260,
+        "wires": [
+            [],
+            [
+                "45426c909f20f8e7"
+            ]
         ]
     },
     {
@@ -10630,8 +11754,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 5,
-        "x": 250,
-        "y": 1000,
+        "x": 770,
+        "y": 1140,
         "wires": [
             [
                 "e1f01743caa82ce1"
@@ -10670,8 +11794,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1510,
-        "y": 960,
+        "x": 2050,
+        "y": 1100,
         "wires": [
             [
                 "789bd77c010226b7"
@@ -10703,8 +11827,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1500,
-        "y": 900,
+        "x": 2040,
+        "y": 1040,
         "wires": [
             [
                 "789bd77c010226b7"
@@ -10719,7 +11843,7 @@
         "type": "subflow:e14f077595377a58",
         "z": "5da8a5ef555890fb",
         "name": "",
-        "x": 1230,
+        "x": 1770,
         "y": 40,
         "wires": [
             [
@@ -10749,7 +11873,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1470,
+        "x": 2010,
         "y": 40,
         "wires": [
             [
@@ -10782,7 +11906,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1480,
+        "x": 2020,
         "y": 80,
         "wires": [
             [
@@ -10798,7 +11922,7 @@
         "type": "subflow:88823d21c11ae7b5",
         "z": "5da8a5ef555890fb",
         "name": "",
-        "x": 1240,
+        "x": 1780,
         "y": 560,
         "wires": [
             [
@@ -10828,7 +11952,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1480,
+        "x": 2020,
         "y": 560,
         "wires": [
             [
@@ -10861,7 +11985,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1490,
+        "x": 2030,
         "y": 620,
         "wires": [
             [
@@ -10877,8 +12001,8 @@
         "type": "subflow:a2511614f51e5116",
         "z": "5da8a5ef555890fb",
         "name": "",
-        "x": 1240,
-        "y": 900,
+        "x": 1780,
+        "y": 1040,
         "wires": [
             [
                 "a4793e2a9a72bd65"
@@ -10890,7 +12014,7 @@
         "type": "subflow:e825fc8e32eb1364",
         "z": "5da8a5ef555890fb",
         "name": "",
-        "x": 1240,
+        "x": 1780,
         "y": 140,
         "wires": [
             [
@@ -10920,7 +12044,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1470,
+        "x": 2010,
         "y": 140,
         "wires": [
             [],
@@ -10951,7 +12075,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1480,
+        "x": 2020,
         "y": 200,
         "wires": [
             [
@@ -10967,7 +12091,7 @@
         "type": "subflow:23c54fc1c5be665e",
         "z": "5da8a5ef555890fb",
         "name": "",
-        "x": 520,
+        "x": 1040,
         "y": 400,
         "wires": [
             [
@@ -10980,7 +12104,7 @@
         "type": "subflow:537136f85533687f",
         "z": "5da8a5ef555890fb",
         "name": "",
-        "x": 520,
+        "x": 1040,
         "y": 780,
         "wires": [
             [
@@ -10993,7 +12117,7 @@
         "type": "subflow:010b1368b661e966",
         "z": "5da8a5ef555890fb",
         "name": "",
-        "x": 1240,
+        "x": 1780,
         "y": 260,
         "wires": [
             [
@@ -11023,7 +12147,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1480,
+        "x": 2020,
         "y": 260,
         "wires": [
             [
@@ -11039,7 +12163,7 @@
         "type": "subflow:326ee5d4d26564c7",
         "z": "5da8a5ef555890fb",
         "name": "",
-        "x": 1240,
+        "x": 1780,
         "y": 340,
         "wires": [
             [
@@ -11069,7 +12193,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1480,
+        "x": 2020,
         "y": 340,
         "wires": [
             [
@@ -11085,8 +12209,8 @@
         "type": "subflow:2313e47e41070980",
         "z": "5da8a5ef555890fb",
         "name": "",
-        "x": 1240,
-        "y": 680,
+        "x": 1780,
+        "y": 640,
         "wires": [
             [
                 "9f3f44cc17d5de50"
@@ -11098,7 +12222,7 @@
         "type": "subflow:c1249a800f33a884",
         "z": "5da8a5ef555890fb",
         "name": "",
-        "x": 1240,
+        "x": 1780,
         "y": 740,
         "wires": [
             [
@@ -11120,17 +12244,25 @@
                 "vt": "str"
             },
             {
+                "t": "eq",
+                "v": "job2",
+                "vt": "str"
+            },
+            {
                 "t": "else"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 2,
-        "x": 700,
+        "outputs": 3,
+        "x": 1220,
         "y": 400,
         "wires": [
             [
                 "59804c96b508e102"
+            ],
+            [
+                "d7c309c2046d0f6d"
             ],
             [
                 "899b93521bd0f2f9"
@@ -11162,7 +12294,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 3,
-        "x": 700,
+        "x": 1220,
         "y": 780,
         "wires": [
             [
@@ -11172,7 +12304,7 @@
                 "fa5c41613b5e2e46"
             ],
             [
-                "70cf301d70b47c50"
+                "ed79614e245d1f56"
             ]
         ]
     },
@@ -11188,7 +12320,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2050,
+        "x": 2590,
         "y": 380,
         "wires": [
             []
@@ -11206,8 +12338,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2050,
-        "y": 800,
+        "x": 2590,
+        "y": 740,
         "wires": [
             []
         ]
@@ -11224,8 +12356,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2050,
-        "y": 1000,
+        "x": 2590,
+        "y": 1140,
         "wires": [
             []
         ]
@@ -11250,8 +12382,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 700,
-        "y": 980,
+        "x": 1220,
+        "y": 1120,
         "wires": [
             [
                 "dd118778765ce796"
@@ -11266,7 +12398,7 @@
         "type": "subflow:9327a343376a53f9",
         "z": "5da8a5ef555890fb",
         "name": "",
-        "x": 1240,
+        "x": 1780,
         "y": 500,
         "wires": [
             [
@@ -11296,7 +12428,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 850,
+        "x": 1390,
         "y": 400,
         "wires": [
             [
@@ -11317,11 +12449,6 @@
         "rules": [
             {
                 "t": "eq",
-                "v": "job2",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
                 "v": "job3",
                 "vt": "str"
             },
@@ -11336,13 +12463,10 @@
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 4,
-        "x": 1000,
+        "outputs": 3,
+        "x": 1540,
         "y": 340,
         "wires": [
-            [
-                "d7c309c2046d0f6d"
-            ],
             [
                 "c8f5b6a3e28abf46"
             ],
@@ -11379,11 +12503,11 @@
         "checkall": "true",
         "repair": false,
         "outputs": 3,
-        "x": 1020,
-        "y": 760,
+        "x": 1420,
+        "y": 780,
         "wires": [
             [
-                "a59647fc4786dd91"
+                "70cf301d70b47c50"
             ],
             [
                 "3c18741b24a35d6b"
@@ -11394,44 +12518,11 @@
         ]
     },
     {
-        "id": "70cf301d70b47c50",
-        "type": "switch",
-        "z": "5da8a5ef555890fb",
-        "name": "tabstat",
-        "property": "tabstat",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "neq",
-                "v": "N",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "N",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 870,
-        "y": 820,
-        "wires": [
-            [
-                "ed79614e245d1f56"
-            ],
-            [
-                "658fc19b5fc46ec0"
-            ]
-        ]
-    },
-    {
         "id": "d4422fca2227f5c1",
         "type": "subflow:96f29b19e2260e65",
         "z": "5da8a5ef555890fb",
         "name": "",
-        "x": 1230,
+        "x": 1770,
         "y": 400,
         "wires": [
             [
@@ -11459,7 +12550,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1000,
+        "x": 1540,
         "y": 440,
         "wires": [
             [
@@ -11467,50 +12558,6 @@
             ],
             [
                 "6d57931c901151c4"
-            ]
-        ]
-    },
-    {
-        "id": "658fc19b5fc46ec0",
-        "type": "switch",
-        "z": "5da8a5ef555890fb",
-        "name": "flow_path",
-        "property": "flowPath",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "job6",
-                "vt": "str"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 1020,
-        "y": 860,
-        "wires": [
-            [
-                "4b01288d0396f82a"
-            ],
-            [
-                "cbaef742bf0eeb8b"
-            ]
-        ]
-    },
-    {
-        "id": "4b01288d0396f82a",
-        "type": "subflow:96f29b19e2260e65",
-        "z": "5da8a5ef555890fb",
-        "name": "",
-        "x": 1250,
-        "y": 820,
-        "wires": [
-            [
-                "cbaef742bf0eeb8b"
             ]
         ]
     },
@@ -11536,7 +12583,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1480,
+        "x": 2020,
         "y": 500,
         "wires": [
             [
@@ -11569,7 +12616,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1480,
+        "x": 2020,
         "y": 680,
         "wires": [
             [
@@ -11602,7 +12649,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1480,
+        "x": 2020,
         "y": 740,
         "wires": [
             [
@@ -11610,6 +12657,235 @@
             ],
             [
                 "cbaef742bf0eeb8b"
+            ]
+        ]
+    },
+    {
+        "id": "fe1bb24f16a5db46",
+        "type": "subflow:1a2581dce20863e3",
+        "z": "5da8a5ef555890fb",
+        "name": "",
+        "x": 190,
+        "y": 1260,
+        "wires": [
+            [
+                "3560976c9c238e09"
+            ]
+        ]
+    },
+    {
+        "id": "3560976c9c238e09",
+        "type": "switch",
+        "z": "5da8a5ef555890fb",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 380,
+        "y": 1260,
+        "wires": [
+            [
+                "6c299fa0da28810e"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "6c299fa0da28810e",
+        "type": "switch",
+        "z": "5da8a5ef555890fb",
+        "name": "scopecheck",
+        "property": "scope",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Y",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 550,
+        "y": 1220,
+        "wires": [
+            [
+                "0ad4cebef3e64c46"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "70cf301d70b47c50",
+        "type": "switch",
+        "z": "5da8a5ef555890fb",
+        "name": "tabstat",
+        "property": "tabstat",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "neq",
+                "v": "N",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "N",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1610,
+        "y": 680,
+        "wires": [
+            [
+                "a59647fc4786dd91"
+            ],
+            [
+                "cbaef742bf0eeb8b"
+            ]
+        ]
+    },
+    {
+        "id": "658fc19b5fc46ec0",
+        "type": "switch",
+        "z": "5da8a5ef555890fb",
+        "name": "flow_path",
+        "property": "flowPath",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "job6",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1560,
+        "y": 860,
+        "wires": [
+            [
+                "4b131d34a5c1f76c"
+            ],
+            [
+                "cbaef742bf0eeb8b"
+            ]
+        ]
+    },
+    {
+        "id": "4b01288d0396f82a",
+        "type": "subflow:96f29b19e2260e65",
+        "z": "5da8a5ef555890fb",
+        "name": "",
+        "x": 2190,
+        "y": 960,
+        "wires": [
+            [
+                "cbaef742bf0eeb8b"
+            ]
+        ]
+    },
+    {
+        "id": "4b131d34a5c1f76c",
+        "type": "subflow:7c74ea1220a33f32",
+        "z": "5da8a5ef555890fb",
+        "name": "",
+        "x": 1720,
+        "y": 900,
+        "wires": [
+            [
+                "aa03aaf76fc46b8a"
+            ]
+        ]
+    },
+    {
+        "id": "aa03aaf76fc46b8a",
+        "type": "switch",
+        "z": "5da8a5ef555890fb",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1940,
+        "y": 900,
+        "wires": [
+            [
+                "cbaef742bf0eeb8b"
+            ],
+            [
+                "fa20dd93d56fdecf"
+            ]
+        ]
+    },
+    {
+        "id": "fa20dd93d56fdecf",
+        "type": "switch",
+        "z": "5da8a5ef555890fb",
+        "name": "sector check",
+        "property": "naicsSector",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Y",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Y",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1950,
+        "y": 960,
+        "wires": [
+            [
+                "cbaef742bf0eeb8b"
+            ],
+            [
+                "4b01288d0396f82a"
             ]
         ]
     },
@@ -17136,6 +18412,60 @@
         "libs": [],
         "x": 320,
         "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "513fe743c07a7cac",
+        "type": "function",
+        "z": "1a2581dce20863e3",
+        "name": "check scope",
+        "func": "try {\n    let record_idx = global.get(\"ptrModuleFacts\")\n    let record = msg.payload.csv[record_idx];\n\n    if (['SU','MU'].includes(record?.REPORTING_ID_TYP_TXT)) {\n        if (record?.SCOPE == 'Y') {\n            flow.set('scope','Y')\n        } else {\n            flow.set('scope', 'N')\n        }\n    } else if (['KAU'].includes(record?.REPORTING_ID_TYP_TXT)) {\n        if (record?.GROUP_KEY_TXT.substring(10,11) == 'Y') {\n            flow.set('scope', 'Y')\n        } else {\n            flow.set('scope', 'N')\n        }\n    } else if (['ENT'].includes(record?.REPORTING_ID_TYP_TXT)) {\n        flow.set('scope', 'Y')\n    }\n\n    return msg;\n} catch(e) {\n    global.set('err','Exit Edit')\n    msg.payload.exit = 'Scope Check'\n    return msg;\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "af6b654eb7fd90cf",
+        "type": "function",
+        "z": "7c74ea1220a33f32",
+        "name": "sector 31",
+        "func": "try {\n    let record_idx = global.get(\"ptrModuleFacts\")\n    let record = msg.payload.csv[record_idx];\n\n    if (record?.NAICS_SECTOR == '31') {\n        global.set('naicsSector','Y')\n    } else {\n        global.set('naicsSector','N')\n    }\n\n    return msg;\n} catch(e) {\n    global.set('err','Exit Edit')\n    msg.payload.exit = 'Sector 31'\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "264c6fe27b557bb8",
+        "type": "function",
+        "z": "a307acf02307bc62",
+        "name": "check estab nontabfl",
+        "func": "try {\n    let record_idx = global.get(\"ptrModuleFacts\")\n    let record = msg.payload.csv[record_idx];\n\n    if (['MU','SU'].includes(record?.REPORTING_ID_TYP_TXT) && record?.NONTABFL == 'M') {\n        global.set('action','Exit Edit')\n    }\n    return msg;\n} catch(e) {\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 40,
         "wires": [
             []
         ]
