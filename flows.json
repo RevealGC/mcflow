@@ -2107,7 +2107,7 @@
                 "y": 100,
                 "wires": [
                     {
-                        "id": "2bda237fe1cd2f49"
+                        "id": "be66adc632710827"
                     }
                 ]
             }
@@ -2118,7 +2118,7 @@
                 "y": 100,
                 "wires": [
                     {
-                        "id": "2bda237fe1cd2f49",
+                        "id": "be66adc632710827",
                         "port": 0
                     }
                 ]
@@ -2189,7 +2189,7 @@
                 "y": 60,
                 "wires": [
                     {
-                        "id": "9f9833d11c2323e2"
+                        "id": "c313e698b0913790"
                     }
                 ]
             }
@@ -2204,11 +2204,11 @@
                         "port": 0
                     },
                     {
-                        "id": "f4b614c73cd62f9d",
+                        "id": "d7d779a3019dab22",
                         "port": 1
                     },
                     {
-                        "id": "c7bb8ab7df326471",
+                        "id": "b7c456c9d73bae60",
                         "port": 0
                     }
                 ]
@@ -3333,38 +3333,46 @@
         "category": "",
         "in": [
             {
-                "x": 260,
-                "y": 140,
+                "x": 280,
+                "y": 240,
                 "wires": [
                     {
-                        "id": "d155d60b701b2ee7"
+                        "id": "46b3677a66484905"
                     }
                 ]
             }
         ],
         "out": [
             {
-                "x": 1000,
+                "x": 1280,
                 "y": 240,
                 "wires": [
                     {
-                        "id": "b354a3d6351291be",
+                        "id": "a241a27d91c97bd0",
                         "port": 0
                     },
                     {
-                        "id": "b354a3d6351291be",
+                        "id": "29636a3b9b9bf654",
+                        "port": 0
+                    },
+                    {
+                        "id": "a6ecbb0f804243ba",
+                        "port": 0
+                    },
+                    {
+                        "id": "ebd10c9f307211a6",
+                        "port": 0
+                    },
+                    {
+                        "id": "da1041380073a9cd",
+                        "port": 0
+                    },
+                    {
+                        "id": "ece6d6ed5ddcee4b",
                         "port": 1
                     },
                     {
-                        "id": "e08612ede8b2c7aa",
-                        "port": 0
-                    },
-                    {
-                        "id": "3cf343fa5819ebd3",
-                        "port": 0
-                    },
-                    {
-                        "id": "3cf343fa5819ebd3",
+                        "id": "29636a3b9b9bf654",
                         "port": 1
                     }
                 ]
@@ -3382,8 +3390,8 @@
         "category": "",
         "in": [
             {
-                "x": 280,
-                "y": 280,
+                "x": 420,
+                "y": 300,
                 "wires": [
                     {
                         "id": "12e36b0a4c1c8eb8"
@@ -3411,6 +3419,10 @@
                     {
                         "id": "75a34d5859224d5e",
                         "port": 0
+                    },
+                    {
+                        "id": "75a34d5859224d5e",
+                        "port": 1
                     }
                 ]
             }
@@ -4506,9 +4518,7 @@
             "5e674b959c1b250a"
         ],
         "x": 14,
-        "y": 599,
-        "w": 2232,
-        "h": 1982
+        "y": 599
     },
     {
         "id": "302cb8040ecade52",
@@ -4524,9 +4534,7 @@
             "a47c991027033263"
         ],
         "x": 704,
-        "y": 719,
-        "w": 382,
-        "h": 82
+        "y": 719
     },
     {
         "id": "d1e0f39ddacfeb20",
@@ -12880,11 +12888,11 @@
         ]
     },
     {
-        "id": "2bda237fe1cd2f49",
+        "id": "be66adc632710827",
         "type": "function",
         "z": "625b8c982fed66b7",
         "name": "MIV: EvaluateNoNLIFOValuationMethodModule",
-        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    function flagRules(variable, details) {\n        let flagname = variable + '_F'\n        if (record?.[variable] == 0) {\n            record[flagname] = setCharAt(record?.[flagname], 2, 'Z');\n        } else {\n            let found = 'N'\n            for (let i in details) {\n                let detail = details[i]\n                if (record?.[detail]) {\n                    if (['R_', 'K_', 'T_'].includes(record?.[detail].substring(0, 2))) {\n                        found = 'Y'\n                    } else if (['R', 'C', 'A', 'S', 'O', 'G'].includes(record?.[detail]?.charAt(1))) {\n                        found = 'Y'\n                    } else {\n                        found = 'N'\n                        break\n                    }\n                    // } else {\n                    //     found = 'N'\n                    //     break\n                }\n            }\n            if (found == 'Y') {\n                record[flagname] = setCharAt(record?.[flagname], 2, 'Y');\n            } else {\n                record[flagname] = setCharAt(record?.[flagname], 2, 'S');\n            }\n        }\n    }\n    function EvaluateNoNLIFOValuationMethod(variable) {\n        let avg = ''\n        let avg_f = ''\n        let fifo = ''\n        let fifo_f = ''\n        let std = ''\n        let std_f = ''\n        let othnl = ''\n        let othnl_f = ''\n        let ival_tot = ''\n        let ival_tot_f = ''\n        let nl_tot = ''\n        if (variable == 'E') {\n            avg = 'INV_E_AVG_VAL'\n            avg_f = 'INV_E_AVG_VAL_F'\n            fifo = 'INV_E_FIFO_VAL'\n            fifo_f = 'INV_E_FIFO_VAL_F'\n            std = 'INV_E_STD_VAL'\n            std_f = 'INV_E_STD_VAL_F'\n            othnl = 'INV_E_OTHNL_VAL'\n            othnl_f = 'INV_E_OTHNL_VAL_F'\n            ival_tot = 'INV_E_IVAL_TOT_DVAL'\n            ival_tot_f = 'INV_E_IVAL_TOT_DVAL_F'\n            nl_tot = 'INV_E_NL_TOT_DVAL'\n        } else if (variable == 'B') {\n            avg = 'INV_B_AVG_VAL'\n            avg_f = 'INV_B_AVG_VAL_F'\n            fifo = 'INV_B_FIFO_VAL'\n            fifo_f = 'INV_B_FIFO_VAL_F'\n            std = 'INV_B_STD_VAL'\n            std_f = 'INV_B_STD_VAL_F'\n            othnl = 'INV_B_OTHNL_VAL'\n            othnl_f = 'INV_B_OTHNL_VAL_F'\n            ival_tot = 'INV_B_IVAL_TOT_DVAL'\n            ival_tot_f = 'INV_B_IVAL_TOT_DVAL_F'\n            nl_tot = 'INV_B_NL_TOT_DVAL'\n        }\n        if (parseFloat(record?.[fifo]) > 0) {\n            if (0 == (parseFloat(record?.[avg]) + parseFloat(record?.[std]) + parseFloat(record?.[othnl]))) {\n                if (parseFloat(record?.[fifo]) != parseFloat(record?.[ival_tot])) {\n                    record[fifo] = record?.[ival_tot]\n                    record[fifo_f] = setCharAt(record?.[fifo_f], 2, 'L')\n                }\n            } else {\n                record[fifo] = Math.round((parseFloat(record?.[fifo]) / parseFloat(record?.[nl_tot])) * parseFloat(record?.[ival_tot]))\n                record[fifo_f] = setCharAt(record?.[fifo_f], 2, 'K')\n                record[avg] = Math.round((parseFloat(record?.[avg]) / parseFloat(record?.[nl_tot])) * parseFloat(record?.[ival_tot]))\n                record[avg_f] = setCharAt(record?.[avg_f], 2, 'K')\n                record[std] = Math.round((parseFloat(record?.[std]) / parseFloat(record?.[nl_tot])) * parseFloat(record?.[ival_tot]))\n                record[std_f] = setCharAt(record?.[std_f], 2, 'K')\n                record[othnl] = Math.round(parseFloat(record?.[ival_tot]) - (parseFloat(record?.[fifo]) + parseFloat(record?.[avg]) + parseFloat(record?.[std])))\n                record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'K')\n            }\n        } else if (parseFloat(record?.[avg]) > 0) {\n            if ((parseFloat(record?.[std]) + parseFloat(record?.[othnl])) == 0) {\n                if (parseFloat(record?.[avg]) != parseFloat(record?.[ival_tot])) {\n                    record[avg] = record?.[ival_tot]\n                    flagRules(avg, [ival_tot_f])\n                }\n            } else {\n                record[avg] = Math.round((parseFloat(record?.[avg]) / parseFloat(record?.[nl_tot])) * parseFloat(record?.[ival_tot]))\n                record[avg_f] = setCharAt(record?.[avg_f], 2, 'K')\n                record[std] = Math.round((parseFloat(record?.[std]) / parseFloat(record?.[nl_tot])) * parseFloat(record?.[ival_tot]))\n                record[std_f] = setCharAt(record?.[std_f], 2, 'K')\n                record[othnl] = Math.round(parseFloat(record?.[ival_tot]) - (parseFloat(record?.[avg]) + parseFloat(record?.[std])))\n                record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'K')\n            }\n\n        } else if (parseFloat(record?.[std]) > 0) {\n            if (parseFloat(record?.[othnl]) == 0) {\n                if (parseFloat(record?.[std]) != parseFloat(record?.[ival_tot])) {\n                    record[std] = record?.[ival_tot]\n                    flagRules(std, [ival_tot_f])\n                }\n            } else {\n                record[std] = Math.round((parseFloat(record?.[std]) / parseFloat(record?.[nl_tot])) * parseFloat(record?.[ival_tot]))\n                record[std_f] = setCharAt(record?.[std_f], 2, 'K')\n                record[othnl] = Math.round(parseFloat(record?.[ival_tot]) - parseFloat(record?.[std]))\n                record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'K')\n            }\n        } else if (parseFloat(record?.[othnl]) == parseFloat(record?.[ival_tot])) {\n        } else {\n            record[othnl] = parseFloat(record?.[ival_tot])\n            flagRules(othnl, [ival_tot_f])\n        }\n    }\n\n    function EvaluateNoNLIFOValuationMethodModule() {\n        let letter = global.get('miv')\n        EvaluateNoNLIFOValuationMethod(letter)\n    }\n\n    EvaluateNoNLIFOValuationMethodModule()\n    return msg\n}catch(e){\n    global.set('err','Exit Edit')\n    msg.payload.exit = 'MIV EvaluateNoNLIFOValuationMethodModule'\n    return msg\n}",
+        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    function flagRules(variable, details) {\n        let flagname = variable + '_F'\n        if (record?.[variable] == 0) {\n            record[flagname] = setCharAt(record?.[flagname], 2, 'Z');\n        } else {\n            let found = 'N'\n            for (let i in details) {\n                let detail = details[i]\n                if (record?.[detail]) {\n                    if (['R_', 'K_', 'T_'].includes(record?.[detail].substring(0, 2))) {\n                        found = 'Y'\n                    } else if (['R', 'C', 'A', 'S', 'O', 'G'].includes(record?.[detail]?.charAt(1))) {\n                        found = 'Y'\n                    } else {\n                        found = 'N'\n                        break\n                    }\n                    // } else {\n                    //     found = 'N'\n                    //     break\n                }\n            }\n            if (found == 'Y') {\n                record[flagname] = setCharAt(record?.[flagname], 2, 'Y');\n            } else {\n                record[flagname] = setCharAt(record?.[flagname], 2, 'S');\n            }\n        }\n    }\n    function EvaluateNoNLIFOValuationMethod(variable) {\n        let avg = ''\n        let avg_f = ''\n        let fifo = ''\n        let fifo_f = ''\n        let std = ''\n        let std_f = ''\n        let othnl = ''\n        let othnl_f = ''\n        let ival_tot = ''\n        let ival_tot_f = ''\n        let nl_tot = ''\n        if (variable == 'E') {\n            avg = 'INV_E_AVG_VAL'\n            avg_f = 'INV_E_AVG_VAL_F'\n            fifo = 'INV_E_FIFO_VAL'\n            fifo_f = 'INV_E_FIFO_VAL_F'\n            std = 'INV_E_STD_VAL'\n            std_f = 'INV_E_STD_VAL_F'\n            othnl = 'INV_E_OTHNL_VAL'\n            othnl_f = 'INV_E_OTHNL_VAL_F'\n            ival_tot = 'INV_E_IVAL_TOT_DVAL'\n            ival_tot_f = 'INV_E_IVAL_TOT_DVAL_F'\n            nl_tot = 'INV_E_NL_TOT_DVAL'\n        } else if (variable == 'B') {\n            avg = 'INV_B_AVG_VAL'\n            avg_f = 'INV_B_AVG_VAL_F'\n            fifo = 'INV_B_FIFO_VAL'\n            fifo_f = 'INV_B_FIFO_VAL_F'\n            std = 'INV_B_STD_VAL'\n            std_f = 'INV_B_STD_VAL_F'\n            othnl = 'INV_B_OTHNL_VAL'\n            othnl_f = 'INV_B_OTHNL_VAL_F'\n            ival_tot = 'INV_B_IVAL_TOT_DVAL'\n            ival_tot_f = 'INV_B_IVAL_TOT_DVAL_F'\n            nl_tot = 'INV_B_NL_TOT_DVAL'\n        }\n        if (parseFloat(record?.[fifo]) > 0) {\n            if (0 == (parseFloat(record?.[avg]) + parseFloat(record?.[std]) + parseFloat(record?.[othnl]))) {\n                if (parseFloat(record?.[fifo]) != parseFloat(record?.[ival_tot])) {\n                    record[fifo] = record?.[ival_tot]\n                    flagRules(fifo, [ival_tot_f])\n                }\n            } else {\n                record[fifo] = Math.round((parseFloat(record?.[fifo]) / parseFloat(record?.[nl_tot])) * parseFloat(record?.[ival_tot]))\n                record[fifo_f] = setCharAt(record?.[fifo_f], 2, 'K')\n                record[avg] = Math.round((parseFloat(record?.[avg]) / parseFloat(record?.[nl_tot])) * parseFloat(record?.[ival_tot]))\n                record[avg_f] = setCharAt(record?.[avg_f], 2, 'K')\n                record[std] = Math.round((parseFloat(record?.[std]) / parseFloat(record?.[nl_tot])) * parseFloat(record?.[ival_tot]))\n                record[std_f] = setCharAt(record?.[std_f], 2, 'K')\n                record[othnl] = Math.round(parseFloat(record?.[ival_tot]) - (parseFloat(record?.[fifo]) + parseFloat(record?.[avg]) + parseFloat(record?.[std])))\n                record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'K')\n            }\n        } else if (parseFloat(record?.[avg]) > 0) {\n            if ((parseFloat(record?.[std]) + parseFloat(record?.[othnl])) == 0) {\n                if (parseFloat(record?.[avg]) != parseFloat(record?.[ival_tot])) {\n                    record[avg] = record?.[ival_tot]\n                    flagRules(avg, [ival_tot_f])\n                }\n            } else {\n                record[avg] = Math.round((parseFloat(record?.[avg]) / parseFloat(record?.[nl_tot])) * parseFloat(record?.[ival_tot]))\n                record[avg_f] = setCharAt(record?.[avg_f], 2, 'K')\n                record[std] = Math.round((parseFloat(record?.[std]) / parseFloat(record?.[nl_tot])) * parseFloat(record?.[ival_tot]))\n                record[std_f] = setCharAt(record?.[std_f], 2, 'K')\n                record[othnl] = Math.round(parseFloat(record?.[ival_tot]) - (parseFloat(record?.[avg]) + parseFloat(record?.[std])))\n                record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'K')\n            }\n\n        } else if (parseFloat(record?.[std]) > 0) {\n            if (parseFloat(record?.[othnl]) == 0) {\n                if (parseFloat(record?.[std]) != parseFloat(record?.[ival_tot])) {\n                    record[std] = record?.[ival_tot]\n                    flagRules(std, [ival_tot_f])\n                }\n            } else {\n                record[std] = Math.round((parseFloat(record?.[std]) / parseFloat(record?.[nl_tot])) * parseFloat(record?.[ival_tot]))\n                record[std_f] = setCharAt(record?.[std_f], 2, 'K')\n                record[othnl] = Math.round(parseFloat(record?.[ival_tot]) - parseFloat(record?.[std]))\n                record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'K')\n            }\n        } else if (parseFloat(record?.[othnl]) == parseFloat(record?.[ival_tot])) {\n        } else {\n            record[othnl] = parseFloat(record?.[ival_tot])\n            flagRules(othnl, [ival_tot_f])\n        }\n    }\n\n    function EvaluateNoNLIFOValuationMethodModule() {\n        let letter = global.get('miv')\n        EvaluateNoNLIFOValuationMethod(letter)\n    }\n\n    EvaluateNoNLIFOValuationMethodModule()\n    return msg\n}catch(e){\n    global.set('err','Exit Edit')\n    msg.payload.exit = 'MIV EvaluateNoNLIFOValuationMethodModule'\n    return msg\n}",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -12893,6 +12901,24 @@
         "libs": [],
         "x": 740,
         "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3f8e37ac204ac9fc",
+        "type": "function",
+        "z": "625b8c982fed66b7",
+        "name": "MIV: EvaluateNoNLIFOValuationMethodModule Database",
+        "func": "try{\n    let record_idx = msg.ptrModuleFacts;\n    let record = msg.payload.csv[record_idx];\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    function flagRules(variable, details) {\n        let flagname = variable + '_F'\n        if (record?.[variable] == 0) {\n            record[flagname] = setCharAt(record?.[flagname], 2, 'Z');\n        } else {\n            let found = 'N'\n            for (let i in details) {\n                let detail = details[i]\n                if (record?.[detail]) {\n                    if (['R_', 'K_', 'T_'].includes(record?.[detail].substring(0, 2))) {\n                        found = 'Y'\n                    } else if (['R', 'C', 'A', 'S', 'O', 'G'].includes(record?.[detail]?.charAt(1))) {\n                        found = 'Y'\n                    } else {\n                        found = 'N'\n                        break\n                    }\n                    // } else {\n                    //     found = 'N'\n                    //     break\n                }\n            }\n            if (found == 'Y') {\n                record[flagname] = setCharAt(record?.[flagname], 2, 'Y');\n            } else {\n                record[flagname] = setCharAt(record?.[flagname], 2, 'S');\n            }\n        }\n    }\n    function EvaluateNoNLIFOValuationMethod(variable) {\n        let avg = ''\n        let avg_f = ''\n        let fifo = ''\n        let fifo_f = ''\n        let std = ''\n        let std_f = ''\n        let othnl = ''\n        let othnl_f = ''\n        let ival_tot = ''\n        let ival_tot_f = ''\n        let nl_tot = ''\n        if (variable == 'E') {\n            avg = 'INV_E_AVG_VAL'\n            avg_f = 'INV_E_AVG_VAL_F'\n            fifo = 'INV_E_FIFO_VAL'\n            fifo_f = 'INV_E_FIFO_VAL_F'\n            std = 'INV_E_STD_VAL'\n            std_f = 'INV_E_STD_VAL_F'\n            othnl = 'INV_E_OTHNL_VAL'\n            othnl_f = 'INV_E_OTHNL_VAL_F'\n            ival_tot = 'INV_E_IVAL_TOT_DVAL'\n            ival_tot_f = 'INV_E_IVAL_TOT_DVAL_F'\n            nl_tot = 'INV_E_NL_TOT_DVAL'\n        } else if (variable == 'B') {\n            avg = 'INV_B_AVG_VAL'\n            avg_f = 'INV_B_AVG_VAL_F'\n            fifo = 'INV_B_FIFO_VAL'\n            fifo_f = 'INV_B_FIFO_VAL_F'\n            std = 'INV_B_STD_VAL'\n            std_f = 'INV_B_STD_VAL_F'\n            othnl = 'INV_B_OTHNL_VAL'\n            othnl_f = 'INV_B_OTHNL_VAL_F'\n            ival_tot = 'INV_B_IVAL_TOT_DVAL'\n            ival_tot_f = 'INV_B_IVAL_TOT_DVAL_F'\n            nl_tot = 'INV_B_NL_TOT_DVAL'\n        }\n        if (parseFloat(record?.[fifo]) > 0) {\n            if (0 == (parseFloat(record?.[avg]) + parseFloat(record?.[std]) + parseFloat(record?.[othnl]))) {\n                if (parseFloat(record?.[fifo]) != parseFloat(record?.[ival_tot])) {\n                    record[fifo] = record?.[ival_tot]\n                    flagRules(fifo, [ival_tot_f])\n                }\n            } else {\n                record[fifo] = Math.round((parseFloat(record?.[fifo]) / parseFloat(record?.[nl_tot])) * parseFloat(record?.[ival_tot]))\n                record[fifo_f] = setCharAt(record?.[fifo_f], 2, 'K')\n                record[avg] = Math.round((parseFloat(record?.[avg]) / parseFloat(record?.[nl_tot])) * parseFloat(record?.[ival_tot]))\n                record[avg_f] = setCharAt(record?.[avg_f], 2, 'K')\n                record[std] = Math.round((parseFloat(record?.[std]) / parseFloat(record?.[nl_tot])) * parseFloat(record?.[ival_tot]))\n                record[std_f] = setCharAt(record?.[std_f], 2, 'K')\n                record[othnl] = Math.round(parseFloat(record?.[ival_tot]) - (parseFloat(record?.[fifo]) + parseFloat(record?.[avg]) + parseFloat(record?.[std])))\n                record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'K')\n            }\n        } else if (parseFloat(record?.[avg]) > 0) {\n            if ((parseFloat(record?.[std]) + parseFloat(record?.[othnl])) == 0) {\n                if (parseFloat(record?.[avg]) != parseFloat(record?.[ival_tot])) {\n                    record[avg] = record?.[ival_tot]\n                    flagRules(avg, [ival_tot_f])\n                }\n            } else {\n                record[avg] = Math.round((parseFloat(record?.[avg]) / parseFloat(record?.[nl_tot])) * parseFloat(record?.[ival_tot]))\n                record[avg_f] = setCharAt(record?.[avg_f], 2, 'K')\n                record[std] = Math.round((parseFloat(record?.[std]) / parseFloat(record?.[nl_tot])) * parseFloat(record?.[ival_tot]))\n                record[std_f] = setCharAt(record?.[std_f], 2, 'K')\n                record[othnl] = Math.round(parseFloat(record?.[ival_tot]) - (parseFloat(record?.[avg]) + parseFloat(record?.[std])))\n                record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'K')\n            }\n\n        } else if (parseFloat(record?.[std]) > 0) {\n            if (parseFloat(record?.[othnl]) == 0) {\n                if (parseFloat(record?.[std]) != parseFloat(record?.[ival_tot])) {\n                    record[std] = record?.[ival_tot]\n                    flagRules(std, [ival_tot_f])\n                }\n            } else {\n                record[std] = Math.round((parseFloat(record?.[std]) / parseFloat(record?.[nl_tot])) * parseFloat(record?.[ival_tot]))\n                record[std_f] = setCharAt(record?.[std_f], 2, 'K')\n                record[othnl] = Math.round(parseFloat(record?.[ival_tot]) - parseFloat(record?.[std]))\n                record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'K')\n            }\n        } else if (parseFloat(record?.[othnl]) == parseFloat(record?.[ival_tot])) {\n        } else {\n            record[othnl] = parseFloat(record?.[ival_tot])\n            flagRules(othnl, [ival_tot_f])\n        }\n    }\n\n    function EvaluateNoNLIFOValuationMethodModule() {\n        let letter = msg.miv\n        EvaluateNoNLIFOValuationMethod(letter)\n    }\n\n    EvaluateNoNLIFOValuationMethodModule()\n    return msg\n}catch(e){\n    msg.err = 'Exit Edit'\n    msg.payload.exit = 'MIV EvaluateNoNLIFOValuationMethodModule'\n    return msg\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 770,
+        "y": 200,
         "wires": [
             []
         ]
@@ -13140,26 +13166,6 @@
         ]
     },
     {
-        "id": "9f9833d11c2323e2",
-        "type": "function",
-        "z": "0ab9d9d713d5103c",
-        "name": "MIV: EvaluateNoNLIFOValuationMethodsModule",
-        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    function EvaluateNoNLIFOValuationMethodsModulePathA(variable, INVVSUMx) {\n        let ival_tot = ''\n        let lifo = ''\n        if (variable == 'E') {\n            ival_tot = 'INV_E_IVAL_TOT_DVAL'\n            lifo = 'INV_E_LIFO_VAL'\n        } else if (variable == 'B') {\n            ival_tot = 'INV_B_IVAL_TOT_DVAL'\n            lifo = 'INV_B_LIFO_VAL'\n        }\n        var INVDIFFx = parseFloat(record?.[ival_tot]) - parseFloat(record?.[lifo])\n        flow.set('invvsumx',INVVSUMx)\n        flow.set('invdiffx',INVDIFFx)\n        flow.set('callDet','Call Details')\n    }\n\n    function EvaluateValuationMethods(variable) {\n        let avg = ''\n        let avg_f = ''\n        let fifo = ''\n        let fifo_f = ''\n        let std = ''\n        let std_f = ''\n        let othnl = ''\n        let othnl_f = ''\n        let tot = ''\n        let ival_tot = ''\n        let ival_tot_f = ''\n        let nl_tot = ''\n        let nl_tot_f = ''\n        let lifo = ''\n        let lifo_f = ''\n        let lifo_rsv = ''\n        let lifo_rsv_f = ''\n\n        if (variable == 'E') {\n            avg = 'INV_E_AVG_VAL'\n            avg_f = 'INV_E_AVG_VAL_F'\n            fifo = 'INV_E_FIFO_VAL'\n            fifo_f = 'INV_E_FIFO_VAL_F'\n            std = 'INV_E_STD_VAL'\n            std_f = 'INV_E_STD_VAL_F'\n            othnl = 'INV_E_OTHNL_VAL'\n            othnl_f = 'INV_E_OTHNL_VAL_F'\n            tot = 'INV_E_TOT_VAL'\n            ival_tot = 'INV_E_IVAL_TOT_DVAL'\n            ival_tot_f = 'INV_E_IVAL_TOT_DVAL_F'\n            nl_tot = 'INV_E_NL_TOT_DVAL'\n            nl_tot_f = 'INV_E_NL_TOT_DVAL_F'\n            lifo = 'INV_E_LIFO_VAL'\n            lifo_f = 'INV_E_LIFO_VAL_F'\n            lifo_rsv = 'INV_E_LIFO_RSV_VAL'\n            lifo_rsv_f = 'INV_E_LIFO_RSV_VAL_F'\n        } else if (variable == 'B') {\n            avg = 'INV_B_AVG_VAL'\n            avg_f = 'INV_B_AVG_VAL_F'\n            fifo = 'INV_B_FIFO_VAL'\n            fifo_f = 'INV_B_FIFO_VAL_F'\n            std = 'INV_B_STD_VAL'\n            std_f = 'INV_B_STD_VAL_F'\n            othnl = 'INV_B_OTHNL_VAL'\n            othnl_f = 'INV_B_OTHNL_VAL_F'\n            tot = 'INV_B_TOT_VAL'\n            ival_tot = 'INV_B_IVAL_TOT_DVAL'\n            ival_tot_f = 'INV_B_IVAL_TOT_DVAL_F'\n            nl_tot = 'INV_B_NL_TOT_DVAL'\n            nl_tot_f = 'INV_B_NL_TOT_DVAL_F'\n            lifo = 'INV_B_LIFO_VAL'\n            lifo_f = 'INV_B_LIFO_VAL_F'\n            lifo_rsv = 'INV_B_LIFO_RSV_VAL'\n            lifo_rsv_f = 'INV_B_LIFO_RSV_VAL_F'\n        }\n        var INVVSUMx = parseFloat(record?.[fifo]) + parseFloat(record?.[avg]) + parseFloat(record?.[std]) + parseFloat(record?.[othnl])\n\n        if (parseInt(record?.[tot]) == 0) {\n            if ((parseFloat(record?.[lifo]) + parseFloat(record?.[fifo]) + parseFloat(record?.[avg]) + parseFloat(record?.[std]) + parseFloat(record?.[othnl]) + parseFloat(record?.[ival_tot]) + parseFloat(record?.[nl_tot])) > 0 || parseInt(record?.[lifo_rsv]) != 0) {\n                record[lifo] = 0;\n                record[lifo_f] = setCharAt(record?.[lifo_f], 2, 'Z');\n                record[fifo] = 0\n                record[fifo_f] = setCharAt(record?.[fifo_f], 2, 'Z');\n                record[avg] = 0;\n                record[avg_f] = setCharAt(record?.[avg_f], 2, 'Z');\n                record[std] = 0;\n                record[std_f] = setCharAt(record?.[std_f], 2, 'Z');\n                record[othnl] = 0;\n                record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'Z');\n                record[ival_tot] = 0;\n                record[ival_tot_f] = setCharAt(record?.[ival_tot_f], 2, 'Z');\n                record[nl_tot] = 0;\n                record[nl_tot_f] = setCharAt(record?.[nl_tot_f], 2, 'Z');\n                record[lifo_rsv] = 0;\n                record[lifo_rsv_f] = setCharAt(record?.[lifo_rsv_f], 2, 'Z');\n            }\n\n        } else if (parseFloat(record?.[tot]) == parseFloat(record?.[ival_tot])) {\n            if (parseFloat(record?.[ival_tot]) == parseFloat(record?.[lifo]) + parseFloat(INVVSUMx)) {\n                if (parseFloat(record?.[nl_tot]) == parseFloat(INVVSUMx)) {\n                } else {\n                    record[nl_tot] = INVVSUMx\n                    record[nl_tot_f] = setCharAt(record?.[nl_tot_f], 2, 'L');\n                }\n            } else {\n                EvaluateNoNLIFOValuationMethodsModulePathA(variable, INVVSUMx)\n            }\n        } else {\n            record[ival_tot] = record[tot]\n            record[ival_tot_f] = setCharAt(record?.[ival_tot_f], 2, 'L')\n            EvaluateNoNLIFOValuationMethodsModulePathA(variable, INVVSUMx)\n        }\n    }\n    function EvaluateValuationMethodsModule() {\n        flow.set('invvsumx','')\n        flow.set('invdiffx','')\n        flow.set('callDet','')\n        let letter = global.get('miv')\n        EvaluateValuationMethods(letter)\n    }\n\n    EvaluateValuationMethodsModule()\n    record.ACTION = 'Return to Non-LIFO Valuation Methods'\n\n    return msg;\n}catch(e){\n    global.set('err','Exit Edit')\n    msg.payload.exit = 'MIV EvaluateNoNLIFOValuationMethodsModule'\n    return msg;\n}",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 720,
-        "y": 60,
-        "wires": [
-            [
-                "c7bb8ab7df326471"
-            ]
-        ]
-    },
-    {
         "id": "fe4e35d89f423462",
         "type": "subflow:3e0275f580e2d77c",
         "z": "0ab9d9d713d5103c",
@@ -13171,7 +13177,47 @@
         ]
     },
     {
-        "id": "f4b614c73cd62f9d",
+        "id": "c313e698b0913790",
+        "type": "function",
+        "z": "0ab9d9d713d5103c",
+        "name": "MIV: EvaluateNoNLIFOValuationMethodsModule",
+        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    function flagRules(variable, details) {\n        let flagname = variable + '_F'\n        if (record?.[variable] == 0) {\n            record[flagname] = setCharAt(record?.[flagname], 2, 'Z');\n        } else {\n            let found = 'N'\n            for (let i in details) {\n                let detail = details[i]\n                if (record?.[detail]) {\n                    if (['R_', 'K_', 'T_'].includes(record?.[detail].substring(0, 2))) {\n                        found = 'Y'\n                    } else if (['R', 'C', 'A', 'S', 'O', 'G'].includes(record?.[detail]?.charAt(1))) {\n                        found = 'Y'\n                    } else {\n                        found = 'N'\n                        break\n                    }\n                    // } else {\n                    //     found = 'N'\n                    //     break\n                }\n            }\n            if (found == 'Y') {\n                record[flagname] = setCharAt(record?.[flagname], 2, 'Y');\n            } else {\n                record[flagname] = setCharAt(record?.[flagname], 2, 'S');\n            }\n        }\n    }\n\n    function EvaluateNoNLIFOValuationMethodsModulePathA(variable, INVVSUMx) {\n        let ival_tot = ''\n        let lifo = ''\n        if (variable == 'E') {\n            ival_tot = 'INV_E_IVAL_TOT_DVAL'\n            lifo = 'INV_E_LIFO_VAL'\n        } else if (variable == 'B') {\n            ival_tot = 'INV_B_IVAL_TOT_DVAL'\n            lifo = 'INV_B_LIFO_VAL'\n        }\n        var INVDIFFx = parseFloat(record?.[ival_tot]) - parseFloat(record?.[lifo])\n        flow.set('invvsumx',INVVSUMx)\n        flow.set('invdiffx',INVDIFFx)\n        flow.set('callDet','Call Details')\n    }\n\n    function EvaluateValuationMethods(variable) {\n        let avg = ''\n        let avg_f = ''\n        let fifo = ''\n        let fifo_f = ''\n        let std = ''\n        let std_f = ''\n        let othnl = ''\n        let othnl_f = ''\n        let tot = ''\n        let tot_f = ''\n        let ival_tot = ''\n        let ival_tot_f = ''\n        let nl_tot = ''\n        let nl_tot_f = ''\n        let lifo = ''\n        let lifo_f = ''\n        let lifo_rsv = ''\n        let lifo_rsv_f = ''\n\n        if (variable == 'E') {\n            avg = 'INV_E_AVG_VAL'\n            avg_f = 'INV_E_AVG_VAL_F'\n            fifo = 'INV_E_FIFO_VAL'\n            fifo_f = 'INV_E_FIFO_VAL_F'\n            std = 'INV_E_STD_VAL'\n            std_f = 'INV_E_STD_VAL_F'\n            othnl = 'INV_E_OTHNL_VAL'\n            othnl_f = 'INV_E_OTHNL_VAL_F'\n            tot = 'INV_E_TOT_VAL'\n            tot_f = 'INV_E_TOT_VAL_F'\n            ival_tot = 'INV_E_IVAL_TOT_DVAL'\n            ival_tot_f = 'INV_E_IVAL_TOT_DVAL_F'\n            nl_tot = 'INV_E_NL_TOT_DVAL'\n            nl_tot_f = 'INV_E_NL_TOT_DVAL_F'\n            lifo = 'INV_E_LIFO_VAL'\n            lifo_f = 'INV_E_LIFO_VAL_F'\n            lifo_rsv = 'INV_E_LIFO_RSV_VAL'\n            lifo_rsv_f = 'INV_E_LIFO_RSV_VAL_F'\n        } else if (variable == 'B') {\n            avg = 'INV_B_AVG_VAL'\n            avg_f = 'INV_B_AVG_VAL_F'\n            fifo = 'INV_B_FIFO_VAL'\n            fifo_f = 'INV_B_FIFO_VAL_F'\n            std = 'INV_B_STD_VAL'\n            std_f = 'INV_B_STD_VAL_F'\n            othnl = 'INV_B_OTHNL_VAL'\n            othnl_f = 'INV_B_OTHNL_VAL_F'\n            tot = 'INV_B_TOT_VAL'\n            tot_f = 'INV_B_TOT_VAL_F'\n            ival_tot = 'INV_B_IVAL_TOT_DVAL'\n            ival_tot_f = 'INV_B_IVAL_TOT_DVAL_F'\n            nl_tot = 'INV_B_NL_TOT_DVAL'\n            nl_tot_f = 'INV_B_NL_TOT_DVAL_F'\n            lifo = 'INV_B_LIFO_VAL'\n            lifo_f = 'INV_B_LIFO_VAL_F'\n            lifo_rsv = 'INV_B_LIFO_RSV_VAL'\n            lifo_rsv_f = 'INV_B_LIFO_RSV_VAL_F'\n        }\n        var INVVSUMx = parseFloat(record?.[fifo]) + parseFloat(record?.[avg]) + parseFloat(record?.[std]) + parseFloat(record?.[othnl])\n\n        if (parseInt(record?.[tot]) == 0) {\n            if ((parseFloat(record?.[lifo]) + parseFloat(record?.[fifo]) + parseFloat(record?.[avg]) + parseFloat(record?.[std]) + parseFloat(record?.[othnl]) + parseFloat(record?.[ival_tot]) + parseFloat(record?.[nl_tot])) > 0 || parseInt(record?.[lifo_rsv]) != 0) {\n                record[lifo] = 0;\n                record[lifo_f] = setCharAt(record?.[lifo_f], 2, 'Z');\n                record[fifo] = 0\n                record[fifo_f] = setCharAt(record?.[fifo_f], 2, 'Z');\n                record[avg] = 0;\n                record[avg_f] = setCharAt(record?.[avg_f], 2, 'Z');\n                record[std] = 0;\n                record[std_f] = setCharAt(record?.[std_f], 2, 'Z');\n                record[othnl] = 0;\n                record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'Z');\n                record[ival_tot] = 0;\n                record[ival_tot_f] = setCharAt(record?.[ival_tot_f], 2, 'Z');\n                record[nl_tot] = 0;\n                record[nl_tot_f] = setCharAt(record?.[nl_tot_f], 2, 'Z');\n                record[lifo_rsv] = 0;\n                record[lifo_rsv_f] = setCharAt(record?.[lifo_rsv_f], 2, 'Z');\n            }\n\n        } else if (parseFloat(record?.[tot]) == parseFloat(record?.[ival_tot])) {\n            if (parseFloat(record?.[ival_tot]) == parseFloat(record?.[lifo]) + parseFloat(INVVSUMx)) {\n                if (parseFloat(record?.[nl_tot]) == parseFloat(INVVSUMx)) {\n                } else {\n                    record[nl_tot] = INVVSUMx\n                    flagRules(nl_tot, [fifo_f,avg_f,std_f,othnl_f])\n                }\n            } else {\n                EvaluateNoNLIFOValuationMethodsModulePathA(variable, INVVSUMx)\n            }\n        } else {\n            record[ival_tot] = record[tot]\n            flagRules(ival_tot,[tot_f])\n            EvaluateNoNLIFOValuationMethodsModulePathA(variable, INVVSUMx)\n        }\n    }\n    function EvaluateValuationMethodsModule() {\n        flow.set('invvsumx','')\n        flow.set('invdiffx','')\n        flow.set('callDet','')\n        let letter = global.get('miv')\n        EvaluateValuationMethods(letter)\n    }\n\n    EvaluateValuationMethodsModule()\n    record.ACTION = 'Return to Non-LIFO Valuation Methods'\n\n    return msg;\n}catch(e){\n    global.set('err','Exit Edit')\n    msg.payload.exit = 'MIV EvaluateNoNLIFOValuationMethodsModule'\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 60,
+        "wires": [
+            [
+                "b7c456c9d73bae60"
+            ]
+        ]
+    },
+    {
+        "id": "46a4448ac47c0607",
+        "type": "function",
+        "z": "0ab9d9d713d5103c",
+        "name": "MIV: EvaluateNoNLIFOValuationMethodsModule_Database",
+        "func": "try{\n    let record_idx = msg.ptrModuleFacts;\n    let record = msg.payload.csv[record_idx];\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    function flagRules(variable, details) {\n        let flagname = variable + '_F'\n        if (record?.[variable] == 0) {\n            record[flagname] = setCharAt(record?.[flagname], 2, 'Z');\n        } else {\n            let found = 'N'\n            for (let i in details) {\n                let detail = details[i]\n                if (record?.[detail]) {\n                    if (['R_', 'K_', 'T_'].includes(record?.[detail].substring(0, 2))) {\n                        found = 'Y'\n                    } else if (['R', 'C', 'A', 'S', 'O', 'G'].includes(record?.[detail]?.charAt(1))) {\n                        found = 'Y'\n                    } else {\n                        found = 'N'\n                        break\n                    }\n                    // } else {\n                    //     found = 'N'\n                    //     break\n                }\n            }\n            if (found == 'Y') {\n                record[flagname] = setCharAt(record?.[flagname], 2, 'Y');\n            } else {\n                record[flagname] = setCharAt(record?.[flagname], 2, 'S');\n            }\n        }\n    }\n\n    function EvaluateNoNLIFOValuationMethodsModulePathA(variable, INVVSUMx) {\n        let ival_tot = ''\n        let lifo = ''\n        if (variable == 'E') {\n            ival_tot = 'INV_E_IVAL_TOT_DVAL'\n            lifo = 'INV_E_LIFO_VAL'\n        } else if (variable == 'B') {\n            ival_tot = 'INV_B_IVAL_TOT_DVAL'\n            lifo = 'INV_B_LIFO_VAL'\n        }\n        var INVDIFFx = parseFloat(record?.[ival_tot]) - parseFloat(record?.[lifo])\n        msg.invvsumx = INVVSUMx\n        msg.invdiffx = INVDIFFx\n        msg.callDet = 'Call Details'\n    }\n\n    function EvaluateValuationMethods(variable) {\n        let avg = ''\n        let avg_f = ''\n        let fifo = ''\n        let fifo_f = ''\n        let std = ''\n        let std_f = ''\n        let othnl = ''\n        let othnl_f = ''\n        let tot = ''\n        let tot_f = ''\n        let ival_tot = ''\n        let ival_tot_f = ''\n        let nl_tot = ''\n        let nl_tot_f = ''\n        let lifo = ''\n        let lifo_f = ''\n        let lifo_rsv = ''\n        let lifo_rsv_f = ''\n\n        if (variable == 'E') {\n            avg = 'INV_E_AVG_VAL'\n            avg_f = 'INV_E_AVG_VAL_F'\n            fifo = 'INV_E_FIFO_VAL'\n            fifo_f = 'INV_E_FIFO_VAL_F'\n            std = 'INV_E_STD_VAL'\n            std_f = 'INV_E_STD_VAL_F'\n            othnl = 'INV_E_OTHNL_VAL'\n            othnl_f = 'INV_E_OTHNL_VAL_F'\n            tot = 'INV_E_TOT_VAL'\n            tot_f = 'INV_E_TOT_VAL_F'\n            ival_tot = 'INV_E_IVAL_TOT_DVAL'\n            ival_tot_f = 'INV_E_IVAL_TOT_DVAL_F'\n            nl_tot = 'INV_E_NL_TOT_DVAL'\n            nl_tot_f = 'INV_E_NL_TOT_DVAL_F'\n            lifo = 'INV_E_LIFO_VAL'\n            lifo_f = 'INV_E_LIFO_VAL_F'\n            lifo_rsv = 'INV_E_LIFO_RSV_VAL'\n            lifo_rsv_f = 'INV_E_LIFO_RSV_VAL_F'\n        } else if (variable == 'B') {\n            avg = 'INV_B_AVG_VAL'\n            avg_f = 'INV_B_AVG_VAL_F'\n            fifo = 'INV_B_FIFO_VAL'\n            fifo_f = 'INV_B_FIFO_VAL_F'\n            std = 'INV_B_STD_VAL'\n            std_f = 'INV_B_STD_VAL_F'\n            othnl = 'INV_B_OTHNL_VAL'\n            othnl_f = 'INV_B_OTHNL_VAL_F'\n            tot = 'INV_B_TOT_VAL'\n            tot_f = 'INV_B_TOT_VAL_F'\n            ival_tot = 'INV_B_IVAL_TOT_DVAL'\n            ival_tot_f = 'INV_B_IVAL_TOT_DVAL_F'\n            nl_tot = 'INV_B_NL_TOT_DVAL'\n            nl_tot_f = 'INV_B_NL_TOT_DVAL_F'\n            lifo = 'INV_B_LIFO_VAL'\n            lifo_f = 'INV_B_LIFO_VAL_F'\n            lifo_rsv = 'INV_B_LIFO_RSV_VAL'\n            lifo_rsv_f = 'INV_B_LIFO_RSV_VAL_F'\n        }\n        var INVVSUMx = parseFloat(record?.[fifo]) + parseFloat(record?.[avg]) + parseFloat(record?.[std]) + parseFloat(record?.[othnl])\n\n        if (parseInt(record?.[tot]) == 0) {\n            if ((parseFloat(record?.[lifo]) + parseFloat(record?.[fifo]) + parseFloat(record?.[avg]) + parseFloat(record?.[std]) + parseFloat(record?.[othnl]) + parseFloat(record?.[ival_tot]) + parseFloat(record?.[nl_tot])) > 0 || parseInt(record?.[lifo_rsv]) != 0) {\n                record[lifo] = 0;\n                record[lifo_f] = setCharAt(record?.[lifo_f], 2, 'Z');\n                record[fifo] = 0\n                record[fifo_f] = setCharAt(record?.[fifo_f], 2, 'Z');\n                record[avg] = 0;\n                record[avg_f] = setCharAt(record?.[avg_f], 2, 'Z');\n                record[std] = 0;\n                record[std_f] = setCharAt(record?.[std_f], 2, 'Z');\n                record[othnl] = 0;\n                record[othnl_f] = setCharAt(record?.[othnl_f], 2, 'Z');\n                record[ival_tot] = 0;\n                record[ival_tot_f] = setCharAt(record?.[ival_tot_f], 2, 'Z');\n                record[nl_tot] = 0;\n                record[nl_tot_f] = setCharAt(record?.[nl_tot_f], 2, 'Z');\n                record[lifo_rsv] = 0;\n                record[lifo_rsv_f] = setCharAt(record?.[lifo_rsv_f], 2, 'Z');\n            }\n\n        } else if (parseFloat(record?.[tot]) == parseFloat(record?.[ival_tot])) {\n            if (parseFloat(record?.[ival_tot]) == parseFloat(record?.[lifo]) + parseFloat(INVVSUMx)) {\n                if (parseFloat(record?.[nl_tot]) == parseFloat(INVVSUMx)) {\n                } else {\n                    record[nl_tot] = INVVSUMx\n                    flagRules(nl_tot, [fifo_f,avg_f,std_f,othnl_f])\n                }\n            } else {\n                EvaluateNoNLIFOValuationMethodsModulePathA(variable, INVVSUMx)\n            }\n        } else {\n            record[ival_tot] = record[tot]\n            flagRules(ival_tot,[tot_f])\n            EvaluateNoNLIFOValuationMethodsModulePathA(variable, INVVSUMx)\n        }\n    }\n    function EvaluateValuationMethodsModule() {\n        msg.invvsumx = ''\n        msg.invdiffx = ''\n        msg.callDet = ''\n        let letter = msg.miv\n        EvaluateValuationMethods(letter)\n    }\n\n    EvaluateValuationMethodsModule()\n    record.ACTION = 'Return to Non-LIFO Valuation Methods'\n\n    return msg;\n}catch(e){\n    msg.err= 'Exit Edit'\n    msg.payload.exit = 'MIV EvaluateNoNLIFOValuationMethodsModule'\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 320,
+        "wires": [
+            [
+                "daf27efbf9f3aa0f"
+            ]
+        ]
+    },
+    {
+        "id": "d7d779a3019dab22",
         "type": "switch",
         "z": "0ab9d9d713d5103c",
         "name": "",
@@ -13200,7 +13246,7 @@
         ]
     },
     {
-        "id": "c7bb8ab7df326471",
+        "id": "b7c456c9d73bae60",
         "type": "switch",
         "z": "0ab9d9d713d5103c",
         "name": "Error Exit Check",
@@ -13226,7 +13272,65 @@
         "wires": [
             [],
             [
-                "f4b614c73cd62f9d"
+                "d7d779a3019dab22"
+            ]
+        ]
+    },
+    {
+        "id": "4cc9bf7f08282667",
+        "type": "switch",
+        "z": "0ab9d9d713d5103c",
+        "name": "",
+        "property": "callDet",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Call Details",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 870,
+        "y": 440,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "daf27efbf9f3aa0f",
+        "type": "switch",
+        "z": "0ab9d9d713d5103c",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1020,
+        "y": 320,
+        "wires": [
+            [],
+            [
+                "4cc9bf7f08282667"
             ]
         ]
     },
@@ -14269,6 +14373,24 @@
         ]
     },
     {
+        "id": "b5c4020edc54e09e",
+        "type": "function",
+        "z": "e4fb9739caef0397",
+        "name": "Unit Balance Function",
+        "func": "try {\n    let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\n    msg.cache = global.get(\"lookupCache\").data.find(\n        item =>\n            item.module === \"balance\" &&\n            item.param === \"unit_balance\" &&\n            item.program === \"aies\" &&\n            item.unit_type === \"estab\"\n    )?.json_values;\n\n    function flagRules(variable, details) {\n        let variable_f = variable + '_F'\n        if (record?.[variable] == 0) {\n            record[variable] = setCharAt(record?.[variable], 2, 'Z');\n        } else {\n            let found = 'N'\n            for (let i in details) {\n                let detail = details[i]\n                if (record?.[detail]) {\n                    if (['R_', 'K_', 'T_'].includes(record?.[detail].substring(0, 2))) {\n                        found = 'Y'\n                    } else if (['R', 'C', 'A', 'S', 'O', 'G'].includes(record?.[detail]?.charAt(1))) {\n                        found = 'Y'\n                    } else {\n                        found = 'N'\n                        break\n                    }\n                    // } else {\n                    //     found = 'N'\n                    //     break\n                }\n            }\n            if (found == 'Y') {\n                record[variable_f] = setCharAt(record?.[variable_f], 2, 'Y');\n            } else {\n                record[variable_f] = setCharAt(record?.[variable_f], 2, 'S');\n            }\n        }\n    }\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    function arrayRemove(arr, value) {\n        return arr.filter(function (ele) {\n            return ele != value;\n        });\n    }\n    \n    function checkNaics(data, naics, rec_typ, rec_typop, rec_tax) {\n        let list = data['NAICS']\n        let unit = data['UNIT TYPE']\n        let typop = data['TYPOP']\n        let tax = data['TAXSTAT']\n        let rectyp = rec_typ\n        if (['SU', 'MU'].includes(rectyp)) {\n            rec_typ = 'ESTAB'\n        } else if (['KAU'].includes(rectyp)) {\n            rec_typ = 'KAU'\n        } else if (['ENT'].includes(rectyp)) {\n            rec_typ = 'ENT'\n        }\n        if ([null, undefined, 'null', 'undefined'].includes(typop)) {\n            rec_typop = typop\n        }\n        if ([null, undefined, 'null', 'undefined'].includes(tax)) {\n            rec_tax = tax\n        }\n\n        if (rec_typ === unit && rec_tax === tax && rec_typop === typop) {\n            if ([\"ALL\", \"All\"].includes(list)) {\n                return (true);\n            } else {\n                list = list.replace(/ /g, \"\");\n                list = list.replace(/'/g, \"\");\n                var array = list.split(',')\n\n                if (array.find(r => naics.startsWith(r))) {\n                    return (true);\n                } else {\n                    return (false)\n                }\n            }\n        }\n    }\n\n    function sumRow(data) {\n        let sum = 0;\n        var keys = [];\n        var keys_f = [];\n        for (var key in data) {\n            if (key.startsWith('DETAIL') && data[key] != null) {\n                let variable = data[key]\n                let variable_f = variable + '_F'\n                if (!Number.isNaN(parseFloat(record[variable]))) {\n                    sum = parseFloat(sum) + parseFloat(record[variable])\n                }\n                // else {\n                //     record[variable] = 0\n                // }\n                keys.push(variable)\n                keys.push(variable_f)\n            }\n        }\n        return [sum, keys, keys_f];\n    }\n\n    function raking(rectot, sum, keys, tol, fixedVar) {\n        keys = keys.filter(key => !fixedVar.has(key))\n\n        if ((Math.abs(rectot - sum) / rectot) <= tol) {\n            keys.sort((a, b) => record[b] - record[a]);\n\n            let updatedRectot = rectot;\n            let updatedSum = sum;\n\n            for (let key of fixedVar) {\n                if (record[key] !== undefined) {\n                    updatedRectot -= record[key]\n                    updatedSum -= record[key]\n                }\n            }\n\n            // if (keys.includes(excludeVar)) {\n            //     keys = arrayRemove(keys, excludeVar)\n            //     rectot = rectot - record[excludeVar]\n            //     sum = sum - record[excludeVar]\n            // }\n\n            let remainder = 0\n            for (let i = 0; i < keys.length; i++) {\n                if (record[keys[i]] !== undefined) {\n                    let num1 = (updatedRectot / updatedSum) * parseFloat(record[keys[i]]) + remainder\n                    let num2 = Math.round(num1)\n                    remainder = num1 - num2\n                    record[keys[i]] = num2\n                }    \n            }\n        }\n    }\n\n\n    let naics = record['NAICS_NUM']\n    naics = '' + naics\n\n    const REPORTING_ID_TYP_TXT = record['REPORTING_ID_TYP_TXT']\n    let TYPOP = record['TYPOP_WHSL_OLD_NUM']\n    let TAXSTAT = record['TAXSTAT']\n\n    var unitBalances = msg.cache['UNIT_BALANCE']\n    unitBalances.sort((a, b) => (a.Priority != null ? a.Priority : Infinity) - (b.Priority != null ? b.Priority : Infinity))\n    // console.log(unitBalances[40]['UNIT TYPE'])\n\n\n    for (let i in unitBalances) {\n        let unitBalance = unitBalances[i]\n        let priority = unitBalance.Priority\n        let fixedKeys = unitBalance['Fixed Variable']\n        if (fixedKeys !== null) {\n            fixedKeys = fixedKeys.split(\", \")\n        }\n\n\n        if (checkNaics(unitBalance, naics, REPORTING_ID_TYP_TXT, TYPOP, TAXSTAT)) {\n            let tot = unitBalance['TOTAL']\n            let rectot = 0\n            if ([100, '100'].includes(tot)) {\n                rectot = 100\n            } else {\n                if (!Number.isNaN(parseFloat(record[tot]))) {\n                    rectot = parseFloat(record[tot])\n                }\n                // else {\n                //     record[tot] = 0\n                // }\n            }\n            let name_f = tot + '_F'\n            let [sum, keys, keys_f] = sumRow(unitBalance)\n            let filteredKeys = keys.filter(key => !fixedKeys.has(key))\n\n            sum = parseFloat(sum)\n\n            const tolerance = parseFloat(unitBalance['Tolerance'])\n            const tolerance2 = parseFloat(unitBalance['Tolerance2'])\n\n            // begin fail logic\n            if (rectot == sum && sum != 0) {\n                record['ACTION'] = 'Go To: Main Routing'\n                // global.set('action', 'Go To: Main Routing')\n            } else  {\n                // not kau path\n                if (['SU', 'MU', 'ENT'].includes(REPORTING_ID_TYP_TXT) || priority == 3) {\n                    if (((sum > 0 && rectot <= 0) || (priority == 3)) && priority != 4) {\n                        record[tot] = sum\n                        flagRules(tot,keys_f)\n                    } else if (sum == 0 && rectot > 0) {\n                        for (let i = 0; i < filteredKeys.length; i++) {\n                            let det_f = filteredKeys[i] + '_F'\n                            record[det_f] = setCharAt(record?.[det_f], 2, 'X')\n                        }\n                    } else if (sum > 0 && rectot > 0) {\n                        if ((Math.abs(rectot - sum) / rectot) <= tolerance) {\n                            let flag_check = 'Yes'\n                            for (let i = 0; i < keys.length; i++) {\n                                let det_f = keys[i] + '_F'\n                                try {\n                                    if (!['P', 'C', 'A', 'S', 'O', 'E', 'F'].includes(record[det_f].substring(1, 2))) {\n                                        flag_check = 'No'\n                                    } \n                                } catch {\n                                }\n                            }\n                            if (flag_check == 'Yes' && priority != 4) {\n                                record[tot] = sum\n                                flagRules(tot, keys_f)\n                            } else {\n                                raking(rectot, sum, keys, tolerance, fixedKeys)\n                                for (let i = 0; i < filteredKeys.length; i++) {\n                                    let det_f = filteredKeys[i] + '_F'\n                                    record[det_f] = setCharAt(record?.[det_f], 2, 'K')\n                                }\n                            }\n                        } else if ((Math.abs(rectot - sum) / rectot) <= tolerance2) {\n                            raking(rectot, sum, keys, tolerance, fixedKeys)\n                            for (let i = 0; i < filteredKeys.length; i++) {\n                                let det_f = filteredKeys[i] + '_F'\n                                record[det_f] = setCharAt(record?.[det_f], 2, 'F')\n                            }\n                        } else {\n                            for (let i = 0; i < filteredKeys.length; i++) {\n                                let det_f = filteredKeys[i] + '_F'\n                                record[det_f] = setCharAt(record?.[det_f], 2, 'X')\n                            }\n                        }\n                    } else if (sum == 0 && rectot <= 0) {\n                        for (let i = 0; i < filteredKeys.length; i++) {\n                            let det_f = filteredKeys[i] + '_F'\n                            record[det_f] = setCharAt(record?.[det_f], 2, 'X')\n                        }\n                    } else {\n                    }\n\n                // kau path\n                } else {\n                    if (priority == 3) {\n                        record[tot] = sum\n                        flagRules(tot, keys_f)\n                    } else if (sum == 0 && rectot > 0) {\n                        for (let i = 0; i < filteredKeys.length; i++) {\n                            let det_f = filteredKeys[i] + '_F'\n                            record[det_f] = setCharAt(record?.[det_f], 2, 'X')\n                        }\n                    } else {\n                        if ((Math.abs(rectot - sum) / rectot) <= tolerance) {\n                            raking(rectot, sum, keys, tolerance, fixedKeys)\n                            for (let i = 0; i < filteredKeys.length; i++) {\n                                let det_f = filteredKeys[i] + '_F'\n                                record[det_f] = setCharAt(record?.[det_f], 2, 'K')\n                            }\n                        } else if (tolerance2 != null) {\n                        } else if ((Math.abs(rectot - sum) / rectot) <= tolerance2) {\n                            raking(rectot, sum, keys, tolerance, fixedKeys)\n                            for (let i = 0; i < filteredKeys.length; i++) {\n                                let det_f = filteredKeys[i] + '_F'\n                                record[det_f] = setCharAt(record?.[det_f], 2, 'F')\n                            }\n                        } else {\n                            for (let i = 0; i < filteredKeys.length; i++) {\n                                let det_f = filteredKeys[i] + '_F'\n                                record[det_f] = setCharAt(record?.[det_f], 2, 'X')\n                            }\n                        }\n                    }\n                }\n            }\n        }\n    }\n\n    record['ACTION'] = 'Go To: Main Routing'\n    // global.set('action', 'Go To: Main Routing')\n    return msg;\n} catch(e) {\n    global.set('err','Exit Edit')\n    msg.payload.exit = 'Unit Balance'\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
         "id": "0c4def347547a284",
         "type": "function",
         "z": "5e2c6717be2fdd36",
@@ -14435,7 +14557,7 @@
         "type": "function",
         "z": "27c40a87c581e266",
         "name": "pay_ann_val",
-        "func": "try {\n    let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\n    // Set function\n    const setVariable = (variable, value) => {\n        record[variable] = value;\n    };\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    function flagRules(variable, details) {\n        if (record?.[variable] == 0) {\n            record[variable] = setCharAt(record?.[variable], 2, 'Z');\n        } else {\n            let found = 'N'\n            for (let i in details) {\n                let detail = details[i]\n                if (record?.[detail]) {\n                    if (['R_', 'K_', 'T_'].includes(record?.[detail].substring(0, 2))) {\n                        found = 'Y'\n                    } else if (['R', 'C', 'A', 'S', 'O', 'G'].includes(record?.[detail]?.charAt(1))) {\n                        found = 'Y'\n                    } else {\n                        found = 'N'\n                        break\n                    }\n                    // } else {\n                    //     found = 'N'\n                    //     break\n                }\n            }\n            if (found == 'Y') {\n                record[variable] = setCharAt(record?.[variable], 2, 'Y');\n            } else {\n                record[variable] = setCharAt(record?.[variable], 2, 'S');\n            }\n        }\n    }\n\n    let cache = global.get(\"lookupCache\");\n    let cy_py_factor = cache.data.find(\n        item =>\n            item.module === \"core_4\" &&\n            item.param === 'core_4' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"all\"\n    )?.json_values;\n\n    function findCY() {\n        let cy_py = {}\n        for (let i in cy_py_factor['CY_PY_K_FACTORS']) {\n            let cy_py_fact = cy_py_factor['CY_PY_K_FACTORS'][i]\n            if (record.NAICS_CODE.startsWith(cy_py_fact['NAICS_CODE'])) {\n                cy_py = cy_py_fact\n                break;\n            }\n        }\n        return (cy_py);\n    }\n\n    const setVals = () => {\n        setVariable('PAY_QTR1_VAL', 0);\n        record['PAY_QTR1_VAL_F'] = setCharAt(record['PAY_QTR1_VAL_F'], 1, 'G');\n        setVariable('EMP_MAR12_NUM', 0);\n        record['EMP_MAR12_NUM_F'] = setCharAt(record['EMP_MAR12_NUM_F'], 1, 'G');\n        setVariable('EXIMP', 'E');\n        setVariable('Referral_Flag', 'LEASED_ONLY');\n    }\n    global.set('action','')\n\n    if (record?.REPORTING_ID_TYP_TXT == 'SU' && parseFloat(record?.IRS_PAY_ANN_VAL) > 0) {\n        setVariable('PAY_ANN_VAL', record?.IRS_PAY_ANN_VAL);\n        record['PAY_ANN_VAL_F'] = setCharAt(record['PAY_ANN_VAL_F'], 2, 'A');\n    } else if (record?.REPORTING_ID_TYP_TXT == 'MU' && parseFloat(record?.BR_PAY_ANN_VAL) > 0) {\n        setVariable('PAY_ANN_VAL', record?.BR_PAY_ANN_VAL);\n        record['PAY_ANN_VAL_F'] = setCharAt(record['PAY_ANN_VAL_F'], 2, 'O');\n    } else if (parseFloat(record?.BR_PAY_ANN_LSD_VAL) > 0) {\n        setVariable('PAY_ANN_VAL', record?.BR_PAY_ANN_LSD_VAL);\n        record['PAY_ANN_VAL_F'] = setCharAt(record['PAY_ANN_VAL_F'], 2, 'O');\n        setVals()\n    } else if (parseFloat(record?.EXPS_TEMPSTAF_VAL) > 0) {\n        setVariable('PAY_ANN_VAL', record?.EXPS_TEMPSTAF_VAL);\n        flagRules('PAY_ANN_VAL_F', ['EXPS_TEMPSTAF_VAL_F'])\n        setVals()\n    } else if (parseFloat(record?.EC_PAY_ANN_VAL) > 0) {\n        let cy_py = findCY()\n        setVariable('PAY_ANN_VAL', Math.round(parseFloat(record?.EC_PAY_ANN_VAL) * parseFloat(cy_py.PAYANN)));\n        record['PAY_ANN_VAL_F'] = setCharAt(record['PAY_ANN_VAL_F'], 2, 'H');\n    } else {\n        setVariable('TABSTAT', 'N')\n        setVariable('NONTABFL', 'N')\n        if (parseFloat(record?.RCPT_TOT_VAL) > 0 && record?.RCPT_TOT_VAL_F?.charAt(0) == 'R') {\n            setVariable('Referral_Flag', 'NO_PAYROLL_W_RECEIPTS')\n        }\n        setVariable('ACTION', 'EXIT EDIT')\n        global.set('action','Exit Edit')\n    }\n\n    return msg;\n} catch(e) {\n    global.set('err','Exit Edit')\n    msg.payload.exit = 'PAY_ANN_VAL'\n    return msg;\n}\n\n\n",
+        "func": "try {\n    let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\n    // Set function\n    const setVariable = (variable, value) => {\n        record[variable] = value;\n    };\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    function flagRules(variable, details) {\n        let flagname = variable + '_F'\n        if (record?.[variable] == 0) {\n            record[flagname] = setCharAt(record?.[flagname], 2, 'Z');\n        } else {\n            let found = 'N'\n            for (let i in details) {\n                let detail = details[i]\n                if (record?.[detail]) {\n                    if (['R_', 'K_', 'T_'].includes(record?.[detail].substring(0, 2))) {\n                        found = 'Y'\n                    } else if (['R', 'C', 'A', 'S', 'O', 'G'].includes(record?.[detail]?.charAt(1))) {\n                        found = 'Y'\n                    } else {\n                        found = 'N'\n                        break\n                    }\n                    // } else {\n                    //     found = 'N'\n                    //     break\n                }\n            }\n            if (found == 'Y') {\n                record[flagname] = setCharAt(record?.[flagname], 2, 'Y');\n            } else {\n                record[flagname] = setCharAt(record?.[flagname], 2, 'S');\n            }\n        }\n    }\n\n    let cache = global.get(\"lookupCache\");\n    let cy_py_factor = cache.data.find(\n        item =>\n            item.module === \"core_4\" &&\n            item.param === 'core_4' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"all\"\n    )?.json_values;\n\n    function findCY() {\n        let cy_py = {}\n        for (let i in cy_py_factor['CY_PY_K_FACTORS']) {\n            let cy_py_fact = cy_py_factor['CY_PY_K_FACTORS'][i]\n            if (record.NAICS_CODE.startsWith(cy_py_fact['NAICS_CODE'])) {\n                cy_py = cy_py_fact\n                break;\n            }\n        }\n        return (cy_py);\n    }\n\n    const setVals = () => {\n        setVariable('PAY_QTR1_VAL', 0);\n        record['PAY_QTR1_VAL_F'] = setCharAt(record['PAY_QTR1_VAL_F'], 1, 'G');\n        setVariable('EMP_MAR12_NUM', 0);\n        record['EMP_MAR12_NUM_F'] = setCharAt(record['EMP_MAR12_NUM_F'], 1, 'G');\n        setVariable('EXIMP', 'E');\n        setVariable('Referral_Flag', 'LEASED_ONLY');\n    }\n    global.set('action','')\n\n    if (record?.REPORTING_ID_TYP_TXT == 'SU' && parseFloat(record?.IRS_PAY_ANN_VAL) > 0) {\n        setVariable('PAY_ANN_VAL', record?.IRS_PAY_ANN_VAL);\n        record['PAY_ANN_VAL_F'] = setCharAt(record['PAY_ANN_VAL_F'], 2, 'A');\n    } else if (record?.REPORTING_ID_TYP_TXT == 'MU' && parseFloat(record?.BR_PAY_ANN_VAL) > 0) {\n        setVariable('PAY_ANN_VAL', record?.BR_PAY_ANN_VAL);\n        record['PAY_ANN_VAL_F'] = setCharAt(record['PAY_ANN_VAL_F'], 2, 'O');\n    } else if (parseFloat(record?.BR_PAY_ANN_LSD_VAL) > 0) {\n        setVariable('PAY_ANN_VAL', record?.BR_PAY_ANN_LSD_VAL);\n        record['PAY_ANN_VAL_F'] = setCharAt(record['PAY_ANN_VAL_F'], 2, 'O');\n        setVals()\n    } else if (parseFloat(record?.EXPS_TEMPSTAF_VAL) > 0) {\n        setVariable('PAY_ANN_VAL', record?.EXPS_TEMPSTAF_VAL);\n        flagRules('PAY_ANN_VAL', ['EXPS_TEMPSTAF_VAL_F'])\n        setVals()\n    } else if (parseFloat(record?.EC_PAY_ANN_VAL) > 0) {\n        let cy_py = findCY()\n        setVariable('PAY_ANN_VAL', Math.round(parseFloat(record?.EC_PAY_ANN_VAL) * parseFloat(cy_py.PAYANN)));\n        record['PAY_ANN_VAL_F'] = setCharAt(record['PAY_ANN_VAL_F'], 2, 'H');\n    } else {\n        setVariable('TABSTAT', 'N')\n        setVariable('NONTABFL', 'N')\n        if (parseFloat(record?.RCPT_TOT_VAL) > 0 && record?.RCPT_TOT_VAL_F?.charAt(0) == 'R') {\n            setVariable('Referral_Flag', 'NO_PAYROLL_W_RECEIPTS')\n        }\n        setVariable('ACTION', 'EXIT EDIT')\n        global.set('action','Exit Edit')\n    }\n\n    return msg;\n} catch(e) {\n    global.set('err','Exit Edit')\n    msg.payload.exit = 'PAY_ANN_VAL'\n    return msg;\n}\n\n\n",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -15030,20 +15152,20 @@
         ]
     },
     {
-        "id": "d155d60b701b2ee7",
+        "id": "508bfe2ad7cfeddd",
         "type": "subflow:1159e6c8f76efda3",
         "z": "e09a92672a809eab",
         "name": "",
-        "x": 460,
-        "y": 140,
+        "x": 540,
+        "y": 360,
         "wires": [
             [
-                "3cf343fa5819ebd3"
+                "29636a3b9b9bf654"
             ]
         ]
     },
     {
-        "id": "3cf343fa5819ebd3",
+        "id": "29636a3b9b9bf654",
         "type": "switch",
         "z": "e09a92672a809eab",
         "name": "Error Exit Check",
@@ -15064,28 +15186,28 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 700,
-        "y": 140,
+        "x": 780,
+        "y": 360,
         "wires": [
             [],
             []
         ]
     },
     {
-        "id": "1e2456926ce5861f",
+        "id": "8587ec4502170e69",
         "type": "subflow:75eae7f006cc0f8a",
         "z": "e09a92672a809eab",
         "name": "",
-        "x": 470,
-        "y": 220,
+        "x": 550,
+        "y": 440,
         "wires": [
             [
-                "e08612ede8b2c7aa"
+                "a6ecbb0f804243ba"
             ]
         ]
     },
     {
-        "id": "e08612ede8b2c7aa",
+        "id": "a6ecbb0f804243ba",
         "type": "switch",
         "z": "e09a92672a809eab",
         "name": "Error Exit Check",
@@ -15106,41 +15228,85 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 700,
-        "y": 220,
+        "x": 780,
+        "y": 440,
         "wires": [
             [],
             [
-                "d78a3e1c8528dfd1"
+                "a5431844c324306b"
             ]
         ]
     },
     {
-        "id": "d78a3e1c8528dfd1",
+        "id": "a5431844c324306b",
         "type": "subflow:b68b1cdb465a831c",
         "z": "e09a92672a809eab",
         "name": "",
-        "x": 440,
-        "y": 280,
+        "x": 520,
+        "y": 500,
         "wires": [
             [
-                "b354a3d6351291be"
+                "ebd10c9f307211a6"
             ]
         ]
     },
     {
-        "id": "922c556578a1d90b",
+        "id": "ebd10c9f307211a6",
+        "type": "switch",
+        "z": "e09a92672a809eab",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 780,
+        "y": 500,
+        "wires": [
+            [],
+            [
+                "da1041380073a9cd"
+            ]
+        ]
+    },
+    {
+        "id": "da1041380073a9cd",
         "type": "subflow:96f29b19e2260e65",
         "z": "e09a92672a809eab",
         "name": "",
-        "x": 450,
-        "y": 340,
+        "x": 550,
+        "y": 780,
         "wires": [
             []
         ]
     },
     {
-        "id": "b354a3d6351291be",
+        "id": "46b3677a66484905",
+        "type": "subflow:7c74ea1220a33f32",
+        "z": "e09a92672a809eab",
+        "name": "",
+        "x": 490,
+        "y": 240,
+        "wires": [
+            [
+                "a241a27d91c97bd0"
+            ]
+        ]
+    },
+    {
+        "id": "a241a27d91c97bd0",
         "type": "switch",
         "z": "e09a92672a809eab",
         "name": "Error Exit Check",
@@ -15161,10 +15327,43 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 700,
-        "y": 280,
+        "x": 740,
+        "y": 240,
         "wires": [
             [],
+            [
+                "ece6d6ed5ddcee4b"
+            ]
+        ]
+    },
+    {
+        "id": "ece6d6ed5ddcee4b",
+        "type": "switch",
+        "z": "e09a92672a809eab",
+        "name": "sector check",
+        "property": "naicsSector",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Y",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Y",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 270,
+        "y": 300,
+        "wires": [
+            [
+                "508bfe2ad7cfeddd"
+            ],
             []
         ]
     },
@@ -15218,9 +15417,7 @@
         "y": 420,
         "wires": [
             [],
-            [
-                "a7323db66b18f651"
-            ]
+            []
         ]
     },
     {
@@ -16031,7 +16228,7 @@
         "type": "function",
         "z": "b93bf22bc3258992",
         "name": "NONNORM: Router",
-        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    flow.set('nonnorm','')\n\n    \n    // function nonNORMRouterPathA() {\n    //     if ((record?.NONNORM_F == \"   \") || (record?.NONNORM_F == \"  J\")) {\n    //         setNONNORM()\n    //     }\n    //     if (record?.NONNORM == 'B') {\n    //         setBASIC()\n    //     }\n    //     if (record?.NONNORM == 'S' && record?.ACTV_MIO_NUM < 10 && record?.PAY_QTR1_VAL == 0 && record?.EMP_MAR12_NUM == 0) {\n    //         specialSeasonal()\n    //     }\n    //     record.ACTION = \"Exit to AIES Main Routing\";\n    // }\n    function processRecord(record) {\n        if (['R', 'T', 'K'].includes(record?.ACTV_MIO_NUM_F?.charAt(0)) && record?.REPORTING_ID_TYP_TXT == 'SU') {\n            if (record?.ACTV_MIO_NUM < 12 && record?.REF_PER == '2022A1' && parseFloat(record?.IRS_PAY_ANN_VAL) == 0) {\n                record.NONNORM = 'B';\n                record.NONNORM_F = setCharAt(record['NONNORM_F'], 2, 'Y');\n            }\n        } else {\n            if (['97', '98', '99'].includes(record?.BMF_FR941)) {\n            } else {\n                if (record?.ACTV_MIO_NUM_F?.charAt(1) == \"_\" && record?.OPSTATS_F?.charAt(1) == \"_\") {\n                    console.log('hello I reached setOpstat')\n                    flow.set('nonnorm','setOpstat')\n                }\n            }\n        }\n    }\n    \n    processRecord(record);\n    return msg;\n}catch(e){\n    global.set('err', 'Exit Edit')\n    msg.payload.exit = 'NONNORM Router'\n    return msg;\n}\n\n\n",
+        "func": "try{\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    flow.set('nonnorm','')\n\n    \n    // function nonNORMRouterPathA() {\n    //     if ((record?.NONNORM_F == \"   \") || (record?.NONNORM_F == \"  J\")) {\n    //         setNONNORM()\n    //     }\n    //     if (record?.NONNORM == 'B') {\n    //         setBASIC()\n    //     }\n    //     if (record?.NONNORM == 'S' && record?.ACTV_MIO_NUM < 10 && record?.PAY_QTR1_VAL == 0 && record?.EMP_MAR12_NUM == 0) {\n    //         specialSeasonal()\n    //     }\n    //     record.ACTION = \"Exit to AIES Main Routing\";\n    // }\n    function processRecord(record) {\n        if (['R', 'T', 'K'].includes(record?.ACTV_MIO_NUM_F?.charAt(0)) && record?.REPORTING_ID_TYP_TXT == 'SU') {\n            if (record?.ACTV_MIO_NUM < 12 && record?.REF_PER == '2022A1' && parseFloat(record?.IRS_PAY_ANN_VAL) == 0) {\n                record.NONNORM = 'B';\n                record.NONNORM_F = setCharAt(record['NONNORM_F'], 2, 'Y');\n            }\n        } else {\n            if (['97', '98', '99'].includes(record?.BMF_FR941)) {\n            } else {\n                if (record?.ACTV_MIO_NUM_F?.charAt(1) == \"_\" && record?.OPSTATS_F?.charAt(1) == \"_\") {\n                    flow.set('nonnorm','setOpstat')\n                }\n            }\n        }\n    }\n    \n    processRecord(record);\n    return msg;\n}catch(e){\n    global.set('err', 'Exit Edit')\n    msg.payload.exit = 'NONNORM Router'\n    return msg;\n}\n\n\n",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -17448,7 +17645,7 @@
         "type": "function",
         "z": "d32a58c0544f501c",
         "name": "NAPCS Balance 3",
-        "func": "try {\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n    let id = record['REPORTING_ID']\n\n    let allData = msg.payload.csv;\n\n    for (let i in allData) {\n        let row = allData[i]\n        if (row.REPORTING_ID == id && row.PROD_CODE_VAL == 0) {\n            row.USABLE = 'D'\n            allData[i] = row\n        } \n    }\n\n    msg.payload.csv = allData\n    return msg;\n} catch(e) {\n    global.set('err','Exit Edit')\n    return msg;\n}",
+        "func": "try {\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n    let id = record['REPORTING_ID']\n\n    let allData = msg.payload.csv;\n\n    for (let i in allData) {\n        let row = allData[i]\n        if (row.REPORTING_ID == id && row.PROD_CODE_VAL_PO == 0) {\n            row.USABLE = 'D'\n            allData[i] = row\n        } \n    }\n\n    msg.payload.csv = allData\n    return msg;\n} catch(e) {\n    global.set('err','Exit Edit')\n    return msg;\n}",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -36302,7 +36499,7 @@
                 "7801b65b30d7f5d3"
             ],
             [
-                "7801b65b30d7f5d3"
+                "964fd3054d69b5b8"
             ]
         ]
     },
@@ -36546,7 +36743,7 @@
                 "66fdc22c898d5af9"
             ],
             [
-                "66fdc22c898d5af9"
+                "160e5288ef2a74cf"
             ]
         ]
     },
@@ -36555,8 +36752,8 @@
         "type": "subflow:848cf3fa24ade3ee",
         "z": "8790b12c7efb6fa0",
         "name": "",
-        "x": 1780,
-        "y": 920,
+        "x": 1980,
+        "y": 940,
         "wires": [
             [
                 "7801b65b30d7f5d3"
