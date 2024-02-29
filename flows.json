@@ -3372,7 +3372,7 @@
                         "port": 1
                     },
                     {
-                        "id": "29636a3b9b9bf654",
+                        "id": "a6ecbb0f804243ba",
                         "port": 1
                     }
                 ]
@@ -3394,35 +3394,39 @@
                 "y": 300,
                 "wires": [
                     {
-                        "id": "12e36b0a4c1c8eb8"
+                        "id": "464674c4029c73d2"
                     }
                 ]
             }
         ],
         "out": [
             {
-                "x": 1340,
-                "y": 500,
+                "x": 1740,
+                "y": 300,
                 "wires": [
                     {
-                        "id": "a7323db66b18f651",
+                        "id": "4504eca1eab0f0d6",
                         "port": 0
                     },
                     {
-                        "id": "dd93ae4285a8a267",
+                        "id": "19086e3898d97bcf",
                         "port": 0
                     },
                     {
-                        "id": "7836fdae7e579881",
+                        "id": "ddcfb9ab334353de",
                         "port": 0
                     },
                     {
-                        "id": "75a34d5859224d5e",
+                        "id": "37fd0022f9cf94d8",
                         "port": 0
                     },
                     {
-                        "id": "75a34d5859224d5e",
-                        "port": 1
+                        "id": "112c2ba4c31fe6c3",
+                        "port": 0
+                    },
+                    {
+                        "id": "a87b0bc5e57096a7",
+                        "port": 0
                     }
                 ]
             }
@@ -14395,7 +14399,7 @@
         "type": "function",
         "z": "5e2c6717be2fdd36",
         "name": "logical edits function",
-        "func": "try{\n    let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\n    msg.cache = global.get(\"lookupCache\").data.find(\n        item =>\n            item.module === \"logical_edit\" &&\n            item.param === \"logical_edit\" &&\n            item.program === \"aies\" &&\n            item.unit_type === \"all\"\n    )?.json_values;\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    function flagRules(variable, details) {\n        let flagname = variable + '_F'\n        if (record?.[variable] == 0) {\n            record[flagname] = setCharAt(record?.[flagname], 2, 'Z');\n        } else {\n            let found = 'N'\n            for (let i in details) {\n                let detail = details[i]\n                if (record?.[detail]) {\n                    if (['R_', 'K_', 'T_'].includes(record?.[detail].substring(0, 2))) {\n                        found = 'Y'\n                    } else if (['R', 'C', 'A', 'S', 'O', 'G'].includes(record?.[detail]?.charAt(1))) {\n                        found = 'Y'\n                    } else {\n                        found = 'N'\n                        break\n                    }\n                    // } else {\n                    //     found = 'N'\n                    //     break\n                }\n            }\n            if (found == 'Y') {\n                record[flagname] = setCharAt(record?.[flagname], 2, 'Y');\n            } else {\n                record[flagname] = setCharAt(record?.[flagname], 2, 'S');\n            }\n        }\n    }\n\n\n    function checkNaics(data, naics, rec_typ, rec_tax, rec_typop) {\n        let list = data['NAICS_NUM']\n        let notlist = data['NAICS_NOT']\n        let unit = data['UNIT']\n        let tax = data['TAXSTAT']\n        let typop = data['TYPOP']\n\n        let rectyp = rec_typ\n        if (['MU', 'SU'].includes(rectyp)) {\n            rec_typ = 'ESTAB'\n        } else if (['KAU', 'kau', 'Kau'].includes(rectyp)) {\n            rec_typ = 'KAU'\n        } else if (['ENT', 'Ent', 'ent'].includes(rectyp)) {\n            rec_typ = 'COMPANY'\n        }\n        if ([null, undefined, 'null', 'undefined'].includes(tax)) {\n            rec_tax = tax\n        }\n        if ([null, undefined, 'null', 'undefined'].includes(typop)) {\n            rec_typop = typop\n        } else {\n            if (![null, undefined, 'null', 'undefined'].includes(rec_typop)) {\n                rec_typop = rec_typop?.charAt(0)\n            }\n        }\n\n        if (rec_typ === unit && rec_tax === tax && rec_typop == typop) {\n            if ([\"ALL\", \"All\", \"ALL \", \"All \"].includes(list)) {\n                return (true);\n            } else {\n                list = list.replace(/ /g, \"\");\n                list = list.replace(/'/g, \"\");\n                var array = list.split(',')\n\n                if (array.find(r => naics.startsWith(r))) {\n                    if (![null, undefined].includes(notlist)) {\n                        notlist = notlist.replace(/ /g, \"\");\n                        notlist = notlist.replace(/'/g, \"\");\n                        var notarray = notlist.split(',');\n                        if (notarray.find(r => naics.startsWith(r))) {\n                            return (false);\n                        } else {\n                            return (true);\n                        }\n                    } else {\n                        return (true);\n                    }\n                } else {\n                    return (false)\n                }\n            }\n        }\n    }\n\n    function createVariables(evalobj, context) {\n        for (let i in evalobj) {\n            context[i] = evalobj[i];\n        }\n    }\n    function returnVariables(evalobj, context, array) {\n        for (let i in array) {\n            let newname = array[i]\n            evalobj[newname] = context[newname];\n        }\n    }\n\n    function evalCondition(logicalEdit, record) {\n        let truth = 'N'\n        var condition = logicalEdit['CONDITION']\n        var columns = logicalEdit['ALL_VARIABLE']\n        columns = columns.replace(/ /g, \"\");\n        var array = columns.split(',')\n        var action_col = logicalEdit['ACTION_VARIABLE']\n        action_col = action_col.replace(/ /g, \"\");\n        var action_array = action_col.split(',')\n        let evalobj = {}\n        for (let i in array) {\n            let newname = array[i]\n            if (!([null, 'null', 'NULL', undefined, 'undefined'].includes(record?.[newname]))) {\n                evalobj[newname] = parseFloat(record[newname])\n            } else {\n                evalobj[newname] = null\n            }\n        }\n        createVariables(evalobj, this);\n        if (condition == 'None') {\n            truth = 'Y'\n        } else {\n            const code = 'if (' + condition + ') {truth = \"Y\"}'\n            try {\n                eval(code)\n            } catch {\n                console.log('Condition Error on: ' + logicalEdit)\n            }\n        }\n        if (truth == 'Y') {\n            const action = logicalEdit['ACTION']\n            try {\n                eval(action)\n            } catch {\n                console.log('Action Error on: ' + logicalEdit)\n            }\n            let num = (action.split(\"=\").length - 1)\n            let string = ''\n            if ((action.split(\"=\").length - 1) >= 1) {\n                for (let i = 1; i <= num; i++) {\n                    if (i == 1) {\n                        string = action.substring(action.indexOf('=')+1)\n                    } else {\n                        string = string.substring(0, string.indexOf(';')) + string.substring(string.indexOf('=') + 1)\n                    }\n                }\n            }\n            let details = []\n            for (let i in evalobj) {\n                let name1 = i\n                if (string.indexOf(name1) != -1) {\n                    details.push(name1 + '_F')\n                }\n            }\n\n\n            returnVariables(evalobj, this, action_array)\n            for (let i in action_array) {\n                let newname = action_array[i]\n                let newname_f = newname + '_F'\n                let flag = logicalEdit['PO Flag']\n                record[newname] = evalobj[newname]\n                if (['L', 'J'].includes(flag)) {\n                    flagRules(newname, details)\n                } else {\n                    record[newname_f] = setCharAt(record?.[newname_f], 2, flag)\n                }\n            }\n        }\n    }\n\n    let naics = record['NAICS_CODE']\n    naics = '' + naics\n\n    const REPORTING_ID_TYP_TXT = record['REPORTING_ID_TYP_TXT']\n    let TAXSTAT = record['TAX_EXEMPT_STAT']\n    let TYPOP_CODE = record['TYPOP_WHSL_OLD_NUM']\n\n\n    var logicalEdits = msg.cache['LOGICAL_EDIT']\n    logicalEdits.sort((a, b) => (a.PRIORITY != null ? a.PRIORITY : Infinity) - (b.PRIORITY != null ? b.PRIORITY : Infinity))\n\n    for (let i in logicalEdits) {\n        let logicalEdit = logicalEdits[i]\n        if (checkNaics(logicalEdit, naics, REPORTING_ID_TYP_TXT, TAXSTAT, TYPOP_CODE)) {\n            evalCondition(logicalEdit, record)\n        }\n    }\n    return msg;\n}catch(e){\n    global.set('err','Exit Edit')\n    msg.payload.exit = 'Logical Edits'\n    return msg;\n}",
+        "func": "try{\n    let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n\n    msg.cache = global.get(\"lookupCache\").data.find(\n        item =>\n            item.module === \"logical_edit\" &&\n            item.param === \"logical_edit\" &&\n            item.program === \"aies\" &&\n            item.unit_type === \"all\"\n    )?.json_values;\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    function flagRules(variable, details) {\n        let flagname = variable + '_F'\n        if (record?.[variable] == 0) {\n            record[flagname] = setCharAt(record?.[flagname], 2, 'Z');\n        } else {\n            let found = 'N'\n            for (let i in details) {\n                let detail = details[i]\n                if (record?.[detail]) {\n                    if (['R_', 'K_', 'T_'].includes(record?.[detail].substring(0, 2))) {\n                        found = 'Y'\n                    } else if (['R', 'C', 'A', 'S', 'O', 'G'].includes(record?.[detail]?.charAt(1))) {\n                        found = 'Y'\n                    } else {\n                        found = 'N'\n                        break\n                    }\n                    // } else {\n                    //     found = 'N'\n                    //     break\n                }\n            }\n            if (found == 'Y') {\n                record[flagname] = setCharAt(record?.[flagname], 2, 'Y');\n            } else {\n                record[flagname] = setCharAt(record?.[flagname], 2, 'S');\n            }\n        }\n    }\n\n\n    function checkNaics(data, naics, rec_typ, rec_tax, rec_typop) {\n        let list = data['NAICS_NUM']\n        let notlist = data['NAICS_NOT']\n        let unit = data['UNIT']\n        let tax = data['TAXSTAT']\n        let typop = data['TYPOP']\n\n        let rectyp = rec_typ\n        if (['MU', 'SU'].includes(rectyp)) {\n            rec_typ = 'ESTAB'\n        } else if (['KAU', 'kau', 'Kau'].includes(rectyp)) {\n            rec_typ = 'KAU'\n        } else if (['ENT', 'Ent', 'ent'].includes(rectyp)) {\n            rec_typ = 'COMPANY'\n        }\n        if ([null, undefined, 'null', 'undefined'].includes(tax)) {\n            rec_tax = tax\n        }\n        if ([null, undefined, 'null', 'undefined'].includes(typop)) {\n            rec_typop = typop\n        } else {\n            if (![null, undefined, 'null', 'undefined'].includes(rec_typop)) {\n                rec_typop = rec_typop?.charAt(0)\n            }\n        }\n\n        if (rec_typ === unit && rec_tax === tax && rec_typop == typop) {\n            if ([\"ALL\", \"All\", \"ALL \", \"All \"].includes(list)) {\n                return (true);\n            } else {\n                list = list.replace(/ /g, \"\");\n                list = list.replace(/'/g, \"\");\n                var array = list.split(',')\n\n                if (array.find(r => naics.startsWith(r))) {\n                    if (![null, undefined].includes(notlist)) {\n                        notlist = notlist.replace(/ /g, \"\");\n                        notlist = notlist.replace(/'/g, \"\");\n                        var notarray = notlist.split(',');\n                        if (notarray.find(r => naics.startsWith(r))) {\n                            return (false);\n                        } else {\n                            return (true);\n                        }\n                    } else {\n                        return (true);\n                    }\n                } else {\n                    return (false)\n                }\n            }\n        }\n    }\n\n    function createVariables(evalobj, context) {\n        for (let i in evalobj) {\n            context[i] = evalobj[i];\n        }\n    }\n    function returnVariables(evalobj, context, array) {\n        for (let i in array) {\n            let newname = array[i]\n            evalobj[newname] = context[newname];\n            if ([null, undefined].includes(evalobj[newname])) {\n            } else {\n                evalobj[newname] = Math.round(evalobj[newname])\n            }\n        }\n    }\n\n    function evalCondition(logicalEdit, record) {\n        let truth = 'N'\n        var condition = logicalEdit['CONDITION']\n        var columns = logicalEdit['ALL_VARIABLE']\n        columns = columns.replace(/ /g, \"\");\n        var array = columns.split(',')\n        var action_col = logicalEdit['ACTION_VARIABLE']\n        action_col = action_col.replace(/ /g, \"\");\n        var action_array = action_col.split(',')\n        let evalobj = {}\n        for (let i in array) {\n            let newname = array[i]\n            if (!([null, 'null', 'NULL', undefined, 'undefined'].includes(record?.[newname]))) {\n                evalobj[newname] = parseFloat(record[newname])\n            } else {\n                evalobj[newname] = null\n            }\n        }\n        createVariables(evalobj, this);\n        if (condition == 'None') {\n            truth = 'Y'\n        } else {\n            const code = 'if (' + condition + ') {truth = \"Y\"}'\n            try {\n                eval(code)\n            } catch {\n                console.log('Condition Error on: ' + logicalEdit)\n            }\n        }\n        if (truth == 'Y') {\n            const action = logicalEdit['ACTION']\n            try {\n                eval(action)\n            } catch {\n                console.log('Action Error on: ' + logicalEdit)\n            }\n            let num = (action.split(\"=\").length - 1)\n            let string = ''\n            if ((action.split(\"=\").length - 1) >= 1) {\n                for (let i = 1; i <= num; i++) {\n                    if (i == 1) {\n                        string = action.substring(action.indexOf('=')+1)\n                    } else {\n                        string = string.substring(0, string.indexOf(';')) + string.substring(string.indexOf('=') + 1)\n                    }\n                }\n            }\n            let details = []\n            for (let i in evalobj) {\n                let name1 = i\n                if (string.indexOf(name1) != -1) {\n                    details.push(name1 + '_F')\n                }\n            }\n\n\n            returnVariables(evalobj, this, action_array)\n            for (let i in action_array) {\n                let newname = action_array[i]\n                let newname_f = newname + '_F'\n                let flag = logicalEdit['PO Flag']\n                record[newname] = evalobj[newname]\n                if (['L', 'J'].includes(flag)) {\n                    flagRules(newname, details)\n                } else {\n                    record[newname_f] = setCharAt(record?.[newname_f], 2, flag)\n                }\n            }\n        }\n    }\n\n    let naics = record['NAICS_CODE']\n    naics = '' + naics\n\n    const REPORTING_ID_TYP_TXT = record['REPORTING_ID_TYP_TXT']\n    let TAXSTAT = record['TAX_EXEMPT_STAT']\n    let TYPOP_CODE = record['TYPOP_WHSL_OLD_NUM']\n\n\n    var logicalEdits = msg.cache['LOGICAL_EDIT']\n    logicalEdits.sort((a, b) => (a.PRIORITY != null ? a.PRIORITY : Infinity) - (b.PRIORITY != null ? b.PRIORITY : Infinity))\n\n    for (let i in logicalEdits) {\n        let logicalEdit = logicalEdits[i]\n        if (checkNaics(logicalEdit, naics, REPORTING_ID_TYP_TXT, TAXSTAT, TYPOP_CODE)) {\n            evalCondition(logicalEdit, record)\n        }\n    }\n    return msg;\n}catch(e){\n    global.set('err','Exit Edit')\n    msg.payload.exit = 'Logical Edits'\n    return msg;\n}",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -14404,6 +14408,24 @@
         "libs": [],
         "x": 740,
         "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "58d9bc29ba886dc5",
+        "type": "function",
+        "z": "5e2c6717be2fdd36",
+        "name": "logical edits function database",
+        "func": "try{\n    let record = msg.payload.csv[msg.ptrModuleFacts];\n\n    msg.cache = global.get(\"lookupCache\").data.find(\n        item =>\n            item.module === \"logical_edit\" &&\n            item.param === \"logical_edit\" &&\n            item.program === \"aies\" &&\n            item.unit_type === \"all\"\n    )?.json_values;\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    function flagRules(variable, details) {\n        let flagname = variable + '_F'\n        if (record?.[variable] == 0) {\n            record[flagname] = setCharAt(record?.[flagname], 2, 'Z');\n        } else {\n            let found = 'N'\n            for (let i in details) {\n                let detail = details[i]\n                if (record?.[detail]) {\n                    if (['R_', 'K_', 'T_'].includes(record?.[detail].substring(0, 2))) {\n                        found = 'Y'\n                    } else if (['R', 'C', 'A', 'S', 'O', 'G'].includes(record?.[detail]?.charAt(1))) {\n                        found = 'Y'\n                    } else {\n                        found = 'N'\n                        break\n                    }\n                    // } else {\n                    //     found = 'N'\n                    //     break\n                }\n            }\n            if (found == 'Y') {\n                record[flagname] = setCharAt(record?.[flagname], 2, 'Y');\n            } else {\n                record[flagname] = setCharAt(record?.[flagname], 2, 'S');\n            }\n        }\n    }\n\n\n    function checkNaics(data, naics, rec_typ, rec_tax, rec_typop) {\n        let list = data['NAICS_NUM']\n        let notlist = data['NAICS_NOT']\n        let unit = data['UNIT']\n        let tax = data['TAXSTAT']\n        let typop = data['TYPOP']\n\n        let rectyp = rec_typ\n        if (['MU', 'SU'].includes(rectyp)) {\n            rec_typ = 'ESTAB'\n        } else if (['KAU', 'kau', 'Kau'].includes(rectyp)) {\n            rec_typ = 'KAU'\n        } else if (['ENT', 'Ent', 'ent'].includes(rectyp)) {\n            rec_typ = 'COMPANY'\n        }\n        if ([null, undefined, 'null', 'undefined'].includes(tax)) {\n            rec_tax = tax\n        }\n        if ([null, undefined, 'null', 'undefined'].includes(typop)) {\n            rec_typop = typop\n        } else {\n            if (![null, undefined, 'null', 'undefined'].includes(rec_typop)) {\n                rec_typop = rec_typop?.charAt(0)\n            }\n        }\n\n        if (rec_typ === unit && rec_tax === tax && rec_typop == typop) {\n            if ([\"ALL\", \"All\", \"ALL \", \"All \"].includes(list)) {\n                return (true);\n            } else {\n                list = list.replace(/ /g, \"\");\n                list = list.replace(/'/g, \"\");\n                var array = list.split(',')\n\n                if (array.find(r => naics.startsWith(r))) {\n                    if (![null, undefined].includes(notlist)) {\n                        notlist = notlist.replace(/ /g, \"\");\n                        notlist = notlist.replace(/'/g, \"\");\n                        var notarray = notlist.split(',');\n                        if (notarray.find(r => naics.startsWith(r))) {\n                            return (false);\n                        } else {\n                            return (true);\n                        }\n                    } else {\n                        return (true);\n                    }\n                } else {\n                    return (false)\n                }\n            }\n        }\n    }\n\n    function createVariables(evalobj, context) {\n        for (let i in evalobj) {\n            context[i] = evalobj[i];\n        }\n    }\n    function returnVariables(evalobj, context, array) {\n        for (let i in array) {\n            let newname = array[i]\n            evalobj[newname] = context[newname];\n            if ([null, undefined].includes(evalobj[newname])) {\n            } else {\n                evalobj[newname] = Math.round(evalobj[newname])\n            }\n        }\n    }\n\n    function evalCondition(logicalEdit, record) {\n        let truth = 'N'\n        var condition = logicalEdit['CONDITION']\n        var columns = logicalEdit['ALL_VARIABLE']\n        columns = columns.replace(/ /g, \"\");\n        var array = columns.split(',')\n        var action_col = logicalEdit['ACTION_VARIABLE']\n        action_col = action_col.replace(/ /g, \"\");\n        var action_array = action_col.split(',')\n        let evalobj = {}\n        for (let i in array) {\n            let newname = array[i]\n            if (!([null, 'null', 'NULL', undefined, 'undefined'].includes(record?.[newname]))) {\n                evalobj[newname] = parseFloat(record[newname])\n            } else {\n                evalobj[newname] = null\n            }\n        }\n        createVariables(evalobj, this);\n        if (condition == 'None') {\n            truth = 'Y'\n        } else {\n            const code = 'if (' + condition + ') {truth = \"Y\"}'\n            try {\n                eval(code)\n            } catch {\n                console.log('Condition Error on: ' + logicalEdit)\n            }\n        }\n        if (truth == 'Y') {\n            const action = logicalEdit['ACTION']\n            try {\n                eval(action)\n            } catch {\n                console.log('Action Error on: ' + logicalEdit)\n            }\n            let num = (action.split(\"=\").length - 1)\n            let string = ''\n            if ((action.split(\"=\").length - 1) >= 1) {\n                for (let i = 1; i <= num; i++) {\n                    if (i == 1) {\n                        string = action.substring(action.indexOf('=')+1)\n                    } else {\n                        string = string.substring(0, string.indexOf(';')) + string.substring(string.indexOf('=') + 1)\n                    }\n                }\n            }\n            let details = []\n            for (let i in evalobj) {\n                let name1 = i\n                if (string.indexOf(name1) != -1) {\n                    details.push(name1 + '_F')\n                }\n            }\n\n\n            returnVariables(evalobj, this, action_array)\n            for (let i in action_array) {\n                let newname = action_array[i]\n                let newname_f = newname + '_F'\n                let flag = logicalEdit['PO Flag']\n                record[newname] = evalobj[newname]\n                if (['L', 'J'].includes(flag)) {\n                    flagRules(newname, details)\n                } else {\n                    record[newname_f] = setCharAt(record?.[newname_f], 2, flag)\n                }\n            }\n        }\n    }\n\n    let naics = record['NAICS_CODE']\n    naics = '' + naics\n\n    const REPORTING_ID_TYP_TXT = record['REPORTING_ID_TYP_TXT']\n    let TAXSTAT = record['TAX_EXEMPT_STAT']\n    let TYPOP_CODE = record['TYPOP_WHSL_OLD_NUM']\n\n\n    var logicalEdits = msg.cache['LOGICAL_EDIT']\n    logicalEdits.sort((a, b) => (a.PRIORITY != null ? a.PRIORITY : Infinity) - (b.PRIORITY != null ? b.PRIORITY : Infinity))\n\n    for (let i in logicalEdits) {\n        let logicalEdit = logicalEdits[i]\n        if (checkNaics(logicalEdit, naics, REPORTING_ID_TYP_TXT, TAXSTAT, TYPOP_CODE)) {\n            evalCondition(logicalEdit, record)\n        }\n    }\n    return msg;\n}catch(e){\n    msg.err = 'Exit Edit'\n    msg.payload.exit = 'Logical Edits'\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 770,
+        "y": 180,
         "wires": [
             []
         ]
@@ -14575,7 +14597,7 @@
         "type": "function",
         "z": "27c40a87c581e266",
         "name": "pay_ann_val_database",
-        "func": "try {\n    let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n    let irs = msg.payload.tables.irs.find(obj => obj.fact.REPORTING_ID == record.REPORTING_ID)\n    let br = msg.payload.tables.br.find(obj => obj.fact.REPORTING_ID == record.REPORTING_ID)\n    let ec = msg.payload.tables.ec.find(obj => obj.fact.REPORTING_ID == record.REPORTING_ID)\n\n    // Set function\n    const setVariable = (variable, value) => {\n        record[variable] = value;\n    };\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n    function flagRules(variable, details) {\n        let flagname = variable + '_F'\n        if (record?.[variable] == 0) {\n            record[flagname] = setCharAt(record?.[flagname], 2, 'Z');\n        } else {\n            let found = 'N'\n            for (let i in details) {\n                let detail = details[i]\n                if (record?.[detail]) {\n                    if (['R_', 'K_', 'T_'].includes(record?.[detail].substring(0, 2))) {\n                        found = 'Y'\n                    } else if (['R', 'C', 'A', 'S', 'O', 'G'].includes(record?.[detail]?.charAt(1))) {\n                        found = 'Y'\n                    } else {\n                        found = 'N'\n                        break\n                    }\n                    // } else {\n                    //     found = 'N'\n                    //     break\n                }\n            }\n            if (found == 'Y') {\n                record[flagname] = setCharAt(record?.[flagname], 2, 'Y');\n            } else {\n                record[flagname] = setCharAt(record?.[flagname], 2, 'S');\n            }\n        }\n    }\n    let cache = global.get(\"lookupCache\");\n    let cy_py_factor = cache.data.find(\n        item =>\n            item.module === \"core_4\" &&\n            item.param === 'core_4' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"all\"\n    )?.json_values;\n\n    function findCY() {\n        let cy_py = {}\n        for (let i in cy_py_factor['CY_PY_K_FACTORS']) {\n            let cy_py_fact = cy_py_factor['CY_PY_K_FACTORS'][i]\n            if (record.NAICS_CODE.startsWith(cy_py_fact['NAICS_CODE'])) {\n                cy_py = cy_py_fact\n                break;\n            }\n        }\n        return (cy_py);\n    }\n\n    const setVals = () => {\n        setVariable('PAY_QTR1_VAL', 0);\n        record['PAY_QTR1_VAL_F'] = setCharAt(record['PAY_QTR1_VAL_F'], 1, 'G');\n        setVariable('EMP_MAR12_NUM', 0);\n        record['EMP_MAR12_NUM_F'] = setCharAt(record['EMP_MAR12_NUM_F'], 1, 'G');\n        setVariable('EXIMP', 'E');\n        setVariable('Referral_Flag', 'LEASED_ONLY');\n    }\n    global.set('action','')\n\n    if (record?.REPORTING_ID_TYP_TXT == 'SU' && parseFloat(irs?.PAY_ANN_VAL) > 0) {\n        setVariable('PAY_ANN_VAL', irs?.PAY_ANN_VAL);\n        record['PAY_ANN_VAL_F'] = setCharAt(record['PAY_ANN_VAL_F'], 2, 'A');\n    } else if (record?.REPORTING_ID_TYP_TXT == 'MU' && parseFloat(br?.PAY_ANN_VAL) > 0) {\n        setVariable('PAY_ANN_VAL', br?.PAY_ANN_VAL);\n        record['PAY_ANN_VAL_F'] = setCharAt(record['PAY_ANN_VAL_F'], 2, 'O');\n    } else if (parseFloat(br?.PAY_ANN_LSD_VAL) > 0) {\n        setVariable('PAY_ANN_VAL', br?.PAY_ANN_LSD_VAL);\n        record['PAY_ANN_VAL_F'] = setCharAt(record['PAY_ANN_VAL_F'], 2, 'O');\n        setVals()\n    } else if (parseFloat(record?.EXPS_TEMPSTAF_VAL) > 0) {\n        setVariable('PAY_ANN_VAL', record?.EXPS_TEMPSTAF_VAL);\n        flagRules('PAY_ANN_VAL_F', ['EXPS_TEMPSTAF_VAL_F'])\n        setVals()\n    } else if (parseFloat(ec?.PAY_ANN_VAL) > 0) {\n        let cy_py = findCY()\n        setVariable('PAY_ANN_VAL', Math.round(parseFloat(ec?.PAY_ANN_VAL) * parseFloat(cy_py.PAYANN)));\n        record['PAY_ANN_VAL_F'] = setCharAt(record['PAY_ANN_VAL_F'], 2, 'H');\n    } else {\n        setVariable('TABSTAT', 'N')\n        setVariable('NONTABFL', 'N')\n        if (parseFloat(record?.RCPT_TOT_VAL) > 0 && record?.RCPT_TOT_VAL_F?.charAt(0) == 'R') {\n            setVariable('Referral_Flag', 'NO_PAYROLL_W_RECEIPTS')\n        }\n        setVariable('ACTION', 'EXIT EDIT')\n        global.set('action','Exit Edit')\n    }\n\n    return msg;\n} catch(e) {\n    global.set('err','Exit Edit')\n    msg.payload.exit = 'PAY_ANN_VAL'\n    return msg;\n}\n\n\n",
+        "func": "try {\n    let record = msg.payload.csv[global.get(\"ptrModuleFacts\")];\n    let irs = msg.payload.tables.irs.find(obj => obj.fact.REPORTING_ID == record.REPORTING_ID)\n    let br = msg.payload.tables.br.find(obj => obj.fact.REPORTING_ID == record.REPORTING_ID)\n    let ec = msg.payload.tables.ec.find(obj => obj.fact.REPORTING_ID == record.REPORTING_ID)\n\n    // Set function\n    const setVariable = (variable, value) => {\n        record[variable] = value;\n    };\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n    function flagRules(variable, details) {\n        let flagname = variable + '_F'\n        if (record?.[variable] == 0) {\n            record[flagname] = setCharAt(record?.[flagname], 2, 'Z');\n        } else {\n            let found = 'N'\n            for (let i in details) {\n                let detail = details[i]\n                if (record?.[detail]) {\n                    if (['R_', 'K_', 'T_'].includes(record?.[detail].substring(0, 2))) {\n                        found = 'Y'\n                    } else if (['R', 'C', 'A', 'S', 'O', 'G'].includes(record?.[detail]?.charAt(1))) {\n                        found = 'Y'\n                    } else {\n                        found = 'N'\n                        break\n                    }\n                    // } else {\n                    //     found = 'N'\n                    //     break\n                }\n            }\n            if (found == 'Y') {\n                record[flagname] = setCharAt(record?.[flagname], 2, 'Y');\n            } else {\n                record[flagname] = setCharAt(record?.[flagname], 2, 'S');\n            }\n        }\n    }\n    let cache = global.get(\"lookupCache\");\n    let cy_py_factor = cache.data.find(\n        item =>\n            item.module === \"core_4\" &&\n            item.param === 'core_4' &&\n            item.program === \"aies\" &&\n            item.unit_type === \"all\"\n    )?.json_values;\n\n    function findCY() {\n        let cy_py = {}\n        for (let i in cy_py_factor['CY_PY_K_FACTORS']) {\n            let cy_py_fact = cy_py_factor['CY_PY_K_FACTORS'][i]\n            if (record.NAICS_CODE.startsWith(cy_py_fact['NAICS_CODE'])) {\n                cy_py = cy_py_fact\n                break;\n            }\n        }\n        return (cy_py);\n    }\n\n    const setVals = () => {\n        setVariable('PAY_QTR1_VAL', 0);\n        record['PAY_QTR1_VAL_F'] = setCharAt(record['PAY_QTR1_VAL_F'], 1, 'G');\n        setVariable('EMP_MAR12_NUM', 0);\n        record['EMP_MAR12_NUM_F'] = setCharAt(record['EMP_MAR12_NUM_F'], 1, 'G');\n        setVariable('EXIMP', 'E');\n        setVariable('Referral_Flag', 'LEASED_ONLY');\n    }\n    global.set('action','')\n\n    if (record?.REPORTING_ID_TYP_TXT == 'SU' && parseFloat(irs?.PAY_ANN_VAL) > 0) {\n        setVariable('PAY_ANN_VAL', irs?.PAY_ANN_VAL);\n        record['PAY_ANN_VAL_F'] = setCharAt(record['PAY_ANN_VAL_F'], 2, 'A');\n    } else if (record?.REPORTING_ID_TYP_TXT == 'MU' && parseFloat(br?.PAY_ANN_VAL) > 0) {\n        setVariable('PAY_ANN_VAL', br?.PAY_ANN_VAL);\n        record['PAY_ANN_VAL_F'] = setCharAt(record['PAY_ANN_VAL_F'], 2, 'O');\n    } else if (parseFloat(br?.PAY_ANN_LSD_VAL) > 0) {\n        setVariable('PAY_ANN_VAL', br?.PAY_ANN_LSD_VAL);\n        record['PAY_ANN_VAL_F'] = setCharAt(record['PAY_ANN_VAL_F'], 2, 'O');\n        setVals()\n    } else if (parseFloat(record?.EXPS_TEMPSTAF_VAL) > 0) {\n        setVariable('PAY_ANN_VAL', record?.EXPS_TEMPSTAF_VAL);\n        flagRules('PAY_ANN_VAL', ['EXPS_TEMPSTAF_VAL_F'])\n        setVals()\n    } else if (parseFloat(ec?.PAY_ANN_VAL) > 0) {\n        let cy_py = findCY()\n        setVariable('PAY_ANN_VAL', Math.round(parseFloat(ec?.PAY_ANN_VAL) * parseFloat(cy_py.PAYANN)));\n        record['PAY_ANN_VAL_F'] = setCharAt(record['PAY_ANN_VAL_F'], 2, 'H');\n    } else {\n        setVariable('TABSTAT', 'N')\n        setVariable('NONTABFL', 'N')\n        if (parseFloat(record?.RCPT_TOT_VAL) > 0 && record?.RCPT_TOT_VAL_F?.charAt(0) == 'R') {\n            setVariable('Referral_Flag', 'NO_PAYROLL_W_RECEIPTS')\n        }\n        setVariable('ACTION', 'EXIT EDIT')\n        global.set('action','Exit Edit')\n    }\n\n    return msg;\n} catch(e) {\n    global.set('err','Exit Edit')\n    msg.payload.exit = 'PAY_ANN_VAL'\n    return msg;\n}\n\n\n",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -15190,7 +15212,9 @@
         "y": 360,
         "wires": [
             [],
-            []
+            [
+                "8587ec4502170e69"
+            ]
         ]
     },
     {
@@ -15232,9 +15256,7 @@
         "y": 440,
         "wires": [
             [],
-            [
-                "a5431844c324306b"
-            ]
+            []
         ]
     },
     {
@@ -15368,31 +15390,20 @@
         ]
     },
     {
-        "id": "623ce28ea5f36e8b",
-        "type": "subflow:5e2c6717be2fdd36",
+        "id": "4d56f52e9266104e",
+        "type": "subflow:b68b1cdb465a831c",
         "z": "848cf3fa24ade3ee",
         "name": "",
-        "x": 670,
-        "y": 420,
+        "x": 1200,
+        "y": 380,
         "wires": [
             [
-                "75a34d5859224d5e"
+                "19086e3898d97bcf"
             ]
         ]
     },
     {
-        "id": "a7323db66b18f651",
-        "type": "subflow:e4fb9739caef0397",
-        "z": "848cf3fa24ade3ee",
-        "name": "",
-        "x": 710,
-        "y": 500,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "75a34d5859224d5e",
+        "id": "19086e3898d97bcf",
         "type": "switch",
         "z": "848cf3fa24ade3ee",
         "name": "Error Exit Check",
@@ -15413,28 +15424,43 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 860,
-        "y": 420,
+        "x": 1400,
+        "y": 380,
         "wires": [
             [],
-            []
+            [
+                "a7635805269c06d8"
+            ]
         ]
     },
     {
-        "id": "12e36b0a4c1c8eb8",
+        "id": "a7635805269c06d8",
+        "type": "subflow:96f29b19e2260e65",
+        "z": "848cf3fa24ade3ee",
+        "name": "",
+        "x": 1210,
+        "y": 440,
+        "wires": [
+            [
+                "ddcfb9ab334353de"
+            ]
+        ]
+    },
+    {
+        "id": "464674c4029c73d2",
         "type": "subflow:7c74ea1220a33f32",
         "z": "848cf3fa24ade3ee",
         "name": "",
-        "x": 640,
+        "x": 560,
         "y": 300,
         "wires": [
             [
-                "7836fdae7e579881"
+                "4504eca1eab0f0d6"
             ]
         ]
     },
     {
-        "id": "7836fdae7e579881",
+        "id": "4504eca1eab0f0d6",
         "type": "switch",
         "z": "848cf3fa24ade3ee",
         "name": "Error Exit Check",
@@ -15455,17 +15481,17 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 860,
+        "x": 740,
         "y": 300,
         "wires": [
             [],
             [
-                "dd93ae4285a8a267"
+                "0ac0ff658a0a1649"
             ]
         ]
     },
     {
-        "id": "dd93ae4285a8a267",
+        "id": "0ac0ff658a0a1649",
         "type": "switch",
         "z": "848cf3fa24ade3ee",
         "name": "sector check",
@@ -15486,12 +15512,210 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 870,
+        "x": 610,
         "y": 360,
+        "wires": [
+            [
+                "bb5df2efe11ea168"
+            ],
+            [
+                "48ec85d7b3ad04fe"
+            ]
+        ]
+    },
+    {
+        "id": "a87b0bc5e57096a7",
+        "type": "subflow:0179503501c47e39",
+        "z": "848cf3fa24ade3ee",
+        "name": "",
+        "x": 1410,
+        "y": 680,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c52d373db0383ce9",
+        "type": "subflow:6ace7023ea973ebe",
+        "z": "848cf3fa24ade3ee",
+        "name": "",
+        "x": 1190,
+        "y": 520,
+        "wires": [
+            [
+                "37fd0022f9cf94d8"
+            ]
+        ]
+    },
+    {
+        "id": "48ec85d7b3ad04fe",
+        "type": "subflow:1ff4019fd0378d4a",
+        "z": "848cf3fa24ade3ee",
+        "name": "",
+        "x": 1170,
+        "y": 600,
+        "wires": [
+            [
+                "112c2ba4c31fe6c3"
+            ]
+        ]
+    },
+    {
+        "id": "ddcfb9ab334353de",
+        "type": "switch",
+        "z": "848cf3fa24ade3ee",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1420,
+        "y": 440,
         "wires": [
             [],
             [
-                "623ce28ea5f36e8b"
+                "c52d373db0383ce9"
+            ]
+        ]
+    },
+    {
+        "id": "37fd0022f9cf94d8",
+        "type": "switch",
+        "z": "848cf3fa24ade3ee",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1420,
+        "y": 520,
+        "wires": [
+            [],
+            [
+                "48ec85d7b3ad04fe"
+            ]
+        ]
+    },
+    {
+        "id": "112c2ba4c31fe6c3",
+        "type": "switch",
+        "z": "848cf3fa24ade3ee",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1420,
+        "y": 600,
+        "wires": [
+            [],
+            [
+                "a87b0bc5e57096a7"
+            ]
+        ]
+    },
+    {
+        "id": "bb5df2efe11ea168",
+        "type": "switch",
+        "z": "848cf3fa24ade3ee",
+        "name": "tabstat",
+        "property": "tabstat",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "neq",
+                "v": "N",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "N",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 790,
+        "y": 360,
+        "wires": [
+            [
+                "1ebfc483e36c32ee"
+            ],
+            [
+                "a7635805269c06d8"
+            ]
+        ]
+    },
+    {
+        "id": "1ebfc483e36c32ee",
+        "type": "switch",
+        "z": "848cf3fa24ade3ee",
+        "name": "action check",
+        "property": "action",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 970,
+        "y": 360,
+        "wires": [
+            [
+                "4d56f52e9266104e"
+            ],
+            [
+                "a7635805269c06d8"
             ]
         ]
     },
@@ -36499,7 +36723,7 @@
                 "7801b65b30d7f5d3"
             ],
             [
-                "964fd3054d69b5b8"
+                "4cf602eb8c214878"
             ]
         ]
     },
@@ -36752,8 +36976,8 @@
         "type": "subflow:848cf3fa24ade3ee",
         "z": "8790b12c7efb6fa0",
         "name": "",
-        "x": 1980,
-        "y": 940,
+        "x": 2000,
+        "y": 1000,
         "wires": [
             [
                 "7801b65b30d7f5d3"
@@ -36811,8 +37035,8 @@
         "type": "subflow:2313e47e41070980",
         "z": "8790b12c7efb6fa0",
         "name": "",
-        "x": 1770,
-        "y": 1000,
+        "x": 1780,
+        "y": 940,
         "wires": [
             [
                 "1e6af3c397d17e33"
@@ -36841,14 +37065,14 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1990,
-        "y": 1000,
+        "x": 2000,
+        "y": 940,
         "wires": [
             [
                 "7801b65b30d7f5d3"
             ],
             [
-                "73cd649911613fee"
+                "7801b65b30d7f5d3"
             ]
         ]
     },
