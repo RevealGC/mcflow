@@ -4538,9 +4538,7 @@
             "5e674b959c1b250a"
         ],
         "x": 14,
-        "y": 599,
-        "w": 2232,
-        "h": 1982
+        "y": 599
     },
     {
         "id": "302cb8040ecade52",
@@ -4556,9 +4554,7 @@
             "a47c991027033263"
         ],
         "x": 704,
-        "y": 719,
-        "w": 382,
-        "h": 82
+        "y": 719
     },
     {
         "id": "d1e0f39ddacfeb20",
@@ -17258,7 +17254,7 @@
         "type": "function",
         "z": "1ff4019fd0378d4a",
         "name": "su to ent mfg and nonmfg",
-        "func": "try {\n    let record_idx = global.get('ptrModuleFacts')\n    let record = msg.payload.csv[record_idx]\n\n    if (record?.REPORTING_ID_TYP_TXT == 'ENT' && record?.ENT_TYP_TXT == 'SU') {\n        let suData = msg.payload.csv.find(su => su?.ENT_ID == record?.ENT_ID && record?.RECORD_TYP_TXT == '10')\n        let list = ['TABSTAT', 'NONTABFL']\n        //entData = entData[0] \n        for (let i in list) { \n            let name = list[i]\n\n            record[name] = suData[name]\n        }    \n    }\n    return msg;\n} catch(e) {\n    global.set('err','Exit Edit')\n    msg.payload.exit = 'SU to ENT'\n    return msg;\n}",
+        "func": "try {\n    let record_idx = global.get('ptrModuleFacts')\n    let record = msg.payload.csv[record_idx]\n\n    if (record?.REPORTING_ID_TYP_TXT == 'ENT' && record?.ENT_TYP_TXT == 'SU') {\n        let suData = msg.payload.csv.find(su => su?.ENT_ID == record?.ENT_ID && su?.RECORD_TYP_TXT == '20')\n        let list = ['TABSTAT', 'NONTABFL']\n        //entData = entData[0] \n        for (let i in list) { \n            let name = list[i]\n\n            record[name] = suData[name]\n        }    \n    }\n    return msg;\n} catch(e) {\n    global.set('err','Exit Edit')\n    msg.payload.exit = 'SU to ENT'\n    return msg;\n}",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -17276,7 +17272,7 @@
         "type": "function",
         "z": "1ff4019fd0378d4a",
         "name": "su to ent mfg and nonmfg (database)",
-        "func": "try {\n    let record_idx = msg.ptrModuleFacts;\n    let record = msg.payload.csv[record_idx]; \n\n    if (record?.REPORTING_ID_TYP_TXT == 'ENT' && record?.ENT_TYP_TXT == 'SU') {\n        let suData = msg.payload.tables.estabs.find(su => su.fact?.ENT_ID == record?.ENT_ID && record?.RECORD_TYP_TXT == '10')\n        let list = ['TABSTAT', 'NONTABFL']\n        //entData = entData[0] \n        for (let i in list) { \n            let name = list[i]\n            record[name] = suData[name]\n        }    \n    }\n    return msg;\n} catch(e) {\n    msg.err = 'Exit Edit'\n    msg.payload.exit = 'SU to ENT'\n    return msg;\n}",
+        "func": "try {\n    let record_idx = msg.ptrModuleFacts;\n    let record = msg.payload.csv[record_idx]; \n\n    if (record?.REPORTING_ID_TYP_TXT == 'ENT' && record?.ENT_TYP_TXT == 'SU') {\n        let suData = msg.payload.tables.estabs.find(su => su.fact?.ENT_ID == record?.ENT_ID && su?.RECORD_TYP_TXT == '20')\n        let list = ['TABSTAT', 'NONTABFL']\n        //entData = entData[0] \n        for (let i in list) { \n            let name = list[i]\n            record[name] = suData[name]\n        }    \n    }\n    return msg;\n} catch(e) {\n    msg.err = 'Exit Edit'\n    msg.payload.exit = 'SU to ENT'\n    return msg;\n}",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
