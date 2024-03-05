@@ -1426,8 +1426,8 @@
         "category": "",
         "in": [
             {
-                "x": 500,
-                "y": 160,
+                "x": 520,
+                "y": 60,
                 "wires": [
                     {
                         "id": "4e95996f9340ca3f"
@@ -1471,6 +1471,10 @@
                     {
                         "id": "a8113eded2e20f82",
                         "port": 0
+                    },
+                    {
+                        "id": "5ace2b986f5525ec",
+                        "port": 0
                     }
                 ]
             }
@@ -1499,7 +1503,7 @@
         "out": [
             {
                 "x": 1900,
-                "y": 480,
+                "y": 600,
                 "wires": [
                     {
                         "id": "9e9b4cee68be6e9c",
@@ -1559,6 +1563,14 @@
                     },
                     {
                         "id": "7ba256c934b12f11",
+                        "port": 0
+                    },
+                    {
+                        "id": "c16f32959166880c",
+                        "port": 0
+                    },
+                    {
+                        "id": "e5012db73e035f03",
                         "port": 0
                     }
                 ]
@@ -3390,14 +3402,6 @@
                     {
                         "id": "da1041380073a9cd",
                         "port": 0
-                    },
-                    {
-                        "id": "ece6d6ed5ddcee4b",
-                        "port": 1
-                    },
-                    {
-                        "id": "ebd10c9f307211a6",
-                        "port": 1
                     }
                 ]
             }
@@ -3457,15 +3461,7 @@
                         "port": 1
                     },
                     {
-                        "id": "1ebfc483e36c32ee",
-                        "port": 1
-                    },
-                    {
-                        "id": "bb5df2efe11ea168",
-                        "port": 1
-                    },
-                    {
-                        "id": "19086e3898d97bcf",
+                        "id": "ddcfb9ab334353de",
                         "port": 1
                     }
                 ]
@@ -4367,6 +4363,39 @@
                 "wires": [
                     {
                         "id": "b853872c4456ce78",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "f0920ac3618eb45b",
+        "type": "subflow",
+        "name": "Check writeback",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 260,
+                "y": 120,
+                "wires": [
+                    {
+                        "id": "670fcf981f211fb3"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 660,
+                "y": 120,
+                "wires": [
+                    {
+                        "id": "670fcf981f211fb3",
                         "port": 0
                     }
                 ]
@@ -8585,7 +8614,7 @@
         "type": "subflow:96f29b19e2260e65",
         "z": "a2511614f51e5116",
         "name": "",
-        "x": 1170,
+        "x": 1230,
         "y": 300,
         "wires": [
             []
@@ -8596,8 +8625,8 @@
         "type": "subflow:1ff4019fd0378d4a",
         "z": "a2511614f51e5116",
         "name": "",
-        "x": 690,
-        "y": 160,
+        "x": 710,
+        "y": 60,
         "wires": [
             [
                 "a8113eded2e20f82"
@@ -8626,10 +8655,85 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 960,
-        "y": 160,
+        "x": 980,
+        "y": 60,
         "wires": [
             [],
+            [
+                "d95a9e57db30c870"
+            ]
+        ]
+    },
+    {
+        "id": "d95a9e57db30c870",
+        "type": "subflow:f0920ac3618eb45b",
+        "z": "a2511614f51e5116",
+        "name": "",
+        "x": 700,
+        "y": 120,
+        "wires": [
+            [
+                "5ace2b986f5525ec"
+            ]
+        ]
+    },
+    {
+        "id": "5ace2b986f5525ec",
+        "type": "switch",
+        "z": "a2511614f51e5116",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 980,
+        "y": 120,
+        "wires": [
+            [],
+            [
+                "4d97322daa54a9b6"
+            ]
+        ]
+    },
+    {
+        "id": "4d97322daa54a9b6",
+        "type": "switch",
+        "z": "a2511614f51e5116",
+        "name": "exit check",
+        "property": "action",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 980,
+        "y": 180,
+        "wires": [
+            [
+                "d555c694ed9727e0"
+            ],
             [
                 "889cdcc114ad738b"
             ]
@@ -8641,7 +8745,7 @@
         "z": "88823d21c11ae7b5",
         "name": "",
         "x": 820,
-        "y": 240,
+        "y": 360,
         "wires": [
             [
                 "9e9b4cee68be6e9c"
@@ -8671,7 +8775,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1050,
-        "y": 300,
+        "y": 420,
         "wires": [
             [],
             [
@@ -8685,7 +8789,7 @@
         "z": "88823d21c11ae7b5",
         "name": "",
         "x": 1360,
-        "y": 760,
+        "y": 880,
         "wires": [
             [
                 "4d5edc2ef2a2765f"
@@ -8698,7 +8802,7 @@
         "z": "88823d21c11ae7b5",
         "name": "",
         "x": 1340,
-        "y": 700,
+        "y": 820,
         "wires": [
             [
                 "52b0141e97338396"
@@ -8711,7 +8815,7 @@
         "z": "88823d21c11ae7b5",
         "name": "",
         "x": 1360,
-        "y": 820,
+        "y": 940,
         "wires": [
             [
                 "36eb5b1bc3f37a3f"
@@ -8741,7 +8845,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1040,
-        "y": 240,
+        "y": 360,
         "wires": [
             [],
             [
@@ -8772,7 +8876,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1480,
-        "y": 600,
+        "y": 720,
         "wires": [
             [],
             [
@@ -8803,7 +8907,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1500,
-        "y": 700,
+        "y": 820,
         "wires": [
             [],
             [
@@ -8834,7 +8938,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1560,
-        "y": 760,
+        "y": 880,
         "wires": [
             [],
             [
@@ -8848,7 +8952,7 @@
         "z": "88823d21c11ae7b5",
         "name": "",
         "x": 790,
-        "y": 360,
+        "y": 480,
         "wires": [
             [
                 "ca3f2d5ace132159"
@@ -8878,7 +8982,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1040,
-        "y": 360,
+        "y": 480,
         "wires": [
             [],
             [
@@ -8917,7 +9021,7 @@
         "repair": false,
         "outputs": 4,
         "x": 810,
-        "y": 440,
+        "y": 560,
         "wires": [
             [],
             [
@@ -8935,7 +9039,7 @@
         "z": "88823d21c11ae7b5",
         "name": "",
         "x": 1040,
-        "y": 500,
+        "y": 620,
         "wires": [
             [
                 "927b048b92d700b0"
@@ -8965,7 +9069,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1240,
-        "y": 500,
+        "y": 620,
         "wires": [
             [],
             [
@@ -8996,7 +9100,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1230,
-        "y": 560,
+        "y": 680,
         "wires": [
             [
                 "969a8179dd9281f7"
@@ -9012,7 +9116,7 @@
         "z": "88823d21c11ae7b5",
         "name": "",
         "x": 1460,
-        "y": 540,
+        "y": 660,
         "wires": [
             [
                 "e4f66c7916ddf51b"
@@ -9042,7 +9146,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1570,
-        "y": 880,
+        "y": 1000,
         "wires": [
             [],
             [
@@ -9073,7 +9177,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1560,
-        "y": 820,
+        "y": 940,
         "wires": [
             [],
             [
@@ -9087,7 +9191,7 @@
         "z": "88823d21c11ae7b5",
         "name": "",
         "x": 1580,
-        "y": 940,
+        "y": 1060,
         "wires": [
             []
         ]
@@ -9098,7 +9202,7 @@
         "z": "88823d21c11ae7b5",
         "name": "",
         "x": 800,
-        "y": 180,
+        "y": 300,
         "wires": [
             [
                 "478bc0c651014446"
@@ -9128,7 +9232,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1040,
-        "y": 180,
+        "y": 300,
         "wires": [
             [],
             [
@@ -9204,6 +9308,79 @@
         "outputs": 2,
         "x": 1050,
         "y": 120,
+        "wires": [
+            [],
+            [
+                "596b207b8eb4f966"
+            ]
+        ]
+    },
+    {
+        "id": "596b207b8eb4f966",
+        "type": "subflow:f0920ac3618eb45b",
+        "z": "88823d21c11ae7b5",
+        "name": "",
+        "x": 860,
+        "y": 180,
+        "wires": [
+            [
+                "e5012db73e035f03"
+            ]
+        ]
+    },
+    {
+        "id": "e5012db73e035f03",
+        "type": "switch",
+        "z": "88823d21c11ae7b5",
+        "name": "Error Exit Check",
+        "property": "err",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "Exit Edit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1060,
+        "y": 180,
+        "wires": [
+            [],
+            [
+                "c16f32959166880c"
+            ]
+        ]
+    },
+    {
+        "id": "c16f32959166880c",
+        "type": "switch",
+        "z": "88823d21c11ae7b5",
+        "name": "exit check",
+        "property": "action",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Exit Edit",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1040,
+        "y": 240,
         "wires": [
             [],
             [
@@ -14719,7 +14896,7 @@
         "type": "function",
         "z": "1a584bfe7f4a2458",
         "name": "load_referrals",
-        "func": "try {\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n    \n    function getDate() {\n        let date_1 = new Date()\n        date_1 = date_1.toLocaleDateString()\n        return date_1\n    }\n\n    function endDate() {\n        let id = record?.REPORTING_ID\n        for (let i in msg.payload.csv) {\n            let row = msg.payload.csv[i]\n            if (row?.REPORTING_ID == id) {\n                if (row?.ENDDATE) {\n                    let date1 = new Date(row.ENDDATE).toLocaleDateString()\n                    let date2 = new Date('01/01/1950').toLocaleDateString()\n                    if (date1 == date2) {\n                        row.ENDDATE = getDate()\n                    }\n                }\n            }\n        }\n    }\n\n    endDate()\n\n    function refUpdate() {\n        let found = msg.payload.csv.find(flag => flag.REPORTING_ID == record?.REPORTING_ID && flag.FLAG_NAME == record?.['REFERRAL_FLAG'])\n        if (found) {\n            found['BGNDATE'] = getDate()\n            found['ENDDATE'] = '01/01/1950'\n        } else {\n            let obj = {}\n            obj['REPORTING_ID'] = record?.REPORTING_ID\n            obj['REF_PER'] = record?.REF_PER\n            obj['FLAG_NAME'] = record?.REFERRAL_FLAG\n            obj['RECORD_TYP'] = record?.REPORTING_ID_TYP_TXT\n            obj['BGNDATE'] = getDate()\n            // obj['ENDDATE'] = '01/01/1950'\n            if (record?.NONTABFL == 'R') {\n                obj['CRITICAL'] = 'Y'\n            }\n            msg.payload.csv.push(obj)\n            console.log(msg.payload.csv)\n        }\n    }\n\n    refUpdate()\n\n    return msg;\n} catch (e) {\n    msg.err = 'Exit Edit'\n    msg.payload.exit = 'Load Referrals'\n    return msg;\n}",
+        "func": "try {\n    let record_idx = global.get(\"ptrModuleFacts\");\n    let record = msg.payload.csv[record_idx];\n    \n    function getDate() {\n        let date_1 = new Date()\n        date_1 = date_1.toLocaleDateString()\n        return date_1\n    }\n\n    function endDate() {\n        let id = record?.REPORTING_ID\n        for (let i in msg.payload.csv) {\n            let row = msg.payload.csv[i]\n            if (row?.REPORTING_ID == id && ![null, undefined].includes(row?.FLAG_NAME)) {\n                if (row?.ENDDATE) {\n                    let date1 = new Date(row.ENDDATE).toLocaleDateString()\n                    let date2 = new Date('01/01/1950').toLocaleDateString()\n                    if (date1 == date2) {\n                        row.ENDDATE = getDate()\n                    }\n                }\n            }\n        }\n    }\n\n    endDate()\n\n    function refUpdate() {\n        let found = msg.payload.csv.find(flag => flag.REPORTING_ID == record?.REPORTING_ID && flag.FLAG_NAME == record?.['REFERRAL_FLAG'] && ![null, undefined].includes(flag?.FLAG_NAME))\n        if (found) {\n            found['BGNDATE'] = getDate()\n            found['ENDDATE'] = '01/01/1950'\n        } else {\n            if ([null,undefined].includes(record?.REFERRAL_FLAG)) {\n\n            } else {\n            let obj = {}\n            obj['REPORTING_ID'] = record?.REPORTING_ID\n            obj['REF_PER'] = record?.REF_PER\n            obj['FLAG_NAME'] = record?.REFERRAL_FLAG\n            obj['RECORD_TYP'] = record?.REPORTING_ID_TYP_TXT\n            obj['BGNDATE'] = getDate()\n            // obj['ENDDATE'] = '01/01/1950'\n            if (record?.NONTABFL == 'R') {\n                obj['CRITICAL'] = 'Y'\n            }\n            msg.payload.csv.push(obj)\n            console.log(msg.payload.csv)\n            }\n        }\n    }\n\n    refUpdate()\n\n    return msg;\n} catch (e) {\n    msg.err = 'Exit Edit'\n    msg.payload.exit = 'Load Referrals'\n    return msg;\n}",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -16116,7 +16293,9 @@
         "y": 500,
         "wires": [
             [],
-            []
+            [
+                "da1041380073a9cd"
+            ]
         ]
     },
     {
@@ -16124,8 +16303,8 @@
         "type": "subflow:96f29b19e2260e65",
         "z": "e09a92672a809eab",
         "name": "",
-        "x": 550,
-        "y": 780,
+        "x": 570,
+        "y": 740,
         "wires": [
             []
         ]
@@ -16202,7 +16381,9 @@
             [
                 "508bfe2ad7cfeddd"
             ],
-            []
+            [
+                "da1041380073a9cd"
+            ]
         ]
     },
     {
@@ -16244,7 +16425,9 @@
         "y": 380,
         "wires": [
             [],
-            []
+            [
+                "a7635805269c06d8"
+            ]
         ]
     },
     {
@@ -16398,9 +16581,7 @@
         "y": 440,
         "wires": [
             [],
-            [
-                "c52d373db0383ce9"
-            ]
+            []
         ]
     },
     {
@@ -16493,7 +16674,9 @@
             [
                 "1ebfc483e36c32ee"
             ],
-            []
+            [
+                "a7635805269c06d8"
+            ]
         ]
     },
     {
@@ -16518,13 +16701,15 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 950,
-        "y": 240,
+        "x": 910,
+        "y": 380,
         "wires": [
             [
                 "4d56f52e9266104e"
             ],
-            []
+            [
+                "a7635805269c06d8"
+            ]
         ]
     },
     {
@@ -18476,7 +18661,7 @@
         "type": "function",
         "z": "f9cd233b8803b29d",
         "name": "nonmfg su to kau",
-        "func": "try {\n    let record_idx = global.get('ptrModuleFacts')\n    let record = msg.payload.csv[record_idx]\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    if (record?.REPORTING_ID_TYP_TXT == 'SU' && record?.NAICS_SECTOR != 31) {\n        let kauData = msg.payload.csv.find(kau => kau.KAU_ID == record.KAU_ID && kau.RECORD_TYP_TXT == '30' && kau.ENT_TYP_TXT == 'SU')\n        let list = ['TABSTAT', 'NONTABFL', 'EMP_MAR12_NUM', 'PAY_ANN_VAL', 'PAY_QTR1_VAL', 'RCPT_TOT_VAL']\n        let listFlags = ['EMP_MAR12_NUM_F', 'PAY_ANN_VAL_F', 'PAY_QTR1_VAL_F', 'RCPT_TOT_VAL_F']\n        \n        //entData = entData[0] \n        for (let i in list) {\n            let name = list[i]\n            kauData[name] = record[name]\n        }\n        for (let j in listFlags) {\n            let nameFlag = listFlags[j]\n            let flagValue = record[nameFlag]\n            let flagLetter = flagValue.charAt(2)\n            kauData[nameFlag] = setCharAt(kauData[nameFlag], 2, flagLetter)\n        }\n    }\n\n    return msg;\n\n} catch (e) {\n    global.set('err', 'Exit Edit')\n    msg.payload.exit = 'NONMFG SU to KAU'\n    return msg;\n}\n\n",
+        "func": "try {\n    let record_idx = global.get('ptrModuleFacts')\n    let record = msg.payload.csv[record_idx]\n\n    function setCharAt(str, index, chr) {\n        if ([null, undefined].includes(str)) {\n            let newstr = ''\n            for (let i = 0; i < index; i++) {\n                newstr = newstr + '_';\n            }\n            newstr = newstr + chr\n            return newstr;\n        } else {\n            if (index > str.length - 1) {\n                let addstr = index - str.length\n                let newstr = str\n                for (let i = 0; i < addstr; i++) {\n                    newstr = newstr + '_';\n                }\n                newstr = newstr + chr\n                return newstr;\n            } else {\n                return str.substring(0, index) + chr + str.substring(index + 1);\n            }\n        }\n    }\n\n    if (record?.REPORTING_ID_TYP_TXT == 'SU' && record?.NAICS_SECTOR != 31) {\n        let kauData = msg.payload.csv.find(kau => kau?.KAU_ID == record?.KAU_ID && kau?.RECORD_TYP_TXT == '30' && kau?.ENT_TYP_TXT == 'SU')\n        let list = ['TABSTAT', 'NONTABFL', 'EMP_MAR12_NUM', 'PAY_ANN_VAL', 'PAY_QTR1_VAL', 'RCPT_TOT_VAL']\n        let listFlags = ['EMP_MAR12_NUM_F', 'PAY_ANN_VAL_F', 'PAY_QTR1_VAL_F', 'RCPT_TOT_VAL_F']\n        \n        //entData = entData[0] \n        for (let i in list) {\n            let name = list[i]\n            kauData[name] = record[name]\n        }\n        for (let j in listFlags) {\n            let nameFlag = listFlags[j]\n            let flagValue = record?.[nameFlag]\n            let flagLetter = flagValue?.charAt(2)\n            kauData[nameFlag] = setCharAt(kauData?.[nameFlag], 2, flagLetter)\n        }\n        console.log(kauData)\n    }\n\n    return msg;\n\n} catch (e) {\n    global.set('err', 'Exit Edit')\n    msg.payload.exit = 'NONMFG SU to KAU'\n    return msg;\n}\n\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -20334,7 +20519,7 @@
         "type": "function",
         "z": "e50e4180ad305262",
         "name": "histstat after pv",
-        "func": "try{\n    let record_idx = global.get('ptrModuleFacts')\n    let record = msg.payload.csv[record_idx]\n    \n    const ecUsed = [\n        \"ELEC_PRCH_KWH_NUM\", \"EMP_MAR12_NUM\", \"EXPS_ELEC_VAL\", \"INV_B_AVG_VAL\",\n        \"INV_B_IVAL_TOT_DVAL\", \"INV_B_LIFO_RSV_VAL\", \"INV_B_LIFO_VAL\", \"INV_B_STD_VAL\",\n        \"INV_B_TOT_VAL\", \"INV_E_AVG_VAL\", \"INV_E_IVAL_TOT_DVAL\", \"INV_E_LIFO_RSV_VAL\",\n        \"INV_E_LIFO_VAL\", \"INV_E_STD_VAL\", \"INV_E_TOT_VAL\", \"PAY_ANN_VAL\", \"PAY_QTR1_VAL\",\n        \"RCPT_TOT_VAL\", \"INV_E_FIFO_VAL\", \"INV_B_FIFO_VAL\", \"NAPCS_BLTOT\"\n    ]; \n\n    // const ecMaybe = [ \n    //     \"ASSET_BGN_VAL\", \"ASSET_END_TOT_DVAL\", \"ASSET_SOLD_VAL\", \"CAPEX_AUTO_VAL\", \n    //     \"CAPEX_BUILD_TOT_DVAL\", \"CAPEX_COMPTR_VAL\", \"CAPEX_MACH_TOT_DVAL\", \"CAPEX_OTHMACH_VAL\", \n    //     \"CAPEX_TOT_DVAL\", \"DEPR_VAL\", \"ELEC_GEN_KWH_NUM\", \"ELEC_SOLD_KWH_NUM\", \n    //     \"EMP_MAR12_NONPRDWRK_NUM\", \"EMP_MAR12_PRDWRK_NUM\", \"EXPS_ADVERT_VAL\", \"EXPS_BENPAY_HLTH_VAL\", \n    //     \"EXPS_COMMSVC_VAL\", \"EXPS_COMPTR_OTHEQ_VAL\", \"EXPS_CONTRACT_VAL\", \"EXPS_DATAPROC_VAL\", \n    //     \"EXPS_EXSOFT_VAL\", \"EXPS_MACH_REP_VAL\", \"EXPS_MAT_V1_VAL\", \"EXPS_OTHER_VAL\", \n    //     \"EXPS_PCHTT_DVAL\", \"EXPS_PRCH_RESALE_VAL\", \"EXPS_PROFTECH_VAL\", \"EXPS_REFUSE_VAL\", \n    //     \"EXPS_RENT_BUILD_VAL\", \"EXPS_RENT_MACH_VAL\", \"EXPS_RESALE_VAL\", \"EXPS_TAX_VAL\", \n    //     \"EXPS_TEMPSTAF_VAL\", \"EXPS_TOT_VAL\", \"HOURS_PRDWRK_NUM\", \"INV_B_MAT_VAL\", \n    //     \"INV_B_NL_TOT_DVAL\", \"INV_B_OTHNL_VAL\", \"INV_B_WIP_VAL\", \"INV_E_MAT_VAL\", \n    //     \"INV_E_NL_TOT_DVAL\", \"INV_E_OTHNL_VAL\", \"INV_E_WIP_VAL\", \"PAY_ANN_NONPRDWRK_VAL\", \n    //     \"PAY_ANN_PRDWRK_VAL\", \"PAY_QTR1_NONPRDWRK_VAL\", \"PAY_QTR1_PRDWRK_VAL\", \"RCPT_COMSN_EARN_VAL\", \n    //     \"RCPT_COMSN_GSV_VAL\", \"RCPT_ECOMM_VAL\", \"RCPT_ESHIP_PCT\", \"ROBOT_INDST_INOP_NUM\", \n    //     \"ROBOT_INDST_PRCH_NUM\", \"ROBOT_INDST_VAL\", \"VALUE_ADDED_DVAL\" \n    // ]; \n\n    if (record?.HISTSTAT == 'Y') {\n    } else {\n        let obj = {}\n        for (let i of ecUsed) {\n            obj[i] = 0\n        }\n        msg.payload.csv.push(obj)\n        console.log(msg.payoad.csv)\n    }\n    \n    return msg;\n} catch(e) {\n    global.set('err','Exit Edit')\n    msg.payload.exit = 'histstat after pv'\n    return msg;\n}\n",
+        "func": "try{\n    let record_idx = global.get('ptrModuleFacts')\n    let record = msg.payload.csv[record_idx]\n    \n    const ecUsed = [\n        \"ELEC_PRCH_KWH_NUM\", \"EMP_MAR12_NUM\", \"EXPS_ELEC_VAL\", \"INV_B_AVG_VAL\",\n        \"INV_B_IVAL_TOT_DVAL\", \"INV_B_LIFO_RSV_VAL\", \"INV_B_LIFO_VAL\", \"INV_B_STD_VAL\",\n        \"INV_B_TOT_VAL\", \"INV_E_AVG_VAL\", \"INV_E_IVAL_TOT_DVAL\", \"INV_E_LIFO_RSV_VAL\",\n        \"INV_E_LIFO_VAL\", \"INV_E_STD_VAL\", \"INV_E_TOT_VAL\", \"PAY_ANN_VAL\", \"PAY_QTR1_VAL\",\n        \"RCPT_TOT_VAL\", \"INV_E_FIFO_VAL\", \"INV_B_FIFO_VAL\", \"NAPCS_BLTOT\"\n    ]; \n\n    // const ecMaybe = [ \n    //     \"ASSET_BGN_VAL\", \"ASSET_END_TOT_DVAL\", \"ASSET_SOLD_VAL\", \"CAPEX_AUTO_VAL\", \n    //     \"CAPEX_BUILD_TOT_DVAL\", \"CAPEX_COMPTR_VAL\", \"CAPEX_MACH_TOT_DVAL\", \"CAPEX_OTHMACH_VAL\", \n    //     \"CAPEX_TOT_DVAL\", \"DEPR_VAL\", \"ELEC_GEN_KWH_NUM\", \"ELEC_SOLD_KWH_NUM\", \n    //     \"EMP_MAR12_NONPRDWRK_NUM\", \"EMP_MAR12_PRDWRK_NUM\", \"EXPS_ADVERT_VAL\", \"EXPS_BENPAY_HLTH_VAL\", \n    //     \"EXPS_COMMSVC_VAL\", \"EXPS_COMPTR_OTHEQ_VAL\", \"EXPS_CONTRACT_VAL\", \"EXPS_DATAPROC_VAL\", \n    //     \"EXPS_EXSOFT_VAL\", \"EXPS_MACH_REP_VAL\", \"EXPS_MAT_V1_VAL\", \"EXPS_OTHER_VAL\", \n    //     \"EXPS_PCHTT_DVAL\", \"EXPS_PRCH_RESALE_VAL\", \"EXPS_PROFTECH_VAL\", \"EXPS_REFUSE_VAL\", \n    //     \"EXPS_RENT_BUILD_VAL\", \"EXPS_RENT_MACH_VAL\", \"EXPS_RESALE_VAL\", \"EXPS_TAX_VAL\", \n    //     \"EXPS_TEMPSTAF_VAL\", \"EXPS_TOT_VAL\", \"HOURS_PRDWRK_NUM\", \"INV_B_MAT_VAL\", \n    //     \"INV_B_NL_TOT_DVAL\", \"INV_B_OTHNL_VAL\", \"INV_B_WIP_VAL\", \"INV_E_MAT_VAL\", \n    //     \"INV_E_NL_TOT_DVAL\", \"INV_E_OTHNL_VAL\", \"INV_E_WIP_VAL\", \"PAY_ANN_NONPRDWRK_VAL\", \n    //     \"PAY_ANN_PRDWRK_VAL\", \"PAY_QTR1_NONPRDWRK_VAL\", \"PAY_QTR1_PRDWRK_VAL\", \"RCPT_COMSN_EARN_VAL\", \n    //     \"RCPT_COMSN_GSV_VAL\", \"RCPT_ECOMM_VAL\", \"RCPT_ESHIP_PCT\", \"ROBOT_INDST_INOP_NUM\", \n    //     \"ROBOT_INDST_PRCH_NUM\", \"ROBOT_INDST_VAL\", \"VALUE_ADDED_DVAL\" \n    // ]; \n\n    if (record?.HISTSTAT == 'Y') {\n    } else {\n        let obj = {}\n        for (let i of ecUsed) {\n            obj[i] = 0\n        }\n        msg.payload.csv.push(obj)\n        // console.log(msg.payoad.csv)\n    }\n    \n    return msg;\n} catch(e) {\n    global.set('err','Exit Edit')\n    msg.payload.exit = 'histstat after pv'\n    return msg;\n}\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -20361,6 +20546,24 @@
         "libs": [],
         "x": 350,
         "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "670fcf981f211fb3",
+        "type": "function",
+        "z": "f0920ac3618eb45b",
+        "name": "check writeback",
+        "func": "let record_idx = global.get('ptrModuleFacts')\nlet record = msg.payload.csv[record_idx]\n\nif (record?.ENT_TYP_TXT == 'SU') {\n    if (['ENT','KAU'].includes(record?.REPORTING_ID_TYP_TXT)) {\n        if (record?.TABSTAT != 'Y') {\n            global.set('action','Exit Edit')\n        }\n    }\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 120,
         "wires": [
             []
         ]
@@ -38286,8 +38489,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2420,
-        "y": 400,
+        "x": 2670,
+        "y": 380,
         "wires": [
             [
                 "0422aeccc8321ad8"
@@ -38515,7 +38718,7 @@
         "y": 280,
         "wires": [
             [
-                "66fdc22c898d5af9"
+                "893a3c0221e36028"
             ],
             [
                 "0b7cc3acbec1c3e3"
@@ -38590,11 +38793,11 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 2010,
+        "x": 1770,
         "y": 880,
         "wires": [
             [
-                "7801b65b30d7f5d3"
+                "186d08aa36ecf129"
             ],
             [
                 "4cf602eb8c214878"
@@ -38686,7 +38889,7 @@
         "y": 400,
         "wires": [
             [
-                "66fdc22c898d5af9"
+                "893a3c0221e36028"
             ],
             [
                 "916ac88149df008a"
@@ -38772,7 +38975,7 @@
         "z": "8790b12c7efb6fa0",
         "name": "",
         "x": 2000,
-        "y": 640,
+        "y": 580,
         "wires": [
             [
                 "66fdc22c898d5af9"
@@ -38838,10 +39041,10 @@
         "y": 520,
         "wires": [
             [
-                "66fdc22c898d5af9"
+                "893a3c0221e36028"
             ],
             [
-                "160e5288ef2a74cf"
+                "dc42b62910d4bb13"
             ]
         ]
     },
@@ -38997,34 +39200,25 @@
         ]
     },
     {
-        "id": "b9a3547ef5c843ce",
-        "type": "subflow:23c54fc1c5be665e",
+        "id": "186d08aa36ecf129",
+        "type": "subflow:96f29b19e2260e65",
         "z": "8790b12c7efb6fa0",
         "name": "",
-        "x": 1440,
-        "y": 240,
+        "x": 2030,
+        "y": 880,
         "wires": [
-            []
+            [
+                "7801b65b30d7f5d3"
+            ]
         ]
     },
     {
-        "id": "a380a83d38880c12",
-        "type": "subflow:537136f85533687f",
+        "id": "893a3c0221e36028",
+        "type": "subflow:96f29b19e2260e65",
         "z": "8790b12c7efb6fa0",
         "name": "",
-        "x": 1440,
-        "y": 780,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "160e5288ef2a74cf",
-        "type": "subflow:e09a92672a809eab",
-        "z": "8790b12c7efb6fa0",
-        "name": "",
-        "x": 2000,
-        "y": 580,
+        "x": 2390,
+        "y": 260,
         "wires": [
             [
                 "66fdc22c898d5af9"
